@@ -49,7 +49,7 @@ const Login = () => {
           localStorage.setItem("Token", myData?.data?.token)
 
           toast.success(myData?.data.msg)
-
+console.log("11")
           router.push("/")
         } else {
           toast.error(myData?.data.msg)
