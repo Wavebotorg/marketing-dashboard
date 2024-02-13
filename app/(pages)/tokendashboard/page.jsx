@@ -9,13 +9,13 @@ const TokenDashboard = () => {
         <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
           Revenue Share Dashboard
         </p>
-        <div className="flex flex-col md:flex-row gap-6 mt-5">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
-            <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
+        <div className="flex flex-col md:flex-row  md:justify-center md: items-center gap-6 mt-5">
+          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52">
+            <IoIosInformationCircleOutline size={20} />
             <p>Rewards Forfeiture</p>
           </div>
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
-            <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
+          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52">
+            <IoIosInformationCircleOutline size={20} />
             <p>Paginated Results</p>
           </div>
         </div>
