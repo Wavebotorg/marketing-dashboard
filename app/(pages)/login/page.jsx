@@ -15,12 +15,12 @@ const Login = () => {
   const router = useRouter()
   const { decryptData } = useEncryption()
 
-  useEffect(() => {
-    const checkAuth = localStorage.getItem("Token")
-    if (checkAuth) {
-      router.push("/")
-    }
-  }, [])
+  // useEffect(() => {
+  //   const checkAuth = localStorage.getItem("Token")
+  //   if (checkAuth) {
+  //     router.push("/")
+  //   }
+  // }, [])
   const [loginFields, setLoginFields] = useState({ email: "", password: "" })
   const onChangeInput = (e) => {
     const value = e.target.value

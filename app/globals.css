@@ -13,7 +13,12 @@ body {
 }
 
 
-
+.container{
+ 
+    width:100%;
+    margin: auto;
+    padding:30px 20px
+}
 /* authentication background image */
 .bgImage {
     background-image: url("../public/assets/bg-loginpopup.png");
