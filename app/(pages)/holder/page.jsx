@@ -7,14 +7,14 @@ const Holder = () => {
       <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
         Holder Rewards
       </p>
-      <div className="flex flex-col md:flex-row gap-6 mt-5">
-        <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
+      <div className="flex flex-col md:flex-row gap-6 mt-5  ">
+        <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2  md:w-full w-52 ">
           <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
           <p>Paginated Results</p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-6 mt-5">
-        <div className="rounded-lg p-4 bg-[#1C1C1C]">
+      <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full w-52">
+        <div className="rounded-lg p-4 bg-[#1C1C1C] ">
           <p>Total Rewards</p>
           <p className="text-blue-400 text-2xl mt-1">0ETH</p>
         </div>
