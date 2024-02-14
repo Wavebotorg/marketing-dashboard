@@ -1,35 +1,51 @@
-import React from "react"
-import HomeUser from "../public/assets/homeuser.png"
-import Image from "next/image"
-import Market from "./(pages)/Market/page"
-
+"use client";
+import React from "react";
+import HomeUser from "../public/assets/homeuser.png";
+import Image from "next/image";
+import Market from "./(pages)/Market/page";
 
 const Page = () => {
+  const userData = {
+    userId: "95968227",
+    vipLevel: "Regular User",
+    userType: "Personal",
+    following: 0,
+    followers: 0,
+  };
+
   return (
-    <div className=" text-white container">
-      <div className="flex ">
-        <div className="flex justify-between items-center">
+    <div className="text-white container">
+      <div className="flex">
+        <div className="flex items-center">
           <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
           <span className="ml-5 mr-20">Anonymous-User-810b1</span>
         </div>
         <div className="border-r border-[#828282] "></div>
-        <div className="grid grid-cols-5 gap-4 mt-4 text-[#828282] flex justify-between content-between ml-5  ">
-          <div>User Id</div>
-          <div>VIP Level</div>
-          <div>User Type</div>
-          <div>Following</div>
-          <div>Followers</div>
-
-          <div>95968227</div>
-          <div>Regular User</div>
-          <div>Personal</div>
-          <div>0</div>
-          <div>0</div>
-        </div>
+        <table className="mt-4 text-[#828282] flex justify-between content-between ml-5 w-full " >
+          <tbody className="">
+            <tr className="flex justify-between ">
+              <td className="4/12">User Id</td>
+              <td className="2/12">VIP Level</td>
+              <td className="3/12">User Type</td>
+              <td className="2/12">Following</td>
+              <td className="1/12">Followers</td>
+            </tr>
+            <tr>
+              {Object.values(userData).map((value, index) => (
+                <td key={index}>{value}</td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div className="mt-10 bg-[#1C1C1C] rounded-2xl"><Market /></div>
+      <div className="mt-10 bg-[#1C1C1C] rounded-2xl">
+        <Market />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
+
+
+

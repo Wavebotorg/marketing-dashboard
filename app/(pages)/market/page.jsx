@@ -33,55 +33,7 @@ const Market = () => {
   };
 
 
-  // return (
-  //   <div className="text-white p-10 rounded-lg">
-  //     {/* Header Section */}
-  //     <div className=" items-center ">
-  //       <div className="flex pb-3" >
-  //         <h1 className="font-bold text-2xl">Liquidity Intents</h1>
-  //         <span>
-  //           <LiaEyeSolid />
-  //         </span>
-  //       </div>
-      
-  //       <div className="flex  pb-4">
-  //         <h1 className="text-[#1788FB] font-bold text-3xl">{marketData.amount}</h1>{" "}
-  //         <span>{marketData.coin}</span>
-  //       </div>
-
-  //       <div className="text-sm  pb-4">{marketData.price}</div>
-  //       <div className="text-sm  pb-5">{marketData.pnl}</div>
-  //     </div>
-
-  //     {/* Border */}
-  //     <div className="border-t border-white mt-2 pb-2"></div>
-
-  //     {/* Market Data Section */}
-  //     <div className="">
-  //       <h1 className="font-medium pt-5 text-3xl tracking-wide">Markets</h1>
-  //       <div className="grid grid-cols-5 items-center py-5 ">
-  //         <div>Coin</div>
-  //         <div>Amount</div>
-  //         <div>Coin Price</div>
-  //         <div>Todat’s PnL</div>
-  //         <div>Trade</div>
-
-  //         {marketData.markets.map((market, index) => (
-  //           <React.Fragment key={index}>
-  //             <div className="inline-flex  items-center py-5 mr-24">
-  //               <Image src={market.image} alt={market.alt} width="10px" height="10px" />
-  //               <span className="">{market.name}</span>
-  //             </div>
-  //             <div className=" ">{market.amount} <span>({market.percentChange})</span></div>
-  //             <div className="">${market.price} <span>({market.percentChange})</span></div>
-  //             <div className="">${market.pnl}</div>
-  //             <Link href="/">{market.tradeLink}</Link>
-  //           </React.Fragment>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
+ 
 
 
   return (
@@ -108,7 +60,7 @@ const Market = () => {
       {/* Market Data Section */}
       <div className="">
         <h1 className="font-medium pt-5 text-3xl tracking-wide">Markets</h1>
-        <table className=" mt-5 min-w-full flex ">
+        <table className=" mt-5 min-w-full  ">
           <thead>
             <tr>
               <th>Coin</th>
@@ -118,8 +70,8 @@ const Market = () => {
               <th>Trade</th>
             </tr>
           </thead>
-          <tbody>
-            {marketData.markets.map((market, index) => (
+          <tbody className="divide-y">
+            {marketData?.markets.length > 0 && marketData.markets.map((market, index) => (
               <tr key={index}>
                 <td>
                   <div className="inline-flex items-center">

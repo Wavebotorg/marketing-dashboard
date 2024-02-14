@@ -21,7 +21,7 @@ const Loginbutton = () => {
         getPath === "/passwordverify" ||
         getPath === "/resetpassword"
           ? "hidden"
-          : "flex  justify-end pt-5 "
+          : "flex  justify-end pt-5  pb-6 border-b "
       }`}
     >
       <Link href="/login">
