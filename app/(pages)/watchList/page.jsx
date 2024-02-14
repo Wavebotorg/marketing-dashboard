@@ -86,7 +86,7 @@ const WatchList = () => {
     },
   ];
   return (
-    <div>
+    <div className="container">
       <div className="relative flex-grow md:max-w-[700px]">
         <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
           <CiSearch size={20} />

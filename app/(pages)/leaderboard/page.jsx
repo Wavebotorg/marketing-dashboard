@@ -44,7 +44,7 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <div className="md:flex md:justify-between gap-5 ">
+      <div className="md:flex md:justify-between gap-5 container ">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board

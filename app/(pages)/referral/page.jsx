@@ -4,6 +4,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 const Referral = () => {
   return (
     <>
+    <div className="container">
       <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
         Referral Rewards
       </p>
@@ -112,6 +113,7 @@ const Referral = () => {
           </select>
           <label> 1 of 5</label>
         </div>
+      </div>
       </div>
     </>
   );

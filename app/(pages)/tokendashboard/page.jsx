@@ -5,7 +5,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 const TokenDashboard = () => {
   return (
     <>
-      <div className="">
+      <div className="container">
         <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
           Revenue Share Dashboard
         </p>

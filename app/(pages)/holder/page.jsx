@@ -4,6 +4,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 const Holder = () => {
   return (
     <>
+    <div className="container">
       <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
         Holder Rewards
       </p>
@@ -87,7 +88,7 @@ const Holder = () => {
           <label> 1 of 5</label>
         </div>
       </div>
-    </>
+      </div> </>
   );
 };
 
