@@ -22,10 +22,11 @@ export default function RootLayout({ children }) {
               <div className="w-[20%] h-full ">
                 <Sidebar />
               </div>
-              <div className="w-full h-full bg-[#0B0E10] p-5 ">
-                <Loginbutton />
-
-                {children}
+              <div className="w-full  bg-[#0B0E10] p-5 overflow-auto h-screen ">
+                <div>
+                  <Loginbutton />
+                </div>
+                <div>{children}</div>
               </div>
             </div>
           </div>

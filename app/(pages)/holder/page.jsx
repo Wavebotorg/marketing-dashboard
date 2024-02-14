@@ -30,7 +30,7 @@ const Holder = () => {
       <div className="font-medium text-2xl mt-7">
         <p>Holder Rewards</p>
       </div>
-      {/*    <div className="mt-6 ">
+      <div className="mt-6">
         <table className="w-full bg-[#1C1C1C]">
           <thead>
             <tr>
@@ -42,16 +42,18 @@ const Holder = () => {
             </tr>
           </thead>
           <tbody>
-            <td className="w-1/6">1</td>
-            <td className="w-1/6">2</td>
-            <td className="w-1/6">3</td>
-            <td className="w-1/6">4</td>
-            <td className="w-1/6">5</td>
+            <tr>
+              <td className="px-28 py-1">1</td>
+              <td className="px-28 py-1">2</td>
+              <td className="px-28 py-1">3</td>
+              <td className="px-28 py-1">4</td>
+              <td className="px-28 py-1">5</td>
+            </tr>
           </tbody>
         </table>
-      </div> */}
+      </div>
 
-      <div className="mt-6 ">
+      {/*  <div className="mt-6 ">
         <div className="grid grid-cols-5 bg-[#1C1C1C]">
           <div className="px-4 py-2 ">Snapshot Block</div>
           <div className="px-4 py-2 ">Time</div>
@@ -59,14 +61,14 @@ const Holder = () => {
           <div className="px-4 py-2 ">Unlock</div>
           <div className="px-4 py-2 ">Status</div>
 
-          {/* Add more rows as needed */}
+          {/* Add more rows as needed *
           <div className="px-4 py-2 ">Value 1</div>
           <div className="px-4 py-2 ">Value 2</div>
           <div className="px-4 py-2 ">Value 3</div>
           <div className="px-4 py-2 ">Value 4</div>
           <div className="px-4 py-2 ">Value 5</div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-end mt-8">
         <div>
