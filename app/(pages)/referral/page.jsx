@@ -59,24 +59,26 @@ const Referral = () => {
         <table className="w-full bg-[#1C1C1C]">
           <thead>
             <tr>
-              <th className="w-1/6">Snapshot Block</th>
-              <th className="w-1/6">Time</th>
-              <th className="w-1/6">Rewards</th>
-              <th className="w-1/6">Unlock</th>
-              <th className="w-1/6">Status</th>
-              <th className="w-1/6">Status</th>
-              <th className="w-1/6">Status</th>
+              <th className="px-8">Block</th>
+              <th className="px-8">Date</th>
+              <th className="px-8">Wallet</th>
+              <th className="px-8">Swap Cost/Gain (ETH)</th>
+              <th className="px-8">Referral Reward (ETH)</th>
+              <th className="px-8">Transaction</th>
+              <th className="px-8">Status</th>
             </tr>
           </thead>
-          {/*  <tbody>
+          <tbody>
             <tr>
-              <td className="px-16 py-1">value 1</td>
-              <td className="px-16 py-1">value 2</td>
-              <td className="px-16 py-1">value 3</td>
-              <td className="px-16 py-1">value 4</td>
-              <td className="px-16 py-1">value 5</td>
+              <td className="px-12 py-1 ">value 1</td>
+              <td className="px-12 py-1 ">value 2</td>
+              <td className="px-12 py-1 ">value 3</td>
+              <td className="px-12 py-1 ">value 4</td>
+              <td className="px-12 py-1 ">value 5</td>
+              <td className="px-12 py-1 ">value 6</td>
+              <td className="px-12 py-1 ">value 7</td>
             </tr>
-          </tbody> */}
+          </tbody>
         </table>
       </div>
       {/*   <div className="mt-6 ">
