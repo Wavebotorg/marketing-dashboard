@@ -35,27 +35,7 @@ const Referral = () => {
       <div className="font-medium text-2xl mt-7">
         <p>Referral Reward History</p>
       </div>
-      {/*    <div className="mt-6 ">
-        <table className="w-full bg-[#1C1C1C]">
-          <thead>
-            <tr>
-              <th className="w-1/6">Snapshot Block</th>
-              <th className="w-1/6">Time</th>
-              <th className="w-1/6">Rewards</th>
-              <th className="w-1/6">Unlock</th>
-              <th className="w-1/6">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <td className="w-1/6">1</td>
-            <td className="w-1/6">2</td>
-            <td className="w-1/6">3</td>
-            <td className="w-1/6">4</td>
-            <td className="w-1/6">5</td>
-          </tbody>
-        </table>
-      </div> */}
-
+     
       <div className="mt-6">
         <table className="w-full bg-[#1C1C1C]">
           <thead>
@@ -80,22 +60,7 @@ const Referral = () => {
           </tbody> */}
         </table>
       </div>
-      {/*   <div className="mt-6 ">
-        <div className="grid grid-cols-5 bg-[#1C1C1C]">
-          <div className="px-4 py-2 ">Snapshot Block</div>
-          <div className="px-4 py-2 ">Time</div>
-          <div className="px-4 py-2 ">Rewards</div>
-          <div className="px-4 py-2 ">Unlock</div>
-          <div className="px-4 py-2 ">Status</div>
-
-          {/* Add more rows as needed *
-          <div className="px-4 py-2 ">Value 1</div>
-          <div className="px-4 py-2 ">Value 2</div>
-          <div className="px-4 py-2 ">Value 3</div>
-          <div className="px-4 py-2 ">Value 4</div>
-          <div className="px-4 py-2 ">Value 5</div>
-        </div>
-      </div> */}
+     
 
       <div className="flex justify-end mt-8">
         <div>
