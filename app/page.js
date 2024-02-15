@@ -21,7 +21,27 @@ const Page = () => {
           <span className="ml-5 mr-20">Anonymous-User-810b1</span>
         </div>
         <div className="border-r border-[#828282] "></div>
-        <table className="mt-4 text-[#828282] flex justify-between content-between ml-5 w-full " >
+        <table className=" w-full mt-4 text-[#828282] text-center">
+          <thead>
+            <tr>
+              <th className=" ">User Id</th>
+              <th className=" ">VIP Level</th>
+              <th className=" ">User Type</th>
+              <th className=" ">Following</th>
+              <th className=" ">Followers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className=" py-2">95968227</td>
+              <td className=" py-2">Regular User</td>
+              <td className=" py-2">Personal</td>
+              <td className=" py-2">0</td>
+              <td className=" py-2">0</td>
+            </tr>
+          </tbody>
+        </table>
+        {/*  <table className="mt-4 text-[#828282] flex justify-between content-between ml-5 w-full ">
           <tbody className="">
             <tr className="flex justify-between ">
               <td className="4/12">User Id</td>
@@ -36,7 +56,7 @@ const Page = () => {
               ))}
             </tr>
           </tbody>
-        </table>
+        </table> */}
       </div>
       <div className="mt-10 bg-[#1C1C1C] rounded-2xl">
         <Market />
@@ -46,6 +66,4 @@ const Page = () => {
 };
 
 export default Page;
-
-
 

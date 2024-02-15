@@ -1,19 +1,19 @@
-"use client"
-import React, { useEffect, useState } from "react"
+"use client";
+import React, { useEffect, useState } from "react";
 
-import Logo from "../../../public/assets/loginpopuplogo.png"
-import Image from "next/image"
-import Link from "next/link"
-import { FaRegEyeSlash } from "react-icons/fa"
-import axiosInstance from "../../apiInstances/axiosInstance"
-import useEncryption from "../../components/useEncryption/index"
-import { useRouter } from "next/navigation"
-import { IoEyeOutline } from "react-icons/io5"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+import Logo from "../../../public/assets/loginpopuplogo.png";
+import Image from "next/image";
+import Link from "next/link";
+import { FaRegEyeSlash } from "react-icons/fa";
+import axiosInstance from "../../apiInstances/axiosInstance";
+import useEncryption from "../../components/useEncryption/index";
+import { useRouter } from "next/navigation";
+import { IoEyeOutline } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
-  const router = useRouter()
-  const { decryptData } = useEncryption()
+  const router = useRouter();
+  const { decryptData } = useEncryption();
 
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
@@ -21,49 +21,46 @@ const Login = () => {
   //     router.push("/")
   //   }
   // }, [])
-  const [loginFields, setLoginFields] = useState({ email: "", password: "" })
+  const [loginFields, setLoginFields] = useState({ email: "", password: "" });
   const onChangeInput = (e) => {
-    const value = e.target.value
-    const name = e.target.name
+    const value = e.target.value;
+    const name = e.target.name;
 
     setLoginFields({
       ...loginFields,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const mydata = {
     email: loginFields?.email,
     password: loginFields?.password,
-  }
+  };
   const handleSubmit = async () => {
     await axiosInstance
       .post("login", mydata)
       .then((res) => {
-        const myData = res
-        console.log("=========mydata:", res)
-        console.log("token--", myData?.data?.token)
+        const myData = res;
+        console.log("=========mydata:", res);
+        console.log("token--", myData?.data?.token);
         if (myData?.status) {
+          localStorage.setItem("Token", myData?.data?.token);
 
+          toast.success(myData?.data.msg);
 
-          localStorage.setItem("Token", myData?.data?.token)
-
-          toast.success(myData?.data.msg)
-console.log("11")
-          router.push("/")
+          router.push("/");
         } else {
-          toast.error(myData?.data.msg)
-
+          toast.error(myData?.data.msg);
         }
       })
       .catch((err) => {
-        console.log("err --->", err)
-      })
-  }
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+        console.log("err --->", err);
+      });
+  };
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   function togglePasswordVisibility() {
-    setIsPasswordVisible((prevState) => !prevState)
+    setIsPasswordVisible((prevState) => !prevState);
   }
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
@@ -129,7 +126,7 @@ console.log("11")
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

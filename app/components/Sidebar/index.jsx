@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,169 +22,185 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const [active, setActive] = useState("");
+
   const menu = [
     {
       id: 1,
-      link: " ",
+      link: "/",
       icon: Homemenu,
       name: "Home",
     },
     {
       id: 2,
-      link: "tokendashboard",
+      link: "/tokendashboard",
       icon: Tokendashboard,
       name: "Token Dashboard",
     },
     {
       id: 3,
-      link: "holder",
+      link: "/holder",
       icon: Holder,
       name: "Holder",
     },
     {
       id: 4,
-      link: "referral",
+      link: "/referral",
       icon: Referral,
       name: "Referral",
     },
     {
       id: 5,
-      link: "leaderboard",
+      link: "/leaderboard",
       icon: Leaderboard,
       name: "Leader Board",
     },
     {
       id: 6,
-      link: "portfolio",
+      link: "/portfolio",
       icon: Portfolio,
       name: "Portfolio",
     },
     {
       id: 7,
-      link: "volumestats",
+      link: "/volumestats",
       icon: Volumestats,
       name: "Volume Stats",
     },
   ];
+
   const menubottom = [
     {
       id: 1,
-      link: "watchList",
+      link: "/watchList",
       icon: WatchList,
       name: "Watch List",
     },
     {
       id: 2,
-      link: "discover",
+      link: "/discover",
       icon: Discover,
       name: "Discover",
     },
     {
       id: 3,
-      link: "apecurdocs",
+      link: "/apecurdocs",
       icon: Apecurdocs,
       name: "Apecurdocs",
     },
     {
       id: 4,
-      link: "officialwebsite",
+      link: "/officialwebsite",
       icon: Officialwebsite,
       name: "Officialwebsite",
     },
   ];
+
   const getPath = usePathname();
+
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
   }, [getPath]);
 
   return (
-    <div
-      className={`${
-        getPath === "/login" ||
-        getPath === "/signup" ||
-        getPath === "/forgotpassword" ||
-        getPath === "/passwordverify" ||
-        getPath === "/resetpassword"
-          ? "hidden"
-          : "p-5  bg-[#1C1C1C] "
-      }`}
-    >
-      <div className="p-8 pb-10 flex justify-center ">
-        {" "}
-        <Image src={Logo} alt="" height="50" width="132" />
-      </div>
-      <ul className="text-white">
-        {menu.map(({ id, link, icon, name }) => (
-          <li key={id} className=" p-4 ">
-            <Link href={`/${link}`} className=" flex gap-4 ">
-              <Image src={icon} alt={name} width="10px" height="10px" />
-              <span className="font-bold ">{name}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <div className="border-t border-white mt-2 pb-2 -mx-10"></div>
-      <ul className="text-white  ">
-        {menubottom.map(({ id, link, icon, name }) => (
-          <li key={id} className=" p-4 ">
-            <Link href={`/${link}`} className=" flex gap-4 ">
-              <Image src={icon} alt={name} width="10px" height="10px" />
-              <span className="font-bold ">{name}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <div className="text-white   mt-28 ">
-        <div className="flex gap-2">
-          <div>
-            <Image
-              src={Sidebaruserlogo}
-              alt="Sidebaruserlogo"
-              width="20px"
-              height="10px"
-            />
+    <>
+      <div
+        className={`${
+          getPath === "/login" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword"
+            ? "hidden"
+            : "p-5  bg-[#1C1C1C] "
+        }`}
+      >
+        <div className={` bg-[#1C1C1C] `}>
+          <div className="2xl:p-8 lg:p-6 sm:p-2 flex justify-center    2xl:pb-10  lg:pb-2 sm:pb-2 ">
+            <Image src={Logo} alt=""   className="2xl:h-[50] 2xl:w-[132]  sm:h-[30] sm:w-[100] "/>
           </div>
+          <ul className="text-white">
+            {menu.map(({ id, link, icon, name }) => (
+              <li
+                key={id}
+                className={`p-4 ${
+                  link === active ? "bg-[#1788FB] opacity-70 rounded-lg" : ""
+                }`}
+              >
+                <Link href={link} className="flex gap-4">
+                  <Image src={icon} alt={name} width="10px" height="10px" />
+                  <span className="font-bold ">{name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-          <div>
-            <div className="flex">
-              {" "}
-              <h1>UniV3 Simulate</h1>
-              <span className="ml-2">
-                <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-              </span>
-            </div>
+          <div className="border-t border-white mt-2 pb-2 -mx-10"></div>
+          <ul className="text-white">
+            {menubottom.map(({ id, link, icon, name }) => (
+              <li
+                key={id}
+                className={`p-4 ${
+                  link === active ? "bg-[#1788FB] opacity-70 rounded-lg" : ""
+                }`}
+              >
+                <Link href={link} className="flex gap-4">
+                  <Image src={icon} alt={name} width="10px" height="10px" />
+                  <span className="font-bold">{name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-            <p className="text-xs">Invited by @luoluonuoy323</p>
-            <div className="flex mt-2">
-              <Image
-                src={Twitter}
-                alt="twitter"
-                width="10px"
-                height="10px"
-                className="mr-2"
-              />
-              <Image
-                src={Twitter}
-                alt="twitter"
-                width="10px"
-                height="10px"
-                className="mr-2"
-              />
-              <Image
-                src={Twitter}
-                alt="twitter"
-                width="10px"
-                height="10px"
-                className="mr-2"
-              />
+          <div className="text-white mt-28">
+            <div className="flex gap-2">
+              <div>
+                <Image
+                  src={Sidebaruserlogo}
+                  alt="Sidebaruserlogo"
+                  width="20px"
+                  height="10px"
+                />
+              </div>
+
+              <div>
+                <div className="flex">
+                  <h1>UniV3 Simulate</h1>
+                  <span>
+                    <Image src={Arrow} alt="arrow" width="10px" height="10px" />
+                  </span>
+                </div>
+
+                <p className="text-xs">Invited by @luoluonuoy323</p>
+                <div className="flex mt-2">
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
