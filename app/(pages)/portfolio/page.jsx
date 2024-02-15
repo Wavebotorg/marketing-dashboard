@@ -74,7 +74,7 @@ const Portfolio = () => {
   return (
     <div className="container">
     
-      <div className="border-b border-stone-500 mt-7" />
+      {/* <div className="border-b border-stone-500 mt-7" />  */}
       <p className="mt-6 text-2xl">My Portfolio</p>
       <div className="flex  gap-3 mt-6">
         <div>
