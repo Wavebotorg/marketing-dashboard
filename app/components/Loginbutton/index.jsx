@@ -23,10 +23,10 @@ const Loginbutton = () => {
         getPath === "/passwordverify" ||
         getPath === "/resetpassword"
           ? "hidden"
-          : "flex  justify-between  border-b border-stone-500 pb-7 pt-5 "
+          : "flex  justify-between  border-b border-stone-500 pb-7 pt-5 pl-10  " 
       }`}
     >
-       <div className="relative flex-grow md:max-w-[700px] md:mr-10 sm:mr-5 xsm:mr-5">
+       <div className="relative flex-grow md:max-w-[700px] md:mr-10 sm:mr-5 xsm:mr-5  ">
         <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
           <CiSearch size={20} />
         </div>
@@ -54,3 +54,4 @@ const Loginbutton = () => {
 };
 
 export default Loginbutton;
+

@@ -1,42 +1,9 @@
 
 
-// "use client"
-// import { useState } from 'react';
-// import { useRouter } from 'next/navigation';
+"use client"
 
-// const SidebarItem = ({ icon, name, path }) => {
-//   const router = useRouter();
-//   const [isNameVisible, setIsNameVisible] = useState(false);
-
-//   const handleClick = () => {
-//     setIsNameVisible(!isNameVisible);
-//     router.push(path);
-//   };
-
-//   return (
-//     <div className="flex items-center p-4 cursor-pointer" onClick={handleClick}>
-//       <div className="mr-4">{icon}</div>
-//       <div className={`hidden sm:inline ${isNameVisible ? 'sm:inline' : 'sm:hidden'}`}>{name}</div>
-//     </div>
-//   );
-// };
-
-// const Sidebar = () => {
-//   return (
-//     <div className="bg-gray-800 text-white w-64 min-h-screen">
-//       <SidebarItem icon="🏠" name="Home" path="/" />
-//       <SidebarItem icon="📁" name="Projects" path="/projects" />
-//       <SidebarItem icon="👤" name="Profile" path="/profile" />
-//       {/* Add more SidebarItems as needed */}
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
-
-"use client";
-
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Disclosure } from "@headlessui/react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -57,202 +24,209 @@ import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png"
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
 import { usePathname } from "next/navigation";
-const SidebarItem = ({ icon, name, path, active, onClick }) => {
-  const [isNameVisible, setIsNameVisible] = useState(false);
+import {
+  MdOutlineSpaceDashboard,
+  MdOutlineAnalytics,
+  MdOutlineIntegrationInstructions,
+  MdOutlineMoreHoriz,
+  MdOutlineSettings,
+  MdOutlineLogout,
+} from "react-icons/md";
+
+
+const Sidebar =()=> {
   const router = useRouter();
+  const handleMenuItemClick = (link) => {
+    router.push(link); // Navigate to the specified link
+    setOpen(false); // Close the sidebar after clicking a menu item
+  };
 
-  const handleClick = () => {
-        setIsNameVisible(!isNameVisible);
-        router.push(path);
-      };
-    
-  return (
-  <div className={`flex items-center p-4 cursor-pointer"  ${path === active ? "bg-[#1788FB] opacity-70 rounded-lg" : ""} `} onClick={handleClick}>
-  <div className="mr-4">   <Image src={icon} alt={name} width="10px" height="10px" /></div>
-  <div className={` hidden inline ${isNameVisible ? 'sm:inline' : 'sm:hidden'}`}>{name}</div>
-</div>
-  )
-};
-
- const Sidebar = () => {
+  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
-
-
+  const getPath = usePathname();
+  useEffect(() => {
+    const storedActive = localStorage.getItem("Dashboard");
+    setActive(storedActive || getPath);
+  }, [getPath]);
   const menu = [
-    {
-      id: 1,
-      link: "/",
-      icon: Homemenu,
-      name: "Home",
-    },
-    {
-      id: 2,
-      link: "/tokendashboard",
-      icon: Tokendashboard,
-      name: "Token Dashboard",
-    },
-    {
-      id: 3,
-      link: "/holder",
-      icon: Holder,
-      name: "Holder",
-    },
-    {
-      id: 4,
-      link: "/referral",
-      icon: Referral,
-      name: "Referral",
-    },
-    {
-      id: 5,
-      link: "/leaderboard",
-      icon: Leaderboard,
-      name: "Leader Board",
-    },
-    {
-      id: 6,
-      link: "/portfolio",
-      icon: Portfolio,
-      name: "Portfolio",
-    },
-    {
-      id: 7,
-      link: "/volumestats",
-      icon: Volumestats,
-      name: "Volume Stats",
-    },
-  ];
-
-  const menubottom = [
-    {
-      id: 1,
-      link: "/watchList",
-      icon: WatchList,
-      name: "Watch List",
-    },
-    {
-      id: 2,
-      link: "/discover",
-      icon: Discover,
-      name: "Discover",
-    },
-    {
-      id: 3,
-      link: "/apecurdocs",
-      icon: Apecurdocs,
-      name: "Apecurdocs",
-    },
-    {
-      id: 4,
-      link: "/officialwebsite",
-      icon: Officialwebsite,
-      name: "Officialwebsite",
-    },
-  ];
-
-
-  const handleItemClick = (path) => {
-    setActive(path);
-    localStorage.setItem("Dashboard", path);
-  };  const getPath = usePathname();
-
-  
-
-
-  return (
-    <>
-      <div
-        className={`${
+        {
+          id: 1,
+          link: "/",
+          icon: Homemenu,
+          name: "Home",
+        },
+        {
+          id: 2,
+          link: "/tokendashboard",
+          icon: Tokendashboard,
+          name: "Token Dashboard",
+        },
+        {
+          id: 3,
+          link: "/holder",
+          icon: Holder,
+          name: "Holder",
+        },
+        {
+          id: 4,
+          link: "/referral",
+          icon: Referral,
+          name: "Referral",
+        },
+        {
+          id: 5,
+          link: "/leaderboard",
+          icon: Leaderboard,
+          name: "Leader Board",
+        },
+        {
+          id: 6,
+          link: "/portfolio",
+          icon: Portfolio,
+          name: "Portfolio",
+        },
+        {
+          id: 7,
+          link: "/volumestats",
+          icon: Volumestats,
+          name: "Volume Stats",
+        },
+      ];
+    
+      const menubottom = [
+        {
+          id: 1,
+          link: "/watchList",
+          icon: WatchList,
+          name: "Watch List",
+        },
+        {
+          id: 2,
+          link: "/discover",
+          icon: Discover,
+          name: "Discover",
+        },
+        {
+          id: 3,
+          link: "/apecurdocs",
+          icon: Apecurdocs,
+          name: "Apecurdocs",
+        },
+        {
+          id: 4,
+          link: "/officialwebsite",
+          icon: Officialwebsite,
+          name: "Officialwebsite",
+        },
+      ];
+      return (
+       
+        <div   className={`${
           getPath === "/login" ||
           getPath === "/signup" ||
           getPath === "/forgotpassword" ||
           getPath === "/passwordverify" ||
           getPath === "/resetpassword"
             ? "hidden"
-            : "p-5  bg-[#1C1C1C] "
-        }`}
-      >
-      <div className={`bg-[#1C1C1C] `}>
-        <div className="p-8 pb-10 flex justify-center">
-          <Image src={Logo} alt="" height="50" width="132" />
-        </div>
-        <ul className="text-white">
-          {menu.map(({ id, link, icon, name }) => (
-            <SidebarItem
-              key={id}
-              path={link}
-              icon={icon}
-              name={name}
-              active={active}
-              onClick={() => handleItemClick(link)}
-            />
-          ))}
-        </ul>
-
-        <div className="border-t border-white mt-2 pb-2 -mx-10"></div>
-        <ul className="text-white">
-          {menubottom.map(({ id, link, icon, name }) => (
-            <SidebarItem
-              key={id}
-              path={link}
-              icon={icon}
-              name={name}
-              active={active}
-              onClick={() => handleItemClick(link)}
-            />
-          ))}
-        </ul>
-
-        <div className="text-white mt-28">
-          <div className="flex gap-2">
-            <div>
-              <Image
-                src={Sidebaruserlogo}
-                alt="Sidebaruserlogo"
-                width="20px"
-                height="10px"
-              />
-            </div>
-
-            <div>
-              <div className="flex">
-                <h1>UniV3 Simulate</h1>
-                <span>
-                  <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-                </span>
+            : "  "
+        }`}>
+          <Disclosure as="nav">
+            <Disclosure.Button className="absolute  lg:hidden top-4 left-4 inline-flex items-center peer justify-center rounded-md p-2 pt-7  text-white   focus:outline-none focus:ring-inset focus:ring-white group">
+              <GiHamburgerMenu className="block h-6 w-6  " aria-hidden="true" />
+            </Disclosure.Button>
+         
+          
+            <div
+              className={`p-6 sm:pl-0 md:p-2 xsm:p-2 w-1/2 md:w-1/3 sm:w-1/3 h-screen bg-[#1C1C1C] z-20 fixed top-0  ${
+                open ? "left-0 w-[20%] " : "-left-96 "
+              } lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200  `}
+            >
+      
+        
+      
+       
+              {/* Header */}
+              <div className="2xl:p-8 md:p-7 sm:p-5 xsm:p-4  pb-10 flex justify-center ">
+            <Image src={Logo} alt="" className="h-[50] w-[132] sm:w-[100] sm:h-[20] "  />
+          </div>
+              {/* Menu */}
+              <div className="my-4">
+                {menu.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB]  text-white p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={() => handleMenuItemClick(item.link)}>
+                    <Image src={item.icon} alt={item.name} width={24} height={24} />
+                    <h3 className="text-base text-white group-hover:text-white font-semibold ">{item.name}</h3>
+                  </div>
+                ))}
+              </div>
+              {/* Bottom Menu */}
+          <div className="border-b border-stone-500 mt-7" /> 
+              <div className="my-4">
+                {menubottom.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={() => handleMenuItemClick(item.link)} >
+                    <Image src={item.icon} alt={item.name} width={24} height={24} />
+                    <h3 className="text-base text-white group-hover:text-white font-semibold ">{item.name}</h3>
+                  </div>
+                ))}
+              </div>
+              <div className="text-white 2xl:mt-48 md:mt-24 xsm:mt-20 ">
+            <div className="flex gap-2">
+              <div>
+                <Image
+                  src={Sidebaruserlogo}
+                  alt="Sidebaruserlogo"
+                  width="20px"
+                  height="10px"
+                />
               </div>
 
-              <p className="text-xs">Invited by @luoluonuoy323</p>
-              <div className="flex mt-2">
-                <Image
-                  src={Twitter}
-                  alt="twitter"
-                  width="10px"
-                  height="10px"
-                  className="mr-2"
-                />
-                <Image
-                  src={Twitter}
-                  alt="twitter"
-                  width="10px"
-                  height="10px"
-                  className="mr-2"
-                />
-                <Image
-                  src={Twitter}
-                  alt="twitter"
-                  width="10px"
-                  height="10px"
-                  className="mr-2"
-                />
+              <div>
+                <div className="flex">
+                  <h1>UniV3 Simulate</h1>
+                  <span>
+                    <Image src={Arrow} alt="arrow" width="10px" height="10px" />
+                  </span>
+                </div>
+
+                <p className="text-xs">Invited by @luoluonuoy323</p>
+                <div className="flex mt-2">
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                  <Image
+                    src={Twitter}
+                    alt="twitter"
+                    width="10px"
+                    height="10px"
+                    className="mr-2"
+                  />
+                </div>
               </div>
             </div>
           </div>
+            </div>
+              
+               
+          </Disclosure>
         </div>
-      </div>
-      </div>
-    </>
-  );
-};
-
-export default Sidebar;
+      );
+      
+    };
+    
+    export default Sidebar;
