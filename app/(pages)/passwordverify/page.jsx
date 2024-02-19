@@ -1,51 +1,64 @@
-"use client"
-import React, { useState } from "react"
-import Logo from "../../../public/assets/loginpopuplogo.png"
-import Image from "next/image"
-import Link from "next/link"
-import { FaRegEyeSlash } from "react-icons/fa"
-import Otpsucess from "../../../public/assets/otpsucess.png"
-import OtpInput from "react-otp-input"
-import { useRouter } from "next/navigation"
-import axiosInstance from "@/app/apiInstances/axiosInstance"
+"use client";
+import React, { useState } from "react";
+import Logo from "../../../public/assets/loginpopuplogo.png";
+import Image from "next/image";
+import Link from "next/link";
+import { FaRegEyeSlash } from "react-icons/fa";
+import Otpsucess from "../../../public/assets/otpsucess.png";
+import OtpInput from "react-otp-input";
+import { useRouter } from "next/navigation";
+import axiosInstance from "@/app/apiInstances/axiosInstance";
+
+import { ToastContainer, toast } from "react-toastify";
+
 const PasswordVerify = () => {
-  const email = localStorage.getItem("userEmail")
+  const email = localStorage.getItem("userEmail");
+  const types = localStorage.getItem("type");
 
-  const [otp, setOtp] = useState("")
+  const [otp, setOtp] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   // const [isVerificationSuccess, setIsVerificationSuccess] = useState(false)
   const handleOtpChange = (value) => {
-    const sanitizedValue = value.replace(/\D/g, "")
-    setOtp(sanitizedValue)
-  }
+    const sanitizedValue = value.replace(/\D/g, "");
+    setOtp(sanitizedValue);
+  };
   const mydata = {
     email: email,
     otp: otp,
-  }
-  console.log("mydata--->", mydata)
+    types,
+  };
+
   const handleSubmit = async () => {
     await axiosInstance
       .post("verify", mydata)
       .then((res) => {
-        const myData = res
-        console.log("res--->", res)
+        const myData = res?.data;
+        console.log("OTP Done--->", myData?.data);
 
         if (myData?.status) {
-          router.push("/login")
-          localStorage.removeItem("userEmail")
-          toast.success(myData?.data.msg)
+          if (myData?.data === "signup") {
+            router.push("/login");
+          }
+
+          if (myData?.data === "forget") {
+            router.push("/resetpassword");
+          }
+          // localStorage.removeItem("userEmail");
+          localStorage.removeItem("type");
+
+          toast.success(myData?.msg);
         } else {
-          toast.error(myData?.data.msg)
+          toast.error(myData?.msg);
         }
       })
       .catch((err) => {
-        console.log("error--->", err)
-      })
+        console.log("error--->", err);
+      });
 
     // setIsVerificationSuccess(true)
-  }
+  };
 
   return (
     <>
@@ -103,6 +116,7 @@ const PasswordVerify = () => {
               <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
                 Verify
               </button>
+              <ToastContainer />
             </div>
             <div className="flex justify-center mt-10 ">
               <Link
@@ -118,7 +132,7 @@ const PasswordVerify = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PasswordVerify
+export default PasswordVerify;
