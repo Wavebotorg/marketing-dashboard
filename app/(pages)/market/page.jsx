@@ -148,7 +148,7 @@ const Market = () => {
                     </div>
                     <div className="">{market?.name} <span>{market?.symbol}</span></div>
                   </td>
-                   <td className="flex justify-end">
+                   <td className="flex justify-center">
                      {/* {market.amount} <span>({market.percentChange})</span> */}
                   </td> 
                   <td className="flex justify-end text-center ">
@@ -170,3 +170,5 @@ const Market = () => {
 };
 
 export default Market;
+
+//alt space l
