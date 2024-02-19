@@ -1,8 +1,13 @@
-"use client";
 
+
+"use client"
+
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Disclosure } from "@headlessui/react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
 import Homemenu from "../../../public/assets/sidebar/home.png";
 import Holder from "../../../public/assets/sidebar/holder.png";
@@ -19,140 +24,157 @@ import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png"
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
 import { usePathname } from "next/navigation";
+import {
+  MdOutlineSpaceDashboard,
+  MdOutlineAnalytics,
+  MdOutlineIntegrationInstructions,
+  MdOutlineMoreHoriz,
+  MdOutlineSettings,
+  MdOutlineLogout,
+} from "react-icons/md";
 
-const Sidebar = () => {
+
+const Sidebar =()=> {
+  const router = useRouter();
+  const handleMenuItemClick = (link) => {
+    router.push(link); // Navigate to the specified link
+    setOpen(false); // Close the sidebar after clicking a menu item
+  };
+
+  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
-
-  const menu = [
-    {
-      id: 1,
-      link: "/",
-      icon: Homemenu,
-      name: "Home",
-    },
-    {
-      id: 2,
-      link: "/tokendashboard",
-      icon: Tokendashboard,
-      name: "Token Dashboard",
-    },
-    {
-      id: 3,
-      link: "/holder",
-      icon: Holder,
-      name: "Holder",
-    },
-    {
-      id: 4,
-      link: "/referral",
-      icon: Referral,
-      name: "Referral",
-    },
-    {
-      id: 5,
-      link: "/leaderboard",
-      icon: Leaderboard,
-      name: "Leader Board",
-    },
-    {
-      id: 6,
-      link: "/portfolio",
-      icon: Portfolio,
-      name: "Portfolio",
-    },
-    {
-      id: 7,
-      link: "/volumestats",
-      icon: Volumestats,
-      name: "Volume Stats",
-    },
-  ];
-
-  const menubottom = [
-    {
-      id: 1,
-      link: "/watchList",
-      icon: WatchList,
-      name: "Watch List",
-    },
-    {
-      id: 2,
-      link: "/discover",
-      icon: Discover,
-      name: "Discover",
-    },
-    {
-      id: 3,
-      link: "/apecurdocs",
-      icon: Apecurdocs,
-      name: "Apecurdocs",
-    },
-    {
-      id: 4,
-      link: "/officialwebsite",
-      icon: Officialwebsite,
-      name: "Officialwebsite",
-    },
-  ];
-
   const getPath = usePathname();
-
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
   }, [getPath]);
-
-  return (
-    <>
-      <div
-        className={`${
+  const menu = [
+        {
+          id: 1,
+          link: "/",
+          icon: Homemenu,
+          name: "Home",
+        },
+        {
+          id: 2,
+          link: "/tokendashboard",
+          icon: Tokendashboard,
+          name: "Token Dashboard",
+        },
+        {
+          id: 3,
+          link: "/holder",
+          icon: Holder,
+          name: "Holder",
+        },
+        {
+          id: 4,
+          link: "/referral",
+          icon: Referral,
+          name: "Referral",
+        },
+        {
+          id: 5,
+          link: "/leaderboard",
+          icon: Leaderboard,
+          name: "Leader Board",
+        },
+        {
+          id: 6,
+          link: "/portfolio",
+          icon: Portfolio,
+          name: "Portfolio",
+        },
+        {
+          id: 7,
+          link: "/volumestats",
+          icon: Volumestats,
+          name: "Volume Stats",
+        },
+      ];
+    
+      const menubottom = [
+        {
+          id: 1,
+          link: "/watchList",
+          icon: WatchList,
+          name: "Watch List",
+        },
+        {
+          id: 2,
+          link: "/discover",
+          icon: Discover,
+          name: "Discover",
+        },
+        {
+          id: 3,
+          link: "/apecurdocs",
+          icon: Apecurdocs,
+          name: "Apecurdocs",
+        },
+        {
+          id: 4,
+          link: "/officialwebsite",
+          icon: Officialwebsite,
+          name: "Officialwebsite",
+        },
+      ];
+      return (
+       
+        <div   className={`${
           getPath === "/login" ||
           getPath === "/signup" ||
           getPath === "/forgotpassword" ||
           getPath === "/passwordverify" ||
           getPath === "/resetpassword"
             ? "hidden"
-            : "p-5  bg-[#1C1C1C] "
-        }`}
-      >
-        <div className={` bg-[#1C1C1C] `}>
-          <div className="2xl:p-8 lg:p-6 sm:p-2 flex justify-center    2xl:pb-10  lg:pb-2 sm:pb-2 ">
-            <Image src={Logo} alt=""   className="2xl:h-[50] 2xl:w-[132]  sm:h-[30] sm:w-[100] "/>
+            : "  "
+        }`}>
+          <Disclosure as="nav">
+            <Disclosure.Button className="absolute  lg:hidden top-4 left-4 inline-flex items-center peer justify-center rounded-md p-2 pt-7  text-white   focus:outline-none focus:ring-inset focus:ring-white group">
+              <GiHamburgerMenu className="block h-6 w-6  " aria-hidden="true" />
+            </Disclosure.Button>
+         
+          
+            <div
+              className={`p-6 sm:pl-0 md:p-2 xsm:p-2 w-1/2 md:w-1/3 sm:w-1/3 h-screen bg-[#1C1C1C] z-20 fixed top-0  ${
+                open ? "left-0 w-[20%] " : "-left-96 "
+              } lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200  `}
+            >
+      
+        
+      
+       
+              {/* Header */}
+              <div className="2xl:p-8 md:p-7 sm:p-5 xsm:p-4  pb-10 flex justify-center ">
+            <Image src={Logo} alt="" className="h-[50] w-[132] sm:w-[100] sm:h-[20] "  />
           </div>
-          <ul className="text-white">
-            {menu.map(({ id, link, icon, name }) => (
-              <li
-                key={id}
-                className={`p-4 ${
-                  link === active ? "bg-[#1788FB] opacity-70 rounded-lg" : ""
-                }`}
-              >
-                <Link href={link} className="flex gap-4">
-                  <Image src={icon} alt={name} width="10px" height="10px" />
-                  <span className="font-bold ">{name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className="border-t border-white mt-2 pb-2 -mx-10"></div>
-          <ul className="text-white">
-            {menubottom.map(({ id, link, icon, name }) => (
-              <li
-                key={id}
-                className={`p-4 ${
-                  link === active ? "bg-[#1788FB] opacity-70 rounded-lg" : ""
-                }`}
-              >
-                <Link href={link} className="flex gap-4">
-                  <Image src={icon} alt={name} width="10px" height="10px" />
-                  <span className="font-bold">{name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className="text-white mt-28">
+              {/* Menu */}
+              <div className="my-4">
+                {menu.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB]  text-white p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={() => handleMenuItemClick(item.link)}>
+                    <Image src={item.icon} alt={item.name} width={24} height={24} />
+                    <h3 className="text-base text-white group-hover:text-white font-semibold ">{item.name}</h3>
+                  </div>
+                ))}
+              </div>
+              {/* Bottom Menu */}
+          <div className="border-b border-stone-500 mt-7" /> 
+              <div className="my-4">
+                {menubottom.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB] p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto"
+                    onClick={() => handleMenuItemClick(item.link)} >
+                    <Image src={item.icon} alt={item.name} width={24} height={24} />
+                    <h3 className="text-base text-white group-hover:text-white font-semibold ">{item.name}</h3>
+                  </div>
+                ))}
+              </div>
+              <div className="text-white 2xl:mt-48 md:mt-24 xsm:mt-20 ">
             <div className="flex gap-2">
               <div>
                 <Image
@@ -198,10 +220,13 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
+            </div>
+              
+               
+          </Disclosure>
         </div>
-      </div>
-    </>
-  );
-};
-
-export default Sidebar;
+      );
+      
+    };
+    
+    export default Sidebar;

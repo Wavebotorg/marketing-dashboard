@@ -1,79 +1,101 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { LiaEyeSolid } from "react-icons/lia";
 
 import Bitcoin from "../../assets/bitcoin.png";
 import Link from "next/link";
+import axios from "axios";
 
 const Market = () => {
-  // JSON data
-  const marketData = {
-    amount: "0.01899934",
-    coin: "BTC",
-    price: "=$42,693.89",
-    pnl: "Todays PnL -$.550()",
-    markets: [
-      {
-        name: "Bitcoin BTC",
-        image: Bitcoin,
-        alt: "bitcoin",
-        amount: "3.00",
-        percentChange: "-2.49%",
-        price: "$100.4",
+  const [allCoinData, setAllCoinData] = useState([]);
+ 
+  // const marketData = {
+  //   amount: "0.01899934",
+  //   coin: "BTC",
+  //   price: "=$42,693.89",
+  //   pnl: "Todays PnL -$.550()",
+  //   markets: [
+  //     {
+  //       name: "Bitcoin BTC",
+  //       image: Bitcoin,
+  //       alt: "bitcoin",
+  //       amount: "3.00",
+  //       percentChange: "-2.49%",
+  //       price: "$100.4",
 
-        pnl: "-$3.15",
-        tradeLink: "Trade",
-      },
-      {
-        name: "Bitcoin BTC",
-        image: Bitcoin,
-        alt: "bitcoin",
-        amount: "3.00",
-        percentChange: "-2.49%",
-        price: "$100.4",
+  //       pnl: "-$3.15",
+  //       tradeLink: "Trade",
+  //     },
+  //     {
+  //       name: "Bitcoin BTC",
+  //       image: Bitcoin,
+  //       alt: "bitcoin",
+  //       amount: "3.00",
+  //       percentChange: "-2.49%",
+  //       price: "$100.4",
 
-        pnl: "-$3.15",
-        tradeLink: "Trade",
-      },
-      {
-        name: "Bitcoin BTC",
-        image: Bitcoin,
-        alt: "bitcoin",
-        amount: "3.00",
-        percentChange: "-2.49%",
-        price: "$100.4",
+  //       pnl: "-$3.15",
+  //       tradeLink: "Trade",
+  //     },
+  //     {
+  //       name: "Bitcoin BTC",
+  //       image: Bitcoin,
+  //       alt: "bitcoin",
+  //       amount: "3.00",
+  //       percentChange: "-2.49%",
+  //       price: "$100.4",
 
-        pnl: "-$3.15",
-        tradeLink: "Trade",
-      },
-      {
-        name: "Bitcoin BTC",
-        image: Bitcoin,
-        alt: "bitcoin",
-        amount: "3.00",
-        percentChange: "-2.49%",
-        price: "$100.4",
+  //       pnl: "-$3.15",
+  //       tradeLink: "Trade",
+  //     },
+  //     {
+  //       name: "Bitcoin BTC",
+  //       image: Bitcoin,
+  //       alt: "bitcoin",
+  //       amount: "3.00",
+  //       percentChange: "-2.49%",
+  //       price: "$100.4",
 
-        pnl: "-$3.15",
-        tradeLink: "Trade",
-      },
-      {
-        name: "Bitcoin BTC",
-        image: Bitcoin,
-        alt: "bitcoin",
-        amount: "3.00",
-        percentChange: "-2.49%",
-        price: "$100.4",
+  //       pnl: "-$3.15",
+  //       tradeLink: "Trade",
+  //     },
+  //     {
+  //       name: "Bitcoin BTC",
+  //       image: Bitcoin,
+  //       alt: "bitcoin",
+  //       amount: "3.00",
+  //       percentChange: "-2.49%",
+  //       price: "$100.4",
 
-        pnl: "-$3.15",
-        tradeLink: "Trade",
-      },
+  //       pnl: "-$3.15",
+  //       tradeLink: "Trade",
+  //     },
 
-      // Add more market objects as needed
-    ],
+  //     // Add more market objects as needed
+  //   ],
+  // };
+  const getUserdata = async () => {
+    axios 
+      .get(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+      )
+      .then((res) => {
+        setAllCoinData(res?.data);
+        console.log("AllCoinData---->", myData?.data);
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
   };
+
+
+  useEffect(() => {
+    getUserdata();
+  }, []);
+
 
   return (
     <div className="text-white p-10 rounded-lg">
@@ -87,12 +109,12 @@ const Market = () => {
         </div>
         <div className="flex pb-4">
           <h1 className="text-[#1788FB] font-bold text-3xl">
-            {marketData.amount}
+            {allCoinData.amount}
           </h1>{" "}
-          <span>{marketData.coin}</span>
+          <span>{allCoinData.coin}</span>
         </div>
-        <div className="text-sm pb-4">{marketData.price}</div>
-        <div className="text-sm pb-5">{marketData.pnl}</div>
+        <div className="text-sm pb-4">{allCoinData.price}</div>
+        {/* <div className="text-sm pb-5">{allCoinData.pnl}</div> */}
       </div>
 
       {/* Border */}
@@ -107,34 +129,36 @@ const Market = () => {
               <th className="flex justify-start">Coin</th>
               <th className="flex justify-end">Amount</th>
               <th className="flex justify-end">Coin Price</th>
-              <th className="flex justify-end">Todat’s PnL</th>
+              <th className="flex justify-end">Today’s PnL</th>
               <th className="flex justify-end">Trade</th>
             </tr>
           </thead>
           <tbody className="pt-5">
-            {marketData?.markets.length > 0 &&
-              marketData.markets.map((market, index) => (
-                <tr key={index} className="grid grid-cols-5">
-                  <td className=" flex justify-start items-center gap-3">
+            {allCoinData?.length > 0 &&
+            allCoinData.map((market, index) => (
+                <tr key={index} className="grid grid-cols-5  ">
+                  <td className=" flex justify-start items-center gap-3 p-2">
                     <div className="inline-flex items-center ">
                       <Image
-                        src={market.image}
-                        alt={market.alt}
-                        width="10px"
-                        height="10px"
+                        src={market?.image}
+                        alt={market?.name}
+                        width={30}
+                        height={30}
                       />
                     </div>
-                    <div className="">{market.name}</div>
+                    <div className="">{market?.name} <span>{market?.symbol}</span></div>
                   </td>
-                  <td className="flex justify-end">
-                    {market.amount} <span>({market.percentChange})</span>
+                   <td className="flex justify-end">
+                     {/* {market.amount} <span>({market.percentChange})</span> */}
+                  </td> 
+                  <td className="flex justify-end text-center ">
+                  ${market?.current_price}
+                   <span>({market?.price_change_percentage_24h})</span>
                   </td>
+                  {/* <td className="flex justify-end">${market.pnl}</td> */}
+                  <td></td>
                   <td className="flex justify-end">
-                    ${market.price} <span>({market.percentChange})</span>
-                  </td>
-                  <td className="flex justify-end">${market.pnl}</td>
-                  <td className="flex justify-end">
-                    <Link href="/">{market.tradeLink}</Link>
+                    <Link href="/">Trade</Link>
                   </td>
                 </tr>
               ))}

@@ -19,14 +19,14 @@ export default function RootLayout({ children }) {
         <>
           <div className="mx-auto">
             <div className="fixed flex  w-full ">
-              <div className="w-[20%] h-full ">
+              <div className=" h-full ">
                 <Sidebar />
               </div>
               <div className="w-full  bg-[#0B0E10] p-5 overflow-auto h-screen ">
-                <div>
+                <div className="lg:pl-56 ">
                   <Loginbutton />
                 </div>
-                <div>{children}</div>
+                <div className="lg:pl-56">{children}</div>
               </div>
             </div>
           </div>

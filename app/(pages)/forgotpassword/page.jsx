@@ -1,14 +1,43 @@
 "use client"
-import React from "react"
+import React, { useEffect } from "react"
+
 import Logo from "../../../public/assets/loginpopuplogo.png"
 import Image from "next/image"
 import Link from "next/link"
+import { toast } from "react-toastify";
 import { FaRegEyeSlash } from "react-icons/fa"
 import { useRouter } from "next/navigation"
+import axiosInstance from "../../../apiInstances/axiosInstance";
 const ForgotPassword = () => {
   const router = useRouter()
-  const handleotp = () => {
-    router.push("/passwordverify")
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
+ 
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const mydata = {
+    email: loginFields?.email,
+   
+  }
+  const handleSubmit = async() => {
+    await axiosInstance
+    .post("forgetPassword",mydata)
+    .then((res)=>{
+      const myData =res
+      console.log("-------mydata:",res)
+      if(myData?.status){
+        router.push("/passwordverify")
+        toast.success(myData?.data.msg)
+      }else{
+        toast.error("something went wrong");
+      }
+    })
+    .catch((err) => {
+      console.log("err --->", err)
+    })
+  
   }
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
@@ -33,10 +62,15 @@ const ForgotPassword = () => {
             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 bg-neutral-800 mb-5"
             type="text"
             name="email"
+            value={email}
+            onChange={handleEmailChange}
+          
           />
         </div>
 
-        <div className="flex justify-center mt-10" onClick={() => handleotp()}>
+        <div className="flex justify-center mt-10" onClick={(event) => {
+                      handleSubmit(event);
+                    }}>
           <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
             send OTP
           </button>
