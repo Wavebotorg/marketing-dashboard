@@ -130,12 +130,12 @@ const Sidebar =()=> {
             ? "hidden"
             : "  "
         }`}>
-          <Disclosure as="nav">
+          <Disclosure as="nav"> 
             <Disclosure.Button className="absolute  lg:hidden top-4 left-4 inline-flex items-center peer justify-center rounded-md p-2 pt-7  text-white   focus:outline-none focus:ring-inset focus:ring-white group">
               <GiHamburgerMenu className="block h-6 w-6  " aria-hidden="true" />
             </Disclosure.Button>
          
-          
+        
             <div
               className={`p-6 sm:pl-0 md:p-2 xsm:p-2 w-1/2 md:w-1/3 sm:w-1/3 h-screen bg-[#1C1C1C] z-20 fixed top-0  ${
                 open ? "left-0 w-[20%] " : "-left-96 "
