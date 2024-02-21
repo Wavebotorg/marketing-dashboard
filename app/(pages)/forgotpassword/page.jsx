@@ -1,42 +1,59 @@
 "use client";
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
 
 import axiosInstance from "../../apiInstances/axiosInstance";
+
 const ForgotPassword = () => {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState("");
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const [forgetData, setForgetData] = useState({
+    email: "",
+  });
+
+  const onChangeInput = (e) => {
+    const value = e.target.value.trim();
+    const name = e.target.name;
+
+    setForgetData({
+      ...forgetData,
+      [name]: value,
+    });
   };
+
   const mydata = {
-    email: email,
+    email: forgetData?.email,
   };
+
+  // Forget Password API code
   const handleSubmit = async () => {
     await axiosInstance
       .post("forgetPassword", mydata)
       .then((res) => {
-        const myData = res;
-        console.log("-------mydata:", res);
+        const myData = res?.data;
+        console.log("Forget Password Data --->", myData);
+        localStorage.setItem("type", "forget");
+        localStorage.setItem("userEmail", forgetData?.email);
         if (myData?.status) {
-          router.push("/passwordverify");
-          toast.success(myData?.data.msg);
+          toast.success(myData?.msg);
+
+          setTimeout(() => {
+            router.push("/passwordverify");
+          }, 3000);
         } else {
-          toast.error("something went wrong");
+          toast.error(myData?.msg);
         }
       })
       .catch((err) => {
-        console.log("err --->", err);
+        console.log("err---->", err);
       });
   };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -53,27 +70,22 @@ const ForgotPassword = () => {
         </h2>
         <div>
           <div className="text-[#CACACA] mb-2 2xl:text-left md:text-left sm:text-left xsm:text-center">
-            {" "}
-            Enter Email{" "}
+            Enter Email
           </div>
           <input
             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 bg-neutral-800 mb-5"
-            type="text"
+            type="email"
             name="email"
-            value={email}
-            onChange={handleEmailChange}
+            value={forgetData?.email}
+            onChange={onChangeInput}
           />
         </div>
 
-        <div
-          className="flex justify-center mt-10"
-          onClick={(event) => {
-            handleSubmit(event);
-          }}
-        >
+        <div className="flex justify-center mt-10" onClick={handleSubmit}>
           <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
             send OTP
           </button>
+          <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">
           <Link href="/resetpassword" className="text-xs">
