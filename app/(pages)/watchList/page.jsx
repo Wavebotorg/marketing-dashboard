@@ -163,13 +163,14 @@ const WatchList = () => {
 
   return (
     <>
-      <div className="container hidden lg:block ">
-        <div className="border-b border-stone-500 mt-7" />
-        <div className="flex flex-col md:flex-row items-center justify-between mt-6">
+      <div className="md:container ">
+        <div className="flex lg:px-6 flex-row  items-center justify-between mt-6">
           <div>
-            <div className="text-2xl justify-start">My Watchlist</div>
+            <div className="text-2xl justify-start items-center">
+              My Watchlist
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row md:flex-row justify-center md:justify-end mt-4 md:mt-0 gap-3">
+          <div className="flex flex-row   items-center  md:mt-0 gap-3">
             <div>
               <FaPlus size={24} />
             </div>
@@ -187,28 +188,28 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="flex  gap-3 mt-6">
+        <div className="flex  gap-3 mt-6 lg:px-6 md:text-base text-sm">
           <div>
             <button className="bg-blue-500 px-2 rounded-lg">All</button>
           </div>
           <div>
-            <button className="  ">Crypto</button>
+            <button className="">Crypto</button>
           </div>
           <div>
-            <button className="  ">Stocks</button>
+            <button className="">Stocks</button>
           </div>
           <div>
-            <button className="  ">People</button>
+            <button className="">People</button>
           </div>
           <div>
-            <button className="  ">Smart Portfolios</button>
+            <button className="">Smart Portfolios</button>
           </div>
           <div className="mt-[7px]">
             <FaGreaterThan size={13} />
           </div>
         </div>
 
-        <div className="container">
+        <div className="container hidden lg:block ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[550px] overflow-auto rounded-lg">
               <table className="w-full  ">
