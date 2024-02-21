@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <>
           <div className="mx-auto">
-            <div className="fixed flex  w-full h-full">
+            <div className="fixed flex  w-full ">
               <div className="w-[20%] h-full ">
                 <Sidebar />
               </div>

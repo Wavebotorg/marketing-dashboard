@@ -54,23 +54,7 @@ const Holder = () => {
         </table>
       </div>
 
-      {/*  <div className="mt-6 ">
-        <div className="grid grid-cols-5 bg-[#1C1C1C]">
-          <div className="px-4 py-2 ">Snapshot Block</div>
-          <div className="px-4 py-2 ">Time</div>
-          <div className="px-4 py-2 ">Rewards</div>
-          <div className="px-4 py-2 ">Unlock</div>
-          <div className="px-4 py-2 ">Status</div>
-
-          {/* Add more rows as needed *
-          <div className="px-4 py-2 ">Value 1</div>
-          <div className="px-4 py-2 ">Value 2</div>
-          <div className="px-4 py-2 ">Value 3</div>
-          <div className="px-4 py-2 ">Value 4</div>
-          <div className="px-4 py-2 ">Value 5</div>
-        </div>
-      </div> */}
-
+     
       <div className="flex justify-end mt-8">
         <div>
           <label>Rows per page </label>
@@ -94,62 +78,3 @@ const Holder = () => {
 
 export default Holder;
 
-{
-  /*  <div class="grid-flow-row flex justify-between bg-[#1C1C1C] mt-6 ">
-  <span class="flex-1">
-    <strong>Snapshot Block</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Time</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Rewards</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Unlock</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Status</strong>
-  </span>
-</div>
-
-*/
-}
-
-{
-  /* <div className="grid grid-cols-5 ">
-<div className="px-4 py-2 ">Snapshot Block</div>
-  <div className="px-4 py-2 ">Time</div>
-  <div className="px-4 py-2 ">Rewards</div>
-  <div className="px-4 py-2 ">Unlock</div>
-  <div className="px-4 py-2 ">Status</div>
-
-  {/* Add more rows as needed *
-  <div className="px-4 py-2 ">Value 1</div>
-  <div className="px-4 py-2 ">Value 2</div>
-  <div className="px-4 py-2 ">Value 3</div>
-  <div className="px-4 py-2 ">Value 4</div>
-  <div className="px-4 py-2 ">Value 5</div>
-</div> */
-}
-
-{
-  /*    <span>0</span>
-  <span>AaronKris</span>
-  <span>Philippines</span>
-  <span>1991-05-23T14:19:51</span>
-  <span>Ophelia_Mitchell@karley.name</span>
-  <span>1</span>
-  <span>SimeonMcLaughlin</span>
-  <span>Singapore</span>
-  <span>2012-03-07T00:08:36</span>
-  <span>Sabrina_Barton@torey.net</span>
-  <span>2</span>
-  <span>Kelsie Shanahan</span>
-  <span>Brazil</span>
-  <span>1985-03-10T20:13:04</span>
-  <span>Karianne@salvatore.biz</span> */
-}
-{
-  /* </div> */
-}
