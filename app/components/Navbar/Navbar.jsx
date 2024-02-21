@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
-const Loginbutton = () => {
+const Navbar = () => {
   const [active, setActive] = useState("");
   const getPath = usePathname();
   useEffect(() => {
@@ -53,5 +53,4 @@ const Loginbutton = () => {
   );
 };
 
-export default Loginbutton;
-
+export default Navbar;
