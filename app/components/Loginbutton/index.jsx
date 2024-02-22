@@ -7,12 +7,16 @@ import Link from "next/link";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 const Loginbutton = () => {
+  const token = localStorage.getItem("Token");
+
   const [active, setActive] = useState("");
+
   const getPath = usePathname();
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
   }, [getPath]);
+
   return (
     <>
       <div

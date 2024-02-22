@@ -163,6 +163,7 @@ const WatchList = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <div className="md:container ">
         <div className="flex lg:px-6 flex-row  items-center justify-between mt-6">
           <div>
@@ -171,6 +172,15 @@ const WatchList = () => {
             </div>
           </div>
           <div className="flex flex-row   items-center  md:mt-0 gap-3">
+=======
+      <div className="container hidden lg:block ">
+        <div className="border-b border-stone-500 mt-7" />
+        <div className="flex flex-col md:flex-row items-center justify-between mt-6">
+          <div>
+            <div className="text-2xl justify-start">My Watchlist</div>
+          </div>
+          <div className="flex flex-col sm:flex-row md:flex-row justify-center md:justify-end mt-4 md:mt-0 gap-3">
+>>>>>>> 2f616dedc68a9524592a428dbf88710713a224d9
             <div>
               <FaPlus size={24} />
             </div>
@@ -188,11 +198,16 @@ const WatchList = () => {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
         <div className="flex  gap-3 mt-6 lg:px-6 md:text-base text-sm">
+=======
+        <div className="flex  gap-3 mt-6">
+>>>>>>> 2f616dedc68a9524592a428dbf88710713a224d9
           <div>
             <button className="bg-blue-500 px-2 rounded-lg">All</button>
           </div>
           <div>
+<<<<<<< HEAD
             <button className="">Crypto</button>
           </div>
           <div>
@@ -203,13 +218,29 @@ const WatchList = () => {
           </div>
           <div>
             <button className="">Smart Portfolios</button>
+=======
+            <button className="  ">Crypto</button>
+          </div>
+          <div>
+            <button className="  ">Stocks</button>
+          </div>
+          <div>
+            <button className="  ">People</button>
+          </div>
+          <div>
+            <button className="  ">Smart Portfolios</button>
+>>>>>>> 2f616dedc68a9524592a428dbf88710713a224d9
           </div>
           <div className="mt-[7px]">
             <FaGreaterThan size={13} />
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="container hidden lg:block ">
+=======
+        <div className="container">
+>>>>>>> 2f616dedc68a9524592a428dbf88710713a224d9
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[550px] overflow-auto rounded-lg">
               <table className="w-full  ">

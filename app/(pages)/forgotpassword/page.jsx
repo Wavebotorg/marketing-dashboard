@@ -42,9 +42,15 @@ const ForgotPassword = () => {
         if (myData?.status) {
           toast.success(myData?.msg);
 
+<<<<<<< HEAD
           setTimeout(() => {
             router.push("/passwordverify");
           }, 3000);
+=======
+          router.push("/passwordverify");
+          // setTimeout(() => {
+          // }, 3000);
+>>>>>>> 2f616dedc68a9524592a428dbf88710713a224d9
         } else {
           toast.error(myData?.msg);
         }
