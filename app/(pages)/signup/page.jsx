@@ -1,78 +1,73 @@
-"use client"
-import React, { useState } from "react"
+"use client";
+import React, { useState } from "react";
 
-import Logo from "../../../public/assets/loginpopuplogo.png"
-import Image from "next/image"
-import Link from "next/link"
-import { FaRegEyeSlash } from "react-icons/fa"
-import { IoEyeOutline } from "react-icons/io5"
-import axiosInstance from "../../apiInstances/axiosInstance"
+import Logo from "../../../public/assets/loginpopuplogo.png";
+import Image from "next/image";
+import Link from "next/link";
+import { FaRegEyeSlash } from "react-icons/fa";
+import { IoEyeOutline } from "react-icons/io5";
+import axiosInstance from "../../apiInstances/axiosInstance";
 // import useEncryption from "../../components/useEncryption/index"
 
-import { useRouter } from "next/navigation"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   // const { decryptData } = useEncryption()
-  const router = useRouter()
+  const router = useRouter();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const [signupdata, setSignupData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-  })
+  });
+
   const onChangeInput = (e) => {
-    const value = e.target.value.trim()
-    const name = e.target.name
+    const value = e.target.value.trim();
+    const name = e.target.name;
 
     setSignupData({
       ...signupdata,
       [name]: value,
-    })
-  }
+    });
+  };
+
   const mydata = {
     name: signupdata?.name,
     email: signupdata?.email,
     password: signupdata?.password,
     confirmPassword: signupdata?.confirmPassword,
-  }
-  // console.log("mydata sign", mydata)
-  // Signup API code
-  const [email, setEmail] = useState("")
+  };
 
-  console.log("email------------------>", email)
+  // Signup API code
   const handleSubmit = async () => {
     await axiosInstance
       .post("signup", mydata)
       .then((res) => {
-        const myData = res
-        console.log("=========mydata:", myData)
-        setEmail(myData?.data?.data?.email || [])
-        localStorage.setItem("userEmail", myData?.data?.data?.email || "")
-        if (myData?.status) {
-          toast.success(myData?.data.msg)
+        const myData = res?.data;
+        console.log("=========mydata:", myData);
 
-          setTimeout(() => {
-            router.push("/passwordverify")
-          }, 3000)
-          // toast.success(myData?.data.msg, {
-          //   onClose: () => {
-          //     // Only redirect on successful signup
-          //     router.push("/")
-          //   },
-          // })
+        localStorage.setItem("userEmail", myData?.data?.email || "");
+        localStorage.setItem("type", "signup");
+        if (myData?.status) {
+          toast.success(myData?.data.msg);
+
+          router.push("/passwordverify");
+          // setTimeout(() => {
+          // }, 3000);
         } else {
-          toast.error(myData?.data.msg)
+          toast.error(myData?.data.msg);
         }
       })
       .catch((err) => {
-        console.log("err---->", err)
-      })
-  }
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+        console.log("err---->", err);
+      });
+  };
 
   function togglePasswordVisibility() {
-    setIsPasswordVisible((prevState) => !prevState)
+    setIsPasswordVisible((prevState) => !prevState);
   }
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
@@ -163,7 +158,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
