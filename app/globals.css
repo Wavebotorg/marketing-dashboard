@@ -121,12 +121,12 @@ body {
 }
 .responsive-table caption {
   margin-bottom: 1em;
-  font-size: 1em;
+  /* font-size: 1em; */
   font-weight: bold;
   text-align: center;
 }
 .responsive-table tfoot {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
   font-style: italic;
 }
 .responsive-table tbody tr {
@@ -152,7 +152,7 @@ body {
 .responsive-table tbody td[data-title]:before {
   content: attr(data-title);
   float: left;
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
   color: #dfe5ff;
 }
 .responsive-table tbody td {
@@ -166,9 +166,10 @@ body {
   color: #dfe5ff;
 }
 
+/* 832pixels */
 @media (min-width: 52em) {
   .responsive-table {
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
   }
   .responsive-table thead {
     position: relative;
@@ -183,11 +184,11 @@ body {
   .responsive-table th,
   .responsive-table td {
     display: table-cell;
-    padding: 0.5em;
+    padding: 0.9em;
   }
 
   .responsive-table caption {
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
   }
   .responsive-table tbody {
     display: table-row-group;
@@ -227,19 +228,21 @@ body {
     content: none;
   }
 }
+/* 992pixels */
 @media (min-width: 62em) {
   .responsive-table {
-    font-size: 1em;
+    /* font-size: 1em; */
   }
   .responsive-table th,
   .responsive-table td {
     padding: 0.75em 0.5em;
   }
   .responsive-table tfoot {
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
   }
 }
 
+/* 1200pixels */
 @media (min-width: 75em) {
   .responsive-table th,
   .responsive-table td {
