@@ -26,7 +26,7 @@ const Page = () => {
   ];
 
   return (
-    <div className="text-white container ">
+    <div className="text-white container  ">
    
       
         <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">

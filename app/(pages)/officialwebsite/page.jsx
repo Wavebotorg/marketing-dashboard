@@ -1,7 +1,7 @@
 import React from "react";
 
 const OfficialWebsite = () => {
-  return <div>officialwebsite</div>;
+  return <div className="container">officialwebsite</div>;
 };
 
 export default OfficialWebsite;

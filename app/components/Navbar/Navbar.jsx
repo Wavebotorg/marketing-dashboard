@@ -30,7 +30,7 @@ const Navbar = () => {
           getPath === "/passwordverify" ||
           getPath === "/resetpassword"
             ? "hidden"
-            : "flex  justify-between  border-b border-stone-500 pb-7 pt-5 pl-10 "
+            : "flex  justify-between  border-b border-stone-500 pb-7 pt-5 pl-16 container  "
         }`}
       >
         <div className="relative flex-grow md:max-w-[700px] md:mr-10 sm:mr-5 xsm:mr-5  ">

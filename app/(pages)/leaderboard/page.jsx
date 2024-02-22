@@ -72,7 +72,7 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <div className="xl:flex md:justify-between gap-5 md:container md:mx-auto my-10 xl:space-y-0 space-y-5 ">
+      <div className="xl:flex md:justify-between gap-5 md:container md:mx-auto my-10 xl:space-y-0 space-y-5 container">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board

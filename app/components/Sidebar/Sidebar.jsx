@@ -57,7 +57,9 @@ function Sidebar() {
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
+  const [isHover1, setIsHover1] = useState(null);
   const [isNavbar, setIsNavbar] = useState(false);
+  const [isNavbar1, setIsNavbar1] = useState(false);
   const headerdata = [
     {
       id: 1,
@@ -218,18 +220,18 @@ function Sidebar() {
                     <Link
                       href={data.pathname}
                       className={`${
-                        (isHover && data.id === isHover) ||
+                        (isHover1 && data.id === isHover1) ||
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
                       } flex md:px-2 lg:px-4  py-3 rounded-lg`}
-                      onClick={() => setIsNavbar(false)}
+                      onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
-                      onMouseLeave={() => setIsHover(null)}
+                      onMouseLeave={() => setIsHover1(null)}
                     >
                       <div
                         className={
-                          (isHover && data.id === isHover) ||
+                          (isHover1 && data.id === isHover1) ||
                           data.pathname === pathname
                             ? "dropdown-left-border -ml-[7px]"
                             : "border-l-2 -ml-[7px] border-transparent"
