@@ -101,10 +101,10 @@ const LeaderBoard = () => {
             </div>
           </div> */}
 
-          <div className="md:container">
+          <div className="md:container ">
             <div className="mt-6 rounded-lg overflow-auto">
-              <div className="bg-[#1C1C1C]  text-white  overflow-auto rounded-lg">
-                <table className="w-full  ">
+              <div className="bg-[#1C1C1C]  text-white  overflow-auto rounded-lg ">
+                <table className="w-full">
                   <thead className="sticky top-0 bg-[#1788FB] shadow-2xl">
                     <tr className=" text-[#FFFFFF]  ">
                       <th
@@ -225,7 +225,7 @@ const LeaderBoard = () => {
             Recent Joins
           </p>
           <div className="md:container">
-            <div className="mt-6 rounded-lg overflow-hidden">
+            <div className="mt-6 rounded-lg overflow-hidden w-full">
               <div className="bg-[#1C1C1C] text-white xl:block md:grid md:grid-cols-2 ">
                 {/* Mapping over students data */}
                 {allRecentUser?.length > 0 &&
@@ -234,7 +234,7 @@ const LeaderBoard = () => {
                       <div key={index} className="">
                         <div className="md:p-4 p-3">
                           <div className="flex gap-2">
-                            <div>
+                            <div className="">
                               <Image
                                 src={img}
                                 alt="Picture of the author"
