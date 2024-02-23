@@ -10,10 +10,10 @@ import Link from "next/link";
 import axios from "axios";
 
 const Market = () => {
-  const {id}  = useParams();
+  const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
- console.log("save",savedCoins);
+  console.log("save", savedCoins);
   const getUserdata = async () => {
     axios
       .get(
@@ -21,7 +21,6 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
-     
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -31,19 +30,19 @@ const Market = () => {
   useEffect(() => {
     getUserdata();
   }, []);
-  
-  const saveCoin = async (id)=>{
-    axios.post("watchlist", { id })
-    .then((res)=>{
-      setSavedCoins(res?.data)
-      //  setSavedCoins((prevSavedCoins) => [...prevSavedCoins, savedCoin]);
-  
-    })
-    .catch((err)=>{
-      console.log("err--->",err)
-    })
-    }
-  
+
+  const saveCoin = async (id) => {
+    axios
+      .post("watchlist", { id })
+      .then((res) => {
+        setSavedCoins(res?.data);
+        //  setSavedCoins((prevSavedCoins) => [...prevSavedCoins, savedCoin]);
+      })
+      .catch((err) => {
+        console.log("err--->", err);
+      });
+  };
+
   useEffect(() => {
     saveCoin();
   }, []);
@@ -106,29 +105,31 @@ const Market = () => {
                     {/* {market.amount} <span>({market.percentChange})</span> */}
                   </td>
                   <td className="pl-36  ">
-                 
+                    {" "}
+                    <div className="justify-end text-center">
                       {" "}
-                      <div className="justify-end text-center"> ${market?.current_price}</div>
-                      <div className="justify-end text-center text-[#FF0000]">({market?.price_change_percentage_24h})</div>
-                   
+                      ${market?.current_price}
+                    </div>
+                    <div className="justify-end text-center text-[#FF0000]">
+                      ({market?.price_change_percentage_24h})
+                    </div>
                   </td>
                   {/* <td className="flex justify-end">${market.pnl}</td> */}
                   <td></td>
-                <td className="flex justify-end">
-                    <Link href="/">Trade</Link>
-                  </td  >
                   <td className="flex justify-end">
-                  {savedCoins.includes(savedCoins.id) ? (
-                    // Render a filled bookmark if the coin is saved
-                    <BiBookmark style={{ color: '#1788FB' }} />
-                  ) : (
-                    // Render a button to save the coin
-                    <button onClick={() => saveCoin(savedCoins.id)}>
-                      <BiBookmark />
-                    </button>
-                  )}
-                  
-                </td>
+                    <Link href="/">Trade</Link>
+                  </td>
+                  <td className="flex justify-end">
+                    {savedCoins.includes(savedCoins.id) ? (
+                      // Render a filled bookmark if the coin is saved
+                      <BiBookmark style={{ color: "#1788FB" }} />
+                    ) : (
+                      // Render a button to save the coin
+                      <button onClick={() => saveCoin(savedCoins.id)}>
+                        <BiBookmark />
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))}
           </tbody>

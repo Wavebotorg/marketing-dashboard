@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -27,20 +24,25 @@ import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png"
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
+import medium from "../../../public/assets/sidebar/medium.png";
 
-import useEncryption from "@/app/components/useEncryption/index"
+import discord from "../../../public/assets/sidebar/discord.png";
+import useEncryption from "@/app/components/useEncryption/index";
+import axios from "axios";
+import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
   const router = useRouter();
   const { encryptData, decryptData } = useEncryption();
 
-  const getdata = localStorage.getItem("details")
-  const data = decryptData(getdata)
-  console.log("🚀 ~ Navbar ~ data:", data)
+  const getdata = localStorage.getItem("details");
 
-  if(data?.code)
-  {
-    toast.success(data.message)
+  const data = decryptData(getdata);
+  console.log("🚀 ~ Navbar ~ data:", data);
+
+  if (data?.code) {
+    toast.success(data.message);
   }
 
   // useEffect(() => {
@@ -69,7 +71,7 @@ function Sidebar() {
     },
     {
       id: 2,
-      pathname:  "/tokendashboard",
+      pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
@@ -77,29 +79,29 @@ function Sidebar() {
       id: 3,
       pathname: "/holder",
       icon: Holder,
-      pagename :"Holder",
+      pagename: "Holder",
     },
     {
       id: 4,
-      pathname:  "/referral",
+      pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
       id: 5,
-      pathname:  "/leaderboard",
+      pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
       id: 6,
-      pathname:  "/portfolio",
+      pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
       id: 7,
-      pathname:  "/volumestats",
+      pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
     },
@@ -135,16 +137,80 @@ function Sidebar() {
     setIsHover(id);
   };
   const matchPath =
-  pathname === "/login" ||
- pathname=== "/signup" ||
- pathname=== "/forgotpassword" ||
- pathname=== "/passwordverify" ||
- pathname=== "/resetpassword"
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgotpassword" ||
+    pathname === "/passwordverify" ||
+    pathname === "/resetpassword";
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
   //   !token && router.push("/login");
   // }, []);
+
+  /* const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axios.get("/getUserProfile");
+        console.log("response -->", response?.data);
+        const { name, email } = response.data;
+        setUserData({ name, email });
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []); */
+  const [userProfile, setUserProfile] = useState([]);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        setUserProfile(response?.data?.data || []);
+        console.log("User Profile Data:", response?.data?.data);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []);
+
+  /* useEffect(() => {
+    const getUserProfile = async () => {
+      await axiosInstanceAuth
+        .get("/getUserProfile")
+        .then((res) => {
+          // const myData = decryptData(res);
+          setUserProfile(res?.data?.data || []);
+          console.log("Userrrrrrrrrrrrrr ProfileData---->", res?.data?.data);
+        })
+        .catch((err) => {
+          console.log("err --->", err);
+        });
+    };
+
+    getUserProfile();
+  }, []); */
+
+  /*  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        const userData = response?.data?.data;
+        setUserProfile(userData);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []); */
+
   return (
     <div
       className={`!fixed !top-0 !left-0 bg-[#1C1C1C] ${
@@ -214,8 +280,8 @@ function Sidebar() {
                     </Link>
                   </li>
                 ))}
-                     <div className="border-b border-stone-500 mb-4" />
-                  {headerbottom?.map((data) => (
+                <div className="border-b border-stone-500 mb-4" />
+                {headerbottom?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
                       href={data.pathname}
@@ -249,51 +315,60 @@ function Sidebar() {
               </ul>
             </div>
             <div className="text-white 2xl:mt-16 md:mt-20 xsm:mt-20">
-            <div className="flex gap-2 ">
-              <div>
-                <Image
-                  src={Sidebaruserlogo}
-                  alt="Sidebaruserlogo"
-                  width="20px"
-                  height="10px"
-                />
-              </div>
+              {userProfile && (
+                <>
+                  <div className="flex gap-2 ">
+                    <div>
+                      <Image
+                        src={Sidebaruserlogo}
+                        alt="Sidebaruserlogo"
+                        width="20px"
+                        height="10px"
+                      />
+                    </div>
 
-              <div>
-                <div className="flex">
-                  <h1>UniV3 Simulate</h1>
-                  <span>
-                    <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-                  </span>
-                </div>
+                    <div>
+                      <div className="flex">
+                        <h1>{userProfile.name}</h1>
+                        <span>
+                          <Image
+                            src={Arrow}
+                            alt="arrow"
+                            width="10px"
+                            height="10px"
+                          />
+                        </span>
+                      </div>
 
-                <p className="text-xs">Invited by @luoluonuoy323</p>
-                <div className="flex mt-2">
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
-                </div>
-              </div>
+                      <p className="text-xs">{userProfile.email}</p>
+                      <div className="flex mt-2">
+                        <Image
+                          src={discord}
+                          alt="twitter"
+                          width="10px"
+                          height="10px"
+                          className="mr-2"
+                        />
+                        <Image
+                          src={Twitter}
+                          alt="twitter"
+                          width="10px"
+                          height="10px"
+                          className="mr-2"
+                        />
+                        <Image
+                          src={medium}
+                          alt="twitter"
+                          width="10px"
+                          height="10px"
+                          className="mr-2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -323,10 +398,6 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-
-
-
 
 // "use client"
 // import { GiHamburgerMenu } from "react-icons/gi";
@@ -366,12 +437,12 @@ export default Sidebar;
 //   const handleMenuItemClick = (link) => {
 //     router.push(link); // Navigate to the specified link
 //     setOpen(false); // Close the sidebar after clicking a menu item
-   
+
 //   };
 //   const handleSidebarClose = () => {
 //     setOpen(false);
 //      // Set your information message here
-  
+
 //   };
 
 //   const menu = [
@@ -446,9 +517,6 @@ export default Sidebar;
 //     },
 //   ];
 
- 
-
-  
 //   return (
 //     <div   className={`${
 //                 getPath === "/login" ||
@@ -506,54 +574,56 @@ export default Sidebar;
 //             ))}
 //           </div>
 
-          {/* Additional content at the bottom */}
-        //   <div className="text-white 2xl:mt-40 md:mt-26 xsm:mt-24 ">
-        //     <div className="flex gap-2">
-        //       <div>
-        //         <Image
-        //           src={Sidebaruserlogo}
-        //           alt="Sidebaruserlogo"
-        //           width="20px"
-        //           height="10px"
-        //         />
-        //       </div>
+{
+  /* Additional content at the bottom */
+}
+//   <div className="text-white 2xl:mt-40 md:mt-26 xsm:mt-24 ">
+//     <div className="flex gap-2">
+//       <div>
+//         <Image
+//           src={Sidebaruserlogo}
+//           alt="Sidebaruserlogo"
+//           width="20px"
+//           height="10px"
+//         />
+//       </div>
 
-        //       <div>
-        //         <div className="flex">
-        //           <h1>UniV3 Simulate</h1>
-        //           <span>
-        //             <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-        //           </span>
-        //         </div>
+//       <div>
+//         <div className="flex">
+//           <h1>UniV3 Simulate</h1>
+//           <span>
+//             <Image src={Arrow} alt="arrow" width="10px" height="10px" />
+//           </span>
+//         </div>
 
-        //         <p className="text-xs">Invited by @luoluonuoy323</p>
-        //         <div className="flex mt-2">
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
+//         <p className="text-xs">Invited by @luoluonuoy323</p>
+//         <div className="flex mt-2">
+//           <Image
+//             src={Twitter}
+//             alt="twitter"
+//             width="10px"
+//             height="10px"
+//             className="mr-2"
+//           />
+//           <Image
+//             src={Twitter}
+//             alt="twitter"
+//             width="10px"
+//             height="10px"
+//             className="mr-2"
+//           />
+//           <Image
+//             src={Twitter}
+//             alt="twitter"
+//             width="10px"
+//             height="10px"
+//             className="mr-2"
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
 
 //         {/* Close button */}
 //         <div className="lg:hidden absolute top-3 left-4  cursor-pointer" onClick={handleSidebarClose}>
