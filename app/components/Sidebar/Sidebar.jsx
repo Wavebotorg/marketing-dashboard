@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -28,19 +25,18 @@ import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png"
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
 
-import useEncryption from "@/app/components/useEncryption/index"
+import useEncryption from "@/app/components/useEncryption/index";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
   const router = useRouter();
   const { encryptData, decryptData } = useEncryption();
 
-  const getdata = localStorage.getItem("details")
-  const data = decryptData(getdata)
-  console.log("🚀 ~ Navbar ~ data:", data)
+  const getdata = localStorage.getItem("details");
+  const data = decryptData(getdata);
+  console.log("🚀 ~ Navbar ~ data:", data);
 
-  if(data?.code)
-  {
-    toast.success(data.message)
+  if (data?.code) {
+    toast.success(data.message);
   }
 
   // useEffect(() => {
@@ -69,7 +65,7 @@ function Sidebar() {
     },
     {
       id: 2,
-      pathname:  "/tokendashboard",
+      pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
@@ -77,29 +73,29 @@ function Sidebar() {
       id: 3,
       pathname: "/holder",
       icon: Holder,
-      pagename :"Holder",
+      pagename: "Holder",
     },
     {
       id: 4,
-      pathname:  "/referral",
+      pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
       id: 5,
-      pathname:  "/leaderboard",
+      pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
       id: 6,
-      pathname:  "/portfolio",
+      pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
       id: 7,
-      pathname:  "/volumestats",
+      pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
     },
@@ -135,11 +131,11 @@ function Sidebar() {
     setIsHover(id);
   };
   const matchPath =
-  pathname === "/login" ||
- pathname=== "/signup" ||
- pathname=== "/forgotpassword" ||
- pathname=== "/passwordverify" ||
- pathname=== "/resetpassword"
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgotpassword" ||
+    pathname === "/passwordverify" ||
+    pathname === "/resetpassword";
 
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -158,7 +154,7 @@ function Sidebar() {
       >
         <div className="sidebar min-h-screen p-1 hover:shadow-lg">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-          <div className="flex h-screen flex-col">
+          <div className="flex h-screen flex-col  overflow-y-auto">
             <div className="flex items-center justify-center">
               <div
                 className={`xl:hidden text-3xl `}
@@ -182,7 +178,7 @@ function Sidebar() {
               />
             </div>
             <div>
-              <ul className="flex flex-col justify-start mt-10 gap-1.5  tracking-wide !text-slate-400 !overflow-y-auto !overflow-x-hidden">
+              <ul className="flex flex-col justify-start mt-10 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                 {headerdata?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
@@ -192,7 +188,7 @@ function Sidebar() {
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
-                      } flex md:px-2 lg:px-4  py-3 rounded-lg`}
+                      } flex md:px-2 lg:px-3  py-1.5 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -205,7 +201,7 @@ function Sidebar() {
                             : "border-l-2 -ml-[7px] border-transparent"
                         }
                       ></div>
-                      <span className="inline-flex justify-center items-center px-3 relative">
+                      <span className="inline-flex justify-center items-center px-4 relative">
                         <Image src={data.icon} alt="" className="w-5 h-5" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
@@ -214,8 +210,8 @@ function Sidebar() {
                     </Link>
                   </li>
                 ))}
-                     <div className="border-b border-stone-500 mb-4" />
-                  {headerbottom?.map((data) => (
+                <div className="border-b border-stone-500 my-2 " />
+                {headerbottom?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
                       href={data.pathname}
@@ -224,7 +220,7 @@ function Sidebar() {
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
-                      } flex md:px-2 lg:px-4  py-3 rounded-lg`}
+                      } flex md:px-2 lg:px-3 py-1.5 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover1(null)}
@@ -237,7 +233,7 @@ function Sidebar() {
                             : "border-l-2 -ml-[7px] border-transparent"
                         }
                       ></div>
-                      <span className="inline-flex justify-center items-center px-3 relative">
+                      <span className="inline-flex justify-center px-4 items-center relative">
                         <Image src={data.icon} alt="" className="w-5 h-5" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
@@ -248,52 +244,57 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-            <div className="text-white 2xl:mt-16 md:mt-20 xsm:mt-20">
-            <div className="flex gap-2 ">
-              <div>
-                <Image
-                  src={Sidebaruserlogo}
-                  alt="Sidebaruserlogo"
-                  width="20px"
-                  height="10px"
-                />
-              </div>
-
-              <div>
-                <div className="flex">
-                  <h1>UniV3 Simulate</h1>
-                  <span>
-                    <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-                  </span>
+            <div className="text-white mt-7 px-4">
+              <div className="flex gap-2 ">
+                <div>
+                  <Image
+                    src={Sidebaruserlogo}
+                    alt="Sidebaruserlogo"
+                    width="20px"
+                    height="10px"
+                  />
                 </div>
 
-                <p className="text-xs">Invited by @luoluonuoy323</p>
-                <div className="flex mt-2">
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
-                  <Image
-                    src={Twitter}
-                    alt="twitter"
-                    width="10px"
-                    height="10px"
-                    className="mr-2"
-                  />
+                <div>
+                  <div className="flex">
+                    <h1>UniV3 Simulate</h1>
+                    <span>
+                      <Image
+                        src={Arrow}
+                        alt="arrow"
+                        width="10px"
+                        height="10px"
+                      />
+                    </span>
+                  </div>
+
+                  <p className="text-xs">Invited by @luoluonuoy323</p>
+                  <div className="flex mt-2">
+                    <Image
+                      src={Twitter}
+                      alt="twitter"
+                      width="10px"
+                      height="10px"
+                      className="mr-2"
+                    />
+                    <Image
+                      src={Twitter}
+                      alt="twitter"
+                      width="10px"
+                      height="10px"
+                      className="mr-2"
+                    />
+                    <Image
+                      src={Twitter}
+                      alt="twitter"
+                      width="10px"
+                      height="10px"
+                      className="mr-2"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -307,7 +308,9 @@ function Sidebar() {
                 className="flex flex-col md:gap-5 gap-2 opacity-50 hover:opacity-100 text-white text-opacity-50 hover:text-white"
               >
                 <span className="inline-flex justify-center items-center px-3">
-                  <Image src={data.img} alt="" className="w-4 h-4" />
+                  <Image src={data.img} alt="" className-
+
+                  ="w-4 h-4" />
                 </span>
                 <span className="md:text-lg text-xs tracking-wide truncate">
                   {data.pagename}
@@ -323,245 +326,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-
-
-
-
-// "use client"
-// import { GiHamburgerMenu } from "react-icons/gi";
-// import React, { useEffect, useState } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { useRouter } from "next/navigation";
-// import Logo from "../../../public/assets/wave.png";
-// import Homemenu from "../../../public/assets/sidebar/home.png";
-// import Holder from "../../../public/assets/sidebar/holder.png";
-// import Leaderboard from "../../../public/assets/sidebar/leader_board.png";
-// import Portfolio from "../../../public/assets/sidebar/portfolio.png";
-// import Referral from "../../../public/assets/sidebar/referral.png";
-// import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.png";
-// import Volumestats from "../../../public/assets/sidebar/volume_stats.png";
-// import WatchList from "../../../public/assets/sidebar/watchList.png";
-// import Discover from "../../../public/assets/sidebar/discover.png";
-// import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.png";
-// import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png";
-// import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
-// import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
-// import Twitter from "../../../public/assets/sidebar/twitter.png";
-// import { usePathname } from "next/navigation";
-
-// const Sidebar = () => {
-//   const router = useRouter();
-//   const [open, setOpen] = useState(false);
-//   const [active, setActive] = useState("");
-
-//   const getPath = usePathname();
-
-//   useEffect(() => {
-//     const storedActive = localStorage.getItem("Dashboard");
-//     setActive(storedActive || getPath);
-//   }, [getPath]);
-
-//   const handleMenuItemClick = (link) => {
-//     router.push(link); // Navigate to the specified link
-//     setOpen(false); // Close the sidebar after clicking a menu item
-   
-//   };
-//   const handleSidebarClose = () => {
-//     setOpen(false);
-//      // Set your information message here
-  
-//   };
-
-//   const menu = [
-//     {
-//       id: 1,
-//       link: "/",
-//       icon: Homemenu,
-//       name: "Home",
-//     },
-//     {
-//       id: 2,
-//       link: "/tokendashboard",
-//       icon: Tokendashboard,
-//       name: "Token Dashboard",
-//     },
-//     {
-//       id: 3,
-//       link: "/holder",
-//       icon: Holder,
-//       name: "Holder",
-//     },
-//     {
-//       id: 4,
-//       link: "/referral",
-//       icon: Referral,
-//       name: "Referral",
-//     },
-//     {
-//       id: 5,
-//       link: "/leaderboard",
-//       icon: Leaderboard,
-//       name: "Leader Board",
-//     },
-//     {
-//       id: 6,
-//       link: "/portfolio",
-//       icon: Portfolio,
-//       name: "Portfolio",
-//     },
-//     {
-//       id: 7,
-//       link: "/volumestats",
-//       icon: Volumestats,
-//       name: "Volume Stats",
-//     },
-//   ];
-
-//   const menubottom = [
-//     {
-//       id: 1,
-//       link: "/watchList",
-//       icon: WatchList,
-//       name: "Watch List",
-//     },
-//     {
-//       id: 2,
-//       link: "/discover",
-//       icon: Discover,
-//       name: "Discover",
-//     },
-//     {
-//       id: 3,
-//       link: "/apecurdocs",
-//       icon: Apecurdocs,
-//       name: "Apecurdocs",
-//     },
-//     {
-//       id: 4,
-//       link: "/officialwebsite",
-//       icon: Officialwebsite,
-//       name: "Officialwebsite",
-//     },
-//   ];
-
- 
-
-  
-//   return (
-//     <div   className={`${
-//                 getPath === "/login" ||
-//                 getPath === "/signup" ||
-//                 getPath === "/forgotpassword" ||
-//                 getPath === "/passwordverify" ||
-//                 getPath === "/resetpassword"
-//                   ? "hidden"
-//                   : " "
-//               }`}>
-//       {/* Hamburger menu button for smaller screens */}
-//       {!open && (
-//         <div className="lg:hidden fixed top-4 left-4 inline-flex items-center peer justify-center rounded-md p-2 pt-7 text-white focus:outline-none focus:ring-inset focus:ring-white group">
-//           <GiHamburgerMenu
-//             className="block h-6 w-6"
-//             aria-hidden="true"
-//             onClick={() => setOpen(!open)} // Toggle the 'open' state
-//           />
-//         </div>
-//       )}
-
-//       {/* Sidebar content */}
-//       <div className={`lg:flex lg:flex-row lg:min-h-screen ${open ? '' : 'hidden'}`}>
-//         {/* Sidebar content for all screens */}
-//         <div className="flex flex-col w-64 bg-[#1C1C1C] p-4">
-//           {/* Header */}
-//           <div className="mb-4 flex justify-center p-10">
-//             <Image src={Logo} alt="" className="h-[50] w-[132] sm:w-[100] sm:h-[20]" />
-//           </div>
-
-//           {/* Menu */}
-//           <div className="mb-4">
-//             {menu.map((item) => (
-//               <div
-//                 key={item.id}
-//                 className={`flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB] text-white p-2 rounded-md group cursor-pointer hover:shadow-lg ${item.link === active ? 'bg-[#1788FB]' : ''}`}
-//                 onClick={() => handleMenuItemClick(item.link)}>
-//                 <Image src={item.icon} alt={item.name} width={24} height={24} />
-//                 <h3 className="text-base text-white group-hover:text-white font-semibold">{item.name}</h3>
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Bottom Menu */}
-//           <div className="border-b border-stone-500 mb-4" />
-//           <div>
-//             {menubottom.map((item) => (
-//               <div
-//                 key={item.id}
-//                 className={`flex mb-2 justify-start items-center gap-4 pl-5 hover:bg-[#1788FB] p-2 rounded-md group cursor-pointer hover:shadow-lg ${item.link === active ? 'bg-[#1788FB]' : ''}`}
-//                 onClick={() => handleMenuItemClick(item.link)}>
-//                 <Image src={item.icon} alt={item.name} width={24} height={24} />
-//                 <h3 className="text-base text-white group-hover:text-white font-semibold ">{item.name}</h3>
-//               </div>
-//             ))}
-//           </div>
-
-          {/* Additional content at the bottom */}
-        //   <div className="text-white 2xl:mt-40 md:mt-26 xsm:mt-24 ">
-        //     <div className="flex gap-2">
-        //       <div>
-        //         <Image
-        //           src={Sidebaruserlogo}
-        //           alt="Sidebaruserlogo"
-        //           width="20px"
-        //           height="10px"
-        //         />
-        //       </div>
-
-        //       <div>
-        //         <div className="flex">
-        //           <h1>UniV3 Simulate</h1>
-        //           <span>
-        //             <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-        //           </span>
-        //         </div>
-
-        //         <p className="text-xs">Invited by @luoluonuoy323</p>
-        //         <div className="flex mt-2">
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //           <Image
-        //             src={Twitter}
-        //             alt="twitter"
-        //             width="10px"
-        //             height="10px"
-        //             className="mr-2"
-        //           />
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        // </div>
-
-//         {/* Close button */}
-//         <div className="lg:hidden absolute top-3 left-4  cursor-pointer" onClick={handleSidebarClose}>
-//           <span className="text-white text-lg">×</span>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;

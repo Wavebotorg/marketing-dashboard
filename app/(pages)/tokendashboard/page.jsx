@@ -90,7 +90,7 @@ const TokenDashboard = () => {
           </table>
         </div>
 
-        <div className="flex justify-end mt-8">
+        {/* <div className="flex justify-end mt-8">
           <div>
             <label>Rows per page </label>
             <select
@@ -106,7 +106,7 @@ const TokenDashboard = () => {
             </select>
             <label> 1 of 5</label>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

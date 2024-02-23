@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
-const Navbar= () => {
+const Navbar = () => {
   const router = useRouter();
   const [active, setActive] = useState("");
 
@@ -145,7 +145,5 @@ const Navbar= () => {
     </>
   );
 };
-
-
 
 export default Navbar;
