@@ -67,7 +67,7 @@ const Market = () => {
           <span>{allCoinData.symbol}</span>
         </div>
         <div className="text-sm pb-4">{allCoinData.price}</div>
-        {/* <div className="text-sm pb-5">{allCoinData.pnl}</div> */}
+        <div className="text-sm pb-5">{allCoinData.pnl}</div>
       </div>
 
       {/* Border */}
@@ -142,14 +142,16 @@ const Market = () => {
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                           
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                     
-                          </td>
+                        
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
-                            ${market?.current_price} ({market?.price_change_percentage_24h})
-                            </div>
+                           <div>${market?.current_price} </div> 
+                           <div>({market?.price_change_percentage_24h})
+                            </div></div>
                           </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                     
+                     </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             {/* {d.ChangesD} */}
                             <div className="flex justify-center items-center ">
@@ -208,10 +210,10 @@ const Market = () => {
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Coin Price</div>
-                      {/* <div className="flex justify-end items-center py-2 pr-4 pl-4">
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4">
                          <div>  ${market?.current_price} </div>
                     <div>({market?.price_change_percentage_24h})</div>
-                      </div> */}
+                      </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Today’s PnL</div>
