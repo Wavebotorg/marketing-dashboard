@@ -31,6 +31,8 @@ import {
   MdOutlineLogout,
 } from "react-icons/md";
 
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+
 const Sidebar = () => {
   const router = useRouter();
   const handleMenuItemClick = (link) => {
@@ -116,6 +118,26 @@ const Sidebar = () => {
       name: "Officialwebsite",
     },
   ];
+
+  const [allUser, setAllUser] = useState({});
+const Token = localStorage.getItem("Token")
+  const getUserdata = async () => {
+    await axiosInstanceAuth
+      .get("getUserProfile")
+      .then((res) => {
+        const myData = res?.data?.data;
+        setAllUser(myData || []);
+
+        console.log("getUserProfile---->", myData);
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
+
+  useEffect(() => {
+    getUserdata();
+  }, [Token]);
   return (
     <div
       className={`${
@@ -190,13 +212,13 @@ const Sidebar = () => {
 
               <div>
                 <div className="flex">
-                  <h1>UniV3 Simulate</h1>
+                  <h1>{allUser.name}</h1>
                   <span>
                     <Image src={Arrow} alt="arrow" width="10px" height="10px" />
                   </span>
                 </div>
 
-                <p className="text-xs">Invited by @luoluonuoy323</p>
+                <p className="text-xs">Invited by {allUser.email}</p>
                 <div className="flex mt-2">
                   <Image
                     src={Twitter}

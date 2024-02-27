@@ -24,6 +24,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { GrFormNext } from "react-icons/gr";
 
 const WatchList = () => {
   const watchListData = [
@@ -188,9 +189,9 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="flex  gap-3 mt-6 lg:px-6 md:text-base text-sm">
+        <div className="flex  md:gap-5 gap-2.5 mt-6 lg:px-6 md:text-base text-sm items-center">
           <div>
-            <button className="bg-blue-500 px-2 rounded-lg">All</button>
+            <button className="bg-blue-500 px-3 py-0.5 rounded-full">All</button>
           </div>
           <div>
             <button className="">Crypto</button>
@@ -202,10 +203,10 @@ const WatchList = () => {
             <button className="">People</button>
           </div>
           <div>
-            <button className="">Smart Portfolios</button>
+            <button className="">SmartPortfolios</button>
           </div>
-          <div className="mt-[7px]">
-            <FaGreaterThan size={13} />
+          <div className="cursor-pointer">
+          <GrFormNext size={22}/>
           </div>
         </div>
 
@@ -269,7 +270,7 @@ const WatchList = () => {
                                 <Image
                                   src={d.icon}
                                   alt="Picture of the author"
-                                  className="rounded-full"
+                                  className="rounded-full max-w-12"
                                 />
                               </div>
                               <div>{d.Market}</div>

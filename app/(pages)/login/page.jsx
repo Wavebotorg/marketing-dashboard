@@ -42,13 +42,13 @@ const Login = () => {
       .then((res) => {
         const myData = res?.data;
         console.log("=========mydata:", myData);
-        console.log("token--", myData?.token);
+        // console.log("token--", myData?.token);
         if (myData?.status) {
           localStorage.setItem("Token", myData?.token);
-
           toast.success(myData?.msg);
-
-          router.push("/");
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
         } else {
           toast.error(myData?.msg);
         }

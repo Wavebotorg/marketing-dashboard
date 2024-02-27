@@ -4,9 +4,20 @@ import Image from "next/image";
 import img from "../../assets/profile.PNG";
 
 import { formatDistanceToNow } from "date-fns";
-
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
+
+const truncateEmail = (email) => {
+  if (email.length < 20) {
+    // Show full email if length is greater than 50
+    return email;
+  } else {
+    // Show truncated email if length is 50 or less
+    const truncatedEmail = `${email.slice(0, 10)}...${email.slice(-10)}`;
+    return truncatedEmail;
+  }
+};
 
 const LeaderBoard = () => {
   const students = [
@@ -77,29 +88,6 @@ const LeaderBoard = () => {
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
           </p>
-          {/* <div className="md:container">
-            <div className="mt-6 rounded-lg w-96 overflow-auto">
-              <div className="bg-[#1C1C1C] text-white">
-                <div className="flex lg:grid grid-cols-10 bg-[#1788FB] ">
-                  <div className="px-4 py-2 col-span-1">Rank</div>
-                  <div className="px-4 py-2 col-span-3">Name</div>
-                  <div className="px-4 py-2 col-span-3">Invited by</div>
-                  <div className="px-4 py-2 col-span-3">Points</div>
-                </div>
-
-                {students.map((student, index) => (
-                  <div key={index} className="grid grid-cols-10">
-                    <div className="px-4 py-2 col-span-1">{student.Rank}</div>
-                    <div className="px-4 py-2 col-span-3">{student.Name}</div>
-                    <div className="px-4 py-2 col-span-3">
-                      {student.Invitedby}
-                    </div>
-                    <div className="px-4 py-2 col-span-3">{student.Points}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div> */}
 
           <div className="md:container ">
             <div className="mt-6 rounded-lg overflow-auto">
@@ -159,65 +147,6 @@ const LeaderBoard = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className="container ">
-            <div className="rounded-lg">
-              <div className="bg-[#1C1C1C]  text-white  overflow-auto rounded-lg">
-                <table className="w-full  ">
-                  <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                    <tr className=" text-[#CECECE]  ">
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-center text-base font-medium  "
-                      >
-                        Rank
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                        Invited by
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                        Points
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {students?.length > 0 &&
-                      students?.map((student, index) => (
-                        <>
-                          <tr key={index}>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Rank}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Name}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Invitedby}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Points}
-                            </td>
-                          </tr>
-                        </>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div> */}
         </div>
 
         <div className="">
@@ -251,9 +180,43 @@ const LeaderBoard = () => {
                                 </p>
                               </div>
 
-                              <p className="text-nowrap">
-                                Invited by {d.email}
-                              </p>
+                              {/* <p
+                                className="text-nowrap "
+                                title={
+                                  hoveredEmail === d.email
+                                    ? d.email
+                                    : truncateEmail(d.email)
+                                }
+                              >
+                                Invited by {truncateEmail(d.email)}
+                              </p> */}
+
+                              {/* <h1 data-tooltip-id="my-tooltip-1">
+                                Invited by {truncateEmail(d.email)}
+                              </h1>
+                              <ReactTooltip
+                                id="my-tooltip-1"
+                                place="top"
+                                content={d.email}
+                              /> */}
+
+                              <div
+                                data-tooltip-id={`tooltip-${index}`}
+                                className=""
+                              >
+                                <p className="text-nowrap ">
+                                  Invited by {truncateEmail(d.email)}
+                                </p>
+                              </div>
+                              <ReactTooltip
+                                id={`tooltip-${index}`}
+                                place="bottom-end"
+                                effect="solid"
+                                variant="info"
+                              >
+                                {/* Display full email in the tooltip */}
+                                <span>{d.email}</span>
+                              </ReactTooltip>
                             </div>
                           </div>
                         </div>

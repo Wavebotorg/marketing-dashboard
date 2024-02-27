@@ -27,7 +27,6 @@ const Loginbutton = () => {
 
   const ConfirmLogOut = () => {
     localStorage.clear();
-    // navigate("/log-in");
     router.push("/login");
     setConfirmationPopUp(false);
   };
