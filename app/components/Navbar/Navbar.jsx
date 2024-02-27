@@ -43,10 +43,10 @@ const Navbar = () => {
           getPath === "/passwordverify" ||
           getPath === "/resetpassword"
             ? "hidden"
-            : "flex  justify-between  border-b border-stone-500 pb-7 pt-5 pl-10"
+            : "flex  justify-between   pb-7 pt-5 pl-10 container"
         }`}
       >
-        <div className="relative flex-grow md:max-w-[700px] md:mr-10 sm:mr-5 xsm:mr-5  ">
+        <div className="relative flex-grow md:max-w-[700px]  ">
           <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
             <CiSearch size={20} />
           </div>
@@ -59,7 +59,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <button className="ml- mr- ">
+          <button className="">
             <IoIosNotifications size={25} />
           </button>
           <div>
@@ -141,7 +141,9 @@ const Navbar = () => {
             )}
           </div>
         </div>
+       
       </div>
+      <div className="border-t border-stone-500"></div>
     </>
   );
 };

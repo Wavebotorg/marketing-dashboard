@@ -7,8 +7,6 @@ import Market from "./(pages)/Market/page";
 import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
 
-
-
 const Page = () => {
   const userData = [
     {
@@ -28,27 +26,28 @@ const Page = () => {
 
   return (
     <div className="text-white container  ">
-   
-      
-        <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">
+      <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">
         <div className="flex items-center mb-5 md:mb-0">
           <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-          <span className="ml-5 mr-5 text-wrap md:text-nowrap">Anonymous-User-810b1</span>
+          <span className="ml-5 mr-5 text-wrap md:text-nowrap">
+            Anonymous-User-810b1
+          </span>
         </div>
-          <div className="lg:container lg:mx-auto md:mx-5 mx-3 ">
-            <table className="responsive-table border1 ">
-              <thead className="text-[#828282] md:text-[#828282]">
-                <tr className="  ">
-                  <th  scope="col">User Id</th>
-                  <th scope="col ">VIP Level</th>
-                  <th scope="col">User Type</th>
-                  <th  scope="col">Following</th>
-                  <th scope="col ">Followers</th>{" "}
-                </tr>
-              </thead>
 
-              <tbody >
-                {/* {!userData?.length > 0 ? (
+        <div className="lg:container lg:mx-auto md:mx-5 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
+          <table className="responsive-table border1 ">
+            <thead className="text-[#828282] md:text-[#828282]">
+              <tr className="  ">
+                <th scope="col">User Id</th>
+                <th scope="col ">VIP Level</th>
+                <th scope="col">User Type</th>
+                <th scope="col">Following</th>
+                <th scope="col ">Followers</th>{" "}
+              </tr>
+            </thead>
+
+            <tbody>
+              {/* {!userData?.length > 0 ? (
               <tr>
                 <td data-title="User Id">_</td>
                 <td data-title="VIP Level">_</td>
@@ -57,31 +56,41 @@ const Page = () => {
                 <td data-title="Followers">_</td>
               </tr>
             ) : ( */}
-                {userData?.map((items) => (
-                  <>
-                    <tr className="md:pl-2" >
-                      <td data-title="User Id " className=" ">{items?.userId}
-                      <button className="pl-2 text-xl " >  <PiCopySimple /></button> 
+              {userData?.map((items) => (
+                <>
+                  <tr className="md:pl-2">
+                    <td data-title="User Id" className="">
+                      {items?.userId}
+                      <button className="text-xl text-[#828282] align-middle pb-1.5 ">
+                        <PiCopySimple className="" />
+                      </button>
                     </td>
-                      <td data-title="VIP Level" className=" " >{items?.vipLevel} 
-                     
-                        <button className="pl-2 text-2xl " ><GrFormNext /></button>  
-                   </td>
-                      <td data-title="User Type" className=" ">{items?.userType}</td>
-                      <td data-title="Following" className=" ">{items?.following}</td>
-                      <td data-title="Followers" className=" ">{items?.followers}
-                      <button className="pl-2 text-2xl " ><GrFormNext /></button>  </td>
-                    </tr>
-                  
-                  </>
-                  
-                ))}
-              </tbody>
-            </table>
-          </div>
-        
+                    <td data-title="VIP Level" className=" flex items-center">
+                      {items?.vipLevel}
+
+                      <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                        <GrFormNext />
+                      </button>
+                    </td>
+                    <td data-title="User Type" className=" ">
+                      {items?.userType}
+                    </td>
+                    <td data-title="Following" className=" ">
+                      {items?.following}
+                    </td>
+                    <td data-title="Followers" className=" flex items-center">
+                      {items?.followers}
+                      <button className=" text-xl  text-[#828282] align-middle pb-1.5 ">
+                        <GrFormNext />
+                      </button>{" "}
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
         </div>
-  
+      </div>
 
       <div className="mt-10 bg-[#1C1C1C] rounded-2xl ">
         <Market />

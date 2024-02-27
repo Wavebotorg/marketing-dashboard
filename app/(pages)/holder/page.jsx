@@ -13,6 +13,22 @@ const Holder = () => {
       status: "true",
     
     },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    
+    },
     // Add more data as needed
   ]);
   return (
@@ -183,7 +199,7 @@ const Holder = () => {
                         {d?.status}
                         </div>
                       </div>
-                     
+                      <div></div>
                     </>
                   </div>
                 </div>
@@ -199,20 +215,4 @@ const Holder = () => {
 
 export default Holder;
 
-  {/* <div className="flex justify-end mt-8">
-        <div>
-          <label>Rows per page </label>
-          <select
-            name="select Row"
-            className="bg-blue-500 rounded-lg p-1"
-            defaultValue="Show 5"
-          >
-            <option value="Show 1">Show 1</option>
-            <option value="Show 2">Show 2</option>
-            <option value="Show 3">Show 3</option>
-            <option value="Show 4">Show 4</option>
-            <option value="Show 5">Show 5</option>
-          </select>
-          <label> 1 of 5</label>
-        </div>
-      </div>*/}
+ 

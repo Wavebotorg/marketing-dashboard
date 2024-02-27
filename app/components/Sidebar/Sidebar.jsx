@@ -149,7 +149,7 @@ function Sidebar() {
     >
       <div
         className={`sidebar z-30 ${
-          isNavbar ? "w-72" : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72"
+          isNavbar ? "w-72" : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
         }`}
       >
         <div className="sidebar min-h-screen p-1 hover:shadow-lg">
@@ -178,7 +178,7 @@ function Sidebar() {
               />
             </div>
             <div>
-              <ul className="flex flex-col justify-start mt-10 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
+              <ul className="flex flex-col justify-start lg:pb-10 mt-10 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                 {headerdata?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
@@ -188,7 +188,7 @@ function Sidebar() {
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
-                      } flex md:px-2 lg:px-3  py-1.5 rounded-lg`}
+                      } flex md:px-2 lg:px-3  py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -201,7 +201,7 @@ function Sidebar() {
                             : "border-l-2 -ml-[7px] border-transparent"
                         }
                       ></div>
-                      <span className="inline-flex justify-center items-center px-4 relative">
+                      <span className="inline-flex justify-center items-center px-4 relative ">
                         <Image src={data.icon} alt="" className="w-5 h-5" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
@@ -220,7 +220,7 @@ function Sidebar() {
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
-                      } flex md:px-2 lg:px-3 py-1.5 rounded-lg`}
+                      } flex md:px-2 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover1(null)}
@@ -233,7 +233,7 @@ function Sidebar() {
                             : "border-l-2 -ml-[7px] border-transparent"
                         }
                       ></div>
-                      <span className="inline-flex justify-center px-4 items-center relative">
+                      <span className="inline-flex justify-center  px-4 items-center relative">
                         <Image src={data.icon} alt="" className="w-5 h-5" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
@@ -244,83 +244,74 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-            <div className="text-white mt-7 px-4">
-              <div className="flex gap-2 ">
-                <div>
-                  <Image
-                    src={Sidebaruserlogo}
-                    alt="Sidebaruserlogo"
-                    width="20px"
-                    height="10px"
-                  />
-                </div>
+           
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5  absolute bottom-0">
+              <div className="hidden 2xl:flex xl:flex">
+                <div className="flex gap-2">
+                  <div>
+                    <Image
+                      src={Sidebaruserlogo}
+                      alt="Sidebaruserlogo"
+                      width="20px"
+                      height="10px"
+                    />
+                  </div>
 
-                <div>
-                  <div className="flex">
-                    <h1>UniV3 Simulate</h1>
-                    <span>
+                  <div>
+                    <div className="flex">
+                      <h1>UniV3 Simulate</h1>
+                      <span>
+                        <Image
+                          src={Arrow}
+                          alt="arrow"
+                          width="10px"
+                          height="10px"
+                        />
+                      </span>
+                    </div>
+
+                    <p className="text-xs">Invited by @luoluonuoy323</p>
+                    <div className="flex mt-2">
                       <Image
-                        src={Arrow}
-                        alt="arrow"
+                        src={Twitter}
+                        alt="twitter"
                         width="10px"
                         height="10px"
+                        className="mr-2"
                       />
-                    </span>
-                  </div>
-
-                  <p className="text-xs">Invited by @luoluonuoy323</p>
-                  <div className="flex mt-2">
-                    <Image
-                      src={Twitter}
-                      alt="twitter"
-                      width="10px"
-                      height="10px"
-                      className="mr-2"
-                    />
-                    <Image
-                      src={Twitter}
-                      alt="twitter"
-                      width="10px"
-                      height="10px"
-                      className="mr-2"
-                    />
-                    <Image
-                      src={Twitter}
-                      alt="twitter"
-                      width="10px"
-                      height="10px"
-                      className="mr-2"
-                    />
+                      <Image
+                        src={Twitter}
+                        alt="twitter"
+                        width="10px"
+                        height="10px"
+                        className="mr-2"
+                      />
+                      <Image
+                        src={Twitter}
+                        alt="twitter"
+                        width="10px"
+                        height="10px"
+                        className="mr-2"
+                      />
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Only show the image on screens smaller than 2xl and xl */}
+              <div className="2xl:hidden xl:hidden ">
+                <Image
+                  src={Sidebaruserlogo}
+                  alt="Sidebaruserlogo"
+                  width="30px"
+                  height="30px"
+                  className="text-center"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <nav class="lg:hidden fixed top-0 inset-x-0 bg-[#0A0D1A] py-2 flex justify-center items-center text-sm z-50 px-1">
-        <ul className="flex justify-center items-center p-1 md:gap-10 gap-[7px]">
-          {headerdata?.map((data) => (
-            <li key={data?.id} className="min-w-max">
-              <Link
-                href={data.pathname}
-                className="flex flex-col md:gap-5 gap-2 opacity-50 hover:opacity-100 text-white text-opacity-50 hover:text-white"
-              >
-                <span className="inline-flex justify-center items-center px-3">
-                  <Image src={data.img} alt="" className-
-
-                  ="w-4 h-4" />
-                </span>
-                <span className="md:text-lg text-xs tracking-wide truncate">
-                  {data.pagename}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav> */}
-      {/* <Toaster position="top-right" reverseOrder={false} /> */}
     </div>
   );
 }
