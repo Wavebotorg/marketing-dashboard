@@ -24,7 +24,7 @@ import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png"
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
-
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import useEncryption from "@/app/components/useEncryption/index";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
@@ -39,16 +39,25 @@ function Sidebar() {
     toast.success(data.message);
   }
 
-  // useEffect(() => {
-  //   const getdata = localStorage.getItem("details");
-  //   const data = decryptData(getdata);
-  //   // console.log("🚀 ~ Navbar ~ data:", data);
-
-  //   if (data?.code && !localStorage.getItem("toastShown")) {
-  //     toast.success(data.message);
-  //     localStorage.setItem("toastShown", "true");
-  //   }
-  // }, []);
+  const [allUser, setAllUser] = useState({});
+  const Token = localStorage.getItem("Token")
+    const getUserdata = async () => {
+      await axiosInstanceAuth
+        .get("getUserProfile")
+        .then((res) => {
+          const myData = res?.data?.data;
+          setAllUser(myData || []);
+  
+          console.log("getUserProfile---->", myData);
+        })
+        .catch((err) => {
+          console.log("err --->", err);
+        });
+    };
+  
+    useEffect(() => {
+      getUserdata();
+    }, [Token]);
 
   const pathname = usePathname();
   // const { pathname } = location;
@@ -259,7 +268,7 @@ function Sidebar() {
 
                   <div>
                     <div className="flex">
-                      <h1>UniV3 Simulate</h1>
+                      <h1>{allUser.name}</h1>
                       <span>
                         <Image
                           src={Arrow}
@@ -270,7 +279,7 @@ function Sidebar() {
                       </span>
                     </div>
 
-                    <p className="text-xs">Invited by @luoluonuoy323</p>
+                    <p className="text-xs">Invited by @{allUser.email}</p>
                     <div className="flex mt-2">
                       <Image
                         src={Twitter}
