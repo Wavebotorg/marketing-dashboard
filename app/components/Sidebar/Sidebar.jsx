@@ -24,14 +24,20 @@ import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png"
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
-import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import medium from "../../../public/assets/sidebar/medium.png";
+
+import discord from "../../../public/assets/sidebar/discord.png";
 import useEncryption from "@/app/components/useEncryption/index";
+import axios from "axios";
+import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
   const router = useRouter();
   const { encryptData, decryptData } = useEncryption();
 
   const getdata = localStorage.getItem("details");
+
   const data = decryptData(getdata);
   console.log("🚀 ~ Navbar ~ data:", data);
 
@@ -150,6 +156,70 @@ function Sidebar() {
   //   const token = localStorage.getItem("token");
   //   !token && router.push("/login");
   // }, []);
+
+  /* const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axios.get("/getUserProfile");
+        console.log("response -->", response?.data);
+        const { name, email } = response.data;
+        setUserData({ name, email });
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []); */
+  const [userProfile, setUserProfile] = useState([]);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        setUserProfile(response?.data?.data || []);
+        console.log("User Profile Data:", response?.data?.data);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []);
+
+  /* useEffect(() => {
+    const getUserProfile = async () => {
+      await axiosInstanceAuth
+        .get("/getUserProfile")
+        .then((res) => {
+          // const myData = decryptData(res);
+          setUserProfile(res?.data?.data || []);
+          console.log("Userrrrrrrrrrrrrr ProfileData---->", res?.data?.data);
+        })
+        .catch((err) => {
+          console.log("err --->", err);
+        });
+    };
+
+    getUserProfile();
+  }, []); */
+
+  /*  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        const userData = response?.data?.data;
+        setUserProfile(userData);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []); */
+
   return (
     <div
       className={`!fixed !top-0 !left-0 bg-[#1C1C1C] ${
