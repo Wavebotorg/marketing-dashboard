@@ -266,6 +266,8 @@ const Discover = () => {
           </div>
         </div> */}
 
+        {/* <div>Hello</div> */}
+
         <div className="flex justify-between items-center lg:p-5 md:p-2 mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Daily Movers
