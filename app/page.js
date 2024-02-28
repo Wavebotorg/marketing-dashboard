@@ -1,64 +1,98 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
 import Market from "./(pages)/Market/page";
+import { GrFormNext } from "react-icons/gr";
+import { PiCopySimple } from "react-icons/pi";
 
 const Page = () => {
-  const userData = {
-    userId: "95968227",
-    vipLevel: "Regular User",
-    userType: "Personal",
-    following: 0,
-    followers: 0,
-  };
+  const userData = [
+    {
+      userId: "95968227",
+      vipLevel: "Regular User",
+      userType: "Personal",
+      following: 0,
+      followers: 0,
+    },
+
+    // {userId: "95968223",
+    // vipLevel: "Regular User",
+    // userType: "Personal",
+    // following: 0,
+    // followers: 0}
+  ];
 
   return (
-    <div className="text-white container">
-      <div className="flex">
-        <div className="flex items-center">
+    <div className="text-white container  ">
+      <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">
+        <div className="flex items-center mb-5 md:mb-0">
           <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-          <span className="ml-5 mr-20">Anonymous-User-810b1</span>
+          <span className="ml-5 mr-5 text-wrap md:text-nowrap">
+            Anonymous-User-810b1
+          </span>
         </div>
-        <div className="border-r border-[#828282] "></div>
-        <table className=" w-full mt-4 text-[#828282] text-center">
-          <thead>
-            <tr>
-              <th className=" ">User Id</th>
-              <th className=" ">VIP Level</th>
-              <th className=" ">User Type</th>
-              <th className=" ">Following</th>
-              <th className=" ">Followers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className=" py-2">95968227</td>
-              <td className=" py-2">Regular User</td>
-              <td className=" py-2">Personal</td>
-              <td className=" py-2">0</td>
-              <td className=" py-2">0</td>
-            </tr>
-          </tbody>
-        </table>
-        {/*  <table className="mt-4 text-[#828282] flex justify-between content-between ml-5 w-full ">
-          <tbody className="">
-            <tr className="flex justify-between ">
-              <td className="4/12">User Id</td>
-              <td className="2/12">VIP Level</td>
-              <td className="3/12">User Type</td>
-              <td className="2/12">Following</td>
-              <td className="1/12">Followers</td>
-            </tr>
-            <tr>
-              {Object.values(userData).map((value, index) => (
-                <td key={index}>{value}</td>
+
+        <div className="lg:container lg:mx-auto md:mx-5 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
+          <table className="responsive-table border1 ">
+            <thead className="text-[#828282] md:text-[#828282]">
+              <tr className="  ">
+                <th scope="col">User Id</th>
+                <th scope="col ">VIP Level</th>
+                <th scope="col">User Type</th>
+                <th scope="col">Following</th>
+                <th scope="col ">Followers</th>{" "}
+              </tr>
+            </thead>
+
+            <tbody>
+              {/* {!userData?.length > 0 ? (
+              <tr>
+                <td data-title="User Id">_</td>
+                <td data-title="VIP Level">_</td>
+                <td data-title="User Type">_</td>
+                <td data-title="Following">_</td>
+                <td data-title="Followers">_</td>
+              </tr>
+            ) : ( */}
+              {userData?.map((items) => (
+                <>
+                  <tr className="md:pl-2">
+                    <td data-title="User Id" className="">
+                      {items?.userId}
+                      <button className="text-xl text-[#828282] align-middle pb-1.5 ">
+                        <PiCopySimple className="" />
+                      </button>
+                    </td>
+                    <td data-title="VIP Level" className=" flex items-center">
+                      {items?.vipLevel}
+
+                      <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                        <GrFormNext />
+                      </button>
+                    </td>
+                    <td data-title="User Type" className=" ">
+                      {items?.userType}
+                    </td>
+                    <td data-title="Following" className=" ">
+                      {items?.following}
+                    </td>
+                    <td data-title="Followers" className=" flex items-center">
+                      {items?.followers}
+                      <button className=" text-xl  text-[#828282] align-middle pb-1.5 ">
+                        <GrFormNext />
+                      </button>{" "}
+                    </td>
+                  </tr>
+                </>
               ))}
-            </tr>
-          </tbody>
-        </table> */}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="mt-10 bg-[#1C1C1C] rounded-2xl">
+
+      <div className="mt-10  rounded-2xl ">
         <Market />
       </div>
     </div>
@@ -66,59 +100,3 @@ const Page = () => {
 };
 
 export default Page;
-
-/* 
-import React from "react";
-import HomeUser from "../public/assets/homeuser.png";
-import Image from "next/image";
-
-const Page = () => {
-  return (
-    <div className="container text-white">
-      <div className="flex">
-        <div className="flex justify-between items-center">
-          <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-          <span>Anonymous-User-810b1</span>
-        </div>
-        <div className="border-r border-[#828282]"></div>
-        <table className="border-collapse w-full mt-4 text-[#828282]">
-          <thead>
-            <tr>
-              <th className=" px-4 py-2">User Id</th>
-              <th className=" px-4 py-2">VIP Level</th>
-              <th className=" px-4 py-2">User Type</th>
-              <th className=" px-4 py-2">Following</th>
-              <th className=" px-4 py-2">Followers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="px- py-2">95968227</td>
-              <td className="px- py-2">Regular User</td>
-              <td className="px- py-2">Personal</td>
-              <td className="px- py-2">0</td>
-              <td className="px- py-2">0</td>
-            </tr>
-          </tbody>
-        </table>
-
-        {/*  <div className="grid grid-cols-5 gap-4 mt-4 text-[#828282]">
-          <div>User Id</div>
-          <div>VIP Level</div>
-          <div>User Type</div>
-          <div>Following</div>
-          <div>Followers</div>
-
-          <div>95968227</div>
-          <div>Regular User</div>
-          <div>Personal</div>
-          <div>0</div>
-          <div>0</div>
-        </div> 
-      </div>
-    </div>
-  );
-};
-
-export default Page;
- */

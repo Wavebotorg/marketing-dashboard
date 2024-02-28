@@ -1,154 +1,218 @@
-import React from "react";
+
+"use client"
+import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
 const Holder = () => {
+  const [allCoinData, setAllCoinData] = useState([
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    
+    },
+    // Add more data as needed
+  ]);
   return (
     <>
-      <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
+    <div className="container">
+      <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
         Holder Rewards
       </p>
-      <div className="flex flex-col md:flex-row gap-6 mt-5  ">
-        <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2  md:w-full w-52 ">
+      <div className="flex flex-col md:flex-row gap-6 mt-5">
+        <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
           <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
           <p>Paginated Results</p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full w-52">
-        <div className="rounded-lg p-4 bg-[#1C1C1C] ">
+      <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full ">
+        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
           <p>Total Rewards</p>
-          <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+          <p className="text-blue-400 text-2xl mt-1  ">0ETH</p>
         </div>
-        <div className="rounded-lg p-4 bg-[#1C1C1C] ">
+        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
           <p>Unclaimed Rewards</p>
           <p className="text-blue-400 text-2xl mt-1">0ETH</p>
         </div>
-        <div className="rounded-lg p-4 bg-[#1C1C1C] ">
+        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
           <p>Claimable Rewards</p>
           <p className="text-blue-400 text-2xl mt-1">0ETH</p>
         </div>
       </div>
-      <div className="font-medium text-2xl mt-7">
-        <p>Holder Rewards</p>
+      <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
+        <h1 className="  ">Holder Rewards</h1>
+      
       </div>
-      <div className="mt-6">
-        <table className="w-full bg-[#1C1C1C]">
-          <thead>
-            <tr>
-              <th className="w-1/6">Snapshot Block</th>
-              <th className="w-1/6">Time</th>
-              <th className="w-1/6">Rewards</th>
-              <th className="w-1/6">Unlock</th>
-              <th className="w-1/6">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="px-28 py-1">1</td>
-              <td className="px-28 py-1">2</td>
-              <td className="px-28 py-1">3</td>
-              <td className="px-28 py-1">4</td>
-              <td className="px-28 py-1">5</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div className="flex justify-end  ">
+          <div>
+            <label className=" text-sm md:text-lg">Rows per page </label>
+            <select
+              name="select Row"
+              className="bg-blue-500 rounded-lg p-1 !outline-none "
+              defaultValue="Show 5"
+            >
+              <option value="Show 1">Show 1</option>
+              <option value="Show 2">Show 2</option>
+              <option value="Show 3">Show 3</option>
+              <option value="Show 4">Show 4</option>
+              <option value="Show 5">Show 5</option>
+            </select>
+          
+          </div>
+        </div> 
+      
+      <div className="mt-4 hidden lg:block ">
+          <div className="rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-auto  overflow-auto rounded-lg">
+              <table className="w-full  ">
+                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+                  <tr className=" text-[#CECECE]  ">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium  "
+                    >
+                  Snapshot Block
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                     Time  </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                    Rewards
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                    Unlock
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
+                    >
+                   Status
+                    </th>
+                   
+                  </tr>
+                </thead>
 
-      {/*  <div className="mt-6 ">
-        <div className="grid grid-cols-5 bg-[#1C1C1C]">
-          <div className="px-4 py-2 ">Snapshot Block</div>
-          <div className="px-4 py-2 ">Time</div>
-          <div className="px-4 py-2 ">Rewards</div>
-          <div className="px-4 py-2 ">Unlock</div>
-          <div className="px-4 py-2 ">Status</div>
+                <tbody>
+                  {allCoinData?.length > 0 &&
+                    allCoinData?.map((d, index) => (
+                      <>
+                        <tr key={index}>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                            <div> {d?.snapblock}</div>
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                          {d?.time}
+                          </td>
 
-          {/* Add more rows as needed *
-          <div className="px-4 py-2 ">Value 1</div>
-          <div className="px-4 py-2 ">Value 2</div>
-          <div className="px-4 py-2 ">Value 3</div>
-          <div className="px-4 py-2 ">Value 4</div>
-          <div className="px-4 py-2 ">Value 5</div>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            <div className="flex items-center justify-center gap-5">
+                              <div>${d?.reward} </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            {d?.unlock}
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            <div className="flex justify-center items-center ">
+                              {d?.status}
+                            </div>
+                          </td>
+                         
+                        </tr>
+                      </>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div> */}
 
-      <div className="flex justify-end mt-8">
-        <div>
-          <label>Rows per page </label>
-          <select
-            name="select Row"
-            className="bg-blue-500 rounded-lg p-1"
-            defaultValue="Show 5"
-          >
-            <option value="Show 1">Show 1</option>
-            <option value="Show 2">Show 2</option>
-            <option value="Show 3">Show 3</option>
-            <option value="Show 4">Show 4</option>
-            <option value="Show 5">Show 5</option>
-          </select>
-          <label> 1 of 5</label>
-        </div>
-      </div>
-    </>
+        {allCoinData?.length > 0 &&
+          allCoinData?.map((d, index) => (
+            <div key={index} className="lg:hidden mt-4 ">
+              <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
+                <div className="w-full  ">
+                  <div className="">
+                    <>
+                      <div className="border-b border-[#494949] flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">   Snapshot Block</div>
+                        <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        {d?.snapblock}
+                        </div>
+                      </div>
+                      <div className="border-b border-[#494949] flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">
+                        Time 
+                        </div>
+                        <div className=" py-2 pr-4 pl-4">
+                          {" "}
+                          {d?.time}
+                        </div>
+                      </div>
+                      <div className="border-b border-[#494949] flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">
+                        Rewards
+                        </div>
+                        <div className=" py-2 pr-4 pl-4">
+                          {" "}
+                          ${d?.reward} 
+                        </div>
+                      </div>
+                      <div className="border-b border-[#494949] flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">
+                          {" "}
+                          Unlock
+                        </div>
+                        <div className="flex justify-end items-center py-2 pr-4 pl-4">
+                        {d?.unlock}
+                        </div>
+                      </div>
+                      <div className=" flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">Status</div>
+                        <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        {d?.status}
+                        </div>
+                      </div>
+                      <div></div>
+                    </>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+     
+     
+      </div>  
+      </>
   );
 };
 
 export default Holder;
 
-{
-  /*  <div class="grid-flow-row flex justify-between bg-[#1C1C1C] mt-6 ">
-  <span class="flex-1">
-    <strong>Snapshot Block</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Time</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Rewards</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Unlock</strong>
-  </span>
-  <span class="flex-1">
-    <strong>Status</strong>
-  </span>
-</div>
-
-*/
-}
-
-{
-  /* <div className="grid grid-cols-5 ">
-<div className="px-4 py-2 ">Snapshot Block</div>
-  <div className="px-4 py-2 ">Time</div>
-  <div className="px-4 py-2 ">Rewards</div>
-  <div className="px-4 py-2 ">Unlock</div>
-  <div className="px-4 py-2 ">Status</div>
-
-  {/* Add more rows as needed *
-  <div className="px-4 py-2 ">Value 1</div>
-  <div className="px-4 py-2 ">Value 2</div>
-  <div className="px-4 py-2 ">Value 3</div>
-  <div className="px-4 py-2 ">Value 4</div>
-  <div className="px-4 py-2 ">Value 5</div>
-</div> */
-}
-
-{
-  /*    <span>0</span>
-  <span>AaronKris</span>
-  <span>Philippines</span>
-  <span>1991-05-23T14:19:51</span>
-  <span>Ophelia_Mitchell@karley.name</span>
-  <span>1</span>
-  <span>SimeonMcLaughlin</span>
-  <span>Singapore</span>
-  <span>2012-03-07T00:08:36</span>
-  <span>Sabrina_Barton@torey.net</span>
-  <span>2</span>
-  <span>Kelsie Shanahan</span>
-  <span>Brazil</span>
-  <span>1985-03-10T20:13:04</span>
-  <span>Karianne@salvatore.biz</span> */
-}
-{
-  /* </div> */
-}
+ 

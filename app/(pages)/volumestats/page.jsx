@@ -1,7 +1,7 @@
 import React from "react";
 
 const Volumestats = () => {
-  return <div>volumestats</div>;
+  return <div className="container ">volumestats</div>;
 };
 
 export default Volumestats;

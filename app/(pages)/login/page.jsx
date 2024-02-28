@@ -40,17 +40,17 @@ const Login = () => {
     await axiosInstance
       .post("login", mydata)
       .then((res) => {
-        const myData = res;
-        console.log("=========mydata:", res);
-        console.log("token--", myData?.data?.token);
+        const myData = res?.data;
+        console.log("=========mydata:", myData);
+        // console.log("token--", myData?.token);
         if (myData?.status) {
-          localStorage.setItem("Token", myData?.data?.token);
-
-          toast.success(myData?.data.msg);
-
-          router.push("/");
+          localStorage.setItem("Token", myData?.token);
+          toast.success(myData?.msg);
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
         } else {
-          toast.error(myData?.data.msg);
+          toast.error(myData?.msg);
         }
       })
       .catch((err) => {

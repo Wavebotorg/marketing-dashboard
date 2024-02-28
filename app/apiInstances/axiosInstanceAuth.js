@@ -12,7 +12,7 @@ axiosInstanceAuth.interceptors.request.use(
     const auth = localStorage.getItem("Token")
     if (auth) {
       config.headers = {
-        Authorization: `${auth}`,
+        Authorization: `Bearer ${auth}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       }
