@@ -67,6 +67,7 @@ function Sidebar() {
 
   const pathname = usePathname();
   // const { pathname } = location;
+  
   const [isHover, setIsHover] = useState(null);
   const [isHover1, setIsHover1] = useState(null);
   const [isNavbar, setIsNavbar] = useState(false);
@@ -152,27 +153,7 @@ function Sidebar() {
     pathname === "/passwordverify" ||
     pathname === "/resetpassword";
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   !token && router.push("/login");
-  // }, []);
-
-  /* const [userData, setUserData] = useState();
-
-  useEffect(() => {
-    const getUserProfile = async () => {
-      try {
-        const response = await axios.get("/getUserProfile");
-        console.log("response -->", response?.data);
-        const { name, email } = response.data;
-        setUserData({ name, email });
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-    getUserProfile();
-  }, []); */
+  
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
@@ -189,37 +170,7 @@ function Sidebar() {
     getUserProfile();
   }, []);
 
-  /* useEffect(() => {
-    const getUserProfile = async () => {
-      await axiosInstanceAuth
-        .get("/getUserProfile")
-        .then((res) => {
-          // const myData = decryptData(res);
-          setUserProfile(res?.data?.data || []);
-          console.log("Userrrrrrrrrrrrrr ProfileData---->", res?.data?.data);
-        })
-        .catch((err) => {
-          console.log("err --->", err);
-        });
-    };
-
-    getUserProfile();
-  }, []); */
-
-  /*  useEffect(() => {
-    const getUserProfile = async () => {
-      try {
-        const response = await axiosInstanceAuth.get("/getUserProfile");
-        const userData = response?.data?.data;
-        setUserProfile(userData);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-    getUserProfile();
-  }, []); */
-
+ 
   return (
     <div
       className={`!fixed !top-0 !left-0 bg-[#1C1C1C] ${
@@ -324,7 +275,7 @@ function Sidebar() {
               </ul>
             </div>
            
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5  absolute bottom-0">
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 ">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>
@@ -378,7 +329,7 @@ function Sidebar() {
               </div>
 
               {/* Only show the image on screens smaller than 2xl and xl */}
-              <div className="2xl:hidden xl:hidden ">
+              <div className="2xl:hidden xl:hidden   " style={{position:"absolute",bottom:"0"}}>
                 <Image
                   src={Sidebaruserlogo}
                   alt="Sidebaruserlogo"

@@ -24,134 +24,20 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { GrFormNext } from "react-icons/gr";
+import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 const WatchList = () => {
-  const watchListData = [
-    {
-      id: 1,
-      icon: Bit,
-      Market: "Bitcoin BTC",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 2,
-      icon: ETH,
-      Market: "ETH",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 3,
-      icon: XRP,
-      Market: "XRP",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 4,
-      icon: MATIC,
-      Market: "MATIC",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: RedChart,
-    },
-    {
-      id: 5,
-      icon: DOGE,
-      Market: "DOGE",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 6,
-      icon: USDC,
-      Market: "USDC",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 7,
-      icon: ARB,
-      Market: "ARB",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 8,
-      icon: LTC,
-      Market: "LTC",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-    {
-      id: 9,
-      icon: SOL,
-      Market: "SOL",
-      Sell: "0.46253",
-      Buy: "40189.72",
-      WRange1: " 19353.30",
-      WRange2: " 48447.17",
-      ChangesD: "-289.77",
-      Sentiments: "99% Buying",
-      chart: GreenChart,
-    },
-  ];
-
+  
+  const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
-  console.log("🚀 ~ WatchList ~ allCoinData:", allCoinData);
-
-  // Get All User Show
+  const [watchlistData, setWatchlistData] = useState([]);
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=5&page=1&sparkline=false&locale=en"
       )
       .then((res) => {
-        const myData = res;
-        setAllCoinData(myData || []);
-
-        console.log("AllCoinData---->", myData);
+        setAllCoinData(res?.data);
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -161,6 +47,50 @@ const WatchList = () => {
   useEffect(() => {
     getUserdata();
   }, []);
+  // Get All User Show
+  // const getWatchlistdata = async () => {
+  //   axiosInstanceAuth
+  //     .get("/allWatchlistData")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setWatchlist(res?.data?.data);
+
+  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   getWatchlistdata();
+  // }, []);
+  const getWatchlistdata = async () => {
+    axiosInstanceAuth
+      .get("/allWatchlistData")
+      .then((res) => {
+        const myData = res?.data?.data;
+        setWatchlist(res?.data?.data);
+
+        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+
+        // Filter allCoinData based on watchlist IDs
+        const filteredData = allCoinData.filter((coin) =>
+          watchlist.includes(coin.id)
+        );
+
+        setWatchlistData(filteredData);
+        console.log("watchlistfilter-----------",filteredData)
+
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
+
+  useEffect(() => {
+    getWatchlistdata();
+  }, [allCoinData]);
 
   return (
     <>
@@ -188,9 +118,9 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="flex  md:gap-5 gap-2.5 mt-6 lg:px-6 md:text-base text-sm items-center">
+        <div className="flex  gap-3 mt-6">
           <div>
-            <button className="bg-blue-500 px-3 py-0.5 rounded-full">All</button>
+            <button className="bg-blue-500 px-2 rounded-lg">All</button>
           </div>
           <div>
             <button className="  ">Crypto</button>
@@ -202,10 +132,10 @@ const WatchList = () => {
             <button className="  ">People</button>
           </div>
           <div>
-            <button className="">SmartPortfolios</button>
+            <button className="  ">Smart Portfolios</button>
           </div>
-          <div className="cursor-pointer">
-          <GrFormNext size={22}/>
+          <div className="mt-[7px]">
+            <FaGreaterThan size={13} />
           </div>
         </div>
 
@@ -259,36 +189,38 @@ const WatchList = () => {
                 </thead>
 
                 <tbody>
-                  {watchListData?.length > 0 &&
-                    watchListData?.map((d, index) => (
+                  {watchlistData?.length > 0 &&
+                    watchlistData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
                                 <Image
-                                  src={d.icon}
+                                  src={d.image}
                                   alt="Picture of the author"
-                                  className="rounded-full max-w-12"
+                                  className="rounded-full"
+                                  width={30}
+                                  height={30}
                                 />
                               </div>
-                              <div>{d.Market}</div>
+                              <div>{d.name}</div>
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.Sell}
+                            {d.circulating_supply}
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.Buy}
+                            {d.current_price}
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
-                              <div>{d.WRange1}</div>
-                              <div>{d.WRange2}</div>
+                              <div>{d.max_supply}</div>
+                              <div>{d.price_change_24h}</div>
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.ChangesD}
+                            {d.total_supply}
                             <div className="flex justify-center items-center ">
                               <div className="">
                                 <FaCaretDown
@@ -302,7 +234,7 @@ const WatchList = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4  whitespace-nowrap text-md text-white ">
-                            {d.Sentiments}
+                            {d.market_cap_rank} % Buying
                             <div className="w-full bg-[#262626] rounded-full h-1.5 mt-1.5">
                               <div
                                 className="bg-[#494949] h-1.5 rounded-full"
@@ -327,8 +259,8 @@ const WatchList = () => {
         </div>
       </div>
 
-      {watchListData?.length > 0 &&
-        watchListData?.map((d, index) => (
+      {watchlistData?.length > 0 &&
+      watchlistData?.map((d, index) => (
           <div key={index} className="lg:hidden">
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md m-5">
               <div className="w-full  ">
@@ -339,34 +271,38 @@ const WatchList = () => {
                       <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                         <span>
                           <Image
-                            src={d.icon}
+                            src={d.image}
                             alt="Picture of the author"
                             className="rounded-full w-7 "
+                            width={30}
+                            height={30}
                           />
                         </span>
-                        {d.Market}
+                        {d.name}
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sell</div>
-                      <div className=" py-2 pr-4 pl-4">{d.Sell}</div>
+                      <div className=" py-2 pr-4 pl-4">
+                        {d.circulating_supply}
+                      </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Buy</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.Buy}
+                        {d.current_price}
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">52W Range</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.WRange1} - {d.WRange2}
+                        {d.max_supply} - {d.price_change_24h}
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Change 1D</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        {d.ChangesD}{" "}
+                        {d.total_supply}{" "}
                         <span className="flex items-center text-red-500 text-[11px]">
                           <FaCaretDown size={12} />
                           (-0.73%)
@@ -377,7 +313,7 @@ const WatchList = () => {
                       <div className="py-2  pl-4 font-semibold">Sentiment</div>
                       <div>
                         <div className="flex justify-end  py- pr-4 pl-4">
-                          {d.Sentiments}
+                          {d.market_cap_rank} % Buying
                         </div>
                         <div className="flex justify-end  py-1.5 pr-4 pl-4">
                           <div className="w-44 bg-[#262626] rounded-full h-1.5 mt-1.5">

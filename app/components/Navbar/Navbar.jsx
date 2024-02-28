@@ -45,8 +45,8 @@ const Navbar = () => {
             : "flex  justify-between   pb-7 pt-5 pl-10 container"
         }`}
       >
-        <div className="relative flex-grow md:max-w-[700px]  ">
-          <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+        <div className=" flex-grow md:max-w-[700px]  ">
+          <div className=" inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
             <CiSearch size={20} />
           </div>
           <input
@@ -142,7 +142,7 @@ const Navbar = () => {
         </div>
        
       </div>
-      <div className="border-t border-stone-500"></div>
+      {/* <div className="border-t border-stone-500"></div> */}
     </>
   );
 };

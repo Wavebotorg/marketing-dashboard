@@ -34,7 +34,7 @@ const Market = () => {
     try {
       console.log("MAsi Masa Fai Fuva");
       const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
-      console.log("res dsfgdfsgdsgds -->", res);
+      console.log("res ------->", res);
       setSavedCoins([...savedCoins, id]); // Add the saved coin ID to the state
     } catch (err) {
       console.log("err--->", err);
@@ -45,7 +45,23 @@ const Market = () => {
     saveCoin();
   }, []);
 
- 
+  // const saveCoin = async (id) => {
+  //   try {
+  //     if (!savedCoins.includes(id)) {
+  //       const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
+  //       setSavedCoins([...savedCoins, id]);
+  //       console.log("res ------->", res);
+  //     } else {
+  //       console.log("Coin already saved");
+  //     }
+  //   } catch (err) {
+  //     console.log("err--->", err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   saveCoin(id);
+  // }, [id]);
 
   return (
     <>
@@ -128,8 +144,9 @@ const Market = () => {
                     >
                       Trade
                     </th>
-                    <th
-                      scope="col"
+                    <th        
+
+scope="col"
                       className="px-6 py-3 text-end text-base font-medium  whitespace-nowrap"
                     >
                       Save
@@ -266,7 +283,8 @@ const Market = () => {
               
               </div>
             </div>
-          </div>
+            <div></div>  </div>
+          
         ))}
     </>
   );
