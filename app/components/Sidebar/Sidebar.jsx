@@ -46,28 +46,27 @@ function Sidebar() {
   }
 
   const [allUser, setAllUser] = useState({});
-  const Token = localStorage.getItem("Token")
-    const getUserdata = async () => {
-      await axiosInstanceAuth
-        .get("getUserProfile")
-        .then((res) => {
-          const myData = res?.data?.data;
-          setAllUser(myData || []);
-  
-          console.log("getUserProfile---->", myData);
-        })
-        .catch((err) => {
-          console.log("err --->", err);
-        });
-    };
-  
-    useEffect(() => {
-      getUserdata();
-    }, [Token]);
+  const Token = localStorage.getItem("Token");
+  const getUserdata = async () => {
+    await axiosInstanceAuth
+      .get("getUserProfile")
+      .then((res) => {
+        const myData = res?.data?.data;
+        setAllUser(myData || []);
+
+        console.log("getUserProfile---->", myData);
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
+
+  useEffect(() => {
+    getUserdata();
+  }, [Token]);
 
   const pathname = usePathname();
   // const { pathname } = location;
-  
   const [isHover, setIsHover] = useState(null);
   const [isHover1, setIsHover1] = useState(null);
   const [isNavbar, setIsNavbar] = useState(false);
@@ -119,25 +118,25 @@ function Sidebar() {
 
   const headerbottom = [
     {
-      id: 1,
+      id: 8,
       pathname: "/watchList",
       icon: WatchList,
       pagename: "Watch List",
     },
     {
-      id: 2,
+      id: 9,
       pathname: "/discover",
       icon: Discover,
       pagename: "Discover",
     },
     {
-      id: 3,
+      id: 10,
       pathname: "/apecurdocs",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
     {
-      id: 4,
+      id: 11,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",
@@ -153,7 +152,6 @@ function Sidebar() {
     pathname === "/passwordverify" ||
     pathname === "/resetpassword";
 
-  
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
@@ -170,21 +168,22 @@ function Sidebar() {
     getUserProfile();
   }, []);
 
- 
   return (
     <div
-      className={`!fixed !top-0 !left-0 bg-[#1C1C1C] ${
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-screen z-[999999999999] ${
         matchPath ? "hidden" : "block"
       } `}
     >
       <div
-        className={`sidebar z-30 ${
-          isNavbar ? "w-72" : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
+        className={`sidebar ${
+          isNavbar
+            ? "w-72"
+            : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
         }`}
       >
-        <div className="sidebar min-h-screen p-1 hover:shadow-lg">
+        <div className="sidebar  p-1 hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-          <div className="flex h-screen flex-col  overflow-y-auto">
+          <div className="flex flex-col  overflow-y-auto">
             <div className="flex items-center justify-center">
               <div
                 className={`xl:hidden text-3xl `}
@@ -246,14 +245,14 @@ function Sidebar() {
                     <Link
                       href={data.pathname}
                       className={`${
-                        (isHover1 && data.id === isHover1) ||
+                        (isHover && data.id === isHover) ||
                         data.pathname === pathname
                           ? "navHover"
                           : "border-l-2 border-transparent"
                       } flex md:px-2 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
-                      onMouseLeave={() => setIsHover1(null)}
+                      onMouseLeave={() => setIsHover(null)}
                     >
                       <div
                         className={
@@ -274,8 +273,8 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-           
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 ">
+
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24  sm:mt-32 xsm:mt-32 ">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>
@@ -286,8 +285,7 @@ function Sidebar() {
                       height="10px"
                     />
                   </div>
-
-                  <div>
+                  <div className="">
                     <div className="flex">
                       <h1>{allUser.name}</h1>
                       <span>
@@ -296,15 +294,15 @@ function Sidebar() {
                           alt="arrow"
                           width="10px"
                           height="10px"
+                          className="ml-2"
                         />
                       </span>
                     </div>
-
                     <p className="text-xs">Invited by @{allUser.email}</p>
                     <div className="flex mt-2">
                       <Image
-                        src={Twitter}
-                        alt="twitter"
+                        src={discord}
+                        alt="discord"
                         width="10px"
                         height="10px"
                         className="mr-2"
@@ -317,8 +315,8 @@ function Sidebar() {
                         className="mr-2"
                       />
                       <Image
-                        src={Twitter}
-                        alt="twitter"
+                        src={medium}
+                        alt="medium"
                         width="10px"
                         height="10px"
                         className="mr-2"
@@ -329,14 +327,21 @@ function Sidebar() {
               </div>
 
               {/* Only show the image on screens smaller than 2xl and xl */}
-              <div className="2xl:hidden xl:hidden   " style={{position:"absolute",bottom:"0"}}>
+              <div
+                className="2xl:hidden xl:hidden flex gap-2"
+                style={{ position: "absolute", bottom: "0" }}
+              >
                 <Image
                   src={Sidebaruserlogo}
                   alt="Sidebaruserlogo"
                   width="30px"
                   height="30px"
-                  className="text-center"
+                  className="items-center"
                 />
+                <div className={` ${isNavbar ? "" : "hidden"} `}>
+                  <p className="">{allUser.name}</p>
+                  <p className="text-xs">{allUser.email}</p>
+                </div>
               </div>
             </div>
           </div>

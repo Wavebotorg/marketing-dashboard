@@ -45,15 +45,15 @@ const Navbar = () => {
             : "flex  justify-between   pb-7 pt-5 pl-10 container"
         }`}
       >
-        <div className=" flex-grow md:max-w-[700px]  ">
-          <div className=" inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+        <div className=" flex w-full gap-2 text-sm text--900 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
+          <div className=" flex items-center pl-3 pointer-events-none">
             <CiSearch size={20} />
           </div>
           <input
             type="search"
             id="default-search"
-            className="block w-full md: p-2 pl-10 text-sm text--900 rounded-lg  bg-[#1C1C1C]   text-white "
-            placeholder="Search"
+            className="bg-transparent w-full outline-none "
+            placeholder="Search "
           />
         </div>
 
@@ -140,7 +140,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-       
       </div>
       {/* <div className="border-t border-stone-500"></div> */}
     </>
