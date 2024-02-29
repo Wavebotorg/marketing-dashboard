@@ -57,7 +57,11 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="md:container">
+    <div
+      className="
+    
+     md:container"
+    >
       {/* <div className="border-b border-stone-500 mt-7" />  */}
 
       {/* <div className="flex  gap-3 mt-6">
@@ -134,37 +138,37 @@ const Portfolio = () => {
                             className="rounded-full max-w-12"
                           />
                         </div>
-                        <div>{item.coin}</div>
+                        <div>{item?.coin}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                      <div className="py-0.5 ">{item.price}</div>
+                      <div className="py-0.5 ">{item?.price}</div>
                       <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
                     </td>
                     <td className="px-6 py-4  whitespace-nowrap  text-white">
-                      <div className="py-0.5 text-center">{item.units}</div>
+                      <div className="py-0.5 text-center">{item?.units}</div>
                       <p className="text-sm mr-4 text-[#CECECE] text-end">
                         Long
                       </p>
                     </td>
 
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                      {item.avgOpen}
+                      {item?.avgOpen}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-[#FF0000]">
-                      {item.pl}
+                      {item?.pl}
                     </td>
                     <td className=" px-6 py-4 text-center whitespace-nowrap  text-[#FF0000]">
-                      {item.plPercentage}
+                      {item?.plPercentage}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                      {item.value}
+                      {item?.value}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                      {item.sell}
+                      {item?.sell}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                      {item.buy}
+                      {item?.buy}
                     </td>
                   </tr>
                 ))}

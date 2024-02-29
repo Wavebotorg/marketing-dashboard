@@ -13,11 +13,12 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  console.log("save",allCoinData);
+  console.log("save", allCoinData);
+  console.log("savedcoins-----------------",savedCoins)
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=5&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -30,42 +31,51 @@ const Market = () => {
   useEffect(() => {
     getUserdata();
   }, []);
-  const saveCoin = async (id) => {
-    try {
-      console.log("MAsi Masa Fai Fuva");
-      const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
-      console.log("res ------->", res);
-      setSavedCoins([...savedCoins, id]); // Add the saved coin ID to the state
-    } catch (err) {
-      console.log("err--->", err);
-    }
-  };
-
-  useEffect(() => {
-    saveCoin();
-  }, []);
+  // useEffect(() => {
+  //   const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
+  //   setSavedCoins(savedCoinsFromStorage);
+  // }, []);
 
   // const saveCoin = async (id) => {
   //   try {
-  //     if (!savedCoins.includes(id)) {
-  //       const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
-  //       setSavedCoins([...savedCoins, id]);
-  //       console.log("res ------->", res);
-  //     } else {
-  //       console.log("Coin already saved");
-  //     }
+  //     const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
+  //     setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+
+  //     // Save updated coins to local storage
+  //     localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
   //   } catch (err) {
   //     console.log("err--->", err);
   //   }
   // };
 
-  // useEffect(() => {
-  //   saveCoin(id);
-  // }, [id]);
+  useEffect(() => {
+    const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
+    setSavedCoins(savedCoinsFromStorage);
+  }, []);
+
+  const saveCoin = async (id) => {
+    try {
+      // Check if the user is logged in (you need to replace this condition with your authentication logic)
+      const userIsLoggedIn = true; // Replace with your logic to check if the user is logged in
+
+      if (userIsLoggedIn) {
+        // Save the coin to the server for the logged-in user
+        await axiosInstanceAuth.post("watchlist", { coinId: id });
+      }
+
+      // Save the coin locally for both logged-in and logged-out users
+      setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+      localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
+
+    } catch (err) {
+      console.log("err--->", err);
+    }
+  };
+
 
   return (
     <>
-      <div className="container  ">
+      <div className="container bg-[#1C1C1C] rounded-2xl ">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className="items-center container">
           <div className="flex pb-3">
@@ -190,15 +200,20 @@ scope="col"
                               <Link href="/">Trade</Link>
                             </div>
                           </td>
-                          <td className="px-6  py-4   text-center flex whitespace-nowrap text-md text-white  ">
+                          <td className="px-12  py-7   text-end flex whitespace-nowrap text-md text-white  ">
                             {savedCoins.includes(market.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
-                                <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                                <BiBookmark
+                                  style={{ backgroundColor: "#1788FB" }}
+                                />
                               </button>
                             ) : (
                               // Render a button to save the coin
-                              <button className="mx-auto" onClick={() => saveCoin(market?.id)}>
+                              <button
+                                className=""
+                                onClick={() => saveCoin(market?.id)}
+                              >
                                 <BiBookmark />
                               </button>
                             )}
@@ -214,7 +229,10 @@ scope="col"
       </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
-          <div key={index} className="lg:hidden">
+          <div
+            key={index}
+            className="lg:hidden mt-4 space-y-2 flex justify-between"
+          >
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
               <div className="w-full  ">
                 <>
@@ -262,25 +280,22 @@ scope="col"
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Save</div>
-                   
-                      <div className="flex justify-end py-2 px-4">
-                        <div className="flex justify-end">
-                          {savedCoins.includes(market?.id) ? (
-                            // Render a filled bookmark if the coin is saved
-                            <BiBookmark style={{ backgroundColor: "#1788FB" }} />
-                          ) : (
-                            // Render a button to save the coin
-                            <button onClick={() => saveCoin(market?.id)}>
-                              <BiBookmark />
-                            </button>
-                          )}
-                        </div>
+
+                    <div className="flex justify-end py-2 px-4">
+                      <div className="flex justify-end ml-16">
+                        {savedCoins.includes(market?.id) ? (
+                          // Render a filled bookmark if the coin is saved
+                          <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                        ) : (
+                          // Render a button to save the coin
+                          <button onClick={() => saveCoin(market?.id)}>
+                            <BiBookmark />
+                          </button>
+                        )}
                       </div>
-                     
-                  
+                    </div>
                   </div>
                 </>
-              
               </div>
             </div>
             <div></div>  </div>
@@ -291,5 +306,3 @@ scope="col"
 };
 
 export default Market;
-
-

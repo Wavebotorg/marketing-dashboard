@@ -70,28 +70,26 @@ const TokenDashboard = () => {
             </div>
           </div>
           <div className="mt-6">
-          <input
-            type="text"
-            name="text"
-            id="text"
-            placeholder="Wallet:"
-            className="bg-[#1C1C1C] rounded-lg p-3 w-full"
-          />
+            <input
+              type="text"
+              name="text"
+              id="text"
+              placeholder="Wallet:"
+              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+            />
+          </div>
+
+          <div className="mt-3">
+            <input
+              type="text"
+              name="text"
+              id="text"
+              placeholder="AUTO-COMPOUND:"
+              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+            />
+          </div>
         </div>
 
-        <div className="mt-3">
-          <input
-            type="text"
-            name="text"
-            id="text"
-            placeholder="AUTO-COMPOUND:"
-            className="bg-[#1C1C1C] rounded-lg p-3 w-full"
-          />
-        </div>
-
-        </div>
-
-       
         <div className="mt-6 flex items-center justify-between">
           <div className="font-medium text-2xl ">
             <p>Claimed Rewards</p>
@@ -116,9 +114,8 @@ const TokenDashboard = () => {
               <option value="Show 4">Show 4</option>
               <option value="Show 5">Show 5</option>
             </select>
-          
           </div>
-        </div> 
+        </div>
         <div className="mt-7 hidden lg:block ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-auto  overflow-auto rounded-lg">
@@ -202,7 +199,6 @@ const TokenDashboard = () => {
             </div>
           </div>
         </div>
-
         {allCoinData?.length > 0 &&
           allCoinData?.map((market, index) => (
             <div key={index} className="lg:hidden mt-4 ">
@@ -254,9 +250,8 @@ const TokenDashboard = () => {
                           Transaction
                         </div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {market?.transaction}
+                          {market?.transaction}
                         </div>
-                      
                       </div>
                       <div></div>
                     </>
@@ -271,7 +266,3 @@ const TokenDashboard = () => {
 };
 
 export default TokenDashboard;
-
-
-  
-

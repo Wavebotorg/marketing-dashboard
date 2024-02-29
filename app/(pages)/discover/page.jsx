@@ -82,7 +82,7 @@ const Discover = () => {
 
   return (
     <>
-      <div className="text-white ">
+      <div className="text-white  ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-12 mt-7">

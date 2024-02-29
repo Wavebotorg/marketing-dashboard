@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         {/* <Web3AuthSignerProvider> */}
 
         <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-5 w-full ">
-          <div className="sidebar   px-5  ">
+          <div className="sidebar visible px-5  ">
             <Sidebar />
           </div>
           {/* <div className="fixed top-0 w-full z-50"><Navbar /></div> */}

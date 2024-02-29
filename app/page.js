@@ -92,7 +92,7 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="mt-10 bg-[#1C1C1C] rounded-2xl ">
+      <div className="mt-10  rounded-2xl ">
         <Market />
       </div>
     </div>

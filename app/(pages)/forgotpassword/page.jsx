@@ -69,11 +69,11 @@ const ForgotPassword = () => {
           Forget Password
         </h2>
         <div>
-          <div className="text-[#CACACA] mb-2 2xl:text-left md:text-left sm:text-left xsm:text-center">
+          <div className="text-[#CACACA] mb-2 2xl:text-left md:text-left sm:text-left xsm:text-center ">
             Enter Email
           </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 bg-neutral-800 mb-5"
+            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"  
             type="email"
             name="email"
             value={forgetData?.email}
