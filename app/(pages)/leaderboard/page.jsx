@@ -97,7 +97,7 @@ const LeaderBoard = () => {
                     <tr className=" text-[#FFFFFF]  ">
                       <th
                         scope="col"
-                        className="px-6 py-3 text-center text-base font-medium  "
+                        className="px-6 py-3 text-center text-base font-medium "
                       >
                         Rank
                       </th>
@@ -150,7 +150,7 @@ const LeaderBoard = () => {
         </div>
 
         <div className="">
-          <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg w-96 ">
+          <p className="text-blue-400 text-3xl md:text-4xl font-medium max-w-screen-lg ">
             Recent Joins
           </p>
           <div className="md:container">

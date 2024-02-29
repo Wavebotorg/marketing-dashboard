@@ -52,12 +52,12 @@ const Navbar = () => {
           <input
             type="search"
             id="default-search"
-            className="bg-transparent w-full outline-none "
+            className="bg-[#1C1C1C]  w-full outline-none "
             placeholder="Search "
           />
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className=" flex items-center gap-1.5">
           <button className="">
             <IoIosNotifications size={25} />
           </button>
@@ -141,6 +141,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       {/* <div className="border-t border-stone-500"></div> */}
     </>
   );
