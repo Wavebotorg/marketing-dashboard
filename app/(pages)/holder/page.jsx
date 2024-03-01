@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import Pagination from "../Pagination/Pagination";
 
 const Holder = () => {
   const [allCoinData, setAllCoinData] = useState([
@@ -112,6 +113,17 @@ const Holder = () => {
 
     // Add more data as needed
   ]);
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <div className="container">
@@ -196,41 +208,48 @@ const Holder = () => {
                     </th>
                   </tr>
                 </thead>
+                {visibleData?.map((d, index) => (
+                  <tbody>
+                    {visibleData?.length > 0 &&
+                     visibleData?.map((d, index) => (
+                        <>
+                          <tr key={index}>
+                            <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                              <div> {d?.snapblock}</div>
+                            </td>
+                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                              {d?.time}
+                            </td>
 
-                <tbody>
-                  {allCoinData?.length > 0 &&
-                    allCoinData?.map((d, index) => (
-                      <>
-                        <tr key={index}>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
-                            <div> {d?.snapblock}</div>
-                          </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d?.time}
-                          </td>
-
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            <div className="flex items-center justify-center gap-5">
-                              <div>${d?.reward} </div>
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d?.unlock}
-                          </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            <div className="flex justify-center items-center ">
-                              {d?.status}
-                            </div>
-                          </td>
-                        </tr>
-                      </>
-                    ))}
-                </tbody>
+                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                              <div className="flex items-center justify-center gap-5">
+                                <div>${d?.reward} </div>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                              {d?.unlock}
+                            </td>
+                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                              <div className="flex justify-center items-center ">
+                                {d?.status}
+                              </div>
+                            </td>
+                          </tr>
+                        </>
+                      ))}
+                  </tbody>
+                ))}
               </table>
+             
             </div>
           </div>
         </div>
-
+        <Pagination
+                totalItems={allCoinData.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+                currentPage={currentPage}
+              />
         {allCoinData?.length > 0 &&
           allCoinData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">

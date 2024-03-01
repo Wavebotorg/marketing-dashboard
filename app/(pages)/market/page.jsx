@@ -295,7 +295,7 @@ scope="col"
                         </span> */}
                     </div>
                   </div>
-                  <div className="border-b border-[#494949] flex justify-between">
+                  <div className="flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Save</div>
 
                     <div className="flex justify-end py-2 px-4">

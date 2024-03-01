@@ -40,9 +40,9 @@ const Page = () => {
               <tr className="   ">
                 <th scope="col">User Id</th>
                 <th scope="col ">VIP Level</th>
-                <th scope="col">User Type</th>
+                <th scope="col" >User Type</th>
                 <th scope="col">Following</th>
-                <th scope="col ">Followers</th>{" "}
+                <th scope="col ">Followers</th>
               </tr>
             </thead>
 
@@ -66,14 +66,16 @@ const Page = () => {
                       </button>
                     </td>
                     <td data-title="VIP Level" className=" flex items-center">
-                      {items?.vipLevel}
-
-                      <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                   {items?.vipLevel}
+                  <button className=" text-xl  text-[#828282] align-middle pb-0.6 pl-10 md:pl-0 ">
                         <GrFormNext />
+                      
                       </button>
+                    
                     </td>
                     <td data-title="User Type" className=" ">
                       {items?.userType}
+
                     </td>
                     <td data-title="Following" className=" ">
                       {items?.following}

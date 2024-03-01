@@ -58,6 +58,27 @@ const PasswordVerify = () => {
 
  
   };
+  // const [resendStatus, setResendStatus] = useState(false);
+
+  // // Function to resend OTP
+  // const resendOtp = async () => {
+  //   // Perform the logic to resend OTP
+  //   // For example, you can make an API call to request a new OTP
+  //   // Update the resendStatus accordingly
+  //   try {
+  //     const res = await axiosInstance.post("/resendotp", { email: email, types });
+  //     const responseData = res?.data;
+
+  //     if (res.status) {
+  //       toast.success(res.msg);
+  //       setResendStatus(true);
+  //     } else {
+  //       toast.error(res.msg);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error resending OTP:", error);
+  //   }
+  // };
 
   return (
     <>
