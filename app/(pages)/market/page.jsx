@@ -13,7 +13,7 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  console.log("save",allCoinData);
+  console.log("save", allCoinData);
   const getUserdata = async () => {
     axios
       .get(
@@ -32,7 +32,6 @@ const Market = () => {
   }, []);
   const saveCoin = async (id) => {
     try {
-      console.log("MAsi Masa Fai Fuva");
       const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
       console.log("res dsfgdfsgdsgds -->", res);
       setSavedCoins([...savedCoins, id]); // Add the saved coin ID to the state
@@ -44,8 +43,6 @@ const Market = () => {
   useEffect(() => {
     saveCoin();
   }, []);
-
- 
 
   return (
     <>
@@ -177,11 +174,16 @@ const Market = () => {
                             {savedCoins.includes(market.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
-                                <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                                <BiBookmark
+                                  style={{ backgroundColor: "#1788FB" }}
+                                />
                               </button>
                             ) : (
                               // Render a button to save the coin
-                              <button className="mx-auto" onClick={() => saveCoin(market?.id)}>
+                              <button
+                                className="mx-auto"
+                                onClick={() => saveCoin(market?.id)}
+                              >
                                 <BiBookmark />
                               </button>
                             )}
@@ -245,25 +247,22 @@ const Market = () => {
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Save</div>
-                   
-                      <div className="flex justify-end py-2 px-4">
-                        <div className="flex justify-end">
-                          {savedCoins.includes(market?.id) ? (
-                            // Render a filled bookmark if the coin is saved
-                            <BiBookmark style={{ backgroundColor: "#1788FB" }} />
-                          ) : (
-                            // Render a button to save the coin
-                            <button onClick={() => saveCoin(market?.id)}>
-                              <BiBookmark />
-                            </button>
-                          )}
-                        </div>
+
+                    <div className="flex justify-end py-2 px-4">
+                      <div className="flex justify-end">
+                        {savedCoins.includes(market?.id) ? (
+                          // Render a filled bookmark if the coin is saved
+                          <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                        ) : (
+                          // Render a button to save the coin
+                          <button onClick={() => saveCoin(market?.id)}>
+                            <BiBookmark />
+                          </button>
+                        )}
                       </div>
-                     
-                  
+                    </div>
                   </div>
                 </>
-              
               </div>
             </div>
           </div>
@@ -273,5 +272,3 @@ const Market = () => {
 };
 
 export default Market;
-
-

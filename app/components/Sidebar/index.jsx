@@ -211,11 +211,11 @@ const Token = localStorage.getItem("Token")
               </div>
 
               <div>
-                <div className="flex">
-                  <h1>{allUser.name}</h1>
-                  <span>
+                <div className="flex justify-between">
+                  <h1>{allUser.name}aaaaa</h1>
+                  <div >
                     <Image src={Arrow} alt="arrow" width="10px" height="10px" />
-                  </span>
+                  </div>
                 </div>
 
                 <p className="text-xs">Invited by {allUser.email}</p>

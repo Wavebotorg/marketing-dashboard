@@ -57,7 +57,7 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="md:container">
+    <div className="flex flex-col xl:justify-center xl:ml-5 xl:mr-0 lg:mr-4 md:mr-5 md:mx-0 mx-4">
       {/* <div className="border-b border-stone-500 mt-7" />  */}
 
       {/* <div className="flex  gap-3 mt-6">

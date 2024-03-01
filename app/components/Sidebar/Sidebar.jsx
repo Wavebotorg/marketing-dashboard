@@ -337,7 +337,7 @@ function Sidebar() {
                   </div>
 
                   <div>
-                    <div className="flex">
+                    <div className="flex gap-3 items-center">
                       <h1>{allUser.name}</h1>
                       <span>
                         <Image
