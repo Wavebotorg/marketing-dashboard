@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
@@ -11,7 +10,6 @@ const Holder = () => {
       reward: "$55",
       unlock: "566",
       status: "true",
-    
     },
     {
       snapblock: "23",
@@ -19,7 +17,6 @@ const Holder = () => {
       reward: "$55",
       unlock: "566",
       status: "true",
-    
     },
     {
       snapblock: "23",
@@ -27,41 +24,124 @@ const Holder = () => {
       reward: "$55",
       unlock: "566",
       status: "true",
-    
     },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+    {
+      snapblock: "23",
+      time: "2:00:66",
+      reward: "$55",
+      unlock: "566",
+      status: "true",
+    },
+
     // Add more data as needed
   ]);
   return (
     <>
-    <div className="container">
-      <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
-        Holder Rewards
-      </p>
-      <div className="flex flex-col md:flex-row gap-6 mt-5">
-        <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
-          <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
-          <p>Paginated Results</p>
+      <div className="container">
+        <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
+          Holder Rewards
+        </p>
+        <div className="flex flex-col md:flex-row gap-6 mt-5">
+          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
+            <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
+            <p>Paginated Results</p>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full ">
-        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-          <p>Total Rewards</p>
-          <p className="text-blue-400 text-2xl mt-1  ">0ETH</p>
+        <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full ">
+          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
+            <p>Total Rewards</p>
+            <p className="text-blue-400 text-2xl mt-1  ">0ETH</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
+            <p>Unclaimed Rewards</p>
+            <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
+            <p>Claimable Rewards</p>
+            <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+          </div>
         </div>
-        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-          <p>Unclaimed Rewards</p>
-          <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+        <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
+          <h1 className="  ">Holder Rewards</h1>
         </div>
-        <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-          <p>Claimable Rewards</p>
-          <p className="text-blue-400 text-2xl mt-1">0ETH</p>
-        </div>
-      </div>
-      <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
-        <h1 className="  ">Holder Rewards</h1>
-      
-      </div>
-      <div className="flex justify-end  ">
+        <div className="flex justify-end  ">
           <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
             <select
@@ -75,13 +155,12 @@ const Holder = () => {
               <option value="Show 4">Show 4</option>
               <option value="Show 5">Show 5</option>
             </select>
-          
           </div>
-        </div> 
-      
-      <div className="mt-4 hidden lg:block ">
+        </div>
+
+        <div className="mt-4 hidden lg:block ">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C]  text-white h-auto  overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-[650px]  overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -89,32 +168,32 @@ const Holder = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  "
                     >
-                  Snapshot Block
+                      Snapshot Block
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
-                     Time  </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                    >
-                    Rewards
+                      Time{" "}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
-                    Unlock
+                      Rewards
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                      Unlock
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     >
-                   Status
+                      Status
                     </th>
-                   
                   </tr>
                 </thead>
 
@@ -127,7 +206,7 @@ const Holder = () => {
                             <div> {d?.snapblock}</div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                          {d?.time}
+                            {d?.time}
                           </td>
 
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
@@ -143,7 +222,6 @@ const Holder = () => {
                               {d?.status}
                             </div>
                           </td>
-                         
                         </tr>
                       </>
                     ))}
@@ -161,42 +239,32 @@ const Holder = () => {
                   <div className="">
                     <>
                       <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">   Snapshot Block</div>
+                        <div className="py-2  pl-4 font-semibold">
+                          {" "}
+                          Snapshot Block
+                        </div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        {d?.snapblock}
+                          {d?.snapblock}
                         </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">
-                        Time 
-                        </div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          {d?.time}
-                        </div>
+                        <div className="py-2  pl-4 font-semibold">Time</div>
+                        <div className=" py-2 pr-4 pl-4"> {d?.time}</div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">
-                        Rewards
-                        </div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          ${d?.reward} 
-                        </div>
+                        <div className="py-2  pl-4 font-semibold">Rewards</div>
+                        <div className=" py-2 pr-4 pl-4"> ${d?.reward}</div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">
-                          {" "}
-                          Unlock
-                        </div>
+                        <div className="py-2  pl-4 font-semibold"> Unlock</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d?.unlock}
+                          {d?.unlock}
                         </div>
                       </div>
                       <div className=" flex justify-between">
                         <div className="py-2  pl-4 font-semibold">Status</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        {d?.status}
+                          {d?.status}
                         </div>
                       </div>
                       <div></div>
@@ -206,13 +274,9 @@ const Holder = () => {
               </div>
             </div>
           ))}
-     
-     
-      </div>  
-      </>
+      </div>
+    </>
   );
 };
 
 export default Holder;
-
- 

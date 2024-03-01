@@ -171,20 +171,20 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-screen z-[999999999999] ${
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full  z-[9999] ${
         matchPath ? "hidden" : "block"
       } `}
     >
       <div
-        className={`sidebar ${
+        className={`sidebar   ${
           isNavbar
             ? "w-72"
             : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
         }`}
       >
-        <div className="sidebar  p-1 hover:shadow-lg ">
+        <div className="sidebar h-full  p-1 hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-          <div className="flex flex-col  overflow-y-auto">
+          <div className="flex h-screen flex-col  overflow-y-auto">
             <div className="flex items-center justify-center">
               <div
                 className={`xl:hidden text-3xl `}
@@ -275,7 +275,7 @@ function Sidebar() {
               </ul>
             </div>
 
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24  sm:mt-32 xsm:mt-32 ">
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  ">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>

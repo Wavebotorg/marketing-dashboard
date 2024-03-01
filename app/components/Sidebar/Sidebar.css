@@ -20,6 +20,8 @@
   }
   .sidebar {
     transition: all 0.4s ease-in-out;
+    overflow-y: scroll;
+    height: 100%;
 
 
   }

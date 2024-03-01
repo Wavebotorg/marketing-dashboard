@@ -37,7 +37,7 @@ const Page = () => {
         <div className="lg:container lg:mx-auto md:mx-5 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
           <table className="responsive-table border1 ">
             <thead className="text-[#828282] md:text-[#828282]">
-              <tr className="  ">
+              <tr className="   ">
                 <th scope="col">User Id</th>
                 <th scope="col ">VIP Level</th>
                 <th scope="col">User Type</th>

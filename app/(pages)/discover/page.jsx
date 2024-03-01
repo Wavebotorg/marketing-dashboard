@@ -82,7 +82,7 @@ const Discover = () => {
 
   return (
     <>
-      <div className="text-white  ">
+      <div className="text-white  xsm:p-2">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-12 mt-7">
@@ -108,11 +108,7 @@ const Discover = () => {
                 >
                   <div className="text-sm  ">{image.name}</div>
                 </ReactTooltip>
-                <Image
-                  className="max-w-14 mx-auto"
-                  src={image.img}
-                  alt={image.name}
-                />
+                <Image className=" mx-auto" src={image.img} alt={image.name} />
               </div>
             ))}
           </div>
@@ -184,7 +180,7 @@ const Discover = () => {
             </div>
           </div>
         </div>
-        <div class="lg:mx-4 md:p-2  grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 md:gap-10 gap-5">
+        <div class="lg:mx-4 md:p-2  grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 md:gap-10 gap-5  ">
           {cards.map((card, index) => (
             <div
               key={index}
