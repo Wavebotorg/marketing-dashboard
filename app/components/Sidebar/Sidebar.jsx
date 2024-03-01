@@ -150,7 +150,8 @@ function Sidebar() {
     pathname === "/signup" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
-    pathname === "/resetpassword";
+    pathname === "/resetpassword" ||
+    pathname === "/sucessreset"
 
   const [userProfile, setUserProfile] = useState([]);
 

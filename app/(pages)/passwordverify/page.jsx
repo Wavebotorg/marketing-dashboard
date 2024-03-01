@@ -4,7 +4,6 @@ import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
-import Otpsucess from "../../../public/assets/otpsucess.png";
 import OtpInput from "react-otp-input";
 import { useRouter } from "next/navigation";
 import axiosInstance from "@/app/apiInstances/axiosInstance";
@@ -19,7 +18,7 @@ const PasswordVerify = () => {
 
   const router = useRouter();
 
-  // const [isVerificationSuccess, setIsVerificationSuccess] = useState(false)
+
   const handleOtpChange = (value) => {
     const sanitizedValue = value.replace(/\D/g, "");
     setOtp(sanitizedValue);
@@ -57,7 +56,7 @@ const PasswordVerify = () => {
         console.log("error--->", err);
       });
 
-    // setIsVerificationSuccess(true)
+ 
   };
 
   return (
@@ -72,24 +71,7 @@ const PasswordVerify = () => {
         </div>
 
         <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14  w-[70%] sm:w-[70%]  md:w-[40%] lg:w-[40%]  2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-          {/* {isVerificationSuccess ? (
-            <div className="success-popup">
-              <Image
-                src={Otpsucess}
-                alt="Otpsucess"
-                className="2xl:h-[39px] w-full lg:h-[32px] sm:h-[32px] xsm:h-[30px]"
-              />
-              <h2 className="text-white">
-                Your Password is Reset
-                <br /> successfully, Please login again
-              </h2>
-              <div className="flex justify-center mt-10">
-                <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
-                  Login
-                </button>
-              </div>
-            </div>
-          ) : ( */}
+       
           <div>
             <h2 className="text-lg  sm:text-lg md:text-xl lg:text-2xl  2xl:text-3xl tracking-wide text-white   mb-3 sm:mb-3 md:mb-4 lg:mb-5 2xl:mb-5  font-semibold text-center">
               OTP Verification
@@ -128,7 +110,7 @@ const PasswordVerify = () => {
               </Link>
             </div>
           </div>
-          {/* )} */}
+         
         </div>
       </div>
     </>

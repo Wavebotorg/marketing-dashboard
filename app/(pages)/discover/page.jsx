@@ -275,6 +275,23 @@ const Discover = () => {
               Explore the biggest crypto movers on the market.
             </p>
           </div>
+          <div className="flex items-center  ml-auto  ">
+          <div>
+            <label className=" text-sm md:text-lg ">Rows per page </label>
+            <select
+              name="select Row"
+              className="bg-blue-500 rounded-lg p-1 !outline-none "
+              defaultValue="Show 5"
+            >
+              <option value="Show 1">Show 1</option>
+              <option value="Show 2">Show 2</option>
+              <option value="Show 3">Show 3</option>
+              <option value="Show 4">Show 4</option>
+              <option value="Show 5">Show 5</option>
+            </select>
+          
+          </div>
+        </div> 
         </div>
 
         <div className="lg:mx-4  md:p-2 mb-5">

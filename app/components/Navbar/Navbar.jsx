@@ -40,7 +40,8 @@ const Navbar = () => {
           getPath === "/signup" ||
           getPath === "/forgotpassword" ||
           getPath === "/passwordverify" ||
-          getPath === "/resetpassword"
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
             ? "hidden"
             : "flex  justify-between  border-b border-stone-500  pb-7 pt-5 pl-10 container"
         }`}
