@@ -65,13 +65,17 @@ const Page = () => {
                         <PiCopySimple className="" />
                       </button>
                     </td>
-                    <td data-title="VIP Level" className=" flex items-center">
-                   {items?.vipLevel}
-                  <button className=" text-xl  text-[#828282] align-middle pb-0.6 pl-10 md:pl-0 ">
-                        <GrFormNext />
-                      
-                      </button>
-                    
+                    <td
+                      data-title="VIP Level"
+                      className="flex items-center  xsm:mx-1"
+                    >
+                      <span className="md:ml-[2rem]">
+                        {items?.vipLevel}
+
+                        <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                          <GrFormNext />
+                        </button>
+                      </span>
                     </td>
                     <td data-title="User Type" className=" ">
                       {items?.userType}

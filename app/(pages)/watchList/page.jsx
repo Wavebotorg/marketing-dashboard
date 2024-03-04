@@ -25,7 +25,6 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
-<<<<<<< HEAD
 
 const WatchList = () => {
   
@@ -39,24 +38,6 @@ const WatchList = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
-=======
-
-import { GrFormNext } from "react-icons/gr";
-
-const WatchList = () => {
-  const [watchlist, setWatchlist] = useState("");
-  console.log("🚀 ~ WatchList ~ watchlist:", watchlist);
-
-  // Get All User Show
-  const getWatchlistdata = async () => {
-    axiosInstanceAuth
-      .get("/allWatchlistData")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setWatchlist(res?.data?.data);
-
-        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
->>>>>>> 2154ac24b5b435f900faebd4ef13982d18c88491
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -154,7 +135,7 @@ const WatchList = () => {
             <button className="  ">Smart Portfolios</button>
           </div>
           <div className="">
-            <GrFormNext size={22} />
+            {/* <GrFormNext size={22} /> */}
           </div>
           <div className="flex items-center  ml-auto  ">
           <div>
