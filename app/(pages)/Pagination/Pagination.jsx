@@ -93,7 +93,7 @@ const Pagination = ({
   };
 
   return (
-    <div className="flex justify-end mt-4">
+    <div className=" flex justify-end mt-4" >
       <nav>
         <ul className="pagination">
           {getPageNumbers().map((page, index) => (

@@ -135,7 +135,7 @@ const Navbar = () => {
                         alt="loginicon"
                         className="w-[20px] h-[20px] md:block hidden"
                       />
-                      <span className="md:ml-2 md:text-md text-sm">Login</span>
+                      <span className="md:ml-2 md:text-md text-sm md:w-14">Login</span>
                     </div>
                   </button>
                 </Link>

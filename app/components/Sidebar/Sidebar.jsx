@@ -275,7 +275,7 @@ function Sidebar() {
               </ul>
             </div>
 
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  ">
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>
