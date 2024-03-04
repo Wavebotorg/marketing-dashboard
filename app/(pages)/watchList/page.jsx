@@ -25,43 +25,19 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
+import Pagination from "../Pagination/Pagination";
 
 const WatchList = () => {
-  /*   const [allCoinData, setAllCoinData] = useState([]);
-  console.log("🚀 ~ WatchList ~ allCoinData:", allCoinData);
-
-  // Get All User Show
+  const [watchlist, setWatchlist] = useState("");
+  const [allCoinData, setAllCoinData] = useState([]);
+  const [watchlistData, setWatchlistData] = useState([]);
   const getUserdata = async () => {
     axios
       .get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
       )
       .then((res) => {
-        const myData = res;
-        setAllCoinData(myData || []);
-
-        console.log("AllCoinData---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
-
-  useEffect(() => {
-    getUserdata();
-  }, []);
- */
-  const [watchlist, setWatchlist] = useState("");
-
-  // Get All User Show
-  const getWatchlistdata = async () => {
-    axiosInstanceAuth
-      .get("/allWatchlistData")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setWatchlist(res?.data?.data);
-
-        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+        setAllCoinData(res?.data);
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -71,16 +47,70 @@ const WatchList = () => {
   useEffect(() => {
     getWatchlistdata();
   }, []);
+  // Get All User Show
+  // const getWatchlistdata = async () => {
+  //   axiosInstanceAuth
+  //     .get("/allWatchlistData")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setWatchlist(res?.data?.data);
+
+  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   getWatchlistdata();
+  // }, []);
+  const getWatchlistdata = async () => {
+    axiosInstanceAuth
+      .get("/allWatchlistData")
+      .then((res) => {
+        const myData = res?.data?.data;
+        setWatchlist(res?.data?.data);
+
+        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+
+        // Filter allCoinData based on watchlist IDs
+        const filteredData = allCoinData.filter((coin) =>
+          watchlist.includes(coin.id)
+        );
+
+        setWatchlistData(filteredData);
+        console.log("watchlistfilter-----------", filteredData);
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
+
+  useEffect(() => {
+    getWatchlistdata();
+  }, [allCoinData]);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = watchlistData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <>
-      <div className="container hidden lg:block ">
-        <div className="border-b border-stone-500 mt-7" />
-        <div className="flex flex-col md:flex-row items-center justify-between mt-6">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
+        <div className=" mt-7" />
+        <div className="flex  items-center justify-between mt-6">
           <div>
             <div className="text-2xl justify-start">My Watchlist</div>
           </div>
-          <div className="flex flex-col sm:flex-row md:flex-row justify-center md:justify-end mt-4 md:mt-0 gap-3">
+          <div className="flex  justify-center md:justify-end  md:mt-0 gap-3">
             <div>
               <FaPlus size={24} />
             </div>
@@ -98,7 +128,7 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="flex  gap-3 mt-6">
+        <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
           <div>
             <button className="bg-blue-500 px-2 rounded-lg">All</button>
           </div>
@@ -114,12 +144,26 @@ const WatchList = () => {
           <div>
             <button className="  ">Smart Portfolios</button>
           </div>
-          <div className="mt-[7px]">
-            <FaGreaterThan size={13} />
+          <div className="">{/* <GrFormNext size={22} /> */}</div>
+          <div className="flex items-center  ml-auto  ">
+            <div>
+              <label className=" text-sm md:text-lg ">Rows per page </label>
+              <select
+                name="select Row"
+                className="bg-blue-500 rounded-lg p-1 !outline-none "
+                defaultValue="Show 5"
+              >
+                <option value="Show 1">Show 1</option>
+                <option value="Show 2">Show 2</option>
+                <option value="Show 3">Show 3</option>
+                <option value="Show 4">Show 4</option>
+                <option value="Show 5">Show 5</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div className="container">
+        <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[550px] overflow-auto rounded-lg">
               <table className="w-full  ">
@@ -169,8 +213,8 @@ const WatchList = () => {
                 </thead>
 
                 <tbody>
-                  {watchlist?.length > 0 &&
-                    watchlist?.map((d, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -237,10 +281,17 @@ const WatchList = () => {
             </div>
           </div>
         </div>
+
+        <Pagination
+          totalItems={watchlistData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
 
-      {watchlist?.length > 0 &&
-        watchlist?.map((d, index) => (
+      {watchlistData?.length > 0 &&
+        watchlistData?.map((d, index) => (
           <div key={index} className="lg:hidden">
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md m-5">
               <div className="w-full  ">
@@ -321,7 +372,7 @@ const WatchList = () => {
             </div>
           </div>
         ))}
-    </>
+    </div>
   );
 };
 

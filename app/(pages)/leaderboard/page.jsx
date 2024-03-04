@@ -7,6 +7,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
+import Pagination from "../Pagination/Pagination";
 
 const truncateEmail = (email) => {
   if (email.length < 20) {
@@ -81,15 +82,26 @@ const LeaderBoard = () => {
     getAdmindata();
   }, []);
 
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = students.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <>
-      <div className="xl:flex md:justify-between gap-5 md:container md:mx-auto my-10 xl:space-y-0 space-y-5 container">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+      <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-1 md:mr-7 ml-5 xl:space-y-0 space-y-4">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
           </p>
 
-          <div className="md:container ">
+          <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C]  text-white  overflow-auto rounded-lg ">
                 <table className="w-full">
@@ -123,8 +135,8 @@ const LeaderBoard = () => {
                   </thead>
 
                   <tbody>
-                    {students?.length > 0 &&
-                      students?.map((student, index) => (
+                    {visibleData?.length > 0 &&
+                      visibleData?.map((student, index) => (
                         <>
                           <tr key={index}>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
@@ -147,6 +159,13 @@ const LeaderBoard = () => {
               </div>
             </div>
           </div>
+
+          <Pagination
+            totalItems={students.length}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
         </div>
 
         <div className="">
@@ -228,7 +247,7 @@ const LeaderBoard = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

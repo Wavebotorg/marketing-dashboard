@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import Pagination from "../Pagination/Pagination";
 
 const Holder = () => {
   const [allCoinData, setAllCoinData] = useState([
@@ -47,63 +48,63 @@ const Holder = () => {
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "277676732673627",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "2757573",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "25353533",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "25353",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "273263",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "4223",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "423",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "3",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "10",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
@@ -112,9 +113,20 @@ const Holder = () => {
 
     // Add more data as needed
   ]);
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <>
-      <div className="container ">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
         </p>
@@ -196,10 +208,10 @@ const Holder = () => {
                     </th>
                   </tr>
                 </thead>
-
+                {/* {visibleData?.map((d, index) => ( */}
                 <tbody>
-                  {allCoinData?.length > 0 &&
-                    allCoinData?.map((d, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -226,15 +238,17 @@ const Holder = () => {
                       </>
                     ))}
                 </tbody>
+                {/* ))} */}
               </table>
             </div>
           </div>
         </div>
-
-        <div>
-          1<div>2</div> <div>3</div>
-        </div>
-
+        <Pagination
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
         {allCoinData?.length > 0 &&
           allCoinData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
@@ -279,7 +293,7 @@ const Holder = () => {
             </div>
           ))}
       </div>
-    </>
+    </div>
   );
 };
 

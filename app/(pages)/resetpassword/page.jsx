@@ -8,6 +8,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
+
 import axiosInstance from "../../apiInstances/axiosInstance";
 
 
@@ -20,7 +21,10 @@ const ResetPassword = () => {
     newPassword: "",
     confirmPassword: "",
   });
-
+  const [isVerificationSuccess, setIsVerificationSuccess] = useState(false)
+  // const redirecttoLogin=()=>{
+//   router.push("/login");
+// }
   const onChangeInput = (e) => {
     const value = e.target.value.trim();
     const name = e.target.name;
@@ -47,7 +51,7 @@ const ResetPassword = () => {
         if (myData?.status) {
           toast.success(myData?.msg);
 
-          router.push("/login");
+          router.push("/sucessreset");
           // setTimeout(() => {
           // }, 3000);
         } else {
@@ -57,6 +61,7 @@ const ResetPassword = () => {
       .catch((err) => {
         console.log("err---->", err);
       });
+      setIsVerificationSuccess(true)
   };
 
   return (
@@ -68,8 +73,10 @@ const ResetPassword = () => {
           className="2xl:h-[39px] w-full lg:h-[32px] sm:h-[32px] xsm:h-[30px]"
         />
       </div>
-
+    
       <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+      
+       
         <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Reset Password
         </h2>
@@ -103,6 +110,7 @@ const ResetPassword = () => {
           </button>
         </div>
       </div>
+         
     </div>
   );
 };

@@ -150,7 +150,8 @@ function Sidebar() {
     pathname === "/signup" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
-    pathname === "/resetpassword";
+    pathname === "/resetpassword" ||
+    pathname === "/sucessreset";
 
   const [userProfile, setUserProfile] = useState([]);
 
@@ -285,8 +286,9 @@ function Sidebar() {
                       height="10px"
                     />
                   </div>
-                  <div className="">
-                    <div className="flex">
+
+                  <div>
+                    <div className="flex gap-3 items-center">
                       <h1>{allUser.name}</h1>
                       <span>
                         <Image
@@ -305,21 +307,21 @@ function Sidebar() {
                         alt="discord"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                       <Image
                         src={Twitter}
                         alt="twitter"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                       <Image
                         src={medium}
                         alt="medium"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                     </div>
                   </div>
