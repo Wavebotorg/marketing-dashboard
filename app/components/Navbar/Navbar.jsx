@@ -42,7 +42,7 @@ const Navbar = () => {
           getPath === "/passwordverify" ||
           getPath === "/resetpassword"
             ? "hidden"
-            : "flex  justify-between   pb-7 pt-5 pl-10 container"
+            : "flex  justify-between   pb-7 pt-5 pl-10 "
         }`}
       >
         <div className=" flex w-full gap-2 text-sm text--900 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
@@ -142,7 +142,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* <div className="border-t border-stone-500"></div> */}
+      <div className="border-t border-stone-500"></div>
     </>
   );
 };

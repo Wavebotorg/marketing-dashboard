@@ -114,7 +114,7 @@ const Holder = () => {
   ]);
   return (
     <>
-      <div className="container">
+      <div className="container ">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
         </p>
@@ -162,7 +162,7 @@ const Holder = () => {
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[650px]  overflow-auto rounded-lg">
               <table className="w-full  ">
-                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
                   <tr className=" text-[#CECECE]  ">
                     <th
                       scope="col"
@@ -229,6 +229,10 @@ const Holder = () => {
               </table>
             </div>
           </div>
+        </div>
+
+        <div>
+          1<div>2</div> <div>3</div>
         </div>
 
         {allCoinData?.length > 0 &&
