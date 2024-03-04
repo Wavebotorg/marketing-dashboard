@@ -58,7 +58,7 @@ const Navbar = () => {
           />
         </div>
 
-        <div className=" flex items-center gap-1.5">
+        <div className=" flex items-center gap-1.5 mr-5">
           <button className="">
             <IoIosNotifications size={25} />
           </button>
@@ -69,7 +69,7 @@ const Navbar = () => {
                   onClick={(e) => setConfirmationPopUp(true)}
                   className="bg-[#1788FB] text-white p-2 rounded-xl "
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 ">
                     <FiPower size={18} />
                     <span className="md:ml-1 md:text-md text-sm md:block hidden">
                       Logout

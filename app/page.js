@@ -25,8 +25,8 @@ const Page = () => {
   ];
 
   return (
-    <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
-      <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">
+    <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
+      <div className="mx-3  md:flex gap-5 ">
         <div className="flex items-center mb-5 md:mb-0">
           <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
           <span className="ml-5 mr-5 text-wrap md:text-nowrap">
@@ -69,7 +69,7 @@ const Page = () => {
                       data-title="VIP Level"
                       className="flex items-center  xsm:mx-1"
                     >
-                      <span className="md:ml-[2rem]">
+                      <span className="md:ml-[2rem] ">
                         {items?.vipLevel}
 
                         <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">

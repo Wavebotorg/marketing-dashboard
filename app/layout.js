@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           </div>
           {/* <div className="fixed top-0 w-full z-50"><Navbar /></div> */}
 
-          <div className=" flex-grow w-full 2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto mt-24 ">
+          <div className=" flex-grow w-full 2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto mt-24">
             <div className=" sticky top-0 z[999999999999999999999] bg-black w-full">
               {" "}
               <Navbar />

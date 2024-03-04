@@ -200,7 +200,7 @@ const TokenDashboard = () => {
   ]);
   return (
     <>
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 ">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
         <h1 className="text-[#1788FB]   font-medium max-w-screen-lg   text-2xl  md:text-3xl  text-center md:text-left ">
           Revenue Share Dashboard
         </h1>

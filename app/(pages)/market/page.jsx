@@ -8,7 +8,7 @@ import { BiBookmark } from "react-icons/bi";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Link from "next/link";
 import axios from "axios";
-import "./Market.css";
+
 const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
@@ -31,26 +31,12 @@ const Market = () => {
   useEffect(() => {
     getUserdata();
   }, []);
-  // useEffect(() => {
-  //   const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-  //   setSavedCoins(savedCoinsFromStorage);
-  // }, []);
 
-  // const saveCoin = async (id) => {
-  //   try {
-  //     const res = await axiosInstanceAuth.post("watchlist", { coinId: id });
-  //     setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-
-  //     // Save updated coins to local storage
-  //     localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
-  //   } catch (err) {
-  //     console.log("err--->", err);
-  //   }
-  // };
 
   useEffect(() => {
-    const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-    setSavedCoins(savedCoinsFromStorage);
+    // const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
+    // setSavedCoins(savedCoinsFromStorage);
+    saveCoin()
   }, []);
 
   const saveCoin = async (id) => {
@@ -60,12 +46,19 @@ const Market = () => {
 
       if (userIsLoggedIn) {
         // Save the coin to the server for the logged-in user
+      
         await axiosInstanceAuth.post("watchlist", { coinId: id });
+
+        // Fetch the updated saved coins data from the server
+        const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
+
+        // Update the state with the updated saved coins from the server
+        setSavedCoins(updatedSavedCoins.data);
       }
 
       // Save the coin locally for both logged-in and logged-out users
-      setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-      localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
+      // setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+      // localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
 
     } catch (err) {
       console.log("err--->", err);
@@ -75,9 +68,9 @@ const Market = () => {
 
   return (
     <>
-      <div className="container bg-[#1C1C1C] rounded-2xl ">
+      <div className=" bg-[#1C1C1C] rounded-2xl   ">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
-        <div className="items-center container">
+        <div className=" sm:pl-10 pl-2 sm:py-9 py-4" >
           <div className="flex pb-3">
             <h1 className="font-bold text-2xl">Liquidity Intents</h1>
             <span className="text-[#828282] text-xl pl-4 pt-1   ">
@@ -106,7 +99,7 @@ const Market = () => {
             </select>
           </div>
           <div className="text-sm pb-4">{/* =${d.price} */} =$42,693.8</div>
-          <div className="text-sm pb-5">
+          <div className="text-sm ">
             {/* {d.pnl} */} Todays PnL -$.550()
           </div>
           {/* </div>
@@ -115,11 +108,11 @@ const Market = () => {
         </div>
 
         {/* Border */}
-        <div className="border-t border-white mt-2 pb-2"></div>
+        <div className="lg:border-t lg:border-white  lg:pb-2 pb-0"></div>
 
-        <div className="container hidden lg:block">
+        <div className=" hidden lg:block ">
           <div className="rounded-lg">
-            <h1 className="font-medium pt-5 text-3xl tracking-wide">Markets</h1>
+            <h1 className="font-medium pt-5 text-3xl tracking-wide pl-10">Markets</h1>
             <div className="flex justify-end  mb-7 ">
           {/* <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
@@ -137,44 +130,44 @@ const Market = () => {
           
           </div> */}
         </div> 
-            <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
                     <th
                       scope="col"
-                      className="px-6 py-3  text-base font-medium text-start "
+                      className=" py-3  text-base font-medium text-start "
                     >
                       Coin
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
                       Amount
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
                       Coin Price
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
                       Today’s PnL
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
+                      className=" py-3 text-center text-base font-medium  whitespace-nowrap"
                     >
                       Trade
                     </th>
                     <th        
 
 scope="col"
-                      className="px-6 py-3 text-end text-base font-medium  whitespace-nowrap"
+                      className=" py-3 text-end text-base font-medium  whitespace-nowrap"
                     >
                       Save
                     </th>
@@ -185,8 +178,10 @@ scope="col"
                   {allCoinData?.length > 0 &&
                     allCoinData?.map((market, index) => (
                       <>
-                        <tr key={index}>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                        <tr key={index} className={`${
+                      savedCoins.includes(market.id) ? 'bg-blue-500' : ''
+                    }`}>
+                          <td className=" py-4 text-center whitespace-nowrap text-md font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
                                 <Image
@@ -200,9 +195,9 @@ scope="col"
                               <div> {market?.name}</div>
                             </div>
                           </td>
-                          <td className="px-6  text-center whitespace-nowrap text-md text-white "></td>
+                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
-                          <td className="px-6 text-center whitespace-nowrap text-md text-white ">
+                          <td className="text-center whitespace-nowrap text-md text-white ">
                             <div className="flex flex-col items-center justify-center ">
                               <div>${market?.current_price} </div>
                               <div className="text-[#FF0000]">
@@ -210,14 +205,14 @@ scope="col"
                               </div>
                             </div>
                           </td>
-                          <td className="px-6  text-center whitespace-nowrap text-md text-white "></td>
-                          <td className="px-6 text-center whitespace-nowrap text-md text-white ">
+                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
+                          <td className=" text-center whitespace-nowrap text-md text-white ">
                             {/* {d.ChangesD} */}
                             <div className="flex justify-center items-center ">
                               <Link href="/">Trade</Link>
                             </div>
                           </td>
-                          <td className="px-6   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
+                          <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
                             {savedCoins.includes(market.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
@@ -253,7 +248,9 @@ scope="col"
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
               <div className="w-full  ">
                 <>
-                  <div className="border-b border-[#494949] flex justify-between">
+                  <div className={`border-b border-[#494949] flex justify-between ${
+                      savedCoins.includes(market?.id) ? 'bg-blue-500' : ''
+                    }`}>
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                       <span>
