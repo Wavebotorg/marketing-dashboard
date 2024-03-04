@@ -126,7 +126,7 @@ const Holder = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
         </p>

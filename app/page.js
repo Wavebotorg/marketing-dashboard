@@ -25,7 +25,7 @@ const Page = () => {
   ];
 
   return (
-    <div className="text-white container  ">
+    <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
       <div className="lg:container lg:mx-auto mx-3  md:flex gap-5 ">
         <div className="flex items-center mb-5 md:mb-0">
           <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />

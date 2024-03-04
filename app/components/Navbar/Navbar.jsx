@@ -43,7 +43,7 @@ const Navbar = () => {
           getPath === "/resetpassword" ||
           getPath === "/sucessreset"
             ? "hidden"
-            : "flex  justify-between  border-b border-stone-500  pb-7 pt-5 pl-10 container"
+            : "flex  justify-between  border-b border-stone-500  pb-7 pt-5 pl-10 "
         }`}
       >
         <div className=" flex w-full gap-2 text-sm text--900 rounded-lg bg-[#1C1C1C]   text-white md:max-w-[700px]">
