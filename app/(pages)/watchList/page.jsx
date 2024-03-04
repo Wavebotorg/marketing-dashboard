@@ -25,6 +25,7 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
+<<<<<<< HEAD
 
 const WatchList = () => {
   
@@ -38,6 +39,24 @@ const WatchList = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
+=======
+
+import { GrFormNext } from "react-icons/gr";
+
+const WatchList = () => {
+  const [watchlist, setWatchlist] = useState("");
+  console.log("🚀 ~ WatchList ~ watchlist:", watchlist);
+
+  // Get All User Show
+  const getWatchlistdata = async () => {
+    axiosInstanceAuth
+      .get("/allWatchlistData")
+      .then((res) => {
+        const myData = res?.data?.data;
+        setWatchlist(res?.data?.data);
+
+        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+>>>>>>> 2154ac24b5b435f900faebd4ef13982d18c88491
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -45,7 +64,7 @@ const WatchList = () => {
   };
 
   useEffect(() => {
-    getUserdata();
+    getWatchlistdata();
   }, []);
   // Get All User Show
   // const getWatchlistdata = async () => {
@@ -94,13 +113,13 @@ const WatchList = () => {
 
   return (
     <>
-      <div className="container hidden lg:block ">
-        <div className="border-b border-stone-500 mt-7" />
-        <div className="flex flex-col md:flex-row items-center justify-between mt-6">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
+        <div className=" mt-7" />
+        <div className="flex  items-center justify-between mt-6">
           <div>
             <div className="text-2xl justify-start">My Watchlist</div>
           </div>
-          <div className="flex flex-col sm:flex-row md:flex-row justify-center md:justify-end mt-4 md:mt-0 gap-3">
+          <div className="flex  justify-center md:justify-end  md:mt-0 gap-3">
             <div>
               <FaPlus size={24} />
             </div>
@@ -118,7 +137,7 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="flex  gap-3 mt-6">
+        <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
           <div>
             <button className="bg-blue-500 px-2 rounded-lg">All</button>
           </div>
@@ -134,8 +153,8 @@ const WatchList = () => {
           <div>
             <button className="  ">Smart Portfolios</button>
           </div>
-          <div className="mt-[7px]">
-            <FaGreaterThan size={13} />
+          <div className="">
+            <GrFormNext size={22} />
           </div>
           <div className="flex items-center  ml-auto  ">
           <div>
@@ -156,7 +175,7 @@ const WatchList = () => {
         </div> 
         </div>
 
-        <div className="pt-10">
+        <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[550px] overflow-auto rounded-lg">
               <table className="w-full  ">

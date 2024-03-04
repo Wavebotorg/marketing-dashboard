@@ -83,13 +83,13 @@ const LeaderBoard = () => {
 
   return (
     <>
-      <div className="xl:flex md:justify-between gap-5 md:container md:mx-auto my-10 xl:space-y-0 space-y-5 container">
+      <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-1 md:mr-7 ml-5 xl:space-y-0 space-y-4">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
           </p>
 
-          <div className="md:container ">
+          <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C]  text-white  overflow-auto rounded-lg ">
                 <table className="w-full">

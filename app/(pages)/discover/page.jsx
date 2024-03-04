@@ -82,10 +82,10 @@ const Discover = () => {
 
   return (
     <>
-      <div className="text-white  xsm:p-2">
+      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-40 ml-3 mr-3">
         <div className="">
           {/* laptop & tablate screen  */}
-          <div className="md:flex hidden justify-center items-center gap-12 mt-7">
+          <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
             {imageNames.map((image, index) => (
               <div key={index} className="space-y-0.5">
                 <Image className="mx-auto" src={image.img} alt={image.name} />
@@ -161,7 +161,7 @@ const Discover = () => {
             </div>
           </div>
         </div> */}
-        <div className="flex justify-between items-center lg:p-5 md:p-2 mt-8 mb-2">
+        <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Explore Crypto
           </div>
@@ -180,21 +180,21 @@ const Discover = () => {
             </div>
           </div>
         </div>
-        <div class="lg:mx-4 md:p-2  grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 md:gap-10 gap-5  ">
+        <div class="lg:mx- md:p-  grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 mt-5">
           {cards.map((card, index) => (
             <div
               key={index}
               class="bg-[#1C1C1C] rounded-xl p-5 flex flex-col items-center"
             >
-              <Image src={card.img} alt={card.name} className="mx-auto" />
-              <div className="text-center space-y-4 mt-10">
-                <h1 className="text-3xl font-semibold text-white">
+              <Image src={card.img} alt={card.name} className="mx-auto  " />
+              <div className="text-center md:space-y-4 space-y-1 md:mt-10 mt-4">
+                <h1 className="md:text-3xl text-xl font-semibold text-white">
                   {card.name}
                 </h1>
-                <h1 className="text-2xl font-semibold text-white">
+                <h1 className="md:text-2xl text-base font-semibold text-white">
                   {card.point}
                 </h1>
-                <h1 className="text-lg font-semibold text-[#BFBFBF]">
+                <h1 className="md:text-lg text-sm font-semibold text-[#BFBFBF]">
                   {card.percentage}
                 </h1>
               </div>
@@ -264,7 +264,7 @@ const Discover = () => {
 
         {/* <div>Hello</div> */}
 
-        <div className="flex justify-between items-center lg:p-5 md:p-2 mt-8 mb-2">
+        <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Daily Movers
             <p className="text-[#7B7B7B] md:text-lg text-sm">
@@ -290,7 +290,7 @@ const Discover = () => {
         </div> 
         </div>
 
-        <div className="lg:mx-4  md:p-2 mb-5">
+        <div className="lg:mx-  md:p- mb-5 mt-2">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg">
               <table className="w-full">

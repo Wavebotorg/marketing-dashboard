@@ -57,12 +57,17 @@ const Portfolio = () => {
   ];
 
   return (
-    <div
-      className="
-    
-     md:container"
-    >
-     
+    <div className="flex flex-col xl:justify-center xl:ml-5 xl:mr-0 lg:mr-4 md:mr-5 md:mx-0 mx-4">
+      {/* <div className="border-b border-stone-500 mt-7" />  */}
+
+      {/* <div className="flex  gap-3 mt-6">
+        <div>
+          <button className="bg-blue-500 px-2 rounded-lg">Orders</button>
+        </div>
+        <div>
+          <button className="  ">Manual Trades</button>
+        </div>
+      </div> */}
       <div className="flex lg:px-6 flex-row  items-center justify-between mt-6">
         <div>
           <div className="text-2xl justify-start items-center">
