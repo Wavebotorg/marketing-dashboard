@@ -94,7 +94,7 @@ const LeaderBoard = () => {
   };
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+  
       <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-1 md:mr-7 ml-5 xl:space-y-0 space-y-4">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
@@ -247,7 +247,7 @@ const LeaderBoard = () => {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 };
 

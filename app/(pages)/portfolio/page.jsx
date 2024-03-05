@@ -70,7 +70,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+  
       <div className="flex flex-col xl:justify-center xl:ml-5 xl:mr-0 lg:mr-4 md:mr-5 md:mx-0 mx-4">
         {/* <div className="border-b border-stone-500 mt-7" />  */}
 
@@ -215,7 +215,7 @@ const Portfolio = () => {
           currentPage={currentPage}
         />
       </div>
-    </div>
+   
   );
 };
 

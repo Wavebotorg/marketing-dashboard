@@ -77,7 +77,7 @@ const Page = () => {
                         </button>
                         </span>
                       </td>
-                      <td
+                      {/* <td
                         data-title="VIP Level"
                         className="flex items-center  xsm:mx-1"
                       >
@@ -88,7 +88,7 @@ const Page = () => {
                             <GrFormNext />
                           </button>
                         </span>
-                      </td>
+                      </td> */}
                       <td data-title="User Type" className=" ">
                         {items?.userType}
                       </td>
