@@ -125,8 +125,8 @@ const Holder = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
         </p>
@@ -153,7 +153,7 @@ const Holder = () => {
         <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <h1 className="  ">Holder Rewards</h1>
         </div>
-        <div className="flex justify-end  ">
+        {/*  <div className="flex justify-end  ">
           <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
             <select
@@ -168,7 +168,7 @@ const Holder = () => {
               <option value="Show 5">Show 5</option>
             </select>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-4 hidden lg:block ">
           <div className="rounded-lg">
@@ -243,12 +243,14 @@ const Holder = () => {
             </div>
           </div>
         </div>
-        <Pagination
-          totalItems={allCoinData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
+        <div className="xsm:hidden md:hidden lg:block">
+          <Pagination
+            totalItems={allCoinData.length}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        </div>
         {allCoinData?.length > 0 &&
           allCoinData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
@@ -293,7 +295,7 @@ const Holder = () => {
             </div>
           ))}
       </div>
-    </>
+    </div>
   );
 };
 

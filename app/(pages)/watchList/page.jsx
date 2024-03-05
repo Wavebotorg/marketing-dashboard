@@ -147,8 +147,8 @@ const WatchList = () => {
     }
   }, []);
   return (
-<>
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
         <div className="flex  items-center justify-between mt-6">
           <div>
@@ -189,7 +189,7 @@ const WatchList = () => {
             <button className="  ">Smart Portfolios</button>
           </div>
           <div className="">{/* <GrFormNext size={22} /> */}</div>
-          <div className="flex items-center  ml-auto  ">
+          {/*  <div className="flex items-center  ml-auto  ">
             <div>
               <label className=" text-sm md:text-lg ">Rows per page </label>
               <select
@@ -204,7 +204,7 @@ const WatchList = () => {
                 <option value="Show 5">Show 5</option>
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="hidden lg:block mt-5 mb-5">
@@ -325,18 +325,18 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-
         <Pagination
-          totalItems={watchlistData.length}
+          totalItems={allCoinData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
+          style={{ display: "block !important" }}
         />
       </div>
 
       {watchlistData?.length > 0 &&
         watchlistData?.map((d, index) => (
-          <div key={index} className="lg:hidden">
+          <div key={index} className="lg:hidden xsm:ml- md:ml-0 m-5">
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md m-5">
               <div className="w-full  ">
                 <div>
@@ -416,7 +416,7 @@ const WatchList = () => {
             </div>
           </div>
         ))}
-    </>
+    </div>
   );
 };
 

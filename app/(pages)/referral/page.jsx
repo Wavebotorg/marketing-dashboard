@@ -116,22 +116,20 @@ const Referral = () => {
     // Add more data as needed
   ]);
 
-//pagination
-const [currentPage, setCurrentPage] = useState(1);
-const itemsPerPage = 5;
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
-const startIndex = (currentPage - 1) * itemsPerPage;
-const endIndex = startIndex + itemsPerPage;
-const visibleData = allCoinData.slice(startIndex, endIndex);
-const handlePageChange = (page) => {
-  setCurrentPage(page);
-};
-
-
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <>
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
         <h1 className="text-[#1788FB]  text-2xl  md:text-3xl   text-center md:text-left font-medium max-w-screen-lg ">
           Referral Rewards
         </h1>
@@ -162,7 +160,7 @@ const handlePageChange = (page) => {
         <div className=" mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <p>Referral Reward History</p>
         </div>
-        <div className="flex justify-end  ">
+        {/*   <div className="flex justify-end  ">
           <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
             <select
@@ -177,7 +175,7 @@ const handlePageChange = (page) => {
               <option value="Show 5">Show 5</option>
             </select>
           </div>
-        </div>
+        </div> */}
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white  h-[650px] overflow-auto rounded-lg">
@@ -232,7 +230,7 @@ const handlePageChange = (page) => {
                 </thead>
 
                 <tbody>
-                {visibleData?.length > 0 &&
+                  {visibleData?.length > 0 &&
                     visibleData?.map((d, index) => (
                       <>
                         <tr key={index}>
@@ -270,17 +268,14 @@ const handlePageChange = (page) => {
             </div>
           </div>
         </div>
-
-
-        <Pagination
-          totalItems={allCoinData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-
-        />
-
-
+        <div className="xsm:hidden md:hidden lg:block">
+          <Pagination
+            totalItems={allCoinData.length}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        </div>
         {allCoinData?.length > 0 &&
           allCoinData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
@@ -334,7 +329,7 @@ const handlePageChange = (page) => {
             </div>
           ))}
       </div>
-  </>
+    </div>
   );
 };
 
