@@ -31,22 +31,22 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
-  const getUserdata = async () => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
-      )
-      .then((res) => {
-        setAllCoinData(res?.data);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
+  // const getUserdata = async () => {
+  //   axios
+  //     .get(
+  //       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+  //     )
+  //     .then((res) => {
+  //       setAllCoinData(res?.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
-  useEffect(() => {
-    getWatchlistdata();
-  }, []);
+  // useEffect(() => {
+  //   getWatchlistdata();
+  // }, []);
   // Get All User Show
   // const getWatchlistdata = async () => {
   //   axiosInstanceAuth
@@ -65,33 +65,76 @@ const WatchList = () => {
   // useEffect(() => {
   //   getWatchlistdata();
   // }, []);
+  // const getWatchlistdata = async () => {
+  //   axiosInstanceAuth
+  //     .get("/allWatchlistData")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setWatchlist(res?.data?.data);
+
+  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+
+  //       // Filter allCoinData based on watchlist IDs
+  //       const filteredData = allCoinData.filter((coin) =>
+  //         watchlist.includes(coin.id)
+  //       );
+
+  //       setWatchlistData(filteredData);
+  //       console.log("watchlistfilter-----------",filteredData)
+
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   getWatchlistdata();
+  // }, [allCoinData]);
+  const getUserdata = async () => {
+    try {
+      const res = await axios.get(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+      );
+      setAllCoinData(res?.data);
+    } catch (err) {
+      console.log("err --->", err);
+    }
+  };
+
   const getWatchlistdata = async () => {
-    axiosInstanceAuth
-      .get("/allWatchlistData")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setWatchlist(res?.data?.data);
+    try {
+      const res = await axiosInstanceAuth.get("/allWatchlistData");
+      const myData = res?.data?.data;
+      setWatchlist(myData);
 
-        console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
+      // Filter allCoinData based on watchlist IDs
+      const filteredData = allCoinData.filter((coin) =>
+        myData.includes(coin.id)
+      );
 
-        // Filter allCoinData based on watchlist IDs
-        const filteredData = allCoinData.filter((coin) =>
-          watchlist.includes(coin.id)
-        );
-
-        setWatchlistData(filteredData);
-        console.log("watchlistfilter-----------",filteredData)
-
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
+      setWatchlistData(filteredData);
+      console.log("watchlistfilter-----------", filteredData);
+    } catch (err) {
+      console.log("err --->", err);
+    }
   };
 
   useEffect(() => {
-    getWatchlistdata();
-  }, [allCoinData]);
+    getUserdata();
+  }, []);
 
+  useEffect(() => {
+    if (allCoinData.length > 0) {
+      getWatchlistdata();
+    }
+  }, [allCoinData]); // Only trigger if allCoinData changes
+
+  useEffect(() => {
+    if (watchlist.length > 0) {
+      getWatchlistdata();
+    }
+  }, []);
   return (
     <>
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">

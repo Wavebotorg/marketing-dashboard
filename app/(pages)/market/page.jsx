@@ -53,7 +53,7 @@ const Market = () => {
         const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
 
         // Update the state with the updated saved coins from the server
-        setSavedCoins(updatedSavedCoins.data);
+        setSavedCoins(updatedSavedCoins.data,id);
       }
 
       // Save the coin locally for both logged-in and logged-out users
