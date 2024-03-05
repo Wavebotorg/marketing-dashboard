@@ -34,20 +34,20 @@ const Page = () => {
           </span>
         </div>
 
-        <div className="lg:container lg:mx-auto md:mx-5 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
-          <table className="responsive-table border1 ">
-            <thead className="text-[#828282] md:text-[#828282]">
-              <tr className="   ">
-                <th scope="col">User Id</th>
-                <th scope="col ">VIP Level</th>
-                <th scope="col" >User Type</th>
-                <th scope="col">Following</th>
-                <th scope="col ">Followers</th>
-              </tr>
-            </thead>
+          <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
+            <table className="responsive-table border1 ">
+              <thead className="text-[#828282] md:text-[#828282]">
+                <tr className="   ">
+                  <th scope="col">User Id</th>
+                  <th scope="col ">VIP Level</th>
+                  <th scope="col">User Type</th>
+                  <th scope="col">Following</th>
+                  <th scope="col ">Followers</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {/* {!userData?.length > 0 ? (
+              <tbody>
+                {/* {!userData?.length > 0 ? (
               <tr>
                 <td data-title="User Id">_</td>
                 <td data-title="VIP Level">_</td>
@@ -75,33 +75,45 @@ const Page = () => {
                         <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
                           <GrFormNext />
                         </button>
-                      </span>
-                    </td>
-                    <td data-title="User Type" className=" ">
-                      {items?.userType}
+                        </span>
+                      </td>
+                      <td
+                        data-title="VIP Level"
+                        className="flex items-center  xsm:mx-1"
+                      >
+                        <span className="md:ml-[2rem]">
+                          {items?.vipLevel}
 
-                    </td>
-                    <td data-title="Following" className=" ">
-                      {items?.following}
-                    </td>
-                    <td data-title="Followers" className=" flex items-center">
-                      {items?.followers}
-                      <button className=" text-xl  text-[#828282] align-middle pb-1.5 ">
-                        <GrFormNext />
-                      </button>{" "}
-                    </td>
-                  </tr>
-                </>
-              ))}
-            </tbody>
-          </table>
+                          <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                            <GrFormNext />
+                          </button>
+                        </span>
+                      </td>
+                      <td data-title="User Type" className=" ">
+                        {items?.userType}
+                      </td>
+                      <td data-title="Following" className=" ">
+                        {items?.following}
+                      </td>
+                      <td data-title="Followers" className=" flex items-center">
+                        {items?.followers}
+                        <button className=" text-xl  text-[#828282] align-middle pb-1.5 ">
+                          <GrFormNext />
+                        </button>{" "}
+                      </td>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="mt-10  rounded-2xl ">
+          <Market />
         </div>
       </div>
-
-      <div className="mt-10  rounded-2xl ">
-        <Market />
-      </div>
-    </div>
+   
   );
 };
 

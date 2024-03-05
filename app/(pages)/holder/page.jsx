@@ -48,63 +48,63 @@ const Holder = () => {
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "277676732673627",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "2757573",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "25353533",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "25353",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "273263",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "4223",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "423",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "3",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "10",
       time: "2:00:66",
       reward: "$55",
       unlock: "566",
@@ -174,7 +174,7 @@ const Holder = () => {
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-[650px]  overflow-auto rounded-lg">
               <table className="w-full  ">
-                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
                   <tr className=" text-[#CECECE]  ">
                     <th
                       scope="col"
@@ -208,48 +208,47 @@ const Holder = () => {
                     </th>
                   </tr>
                 </thead>
-                {visibleData?.map((d, index) => (
-                  <tbody>
-                    {visibleData?.length > 0 &&
-                     visibleData?.map((d, index) => (
-                        <>
-                          <tr key={index}>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
-                              <div> {d?.snapblock}</div>
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {d?.time}
-                            </td>
+                {/* {visibleData?.map((d, index) => ( */}
+                <tbody>
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((d, index) => (
+                      <>
+                        <tr key={index}>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                            <div> {d?.snapblock}</div>
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            {d?.time}
+                          </td>
 
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              <div className="flex items-center justify-center gap-5">
-                                <div>${d?.reward} </div>
-                              </div>
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {d?.unlock}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              <div className="flex justify-center items-center ">
-                                {d?.status}
-                              </div>
-                            </td>
-                          </tr>
-                        </>
-                      ))}
-                  </tbody>
-                ))}
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            <div className="flex items-center justify-center gap-5">
+                              <div>${d?.reward} </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            {d?.unlock}
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                            <div className="flex justify-center items-center ">
+                              {d?.status}
+                            </div>
+                          </td>
+                        </tr>
+                      </>
+                    ))}
+                </tbody>
+                {/* ))} */}
               </table>
-             
             </div>
           </div>
         </div>
         <Pagination
-                totalItems={allCoinData.length}
-                itemsPerPage={itemsPerPage}
-                onPageChange={handlePageChange}
-                currentPage={currentPage}
-              />
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
         {allCoinData?.length > 0 &&
           allCoinData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">

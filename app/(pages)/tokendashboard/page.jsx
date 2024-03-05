@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
+import Pagination from "../Pagination/Pagination";
 
 const TokenDashboard = () => {
   const [allCoinData, setAllCoinData] = useState([
@@ -198,6 +199,18 @@ const TokenDashboard = () => {
     },
     // Add more data as needed
   ]);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
@@ -330,8 +343,8 @@ const TokenDashboard = () => {
                 </thead>
 
                 <tbody>
-                  {allCoinData?.length > 0 &&
-                    allCoinData?.map((market, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -367,6 +380,14 @@ const TokenDashboard = () => {
             </div>
           </div>
         </div>
+
+        <Pagination
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+
         {allCoinData?.length > 0 &&
           allCoinData?.map((market, index) => (
             <div key={index} className="lg:hidden mt-4 ">

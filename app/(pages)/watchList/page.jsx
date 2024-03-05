@@ -25,12 +25,23 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
+import Pagination from "../Pagination/Pagination";
 
 const WatchList = () => {
-  
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = watchlistData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   // const getUserdata = async () => {
   //   axios
   //     .get(
@@ -136,7 +147,7 @@ const WatchList = () => {
     }
   }, []);
   return (
-    <>
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2">
         <div className=" mt-7" />
         <div className="flex  items-center justify-between mt-6">
@@ -177,26 +188,23 @@ const WatchList = () => {
           <div>
             <button className="  ">Smart Portfolios</button>
           </div>
-          <div className="">
-            {/* <GrFormNext size={22} /> */}
-          </div>
+          <div className="">{/* <GrFormNext size={22} /> */}</div>
           <div className="flex items-center  ml-auto  ">
-          <div>
-            <label className=" text-sm md:text-lg ">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          
+            <div>
+              <label className=" text-sm md:text-lg ">Rows per page </label>
+              <select
+                name="select Row"
+                className="bg-blue-500 rounded-lg p-1 !outline-none "
+                defaultValue="Show 5"
+              >
+                <option value="Show 1">Show 1</option>
+                <option value="Show 2">Show 2</option>
+                <option value="Show 3">Show 3</option>
+                <option value="Show 4">Show 4</option>
+                <option value="Show 5">Show 5</option>
+              </select>
+            </div>
           </div>
-        </div> 
         </div>
 
         <div className="hidden lg:block mt-5 mb-5">
@@ -249,8 +257,8 @@ const WatchList = () => {
                 </thead>
 
                 <tbody>
-                  {watchlistData?.length > 0 &&
-                    watchlistData?.map((d, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -317,10 +325,17 @@ const WatchList = () => {
             </div>
           </div>
         </div>
+
+        <Pagination
+          totalItems={watchlistData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
 
       {watchlistData?.length > 0 &&
-      watchlistData?.map((d, index) => (
+        watchlistData?.map((d, index) => (
           <div key={index} className="lg:hidden">
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md m-5">
               <div className="w-full  ">
@@ -401,7 +416,7 @@ const WatchList = () => {
             </div>
           </div>
         ))}
-    </>
+    </div>
   );
 };
 

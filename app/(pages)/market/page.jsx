@@ -9,12 +9,13 @@ import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Link from "next/link";
 import axios from "axios";
 
+import Pagination from "../Pagination/Pagination";
 const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   console.log("save", allCoinData);
-  console.log("savedcoins-----------------",savedCoins)
+  console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
     axios
       .get(
@@ -31,6 +32,22 @@ const Market = () => {
   useEffect(() => {
     getUserdata();
   }, []);
+
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  // useEffect(() => {
+  //   const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
+  //   setSavedCoins(savedCoinsFromStorage);
+  // }, []);
 
 
   useEffect(() => {
@@ -64,7 +81,6 @@ const Market = () => {
       console.log("err--->", err);
     }
   };
-
 
   return (
     <>
@@ -114,7 +130,7 @@ const Market = () => {
           <div className="rounded-lg">
             <h1 className="font-medium pt-5 text-3xl tracking-wide pl-10">Markets</h1>
             <div className="flex justify-end  mb-7 ">
-          {/* <div>
+              {/* <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
             <select
               name="select Row"
@@ -173,10 +189,9 @@ scope="col"
                     </th>
                   </tr>
                 </thead>
-
                 <tbody>
-                  {allCoinData?.length > 0 &&
-                    allCoinData?.map((market, index) => (
+                {visibleData?.length > 0 &&
+                    visibleData?.map((market, index) => (
                       <>
                         <tr key={index} className={`${
                       savedCoins.includes(market.id) ? 'bg-blue-500' : ''
@@ -236,6 +251,12 @@ scope="col"
                 </tbody>
               </table>
             </div>
+            <Pagination
+              totalItems={allCoinData.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>
@@ -312,11 +333,11 @@ scope="col"
                 </>
               </div>
             </div>
-            <div></div>  </div>
-          
+            <div></div>{" "}
+          </div>
         ))}
-    </>
-  );
+   
+ </> );
 };
 
 export default Market;

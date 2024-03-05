@@ -151,7 +151,7 @@ function Sidebar() {
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
     pathname === "/resetpassword" ||
-    pathname === "/sucessreset"
+    pathname === "/sucessreset";
 
   const [userProfile, setUserProfile] = useState([]);
 
@@ -275,7 +275,7 @@ function Sidebar() {
               </ul>
             </div>
 
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  ">
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>
@@ -307,21 +307,21 @@ function Sidebar() {
                         alt="discord"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                       <Image
                         src={Twitter}
                         alt="twitter"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                       <Image
                         src={medium}
                         alt="medium"
                         width="10px"
                         height="10px"
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
                     </div>
                   </div>

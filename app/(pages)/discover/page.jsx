@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import Overview from "../../../public/assets/discover/overview.svg";
 import Stocks from "../../../public/assets/discover/stocks.svg";
@@ -24,6 +24,7 @@ import RedChart from "../../../public/assets/watchlist/redchart.svg";
 import Image from "next/image";
 
 import { Tooltip as ReactTooltip } from "react-tooltip";
+import Pagination from "../Pagination/Pagination";
 
 const Discover = () => {
   const imageNames = [
@@ -80,8 +81,19 @@ const Discover = () => {
     },
   ];
 
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 1;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleData = portfolioData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <>
+    <div className="  2xl:pl-52 xl:pl-60  md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-40 ml-3 mr-3">
         <div className="">
           {/* laptop & tablate screen  */}
@@ -272,22 +284,21 @@ const Discover = () => {
             </p>
           </div>
           <div className="flex items-center  ml-auto  ">
-          <div>
-            <label className=" text-sm md:text-lg ">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          
+            <div>
+              <label className=" text-sm md:text-lg ">Rows per page </label>
+              <select
+                name="select Row"
+                className="bg-blue-500 rounded-lg p-1 !outline-none "
+                defaultValue="Show 5"
+              >
+                <option value="Show 1">Show 1</option>
+                <option value="Show 2">Show 2</option>
+                <option value="Show 3">Show 3</option>
+                <option value="Show 4">Show 4</option>
+                <option value="Show 5">Show 5</option>
+              </select>
+            </div>
           </div>
-        </div> 
         </div>
 
         <div className="lg:mx-  md:p- mb-5 mt-2">
@@ -318,62 +329,73 @@ const Discover = () => {
                 </thead>
                 <tbody>
                   {/* Map over the portfolioData array to generate table rows */}
-                  {portfolioData.map((item, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
-                        <div className="flex items-center  gap-2">
-                          <div>
-                            <Image
-                              src={Bitcoin}
-                              alt="Picture of the author"
-                              className="rounded-full max-w-12"
-                            />
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((item, index) => (
+                      <tr key={index}>
+                        <td className="px-6 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
+                          <div className="flex items-center  gap-2">
+                            <div>
+                              <Image
+                                src={Bitcoin}
+                                alt="Picture of the author"
+                                className="rounded-full max-w-12"
+                              />
+                            </div>
+                            <div>{item.coin}</div>
                           </div>
-                          <div>{item.coin}</div>
-                        </div>
-                      </td>
-                      {/* <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                        </td>
+                        {/* <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
                         <div className="py-0.5 ">{item.price}</div>
                         <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
                       </td> */}
-                      <td className="px-6 py-4  whitespace-nowrap  text-white">
-                        <div className="py-0.5 text-center">{item.price}</div>
-                        <p className="text-sm  text-[#FF0000] text-center">
-                          {item.priceper}
-                        </p>
-                      </td>
+                        <td className="px-6 py-4  whitespace-nowrap  text-white">
+                          <div className="py-0.5 text-center">{item.price}</div>
+                          <p className="text-sm  text-[#FF0000] text-center">
+                            {item.priceper}
+                          </p>
+                        </td>
 
-                      <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
-                        <Image
-                          src={item.chart}
-                          alt="Picture of the author"
-                          className="rounded-full mx-auto"
-                        />
-                      </td>
-                      <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                        {item.marketcap}
-                      </td>
-                      <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
-                        <div className="py-0.5 text-center">{item.volume}</div>
-                        <p className="text-sm  text-[#1AA80D] text-center">
-                          {item.volumper}
-                        </p>
-                      </td>
-                      <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
-                        <div className="py-0.5 text-center">{item.signal}</div>
-                        <p className="text-sm  text-white text-center">
-                          {item.indicator}
-                        </p>
-                      </td>
-                    </tr>
-                  ))}
+                        <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
+                          <Image
+                            src={item.chart}
+                            alt="Picture of the author"
+                            className="rounded-full mx-auto"
+                          />
+                        </td>
+                        <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                          {item.marketcap}
+                        </td>
+                        <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
+                          <div className="py-0.5 text-center">
+                            {item.volume}
+                          </div>
+                          <p className="text-sm  text-[#1AA80D] text-center">
+                            {item.volumper}
+                          </p>
+                        </td>
+                        <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                          <div className="py-0.5 text-center">
+                            {item.signal}
+                          </div>
+                          <p className="text-sm  text-white text-center">
+                            {item.indicator}
+                          </p>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <Pagination
+          totalItems={portfolioData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
