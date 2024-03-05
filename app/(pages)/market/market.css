@@ -1,0 +1,9 @@
+.save-button {
+    background-color: transparent; /* Set your default button background color */
+    border: none;
+    cursor: pointer;
+  }
+  
+  .save-button.selected {
+    background-color: #1788FB; /* Set the background color for the selected state */
+  }

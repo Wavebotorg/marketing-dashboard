@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "react-router-dom";
 import Image from "next/image";
-
+import "./market.css"
 import React, { useEffect, useState } from "react";
 import { LiaEyeSolid } from "react-icons/lia";
 import { BiBookmark } from "react-icons/bi";
@@ -11,6 +11,7 @@ import axios from "axios";
 
 import Pagination from "../Pagination/Pagination";
 const Market = () => {
+ 
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
@@ -37,7 +38,7 @@ const Market = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
+  const startIndex = (currentPage - 1) * itemsPerPage; 
   const endIndex = startIndex + itemsPerPage;
   const visibleData = allCoinData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
@@ -56,35 +57,53 @@ const Market = () => {
     saveCoin()
   }, []);
 
+  // const saveCoin = async (id) => {
+  //   try {
+  //     // Check if the user is logged in (you need to replace this condition with your authentication logic)
+  //     const userIsLoggedIn = true; // Replace with your logic to check if the user is logged in
+
+  //     if (userIsLoggedIn) {
+  //       // Save the coin to the server for the logged-in user
+      
+  //       await axiosInstanceAuth.post("watchlist", { coinId: id });
+
+  //       // Fetch the updated saved coins data from the server
+  //       const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
+
+  //       // Update the state with the updated saved coins from the server
+  //       setSavedCoins(updatedSavedCoins.data);
+  //       console.log("Updated Saved Coins:", updatedSavedCoins.data);
+  //     }
+
+  //     // Save the coin locally for both logged-in and logged-out users
+  //     // setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+  //     // localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
+
+  //   } catch (err) {
+  //     console.log("err--->", err);
+  //   }
+  // };
+
   const saveCoin = async (id) => {
     try {
-      // Check if the user is logged in (you need to replace this condition with your authentication logic)
-      const userIsLoggedIn = true; // Replace with your logic to check if the user is logged in
-
-      if (userIsLoggedIn) {
-        // Save the coin to the server for the logged-in user
-      
+      // Check if the coin is already saved
+      if (savedCoins.includes(id)) {
+        // If saved, remove it from the saved list
+        setSavedCoins((prevSavedCoins) => prevSavedCoins.filter((coinId) => coinId !== id));
+      } else {
+        // If not saved, add it to the saved list
+        setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+  
+        // Save the coin to the server (if needed)
         await axiosInstanceAuth.post("watchlist", { coinId: id });
-
-        // Fetch the updated saved coins data from the server
-        const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
-
-        // Update the state with the updated saved coins from the server
-        setSavedCoins(updatedSavedCoins.data,id);
       }
-
-      // Save the coin locally for both logged-in and logged-out users
-      // setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-      // localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
-
     } catch (err) {
-      console.log("err--->", err);
+      console.log("Error while updating saved coins:", err);
     }
   };
-
   return (
     <>
-      <div className=" bg-[#1C1C1C] rounded-2xl   ">
+      <div className=" bg-[#1C1C1C] rounded-2xl">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4" >
           <div className="flex pb-3">
@@ -193,9 +212,10 @@ scope="col"
                 {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index} className={`${
+                        <tr key={index} >
+                        {/* className={`${
                       savedCoins.includes(market.id) ? 'bg-blue-500' : ''
-                    }`}>
+                    }`}> */}
                           <td className=" py-4 text-center whitespace-nowrap text-md font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
@@ -228,7 +248,7 @@ scope="col"
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedCoins.includes(market.id) ? (
+                            {/* {savedCoins.includes(market.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <BiBookmark
@@ -243,7 +263,13 @@ scope="col"
                               >
                                 <BiBookmark />
                               </button>
-                            )}
+                            )} */}
+     <button
+  className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
+  onClick={() => saveCoin(market?.id)}
+>
+  <BiBookmark />
+</button>
                           </td>
                         </tr>
                       </>

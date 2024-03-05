@@ -140,6 +140,7 @@ const WatchList = () => {
       getWatchlistdata();
     }
   }, [allCoinData]); // Only trigger if allCoinData changes
+  
 
   useEffect(() => {
     if (watchlist.length > 0) {
