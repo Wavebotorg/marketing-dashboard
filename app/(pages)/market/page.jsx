@@ -15,7 +15,9 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  console.log("save", allCoinData);
+  const [savedData, setSavedData] = useState([])
+  console.log(savedData, "<,----------------savedData");
+  console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
     axios
@@ -83,10 +85,30 @@ const Market = () => {
   //     console.log("err--->", err);
   //   }
   // };
+//  const removeCoinWatchlist = async (id) => {
+//     try {
+//       // Make an API request to remove the coin from the watchlist
+//       await axiosInstanceAuth.delete(`watchlist/${id}`);
+      
+//       // Fetch the updated saved coins data from the server
+//       const updatedSavedCoins = await axiosInstanceAuth.get("allWatchlistData");
 
+//       // Update the state with the updated saved coins from the server
+//       setSavedData(updatedSavedCoins.data.data);
+//       console.log("Updated Saved Coins:", updatedSavedCoins.data.data);
+//     } catch (err) {
+//       console.log("Error while updating saved coins:", err);
+//     }
+//   };
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
+      const res = await axiosInstanceAuth.get("/allWatchlistData");
+      console.log("rres----------->>>", res);
+      setSavedData(res?.data?.data)
+
+      
+      
       if (savedCoins.includes(id)) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) => prevSavedCoins.filter((coinId) => coinId !== id));
@@ -201,7 +223,7 @@ const Market = () => {
                     </th>
                     <th        
 
-scope="col"
+                        scope="col"
                       className=" py-3 text-end text-base font-medium  whitespace-nowrap"
                     >
                       Save
@@ -248,7 +270,7 @@ scope="col"
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {/* {savedCoins.includes(market.id) ? (
+                            {savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <BiBookmark
@@ -263,13 +285,13 @@ scope="col"
                               >
                                 <BiBookmark />
                               </button>
-                            )} */}
-     <button
+                            )}
+     {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
 >
   <BiBookmark />
-</button>
+</button> */}
                           </td>
                         </tr>
                       </>

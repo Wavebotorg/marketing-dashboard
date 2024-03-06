@@ -1,9 +1,5 @@
-.save-button {
-    background-color: transparent; /* Set your default button background color */
-    border: none;
-    cursor: pointer;
-  }
-  
-  .save-button.selected {
-    background-color: #1788FB; /* Set the background color for the selected state */
-  }
+.saved-row {
+  background-color: #e6f7ff; /* Light blue background color for saved rows */
+  font-weight: bold; /* Make text bold for saved rows */
+  color: #004080; /* Dark blue text color for saved rows */
+}
