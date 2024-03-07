@@ -52,11 +52,10 @@ const Market = () => {
   //   setSavedCoins(savedCoinsFromStorage);
   // }, []);
 
-
   useEffect(() => {
     // const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
     // setSavedCoins(savedCoinsFromStorage);
-    saveCoin()
+    saveCoin();
   }, []);
 
   // const saveCoin = async (id) => {
@@ -127,7 +126,7 @@ const Market = () => {
     <>
       <div className=" bg-[#1C1C1C] rounded-2xl">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
-        <div className=" sm:pl-10 pl-2 sm:py-9 py-4" >
+        <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
           <div className="flex pb-3">
             <h1 className="font-bold text-2xl">Liquidity Intents</h1>
             <span className="text-[#828282] text-xl pl-4 pt-1   ">
@@ -156,9 +155,7 @@ const Market = () => {
             </select>
           </div>
           <div className="text-sm pb-4">{/* =${d.price} */} =$42,693.8</div>
-          <div className="text-sm ">
-            {/* {d.pnl} */} Todays PnL -$.550()
-          </div>
+          <div className="text-sm ">{/* {d.pnl} */} Todays PnL -$.550()</div>
           {/* </div>
                         </>
                    ))} */}
@@ -169,7 +166,9 @@ const Market = () => {
 
         <div className=" hidden lg:block ">
           <div className="rounded-lg">
-            <h1 className="font-medium pt-5 text-3xl tracking-wide pl-10">Markets</h1>
+            <h1 className="font-medium pt-5 text-3xl tracking-wide pl-10">
+              Markets
+            </h1>
             <div className="flex justify-end  mb-7 ">
               {/* <div>
             <label className=" text-sm md:text-lg">Rows per page </label>
@@ -186,7 +185,7 @@ const Market = () => {
             </select>
           
           </div> */}
-        </div> 
+            </div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -231,7 +230,7 @@ const Market = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {visibleData?.length > 0 &&
+                  {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
                         <tr key={index} >
@@ -270,7 +269,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedData.includes(market?.id) ? (
+                            {/* {savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <BiBookmark
@@ -285,7 +284,7 @@ const Market = () => {
                               >
                                 <BiBookmark />
                               </button>
-                            )}
+                            )} */}
      {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
@@ -304,6 +303,7 @@ const Market = () => {
               itemsPerPage={itemsPerPage}
               onPageChange={handlePageChange}
               currentPage={currentPage}
+
             />
           </div>
         </div>
@@ -317,9 +317,11 @@ const Market = () => {
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
               <div className="w-full  ">
                 <>
-                  <div className={`border-b border-[#494949] flex justify-between ${
-                      savedCoins.includes(market?.id) ? 'bg-blue-500' : ''
-                    }`}>
+                  <div
+                    className={`border-b border-[#494949] flex justify-between ${
+                      savedCoins.includes(market?.id) ? "bg-blue-500" : ""
+                    }`}
+                  >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                       <span>
@@ -384,8 +386,8 @@ const Market = () => {
             <div></div>{" "}
           </div>
         ))}
-   
- </> );
+   </>
+  );
 };
 
 export default Market;

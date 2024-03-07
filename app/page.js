@@ -25,14 +25,15 @@ const Page = () => {
   ];
 
   return (
-    <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ml-4 mr-2 mt-10">
-      <div className="mx-3  md:flex gap-5 ">
-        <div className="flex items-center mb-5 md:mb-0">
-          <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-          <span className="ml-5 mr-5 text-wrap md:text-nowrap">
-            Anonymous-User-810b1
-          </span>
-        </div>
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+        <div className="mx-3  md:flex gap-5 ">
+          <div className="flex items-center mb-5 md:mb-0">
+            <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
+            <span className="ml-5 mr-5 text-wrap md:text-nowrap">
+              Anonymous-User-810b1
+            </span>
+          </div>
 
           <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
             <table className="responsive-table border1 ">
@@ -56,25 +57,25 @@ const Page = () => {
                 <td data-title="Followers">_</td>
               </tr>
             ) : ( */}
-              {userData?.map((items) => (
-                <>
-                  <tr className="md:pl-2">
-                    <td data-title="User Id" className="">
-                      {items?.userId}
-                      <button className="text-xl text-[#828282] align-middle pb-1.5 ">
-                        <PiCopySimple className="" />
-                      </button>
-                    </td>
-                    <td
-                      data-title="VIP Level"
-                      className="flex items-center  xsm:mx-1"
-                    >
-                      <span className="md:ml-[2rem] ">
-                        {items?.vipLevel}
-
-                        <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
-                          <GrFormNext />
+                {userData?.map((items) => (
+                  <>
+                    <tr className="md:pl-2">
+                      <td data-title="User Id" className="">
+                        {items?.userId}
+                        <button className="text-xl text-[#828282] align-middle pb-1.5 ">
+                          <PiCopySimple className="" />
                         </button>
+                      </td>
+                      <td
+                        data-title="VIP Level"
+                        className="flex items-center  xsm:mx-1"
+                      >
+                        <span className="md:ml-[2rem] ">
+                          {items?.vipLevel}
+
+                          <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                            <GrFormNext />
+                          </button>
                         </span>
                       </td>
                       {/* <td
@@ -113,7 +114,7 @@ const Page = () => {
           <Market />
         </div>
       </div>
-   
+    </div>
   );
 };
 

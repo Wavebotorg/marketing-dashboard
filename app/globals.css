@@ -16,7 +16,8 @@ body {
 body {
   color: white;
   background-color: #0b0e10;
-  font-family: 'Work Sans', 'sans-serif' !important; 
+  font-family: 'Work Sans', '' !important; 
+  /* font-size: 19px; */
 }
 
 
@@ -288,8 +289,9 @@ body {
   transition: background-color 0.3s ease;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   ul.pagination {
     display: none;
   }
 }
+ */

@@ -93,8 +93,8 @@ const Discover = () => {
   };
 
   return (
-
-      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-40 ml-3 mr-3">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-8  ml-5 mr- ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
@@ -276,29 +276,27 @@ const Discover = () => {
 
         {/* <div>Hello</div> */}
 
-        <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
-          <div className="md:text-3xl text-xl font-semibold text-nowrap">
+        <div class="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
+          <div class="md:text-3xl text-xl font-semibold">
             Daily Movers
-            <p className="text-[#7B7B7B] md:text-lg text-sm">
+            <p class="text-[#7B7B7B] text-sm md:text-lg">
               Explore the biggest crypto movers on the market.
             </p>
           </div>
-          <div className="flex items-center  ml-auto  ">
-            <div>
-              <label className=" text-sm md:text-lg ">Rows per page </label>
-              <select
-                name="select Row"
-                className="bg-blue-500 rounded-lg p-1 !outline-none "
-                defaultValue="Show 5"
-              >
-                <option value="Show 1">Show 1</option>
-                <option value="Show 2">Show 2</option>
-                <option value="Show 3">Show 3</option>
-                <option value="Show 4">Show 4</option>
-                <option value="Show 5">Show 5</option>
-              </select>
-            </div>
-          </div>
+        {/*   <div class="flex items-center">
+            <label class="text-sm md:text-lg mr-2">Rows per page</label>
+            <select
+              name="select Row"
+              class="bg-blue-500 rounded-lg p-1 outline-none"
+              defaultValue="Show 5"
+            >
+              <option value="Show 1">Show 1</option>
+              <option value="Show 2">Show 2</option>
+              <option value="Show 3">Show 3</option>
+              <option value="Show 4">Show 4</option>
+              <option value="Show 5">Show 5</option>
+            </select>
+          </div> */}
         </div>
 
         <div className="lg:mx-  md:p- mb-5 mt-2">
@@ -395,7 +393,7 @@ const Discover = () => {
           currentPage={currentPage}
         />
       </div>
-  
+    </div>
   );
 };
 

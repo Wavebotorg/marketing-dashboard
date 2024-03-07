@@ -70,7 +70,7 @@ const Portfolio = () => {
   };
 
   return (
-  
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       <div className="flex flex-col xl:justify-center xl:ml-5 xl:mr-0 lg:mr-4 md:mr-5 md:mx-0 mx-4">
         {/* <div className="border-b border-stone-500 mt-7" />  */}
 
@@ -99,7 +99,7 @@ const Portfolio = () => {
           <div>
             <button className="">Manual Trades</button>
           </div>
-          <div className="flex items-center  ml-auto  ">
+          {/* <div className="flex items-center  ml-auto  ">
             <div>
               <label className=" text-sm md:text-lg ">Rows per page </label>
               <select
@@ -114,9 +114,9 @@ const Portfolio = () => {
                 <option value="Show 5">Show 5</option>
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="mt-5 lg:m-6">
+        <div className="mt-5 lg:m-6 ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg">
               <table className="w-full">
@@ -213,9 +213,10 @@ const Portfolio = () => {
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
+          style={{ display: "block !important" }}
         />
       </div>
-   
+    </div>
   );
 };
 
