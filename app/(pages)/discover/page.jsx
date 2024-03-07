@@ -94,7 +94,7 @@ const Discover = () => {
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-8  ml-5 mr- ">
+      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-8  ml-5 mr-5 ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
