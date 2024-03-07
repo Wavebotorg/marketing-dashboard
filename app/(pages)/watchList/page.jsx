@@ -105,7 +105,7 @@ const WatchList = () => {
   const getUserdata = async () => {
     try {
       const res = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&page=1&sparkline=false&locale=en"
       );
       setAllCoinData(res?.data);
     } catch (err) {
