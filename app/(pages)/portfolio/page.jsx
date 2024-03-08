@@ -70,8 +70,8 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-5 xl:mr-0 lg:mr-4 md:mr-5 md:mx-0 mx-4">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
+      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 ">
         {/* <div className="border-b border-stone-500 mt-7" />  */}
 
         {/* <div className="flex  gap-3 mt-6">
@@ -82,15 +82,29 @@ const Portfolio = () => {
           <button className="  ">Manual Trades</button>
         </div>
       </div> */}
-        <div className="flex lg:px-6 flex-row  items-center justify-between mt-6">
+        <div className=" mt-7" />
+        <div className="flex  items-center justify-between mt-6">
+          <div>
+            <div className="text-2xl justify-start">My Portfolio</div>
+          </div>
+        </div>
+        <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
+          <div>
+            <button className="bg-blue-500 px-2 rounded-full">Orders</button>
+          </div>
+          <div>
+            <button className="  ">Manual Trades</button>
+          </div>
+        </div>
+        {/* <div className="flex lg:px-6 flex-row  items-center justify-between mt-6">
           <div>
             <div className="text-2xl justify-start items-center">
               My Portfolio
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex  md:gap-5 gap-2.5 mt-6 lg:px-6 md:text-base text-sm items-center">
+        {/* <div className="flex  md:gap-5 gap-2.5 mt-6 lg:px-6 md:text-base text-sm items-center">
           <div>
             <button className="bg-blue-500 px-3 py-0.5 rounded-full">
               Orders
@@ -99,7 +113,7 @@ const Portfolio = () => {
           <div>
             <button className="">Manual Trades</button>
           </div>
-          {/* <div className="flex items-center  ml-auto  ">
+          <div className="flex items-center  ml-auto  ">
             <div>
               <label className=" text-sm md:text-lg ">Rows per page </label>
               <select
@@ -114,13 +128,13 @@ const Portfolio = () => {
                 <option value="Show 5">Show 5</option>
               </select>
             </div>
-          </div> */}
-        </div>
-        <div className="mt-5 lg:m-6 ">
+          </div>
+        </div> */}
+        <div className="mt-5 mb-5">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg ">
               <table className="w-full">
-                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
                   <tr className="text-[#CECECE]">
                     <th className="px-6 py-3 text-center text-base font-medium  sticky left-0 bg-[#1C1C1C]">
                       Coin
@@ -208,13 +222,13 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-        <Pagination
+        {/* <Pagination
           totalItems={portfolioData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
           style={{ display: "block !important" }}
-        />
+        /> */}
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ const LeaderBoard = () => {
       Points: "224,466,796",
     },
     {
-      Rank: "3",
+      Rank: "5",
       Name: "FewHODL_Twitter",
       Invitedby: "invite_EJRN6",
       Points: "224,466,796",
@@ -182,7 +182,7 @@ const LeaderBoard = () => {
                       <div key={index} className="">
                         <div className="md:p-4 p-3">
                           <div className="flex gap-2">
-                            <div className="">
+                            <div className="w-[2.5rem]">
                               <Image
                                 src={img}
                                 alt="Picture of the author"
