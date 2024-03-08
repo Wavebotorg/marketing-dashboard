@@ -5,7 +5,7 @@ import Pagination from "../Pagination/Pagination";
 
 const TokenDashboard = () => {
   const [allCoinData, setAllCoinData] = useState([
-    {
+/*     {
       time: "23:00",
       amounteth: "-2333",
       minamonut: "$55",
@@ -196,7 +196,7 @@ const TokenDashboard = () => {
       amountsol: "2300",
       status: "true",
       transaction: "567879809",
-    },
+    }, */
     // Add more data as needed
   ]);
 
@@ -299,7 +299,7 @@ const TokenDashboard = () => {
         </div> */}
         <div className="mt-7 hidden lg:block ">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C]  text-white h-[650px]  overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-auto  overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">

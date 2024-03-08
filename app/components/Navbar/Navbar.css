@@ -39,9 +39,5 @@
     background: linear-gradient(to right, #c6037c, #0e86fd, #561fd8);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
-<<<<<<< HEAD
   }
   
-=======
-  }
->>>>>>> 5a2e879f68534d9ccbec979c30caf21cfed2637e

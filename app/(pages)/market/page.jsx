@@ -251,15 +251,16 @@ const Market = () => {
                 </tbody>
               </table>
             </div>
-            <Pagination
-              totalItems={allCoinData.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-
-            />
           </div>
         </div>
+      </div>
+      <div className="xsm:hidden md:hidden lg:block">
+        <Pagination
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
