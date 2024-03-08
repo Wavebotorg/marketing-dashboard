@@ -15,8 +15,8 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  // const [savedData, setSavedData] = useState([])
-  // console.log(savedData, "<,----------------savedData");
+  const [savedData, setSavedData] = useState([])
+  console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
@@ -102,13 +102,13 @@ const Market = () => {
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
-      // const res = await axiosInstanceAuth.get("/allWatchlistData");
-      // console.log("rres----------->>>", res);
-      // setSavedData(res?.data?.data)
+      const res = await axiosInstanceAuth.get("/allWatchlistData");
+      console.log("rres----------->>>", res);
+      setSavedData(res?.data?.data)
 
       
       
-      if (savedCoins.includes(id)) {
+      if (savedData.includes(id)) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) => prevSavedCoins.filter((coinId) => coinId !== id));
       } else {
@@ -269,9 +269,10 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedCoins.includes(market?.id) ? (
+                            {savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
+                                
                                 <BiBookmark
                                   style={{ backgroundColor: "#1788FB" }}
                                 />
@@ -319,9 +320,12 @@ const Market = () => {
               <div className="w-full  ">
                 <>
                   <div
-                    className={`border-b border-[#494949] flex justify-between ${
-                      savedCoins.includes(market?.id) ? "bg-blue-500" : ""
-                    }`}
+                    className={`border-b border-[#494949] flex justify-between
+                    //  {
+                    //   savedCoins.includes(market?.id) ? "bg-blue-500" : ""
+                    // }
+                    `
+                  }
                   >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
@@ -369,7 +373,7 @@ const Market = () => {
 
                     <div className="flex justify-end py-2 px-4">
                       <div className="flex justify-end ml-16">
-                        {savedCoins.includes(market?.id) ? (
+                        {savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
                           <BiBookmark style={{ backgroundColor: "#1788FB" }} />
                         ) : (

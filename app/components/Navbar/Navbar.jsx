@@ -10,14 +10,18 @@ import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
 const Navbar = () => {
   const router = useRouter();
-  const [active, setActive] = useState("");
+  // const [active, setActive] = useState("");
 
-  const getPath = usePathname();
+  // const getPath = usePathname();
+  const getPath = usePathname() || "/default-path";
+  const [active, setActive] = useState(
+    localStorage.getItem("Dashboard") || getPath
+  );
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
   }, [getPath]);
-
+ 
   const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
 
   const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
