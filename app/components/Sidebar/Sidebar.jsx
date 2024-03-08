@@ -17,7 +17,7 @@ import Portfolio from "../../../public/assets/sidebar/portfolio.png";
 import Referral from "../../../public/assets/sidebar/referral.png";
 import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.png";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.png";
-import WatchList from "../../../public/assets/sidebar/watchList.png";
+import WatchList from "../../../public/assets/sidebar/watchlist.png";
 import Discover from "../../../public/assets/sidebar/discover.png";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.png";
 import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png";

@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
-import Market from "./(pages)/Market/page";
 import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
+import Market from "./(pages)/market/page";
+
 
 const Page = () => {
   const userData = [
