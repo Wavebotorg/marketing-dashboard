@@ -15,8 +15,8 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  const [savedData, setSavedData] = useState([])
-  console.log(savedData, "<,----------------savedData");
+  // const [savedData, setSavedData] = useState([])
+  // console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
@@ -102,9 +102,9 @@ const Market = () => {
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
-      const res = await axiosInstanceAuth.get("/allWatchlistData");
-      console.log("rres----------->>>", res);
-      setSavedData(res?.data?.data)
+      // const res = await axiosInstanceAuth.get("/allWatchlistData");
+      // console.log("rres----------->>>", res);
+      // setSavedData(res?.data?.data)
 
       
       
@@ -269,7 +269,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedData.includes(market?.id) ? (
+                            {savedCoins.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <BiBookmark
@@ -298,16 +298,17 @@ const Market = () => {
                 </tbody>
               </table>
             </div>
-            <Pagination
+          
+          </div>
+        </div>
+      </div>
+      <Pagination
               totalItems={allCoinData.length}
               itemsPerPage={itemsPerPage}
               onPageChange={handlePageChange}
               currentPage={currentPage}
 
             />
-          </div>
-        </div>
-      </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
           <div

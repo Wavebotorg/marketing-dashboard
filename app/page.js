@@ -68,7 +68,7 @@ const Page = () => {
                       </td>
                       <td
                         data-title="VIP Level"
-                        className="flex items-center  xsm:mx-1"
+                        className="flex items-center  "
                       >
                         <span className="md:ml-[2rem] ">
                           {items?.vipLevel}

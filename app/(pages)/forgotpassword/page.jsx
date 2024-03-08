@@ -87,11 +87,11 @@ const ForgotPassword = () => {
           </button>
           <ToastContainer />
         </div>
-        <div className="flex justify-center mt-10">
+        {/* <div className="flex justify-center mt-10">
           <Link href="/resetpassword" className="text-xs">
             reset password ?
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

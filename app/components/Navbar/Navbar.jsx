@@ -18,7 +18,7 @@ const Navbar = () => {
     setActive(storedActive || getPath);
   }, [getPath]);
 
-  const token = localStorage.getItem("Token");
+  const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
 
   const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
@@ -27,11 +27,38 @@ const Navbar = () => {
   };
 
   const ConfirmLogOut = () => {
+    
     localStorage.clear();
     router.push("/login");
     setConfirmationPopUp(false);
   };
+  if (typeof window === "undefined") {
+    // Server-side rendering, return a placeholder or null
+    return null;
+  }
+  // const getPath = usePathname();
+  // useEffect(() => {
+  //   const storedActive = localStorage.getItem("Dashboard");
+  //   setActive(storedActive || getPath);
+  // }, [getPath]);
 
+
+  // const token = localStorage.getItem("Token");
+
+
+  // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
+
+
+  // const ClosePopUp = () => {
+  //   setConfirmationPopUp(false);
+  // };
+
+
+  // const ConfirmLogOut = () => {
+  //   localStorage.clear();
+  //   router.push("/login");
+  //   setConfirmationPopUp(false);
+  // };
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -44,7 +71,7 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   pb-7 pt-5 pl-10 "
+              : "flex  justify-between   pb-7 pt-5 pl-10   "
           }`}
         >
           <div className=" flex w-full gap-2 text-sm  rounded-lg bg-[#1C1C1C]   text-white md:max-w-[700px]">
@@ -54,7 +81,7 @@ const Navbar = () => {
             <input
               type="search"
               id="default-search"
-              className="bg-[#1C1C1C]  w-full outline-none "
+              className="bg-[#1C1C1C]  outline-none "
               placeholder="Search "
             />
           </div>
@@ -68,11 +95,11 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-2 rounded-xl "
+                    className="bg-[#1788FB] text-white p-1.5  rounded-xl "
                   >
                     <div className="flex items-center gap-1">
                       <FiPower size={18} />
-                      <span className="md:ml-1 md:text-md text-sm md:block hidden">
+                      <span className="md:ml-1 md:text-base text-base tracking-wide md:block hidden">
                         Logout
                       </span>
                     </div>
