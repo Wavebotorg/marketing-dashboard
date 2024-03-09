@@ -13,16 +13,48 @@ const Navbar = () => {
   // const [active, setActive] = useState("");
 
   // const getPath = usePathname();
+  // const getPath = usePathname() || "/default-path";
+  // const [active, setActive] = useState(
+  //   typeof window !== 'undefined' ? localStorage.getItem("Dashboard") || getPath : getPath
+  // );
+  // useEffect(() => {
+  //   const storedActive = localStorage.getItem("Dashboard");
+  //   setActive(storedActive || getPath);
+  // }, [getPath]);
+ 
+  // const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
+
+  // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
+
+  // const ClosePopUp = () => {
+  //   setConfirmationPopUp(false);
+  // };
+
+  // const ConfirmLogOut = () => {
+    
+  //   localStorage.clear();
+  //   router.push("/login");
+  //   setConfirmationPopUp(false);
+  // };
+  // if (typeof window === "undefined") {
+  //   // Server-side rendering, return a placeholder or null
+  //   return null;
+  // }
+
   const getPath = usePathname() || "/default-path";
-  const [active, setActive] = useState(
-    localStorage.getItem("Dashboard") || getPath
-  );
+  const [active, setActive] = useState(getPath);
+  const [token, setToken] = useState(null);
+
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
+
+    // Check for localStorage on the client side
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem("Token");
+      setToken(storedToken);
+    }
   }, [getPath]);
- 
-  const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
 
   const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
@@ -31,15 +63,11 @@ const Navbar = () => {
   };
 
   const ConfirmLogOut = () => {
-    
     localStorage.clear();
     router.push("/login");
     setConfirmationPopUp(false);
   };
-  if (typeof window === "undefined") {
-    // Server-side rendering, return a placeholder or null
-    return null;
-  }
+
   // const getPath = usePathname();
   // useEffect(() => {
   //   const storedActive = localStorage.getItem("Dashboard");
