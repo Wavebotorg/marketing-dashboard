@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         {/* <Web3AuthSignerProvider> */}
 
-        <div className="flex flex-col sm:flex-row space-y-6 sm:space-y-0 sm:space-x-5 w-full ">
+        <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
           <div className="sidebar visible px-5  ">
             <Sidebar />
           </div>
@@ -38,3 +38,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+

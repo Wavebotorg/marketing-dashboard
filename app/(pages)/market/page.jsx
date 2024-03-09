@@ -269,7 +269,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedData.includes(market?.id) ? (
+                            {/* {savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 
@@ -285,7 +285,7 @@ const Market = () => {
                               >
                                 <BiBookmark />
                               </button>
-                            )}
+                            )} */}
      {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
@@ -372,7 +372,7 @@ const Market = () => {
                     <div className="py-2  pl-4 font-semibold">Save</div>
 
                     <div className="flex justify-end py-2 px-4">
-                      <div className="flex justify-end ml-16">
+                      {/* <div className="flex justify-end ml-16">
                         {savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
                           <BiBookmark style={{ backgroundColor: "#1788FB" }} />
@@ -382,7 +382,7 @@ const Market = () => {
                             <BiBookmark />
                           </button>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </>
