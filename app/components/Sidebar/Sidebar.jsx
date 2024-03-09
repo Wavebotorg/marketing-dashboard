@@ -33,20 +33,30 @@ import axiosInstance from "@/app/apiInstances/axiosInstance";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
-  const router = useRouter();
-  const { encryptData, decryptData } = useEncryption();
+  // const router = useRouter();
+  // const { encryptData, decryptData } = useEncryption();
 
-  const getdata = localStorage.getItem("details");
+  // const getdata = localStorage.getItem("details");
 
-  const data = decryptData(getdata);
-  console.log("🚀 ~ Navbar ~ data:", data);
+  // const data = decryptData(getdata);
+  // console.log("🚀 ~ Navbar ~ data:", data);
 
-  if (data?.code) {
-    toast.success(data.message);
+  // if (data?.code) {
+  //   toast.success(data.message);
+  // }
+
+  // const Token = localStorage.getItem("Token");
+  const getdata =
+    typeof window !== "undefined" ? localStorage.getItem("details") : null;
+
+  if (getdata?.code) {
+    toast.success(getdata.message);
   }
 
+  const Token =
+    typeof window !== "undefined" ? localStorage.getItem("Token") : null;
+
   const [allUser, setAllUser] = useState({});
-  const Token = localStorage.getItem("Token");
   const getUserdata = async () => {
     await axiosInstanceAuth
       .get("getUserProfile")

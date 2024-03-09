@@ -111,14 +111,14 @@ const Discover = () => {
           {/* mobile screen  */}
           <div className="flex justify-center items-center gap-8 md:hidden mt-7 ">
             {imageNames.map((image, index) => (
-              <div className="" data-tooltip-id={`tooltip-${index}`}>
+              <div key={index} className="" data-tooltip-id={`tooltip-${index}`}>
                 <ReactTooltip
                   id={`tooltip-${index}`}
                   place="top"
                   effect=""
                   variant="info"
                 >
-                  <div className="text-sm  ">{image.name}</div>
+                  <div className="text-sm">{image.name}</div>
                 </ReactTooltip>
                 <Image className=" mx-auto" src={image.img} alt={image.name} />
               </div>

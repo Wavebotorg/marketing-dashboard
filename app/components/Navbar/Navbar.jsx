@@ -10,17 +10,20 @@ import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
 const Navbar = () => {
   const router = useRouter();
-  const [active, setActive] = useState("");
+  // const token = localStorage.getItem("Token");
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("Token") : null;
+  const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
-  const getPath = usePathname();
+  const getPath = usePathname() || "/default-path";
+  const [active, setActive] = useState(
+    localStorage.getItem("Dashboard") || getPath
+  );
+
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
   }, [getPath]);
-
-  const token = localStorage.getItem("Token");
-
-  const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
   const ClosePopUp = () => {
     setConfirmationPopUp(false);
@@ -31,6 +34,11 @@ const Navbar = () => {
     router.push("/login");
     setConfirmationPopUp(false);
   };
+
+  if (typeof window === "undefined") {
+    // Server-side rendering, return a placeholder or null
+    return null;
+  }
 
   return (
     <>
@@ -54,7 +62,7 @@ const Navbar = () => {
             <input
               type="search"
               id="default-search"
-              className="bg-[#1C1C1C]  w-full outline-none "
+              className="bg-[#1C1C1C] outline-none "
               placeholder="Search "
             />
           </div>
@@ -68,11 +76,11 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-2 rounded-xl "
+                    className="bg-[#1788FB] text-white p-1.5 rounded-xl "
                   >
                     <div className="flex items-center gap-1">
                       <FiPower size={18} />
-                      <span className="md:ml-1 md:text-md text-sm md:block hidden">
+                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
                         Logout
                       </span>
                     </div>
@@ -135,7 +143,9 @@ const Navbar = () => {
                         alt="loginicon"
                         className="w-[20px] h-[20px] md:block hidden"
                       />
-                      <span className="md:ml-2 md:text-md text-sm md:w-14">Login</span>
+                      <span className="md:ml-2 md:text-md text-sm md:w-14">
+                        Login
+                      </span>
                     </div>
                   </button>
                 </Link>
@@ -144,7 +154,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-   
+
       <div className="border-b border-stone-500 mb-2"></div>
     </>
   );

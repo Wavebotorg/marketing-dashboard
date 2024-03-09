@@ -42,7 +42,7 @@ const Market = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage; 
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const visibleData = allCoinData?.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -124,7 +124,7 @@ const Market = () => {
   };
   return (
     <>
-      <div className=" bg-[#1C1C1C] rounded-2xl">
+      <div className=" bg-[#1C1C1C] rounded-2xl mb-5">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
           <div className="flex pb-3">
