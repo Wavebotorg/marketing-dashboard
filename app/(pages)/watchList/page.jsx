@@ -42,66 +42,7 @@ const WatchList = () => {
     setCurrentPage(page);
   };
 
-  // const getUserdata = async () => {
-  //   axios
-  //     .get(
-  //       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
-  //     )
-  //     .then((res) => {
-  //       setAllCoinData(res?.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
 
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, []);
-  // Get All User Show
-  // const getWatchlistdata = async () => {
-  //   axiosInstanceAuth
-  //     .get("/allWatchlistData")
-  //     .then((res) => {
-  //       const myData = res?.data?.data;
-  //       setWatchlist(res?.data?.data);
-
-  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, []);
-  // const getWatchlistdata = async () => {
-  //   axiosInstanceAuth
-  //     .get("/allWatchlistData")
-  //     .then((res) => {
-  //       const myData = res?.data?.data;
-  //       setWatchlist(res?.data?.data);
-
-  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
-
-  //       // Filter allCoinData based on watchlist IDs
-  //       const filteredData = allCoinData.filter((coin) =>
-  //         watchlist.includes(coin.id)
-  //       );
-
-  //       setWatchlistData(filteredData);
-  //       console.log("watchlistfilter-----------",filteredData)
-
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, [allCoinData]);
   const getUserdata = async () => {
     try {
       const res = await axios.get(

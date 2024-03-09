@@ -16,6 +16,8 @@ const Market = () => {
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([])
+  
+  const [token, setToken] = useState(null);
   console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
@@ -99,6 +101,12 @@ const Market = () => {
 //       console.log("Error while updating saved coins:", err);
 //     }
 //   };
+useEffect(() => {
+  // Check if the user is logged in when the component mounts
+  const storedToken = localStorage.getItem("Token");
+  setToken(storedToken);
+}, []);
+
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
@@ -108,15 +116,17 @@ const Market = () => {
 
       
       
-      if (savedData.includes(id)) {
+      if (savedData && savedData.includes(id)) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) => prevSavedCoins.filter((coinId) => coinId !== id));
       } else {
         // If not saved, add it to the saved list
         setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  
+        if (token) {
+          await axiosInstanceAuth.post("watchlist", { coinId: id });
+        }
         // Save the coin to the server (if needed)
-        await axiosInstanceAuth.post("watchlist", { coinId: id });
+       
       }
     } catch (err) {
       console.log("Error while updating saved coins:", err);
@@ -124,6 +134,7 @@ const Market = () => {
   };
   return (
     <>
+    
       <div className=" bg-[#1C1C1C] rounded-2xl">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
@@ -220,6 +231,7 @@ const Market = () => {
                     >
                       Trade
                     </th>
+                    {token && (
                     <th        
 
                         scope="col"
@@ -227,6 +239,7 @@ const Market = () => {
                     >
                       Save
                     </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -269,7 +282,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {/* {savedData.includes(market?.id) ? (
+                          {token ? ( savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 
@@ -285,7 +298,7 @@ const Market = () => {
                               >
                                 <BiBookmark />
                               </button>
-                            )} */}
+                            )   ) : null}
      {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
@@ -302,7 +315,9 @@ const Market = () => {
           
           </div>
         </div>
+        
       </div>
+    
       <Pagination
               totalItems={allCoinData.length}
               itemsPerPage={itemsPerPage}
@@ -320,11 +335,7 @@ const Market = () => {
               <div className="w-full  ">
                 <>
                   <div
-                    className={`border-b border-[#494949] flex justify-between
-                    //  {
-                    //   savedCoins.includes(market?.id) ? "bg-blue-500" : ""
-                    // }
-                    `
+                    className={`border-b border-[#494949] flex justify-between`
                   }
                   >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
@@ -358,7 +369,7 @@ const Market = () => {
                     <div className="py-2  pl-4 font-semibold">Today’s PnL</div>
                     <div className="flex justify-end items-center py-2 px-4 "></div>
                   </div>
-                  <div className="border-b border-[#494949] flex justify-between">
+                  <div className=" flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Trade</div>
                     <div className="flex justify-end items-center py-2 px-4  gap-1.5">
                       <Link href="/">Trade</Link>
@@ -368,12 +379,17 @@ const Market = () => {
                         </span> */}
                     </div>
                   </div>
-                  <div className="flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Save</div>
-
+                  {token && ( <div className="flex justify-between border-t border-[#494949]">
+                    <div className="py-2  pl-4 font-semibold">
+                    Save  
+               
+                    </div>
+                  
+                
+                  
                     <div className="flex justify-end py-2 px-4">
-                      {/* <div className="flex justify-end ml-16">
-                        {savedData.includes(market?.id) ? (
+                      <div className="flex items-center ml-16">
+                        {savedData && savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
                           <BiBookmark style={{ backgroundColor: "#1788FB" }} />
                         ) : (
@@ -382,15 +398,18 @@ const Market = () => {
                             <BiBookmark />
                           </button>
                         )}
-                      </div> */}
+                      </div>
                     </div>
+                  
                   </div>
+                    )}
                 </>
               </div>
             </div>
             <div></div>{" "}
           </div>
         ))}
+    
    </>
   );
 };
