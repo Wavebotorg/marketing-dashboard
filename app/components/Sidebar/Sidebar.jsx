@@ -215,7 +215,7 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full  z-[9999] ${
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] ${
         matchPath ? "hidden" : "block"
       } `}
     >

@@ -106,7 +106,7 @@ const Navbar = () => {
               : "flex  justify-between   pb-7 pt-5 pl-10   "
           }`}
         >
-          <div className=" flex w-full gap-2 text-sm  rounded-lg bg-[#1C1C1C]   text-white md:max-w-[700px]">
+          <div className=" flex w-full gap-2 text-sm xsm:mr-5 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
             <div className=" flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
@@ -194,7 +194,9 @@ const Navbar = () => {
                         alt="loginicon"
                         className="w-[20px] h-[20px] md:block hidden"
                       />
-                      <span className="md:ml-2 md:text-md text-sm md:w-14">Login</span>
+                      <span className="md:ml-2 md:text-md text-sm md:w-14">
+                        Login
+                      </span>
                     </div>
                   </button>
                 </Link>
@@ -203,7 +205,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-   
+
       <div className="border-b border-stone-500 mb-2"></div>
     </>
   );

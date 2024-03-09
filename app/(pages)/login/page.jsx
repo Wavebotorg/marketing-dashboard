@@ -48,7 +48,7 @@ const Login = () => {
           toast.success(myData?.msg);
           setTimeout(() => {
             router.push("/");
-          }, 3000);
+          }, 1000);
         } else {
           toast.error(myData?.msg);
         }

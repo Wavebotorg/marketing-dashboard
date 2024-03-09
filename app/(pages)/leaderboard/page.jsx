@@ -182,13 +182,14 @@ const LeaderBoard = () => {
                       <div key={index} className="">
                         <div className="md:p-4 p-3">
                           <div className="flex gap-2">
-                            <div className="w-[2.5rem]">
+                            <div className="w-[2.5rem] sm:[1.5rem]">
                               <Image
                                 src={img}
                                 alt="Picture of the author"
-                                className="rounded-full md:w-10 w-9"
+                                className="rounded-full"
                               />
                             </div>
+
                             <div className="lg:text-base text-sm">
                               <div className="flex gap-2">
                                 <p>{d.name}</p>
