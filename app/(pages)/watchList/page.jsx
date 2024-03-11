@@ -71,7 +71,24 @@ const WatchList = () => {
       console.log("err --->", err);
     }
   };
+  const removeCoinFromWatchlist = async (id) => {
+    try {
+      // Make an API call to remove the coin from the watchlist
+      await axiosInstanceAuth.delete("removeCoinWatchlist",{ coinId: id });
+      
+      // Update the local state to reflect the changes
+      const updatedWatchlist = watchlist.filter((coinId) => coinId !== id);
+      setWatchlist(updatedWatchlist);
 
+      // Filter the watchlistData based on the updated watchlist
+      const updatedWatchlistData = allCoinData.filter((coin) =>
+        updatedWatchlist.includes(coin.id)
+      );
+      setWatchlistData(updatedWatchlistData);
+    } catch (err) {
+      console.log("Error removing coin from watchlist:", err);
+    }
+  };
   useEffect(() => {
     getUserdata();
   }, []);
@@ -87,7 +104,7 @@ const WatchList = () => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
-  }, []);
+  },  []);
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
@@ -197,6 +214,10 @@ const WatchList = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     ></th>
+                    <th  scope="col"
+                      className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap">
+Delete
+                    </th>
                   </tr>
                 </thead>
 
@@ -254,12 +275,20 @@ const WatchList = () => {
                               />
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-end justify-end flex whitespace-nowrap text-md text-white ">
+                          <td className="px-6 py-4 whitespace-nowrap text-md text-white ">
                             <Image
                               src={d.chart}
                               alt="Picture of the author"
                               className="rounded-full"
                             />
+                          </td>
+                          <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
+                          <button
+                          onClick={() => removeCoinFromWatchlist(d.id)}
+                          className="text-red-500"
+                        >
+                          Remove
+                        </button>
                           </td>
                         </tr>
                       </>

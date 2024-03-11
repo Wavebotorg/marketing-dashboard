@@ -28,7 +28,9 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
+        console.log("🚀 ~ .then ~  setAllCoinData:",  res?.data)
       })
+       
       .catch((err) => {
         console.log("err --->", err);
       });
@@ -60,47 +62,7 @@ const Market = () => {
     saveCoin();
   }, []);
 
-  // const saveCoin = async (id) => {
-  //   try {
-  //     // Check if the user is logged in (you need to replace this condition with your authentication logic)
-  //     const userIsLoggedIn = true; // Replace with your logic to check if the user is logged in
 
-  //     if (userIsLoggedIn) {
-  //       // Save the coin to the server for the logged-in user
-      
-  //       await axiosInstanceAuth.post("watchlist", { coinId: id });
-
-  //       // Fetch the updated saved coins data from the server
-  //       const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
-
-  //       // Update the state with the updated saved coins from the server
-  //       setSavedCoins(updatedSavedCoins.data);
-  //       console.log("Updated Saved Coins:", updatedSavedCoins.data);
-  //     }
-
-  //     // Save the coin locally for both logged-in and logged-out users
-  //     // setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  //     // localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
-
-  //   } catch (err) {
-  //     console.log("err--->", err);
-  //   }
-  // };
-//  const removeCoinWatchlist = async (id) => {
-//     try {
-//       // Make an API request to remove the coin from the watchlist
-//       await axiosInstanceAuth.delete(`watchlist/${id}`);
-      
-//       // Fetch the updated saved coins data from the server
-//       const updatedSavedCoins = await axiosInstanceAuth.get("allWatchlistData");
-
-//       // Update the state with the updated saved coins from the server
-//       setSavedData(updatedSavedCoins.data.data);
-//       console.log("Updated Saved Coins:", updatedSavedCoins.data.data);
-//     } catch (err) {
-//       console.log("Error while updating saved coins:", err);
-//     }
-//   };
 useEffect(() => {
   // Check if the user is logged in when the component mounts
   const storedToken = localStorage.getItem("Token");
@@ -111,9 +73,9 @@ useEffect(() => {
     try {
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
-      console.log("rres----------->>>", res);
+      
       setSavedData(res?.data?.data)
-
+      console.log("rres----------->>>", res);
       
       
       if (savedData && savedData.includes(id)) {
@@ -284,10 +246,10 @@ useEffect(() => {
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
                           {token ? ( savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
-                              <button className="">
+                              <button className=""  >
                                 
                                 <BiBookmark
-                                  style={{ backgroundColor: "#1788FB" }}
+                                  style={{ backgroundColor: "#1788FB" }} 
                                 />
                               </button>
                             ) : (
@@ -317,7 +279,7 @@ useEffect(() => {
         </div>
         
       </div>
-    
+      <div className="xsm:hidden md:hidden lg:block">
       <Pagination
               totalItems={allCoinData.length}
               itemsPerPage={itemsPerPage}
@@ -325,6 +287,7 @@ useEffect(() => {
               currentPage={currentPage}
 
             />
+            </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
           <div

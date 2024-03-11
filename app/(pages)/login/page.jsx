@@ -59,6 +59,7 @@ const Login = () => {
       });
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible)
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
