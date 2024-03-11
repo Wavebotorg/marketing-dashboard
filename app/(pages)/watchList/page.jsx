@@ -151,46 +151,47 @@ const WatchList = () => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
-        <div className="flex  items-center justify-between mt-6">
-          <div>
-            <div className="text-2xl justify-start">My Watchlist</div>
-          </div>
-          <div className="flex  justify-center md:justify-end  md:mt-0 gap-3">
+        <div className="p-2">
+          <div className="flex  items-center justify-between mt-6">
             <div>
-              <FaPlus size={24} />
+              <div className="text-2xl justify-start">My Watchlist</div>
+            </div>
+            <div className="flex  justify-center md:justify-end  md:mt-0 gap-3">
+              <div>
+                <FaPlus size={24} />
+              </div>
+              <div>
+                <HiOutlineAdjustmentsHorizontal
+                  size={24}
+                  className="text-blue-500"
+                />
+              </div>
+              <div>
+                <RiGridFill size={24} />
+              </div>
+              <div>
+                <BsThreeDotsVertical size={24} />
+              </div>
+            </div>
+          </div>
+          <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
+            <div>
+              <button className="bg-blue-500 px-2 rounded-full">All</button>
             </div>
             <div>
-              <HiOutlineAdjustmentsHorizontal
-                size={24}
-                className="text-blue-500"
-              />
+              <button className="  ">Crypto</button>
             </div>
             <div>
-              <RiGridFill size={24} />
+              <button className="  ">Stocks</button>
             </div>
             <div>
-              <BsThreeDotsVertical size={24} />
+              <button className="  ">People</button>
             </div>
-          </div>
-        </div>
-        <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
-          <div>
-            <button className="bg-blue-500 px-2 rounded-lg">All</button>
-          </div>
-          <div>
-            <button className="  ">Crypto</button>
-          </div>
-          <div>
-            <button className="  ">Stocks</button>
-          </div>
-          <div>
-            <button className="  ">People</button>
-          </div>
-          <div>
-            <button className="  ">Smart Portfolios</button>
-          </div>
-          <div className="">{/* <GrFormNext size={22} /> */}</div>
-          {/*  <div className="flex items-center  ml-auto  ">
+            <div>
+              <button className="  ">Smart Portfolios</button>
+            </div>
+            <div className="">{/* <GrFormNext size={22} /> */}</div>
+            {/*  <div className="flex items-center  ml-auto  ">
             <div>
               <label className=" text-sm md:text-lg ">Rows per page </label>
               <select
@@ -206,11 +207,12 @@ const WatchList = () => {
               </select>
             </div>
           </div> */}
+          </div>
         </div>
 
         <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C]  text-white h-[550px] overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -326,13 +328,15 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <Pagination
-          totalItems={allCoinData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-          style={{ display: "block !important" }}
-        />
+        <div className="xsm:hidden md:hidden lg:block">
+          <Pagination
+            totalItems={allCoinData.length}
+            itemsPerPage={itemsPerPage}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+            style={{ display: "block !important" }}
+          />
+        </div>
       </div>
 
       {watchlistData?.length > 0 &&

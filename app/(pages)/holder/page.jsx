@@ -172,7 +172,7 @@ const Holder = () => {
 
         <div className="mt-4 hidden lg:block ">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C]  text-white h-[650px]  overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C]  text-white h-auto  overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
                   <tr className=" text-[#CECECE]  ">

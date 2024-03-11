@@ -93,8 +93,8 @@ const Discover = () => {
   };
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-3 md:mr-8  ml-5 mr- ">
+    <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">
+      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
@@ -111,7 +111,7 @@ const Discover = () => {
           {/* mobile screen  */}
           <div className="flex justify-center items-center gap-8 md:hidden mt-7 ">
             {imageNames.map((image, index) => (
-              <div key={index} className="" data-tooltip-id={`tooltip-${index}`}>
+              <div className="" key={index} data-tooltip-id={`tooltip-${index}`}>
                 <ReactTooltip
                   id={`tooltip-${index}`}
                   place="top"
@@ -283,7 +283,7 @@ const Discover = () => {
               Explore the biggest crypto movers on the market.
             </p>
           </div>
-        {/*   <div class="flex items-center">
+          {/*   <div class="flex items-center">
             <label class="text-sm md:text-lg mr-2">Rows per page</label>
             <select
               name="select Row"
@@ -330,7 +330,7 @@ const Discover = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((item, index) => (
                       <tr key={index}>
-                        <td className="px-6 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
+                        <td className="px-3 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
                           <div className="flex items-center  gap-2">
                             <div>
                               <Image
@@ -342,28 +342,28 @@ const Discover = () => {
                             <div>{item.coin}</div>
                           </div>
                         </td>
-                        {/* <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                        {/* <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                         <div className="py-0.5 ">{item.price}</div>
                         <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
                       </td> */}
-                        <td className="px-6 py-4  whitespace-nowrap  text-white">
+                        <td className="px-3 py-4  whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">{item.price}</div>
                           <p className="text-sm  text-[#FF0000] text-center">
                             {item.priceper}
                           </p>
                         </td>
 
-                        <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
+                        <td className=" px-3 py-4 text-center whitespace-nowrap  text-white">
                           <Image
                             src={item.chart}
                             alt="Picture of the author"
                             className="rounded-full mx-auto"
                           />
                         </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                        <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                           {item.marketcap}
                         </td>
-                        <td className=" px-6 py-4 text-center whitespace-nowrap  text-white">
+                        <td className=" px-3 py-4 text-center whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
                             {item.volume}
                           </div>
@@ -371,7 +371,7 @@ const Discover = () => {
                             {item.volumper}
                           </p>
                         </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap  text-white">
+                        <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
                             {item.signal}
                           </div>

@@ -17,7 +17,7 @@ import Portfolio from "../../../public/assets/sidebar/portfolio.png";
 import Referral from "../../../public/assets/sidebar/referral.png";
 import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.png";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.png";
-import WatchList from "../../../public/assets/sidebar/watchList.png";
+import WatchList from "../../../public/assets/sidebar/watchlist.png";
 import Discover from "../../../public/assets/sidebar/discover.png";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.png";
 import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png";
@@ -33,9 +33,9 @@ import axiosInstance from "@/app/apiInstances/axiosInstance";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 // import toast, { Toaster } from "react-hot-toast";
 function Sidebar() {
-  // const router = useRouter();
+  const router = useRouter();
   // const { encryptData, decryptData } = useEncryption();
-
+  // const [data, setData] = useState(null);
   // const getdata = localStorage.getItem("details");
 
   // const data = decryptData(getdata);
@@ -44,19 +44,53 @@ function Sidebar() {
   // if (data?.code) {
   //   toast.success(data.message);
   // }
+  // const getdata = localStorage.getItem("details");
+  // // const data = decryptData(getdata);
+
+  // // console.log("🚀 ~ Navbar ~ data:", data);
+  // if (getdata?.code) {
+
+  //   toast.success(getdata.message);
+
+  // }
+  const [allUser, setAllUser] = useState({});
 
   // const Token = localStorage.getItem("Token");
-  const getdata =
-    typeof window !== "undefined" ? localStorage.getItem("details") : null;
+
+
+  //  useEffect(() => {
+  //   // Check if localStorage is available
+  //   const getdata = typeof window !== 'undefined' ? localStorage.getItem("details") : null;
+
+  //   // Continue with the code only if localStorage is available
+  //   if (getdata) {
+  //     const decryptedData = decryptData(getdata);
+  //     console.log("🚀 ~ Navbar ~ data:", decryptedData);
+
+  //     if (decryptedData?.code) {
+  //       // Assuming toast is imported from the correct library
+  //       toast.success(decryptedData.message);
+  //     }
+
+  //     // Set the data state for use in the component
+  //     setData(decryptedData);
+  //   }
+  // }, []);
+
+  // const [allUser, setAllUser] = useState({});
+  // const Token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
+
+  const getdata = typeof window !== 'undefined' ? localStorage.getItem("details") : null;
+
+  // ... (other code)
 
   if (getdata?.code) {
     toast.success(getdata.message);
   }
 
-  const Token =
-    typeof window !== "undefined" ? localStorage.getItem("Token") : null;
+  // ... (other code)
 
-  const [allUser, setAllUser] = useState({});
+  const Token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
   const getUserdata = async () => {
     await axiosInstanceAuth
       .get("getUserProfile")
@@ -181,7 +215,7 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full  z-[9999] ${
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] ${
         matchPath ? "hidden" : "block"
       } `}
     >

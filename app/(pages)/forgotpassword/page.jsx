@@ -54,6 +54,13 @@ const ForgotPassword = () => {
       });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -78,6 +85,7 @@ const ForgotPassword = () => {
             name="email"
             value={forgetData?.email}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
         </div>
 
@@ -87,11 +95,11 @@ const ForgotPassword = () => {
           </button>
           <ToastContainer />
         </div>
-        <div className="flex justify-center mt-10">
+        {/* <div className="flex justify-center mt-10">
           <Link href="/resetpassword" className="text-xs">
             reset password ?
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

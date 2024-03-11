@@ -48,7 +48,7 @@ const Login = () => {
           toast.success(myData?.msg);
           setTimeout(() => {
             router.push("/");
-          }, 3000);
+          }, 1000);
         } else {
           toast.error(myData?.msg);
         }
@@ -62,6 +62,13 @@ const Login = () => {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -73,7 +80,7 @@ const Login = () => {
       </div>
 
       <div className="px-4 sm:px-5 md:px-5 2xl:px-10 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-        <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
+        <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl  tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Login
         </h2>
         <div>
@@ -84,6 +91,7 @@ const Login = () => {
             name="email"
             value={loginFields?.email}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="relative">
@@ -94,6 +102,7 @@ const Login = () => {
             name="password"
             value={loginFields?.password}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
           <button
             className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer"

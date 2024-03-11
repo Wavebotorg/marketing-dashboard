@@ -10,20 +10,53 @@ import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
 const Navbar = () => {
   const router = useRouter();
-  // const token = localStorage.getItem("Token");
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
+  // const [active, setActive] = useState("");
+
+  // const getPath = usePathname();
+  // const getPath = usePathname() || "/default-path";
+  // const [active, setActive] = useState(
+  //   typeof window !== 'undefined' ? localStorage.getItem("Dashboard") || getPath : getPath
+  // );
+  // useEffect(() => {
+  //   const storedActive = localStorage.getItem("Dashboard");
+  //   setActive(storedActive || getPath);
+  // }, [getPath]);
+ 
+  // const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
+
+  // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
+
+  // const ClosePopUp = () => {
+  //   setConfirmationPopUp(false);
+  // };
+
+  // const ConfirmLogOut = () => {
+    
+  //   localStorage.clear();
+  //   router.push("/login");
+  //   setConfirmationPopUp(false);
+  // };
+  // if (typeof window === "undefined") {
+  //   // Server-side rendering, return a placeholder or null
+  //   return null;
+  // }
 
   const getPath = usePathname() || "/default-path";
-  const [active, setActive] = useState(
-    localStorage.getItem("Dashboard") || getPath
-  );
+  const [active, setActive] = useState(getPath);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const storedActive = localStorage.getItem("Dashboard");
     setActive(storedActive || getPath);
+
+    // Check for localStorage on the client side
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem("Token");
+      setToken(storedToken);
+    }
   }, [getPath]);
+
+  const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
   const ClosePopUp = () => {
     setConfirmationPopUp(false);
@@ -35,11 +68,29 @@ const Navbar = () => {
     setConfirmationPopUp(false);
   };
 
-  if (typeof window === "undefined") {
-    // Server-side rendering, return a placeholder or null
-    return null;
-  }
+  // const getPath = usePathname();
+  // useEffect(() => {
+  //   const storedActive = localStorage.getItem("Dashboard");
+  //   setActive(storedActive || getPath);
+  // }, [getPath]);
 
+
+  // const token = localStorage.getItem("Token");
+
+
+  // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
+
+
+  // const ClosePopUp = () => {
+  //   setConfirmationPopUp(false);
+  // };
+
+
+  // const ConfirmLogOut = () => {
+  //   localStorage.clear();
+  //   router.push("/login");
+  //   setConfirmationPopUp(false);
+  // };
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -52,17 +103,17 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   pb-7 pt-5 pl-10 "
+              : "flex  justify-between   pb-7 pt-5 pl-10   "
           }`}
         >
-          <div className=" flex w-full gap-2 text-sm  rounded-lg bg-[#1C1C1C]   text-white md:max-w-[700px]">
+          <div className=" flex w-full gap-2 text-sm xsm:mr-5 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
             <div className=" flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
               type="search"
               id="default-search"
-              className="bg-[#1C1C1C] outline-none "
+              className="bg-[#1C1C1C]  outline-none "
               placeholder="Search "
             />
           </div>
@@ -76,11 +127,11 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-1.5 rounded-xl "
+                    className="bg-[#1788FB] text-white p-1.5  rounded-xl "
                   >
                     <div className="flex items-center gap-1">
                       <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
+                      <span className="md:ml-1 md:text-base text-base tracking-wide md:block hidden">
                         Logout
                       </span>
                     </div>

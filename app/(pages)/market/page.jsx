@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "react-router-dom";
 import Image from "next/image";
-import "./market.css"
+import "./market.css";
 import React, { useEffect, useState } from "react";
 import { LiaEyeSolid } from "react-icons/lia";
 import { BiBookmark } from "react-icons/bi";
@@ -11,11 +11,10 @@ import axios from "axios";
 
 import Pagination from "../Pagination/Pagination";
 const Market = () => {
- 
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  const [savedData, setSavedData] = useState([])
+  const [savedData, setSavedData] = useState([]);
   console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
@@ -40,7 +39,7 @@ const Market = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const startIndex = (currentPage - 1) * itemsPerPage; 
+  const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const visibleData = allCoinData?.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
@@ -65,7 +64,7 @@ const Market = () => {
 
   //     if (userIsLoggedIn) {
   //       // Save the coin to the server for the logged-in user
-      
+
   //       await axiosInstanceAuth.post("watchlist", { coinId: id });
 
   //       // Fetch the updated saved coins data from the server
@@ -84,37 +83,37 @@ const Market = () => {
   //     console.log("err--->", err);
   //   }
   // };
-//  const removeCoinWatchlist = async (id) => {
-//     try {
-//       // Make an API request to remove the coin from the watchlist
-//       await axiosInstanceAuth.delete(`watchlist/${id}`);
-      
-//       // Fetch the updated saved coins data from the server
-//       const updatedSavedCoins = await axiosInstanceAuth.get("allWatchlistData");
+  //  const removeCoinWatchlist = async (id) => {
+  //     try {
+  //       // Make an API request to remove the coin from the watchlist
+  //       await axiosInstanceAuth.delete(`watchlist/${id}`);
 
-//       // Update the state with the updated saved coins from the server
-//       setSavedData(updatedSavedCoins.data.data);
-//       console.log("Updated Saved Coins:", updatedSavedCoins.data.data);
-//     } catch (err) {
-//       console.log("Error while updating saved coins:", err);
-//     }
-//   };
+  //       // Fetch the updated saved coins data from the server
+  //       const updatedSavedCoins = await axiosInstanceAuth.get("allWatchlistData");
+
+  //       // Update the state with the updated saved coins from the server
+  //       setSavedData(updatedSavedCoins.data.data);
+  //       console.log("Updated Saved Coins:", updatedSavedCoins.data.data);
+  //     } catch (err) {
+  //       console.log("Error while updating saved coins:", err);
+  //     }
+  //   };
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       console.log("rres----------->>>", res);
-      setSavedData(res?.data?.data)
+      setSavedData(res?.data?.data);
 
-      
-      
-      if (savedCoins.includes(id)) {
+      if (savedData && savedData.includes(id)) {
         // If saved, remove it from the saved list
-        setSavedCoins((prevSavedCoins) => prevSavedCoins.filter((coinId) => coinId !== id));
+        setSavedCoins((prevSavedCoins) =>
+          prevSavedCoins.filter((coinId) => coinId !== id)
+        );
       } else {
         // If not saved, add it to the saved list
         setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  
+
         // Save the coin to the server (if needed)
         await axiosInstanceAuth.post("watchlist", { coinId: id });
       }
@@ -220,9 +219,8 @@ const Market = () => {
                     >
                       Trade
                     </th>
-                    <th        
-
-                        scope="col"
+                    <th
+                      scope="col"
                       className=" py-3 text-end text-base font-medium  whitespace-nowrap"
                     >
                       Save
@@ -233,8 +231,8 @@ const Market = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index} >
-                        {/* className={`${
+                        <tr key={index}>
+                          {/* className={`${
                       savedCoins.includes(market.id) ? 'bg-blue-500' : ''
                     }`}> */}
                           <td className=" py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -269,7 +267,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {/* {savedData.includes(market?.id) ? (
+                            {savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <BiBookmark
@@ -284,8 +282,8 @@ const Market = () => {
                               >
                                 <BiBookmark />
                               </button>
-                            )} */}
-     {/* <button
+                            )}
+                            {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
 >
@@ -298,16 +296,15 @@ const Market = () => {
                 </tbody>
               </table>
             </div>
-            <Pagination
-              totalItems={allCoinData.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-
-            />
           </div>
         </div>
       </div>
+      <Pagination
+        totalItems={allCoinData.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
           <div
@@ -318,9 +315,11 @@ const Market = () => {
               <div className="w-full  ">
                 <>
                   <div
-                    className={`border-b border-[#494949] flex justify-between ${
-                      savedCoins.includes(market?.id) ? "bg-blue-500" : ""
-                    }`}
+                    className={`border-b border-[#494949] flex justify-between
+                    //  {
+                    //   savedCoins.includes(market?.id) ? "bg-blue-500" : ""
+                    // }
+                    `}
                   >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
@@ -368,7 +367,7 @@ const Market = () => {
 
                     <div className="flex justify-end py-2 px-4">
                       <div className="flex justify-end ml-16">
-                        {savedCoins.includes(market?.id) ? (
+                        {savedData && savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
                           <BiBookmark style={{ backgroundColor: "#1788FB" }} />
                         ) : (
@@ -386,7 +385,7 @@ const Market = () => {
             <div></div>{" "}
           </div>
         ))}
-   </>
+    </>
   );
 };
 

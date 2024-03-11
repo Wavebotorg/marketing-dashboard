@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
-import Market from "./(pages)/Market/page";
 import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
+import Market from "./(pages)/market/page";
+
 
 const Page = () => {
   const userData = [
@@ -68,7 +69,7 @@ const Page = () => {
                       </td>
                       <td
                         data-title="VIP Level"
-                        className="flex items-center  xsm:mx-1"
+                        className="flex items-center "
                       >
                         <span className="md:ml-[2rem] ">
                           {items?.vipLevel}

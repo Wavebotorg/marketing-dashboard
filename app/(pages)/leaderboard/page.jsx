@@ -47,7 +47,7 @@ const LeaderBoard = () => {
       Points: "224,466,796",
     },
     {
-      Rank: "3",
+      Rank: "5",
       Name: "FewHODL_Twitter",
       Invitedby: "invite_EJRN6",
       Points: "224,466,796",
@@ -95,7 +95,7 @@ const LeaderBoard = () => {
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-1 md:mr-7 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
@@ -182,13 +182,14 @@ const LeaderBoard = () => {
                       <div key={index} className="">
                         <div className="md:p-4 p-3">
                           <div className="flex gap-2">
-                            <div className="">
+                            <div className="w-[2.5rem] sm:[1.5rem]">
                               <Image
                                 src={img}
                                 alt="Picture of the author"
-                                className="rounded-full md:w-10 w-9"
+                                className="rounded-full"
                               />
                             </div>
+
                             <div className="lg:text-base text-sm">
                               <div className="flex gap-2">
                                 <p>{d.name}</p>
