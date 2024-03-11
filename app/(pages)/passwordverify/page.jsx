@@ -202,6 +202,12 @@ const PasswordVerify = () => {
       });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const [resendStatus, setResendStatus] = useState(false);
 
   const resendOtp = async () => {
@@ -250,7 +256,7 @@ const PasswordVerify = () => {
                 numInputs={4}
                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
                 containerStyle={"otp-container"}
-                renderInput={(props) => <input {...props} />}
+                renderInput={(props) => <input {...props} onKeyDown={handleKeyPress}/>}
               />
             </div>
 
