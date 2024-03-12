@@ -52,13 +52,13 @@ const Signup = () => {
         localStorage.setItem("userEmail", myData?.data?.email || "");
         localStorage.setItem("type", "signup");
         if (myData?.status) {
-          toast.success(myData?.data.msg);
+          toast.success(myData?.msg);
 
           router.push("/passwordverify");
           // setTimeout(() => {
           // }, 3000);
         } else {
-          toast.error(myData?.data.msg);
+          toast.error(myData?.msg);
         }
       })
       .catch((err) => {
@@ -132,7 +132,9 @@ const Signup = () => {
               <FaRegEyeSlash />
             )}
           </button>
+             {/* <FaRegEyeSlash className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer" /> */}
         </div>
+
         <div className="relative">
           <div className="text-[#CACACA] mb-2"> confirm Password </div>
           <input
@@ -154,6 +156,7 @@ const Signup = () => {
             )}
           </button>
           {/* <FaRegEyeSlash className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer" /> */}
+          <FaRegEyeSlash className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer" />
         </div>
 
         <div className="flex justify-center mt-10" onClick={handleSubmit}>
