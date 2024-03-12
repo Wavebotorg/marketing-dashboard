@@ -10,17 +10,17 @@ import "./Sidebar.css";
 import { FaBars } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
-import Homemenu from "../../../public/assets/sidebar/home.png";
-import Holder from "../../../public/assets/sidebar/holder.png";
-import Leaderboard from "../../../public/assets/sidebar/leader_board.png";
-import Portfolio from "../../../public/assets/sidebar/portfolio.png";
-import Referral from "../../../public/assets/sidebar/referral.png";
-import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.png";
-import Volumestats from "../../../public/assets/sidebar/volume_stats.png";
-import WatchList from "../../../public/assets/sidebar/watchlist.png";
-import Discover from "../../../public/assets/sidebar/discover.png";
-import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.png";
-import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png";
+import Homemenu from "../../../public/assets/sidebar/home.svg";
+import Holder from "../../../public/assets/sidebar/holder.svg";
+import Leaderboard from "../../../public/assets/sidebar/leader_board.svg";
+import Portfolio from "../../../public/assets/sidebar/portfolio.svg";
+import Referral from "../../../public/assets/sidebar/referral.svg";
+import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
+import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
+import WatchList from "../../../public/assets/sidebar/watchlist.svg";
+import Discover from "../../../public/assets/sidebar/discover.svg";
+import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
+import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
@@ -234,7 +234,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data.icon} alt="" className="w-5 h-5" />
+                        <Image src={data.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data.pagename}
@@ -266,7 +266,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data.icon} alt="" className="w-5 h-5" />
+                        <Image src={data.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data.pagename}

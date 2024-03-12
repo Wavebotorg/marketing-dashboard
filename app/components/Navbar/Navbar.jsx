@@ -71,23 +71,23 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   py-7  sm:pl-10 pl-3 "
+              : "flex  justify-between   py-7  lg:pl-10 pl-2 "
           }`}
         >
-          <div className=" flex w-full gap-2 text-sm xsm:mr-5 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px] max-w-[60px]">
+          <div className=" flex w-full sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px] max-w-[70px]">
             <div className=" flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
               type="search"
               id="default-search"
-              className="bg-[#1C1C1C]  outline-none "
+              className="bg-[#1C1C1C]  outline-none  rounded-lg "
               placeholder="Search "
             />
           </div>
          
     
-          <div className=" flex items-center gap-1.5 mr-5">
+          <div className=" flex items-center gap-1.5 mr-5 ">
             <button className="">
               <IoIosNotifications size={25} />
             </button>

@@ -12,7 +12,7 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-
+import {  AiFillDelete } from "react-icons/ai";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
 
@@ -31,6 +31,12 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
+
+  // const [open, setOpen] = React.useState(false); // Add user popup open
+  const [open, setOpen] = React.useState(false); // Add user popup open
+  const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
+  const [showModal, setShowModal] = React.useState(false); // Delete Popup
+
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -41,6 +47,12 @@ const WatchList = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  const handleOpen = () => setOpen(!open);
+// Delete Modal Open
+const modelShows = (id) => {
+  setShowModal(true);
+  setSelectedCoinId(id);
+};
 
 
   const getUserdata = async () => {
@@ -71,20 +83,24 @@ const WatchList = () => {
       console.log("err --->", err);
     }
   };
-  const removeCoinFromWatchlist = async (id) => {
+  const removeCoinFromWatchlist = async () => {
     try {
       // Make an API call to remove the coin from the watchlist
-      await axiosInstanceAuth.delete("removeCoinWatchlist",{ coinId: id });
-      
+      await axiosInstanceAuth.post("removeCoinWatchlist", { coinId: selectedCoinId });
+ 
       // Update the local state to reflect the changes
-      const updatedWatchlist = watchlist.filter((coinId) => coinId !== id);
+      const updatedWatchlist = watchlist.filter((coinId) => coinId !==selectedCoinId);
+      
       setWatchlist(updatedWatchlist);
-
-      // Filter the watchlistData based on the updated watchlist
+      console.log("🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",  updatedWatchlist)
+    
       const updatedWatchlistData = allCoinData.filter((coin) =>
         updatedWatchlist.includes(coin.id)
       );
+   
       setWatchlistData(updatedWatchlistData);
+      console.log("🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:", updatedWatchlistData)
+      setShowModal(false);
     } catch (err) {
       console.log("Error removing coin from watchlist:", err);
     }
@@ -215,8 +231,8 @@ const WatchList = () => {
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     ></th>
                     <th  scope="col"
-                      className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap">
-Delete
+                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap">
+Remove
                     </th>
                   </tr>
                 </thead>
@@ -284,11 +300,51 @@ Delete
                           </td>
                           <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
                           <button
-                          onClick={() => removeCoinFromWatchlist(d.id)}
-                          className="text-red-500"
+                          // onClick={() => removeCoinFromWatchlist(d.id)}
+                          onClick={() => modelShows(d.id)}
+                          className="text-red-500 text-center"
                         >
                           Remove
                         </button>
+                        {showModal ? (
+                                  <>
+                                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                      <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                          <div className="relative p-6 flex-auto">
+                                            <span className="justify-center items-center flex">
+                                              <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                            </span>
+                                            <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                              Are You Sure ?
+                                            </p>
+                                            <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                              You want to Remove 
+                                            </p>
+                                          </div>
+
+                                          <div className="flex gap-2 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                            <button
+                                              onClick={() =>
+                                                setShowModal(false)
+                                              }
+                                              class="text-red-500   font-bold py-2 px-6 rounded"
+                                            >
+                                              No
+                                            </button>
+                                            <button
+                                              onClick={removeCoinFromWatchlist}
+                                              class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                            >
+                                              Yes
+                                            </button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                                  </>
+                                ) : null}
                           </td>
                         </tr>
                       </>
@@ -375,7 +431,7 @@ Delete
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className=" border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold"></div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         <Image
@@ -383,6 +439,17 @@ Delete
                           alt="Picture of the author"
                           className="rounded-full"
                         />
+                      </div>
+                    </div>
+                    <div className=" flex justify-between">
+                      <div className="py-2  pl-4 font-semibold">Remove</div>
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4">
+                      <button
+                          onClick={() => removeCoinFromWatchlist(d.id)}
+                          className="text-red-500"
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
                   </>

@@ -57,8 +57,7 @@ const Market = () => {
   // }, []);
 
   useEffect(() => {
-    // const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-    // setSavedCoins(savedCoinsFromStorage);
+   
     saveCoin();
   }, []);
 
@@ -336,10 +335,7 @@ useEffect(() => {
                     <div className="py-2  pl-4 font-semibold">Trade</div>
                     <div className="flex justify-end items-center py-2 px-4  gap-1.5">
                       <Link href="/">Trade</Link>
-                      {/* <span className="flex items-center text-red-500 text-[11px]">
-                          <FaCaretDown size={12} />
-                          (-0.73%)
-                        </span> */}
+                    
                     </div>
                   </div>
                   {token && ( <div className="flex justify-between border-t border-[#494949]">

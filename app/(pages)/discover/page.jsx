@@ -126,53 +126,9 @@ const Discover = () => {
           </div>
         </div>
 
-        {/* <div className="py-14 ">
-          <div className="flex  justify-between items-center">
-            <h1 className="md:text-3xl text-xl font-semibold text-nowrap">
-              Explore Crypto
-            </h1>
-            <div className="flex justify-end gap-3">
-              {" "}
-              <button className="bg-[#1788FB] text-white md:px-3 md:py-2 px-2 py-2  rounded-full flex justify-end">
-                View All
-              </button>
-              <Image src={Leftarraow} className="w-10" />
-              <Image src={Rightarraow} className="w-10" />
-            </div>
-          </div>
+       
 
-          <div className="flex justify-between items-center ">
-            {cards.map((card, index) => (
-              <div key={index} className="bg-[#1C1C1C] py-7 px-16 rounded-xl">
-                <Image src={card.img} alt={card.name} />
-                <div className="text-sm  text-center p-3  pt-10">
-                  <h1 className="text-2xl font-semibold tracking-wide ">
-                    {card.name}
-                  </h1>
-                  <p className="pt-5 text-2xl font-semibold">{card.point}</p>
-                  <p className="pt-2 text-lg">{card.percentage}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
-
-        {/* <div className="  ">
-          <div className="bg-[#1C1C1C] rounded-xl grid grid-cols-2 ">
-            <div>
-              <Image src={Aave} alt={Aave} />
-              <div>AAVE</div>
-              <div>84.63</div>
-              <div>-9.43%</div>
-            </div>
-            <div>
-              <Image src={Aave} alt={Aave} />
-              <div>AAVE</div>
-              <div>84.63</div>
-              <div>-9.43%</div>
-            </div>
-          </div>
-        </div> */}
+       
         <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Explore Crypto
@@ -213,68 +169,7 @@ const Discover = () => {
             </div>
           ))}
         </div>
-        {/* <div class="bg-green-100 rounded p-5">card 2</div>
-          <div class="bg-green-100 rounded p-5">card 3</div>
-          <div class="bg-green-100 rounded p-5">card 4</div>
-          <div class="bg-green-100 rounded p-5">card 5</div>
-          <div class="bg-green-100 rounded p-5">card 6</div> */}
-
-        {/* <div className="mx-10">
-          <h1 className="text-3xl font-semibold">Daily Movers</h1>
-          <p className="tracking-wider font-medium">
-            Explore the biggest crypto movers on the market.
-          </p>
-          <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg my-5 p-4">
-            <table className="w-full text-center">
-              <thead>
-                <tr className="bg-[#1C1C1C] px-4 py-2">
-                  <th className="text-left pl-7 text-nowrap">Coin</th>
-                  <th className="text-nowrap">Price</th>
-                  <th className="text-nowrap">Last 7 Days</th>
-                  <th className="text-nowrap">Market Cap</th>
-                  <th className="text-nowrap">Volume(24H)</th>
-                  <th className="text-nowrap">Signal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {portfolioData.map((item, index) => (
-                  <tr key={index} className="bg-[#1C1C1C]">
-                    <td className="px-4 py-4 flex justify-start items-center space-x-2">
-                      <div className="flex justify-start items-center">
-                        <Image
-                          src={Bitcoin}
-                          alt="Picture of the author"
-                          height={25}
-                          width={25}
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div className="text-center">{item.coin}</div>
-                    </td>
-                    <td className="">
-                      <div>{item.price} </div>
-                      <p className="text-red-700">{item.priceper}</p>
-                    </td>
-                    <td></td>
-                    <td className="">{item.marketcap}</td>
-                    <td>
-                      {" "}
-                      <div>{item.volume} </div>
-                      <p className="text-red-700">{item.volumper}</p>{" "}
-                    </td>
-
-                    <td className="">
-                      <div className="text-red-700"> {item.signal} </div>
-                      <p className="">{item.indicator}</p>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div> */}
-
-        {/* <div>Hello</div> */}
+     
 
         <div class="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
           <div class="md:text-3xl text-xl font-semibold">
@@ -283,20 +178,7 @@ const Discover = () => {
               Explore the biggest crypto movers on the market.
             </p>
           </div>
-          {/*   <div class="flex items-center">
-            <label class="text-sm md:text-lg mr-2">Rows per page</label>
-            <select
-              name="select Row"
-              class="bg-blue-500 rounded-lg p-1 outline-none"
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          </div> */}
+         
         </div>
 
         <div className="lg:mx-  md:p- mb-5 mt-2">
