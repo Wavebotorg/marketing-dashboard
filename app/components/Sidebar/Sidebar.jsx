@@ -10,17 +10,17 @@ import "./Sidebar.css";
 import { FaBars } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
-import Homemenu from "../../../public/assets/sidebar/home.png";
-import Holder from "../../../public/assets/sidebar/holder.png";
-import Leaderboard from "../../../public/assets/sidebar/leader_board.png";
-import Portfolio from "../../../public/assets/sidebar/portfolio.png";
-import Referral from "../../../public/assets/sidebar/referral.png";
-import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.png";
-import Volumestats from "../../../public/assets/sidebar/volume_stats.png";
-import WatchList from "../../../public/assets/sidebar/watchlist.png";
-import Discover from "../../../public/assets/sidebar/discover.png";
-import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.png";
-import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.png";
+import Homemenu from "../../../public/assets/sidebar/home.svg";
+import Holder from "../../../public/assets/sidebar/holder.svg";
+import Leaderboard from "../../../public/assets/sidebar/leader_board.svg";
+import Portfolio from "../../../public/assets/sidebar/portfolio.svg";
+import Referral from "../../../public/assets/sidebar/referral.svg";
+import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
+import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
+import WatchList from "../../../public/assets/sidebar/watchlist.svg";
+import Discover from "../../../public/assets/sidebar/discover.svg";
+import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
+import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
@@ -31,55 +31,13 @@ import useEncryption from "@/app/components/useEncryption/index";
 import axios from "axios";
 import axiosInstance from "@/app/apiInstances/axiosInstance";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
-// import toast, { Toaster } from "react-hot-toast";
+
 function Sidebar() {
   const router = useRouter();
-  // const { encryptData, decryptData } = useEncryption();
-  // const [data, setData] = useState(null);
-  // const getdata = localStorage.getItem("details");
-
-  // const data = decryptData(getdata);
-  // console.log("🚀 ~ Navbar ~ data:", data);
-
-  // if (data?.code) {
-  //   toast.success(data.message);
-  // }
-  // const getdata = localStorage.getItem("details");
-  // // const data = decryptData(getdata);
-
-  // // console.log("🚀 ~ Navbar ~ data:", data);
-  // if (getdata?.code) {
-
-  //   toast.success(getdata.message);
-
-  // }
+  
   const [allUser, setAllUser] = useState({});
 
-  // const Token = localStorage.getItem("Token");
-
-
-  //  useEffect(() => {
-  //   // Check if localStorage is available
-  //   const getdata = typeof window !== 'undefined' ? localStorage.getItem("details") : null;
-
-  //   // Continue with the code only if localStorage is available
-  //   if (getdata) {
-  //     const decryptedData = decryptData(getdata);
-  //     console.log("🚀 ~ Navbar ~ data:", decryptedData);
-
-  //     if (decryptedData?.code) {
-  //       // Assuming toast is imported from the correct library
-  //       toast.success(decryptedData.message);
-  //     }
-
-  //     // Set the data state for use in the component
-  //     setData(decryptedData);
-  //   }
-  // }, []);
-
-  // const [allUser, setAllUser] = useState({});
-  // const Token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
-
+ 
   const getdata = typeof window !== 'undefined' ? localStorage.getItem("details") : null;
 
   // ... (other code)
@@ -276,7 +234,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data.icon} alt="" className="w-5 h-5" />
+                        <Image src={data.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data.pagename}
@@ -308,7 +266,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data.icon} alt="" className="w-5 h-5" />
+                        <Image src={data.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data.pagename}
@@ -332,17 +290,17 @@ function Sidebar() {
                   </div>
 
                   <div>
-                    <div className="flex gap-3 items-center">
+                    <div className="flex  items-center">
                       <h1>{allUser.name}</h1>
-                      <span>
+                    <span>
                         <Image
                           src={Arrow}
                           alt="arrow"
                           width="10px"
                           height="10px"
-                          className="ml-2"
+                          className="mb-3 ml-1.5"
                         />
-                      </span>
+                     </span>
                     </div>
                     <p className="text-xs">Invited by @{allUser.email}</p>
                     <div className="flex mt-2">

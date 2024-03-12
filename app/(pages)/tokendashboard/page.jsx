@@ -5,7 +5,7 @@ import Pagination from "../Pagination/Pagination";
 
 const TokenDashboard = () => {
   const [allCoinData, setAllCoinData] = useState([
-/*     {
+   {
       time: "23:00",
       amounteth: "-2333",
       minamonut: "$55",
@@ -53,6 +53,7 @@ const TokenDashboard = () => {
       status: "true",
       transaction: "567879809",
     },
+    
     {
       time: "23:00",
       amounteth: "-2333",
@@ -92,111 +93,7 @@ const TokenDashboard = () => {
       amountsol: "2300",
       status: "true",
       transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    }, */
+    }, 
     // Add more data as needed
   ]);
 
