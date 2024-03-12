@@ -44,7 +44,7 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   pb-7 pt-5 pl-10 "
+              : "flex  justify-between   pb-7 pt-5 pl-10  "
           }`}
         >
           <div className=" flex w-full gap-2 text-sm xsm:mr-5 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
@@ -146,8 +146,18 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      <div className="border-b border-stone-500 mb-2"></div>
+      <div
+        className={`${
+          getPath === "/login" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
+            ? "hidden"
+            : "border-b border-stone-500 mb-2  "
+        }`}
+      ></div>
     </>
   );
 };
