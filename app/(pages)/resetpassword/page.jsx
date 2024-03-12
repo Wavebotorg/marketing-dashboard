@@ -202,6 +202,13 @@ const ResetPassword = () => {
     setIsVerificationSuccess(true);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -226,6 +233,7 @@ const ResetPassword = () => {
             name="newPassword"
             value={resetPassData?.newPassword}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
           <FaRegEyeSlash className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer" />
         </div>
@@ -237,6 +245,7 @@ const ResetPassword = () => {
             name="confirmPassword"
             value={resetPassData?.confirmPassword}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
           <FaRegEyeSlash className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer" />
         </div>

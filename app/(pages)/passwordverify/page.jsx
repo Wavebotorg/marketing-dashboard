@@ -18,7 +18,6 @@
 
 //   const router = useRouter();
 
-
 //   const handleOtpChange = (value) => {
 //     const sanitizedValue = value.replace(/\D/g, "");
 //     setOtp(sanitizedValue);
@@ -56,7 +55,6 @@
 //         console.log("error--->", err);
 //       });
 
- 
 //   };
 //   const [resendStatus, setResendStatus] = useState(false);
 
@@ -92,7 +90,7 @@
 //         </div>
 
 //         <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14  w-[70%] sm:w-[70%]  md:w-[40%] lg:w-[40%]  2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-       
+
 //           <div>
 //             <h2 className="text-lg  sm:text-lg md:text-xl lg:text-2xl  2xl:text-3xl tracking-wide text-white   mb-3 sm:mb-3 md:mb-4 lg:mb-5 2xl:mb-5  font-semibold text-center">
 //               OTP Verification
@@ -106,8 +104,8 @@
 //                 value={otp}
 //                 onChange={handleOtpChange}
 //                 numInputs={4}
-//                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 
-          
+//                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800
+
 //                h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px]
 //             mx-1 sm:mx-2 2xl:mx-3.5 "
 //                 containerStyle={"otp-container"}
@@ -131,7 +129,7 @@
 //               </Link>
 //             </div>
 //           </div>
-         
+
 //         </div>
 //       </div>
 //     </>
@@ -139,7 +137,6 @@
 // };
 
 // export default PasswordVerify;
-
 
 "use client";
 import React, { useState, useEffect } from "react";
@@ -155,8 +152,10 @@ import { ToastContainer, toast } from "react-toastify";
 const PasswordVerify = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
-  const email = typeof window !== "undefined" ? localStorage.getItem("userEmail") : null;
-  const types = typeof window !== "undefined" ? localStorage.getItem("type") : null;
+  const email =
+    typeof window !== "undefined" ? localStorage.getItem("userEmail") : null;
+  const types =
+    typeof window !== "undefined" ? localStorage.getItem("type") : null;
 
   useEffect(() => {
     if (!email || !types) {
@@ -203,11 +202,20 @@ const PasswordVerify = () => {
       });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const [resendStatus, setResendStatus] = useState(false);
 
   const resendOtp = async () => {
     try {
-      const res = await axiosInstance.post("/resendotp", { email: email, types });
+      const res = await axiosInstance.post("/resendotp", {
+        email: email,
+        types,
+      });
       const responseData = res?.data;
       console.log("responseData--------", responseData);
       if (res.status) {
@@ -248,7 +256,7 @@ const PasswordVerify = () => {
                 numInputs={4}
                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
                 containerStyle={"otp-container"}
-                renderInput={(props) => <input {...props} />}
+                renderInput={(props) => <input {...props} onKeyDown={handleKeyPress}/>}
               />
             </div>
 
@@ -259,7 +267,11 @@ const PasswordVerify = () => {
               <ToastContainer />
             </div>
             <div className="flex justify-center mt-10 ">
-              <Link href="#" className="text-xs text-[#CACACA] " onClick={resendOtp}>
+              <Link
+                href="#"
+                className="text-xs text-[#CACACA] "
+                onClick={resendOtp}
+              >
                 Resend OTP
               </Link>
             </div>

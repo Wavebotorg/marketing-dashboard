@@ -118,7 +118,7 @@ const Discover = () => {
                   effect=""
                   variant="info"
                 >
-                  <div className="text-sm  ">{image.name}</div>
+                  <div className="text-sm">{image.name}</div>
                 </ReactTooltip>
                 <Image className=" mx-auto" src={image.img} alt={image.name} />
               </div>

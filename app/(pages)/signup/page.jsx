@@ -69,6 +69,13 @@ const Signup = () => {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -91,6 +98,7 @@ const Signup = () => {
             name="name"
             value={signupdata?.name}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div>
@@ -101,6 +109,7 @@ const Signup = () => {
             name="email"
             value={signupdata?.email}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
         </div>
         <div className="relative">
@@ -111,6 +120,7 @@ const Signup = () => {
             name="password"
             value={signupdata?.password}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
           <button
             className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
@@ -131,6 +141,7 @@ const Signup = () => {
             name="confirmPassword"
             value={signupdata?.confirmPassword}
             onChange={onChangeInput}
+            onKeyPress={handleKeyPress}
           />
           <button
             className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
