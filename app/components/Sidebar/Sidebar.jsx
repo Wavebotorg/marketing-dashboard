@@ -34,11 +34,11 @@ import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 function Sidebar() {
   const router = useRouter();
-  
+
   const [allUser, setAllUser] = useState({});
 
- 
-  const getdata = typeof window !== 'undefined' ? localStorage.getItem("details") : null;
+  const getdata =
+    typeof window !== "undefined" ? localStorage.getItem("details") : null;
 
   // ... (other code)
 
@@ -48,7 +48,8 @@ function Sidebar() {
 
   // ... (other code)
 
-  const Token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
+  const Token =
+    typeof window !== "undefined" ? localStorage.getItem("Token") : null;
   const getUserdata = async () => {
     await axiosInstanceAuth
       .get("getUserProfile")
@@ -184,7 +185,7 @@ function Sidebar() {
             : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
         }`}
       >
-        <div className="sidebar h-full  p-1 hover:shadow-lg ">
+        <div className="sidebar h-full  -ml-[4px] hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
           <div className="flex h-screen flex-col  overflow-y-auto">
             <div className="flex items-center justify-center">
@@ -219,7 +220,7 @@ function Sidebar() {
                         (isHover && data.id === isHover) ||
                         data.pathname === pathname
                           ? "navHover"
-                          : "border-l-2 border-transparent"
+                          : ""
                       } flex md:px-2 lg:px-3  py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
@@ -229,8 +230,8 @@ function Sidebar() {
                         className={
                           (isHover && data.id === isHover) ||
                           data.pathname === pathname
-                            ? "dropdown-left-border -ml-[7px]"
-                            : "border-l-2 -ml-[7px] border-transparent"
+                            ? "dropdown-left-border  -ml-[0px]"
+                            : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
@@ -251,7 +252,7 @@ function Sidebar() {
                         (isHover && data.id === isHover) ||
                         data.pathname === pathname
                           ? "navHover"
-                          : "border-l-2 border-transparent"
+                          : ""
                       } flex md:px-2 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
@@ -261,8 +262,8 @@ function Sidebar() {
                         className={
                           (isHover1 && data.id === isHover1) ||
                           data.pathname === pathname
-                            ? "dropdown-left-border -ml-[7px]"
-                            : "border-l-2 -ml-[7px] border-transparent"
+                            ? "dropdown-left-border -ml-[0px] "
+                            : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
@@ -292,7 +293,7 @@ function Sidebar() {
                   <div>
                     <div className="flex  items-center">
                       <h1>{allUser.name}</h1>
-                    <span>
+                      <span>
                         <Image
                           src={Arrow}
                           alt="arrow"
@@ -300,7 +301,7 @@ function Sidebar() {
                           height="10px"
                           className="mb-3 ml-1.5"
                         />
-                     </span>
+                      </span>
                     </div>
                     <p className="text-xs">Invited by @{allUser.email}</p>
                     <div className="flex mt-2">

@@ -14,8 +14,8 @@ const Market = () => {
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  const [savedData, setSavedData] = useState([])
-  
+  const [savedData, setSavedData] = useState([]);
+
   const [token, setToken] = useState(null);
   console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
@@ -27,9 +27,9 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
-        console.log("🚀 ~ .then ~  setAllCoinData:",  res?.data)
+        console.log("🚀 ~ .then ~  setAllCoinData:", res?.data);
       })
-       
+
       .catch((err) => {
         console.log("err --->", err);
       });
@@ -56,26 +56,23 @@ const Market = () => {
   // }, []);
 
   useEffect(() => {
-   
     saveCoin();
   }, []);
 
-
-useEffect(() => {
-  // Check if the user is logged in when the component mounts
-  const storedToken = localStorage.getItem("Token");
-  setToken(storedToken);
-}, []);
+  useEffect(() => {
+    // Check if the user is logged in when the component mounts
+    const storedToken = localStorage.getItem("Token");
+    setToken(storedToken);
+  }, []);
 
   const saveCoin = async (id) => {
     try {
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
-      
-      setSavedData(res?.data?.data)
+
+      setSavedData(res?.data?.data);
       console.log("rres----------->>>", res);
-      
-      
+
       if (savedData && savedData.includes(id)) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) =>
@@ -88,15 +85,14 @@ useEffect(() => {
           await axiosInstanceAuth.post("watchlist", { coinId: id });
         }
         // Save the coin to the server (if needed)
-       
       }
     } catch (err) {
       console.log("Error while updating saved coins:", err);
     }
   };
+
   return (
     <>
-    
       <div className=" bg-[#1C1C1C] rounded-2xl">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
@@ -194,13 +190,12 @@ useEffect(() => {
                       Trade
                     </th>
                     {token && (
-                    <th        
-
+                      <th
                         scope="col"
-                      className=" py-3 text-end text-base font-medium  whitespace-nowrap"
-                    >
-                      Save
-                    </th>
+                        className=" py-3 text-end text-base font-medium  whitespace-nowrap"
+                      >
+                        Save
+                      </th>
                     )}
                   </tr>
                 </thead>
@@ -244,24 +239,25 @@ useEffect(() => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                          {token ? ( savedData && savedData.includes(market?.id) ? (
-                              // Render a filled bookmark if the coin is saved
-                              <button className=""  >
-                                
-                                <BiBookmark
-                                  style={{ backgroundColor: "#1788FB" }} 
-                                />
-                              </button>
-                            ) : (
-                              // Render a button to save the coin
-                              <button
-                                className=""
-                                onClick={() => saveCoin(market?.id)}
-                              >
-                                <BiBookmark />
-                              </button>
-                            )   ) : null}
-     {/* <button
+                            {token ? (
+                              savedData && savedData.includes(market?.id) ? (
+                                // Render a filled bookmark if the coin is saved
+                                <button className="">
+                                  <BiBookmark
+                                    style={{ backgroundColor: "#1788FB" }}
+                                  />
+                                </button>
+                              ) : (
+                                // Render a button to save the coin
+                                <button
+                                  className=""
+                                  onClick={() => saveCoin(market?.id)}
+                                >
+                                  <BiBookmark />
+                                </button>
+                              )
+                            ) : null}
+                            {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
 >
@@ -276,17 +272,15 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        
       </div>
       <div className="xsm:hidden md:hidden lg:block">
-      <Pagination
-              totalItems={allCoinData.length}
-              itemsPerPage={itemsPerPage}
-              onPageChange={handlePageChange}
-              currentPage={currentPage}
-
-            />
-            </div>
+        <Pagination
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
           <div
@@ -297,8 +291,7 @@ useEffect(() => {
               <div className="w-full  ">
                 <>
                   <div
-                    className={`border-b border-[#494949] flex justify-between`
-                  }
+                    className={`border-b border-[#494949] flex justify-between`}
                   >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
@@ -335,41 +328,36 @@ useEffect(() => {
                     <div className="py-2  pl-4 font-semibold">Trade</div>
                     <div className="flex justify-end items-center py-2 px-4  gap-1.5">
                       <Link href="/">Trade</Link>
-                    
                     </div>
                   </div>
-                  {token && ( <div className="flex justify-between border-t border-[#494949]">
-                    <div className="py-2  pl-4 font-semibold">
-                    Save  
-               
-                    </div>
-                  
-                
-                  
-                    <div className="flex justify-end py-2 px-4">
-                      <div className="flex items-center ml-16">
-                        {savedData && savedData.includes(market?.id) ? (
-                          // Render a filled bookmark if the coin is saved
-                          <BiBookmark style={{ backgroundColor: "#1788FB" }} />
-                        ) : (
-                          // Render a button to save the coin
-                          <button onClick={() => saveCoin(market?.id)}>
-                            <BiBookmark />
-                          </button>
-                        )}
+                  {token && (
+                    <div className="flex justify-between border-t border-[#494949]">
+                      <div className="py-2  pl-4 font-semibold">Save</div>
+
+                      <div className="flex justify-end py-2 px-4">
+                        <div className="flex items-center ml-16">
+                          {savedData && savedData.includes(market?.id) ? (
+                            // Render a filled bookmark if the coin is saved
+                            <BiBookmark
+                              style={{ backgroundColor: "#1788FB" }}
+                            />
+                          ) : (
+                            // Render a button to save the coin
+                            <button onClick={() => saveCoin(market?.id)}>
+                              <BiBookmark />
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  
-                  </div>
-                    )}
+                  )}
                 </>
               </div>
             </div>
             <div></div>{" "}
           </div>
         ))}
-    
-   </>
+    </>
   );
 };
 
