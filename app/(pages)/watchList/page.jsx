@@ -86,20 +86,30 @@ const modelShows = (id) => {
   const removeCoinFromWatchlist = async () => {
     try {
       // Make an API call to remove the coin from the watchlist
-      await axiosInstanceAuth.post("removeCoinWatchlist", { coinId: selectedCoinId });
- 
+      await axiosInstanceAuth.post("removeCoinWatchlist", {
+        coinId: selectedCoinId,
+      });
+
       // Update the local state to reflect the changes
-      const updatedWatchlist = watchlist.filter((coinId) => coinId !==selectedCoinId);
-      
+      const updatedWatchlist = watchlist.filter(
+        (coinId) => coinId !== selectedCoinId
+      );
+
       setWatchlist(updatedWatchlist);
-      console.log("🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",  updatedWatchlist)
-    
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
+        updatedWatchlist
+      );
+
       const updatedWatchlistData = allCoinData.filter((coin) =>
         updatedWatchlist.includes(coin.id)
       );
-   
+
       setWatchlistData(updatedWatchlistData);
-      console.log("🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:", updatedWatchlistData)
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
+        updatedWatchlistData
+      );
       setShowModal(false);
     } catch (err) {
       console.log("Error removing coin from watchlist:", err);
@@ -114,13 +124,12 @@ const modelShows = (id) => {
       getWatchlistdata();
     }
   }, [allCoinData]); // Only trigger if allCoinData changes
-  
 
   useEffect(() => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
-  },  []);
+  }, []);
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
@@ -230,9 +239,11 @@ const modelShows = (id) => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     ></th>
-                    <th  scope="col"
-                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap">
-Remove
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap"
+                    >
+                      Remove
                     </th>
                   </tr>
                 </thead>
@@ -299,52 +310,50 @@ Remove
                             />
                           </td>
                           <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
-                          <button
-                          // onClick={() => removeCoinFromWatchlist(d.id)}
-                          onClick={() => modelShows(d.id)}
-                          className="text-red-500 text-center"
-                        >
-                          Remove
-                        </button>
-                        {showModal ? (
-                                  <>
-                                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                                      <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                          <div className="relative p-6 flex-auto">
-                                            <span className="justify-center items-center flex">
-                                              <AiFillDelete className="w-16 h-16 fill-red-500" />
-                                            </span>
-                                            <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
-                                              Are You Sure ?
-                                            </p>
-                                            <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                              You want to Remove 
-                                            </p>
-                                          </div>
+                            <button
+                              // onClick={() => removeCoinFromWatchlist(d.id)}
+                              onClick={() => modelShows(d.id)}
+                              className="text-red-500 text-center"
+                            >
+                              Remove
+                            </button>
+                            {showModal ? (
+                              <>
+                                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="relative p-6 flex-auto">
+                                        <span className="justify-center items-center flex">
+                                          <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                        </span>
+                                        <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                          Are You Sure ?
+                                        </p>
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                          You want to Remove
+                                        </p>
+                                      </div>
 
-                                          <div className="flex gap-2 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
-                                            <button
-                                              onClick={() =>
-                                                setShowModal(false)
-                                              }
-                                              class="text-red-500   font-bold py-2 px-6 rounded"
-                                            >
-                                              No
-                                            </button>
-                                            <button
-                                              onClick={removeCoinFromWatchlist}
-                                              class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
-                                            >
-                                              Yes
-                                            </button>
-                                          </div>
-                                        </div>
+                                      <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                          onClick={() => setShowModal(false)}
+                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                        >
+                                          No
+                                        </button>
+                                        <button
+                                          onClick={removeCoinFromWatchlist}
+                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                        >
+                                          Yes
+                                        </button>
                                       </div>
                                     </div>
-                                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                                  </>
-                                ) : null}
+                                  </div>
+                                </div>
+                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                              </>
+                            ) : null}
                           </td>
                         </tr>
                       </>

@@ -224,9 +224,23 @@ const Market = () => {
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
                           <td className="text-center whitespace-nowrap text-md text-white ">
-                            <div className="flex flex-col items-center justify-center ">
+                            {/*    <div className="flex flex-col items-center justify-center ">
                               <div>${market?.current_price} </div>
                               <div className="text-[#FF0000]">
+                                ({market?.price_change_percentage_24h})
+                              </div>
+                            </div> */}
+                            <div className="flex flex-col items-center justify-center">
+                              <div>${market?.current_price}</div>
+                              <div
+                                className={
+                                  market?.price_change_percentage_24h === 0
+                                    ? "text-white"
+                                    : market?.price_change_percentage_24h < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }
+                              >
                                 ({market?.price_change_percentage_24h})
                               </div>
                             </div>
@@ -313,9 +327,23 @@ const Market = () => {
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
-                    <div className="flex justify-end items-center   px-4">
+                    {/*                     <div className="flex justify-end items-center   px-4">
                       <div> ${market?.current_price} </div>
                       <div className="text-[#FF0000]">
+                        ({market?.price_change_percentage_24h})
+                      </div>
+                    </div> */}
+                    <div className="flex flex-col items-center justify-center">
+                      <div>${market?.current_price}</div>
+                      <div
+                        className={
+                          market?.price_change_percentage_24h === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_24h < 0
+                            ? "text-red-500"
+                            : "text-green-500"
+                        }
+                      >
                         ({market?.price_change_percentage_24h})
                       </div>
                     </div>
