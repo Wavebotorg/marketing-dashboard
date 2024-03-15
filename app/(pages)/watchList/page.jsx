@@ -12,7 +12,7 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-import {  AiFillDelete } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ import { RiGridFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 
@@ -48,12 +48,11 @@ const WatchList = () => {
     setCurrentPage(page);
   };
   const handleOpen = () => setOpen(!open);
-// Delete Modal Open
-const modelShows = (id) => {
-  setShowModal(true);
-  setSelectedCoinId(id);
-};
-
+  // Delete Modal Open
+  const modelShows = (id) => {
+    setShowModal(true);
+    setSelectedCoinId(id);
+  };
 
   const getUserdata = async () => {
     try {
@@ -268,10 +267,32 @@ const modelShows = (id) => {
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.circulating_supply}
+                            <span
+                              className={`${
+                                d.circulating_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.circulating_supply}
+                            </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.current_price}
+                            <span
+                              className={`${
+                                d.current_price === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.current_price}
+                            </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
@@ -279,7 +300,7 @@ const modelShows = (id) => {
                               <div>{d.price_change_24h}</div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
+                          {/*      <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             {d.total_supply}
                             <div className="flex justify-center items-center ">
                               <div className="">
@@ -288,11 +309,55 @@ const modelShows = (id) => {
                                   className="text-[#FF0000]"
                                 />
                               </div>
-                              <div className="text-[11px] text-[#FF0000]">
+                              <div className="text-[#FF0000]">
                                 (-0.73%)
                               </div>
                             </div>
+                          </td> */}
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                            <span
+                              className={`${
+                                d.total_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {d.total_supply}
+                            </span>
+                            <div className="flex justify-center items-center">
+                              {/*     <div className="">
+      <FaCaretDown size={15} className={d.percentage_change < 0 ? "text-red-500" : d.percentage_change > 0 ? "text-green-500" : "text-white"} /> */}
+                              <div className="">
+                                {d.price_change_percentage_24h === 0 ? (
+                                  <FaMinus size={15} className="text-white" />
+                                ) : d.price_change_percentage_24h < 0 ? (
+                                  <FaCaretDown
+                                    size={15}
+                                    className="text-red-500"
+                                  />
+                                ) : (
+                                  <FaCaretUp
+                                    size={15}
+                                    className="text-green-500"
+                                  />
+                                )}
+                              </div>
+                              <div
+                                className={`${
+                                  d.price_change_percentage_24h === 0
+                                    ? "text-white"
+                                    : d.price_change_percentage_24h < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }`}
+                              >
+                                ({d.price_change_percentage_24h}%)
+                              </div>
+                            </div>
                           </td>
+
                           <td className="px-6 py-4  whitespace-nowrap text-md text-white ">
                             {d.market_cap_rank} % Buying
                             <div className="w-full bg-[#262626] rounded-full h-1.5 mt-1.5">
@@ -399,13 +464,35 @@ const modelShows = (id) => {
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sell</div>
                       <div className=" py-2 pr-4 pl-4">
-                        {d.circulating_supply}
+                        <span
+                          className={`${
+                            d.circulating_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.circulating_supply}
+                        </span>
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Buy</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.current_price}
+                        <span
+                          className={`${
+                            d.current_price === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.current_price}
+                        </span>
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
@@ -416,12 +503,44 @@ const modelShows = (id) => {
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Change 1D</div>
-                      <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        {d.total_supply}{" "}
-                        <span className="flex items-center text-red-500 text-[11px]">
+                      <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        <span
+                          className={`${
+                            d.total_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {d.total_supply}
+                        </span>
+                        {/* <span className="flex items-center text-red-500 text-[11px]">
                           <FaCaretDown size={12} />
                           (-0.73%)
-                        </span>
+                        </span> */}
+                        <div className="flex">
+                          <div className="">
+                            {d.price_change_percentage_24h === 0 ? (
+                              <FaMinus size={15} className="text-white" />
+                            ) : d.price_change_percentage_24h < 0 ? (
+                              <FaCaretDown size={15} className="text-red-500" />
+                            ) : (
+                              <FaCaretUp size={15} className="text-green-500" />
+                            )}
+                          </div>
+                          <div
+                            className={`${
+                              d.price_change_percentage_24h === 0
+                                ? "text-white"
+                                : d.price_change_percentage_24h < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            ({d.price_change_percentage_24h}%)
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
@@ -453,7 +572,7 @@ const modelShows = (id) => {
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Remove</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                      <button
+                        <button
                           onClick={() => removeCoinFromWatchlist(d.id)}
                           className="text-red-500"
                         >

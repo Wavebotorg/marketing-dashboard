@@ -12,6 +12,7 @@ const Portfolio = () => {
       id: 1,
       coin: "Bitcoin BTC",
       price: "0.07727",
+      p: " -3.12% (-0.00)",
       units: "124858.18",
       avgOpen: "0.08089",
       pl: "-$452.21",
@@ -24,6 +25,7 @@ const Portfolio = () => {
       id: 2,
       coin: "Bitcoin BTC",
       price: "0.07727",
+      p: " -3.12% (-0.00)",
       units: "124858.18",
       avgOpen: "0.08089",
       pl: "-$452.21",
@@ -36,6 +38,7 @@ const Portfolio = () => {
       id: 3,
       coin: "Bitcoin BTC",
       price: "0.07727",
+      p: " -3.12% (-0.00)",
       units: "124858.18",
       avgOpen: "0.08089",
       pl: "-$452.21",
@@ -48,6 +51,7 @@ const Portfolio = () => {
       id: 4,
       coin: "Bitcoin BTC",
       price: "0.07727",
+      p: " -3.12% (-0.00)",
       units: "124858.18",
       avgOpen: "0.08089",
       pl: "-$452.21",
@@ -86,11 +90,10 @@ const Portfolio = () => {
             <button className="  ">Manual Trades</button>
           </div>
         </div>
-       
+
         <div className="mt-5 mb-5 lg:block hidden">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg ">
-           
               <>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -146,7 +149,17 @@ const Portfolio = () => {
                               {item.price}
                             </div>
                             <p className="text-sm text-[#FF0000] text-center">
-                              -3.12% (-0.00)
+                              <span
+                                className={` ${
+                                  item?.p === 0
+                                    ? "text-white"
+                                    : item?.p < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }`}
+                              >
+                                {item?.p}
+                              </span>
                             </p>
                           </td>
 
@@ -162,10 +175,30 @@ const Portfolio = () => {
                             {item?.avgOpen}
                           </td>
                           <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.pl}
+                            <span
+                              className={` ${
+                                item?.pl === 0
+                                  ? "text-white"
+                                  : item?.pl < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item?.pl}
+                            </span>
                           </td>
                           <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.plPercentage}
+                            <span
+                              className={` ${
+                                item?.plPercentage === 0
+                                  ? "text-white"
+                                  : item?.plPercentage < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item?.plPercentage}
+                            </span>
                           </td>
                           <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                             {item?.value}
@@ -225,7 +258,17 @@ const Portfolio = () => {
                           {" "}
                           <span className="pl-5">{item?.price}</span>
                           <p className="text-sm text-[#FF0000]">
-                            -3.12% (-0.00)
+                            <span
+                              className={` ${
+                                item?.p === 0
+                                  ? "text-white"
+                                  : item?.p < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item?.p}
+                            </span>
                           </p>
                         </div>
                       </div>
@@ -248,13 +291,36 @@ const Portfolio = () => {
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold"> P/L</div>
-                        <div className=" py-2 pr-4 pl-4"> {item?.pl}</div>
+                        <div className=" py-2 pr-4 pl-4">
+                          {" "}
+                          <span
+                            className={` ${
+                              item?.pl === 0
+                                ? "text-white"
+                                : item?.pl < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            {item?.pl}
+                          </span>
+                        </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold"> P/L(%)</div>
                         <div className=" py-2 pr-4 pl-4">
                           {" "}
-                          {item?.plPercentage}
+                          <span
+                            className={` ${
+                              item?.plPercentage === 0
+                                ? "text-white"
+                                : item?.plPercentage < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            {item?.plPercentage}
+                          </span>
                         </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
