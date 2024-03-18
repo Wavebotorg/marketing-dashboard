@@ -10,7 +10,12 @@ import Link from "next/link";
 import axios from "axios";
 
 import Pagination from "../Pagination/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { homeDataAsyncThunk } from "@/app/redux/features/searchFeatures";
+
+import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 const Market = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
@@ -27,13 +32,18 @@ const Market = () => {
         setAllCoinData(res?.data);
       })
       .catch((err) => {
-        console.log("err --->", err);
+        console.log("err market page --->", err);
       });
   };
 
   useEffect(() => {
-    getUserdata();
+    // getUserdata();
+    dispatch(homeDataAsyncThunk());
   }, []);
+  const coinData = useSelector(
+    (state) => state?.homeFeatureSlice?.homeDataChange
+  );
+  console.log("🚀 ~ Market ~ coinData:", coinData);
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -100,20 +110,25 @@ const Market = () => {
   //   };
   const saveCoin = async (id) => {
     try {
+      const isSaved = savedData.includes(id);
+
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       console.log("rres----------->>>", res);
       setSavedData(res?.data?.data);
 
-      if (savedData && savedData.includes(id)) {
+      if (isSaved) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) =>
           prevSavedCoins.filter((coinId) => coinId !== id)
         );
+        setSavedData((prevSavedData) =>
+          prevSavedData.filter((coinId) => coinId !== id)
+        );
       } else {
         // If not saved, add it to the saved list
         setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-
+        setSavedData((prevSavedData) => [...prevSavedData, id]);
         // Save the coin to the server (if needed)
         await axiosInstanceAuth.post("watchlist", { coinId: id });
       }
@@ -228,8 +243,8 @@ const Market = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {visibleData?.length > 0 &&
-                    visibleData?.map((market, index) => (
+                  {coinData?.length > 0 &&
+                    coinData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           {/* className={`${
@@ -270,9 +285,11 @@ const Market = () => {
                             {savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
-                                <BiBookmark
-                                  style={{ backgroundColor: "#1788FB" }}
+                                <IoBookmark
+                                  className="text-[#159055]"
+                                  size={20}
                                 />
+                                {/* style={{ backgroundColor: "#1788FB" }} */}
                               </button>
                             ) : (
                               // Render a button to save the coin
@@ -280,7 +297,7 @@ const Market = () => {
                                 className=""
                                 onClick={() => saveCoin(market?.id)}
                               >
-                                <BiBookmark />
+                                <IoBookmarkOutline size={20} />
                               </button>
                             )}
                             {/* <button

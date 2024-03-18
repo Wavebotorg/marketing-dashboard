@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { leaderBoardSearch } from "@/app/redux/features/searchFeatures";
 const Navbar = () => {
   const router = useRouter();
   // const [active, setActive] = useState("");
@@ -21,7 +23,7 @@ const Navbar = () => {
   //   const storedActive = localStorage.getItem("Dashboard");
   //   setActive(storedActive || getPath);
   // }, [getPath]);
- 
+
   // const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
 
   // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
@@ -31,7 +33,7 @@ const Navbar = () => {
   // };
 
   // const ConfirmLogOut = () => {
-    
+
   //   localStorage.clear();
   //   router.push("/login");
   //   setConfirmationPopUp(false);
@@ -50,7 +52,7 @@ const Navbar = () => {
     setActive(storedActive || getPath);
 
     // Check for localStorage on the client side
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("Token");
       setToken(storedToken);
     }
@@ -74,23 +76,33 @@ const Navbar = () => {
   //   setActive(storedActive || getPath);
   // }, [getPath]);
 
-
   // const token = localStorage.getItem("Token");
 
-
   // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
-
 
   // const ClosePopUp = () => {
   //   setConfirmationPopUp(false);
   // };
-
 
   // const ConfirmLogOut = () => {
   //   localStorage.clear();
   //   router.push("/login");
   //   setConfirmationPopUp(false);
   // };
+
+  // const [navBarOnchange, setNavbarOnchange] = useState("");
+  // const leaderBoardData = useSelector(
+  //   (state) => state?.homeFeatureSlice?.leaderBoradData
+  // );
+  // console.log("🚀 ~ Navbar ~ leaderBoardData:", leaderBoardData);
+  // useEffect(() => {
+  //   const changeData = leaderBoardData?.filter((item) =>
+  //     item?.name.toLowerCase().startsWith(navBarOnchange.toLowerCase())
+  //   );
+  //   console.log("🚀 ~ useEffect ~ changeData:", changeData);
+  // }, [navBarOnchange, leaderBoardData]);
+  const dispatch = useDispatch();
+  const pathName = usePathname();
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -113,8 +125,16 @@ const Navbar = () => {
             <input
               type="search"
               id="default-search"
-              className="bg-[#1C1C1C]  outline-none "
-              placeholder="Search "
+              className="bg-[#1C1C1C]  outline-none w-full"
+              placeholder="Search"
+              onChange={(e) =>
+                dispatch(
+                  leaderBoardSearch({
+                    changeValue: e?.target?.value,
+                    pathname: pathName,
+                  })
+                )
+              }
             />
           </div>
 
@@ -127,7 +147,7 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-1.5  rounded-xl "
+                    className="bg-[#1788FB] text-white p-1.5  rounded-xl"
                   >
                     <div className="flex items-center gap-1">
                       <FiPower size={18} />

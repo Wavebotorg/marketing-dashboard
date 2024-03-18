@@ -344,7 +344,7 @@ function Sidebar() {
                         />
                       </span>
                     </div>
-                    <p className="text-xs">Invited by @{allUser.email}</p>
+                    <p className="text-xs">Invited by {allUser.email}</p>
                     <div className="flex mt-2">
                       <Image
                         src={discord}

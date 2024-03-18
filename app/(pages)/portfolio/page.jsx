@@ -73,9 +73,18 @@ const Portfolio = () => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 ">
         <div className=" mt-7" />
-        <div className="flex  items-center justify-between mt-6">
-          <div>
-            <div className="text-2xl justify-start">My Portfolio</div>
+        <div className="flex items-center justify-between mt-6">
+          <div className="text-2xl justify-start">My Portfolio</div>
+          <div className=" flex w-96 gap-2 text-sm xsm:mr-0 rounded-lg  bg-[#1C1C1C] text-white ">
+            <div className=" flex items-center pl-3 pointer-events-none">
+              <CiSearch size={20} />
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="bg-[#1C1C1C]  outline-none my-2"
+              placeholder="Search"
+            />
           </div>
         </div>
         <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">

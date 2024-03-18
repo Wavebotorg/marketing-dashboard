@@ -12,6 +12,8 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
+import { GoSearch } from "react-icons/go";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
@@ -27,81 +29,33 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 
+import { usePagination } from "../Pagination/usePagination";
+
 const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
-  //pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const visibleData = watchlistData.slice(startIndex, endIndex);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  const [search, setSearch] = useState("");
+  const [filterdAllUsers, setFilterdAllUsers] = useState([]); // Use Filter
+  const { sliceData, currentPage, numbers, totalPages, goToPage } =
+    usePagination(filterdAllUsers, 5);
+
+  // Search
+  const HendalSearch = (e) => {
+    setSearch(e.target.value);
   };
 
-  // const getUserdata = async () => {
-  //   axios
-  //     .get(
-  //       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
-  //     )
-  //     .then((res) => {
-  //       setAllCoinData(res?.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
+  useEffect(() => {
+    const results = watchlistData.filter((item) => {
+      const searchTerm = search.toLowerCase();
+      const itemNameMatch = item?.name?.toLowerCase().includes(searchTerm);
+      return itemNameMatch;
+    });
+    setFilterdAllUsers(results);
+    goToPage(1);
+  }, [search]);
 
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, []);
-  // Get All User Show
-  // const getWatchlistdata = async () => {
-  //   axiosInstanceAuth
-  //     .get("/allWatchlistData")
-  //     .then((res) => {
-  //       const myData = res?.data?.data;
-  //       setWatchlist(res?.data?.data);
-
-  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, []);
-  // const getWatchlistdata = async () => {
-  //   axiosInstanceAuth
-  //     .get("/allWatchlistData")
-  //     .then((res) => {
-  //       const myData = res?.data?.data;
-  //       setWatchlist(res?.data?.data);
-
-  //       console.log("AllCoinDataafadsfdasfasdfsfs-------------->", myData);
-
-  //       // Filter allCoinData based on watchlist IDs
-  //       const filteredData = allCoinData.filter((coin) =>
-  //         watchlist.includes(coin.id)
-  //       );
-
-  //       setWatchlistData(filteredData);
-  //       console.log("watchlistfilter-----------",filteredData)
-
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getWatchlistdata();
-  // }, [allCoinData]);
   const getUserdata = async () => {
     try {
       const res = await axios.get(
@@ -140,7 +94,6 @@ const WatchList = () => {
       getWatchlistdata();
     }
   }, [allCoinData]); // Only trigger if allCoinData changes
-  
 
   useEffect(() => {
     if (watchlist.length > 0) {
@@ -151,6 +104,20 @@ const WatchList = () => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
+        <div class="relative">
+          <input
+            class="shadow-md pl-10  rounded-lg lg:w-96 text-[#9F9F9F] text-[16px] py-2 px-3  focus:outline-none"
+            id="username"
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={HendalSearch}
+          />
+
+          <div class="absolute left-0 inset-y-0 flex py-2 ">
+            <GoSearch size={20} className="ml-3 text-[#22345C]" />
+          </div>
+        </div>
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
             <div>
@@ -191,22 +158,6 @@ const WatchList = () => {
               <button className="  ">Smart Portfolios</button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
-            {/*  <div className="flex items-center  ml-auto  ">
-            <div>
-              <label className=" text-sm md:text-lg ">Rows per page </label>
-              <select
-                name="select Row"
-                className="bg-blue-500 rounded-lg p-1 !outline-none "
-                defaultValue="Show 5"
-              >
-                <option value="Show 1">Show 1</option>
-                <option value="Show 2">Show 2</option>
-                <option value="Show 3">Show 3</option>
-                <option value="Show 4">Show 4</option>
-                <option value="Show 5">Show 5</option>
-              </select>
-            </div>
-          </div> */}
           </div>
         </div>
 
@@ -260,8 +211,8 @@ const WatchList = () => {
                 </thead>
 
                 <tbody>
-                  {visibleData?.length > 0 &&
-                    visibleData?.map((d, index) => (
+                  {sliceData?.length > 0 &&
+                    sliceData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -329,13 +280,46 @@ const WatchList = () => {
           </div>
         </div>
         <div className="xsm:hidden md:hidden lg:block">
-          <Pagination
+          {/* <Pagination
             totalItems={allCoinData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
             style={{ display: "block !important" }}
-          />
+          /> */}
+          {watchlistData?.length > 5 ? (
+            <div className="flex gap-2 pb-5 bottom-0">
+              <button
+                className="px-1 py-1 leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
+                disabled={currentPage === 1}
+                onClick={() => goToPage(currentPage - 1)}
+              >
+                <GrFormPrevious size={25} />
+              </button>
+
+              {numbers.map((item, index) => (
+                <button
+                  disabled={item === "..."}
+                  className={`py-[3px] px-3  rounded-lg ${
+                    currentPage === item &&
+                    "bg-[#22345C] text-white font-bold font-sans"
+                  }`}
+                  onClick={() => goToPage(item)}
+                  key={index}
+                >
+                  {item}
+                </button>
+              ))}
+
+              <button
+                className=" px-1 py-1  leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
+                disabled={currentPage === totalPages}
+                onClick={() => goToPage(currentPage + 1)}
+              >
+                <GrFormNext size={25} />
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
 

@@ -1,0 +1,30 @@
+/* Pagination Styles */
+li {
+    list-style: none;
+  }
+  
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .pagination-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 23%;
+    /* border: 1px solid black; */
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .active {
+    background: #22345c;
+    color: white;
+  }
+  .null {
+    color: black;
+  }
+  
