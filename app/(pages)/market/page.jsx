@@ -8,10 +8,12 @@ import { BiBookmark } from "react-icons/bi";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Link from "next/link";
 import axios from "axios";
-
+import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
 const Market = () => {
   const { id } = useParams();
+  const { searchQuery  } = useSearch();//search
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([])
@@ -40,22 +42,28 @@ const Market = () => {
     getUserdata();
   }, []);
 
-  //pagination
+  // useEffect(() => {
+  //   resetSearchQuery();
+  // }, [resetSearchQuery]);
+
+   
+  //pagination 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData?.slice(startIndex, endIndex);
+  //search
+  const filteredData = allCoinData.filter((coin) =>
+  coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+);
+  const visibleData = filteredData?.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  // useEffect(() => {
-  //   const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-  //   setSavedCoins(savedCoinsFromStorage);
-  // }, []);
-
+ 
   useEffect(() => {
 
     saveCoin();
@@ -68,28 +76,58 @@ const Market = () => {
     setToken(storedToken);
   }, []);
 
+  // const saveCoin = async (id) => {
+  //   try {
+  //     // Check if the coin is already saved
+  //     const res = await axiosInstanceAuth.get("/allWatchlistData");
+
+  //     setSavedData(res?.data?.data)
+  //     console.log("rres----------->>>", res);
+
+
+  //     if (savedData && savedData.includes(id)) {
+  //       // If saved, remove it from the saved list
+  //       setSavedCoins((prevSavedCoins) =>
+  //         prevSavedCoins.filter((coinId) => coinId !== id)
+  //       );
+  //     } else {
+  //       // If not saved, add it to the saved list
+  //       setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+  //       if (token) {
+  //         await axiosInstanceAuth.post("watchlist", { coinId: id });
+  //       }
+  //       // Save the coin to the server (if needed)
+
+  //     }
+  //   } catch (err) {
+  //     console.log("Error while updating saved coins:", err);
+  //   }
+  // };
   const saveCoin = async (id) => {
     try {
+      const isSaved = savedData.includes(id);
+
+
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
-
-      setSavedData(res?.data?.data)
       console.log("rres----------->>>", res);
+      setSavedData(res?.data?.data);
 
 
-      if (savedData && savedData.includes(id)) {
+      if (isSaved) {
         // If saved, remove it from the saved list
         setSavedCoins((prevSavedCoins) =>
           prevSavedCoins.filter((coinId) => coinId !== id)
         );
+        setSavedData((prevSavedData) =>
+          prevSavedData.filter((coinId) => coinId !== id)
+        );
       } else {
         // If not saved, add it to the saved list
         setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-        if (token) {
-          await axiosInstanceAuth.post("watchlist", { coinId: id });
-        }
+        setSavedData((prevSavedData) => [...prevSavedData, id]);
         // Save the coin to the server (if needed)
-
+        await axiosInstanceAuth.post("watchlist", { coinId: id });
       }
     } catch (err) {
       console.log("Error while updating saved coins:", err);
@@ -161,6 +199,7 @@ const Market = () => {
           </div> */}
             </div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
+              
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -245,7 +284,7 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {token ? (savedData && savedData.includes(market?.id) ? (
+                            {/* {token ? (savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className=""  >
 
@@ -261,7 +300,26 @@ const Market = () => {
                               >
                                 <BiBookmark />
                               </button>
-                            )) : null}
+                            )) : null} */}
+                            {token ?(savedData && savedData.includes(market?.id) ? (
+                              // Render a filled bookmark if the coin is saved
+                              <button className="">
+                                <IoBookmark
+                                  className="text-[#159055]"
+                                  size={17}
+                                />
+                                {/* style={{ backgroundColor: "#1788FB" }} */}
+                              </button>
+                            ) : (
+                              // Render a button to save the coin
+                              <button
+                                className=""
+                                onClick={() => saveCoin(market?.id)}
+                              >
+                                <IoBookmarkOutline size={17} />
+                              </button>
+                            )
+                            ) : null}
                             {/* <button
   className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
   onClick={() => saveCoin(market?.id)}
@@ -281,7 +339,7 @@ const Market = () => {
       </div>
       <div className="xsm:hidden md:hidden lg:block">
         <Pagination
-          totalItems={allCoinData.length}
+           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}

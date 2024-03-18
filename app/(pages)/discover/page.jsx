@@ -20,7 +20,7 @@ import Ftm from "../../../public/assets/discover/fantom-ftm-logo-3566C53917-seek
 import Bitcoin from "../../../public/assets/bitcoin.png";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
 
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -45,7 +45,7 @@ const Discover = () => {
     { img: Lunc, name: "Lunc", point: "84.65", percentage: "-9.43%" },
     { img: Ftm, name: "Ftm", point: "84.65", percentage: "-9.43%" },
   ];
-  const portfolioData = [
+  const discoverData = [
     {
       coin: "Bitcoin",
       price: "41987.82",
@@ -58,7 +58,7 @@ const Discover = () => {
       indicator: "5/8 Indicators",
     },
     {
-      coin: "Bitcoin",
+      coin: "bnb",
       price: "$50,000",
       priceper: "(-2.49%)",
       chart: GreenChart,
@@ -69,7 +69,7 @@ const Discover = () => {
       indicator: "5/8 Indicators",
     },
     {
-      coin: "Bitcoin",
+      coin: "USDC",
       price: "$50,000",
       priceper: "(-2.49%)",
       chart: GreenChart,
@@ -84,10 +84,14 @@ const Discover = () => {
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 1;
-
+  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = portfolioData.slice(startIndex, endIndex);
+  const filteredData = discoverData.filter((coin) =>
+
+  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -269,7 +273,7 @@ const Discover = () => {
           </div>
         </div>
         <Pagination
-          totalItems={portfolioData.length}
+        totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}

@@ -9,9 +9,15 @@ import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
+import { useSearch } from "../contexts/SearchContext";
 const Navbar = () => {
   const router = useRouter();
   const [active, setActive] = useState("");
+  //search
+  const { searchQuery, setSearchQuery } = useSearch();
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   // const getPath = usePathname();
   // useEffect(() => {
@@ -79,7 +85,9 @@ const Navbar = () => {
               <CiSearch size={20} />
             </div>
             <input
-              type="search"
+              type=""
+              value={searchQuery}
+        onChange={handleSearchChange}
               id="default-search"
               className="bg-[#1C1C1C]  outline-none  rounded-lg "
               placeholder="Search "
