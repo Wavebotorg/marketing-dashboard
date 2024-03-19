@@ -76,7 +76,7 @@ const Discover = () => {
       marketcap: "829.67B",
       volume: "250000",
       volumper: "(61.70%)",
-      signal: "Sell",
+      signal: "Buy",
       indicator: "5/8 Indicators",
     },
   ];
@@ -115,7 +115,11 @@ const Discover = () => {
           {/* mobile screen  */}
           <div className="flex justify-center items-center gap-8 md:hidden mt-7 ">
             {imageNames.map((image, index) => (
-              <div className="" key={index} data-tooltip-id={`tooltip-${index}`}>
+              <div
+                className=""
+                key={index}
+                data-tooltip-id={`tooltip-${index}`}
+              >
                 <ReactTooltip
                   id={`tooltip-${index}`}
                   place="top"
@@ -130,9 +134,6 @@ const Discover = () => {
           </div>
         </div>
 
-       
-
-       
         <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Explore Crypto
@@ -173,7 +174,6 @@ const Discover = () => {
             </div>
           ))}
         </div>
-     
 
         <div class="flex justify-between items-center p- lg:px- md:px- mt-5  mb-2">
           <div class="md:text-3xl text-xl font-semibold">
@@ -182,7 +182,6 @@ const Discover = () => {
               Explore the biggest crypto movers on the market.
             </p>
           </div>
-         
         </div>
 
         <div className="lg:mx-  md:p- mb-5 mt-3">
@@ -235,7 +234,17 @@ const Discover = () => {
                         <td className="px-3 py-4  whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">{item.price}</div>
                           <p className="text-sm  text-[#FF0000] text-center">
-                            {item.priceper}
+                            <span
+                              className={` ${
+                                item?.priceper === 0
+                                  ? "text-white"
+                                  : item?.priceper < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item.priceper}
+                            </span>
                           </p>
                         </td>
 
@@ -254,12 +263,32 @@ const Discover = () => {
                             {item.volume}
                           </div>
                           <p className="text-sm  text-[#1AA80D] text-center">
-                            {item.volumper}
+                            <span
+                              className={` ${
+                                item?.volumper === 0
+                                  ? "text-white"
+                                  : item?.volumper < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item.volumper}
+                            </span>
                           </p>
                         </td>
                         <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
-                            {item.signal}
+                            <span
+                              className={` ${
+                                item?.signal === "HOLD"
+                                  ? "text-yellow-300"
+                                  : item?.signal === "Buy"
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }`}
+                            >
+                              {item.signal}
+                            </span>
                           </div>
                           <p className="text-sm  text-white text-center">
                             {item.indicator}

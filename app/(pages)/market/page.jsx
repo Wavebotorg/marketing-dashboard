@@ -11,12 +11,7 @@ import axios from "axios";
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { homeDataAsyncThunk } from "@/app/redux/features/searchFeatures";
-
-import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 const Market = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
   const { searchQuery  } = useSearch();//search
   const [allCoinData, setAllCoinData] = useState([]);
@@ -39,18 +34,13 @@ const Market = () => {
       })
 
       .catch((err) => {
-        console.log("err market page --->", err);
+        console.log("err --->", err);
       });
   };
 
   useEffect(() => {
-    // getUserdata();
-    dispatch(homeDataAsyncThunk());
+    getUserdata();
   }, []);
-  const coinData = useSelector(
-    (state) => state?.homeFeatureSlice?.homeDataChange
-  );
-  console.log("🚀 ~ Market ~ coinData:", coinData);
 
   // useEffect(() => {
   //   resetSearchQuery();
@@ -117,10 +107,12 @@ const Market = () => {
     try {
       const isSaved = savedData.includes(id);
 
+
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       console.log("rres----------->>>", res);
       setSavedData(res?.data?.data);
+
 
       if (isSaved) {
         // If saved, remove it from the saved list
@@ -253,8 +245,8 @@ const Market = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {coinData?.length > 0 &&
-                    coinData?.map((market, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           {/* className={`${
@@ -299,7 +291,6 @@ const Market = () => {
                                 <BiBookmark
                                   style={{ backgroundColor: "#1788FB" }}
                                 />
-                               
                               </button>
                             ) : (
                               // Render a button to save the coin
@@ -307,7 +298,7 @@ const Market = () => {
                                 className=""
                                 onClick={() => saveCoin(market?.id)}
                               >
-                                <IoBookmarkOutline size={20} />
+                                <BiBookmark />
                               </button>
                             )) : null} */}
                             {token ?(savedData && savedData.includes(market?.id) ? (
