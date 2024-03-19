@@ -10,12 +10,9 @@ import Link from "next/link";
 import axios from "axios";
 
 import Pagination from "../Pagination/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { homeDataAsyncThunk } from "@/app/redux/features/searchFeatures";
 
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 const Market = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
@@ -37,13 +34,8 @@ const Market = () => {
   };
 
   useEffect(() => {
-    // getUserdata();
-    dispatch(homeDataAsyncThunk());
+    getUserdata();
   }, []);
-  const coinData = useSelector(
-    (state) => state?.homeFeatureSlice?.homeDataChange
-  );
-  console.log("🚀 ~ Market ~ coinData:", coinData);
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -243,8 +235,8 @@ const Market = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {coinData?.length > 0 &&
-                    coinData?.map((market, index) => (
+                  {allCoinData?.length > 0 &&
+                    allCoinData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           {/* className={`${
@@ -286,7 +278,7 @@ const Market = () => {
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <IoBookmark
-                                  className="text-[#159055]"
+                                  className="text-[#1788FB]"
                                   size={20}
                                 />
                                 {/* style={{ backgroundColor: "#1788FB" }} */}

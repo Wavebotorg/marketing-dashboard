@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { leaderBoardSearch } from "@/app/redux/features/searchFeatures";
 const Navbar = () => {
   const router = useRouter();
   // const [active, setActive] = useState("");
@@ -101,7 +99,6 @@ const Navbar = () => {
   //   );
   //   console.log("🚀 ~ useEffect ~ changeData:", changeData);
   // }, [navBarOnchange, leaderBoardData]);
-  const dispatch = useDispatch();
   const pathName = usePathname();
   return (
     <>
@@ -127,14 +124,6 @@ const Navbar = () => {
               id="default-search"
               className="bg-[#1C1C1C]  outline-none w-full"
               placeholder="Search"
-              onChange={(e) =>
-                dispatch(
-                  leaderBoardSearch({
-                    changeValue: e?.target?.value,
-                    pathname: pathName,
-                  })
-                )
-              }
             />
           </div>
 

@@ -8,8 +8,6 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import Pagination from "../Pagination/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { leaderBoardDataAsyncThunk } from "@/app/redux/features/searchFeatures";
 
 const truncateEmail = (email) => {
   if (email.length < 20) {
@@ -23,7 +21,6 @@ const truncateEmail = (email) => {
 };
 
 const LeaderBoard = () => {
-  const dispatch = useDispatch();
   const students = [
     {
       Rank: "1",
@@ -64,29 +61,26 @@ const LeaderBoard = () => {
     // Add more student data as needed
   ];
 
-  // const [allRecentUser, setAllRecentUser] = useState([]);
-  const allRecentUser = useSelector(
-    (state) => state?.homeFeatureSlice?.leaderBoradDataChange
-  );
+  const [allRecentUser, setAllRecentUser] = useState([]);
+
   // console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
 
   // Get All Admin Show
-  // const getAdmindata = async () => {
-  //   await axiosInstanceAuth
-  //     .get("recentUsers")
-  //     .then((res) => {
-  //       const myData = res?.data;
-  //       setAllRecentUser(myData?.data || []);
-  //       console.log("recentUsers---->", myData);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
+  const getAdmindata = async () => {
+    await axiosInstanceAuth
+      .get("recentUsers")
+      .then((res) => {
+        const myData = res?.data;
+        setAllRecentUser(myData?.data || []);
+        console.log("recentUsers---->", myData);
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
 
   useEffect(() => {
-    // getAdmindata();
-    dispatch(leaderBoardDataAsyncThunk());
+    getAdmindata();
   }, []);
 
   //pagination

@@ -42,19 +42,19 @@ const WatchList = () => {
     usePagination(filterdAllUsers, 5);
 
   // Search
-  const HendalSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  // const HendalSearch = (e) => {
+  //   setSearch(e.target.value);
+  // };
 
-  useEffect(() => {
-    const results = watchlistData.filter((item) => {
-      const searchTerm = search.toLowerCase();
-      const itemNameMatch = item?.name?.toLowerCase().includes(searchTerm);
-      return itemNameMatch;
-    });
-    setFilterdAllUsers(results);
-    goToPage(1);
-  }, [search]);
+  // useEffect(() => {
+  //   const results = watchlistData.filter((item) => {
+  //     const searchTerm = search.toLowerCase();
+  //     const itemNameMatch = item?.name?.toLowerCase().includes(searchTerm);
+  //     return itemNameMatch;
+  //   });
+  //   setFilterdAllUsers(results);
+  //   goToPage(1);
+  // }, [search]);
 
   const getUserdata = async () => {
     try {
@@ -104,7 +104,7 @@ const WatchList = () => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
-        <div class="relative">
+        {/* <div class="relative">
           <input
             class="shadow-md pl-10  rounded-lg lg:w-96 text-[#9F9F9F] text-[16px] py-2 px-3  focus:outline-none"
             id="username"
@@ -117,7 +117,7 @@ const WatchList = () => {
           <div class="absolute left-0 inset-y-0 flex py-2 ">
             <GoSearch size={20} className="ml-3 text-[#22345C]" />
           </div>
-        </div>
+        </div> */}
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
             <div>
@@ -211,8 +211,8 @@ const WatchList = () => {
                 </thead>
 
                 <tbody>
-                  {sliceData?.length > 0 &&
-                    sliceData?.map((d, index) => (
+                  {watchlistData?.length > 0 &&
+                    watchlistData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
