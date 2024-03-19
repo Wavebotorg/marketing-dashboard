@@ -114,13 +114,24 @@ const Market = () => {
         setSavedCoins((prevSavedCoins) =>
           prevSavedCoins.filter((coinId) => coinId !== id)
         );
-        setSavedData((prevSavedData) =>
-          prevSavedData.filter((coinId) => coinId !== id)
-        );
+        setSavedData((prevSavedData) => {
+          if (Array.isArray(prevSavedData)) {
+            return prevSavedData.filter((coinId) => coinId !== id);
+          } else {
+            return [];
+          }
+        });
       } else {
         // If not saved, add it to the saved list
         setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-        setSavedData((prevSavedData) => [...prevSavedData, id]);
+        setSavedData((prevSavedData) => {
+          if (Array.isArray(prevSavedData)) {
+            return [...prevSavedData, id];
+          } else {
+            return [id];
+          }
+        });
+
         // Save the coin to the server (if needed)
         await axiosInstanceAuth.post("watchlist", { coinId: id });
       }
