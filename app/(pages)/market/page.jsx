@@ -13,7 +13,8 @@ import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
 const Market = () => {
   const { id } = useParams();
-  const { searchQuery  } = useSearch();//search
+
+  console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([])
@@ -38,43 +39,43 @@ const Market = () => {
       });
   };
 
-  useEffect(() => {
-    getUserdata();
-  }, []);
 
   // useEffect(() => {
   //   resetSearchQuery();
   // }, [resetSearchQuery]);
 
-   
+
   //pagination 
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   //search
   const filteredData = allCoinData.filter((coin) =>
-  coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-);
-  const visibleData = filteredData?.slice(startIndex, endIndex);
+    coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    coin.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const visibleData =filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
- 
   useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]); 
 
+
+
+  useEffect(() => {
+    getUserdata();
     saveCoin();
-  }, []);
-
-
-  useEffect(() => {
     // Check if the user is logged in when the component mounts
     const storedToken = localStorage.getItem("Token");
     setToken(storedToken);
   }, []);
+
+
 
   // const saveCoin = async (id) => {
   //   try {
@@ -199,7 +200,7 @@ const Market = () => {
           </div> */}
             </div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
-              
+
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -269,23 +270,23 @@ const Market = () => {
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
                           <td className="text-center whitespace-nowrap text-md text-white ">
-                           
-                           <div className="flex flex-col items-center justify-center">
-                             <div>${market?.current_price}</div>
-                             <div
-                               className={
-                                 market?.price_change_percentage_24h === 0
-                                   ? "text-white"
-                                   : market?.price_change_percentage_24h < 0
-                                   ? "text-red-500"
-                                   : "text-green-500"
-                               }
-                             >
-                               ({market?.price_change_percentage_24h})
-                             </div>
-                           </div>
-                         </td>
-                          
+
+                            <div className="flex flex-col items-center justify-center">
+                              <div>${market?.current_price}</div>
+                              <div
+                                className={
+                                  market?.price_change_percentage_24h === 0
+                                    ? "text-white"
+                                    : market?.price_change_percentage_24h < 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                }
+                              >
+                                ({market?.price_change_percentage_24h})
+                              </div>
+                            </div>
+                          </td>
+
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
                           <td className=" text-center whitespace-nowrap text-md text-white ">
                             {/* {d.ChangesD} */}
@@ -311,7 +312,7 @@ const Market = () => {
                                 <BiBookmark />
                               </button>
                             )) : null} */}
-                            {token ?(savedData && savedData.includes(market?.id) ? (
+                            {token ? (savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <IoBookmark
@@ -330,7 +331,7 @@ const Market = () => {
                               </button>
                             )
                             ) : null}
-                            
+
                           </td>
                         </tr>
                       </>
@@ -344,7 +345,7 @@ const Market = () => {
       </div>
       <div className="xsm:hidden md:hidden lg:block">
         <Pagination
-           totalItems={filteredData.length}
+          totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
@@ -387,12 +388,12 @@ const Market = () => {
                     <div className="flex flex-col items-center justify-center py-2  px-4">
                       <div className="">${market?.current_price}</div>
                       <div
-                        className={ 
+                        className={
                           market?.price_change_percentage_24h === 0
                             ? "text-white"
                             : market?.price_change_percentage_24h < 0
-                            ? "text-red-500 "
-                            : "text-green-500 "
+                              ? "text-red-500 "
+                              : "text-green-500 "
                         }
                       >
                         ({market?.price_change_percentage_24h})
@@ -423,20 +424,20 @@ const Market = () => {
                         {savedData && savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
                           <button className="">
-                          <IoBookmark
-                            className="text-[#159055]"
-                            size={17}
-                          />
-                          {/* style={{ backgroundColor: "#1788FB" }} */}
-                        </button>
+                            <IoBookmark
+                              className="text-[#159055]"
+                              size={17}
+                            />
+                            {/* style={{ backgroundColor: "#1788FB" }} */}
+                          </button>
                         ) : (
                           // Render a button to save the coin
                           <button
-                          className=""
-                          onClick={() => saveCoin(market?.id)}
-                        >
-                          <IoBookmarkOutline size={17} />
-                        </button>
+                            className=""
+                            onClick={() => saveCoin(market?.id)}
+                          >
+                            <IoBookmarkOutline size={17} />
+                          </button>
                         )}
                       </div>
                     </div>

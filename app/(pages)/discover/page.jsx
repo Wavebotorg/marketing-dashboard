@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import Overview from "../../../public/assets/discover/overview.svg";
 import Stocks from "../../../public/assets/discover/stocks.svg";
@@ -82,19 +82,22 @@ const Discover = () => {
   ];
 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 1;
-  const { searchQuery } = useSearch();//search
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = discoverData.filter((coin) =>
-
   coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
 );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">

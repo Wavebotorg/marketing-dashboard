@@ -52,18 +52,18 @@ const LeaderBoard = () => {
       email: "pintu@gmail.com",
       points: "924,466,796",
     },
-    // {
-    //   Rank: "6",
-    //   Name: "FewHODL_Twitter",
-    //   Invitedby: "invite_EJRN6",
-    //   Points: "224,466,796",
-    // },
+    {
+      Rank: "6",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
     // Add more student data as needed
   ];
-  const { searchQuery } = useSearch();//search
+
   const [allRecentUser, setAllRecentUser] = useState([]);
   console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
- 
+
   // Get All Admin Show
   const getAdmindata = async () => {
     await axiosInstanceAuth
@@ -83,21 +83,24 @@ const LeaderBoard = () => {
   }, []);
 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = students.filter((coin) =>
-  coin.name.toLowerCase().includes(searchQuery.toLowerCase())  ||
-  coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.points.toLowerCase().includes(searchQuery.toLowerCase())
-  // Add more fields for search filtering if needed
-);
+    coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    coin.points.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -167,7 +170,7 @@ const LeaderBoard = () => {
           </div>
 
           <Pagination
-             totalItems={filteredData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}

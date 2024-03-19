@@ -113,22 +113,28 @@ const Holder = () => {
 
     // Add more data as needed
   ]);
-  const { searchQuery } = useSearch();
+
   //pagination
+  const { searchQuery } = useSearch();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  //search
   const filteredData = allCoinData.filter((coin) =>
   coin.snapblock.toLowerCase().includes(searchQuery.toLowerCase()) ||
   coin.reward.toLowerCase().includes(searchQuery.toLowerCase())
-  // Add more fields for search filtering if needed
+ 
 );
   const visibleData =  filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import bit from "../../assets/bitcoin.png";
 import Image from "next/image";
@@ -63,9 +63,9 @@ const Portfolio = () => {
   ];
 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData =  portfolioData.filter((coin) =>
@@ -78,7 +78,10 @@ const Portfolio = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
+  
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 ">
