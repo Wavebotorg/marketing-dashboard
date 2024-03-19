@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -255,16 +255,16 @@ const Holder = () => {
             </div>
           </div>
         </div>
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
              totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
           />
-        </div>
-        {allCoinData?.length > 0 &&
-          allCoinData?.map((d, index) => (
+        {/* </div> */}
+        {visibleData?.length > 0 &&
+         visibleData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">

@@ -17,7 +17,7 @@
 //   } else {
 //     if (currentPage === 1) numbers = [1, 2, "...", totalPages];
 //     else if (currentPage === 2) numbers = [1, 2, 3, "...", totalPages];
-//     else if (currentPage === 3) numbers = [1, 2, 3, 4, "...", totalPages];
+//     else if (currentPage === 3) numbers = [1, 2, 3, 4, "...", totalPages];gggg
 //     else if (currentPage > 3 && currentPage === totalPages - 2)
 //       numbers = [
 //         1,

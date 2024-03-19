@@ -278,16 +278,16 @@ const Referral = () => {
             </div>
           </div>
         </div>
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
             totalItems={allCoinData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
           />
-        </div>
-        {allCoinData?.length > 0 &&
-          allCoinData?.map((d, index) => (
+        {/* </div> */}
+        {visibleData?.length > 0 &&
+         visibleData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">

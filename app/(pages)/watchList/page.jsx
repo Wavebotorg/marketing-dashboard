@@ -425,7 +425,7 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
             totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
@@ -433,11 +433,11 @@ const WatchList = () => {
             currentPage={currentPage}
             style={{ display: "block !important" }}
           />
-        </div>
+        {/* </div> */}
       </div>
 
-      {watchlistData?.length > 0 &&
-        watchlistData?.map((d, index) => (
+      {visibleData?.length > 0 &&
+       visibleData?.map((d, index) => (
           <div key={index} className="lg:hidden xsm:ml- md:ml-0 m-5">
             <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md m-5">
               <div className="w-full  ">
