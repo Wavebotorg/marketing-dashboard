@@ -341,7 +341,7 @@ function Sidebar() {
                   alt="Sidebaruserlogo"
                   width="30px"
                   height="30px"
-                  className="items-center"
+                  className=" ml-2 items-center"
                 />
                 <div className={` ${isNavbar ? "" : "hidden"} `}>
                   <p className="">{allUser.name}</p>

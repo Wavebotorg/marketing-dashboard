@@ -21,7 +21,6 @@ const truncateEmail = (email) => {
 };
 
 const LeaderBoard = () => {
-
   const students = [
     {
       Rank: "1",

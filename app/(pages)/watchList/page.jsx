@@ -12,7 +12,7 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-import {  AiFillDelete } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -22,8 +22,8 @@ import { FaPlus } from "react-icons/fa6";
 import { RiGridFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
-
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
+// import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 
@@ -31,7 +31,7 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
-  const { searchQuery } = useSearch();//search
+  const { searchQuery } = useSearch(); //search
   // const [open, setOpen] = React.useState(false); // Add user popup open
   const [open, setOpen] = React.useState(false); // Add user popup open
   const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
@@ -43,24 +43,22 @@ const WatchList = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const filteredData = watchlistData .filter((coin) =>
-
-  // coin.id.toLowerCase().includes(searchQuery.toLowerCase()) 
-  coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-  
-);
+  const filteredData = watchlistData.filter(
+    (coin) =>
+      // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
+      coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coin.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
   const handleOpen = () => setOpen(!open);
-// Delete Modal Open
-const modelShows = (id) => {
-  setShowModal(true);
-  setSelectedCoinId(id);
-};
-
+  // Delete Modal Open
+  const modelShows = (id) => {
+    setShowModal(true);
+    setSelectedCoinId(id);
+  };
 
   const getUserdata = async () => {
     try {
@@ -93,20 +91,30 @@ const modelShows = (id) => {
   const removeCoinFromWatchlist = async () => {
     try {
       // Make an API call to remove the coin from the watchlist
-      await axiosInstanceAuth.post("removeCoinWatchlist", { coinId: selectedCoinId });
- 
+      await axiosInstanceAuth.post("removeCoinWatchlist", {
+        coinId: selectedCoinId,
+      });
+
       // Update the local state to reflect the changes
-      const updatedWatchlist = watchlist.filter((coinId) => coinId !==selectedCoinId);
-      
+      const updatedWatchlist = watchlist.filter(
+        (coinId) => coinId !== selectedCoinId
+      );
+
       setWatchlist(updatedWatchlist);
-      console.log("🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",  updatedWatchlist)
-    
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
+        updatedWatchlist
+      );
+
       const updatedWatchlistData = allCoinData.filter((coin) =>
         updatedWatchlist.includes(coin.id)
       );
-   
+
       setWatchlistData(updatedWatchlistData);
-      console.log("🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:", updatedWatchlistData)
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
+        updatedWatchlistData
+      );
       setShowModal(false);
     } catch (err) {
       console.log("Error removing coin from watchlist:", err);
@@ -121,13 +129,12 @@ const modelShows = (id) => {
       getWatchlistdata();
     }
   }, [allCoinData]); // Only trigger if allCoinData changes
-  
 
   useEffect(() => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
-  },  []);
+  }, []);
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
@@ -237,9 +244,11 @@ const modelShows = (id) => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     ></th>
-                    <th  scope="col"
-                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap">
-Remove
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap"
+                    >
+                      Remove
                     </th>
                   </tr>
                 </thead>
@@ -264,28 +273,78 @@ Remove
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.circulating_supply}
+                            <span
+                              className={`${
+                                d.circulating_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.circulating_supply}
+                            </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.current_price}
+                            <span
+                              className={`${
+                                d.current_price === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.current_price}
+                            </span>
                           </td>
+
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
                               <div>{d.max_supply}</div>
                               <div>{d.price_change_24h}</div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.total_supply}
-                            <div className="flex justify-center items-center ">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                            <span
+                              className={`${
+                                d.total_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {d.total_supply}
+                            </span>
+                            <div className="flex justify-center items-center">
                               <div className="">
-                                <FaCaretDown
-                                  size={15}
-                                  className="text-[#FF0000]"
-                                />
+                                {d.price_change_percentage_24h === 0 ? (
+                                  <FaMinus size={15} className="text-white" />
+                                ) : d.price_change_percentage_24h < 0 ? (
+                                  <FaCaretDown
+                                    size={15}
+                                    className="text-red-500"
+                                  />
+                                ) : (
+                                  <FaCaretUp
+                                    size={15}
+                                    className="text-green-500"
+                                  />
+                                )}
                               </div>
-                              <div className="text-[11px] text-[#FF0000]">
-                                (-0.73%)
+                              <div
+                                className={`${
+                                  d.price_change_percentage_24h === 0
+                                    ? "text-white"
+                                    : d.price_change_percentage_24h < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }`}
+                              >
+                                ({d.price_change_percentage_24h}%)
                               </div>
                             </div>
                           </td>
@@ -306,52 +365,52 @@ Remove
                             />
                           </td>
                           <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
-                          <button
-                          // onClick={() => removeCoinFromWatchlist(d.id)}
-                          onClick={() => modelShows(d.id)}
-                          className="text-red-500 text-center"
-                        >
-                          Remove
-                        </button>
-                        {showModal ? (
-                                  <>
-                                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                                      <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                          <div className="relative p-6 flex-auto">
-                                            <span className="justify-center items-center flex">
-                                              <AiFillDelete className="w-16 h-16 fill-red-500" />
-                                            </span>
-                                            <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
-                                              Are You Sure ?
-                                            </p>
-                                            <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                                              You want to Remove 
-                                            </p>
-                                          </div>
+                            <button
+                              // onClick={() => removeCoinFromWatchlist(d.id)}
+                              onClick={() => modelShows(d.id)}
+                              className="text-red-500 text-center"
+                            >
+                              Remove
+                            </button>
+                            {showModal ? (
+                              <>
+                                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="relative p-6 flex-auto">
+                                        <span className="justify-center items-center flex">
+                                          <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                        </span>
+                                        <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                          Are You Sure ?
+                                        </p>
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                          You want to Remove
+                                        </p>
+                                      </div>
 
-                                          <div className="flex gap-2 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
-                                            <button
-                                              onClick={() =>
-                                                setShowModal(false)
-                                              }
-                                              class="text-red-500   font-bold py-2 px-6 rounded"
-                                            >
-                                              No
-                                            </button>
-                                            <button
-                                              onClick={removeCoinFromWatchlist}
-                                              class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
-                                            >
-                                              Yes
-                                            </button>
-                                          </div>
-                                        </div>
+                                      
+                                      <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                          onClick={() => setShowModal(false)}
+                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                        >
+                                          No
+                                        </button>
+
+                                        <button
+                                          onClick={removeCoinFromWatchlist}
+                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                        >
+                                          Yes
+                                        </button>
                                       </div>
                                     </div>
-                                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                                  </>
-                                ) : null}
+                                  </div>
+                                </div>
+                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                              </>
+                            ) : null}
                           </td>
                         </tr>
                       </>
@@ -397,22 +456,45 @@ Remove
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sell</div>
                       <div className=" py-2 pr-4 pl-4">
-                        {d.circulating_supply}
+                        <span
+                          className={`${
+                            d.circulating_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.circulating_supply}
+                        </span>
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Buy</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.current_price}
+                        <span
+                          className={`${
+                            d.current_price === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.current_price}
+                        </span>
                       </div>
                     </div>
+
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">52W Range</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         {d.max_supply} - {d.price_change_24h}
                       </div>
                     </div>
-                    <div className="border-b border-[#494949] flex justify-between">
+                    {/* <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Change 1D</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                         {d.total_supply}{" "}
@@ -421,7 +503,47 @@ Remove
                           (-0.73%)
                         </span>
                       </div>
+                    </div> */}
+                    <div className="border-b border-[#494949] flex justify-between">
+                      <div className="py-2  pl-4 font-semibold">Change 1D</div>
+                      <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        <span
+                          className={`${
+                            d.total_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {d.total_supply}
+                        </span>
+
+                        <div className="flex">
+                          <div className="">
+                            {d.price_change_percentage_24h === 0 ? (
+                              <FaMinus size={15} className="text-white" />
+                            ) : d.price_change_percentage_24h < 0 ? (
+                              <FaCaretDown size={15} className="text-red-500" />
+                            ) : (
+                              <FaCaretUp size={15} className="text-green-500" />
+                            )}
+                          </div>
+                          <div
+                            className={`${
+                              d.price_change_percentage_24h === 0
+                                ? "text-white"
+                                : d.price_change_percentage_24h < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            ({d.price_change_percentage_24h}%)
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sentiment</div>
                       <div>
@@ -451,14 +573,54 @@ Remove
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Remove</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                      <button
-                          onClick={() => removeCoinFromWatchlist(d.id)}
+                        <button
+                         onClick={() => modelShows(d.id)}
                           className="text-red-500"
                         >
                           Remove
                         </button>
+                        {showModal ? (
+                              <>
+                                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="relative p-6 flex-auto">
+                                        <span className="justify-center items-center flex">
+                                          <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                        </span>
+                                        <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                          Are You Sure ?
+                                        </p>
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                          You want to Remove
+                                        </p>
+                                      </div>
+
+                                      
+                                      <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                          onClick={() => setShowModal(false)}
+                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                        >
+                                          No
+                                        </button>
+
+                                        <button
+                                          onClick={removeCoinFromWatchlist}
+                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                        >
+                                          Yes
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                              </>
+                            ) : null}
                       </div>
                     </div>
+                    
                   </>
                 </div>
               </div>

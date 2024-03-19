@@ -50,9 +50,14 @@ const ResetPassword = () => {
       .post("resetPassword", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("Reset Password Data --->", myData);
+        console.log("Reset Password Data --->", myData?.msg);
         if (myData?.status) {
           toast.success(myData?.msg);
+
+
+
+
+
 
           router.push("/sucessreset");
           // setTimeout(() => {
@@ -121,6 +126,7 @@ const ResetPassword = () => {
           <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
             Submit
           </button>
+          <ToastContainer />
         </div>
       </div>
     </div>

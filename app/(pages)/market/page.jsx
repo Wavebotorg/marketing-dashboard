@@ -269,13 +269,23 @@ const Market = () => {
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
                           <td className="text-center whitespace-nowrap text-md text-white ">
-                            <div className="flex flex-col items-center justify-center ">
-                              <div>${market?.current_price} </div>
-                              <div className="text-[#FF0000]">
-                                ({market?.price_change_percentage_24h})
-                              </div>
-                            </div>
-                          </td>
+                           
+                           <div className="flex flex-col items-center justify-center">
+                             <div>${market?.current_price}</div>
+                             <div
+                               className={
+                                 market?.price_change_percentage_24h === 0
+                                   ? "text-white"
+                                   : market?.price_change_percentage_24h < 0
+                                   ? "text-red-500"
+                                   : "text-green-500"
+                               }
+                             >
+                               ({market?.price_change_percentage_24h})
+                             </div>
+                           </div>
+                         </td>
+                          
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
                           <td className=" text-center whitespace-nowrap text-md text-white ">
                             {/* {d.ChangesD} */}
@@ -320,12 +330,7 @@ const Market = () => {
                               </button>
                             )
                             ) : null}
-                            {/* <button
-  className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
-  onClick={() => saveCoin(market?.id)}
->
-  <BiBookmark />
-</button> */}
+                            
                           </td>
                         </tr>
                       </>
@@ -379,9 +384,17 @@ const Market = () => {
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
-                    <div className="flex justify-end items-center   px-4">
-                      <div> ${market?.current_price} </div>
-                      <div className="text-[#FF0000]">
+                    <div className="flex flex-col items-center justify-center py-2  px-4">
+                      <div className="">${market?.current_price}</div>
+                      <div
+                        className={ 
+                          market?.price_change_percentage_24h === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_24h < 0
+                            ? "text-red-500 "
+                            : "text-green-500 "
+                        }
+                      >
                         ({market?.price_change_percentage_24h})
                       </div>
                     </div>
@@ -409,12 +422,21 @@ const Market = () => {
                       <div className="flex items-center ml-16">
                         {savedData && savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
-                          <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                          <button className="">
+                          <IoBookmark
+                            className="text-[#159055]"
+                            size={17}
+                          />
+                          {/* style={{ backgroundColor: "#1788FB" }} */}
+                        </button>
                         ) : (
                           // Render a button to save the coin
-                          <button onClick={() => saveCoin(market?.id)}>
-                            <BiBookmark />
-                          </button>
+                          <button
+                          className=""
+                          onClick={() => saveCoin(market?.id)}
+                        >
+                          <IoBookmarkOutline size={17} />
+                        </button>
                         )}
                       </div>
                     </div>
