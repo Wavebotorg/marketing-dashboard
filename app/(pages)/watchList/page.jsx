@@ -12,49 +12,53 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-import { GoSearch } from "react-icons/go";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-
+import { AiFillDelete } from "react-icons/ai";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
 import { FaGreaterThan } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { RiGridFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
-
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
+// import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
-
-import { usePagination } from "../Pagination/usePagination";
 
 const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
+  const { searchQuery } = useSearch(); //search
+  // const [open, setOpen] = React.useState(false); // Add user popup open
+  const [open, setOpen] = React.useState(false); // Add user popup open
+  const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
+  const [showModal, setShowModal] = React.useState(false); // Delete Popup
 
-  const [search, setSearch] = useState("");
-  const [filterdAllUsers, setFilterdAllUsers] = useState([]); // Use Filter
-  const { sliceData, currentPage, numbers, totalPages, goToPage } =
-    usePagination(filterdAllUsers, 5);
+  //pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
-  // Search
-  // const HendalSearch = (e) => {
-  //   setSearch(e.target.value);
-  // };
-
-  // useEffect(() => {
-  //   const results = watchlistData.filter((item) => {
-  //     const searchTerm = search.toLowerCase();
-  //     const itemNameMatch = item?.name?.toLowerCase().includes(searchTerm);
-  //     return itemNameMatch;
-  //   });
-  //   setFilterdAllUsers(results);
-  //   goToPage(1);
-  // }, [search]);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const filteredData = watchlistData.filter(
+    (coin) =>
+      // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
+      coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coin.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const visibleData = filteredData.slice(startIndex, endIndex);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  const handleOpen = () => setOpen(!open);
+  // Delete Modal Open
+  const modelShows = (id) => {
+    setShowModal(true);
+    setSelectedCoinId(id);
+  };
 
   const getUserdata = async () => {
     try {
@@ -84,7 +88,38 @@ const WatchList = () => {
       console.log("err --->", err);
     }
   };
+  const removeCoinFromWatchlist = async () => {
+    try {
+      // Make an API call to remove the coin from the watchlist
+      await axiosInstanceAuth.post("removeCoinWatchlist", {
+        coinId: selectedCoinId,
+      });
 
+      // Update the local state to reflect the changes
+      const updatedWatchlist = watchlist.filter(
+        (coinId) => coinId !== selectedCoinId
+      );
+
+      setWatchlist(updatedWatchlist);
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
+        updatedWatchlist
+      );
+
+      const updatedWatchlistData = allCoinData.filter((coin) =>
+        updatedWatchlist.includes(coin.id)
+      );
+
+      setWatchlistData(updatedWatchlistData);
+      console.log(
+        "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
+        updatedWatchlistData
+      );
+      setShowModal(false);
+    } catch (err) {
+      console.log("Error removing coin from watchlist:", err);
+    }
+  };
   useEffect(() => {
     getUserdata();
   }, []);
@@ -104,20 +139,6 @@ const WatchList = () => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
-        {/* <div class="relative">
-          <input
-            class="shadow-md pl-10  rounded-lg lg:w-96 text-[#9F9F9F] text-[16px] py-2 px-3  focus:outline-none"
-            id="username"
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={HendalSearch}
-          />
-
-          <div class="absolute left-0 inset-y-0 flex py-2 ">
-            <GoSearch size={20} className="ml-3 text-[#22345C]" />
-          </div>
-        </div> */}
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
             <div>
@@ -158,6 +179,22 @@ const WatchList = () => {
               <button className="  ">Smart Portfolios</button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
+            {/*  <div className="flex items-center  ml-auto  ">
+            <div>
+              <label className=" text-sm md:text-lg ">Rows per page </label>
+              <select
+                name="select Row"
+                className="bg-blue-500 rounded-lg p-1 !outline-none "
+                defaultValue="Show 5"
+              >
+                <option value="Show 1">Show 1</option>
+                <option value="Show 2">Show 2</option>
+                <option value="Show 3">Show 3</option>
+                <option value="Show 4">Show 4</option>
+                <option value="Show 5">Show 5</option>
+              </select>
+            </div>
+          </div> */}
           </div>
         </div>
 
@@ -207,12 +244,18 @@ const WatchList = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
                     ></th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap"
+                    >
+                      Remove
+                    </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {watchlistData?.length > 0 &&
-                    watchlistData?.map((d, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -230,28 +273,78 @@ const WatchList = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.circulating_supply}
+                            <span
+                              className={`${
+                                d.circulating_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.circulating_supply}
+                            </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.current_price}
+                            <span
+                              className={`${
+                                d.current_price === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {" "}
+                              {d.current_price}
+                            </span>
                           </td>
+
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
                               <div>{d.max_supply}</div>
                               <div>{d.price_change_24h}</div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            {d.total_supply}
-                            <div className="flex justify-center items-center ">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                            <span
+                              className={`${
+                                d.total_supply === 0
+                                  ? "text-white"
+                                  : d.total_supply < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {d.total_supply}
+                            </span>
+                            <div className="flex justify-center items-center">
                               <div className="">
-                                <FaCaretDown
-                                  size={15}
-                                  className="text-[#FF0000]"
-                                />
+                                {d.price_change_percentage_24h === 0 ? (
+                                  <FaMinus size={15} className="text-white" />
+                                ) : d.price_change_percentage_24h < 0 ? (
+                                  <FaCaretDown
+                                    size={15}
+                                    className="text-red-500"
+                                  />
+                                ) : (
+                                  <FaCaretUp
+                                    size={15}
+                                    className="text-green-500"
+                                  />
+                                )}
                               </div>
-                              <div className="text-[11px] text-[#FF0000]">
-                                (-0.73%)
+                              <div
+                                className={`${
+                                  d.price_change_percentage_24h === 0
+                                    ? "text-white"
+                                    : d.price_change_percentage_24h < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }`}
+                              >
+                                ({d.price_change_percentage_24h}%)
                               </div>
                             </div>
                           </td>
@@ -264,12 +357,60 @@ const WatchList = () => {
                               />
                             </div>
                           </td>
-                          <td className="px-6 py-4 text-end justify-end flex whitespace-nowrap text-md text-white ">
+                          <td className="px-6 py-4 whitespace-nowrap text-md text-white ">
                             <Image
                               src={d.chart}
                               alt="Picture of the author"
                               className="rounded-full"
                             />
+                          </td>
+                          <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
+                            <button
+                              // onClick={() => removeCoinFromWatchlist(d.id)}
+                              onClick={() => modelShows(d.id)}
+                              className="text-red-500 text-center"
+                            >
+                              Remove
+                            </button>
+                            {showModal ? (
+                              <>
+                                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="relative p-6 flex-auto">
+                                        <span className="justify-center items-center flex">
+                                          <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                        </span>
+                                        <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                          Are You Sure ?
+                                        </p>
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                          You want to Remove
+                                        </p>
+                                      </div>
+
+                                      
+                                      <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                          onClick={() => setShowModal(false)}
+                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                        >
+                                          No
+                                        </button>
+
+                                        <button
+                                          onClick={removeCoinFromWatchlist}
+                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                        >
+                                          Yes
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                              </>
+                            ) : null}
                           </td>
                         </tr>
                       </>
@@ -280,46 +421,13 @@ const WatchList = () => {
           </div>
         </div>
         <div className="xsm:hidden md:hidden lg:block">
-          {/* <Pagination
-            totalItems={allCoinData.length}
+          <Pagination
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
             style={{ display: "block !important" }}
-          /> */}
-          {watchlistData?.length > 5 ? (
-            <div className="flex gap-2 pb-5 bottom-0">
-              <button
-                className="px-1 py-1 leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
-                disabled={currentPage === 1}
-                onClick={() => goToPage(currentPage - 1)}
-              >
-                <GrFormPrevious size={25} />
-              </button>
-
-              {numbers.map((item, index) => (
-                <button
-                  disabled={item === "..."}
-                  className={`py-[3px] px-3  rounded-lg ${
-                    currentPage === item &&
-                    "bg-[#22345C] text-white font-bold font-sans"
-                  }`}
-                  onClick={() => goToPage(item)}
-                  key={index}
-                >
-                  {item}
-                </button>
-              ))}
-
-              <button
-                className=" px-1 py-1  leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
-                disabled={currentPage === totalPages}
-                onClick={() => goToPage(currentPage + 1)}
-              >
-                <GrFormNext size={25} />
-              </button>
-            </div>
-          ) : null}
+          />
         </div>
       </div>
 
@@ -348,22 +456,45 @@ const WatchList = () => {
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sell</div>
                       <div className=" py-2 pr-4 pl-4">
-                        {d.circulating_supply}
+                        <span
+                          className={`${
+                            d.circulating_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.circulating_supply}
+                        </span>
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Buy</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.current_price}
+                        <span
+                          className={`${
+                            d.current_price === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {" "}
+                          {d.current_price}
+                        </span>
                       </div>
                     </div>
+
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">52W Range</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         {d.max_supply} - {d.price_change_24h}
                       </div>
                     </div>
-                    <div className="border-b border-[#494949] flex justify-between">
+                    {/* <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Change 1D</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                         {d.total_supply}{" "}
@@ -372,7 +503,47 @@ const WatchList = () => {
                           (-0.73%)
                         </span>
                       </div>
+                    </div> */}
+                    <div className="border-b border-[#494949] flex justify-between">
+                      <div className="py-2  pl-4 font-semibold">Change 1D</div>
+                      <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        <span
+                          className={`${
+                            d.total_supply === 0
+                              ? "text-white"
+                              : d.total_supply < 0
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {d.total_supply}
+                        </span>
+
+                        <div className="flex">
+                          <div className="">
+                            {d.price_change_percentage_24h === 0 ? (
+                              <FaMinus size={15} className="text-white" />
+                            ) : d.price_change_percentage_24h < 0 ? (
+                              <FaCaretDown size={15} className="text-red-500" />
+                            ) : (
+                              <FaCaretUp size={15} className="text-green-500" />
+                            )}
+                          </div>
+                          <div
+                            className={`${
+                              d.price_change_percentage_24h === 0
+                                ? "text-white"
+                                : d.price_change_percentage_24h < 0
+                                ? "text-red-500"
+                                : "text-green-500"
+                            }`}
+                          >
+                            ({d.price_change_percentage_24h}%)
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Sentiment</div>
                       <div>
@@ -389,7 +560,7 @@ const WatchList = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className=" border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold"></div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         <Image
@@ -399,6 +570,57 @@ const WatchList = () => {
                         />
                       </div>
                     </div>
+                    <div className=" flex justify-between">
+                      <div className="py-2  pl-4 font-semibold">Remove</div>
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4">
+                        <button
+                         onClick={() => modelShows(d.id)}
+                          className="text-red-500"
+                        >
+                          Remove
+                        </button>
+                        {showModal ? (
+                              <>
+                                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                                  <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                      <div className="relative p-6 flex-auto">
+                                        <span className="justify-center items-center flex">
+                                          <AiFillDelete className="w-16 h-16 fill-red-500" />
+                                        </span>
+                                        <p className="my-4 text-center leading-relaxed text-2xl text-red-500">
+                                          Are You Sure ?
+                                        </p>
+                                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                                          You want to Remove
+                                        </p>
+                                      </div>
+
+                                      
+                                      <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
+                                        <button
+                                          onClick={() => setShowModal(false)}
+                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                        >
+                                          No
+                                        </button>
+
+                                        <button
+                                          onClick={removeCoinFromWatchlist}
+                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                        >
+                                          Yes
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                              </>
+                            ) : null}
+                      </div>
+                    </div>
+                    
                   </>
                 </div>
               </div>

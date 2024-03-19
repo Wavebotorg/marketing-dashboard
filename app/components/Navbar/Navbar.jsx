@@ -1,3 +1,4 @@
+
 "use client";
 import { IoIosNotifications } from "react-icons/io";
 import Image from "next/image";
@@ -8,21 +9,23 @@ import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
 import { FiPower } from "react-icons/fi";
+import { useSearch } from "../contexts/SearchContext";
 const Navbar = () => {
   const router = useRouter();
-  // const [active, setActive] = useState("");
+  const [active, setActive] = useState("");
+  //search
+  const { searchQuery, setSearchQuery } = useSearch();
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   // const getPath = usePathname();
-  // const getPath = usePathname() || "/default-path";
-  // const [active, setActive] = useState(
-  //   typeof window !== 'undefined' ? localStorage.getItem("Dashboard") || getPath : getPath
-  // );
   // useEffect(() => {
   //   const storedActive = localStorage.getItem("Dashboard");
   //   setActive(storedActive || getPath);
   // }, [getPath]);
 
-  // const token = typeof window !== 'undefined' ? localStorage.getItem("Token") : null;
+  // const token = localStorage.getItem("Token");
 
   // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
 
@@ -31,18 +34,12 @@ const Navbar = () => {
   // };
 
   // const ConfirmLogOut = () => {
-
   //   localStorage.clear();
   //   router.push("/login");
   //   setConfirmationPopUp(false);
   // };
-  // if (typeof window === "undefined") {
-  //   // Server-side rendering, return a placeholder or null
-  //   return null;
-  // }
-
   const getPath = usePathname() || "/default-path";
-  const [active, setActive] = useState(getPath);
+
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -68,38 +65,6 @@ const Navbar = () => {
     setConfirmationPopUp(false);
   };
 
-  // const getPath = usePathname();
-  // useEffect(() => {
-  //   const storedActive = localStorage.getItem("Dashboard");
-  //   setActive(storedActive || getPath);
-  // }, [getPath]);
-
-  // const token = localStorage.getItem("Token");
-
-  // const [ConfirmationPopUp, setConfirmationPopUp] = useState(false);
-
-  // const ClosePopUp = () => {
-  //   setConfirmationPopUp(false);
-  // };
-
-  // const ConfirmLogOut = () => {
-  //   localStorage.clear();
-  //   router.push("/login");
-  //   setConfirmationPopUp(false);
-  // };
-
-  // const [navBarOnchange, setNavbarOnchange] = useState("");
-  // const leaderBoardData = useSelector(
-  //   (state) => state?.homeFeatureSlice?.leaderBoradData
-  // );
-  // console.log("🚀 ~ Navbar ~ leaderBoardData:", leaderBoardData);
-  // useEffect(() => {
-  //   const changeData = leaderBoardData?.filter((item) =>
-  //     item?.name.toLowerCase().startsWith(navBarOnchange.toLowerCase())
-  //   );
-  //   console.log("🚀 ~ useEffect ~ changeData:", changeData);
-  // }, [navBarOnchange, leaderBoardData]);
-  const pathName = usePathname();
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -112,22 +77,25 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   pb-7 pt-5 pl-10   "
+              : "flex  justify-between   py-7  lg:pl-10 pl-2 "
           }`}
         >
-          <div className=" flex w-full gap-2 text-sm xsm:mr-5 rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px]">
+          <div className=" flex w-full sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px] max-w-[70px]">
             <div className=" flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
-              type="search"
+              type=""
+              value={searchQuery}
+        onChange={handleSearchChange}
               id="default-search"
-              className="bg-[#1C1C1C]  outline-none w-full"
-              placeholder="Search"
+              className="bg-[#1C1C1C]  outline-none  rounded-lg "
+              placeholder="Search "
             />
           </div>
-
-          <div className=" flex items-center gap-1.5 mr-5">
+         
+    
+          <div className=" flex items-center gap-1.5 mr-5 ">
             <button className="">
               <IoIosNotifications size={25} />
             </button>
@@ -136,11 +104,11 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-1.5  rounded-xl"
+                    className="bg-[#1788FB] text-white p-2 rounded-xl "
                   >
-                    <div className="flex items-center gap-1">
+                   <div className="flex items-center gap-1">
                       <FiPower size={18} />
-                      <span className="md:ml-1 md:text-base text-base tracking-wide md:block hidden">
+                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
                         Logout
                       </span>
                     </div>
@@ -214,8 +182,20 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      <div className="border-b border-stone-500 mb-2"></div>
+      <div
+          className={`${
+            getPath === "/login" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset"
+              ? "hidden"
+              : "border-b border-stone-500 "
+          }`}
+        >
+    
+      </div>
     </>
   );
 };

@@ -2,11 +2,38 @@
 import React, { useState } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 const Referral = () => {
   const [allCoinData, setAllCoinData] = useState([
     {
-      block: "23",
+      block: "45",
+      date: "2:00:66",
+      wallet: "$04",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth12",
+      status: "true",
+    },
+    {
+      block: "33",
+      date: "2:00:66",
+      wallet: "$75",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth52",
+      status: "true",
+    },
+    {
+      block: "78",
+      date: "2:00:66",
+      wallet: "$66",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth42",
+      status: "true",
+    },
+    {
+      block: "90",
       date: "2:00:66",
       wallet: "$55",
       swapcost: "566",
@@ -15,102 +42,75 @@ const Referral = () => {
       status: "true",
     },
     {
-      block: "23",
+      block: "34",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$33",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth52",
       status: "true",
     },
     {
       block: "23",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$22",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth02",
       status: "true",
     },
     {
-      block: "23",
+      block: "02",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$44",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth23",
       status: "true",
     },
     {
-      block: "23",
+      block: "239",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$505",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth62",
       status: "true",
     },
     {
-      block: "23",
+      block: "34",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$05",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth90",
       status: "true",
     },
     {
-      block: "23",
+      block: "73",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$95",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth45",
       status: "true",
     },
     {
-      block: "23",
+      block: "88",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$15",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
+      transaction: "eth23",
       status: "true",
     },
     {
-      block: "23",
+      block: "203",
       date: "2:00:66",
-      wallet: "$55",
+      wallet: "$52",
       swapcost: "566",
       refreward: "true",
-      transaction: "eth22",
-      status: "true",
-    },
-    {
-      block: "23",
-      date: "2:00:66",
-      wallet: "$55",
-      swapcost: "566",
-      refreward: "true",
-      transaction: "eth22",
-      status: "true",
-    },
-    {
-      block: "23",
-      date: "2:00:66",
-      wallet: "$55",
-      swapcost: "566",
-      refreward: "true",
-      transaction: "eth22",
-      status: "true",
-    },
-    {
-      block: "23",
-      date: "2:00:66",
-      wallet: "$55",
-      swapcost: "566",
-      refreward: "true",
-      transaction: "eth22",
+      transaction: "eth56",
       status: "true",
     },
     // Add more data as needed
@@ -119,10 +119,17 @@ const Referral = () => {
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
+  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData.slice(startIndex, endIndex);
+  const filteredData = allCoinData.filter((coin) =>
+ 
+  coin.wallet.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.block.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.transaction.toLowerCase().includes(searchQuery.toLowerCase())
+  // Add more fields for search filtering if needed
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };

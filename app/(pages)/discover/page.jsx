@@ -20,7 +20,7 @@ import Ftm from "../../../public/assets/discover/fantom-ftm-logo-3566C53917-seek
 import Bitcoin from "../../../public/assets/bitcoin.png";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
 
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -45,7 +45,7 @@ const Discover = () => {
     { img: Lunc, name: "Lunc", point: "84.65", percentage: "-9.43%" },
     { img: Ftm, name: "Ftm", point: "84.65", percentage: "-9.43%" },
   ];
-  const portfolioData = [
+  const discoverData = [
     {
       coin: "Bitcoin",
       price: "41987.82",
@@ -58,7 +58,7 @@ const Discover = () => {
       indicator: "5/8 Indicators",
     },
     {
-      coin: "Bitcoin",
+      coin: "bnb",
       price: "$50,000",
       priceper: "(-2.49%)",
       chart: GreenChart,
@@ -69,14 +69,14 @@ const Discover = () => {
       indicator: "5/8 Indicators",
     },
     {
-      coin: "Bitcoin",
+      coin: "USDC",
       price: "$50,000",
       priceper: "(-2.49%)",
       chart: GreenChart,
       marketcap: "829.67B",
       volume: "250000",
       volumper: "(61.70%)",
-      signal: "Sell",
+      signal: "Buy",
       indicator: "5/8 Indicators",
     },
   ];
@@ -84,10 +84,14 @@ const Discover = () => {
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 1;
-
+  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = portfolioData.slice(startIndex, endIndex);
+  const filteredData = discoverData.filter((coin) =>
+
+  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -111,7 +115,11 @@ const Discover = () => {
           {/* mobile screen  */}
           <div className="flex justify-center items-center gap-8 md:hidden mt-7 ">
             {imageNames.map((image, index) => (
-              <div className="" key={index} data-tooltip-id={`tooltip-${index}`}>
+              <div
+                className=""
+                key={index}
+                data-tooltip-id={`tooltip-${index}`}
+              >
                 <ReactTooltip
                   id={`tooltip-${index}`}
                   place="top"
@@ -126,53 +134,6 @@ const Discover = () => {
           </div>
         </div>
 
-        {/* <div className="py-14 ">
-          <div className="flex  justify-between items-center">
-            <h1 className="md:text-3xl text-xl font-semibold text-nowrap">
-              Explore Crypto
-            </h1>
-            <div className="flex justify-end gap-3">
-              {" "}
-              <button className="bg-[#1788FB] text-white md:px-3 md:py-2 px-2 py-2  rounded-full flex justify-end">
-                View All
-              </button>
-              <Image src={Leftarraow} className="w-10" />
-              <Image src={Rightarraow} className="w-10" />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center ">
-            {cards.map((card, index) => (
-              <div key={index} className="bg-[#1C1C1C] py-7 px-16 rounded-xl">
-                <Image src={card.img} alt={card.name} />
-                <div className="text-sm  text-center p-3  pt-10">
-                  <h1 className="text-2xl font-semibold tracking-wide ">
-                    {card.name}
-                  </h1>
-                  <p className="pt-5 text-2xl font-semibold">{card.point}</p>
-                  <p className="pt-2 text-lg">{card.percentage}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
-
-        {/* <div className="  ">
-          <div className="bg-[#1C1C1C] rounded-xl grid grid-cols-2 ">
-            <div>
-              <Image src={Aave} alt={Aave} />
-              <div>AAVE</div>
-              <div>84.63</div>
-              <div>-9.43%</div>
-            </div>
-            <div>
-              <Image src={Aave} alt={Aave} />
-              <div>AAVE</div>
-              <div>84.63</div>
-              <div>-9.43%</div>
-            </div>
-          </div>
-        </div> */}
         <div className="flex justify-between items-center lg:p- md:p- mt-8 mb-2">
           <div className="md:text-3xl text-xl font-semibold text-nowrap">
             Explore Crypto
@@ -213,68 +174,6 @@ const Discover = () => {
             </div>
           ))}
         </div>
-        {/* <div class="bg-green-100 rounded p-5">card 2</div>
-          <div class="bg-green-100 rounded p-5">card 3</div>
-          <div class="bg-green-100 rounded p-5">card 4</div>
-          <div class="bg-green-100 rounded p-5">card 5</div>
-          <div class="bg-green-100 rounded p-5">card 6</div> */}
-
-        {/* <div className="mx-10">
-          <h1 className="text-3xl font-semibold">Daily Movers</h1>
-          <p className="tracking-wider font-medium">
-            Explore the biggest crypto movers on the market.
-          </p>
-          <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg my-5 p-4">
-            <table className="w-full text-center">
-              <thead>
-                <tr className="bg-[#1C1C1C] px-4 py-2">
-                  <th className="text-left pl-7 text-nowrap">Coin</th>
-                  <th className="text-nowrap">Price</th>
-                  <th className="text-nowrap">Last 7 Days</th>
-                  <th className="text-nowrap">Market Cap</th>
-                  <th className="text-nowrap">Volume(24H)</th>
-                  <th className="text-nowrap">Signal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {portfolioData.map((item, index) => (
-                  <tr key={index} className="bg-[#1C1C1C]">
-                    <td className="px-4 py-4 flex justify-start items-center space-x-2">
-                      <div className="flex justify-start items-center">
-                        <Image
-                          src={Bitcoin}
-                          alt="Picture of the author"
-                          height={25}
-                          width={25}
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div className="text-center">{item.coin}</div>
-                    </td>
-                    <td className="">
-                      <div>{item.price} </div>
-                      <p className="text-red-700">{item.priceper}</p>
-                    </td>
-                    <td></td>
-                    <td className="">{item.marketcap}</td>
-                    <td>
-                      {" "}
-                      <div>{item.volume} </div>
-                      <p className="text-red-700">{item.volumper}</p>{" "}
-                    </td>
-
-                    <td className="">
-                      <div className="text-red-700"> {item.signal} </div>
-                      <p className="">{item.indicator}</p>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div> */}
-
-        {/* <div>Hello</div> */}
 
         <div class="flex justify-between items-center p- lg:px- md:px- mt-5  mb-2">
           <div class="md:text-3xl text-xl font-semibold">
@@ -283,20 +182,6 @@ const Discover = () => {
               Explore the biggest crypto movers on the market.
             </p>
           </div>
-          {/*   <div class="flex items-center">
-            <label class="text-sm md:text-lg mr-2">Rows per page</label>
-            <select
-              name="select Row"
-              class="bg-blue-500 rounded-lg p-1 outline-none"
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          </div> */}
         </div>
 
         <div className="lg:mx-  md:p- mb-5 mt-3">
@@ -349,7 +234,17 @@ const Discover = () => {
                         <td className="px-3 py-4  whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">{item.price}</div>
                           <p className="text-sm  text-[#FF0000] text-center">
-                            {item.priceper}
+                            <span
+                              className={` ${
+                                item?.priceper === 0
+                                  ? "text-white"
+                                  : item?.priceper < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item.priceper}
+                            </span>
                           </p>
                         </td>
 
@@ -368,12 +263,32 @@ const Discover = () => {
                             {item.volume}
                           </div>
                           <p className="text-sm  text-[#1AA80D] text-center">
-                            {item.volumper}
+                            <span
+                              className={` ${
+                                item?.volumper === 0
+                                  ? "text-white"
+                                  : item?.volumper < 0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {item.volumper}
+                            </span>
                           </p>
                         </td>
                         <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
-                            {item.signal}
+                            <span
+                              className={` ${
+                                item?.signal === "HOLD"
+                                  ? "text-yellow-300"
+                                  : item?.signal === "Buy"
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              }`}
+                            >
+                              {item.signal}
+                            </span>
                           </div>
                           <p className="text-sm  text-white text-center">
                             {item.indicator}
@@ -387,7 +302,7 @@ const Discover = () => {
           </div>
         </div>
         <Pagination
-          totalItems={portfolioData.length}
+        totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}

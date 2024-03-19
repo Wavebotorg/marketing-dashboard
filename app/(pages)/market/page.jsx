@@ -8,15 +8,18 @@ import { BiBookmark } from "react-icons/bi";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Link from "next/link";
 import axios from "axios";
-
-import Pagination from "../Pagination/Pagination";
-
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+import { useSearch } from "../../components/contexts/SearchContext";
+import Pagination from "../Pagination/Pagination";
 const Market = () => {
   const { id } = useParams();
+  const { searchQuery  } = useSearch();//search
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
-  const [savedData, setSavedData] = useState([]);
+  const [savedData, setSavedData] = useState([])
+  console.log("🚀 ~ Market--------------------------------- ~ savedData:", savedData)
+
+  const [token, setToken] = useState(null);
   console.log(savedData, "<,----------------savedData");
   console.log("getAllCoin------->>>", allCoinData);
   console.log("savedcoins-----------------", savedCoins);
@@ -27,9 +30,11 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
+        console.log("🚀 ~ .then ~  setAllCoinData:", res?.data)
       })
+
       .catch((err) => {
-        console.log("err market page --->", err);
+        console.log("err --->", err);
       });
   };
 
@@ -37,77 +42,77 @@ const Market = () => {
     getUserdata();
   }, []);
 
-  //pagination
+  // useEffect(() => {
+  //   resetSearchQuery();
+  // }, [resetSearchQuery]);
+
+   
+  //pagination 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData?.slice(startIndex, endIndex);
+  //search
+  const filteredData = allCoinData.filter((coin) =>
+  coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+);
+  const visibleData = filteredData?.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  // useEffect(() => {
-  //   const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-  //   setSavedCoins(savedCoinsFromStorage);
-  // }, []);
+ 
+  useEffect(() => {
+
+    saveCoin();
+  }, []);
+
 
   useEffect(() => {
-    // const savedCoinsFromStorage = JSON.parse(localStorage.getItem('savedCoins')) || [];
-    // setSavedCoins(savedCoinsFromStorage);
-    saveCoin();
+    // Check if the user is logged in when the component mounts
+    const storedToken = localStorage.getItem("Token");
+    setToken(storedToken);
   }, []);
 
   // const saveCoin = async (id) => {
   //   try {
-  //     // Check if the user is logged in (you need to replace this condition with your authentication logic)
-  //     const userIsLoggedIn = true; // Replace with your logic to check if the user is logged in
+  //     // Check if the coin is already saved
+  //     const res = await axiosInstanceAuth.get("/allWatchlistData");
 
-  //     if (userIsLoggedIn) {
-  //       // Save the coin to the server for the logged-in user
+  //     setSavedData(res?.data?.data)
+  //     console.log("rres----------->>>", res);
 
-  //       await axiosInstanceAuth.post("watchlist", { coinId: id });
 
-  //       // Fetch the updated saved coins data from the server
-  //       const updatedSavedCoins = await axiosInstanceAuth.get("watchlist");
+  //     if (savedData && savedData.includes(id)) {
+  //       // If saved, remove it from the saved list
+  //       setSavedCoins((prevSavedCoins) =>
+  //         prevSavedCoins.filter((coinId) => coinId !== id)
+  //       );
+  //     } else {
+  //       // If not saved, add it to the saved list
+  //       setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
+  //       if (token) {
+  //         await axiosInstanceAuth.post("watchlist", { coinId: id });
+  //       }
+  //       // Save the coin to the server (if needed)
 
-  //       // Update the state with the updated saved coins from the server
-  //       setSavedCoins(updatedSavedCoins.data);
-  //       console.log("Updated Saved Coins:", updatedSavedCoins.data);
   //     }
-
-  //     // Save the coin locally for both logged-in and logged-out users
-  //     // setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  //     // localStorage.setItem('savedCoins', JSON.stringify([...savedCoins, id]));
-
   //   } catch (err) {
-  //     console.log("err--->", err);
+  //     console.log("Error while updating saved coins:", err);
   //   }
   // };
-  //  const removeCoinWatchlist = async (id) => {
-  //     try {
-  //       // Make an API request to remove the coin from the watchlist
-  //       await axiosInstanceAuth.delete(`watchlist/${id}`);
-
-  //       // Fetch the updated saved coins data from the server
-  //       const updatedSavedCoins = await axiosInstanceAuth.get("allWatchlistData");
-
-  //       // Update the state with the updated saved coins from the server
-  //       setSavedData(updatedSavedCoins.data.data);
-  //       console.log("Updated Saved Coins:", updatedSavedCoins.data.data);
-  //     } catch (err) {
-  //       console.log("Error while updating saved coins:", err);
-  //     }
-  //   };
   const saveCoin = async (id) => {
     try {
       const isSaved = savedData.includes(id);
+
 
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       console.log("rres----------->>>", res);
       setSavedData(res?.data?.data);
+
 
       if (isSaved) {
         // If saved, remove it from the saved list
@@ -141,7 +146,8 @@ const Market = () => {
   };
   return (
     <>
-      <div className=" bg-[#1C1C1C] rounded-2xl mb-5">
+
+      <div className=" bg-[#1C1C1C] rounded-2xl">
         {/* <div className="border-b border-stone-500 mt-7" /> */}
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
           <div className="flex pb-3">
@@ -204,6 +210,7 @@ const Market = () => {
           </div> */}
             </div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
+              
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -237,17 +244,20 @@ const Market = () => {
                     >
                       Trade
                     </th>
-                    <th
-                      scope="col"
-                      className=" py-3 text-end text-base font-medium  whitespace-nowrap"
-                    >
-                      Save
-                    </th>
+                    {token && (
+                      <th
+
+                        scope="col"
+                        className=" py-3 text-end text-base font-medium  whitespace-nowrap"
+                      >
+                        Save
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
-                  {allCoinData?.length > 0 &&
-                    allCoinData?.map((market, index) => (
+                  {visibleData?.length > 0 &&
+                    visibleData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           {/* className={`${
@@ -270,13 +280,23 @@ const Market = () => {
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
                           <td className="text-center whitespace-nowrap text-md text-white ">
-                            <div className="flex flex-col items-center justify-center ">
-                              <div>${market?.current_price} </div>
-                              <div className="text-[#FF0000]">
-                                ({market?.price_change_percentage_24h})
-                              </div>
-                            </div>
-                          </td>
+                           
+                           <div className="flex flex-col items-center justify-center">
+                             <div>${market?.current_price}</div>
+                             <div
+                               className={
+                                 market?.price_change_percentage_24h === 0
+                                   ? "text-white"
+                                   : market?.price_change_percentage_24h < 0
+                                   ? "text-red-500"
+                                   : "text-green-500"
+                               }
+                             >
+                               ({market?.price_change_percentage_24h})
+                             </div>
+                           </div>
+                         </td>
+                          
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
                           <td className=" text-center whitespace-nowrap text-md text-white ">
                             {/* {d.ChangesD} */}
@@ -285,12 +305,29 @@ const Market = () => {
                             </div>
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {savedData && savedData.includes(market?.id) ? (
+                            {/* {token ? (savedData && savedData.includes(market?.id) ? (
+                              // Render a filled bookmark if the coin is saved
+                              <button className=""  >
+
+                                <BiBookmark
+                                  style={{ backgroundColor: "#1788FB" }}
+                                />
+                              </button>
+                            ) : (
+                              // Render a button to save the coin
+                              <button
+                                className=""
+                                onClick={() => saveCoin(market?.id)}
+                              >
+                                <BiBookmark />
+                              </button>
+                            )) : null} */}
+                            {token ?(savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
                                 <IoBookmark
-                                  className="text-[#1788FB]"
-                                  size={20}
+                                  className="text-[#159055]"
+                                  size={17}
                                 />
                                 {/* style={{ backgroundColor: "#1788FB" }} */}
                               </button>
@@ -300,15 +337,11 @@ const Market = () => {
                                 className=""
                                 onClick={() => saveCoin(market?.id)}
                               >
-                                <IoBookmarkOutline size={20} />
+                                <IoBookmarkOutline size={17} />
                               </button>
-                            )}
-                            {/* <button
-  className={`save-button ${savedCoins.includes(market.id) ? 'selected' : ''}`}
-  onClick={() => saveCoin(market?.id)}
->
-  <BiBookmark />
-</button> */}
+                            )
+                            ) : null}
+                            
                           </td>
                         </tr>
                       </>
@@ -318,13 +351,17 @@ const Market = () => {
             </div>
           </div>
         </div>
+
       </div>
-      <Pagination
-        totalItems={allCoinData.length}
-        itemsPerPage={itemsPerPage}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      />
+      <div className="xsm:hidden md:hidden lg:block">
+        <Pagination
+           totalItems={filteredData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+
+        />
+      </div>
       {allCoinData?.length > 0 &&
         allCoinData?.map((market, index) => (
           <div
@@ -335,11 +372,8 @@ const Market = () => {
               <div className="w-full  ">
                 <>
                   <div
-                    className={`border-b border-[#494949] flex justify-between
-                    //  {
-                    //   savedCoins.includes(market?.id) ? "bg-blue-500" : ""
-                    // }
-                    `}
+                    className={`border-b border-[#494949] flex justify-between`
+                    }
                   >
                     <div className="py-2  pl-4 font-semibold">Coin</div>
                     <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
@@ -361,9 +395,17 @@ const Market = () => {
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
-                    <div className="flex justify-end items-center   px-4">
-                      <div> ${market?.current_price} </div>
-                      <div className="text-[#FF0000]">
+                    <div className="flex flex-col items-center justify-center py-2  px-4">
+                      <div className="">${market?.current_price}</div>
+                      <div
+                        className={ 
+                          market?.price_change_percentage_24h === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_24h < 0
+                            ? "text-red-500 "
+                            : "text-green-500 "
+                        }
+                      >
                         ({market?.price_change_percentage_24h})
                       </div>
                     </div>
@@ -372,39 +414,53 @@ const Market = () => {
                     <div className="py-2  pl-4 font-semibold">Today’s PnL</div>
                     <div className="flex justify-end items-center py-2 px-4 "></div>
                   </div>
-                  <div className="border-b border-[#494949] flex justify-between">
+                  <div className=" flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Trade</div>
                     <div className="flex justify-end items-center py-2 px-4  gap-1.5">
                       <Link href="/">Trade</Link>
-                      {/* <span className="flex items-center text-red-500 text-[11px]">
-                          <FaCaretDown size={12} />
-                          (-0.73%)
-                        </span> */}
+
                     </div>
                   </div>
-                  <div className="flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Save</div>
+                  {token && (<div className="flex justify-between border-t border-[#494949]">
+                    <div className="py-2  pl-4 font-semibold">
+                      Save
+
+                    </div>
+
+
 
                     <div className="flex justify-end py-2 px-4">
-                      <div className="flex justify-end ml-16">
+                      <div className="flex items-center ml-16">
                         {savedData && savedData.includes(market?.id) ? (
                           // Render a filled bookmark if the coin is saved
-                          <BiBookmark style={{ backgroundColor: "#1788FB" }} />
+                          <button className="">
+                          <IoBookmark
+                            className="text-[#159055]"
+                            size={17}
+                          />
+                          {/* style={{ backgroundColor: "#1788FB" }} */}
+                        </button>
                         ) : (
                           // Render a button to save the coin
-                          <button onClick={() => saveCoin(market?.id)}>
-                            <BiBookmark />
-                          </button>
+                          <button
+                          className=""
+                          onClick={() => saveCoin(market?.id)}
+                        >
+                          <IoBookmarkOutline size={17} />
+                        </button>
                         )}
                       </div>
                     </div>
+
                   </div>
+                  )}
                 </>
               </div>
             </div>
             <div></div>{" "}
           </div>
         ))}
+
     </>
   );
 };

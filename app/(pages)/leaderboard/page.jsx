@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import img from "../../assets/profile.PNG";
-
+import { useSearch } from "../../components/contexts/SearchContext";//search
 import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
@@ -24,47 +24,46 @@ const LeaderBoard = () => {
   const students = [
     {
       Rank: "1",
-      Name: "FewHODL_Twitter",
-      Invitedby: "invite_EJRN6",
-      Points: "224,466,796",
+      name: "rahul",
+      email: "rahul@gmail.com",
+      points: "254,466,796",
     },
     {
       Rank: "2",
-      Name: "FewHODL_Twitter",
-      Invitedby: "invite_EJRN6",
-      Points: "224,466,796",
+      name: "nikhil",
+      email: "nikhil@gmail.com",
+      points: "724,466,796",
     },
     {
       Rank: "3",
-      Name: "FewHODL_Twitter",
-      Invitedby: "invite_EJRN6",
-      Points: "224,466,796",
+      name: "pari",
+      email: "pari@gmail.com",
+      points: "824,466,796",
     },
     {
       Rank: "4",
-      Name: "FewHODL_Twitter",
-      Invitedby: "invite_EJRN6",
-      Points: "224,466,796",
+      name: "parth",
+      email: "parth@gmail.com",
+      points: "324,466,796",
     },
     {
       Rank: "5",
-      Name: "FewHODL_Twitter",
-      Invitedby: "invite_EJRN6",
-      Points: "224,466,796",
+      name: "pintu",
+      email: "pintu@gmail.com",
+      points: "924,466,796",
     },
     // {
-    //   Rank: "4",
+    //   Rank: "6",
     //   Name: "FewHODL_Twitter",
     //   Invitedby: "invite_EJRN6",
     //   Points: "224,466,796",
     // },
     // Add more student data as needed
   ];
-
+  const { searchQuery } = useSearch();//search
   const [allRecentUser, setAllRecentUser] = useState([]);
-
-  // console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
-
+  console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
+ 
   // Get All Admin Show
   const getAdmindata = async () => {
     await axiosInstanceAuth
@@ -89,14 +88,20 @@ const LeaderBoard = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = students.slice(startIndex, endIndex);
+  const filteredData = students.filter((coin) =>
+  coin.name.toLowerCase().includes(searchQuery.toLowerCase())  ||
+  coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.points.toLowerCase().includes(searchQuery.toLowerCase())
+  // Add more fields for search filtering if needed
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="xl:flex my-10 xl:ml-20 xl:mr-14 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className="xl:flex my-10 xl:ml-16  xl:mr-11 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
           <p className="text-blue-400 text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
@@ -144,13 +149,13 @@ const LeaderBoard = () => {
                               {student.Rank}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Name}
+                              {student.name}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Invitedby}
+                              {student.email}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Points}
+                              {student.points}
                             </td>
                           </tr>
                         </>
@@ -162,7 +167,7 @@ const LeaderBoard = () => {
           </div>
 
           <Pagination
-            totalItems={students.length}
+             totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
@@ -175,7 +180,7 @@ const LeaderBoard = () => {
           </p>
           <div className="md:container">
             <div className="mt-6 rounded-lg overflow-hidden w-full">
-              <div className="bg-[#1C1C1C] text-white xl:block md:grid md:grid-cols-2 h-[720px] overflow-auto ">
+              <div className="bg-[#1C1C1C] text-white xl:block md:grid md:grid-cols-2 ">
                 {/* Mapping over students data */}
                 {allRecentUser?.length > 0 &&
                   allRecentUser.map((d, index) => (

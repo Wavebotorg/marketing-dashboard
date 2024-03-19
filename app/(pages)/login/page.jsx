@@ -22,6 +22,7 @@ const Login = () => {
   //   }
   // }, [])
   const [loginFields, setLoginFields] = useState({ email: "", password: "" });
+
   const onChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -48,7 +49,7 @@ const Login = () => {
           toast.success(myData?.msg);
           setTimeout(() => {
             router.push("/");
-          }, 1000);
+          }, 700);
         } else {
           toast.error(myData?.msg);
         }
@@ -58,6 +59,7 @@ const Login = () => {
       });
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible)
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -105,7 +107,7 @@ const Login = () => {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
+            className="absolute right-2 top-12 transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
             onClick={togglePasswordVisibility}
           >
             {isPasswordVisible ? (
@@ -122,6 +124,12 @@ const Login = () => {
           <button
             className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
             onClick={handleSubmit}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+                setCreateFolder(false);
+              }
+            }}
           >
             Login
           </button>
