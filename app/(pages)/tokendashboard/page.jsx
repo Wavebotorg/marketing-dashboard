@@ -1,12 +1,12 @@
 
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";//search
 const TokenDashboard = () => {
   const [allCoinData, setAllCoinData] = useState([
-   {
+    {
       time: "23:00",
       amounteth: "-2833",
       minamonut: "$55",
@@ -54,7 +54,7 @@ const TokenDashboard = () => {
       status: "true",
       transaction: "767879809",
     },
-    
+
     {
       time: "23:00",
       amounteth: "-5333",
@@ -94,27 +94,31 @@ const TokenDashboard = () => {
       amountsol: "2300",
       status: "true",
       transaction: "562879809",
-    }, 
+    },
     // Add more data as needed
   ]);
-  
+
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   //search
   const filteredData = allCoinData.filter((coin) =>
-  coin.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.amounteth.toLowerCase().includes(searchQuery.toLowerCase())
-  // Add more fields for search filtering if needed
-);
+    coin.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    coin.amounteth.toLowerCase().includes(searchQuery.toLowerCase())
+    
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
+
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -287,7 +291,7 @@ const TokenDashboard = () => {
         </div>
         <div className="xsm:hidden md:hidden lg:block">
           <Pagination
-          totalItems={filteredData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}

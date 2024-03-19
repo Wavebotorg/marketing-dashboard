@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -115,15 +115,15 @@ const Referral = () => {
     },
     // Add more data as needed
   ]);
-
+ 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+  //search
   const filteredData = allCoinData.filter((coin) =>
- 
   coin.wallet.toLowerCase().includes(searchQuery.toLowerCase()) ||
   coin.block.toLowerCase().includes(searchQuery.toLowerCase()) ||
   coin.transaction.toLowerCase().includes(searchQuery.toLowerCase())
@@ -134,6 +134,9 @@ const Referral = () => {
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">

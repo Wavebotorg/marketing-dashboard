@@ -31,16 +31,16 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
-  const { searchQuery } = useSearch(); //search
+
   // const [open, setOpen] = React.useState(false); // Add user popup open
   const [open, setOpen] = React.useState(false); // Add user popup open
   const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
   const [showModal, setShowModal] = React.useState(false); // Delete Popup
 
   //pagination
+  const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = watchlistData.filter(
@@ -53,6 +53,11 @@ const WatchList = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
+
+
   const handleOpen = () => setOpen(!open);
   // Delete Modal Open
   const modelShows = (id) => {

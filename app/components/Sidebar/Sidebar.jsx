@@ -29,7 +29,7 @@ import medium from "../../../public/assets/sidebar/medium.png";
 import discord from "../../../public/assets/sidebar/discord.png";
 import useEncryption from "@/app/components/useEncryption/index";
 import axios from "axios";
-import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstance from "@/app/apiInstances/axiosInstance";                                                                                                                        
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 function Sidebar() {
