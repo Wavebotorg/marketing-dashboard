@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import bit from "../../assets/bitcoin.png";
 import Image from "next/image";
 import Pagination from "../Pagination/Pagination";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 const Portfolio = () => {
   // Sample data array
   const portfolioData = [
@@ -22,7 +22,7 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      coin: "Bitcoin BTC",
+      coin: "etherum",
       price: "0.07727",
       units: "124858.18",
       avgOpen: "0.08089",
@@ -34,7 +34,7 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      coin: "Bitcoin BTC",
+      coin: "usdc",
       price: "0.07727",
       units: "124858.18",
       avgOpen: "0.08089",
@@ -46,7 +46,7 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      coin: "Bitcoin BTC",
+      coin: "Sepolia",
       price: "0.07727",
       units: "124858.18",
       avgOpen: "0.08089",
@@ -61,10 +61,16 @@ const Portfolio = () => {
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-
+  const { searchQuery } = useSearch();//search
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = portfolioData.slice(startIndex, endIndex);
+  const filteredData =  portfolioData.filter((coin) =>
+
+  // coin.id.toLowerCase().includes(searchQuery.toLowerCase()) 
+  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
+  
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -193,7 +199,7 @@ const Portfolio = () => {
         /> */}
         <div className="xsm:hidden md:hidden lg:block">
           <Pagination
-            totalItems={portfolioData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}

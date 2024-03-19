@@ -15,7 +15,7 @@ import RedChart from "../../../public/assets/watchlist/redchart.svg";
 import {  AiFillDelete } from "react-icons/ai";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
 import { FaGreaterThan } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -31,7 +31,7 @@ const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
-
+  const { searchQuery } = useSearch();//search
   // const [open, setOpen] = React.useState(false); // Add user popup open
   const [open, setOpen] = React.useState(false); // Add user popup open
   const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
@@ -43,7 +43,14 @@ const WatchList = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = watchlistData.slice(startIndex, endIndex);
+  const filteredData = watchlistData .filter((coin) =>
+
+  // coin.id.toLowerCase().includes(searchQuery.toLowerCase()) 
+  coin.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+  
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -356,7 +363,7 @@ Remove
         </div>
         <div className="xsm:hidden md:hidden lg:block">
           <Pagination
-            totalItems={allCoinData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}

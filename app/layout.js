@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
-
+import { SearchProvider } from "././components/contexts/SearchContext"; 
 export const metadata = {
   title: "wave",
   description: "wave app",
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {/* <Web3AuthSignerProvider> */}
-
+        <SearchProvider> 
         <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
           <div className="sidebar visible px-5  ">
             <Sidebar />
@@ -34,6 +34,7 @@ export default function RootLayout({ children }) {
         </div>
 
         {/* </Web3AuthSignerProvider> */}
+        </SearchProvider>
       </body>
     </html>
   );
