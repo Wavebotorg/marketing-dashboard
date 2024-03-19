@@ -54,7 +54,7 @@ const LeaderBoard = () => {
       points: "924,466,796",
     },
     // {
-    //   Rank: "4",
+    //   Rank: "6",
     //   Name: "FewHODL_Twitter",
     //   Invitedby: "invite_EJRN6",
     //   Points: "224,466,796",
