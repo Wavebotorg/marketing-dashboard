@@ -175,7 +175,7 @@ const Discover = () => {
         </div>
      
 
-        <div class="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
+        <div class="flex justify-between items-center p- lg:px- md:px- mt-5  mb-2">
           <div class="md:text-3xl text-xl font-semibold">
             Daily Movers
             <p class="text-[#7B7B7B] text-sm md:text-lg">
@@ -185,7 +185,7 @@ const Discover = () => {
          
         </div>
 
-        <div className="lg:mx-  md:p- mb-5 mt-2">
+        <div className="lg:mx-  md:p- mb-5 mt-3">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg">
               <table className="w-full">

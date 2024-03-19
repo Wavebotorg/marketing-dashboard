@@ -47,7 +47,7 @@ const Navbar = () => {
     setActive(storedActive || getPath);
 
     // Check for localStorage on the client side
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("Token");
       setToken(storedToken);
     }

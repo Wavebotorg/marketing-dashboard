@@ -4,6 +4,8 @@ import Link from "next/link";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
+import { store } from "./redux/store/store";
+import Providers from "./redux/store/providers";
 // import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 import { SearchProvider } from "././components/contexts/SearchContext"; 
@@ -25,11 +27,13 @@ export default function RootLayout({ children }) {
           {/* <div className="fixed top-0 w-full z-50"><Navbar /></div> */}
 
           <div className=" flex-grow w-full ">
-            <div className=" sticky top-0 z-[50] bg-black w-full">
-              {" "}
-              <Navbar />
-            </div>
-            <div>{children}</div>
+            <Providers store={store}>
+              <div className=" sticky top-0 z-[50] bg-black w-full">
+                {" "}
+                <Navbar />
+              </div>
+              <div>{children}</div>
+            </Providers>
           </div>
         </div>
 

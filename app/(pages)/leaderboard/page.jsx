@@ -8,6 +8,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import Pagination from "../Pagination/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { leaderBoardDataAsyncThunk } from "@/app/redux/features/searchFeatures";
 
 const truncateEmail = (email) => {
   if (email.length < 20) {
@@ -21,7 +23,6 @@ const truncateEmail = (email) => {
 };
 
 const LeaderBoard = () => {
-
   const students = [
     {
       Rank: "1",
@@ -66,21 +67,22 @@ const LeaderBoard = () => {
   console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
  
   // Get All Admin Show
-  const getAdmindata = async () => {
-    await axiosInstanceAuth
-      .get("recentUsers")
-      .then((res) => {
-        const myData = res?.data;
-        setAllRecentUser(myData?.data || []);
-        console.log("recentUsers---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
+  // const getAdmindata = async () => {
+  //   await axiosInstanceAuth
+  //     .get("recentUsers")
+  //     .then((res) => {
+  //       const myData = res?.data;
+  //       setAllRecentUser(myData?.data || []);
+  //       console.log("recentUsers---->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
   useEffect(() => {
-    getAdmindata();
+    // getAdmindata();
+    dispatch(leaderBoardDataAsyncThunk());
   }, []);
 
   //pagination
@@ -181,7 +183,7 @@ const LeaderBoard = () => {
           </p>
           <div className="md:container">
             <div className="mt-6 rounded-lg overflow-hidden w-full">
-              <div className="bg-[#1C1C1C] text-white xl:block md:grid md:grid-cols-2 ">
+              <div className="bg-[#1C1C1C] text-white xl:block md:grid md:grid-cols-2 h-[720px] overflow-auto ">
                 {/* Mapping over students data */}
                 {allRecentUser?.length > 0 &&
                   allRecentUser.map((d, index) => (

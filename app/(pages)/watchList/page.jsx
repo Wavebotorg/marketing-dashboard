@@ -12,7 +12,13 @@ import LTC from "../../../public/assets/watchlist/ltc.svg";
 import SOL from "../../../public/assets/watchlist/sol.svg";
 import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
+<<<<<<< HEAD
 import {  AiFillDelete } from "react-icons/ai";
+=======
+import { GoSearch } from "react-icons/go";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+
+>>>>>>> 42834d6d64f9c1069f75853664876e8a76f592d2
 import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -26,6 +32,8 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
+
+import { usePagination } from "../Pagination/usePagination";
 
 const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
@@ -121,7 +129,6 @@ const modelShows = (id) => {
       getWatchlistdata();
     }
   }, [allCoinData]); // Only trigger if allCoinData changes
-  
 
   useEffect(() => {
     if (watchlist.length > 0) {
@@ -132,6 +139,20 @@ const modelShows = (id) => {
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
+        <div class="relative">
+          <input
+            class="shadow-md pl-10  rounded-lg lg:w-96 text-[#9F9F9F] text-[16px] py-2 px-3  focus:outline-none"
+            id="username"
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={HendalSearch}
+          />
+
+          <div class="absolute left-0 inset-y-0 flex py-2 ">
+            <GoSearch size={20} className="ml-3 text-[#22345C]" />
+          </div>
+        </div>
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
             <div>
@@ -172,22 +193,6 @@ const modelShows = (id) => {
               <button className="  ">Smart Portfolios</button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
-            {/*  <div className="flex items-center  ml-auto  ">
-            <div>
-              <label className=" text-sm md:text-lg ">Rows per page </label>
-              <select
-                name="select Row"
-                className="bg-blue-500 rounded-lg p-1 !outline-none "
-                defaultValue="Show 5"
-              >
-                <option value="Show 1">Show 1</option>
-                <option value="Show 2">Show 2</option>
-                <option value="Show 3">Show 3</option>
-                <option value="Show 4">Show 4</option>
-                <option value="Show 5">Show 5</option>
-              </select>
-            </div>
-          </div> */}
           </div>
         </div>
 
@@ -245,8 +250,8 @@ Remove
                 </thead>
 
                 <tbody>
-                  {visibleData?.length > 0 &&
-                    visibleData?.map((d, index) => (
+                  {sliceData?.length > 0 &&
+                    sliceData?.map((d, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -368,7 +373,40 @@ Remove
             onPageChange={handlePageChange}
             currentPage={currentPage}
             style={{ display: "block !important" }}
-          />
+          /> 
+          {watchlistData?.length > 5 ? (
+            <div className="flex gap-2 pb-5 bottom-0">
+              <button
+                className="px-1 py-1 leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
+                disabled={currentPage === 1}
+                onClick={() => goToPage(currentPage - 1)}
+              >
+                <GrFormPrevious size={25} />
+              </button>
+
+              {numbers.map((item, index) => (
+                <button
+                  disabled={item === "..."}
+                  className={`py-[3px] px-3  rounded-lg ${
+                    currentPage === item &&
+                    "bg-[#22345C] text-white font-bold font-sans"
+                  }`}
+                  onClick={() => goToPage(item)}
+                  key={index}
+                >
+                  {item}
+                </button>
+              ))}
+
+              <button
+                className=" px-1 py-1  leading-tight  bg-[#FFFFFF] rounded-lg text-black text-xl"
+                disabled={currentPage === totalPages}
+                onClick={() => goToPage(currentPage + 1)}
+              >
+                <GrFormNext size={25} />
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
 
