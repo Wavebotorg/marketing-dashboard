@@ -14,7 +14,7 @@ import Pagination from "../Pagination/Pagination";
 const Market = () => {
   const { id } = useParams();
 
-  console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
+  // console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([])
