@@ -354,7 +354,7 @@ const Market = () => {
         </div>
 
       </div>
-      <div className="xsm:hidden md:hidden lg:block">
+      {/* <div className="xsm:hidden md:hidden lg:block"> */}
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
@@ -362,9 +362,9 @@ const Market = () => {
           currentPage={currentPage}
 
         />
-      </div>
-      {allCoinData?.length > 0 &&
-        allCoinData?.map((market, index) => (
+      {/* </div> */}
+      {visibleData?.length > 0 &&
+      visibleData?.map((market, index) => (
           <div
             key={index}
             className="lg:hidden mt-4 space-y-2 flex justify-between"
