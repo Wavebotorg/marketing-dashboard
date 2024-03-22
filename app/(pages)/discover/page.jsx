@@ -107,9 +107,9 @@ const Discover = () => {
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
             {imageNames.map((image, index) => (
               <div key={index} className="space-y-0.5">
-                <Image className="mx-auto" src={image.img} alt={image.name} />
+                <Image className="mx-auto" src={image?.img} alt={image?.name} />
                 <div className="text-base  md:block hidden text-nowrap">
-                  {image.name}
+                  {image?.name}
                 </div>
               </div>
             ))}
@@ -129,9 +129,9 @@ const Discover = () => {
                   effect=""
                   variant="info"
                 >
-                  <div className="text-sm">{image.name}</div>
+                  <div className="text-sm">{image?.name}</div>
                 </ReactTooltip>
-                <Image className=" mx-auto" src={image.img} alt={image.name} />
+                <Image className=" mx-auto" src={image?.img} alt={image?.name} />
               </div>
             ))}
           </div>
@@ -165,13 +165,13 @@ const Discover = () => {
               <Image src={card.img} alt={card.name} className="mx-auto  " />
               <div className="text-center md:space-y-4 space-y-1 md:mt-10 mt-4">
                 <h1 className="md:text-3xl text-xl font-semibold text-white">
-                  {card.name}
+                  {card?.name}
                 </h1>
                 <h1 className="md:text-2xl text-base font-semibold text-white">
-                  {card.point}
+                  {card?.point}
                 </h1>
                 <h1 className="md:text-lg text-sm font-semibold text-[#BFBFBF]">
-                  {card.percentage}
+                  {card?.percentage}
                 </h1>
               </div>
             </div>

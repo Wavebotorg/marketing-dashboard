@@ -307,7 +307,7 @@ const TokenDashboard = () => {
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold">Time</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                          {market.time}
+                          {market?.time}
                         </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
