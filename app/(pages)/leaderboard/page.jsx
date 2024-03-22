@@ -149,16 +149,16 @@ const LeaderBoard = () => {
                         <>
                           <tr key={index}>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.Rank}
+                              {student?.Rank}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.name}
+                              {student?.name}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.email}
+                              {student?.email}
                             </td>
                             <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student.points}
+                              {student?.points}
                             </td>
                           </tr>
                         </>
@@ -201,9 +201,9 @@ const LeaderBoard = () => {
 
                             <div className="lg:text-base text-sm">
                               <div className="flex gap-2">
-                                <p>{d.name}</p>
+                                <p>{d?.name}</p>
                                 <p className="text-[#6B6B6B]">
-                                  {formatDistanceToNow(new Date(d.createdAt), {
+                                  {formatDistanceToNow(new Date(d?.createdAt), {
                                     addSuffix: true,
                                   })}
                                 </p>
@@ -234,7 +234,7 @@ const LeaderBoard = () => {
                                 className=""
                               >
                                 <p className="text-nowrap ">
-                                  Invited by {truncateEmail(d.email)}
+                                  Invited by {truncateEmail(d?.email)}
                                 </p>
                               </div>
                               <ReactTooltip
@@ -244,7 +244,7 @@ const LeaderBoard = () => {
                                 variant="info"
                               >
                                 {/* Display full email in the tooltip */}
-                                <span>{d.email}</span>
+                                <span>{d?.email}</span>
                               </ReactTooltip>
                             </div>
                           </div>

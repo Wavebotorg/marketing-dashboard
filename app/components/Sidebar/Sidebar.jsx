@@ -577,10 +577,10 @@ function Sidebar() {
                 {headerdata?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
-                      href={data.pathname}
+                      href={data?.pathname}
                       className={`${
-                        (isHover && data.id === isHover) ||
-                        data.pathname === pathname
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
                           : ""
                       } flex md:px-2 lg:px-3  py-2 rounded-lg`}
@@ -590,17 +590,17 @@ function Sidebar() {
                     >
                       <div
                         className={
-                          (isHover && data.id === isHover) ||
-                          data.pathname === pathname
+                          (isHover && data?.id === isHover) ||
+                          data?.pathname === pathname
                             ? "dropdown-left-border  -ml-[0px]"
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data.icon} alt="" className="w-7 h-6" />
+                        <Image src={data?.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
-                        {data.pagename}
+                        {data?.pagename}
                       </span>
                     </Link>
                   </li>
@@ -609,10 +609,10 @@ function Sidebar() {
                 {headerbottom?.map((data) => (
                   <li key={data?.id} className="min-w-max">
                     <Link
-                      href={data.pathname}
+                      href={data?.pathname}
                       className={`${
-                        (isHover && data.id === isHover) ||
-                        data.pathname === pathname
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
                           : ""
                       } flex md:px-2 lg:px-3 py-2 rounded-lg`}
@@ -622,17 +622,17 @@ function Sidebar() {
                     >
                       <div
                         className={
-                          (isHover1 && data.id === isHover1) ||
-                          data.pathname === pathname
+                          (isHover1 && data?.id === isHover1) ||
+                          data?.pathname === pathname
                             ? "dropdown-left-border -ml-[0px] "
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data.icon} alt="" className="w-7 h-6" />
+                        <Image src={data?.icon} alt="" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
-                        {data.pagename}
+                        {data?.pagename}
                       </span>
                     </Link>
                   </li>
