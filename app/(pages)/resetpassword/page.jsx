@@ -13,7 +13,7 @@ import axiosInstance from "../../apiInstances/axiosInstance";
 
 const ResetPassword = () => {
   const router = useRouter();
-  const email = localStorage.getItem("userEmail");
+  const email = typeof window !== 'undefined' ? localStorage.getItem("userEmail") : null;
 
   const [resetPassData, setResetPassData] = useState({
     newPassword: "",
