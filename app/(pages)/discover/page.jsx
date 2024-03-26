@@ -151,8 +151,8 @@ const Discover = () => {
               </button>
             </div>
             <div className="flex gap-1">
-              <Image src={Leftarraow} className="md:w-10 w-8" />
-              <Image src={Rightarraow} className="md:w-10 w-8" />
+              <Image src={Leftarraow} className="md:w-10 w-8"  alt={icon}/>
+              <Image src={Rightarraow} className="md:w-10 w-8" alt={icon} />
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ const Discover = () => {
               key={index}
               class="bg-[#1C1C1C] rounded-xl p-5 flex flex-col items-center"
             >
-              <Image src={card.img} alt={card.name} className="mx-auto  " />
+              <Image src={card?.img} alt={card?.name} className="mx-auto  " />
               <div className="text-center md:space-y-4 space-y-1 md:mt-10 mt-4">
                 <h1 className="md:text-3xl text-xl font-semibold text-white">
                   {card?.name}
@@ -227,7 +227,7 @@ const Discover = () => {
                                 className="rounded-full max-w-12"
                               />
                             </div>
-                            <div>{item.coin}</div>
+                            <div>{item?.coin}</div>
                           </div>
                         </td>
                         {/* <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
@@ -235,7 +235,7 @@ const Discover = () => {
                         <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
                       </td> */}
                         <td className="px-3 py-4  whitespace-nowrap  text-white">
-                          <div className="py-0.5 text-center">{item.price}</div>
+                          <div className="py-0.5 text-center">{item?.price}</div>
                           <p className="text-sm  text-[#FF0000] text-center">
                             <span
                               className={` ${
@@ -253,17 +253,17 @@ const Discover = () => {
 
                         <td className=" px-3 py-4 text-center whitespace-nowrap  text-white">
                           <Image
-                            src={item.chart}
+                            src={item?.chart}
                             alt="Picture of the author"
                             className="rounded-full mx-auto"
                           />
                         </td>
                         <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                          {item.marketcap}
+                          {item?.marketcap}
                         </td>
                         <td className=" px-3 py-4 text-center whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
-                            {item.volume}
+                            {item?.volume}
                           </div>
                           <p className="text-sm  text-[#1AA80D] text-center">
                             <span
@@ -275,7 +275,7 @@ const Discover = () => {
                                   : "text-green-500"
                               }`}
                             >
-                              {item.volumper}
+                              {item?.volumper}
                             </span>
                           </p>
                         </td>
@@ -290,11 +290,11 @@ const Discover = () => {
                                   : "text-red-500"
                               }`}
                             >
-                              {item.signal}
+                              {item?.signal}
                             </span>
                           </div>
                           <p className="text-sm  text-white text-center">
-                            {item.indicator}
+                            {item?.indicator}
                           </p>
                         </td>
                       </tr>

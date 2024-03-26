@@ -597,7 +597,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data?.icon} alt="" className="w-7 h-6" />
+                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -629,7 +629,7 @@ function Sidebar() {
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data?.icon} alt="" className="w-7 h-6" />
+                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
