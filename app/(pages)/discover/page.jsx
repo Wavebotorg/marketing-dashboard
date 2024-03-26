@@ -246,7 +246,7 @@ const Discover = () => {
                                   : "text-green-500"
                               }`}
                             >
-                              {item.priceper}
+                              {item?.priceper}
                             </span>
                           </p>
                         </td>
