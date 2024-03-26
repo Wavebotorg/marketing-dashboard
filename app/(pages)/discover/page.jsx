@@ -151,8 +151,8 @@ const Discover = () => {
               </button>
             </div>
             <div className="flex gap-1">
-              <Image src={Leftarraow} className="md:w-10 w-8"  alt={icon}/>
-              <Image src={Rightarraow} className="md:w-10 w-8" alt={icon} />
+              <Image src={Leftarraow} className="md:w-10 w-8"  alt="icon"/>
+              <Image src={Rightarraow} className="md:w-10 w-8" alt="icon" />
             </div>
           </div>
         </div>
