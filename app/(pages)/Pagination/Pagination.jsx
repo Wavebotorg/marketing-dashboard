@@ -54,18 +54,19 @@ const Pagination = ({
   return (
     <div className=" flex justify-end mt-4" >
       <nav>
-        <ul className="pagination">
+        <ul className="pagination pb-10">
           {getPageNumbers().map((page, index) => (
             <li
               key={index}
-              className={`page-item ${currentPage === page ? "active" : ""}`}
+              className={`page-item   ${currentPage === page ? "active" : ""}`}
             >
               <button
                 onClick={() => handlePageChange(page)}
-                className="page-link"
+                className="page-link px-3 "
               >
                 {page === "..." ? page : page}
               </button>
+             
             </li>
           ))}
         </ul>

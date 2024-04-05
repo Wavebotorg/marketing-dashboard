@@ -80,13 +80,15 @@ const WatchList = () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       const myData = res?.data?.data;
+      console.log("🚀 ~ getWatchlistdata ~ myData:", myData)
+      
       setWatchlist(myData);
-
       // Filter allCoinData based on watchlist IDs
-      const filteredData = allCoinData.filter((coin) =>
-        myData.includes(coin.id)
-      );
 
+      const filteredData = allCoinData.filter((coin) =>
+      myData.includes(coin.id)
+      );
+      
       setWatchlistData(filteredData);
       console.log("watchlistfilter-----------", filteredData);
     } catch (err) {

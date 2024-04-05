@@ -11,9 +11,12 @@ import axios from "axios";
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
+import { useRouter } from "next/navigation";
+import Chart from "../chart/Chart"
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 const Market = () => {
   const { id } = useParams();
-
+  const router = useRouter();
   // console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
@@ -27,7 +30,7 @@ const Market = () => {
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -39,6 +42,9 @@ const Market = () => {
       });
   };
 
+
+
+  
 
   // useEffect(() => {
   //   resetSearchQuery();
@@ -69,41 +75,28 @@ const Market = () => {
 
   useEffect(() => {
     getUserdata();
+
     saveCoin();
     // Check if the user is logged in when the component mounts
+
     const storedToken = localStorage.getItem("Token");
+    // if(!storedToken)
+    // {
+      // router.push("/login")
+    // }
     setToken(storedToken);
   }, []);
 
 
 
-  // const saveCoin = async (id) => {
-  //   try {
-  //     // Check if the coin is already saved
-  //     const res = await axiosInstanceAuth.get("/allWatchlistData");
-
-  //     setSavedData(res?.data?.data)
-  //     console.log("rres----------->>>", res);
-
-
-  //     if (savedData && savedData.includes(id)) {
-  //       // If saved, remove it from the saved list
-  //       setSavedCoins((prevSavedCoins) =>
-  //         prevSavedCoins.filter((coinId) => coinId !== id)
-  //       );
-  //     } else {
-  //       // If not saved, add it to the saved list
-  //       setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  //       if (token) {
-  //         await axiosInstanceAuth.post("watchlist", { coinId: id });
-  //       }
-  //       // Save the coin to the server (if needed)
-
-  //     }
-  //   } catch (err) {
-  //     console.log("Error while updating saved coins:", err);
-  //   }
-  // };
+  function formatToUSD(val){
+    const formattedValue = val.toLocaleString('en-US',{
+        style:'currency',
+        currency:'USD'
+    })
+    const trimmedValue = formattedValue.replace(".00","")
+    return trimmedValue
+}
   const saveCoin = async (id) => {
     try {
       const isSaved = savedData.includes(id);
@@ -180,6 +173,7 @@ const Market = () => {
           </div>
           <div className="text-sm pb-4">{/* =${d.price} */} =$42,693.8</div>
           <div className="text-sm ">{/* {d.pnl} */} Todays PnL -$.550()</div>
+          
           {/* </div>
                         </>
                    ))} */}
@@ -221,12 +215,7 @@ const Market = () => {
                     >
                       Coin
                     </th>
-                    <th
-                      scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
-                    >
-                      Amount
-                    </th>
+                   
                     <th
                       scope="col"
                       className=" py-3 text-center text-base font-medium   whitespace-nowrap"
@@ -237,13 +226,37 @@ const Market = () => {
                       scope="col"
                       className=" py-3 text-center text-base font-medium   whitespace-nowrap"
                     >
-                      Today’s PnL
+                      1h
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                      24h
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+                      7d
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                    >
+             24th Volume
                     </th>
                     <th
                       scope="col"
                       className=" py-3 text-center text-base font-medium  whitespace-nowrap"
                     >
-                      Trade
+                      Market Cap	
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center text-base font-medium  whitespace-nowrap"
+                    >
+                    Last 7 days
                     </th>
                     {token && (
                       <th
@@ -278,13 +291,13 @@ const Market = () => {
                               <div> {market?.name}</div>
                             </div>
                           </td>
-                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
+                       
 
                           <td className="text-center whitespace-nowrap text-md text-white ">
 
                             <div className="flex flex-col items-center justify-center">
-                              <div>${market?.current_price}</div>
-                              <div
+                              <div>{formatToUSD(market?.current_price)}</div>
+                              {/* <div
                                 className={
                                   market?.price_change_percentage_24h === 0
                                     ? "text-white"
@@ -294,35 +307,108 @@ const Market = () => {
                                 }
                               >
                                 ({market?.price_change_percentage_24h})
-                              </div>
+                              </div> */}
                             </div>
                           </td>
+                          <td className= {`text-center whitespace-nowrap text-md text-white `} >
+                          <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_1h_in_currency === 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_1h_in_currency < 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_1h_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_1h_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                              {(market?.price_change_percentage_1h_in_currency * 100 ).toFixed(1)}%
+                                </div>
+                            </td>
+                        
 
-                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
+                          <td className="  text-center whitespace-nowrap text-md text-white ">
+                          <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_24h_in_currency=== 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_24h_in_currency< 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_24h_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_24h_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                              {(market?.price_change_percentage_24h_in_currency * 100).toFixed(1)}%
+                                </div>
+                                </td>
+                          <td className="  text-center whitespace-nowrap text-md text-white ">
+                          <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_7d_in_currency=== 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_7d_in_currency< 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_7d_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_7d_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                     {(market?.price_change_percentage_7d_in_currency * 100).toFixed(1)}%
+                                </div>
+                           </td>
                           <td className=" text-center whitespace-nowrap text-md text-white ">
-                            {/* {d.ChangesD} */}
+                            
                             <div className="flex justify-center items-center ">
-                              <Link href="/">Trade</Link>
+                             {formatToUSD(market?.total_volume)}
                             </div>
+                          </td>
+                          <td className="  text-center whitespace-nowrap text-md text-white ">{formatToUSD(market?.market_cap)}</td>
+                          <td className=" text-center whitespace-nowrap text-md text-white ">
+                          <div className="flex justify-center items-center ">
+                          <Chart sparkline={market?.sparkline_in_7d.price} priceChange={market?.price_change_percentage_7d_in_currency} />
+                            </div>
+                        
+                            
                           </td>
                           <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {/* {token ? (savedData && savedData.includes(market?.id) ? (
-                              // Render a filled bookmark if the coin is saved
-                              <button className=""  >
-
-                                <BiBookmark
-                                  style={{ backgroundColor: "#1788FB" }}
-                                />
-                              </button>
-                            ) : (
-                              // Render a button to save the coin
-                              <button
-                                className=""
-                                onClick={() => saveCoin(market?.id)}
-                              >
-                                <BiBookmark />
-                              </button>
-                            )) : null} */}
+                            
                             {token ? (savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
                               <button className="">
