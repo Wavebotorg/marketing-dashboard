@@ -327,8 +327,6 @@ const WatchList = () => {
                               {d.total_supply}
                             </span>
                             <div className="flex justify-center items-center">
-                              {/*     <div className="">
-      <FaCaretDown size={15} className={d.percentage_change < 0 ? "text-red-500" : d.percentage_change > 0 ? "text-green-500" : "text-white"} /> */}
                               <div className="">
                                 {d.price_change_percentage_24h === 0 ? (
                                   <FaMinus size={15} className="text-white" />
@@ -515,10 +513,7 @@ const WatchList = () => {
                         >
                           {d.total_supply}
                         </span>
-                        {/* <span className="flex items-center text-red-500 text-[11px]">
-                          <FaCaretDown size={12} />
-                          (-0.73%)
-                        </span> */}
+
                         <div className="flex">
                           <div className="">
                             {d.price_change_percentage_24h === 0 ? (

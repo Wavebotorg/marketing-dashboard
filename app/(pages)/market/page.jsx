@@ -8,6 +8,7 @@ import { BiBookmark } from "react-icons/bi";
 import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 import Link from "next/link";
 import axios from "axios";
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 
 import Pagination from "../Pagination/Pagination";
 const Market = () => {
@@ -91,6 +92,32 @@ const Market = () => {
     }
   };
 
+  //   const fetchData = async () => {
+  //     try {
+  //       const initialResponse = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=all&order=market_cap_desc&sparkline=false&locale=en');
+  //       const initialData = await initialResponse.json();
+  //       const totalPages = Math.ceil(initialData.length / 100);
+  //       let allTokens = [];
+
+  //       for (let page = 1; page <= totalPages; page++) {
+  //         const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=all&order=market_cap_desc&sparkline=false&page=${page}`);
+
+  //         const data = await response.json();
+  //         allTokens = [...allTokens, ...data];
+  //         console.log("response---------------------------------",response)
+  //       }
+  // console.log("response---------------------0",response)
+  //       setAllCoinData(allTokens);
+
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+
+  //   };
+
+  //   useEffect(() => {
+  //     fetchData();
+  //   }, [])
+
   return (
     <>
       <div className=" bg-[#1C1C1C] rounded-2xl">
@@ -152,10 +179,10 @@ const Market = () => {
               <option value="Show 4">Show 4</option>
               <option value="Show 5">Show 5</option>
             </select>
-          
+
           </div> */}
             </div>
-            <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
+            <div className="bg-[#1C1C1C]   text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -233,16 +260,55 @@ const Market = () => {
                             <div className="flex flex-col items-center justify-center">
                               <div>${market?.current_price}</div>
                               <div
-                                className={
-                                  market?.price_change_percentage_24h === 0
-                                    ? "text-white"
-                                    : market?.price_change_percentage_24h < 0
-                                    ? "text-red-500"
-                                    : "text-green-500"
-                                }
+                              // className={
+                              //   market?.price_change_percentage_24h === 0
+                              //     ? "text-white"
+                              //     : market?.price_change_percentage_24h < 0
+                              //     ? "text-red-500"
+                              //     : "text-green-500"
+                              // }
                               >
-                                ({market?.price_change_percentage_24h})
+                                <div
+                                  className={`flex ${
+                                    market?.price_change_percentage_24h === 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_24h < 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_24h === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_24h <
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                                  ({market?.price_change_percentage_24h})
+                                </div>
                               </div>
+                              {/* <div className="">
+                                {d.price_change_percentage_24h === 0 ? (
+                                  <FaMinus size={15} className="text-white" />
+                                ) : d.price_change_percentage_24h < 0 ? (
+                                  <FaCaretDown
+                                    size={15}
+                                    className="text-red-500"
+                                  />
+                                ) : (
+                                  <FaCaretUp
+                                    size={15}
+                                    className="text-green-500"
+                                  />
+                                )}
+                              </div> */}
                             </div>
                           </td>
                           <td className="  text-center whitespace-nowrap text-md text-white "></td>
@@ -327,23 +393,30 @@ const Market = () => {
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
-                    {/*                     <div className="flex justify-end items-center   px-4">
+                    {/*                     <div className="flex justify-end items-center   ">
                       <div> ${market?.current_price} </div>
                       <div className="text-[#FF0000]">
                         ({market?.price_change_percentage_24h})
                       </div>
                     </div> */}
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center py-2 px-4">
                       <div>${market?.current_price}</div>
                       <div
-                        className={
+                        className={`flex ${
                           market?.price_change_percentage_24h === 0
                             ? "text-white"
                             : market?.price_change_percentage_24h < 0
                             ? "text-red-500"
                             : "text-green-500"
-                        }
+                        }`}
                       >
+                        {market?.price_change_percentage_24h === 0 ? (
+                          <FaMinus size={15} className="text-white" />
+                        ) : market?.price_change_percentage_24h < 0 ? (
+                          <FaCaretDown size={15} className="text-red-500" />
+                        ) : (
+                          <FaCaretUp size={15} className="text-green-500" />
+                        )}
                         ({market?.price_change_percentage_24h})
                       </div>
                     </div>
