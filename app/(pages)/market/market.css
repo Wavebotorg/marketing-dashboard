@@ -3,3 +3,16 @@
   font-weight: bold; /* Make text bold for saved rows */
   color: #004080; /* Dark blue text color for saved rows */
 }
+
+
+
+@media (min-width:1280px ) and (max-width:1499px ) {
+.text-table{
+  font-size:medium ;
+}
+}
+@media (min-width:1500px )  {
+.text-table{
+  font-size:large;
+}
+}

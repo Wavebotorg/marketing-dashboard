@@ -208,53 +208,53 @@ const Market = () => {
 
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  ">
+                  <tr className=" text-[#CECECE]  2xl:text-lg xl:text-base">
                     <th
                       scope="col"
-                      className=" py-3  text-base font-medium text-start "
+                      className=" py-3  font-medium text-start "
                     >
                       Coin
                     </th>
                    
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
                       Coin Price
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
                       1h
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
                       24h
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
                       7d
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
              24th Volume
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium  whitespace-nowrap"
+                      className=" py-3 text-center  font-medium  whitespace-nowrap"
                     >
                       Market Cap	
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium  whitespace-nowrap"
+                      className=" py-3 text-center  font-medium  whitespace-nowrap"
                     >
                     Last 7 days
                     </th>
@@ -262,7 +262,7 @@ const Market = () => {
                       <th
 
                         scope="col"
-                        className=" py-3 text-end text-base font-medium  whitespace-nowrap"
+                        className=" py-3 text-end font-medium  whitespace-nowrap"
                       >
                         Save
                       </th>
@@ -273,11 +273,11 @@ const Market = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index}>
+                        <tr key={index} className="  2xl:text-md xl:text-base" >
                           {/* className={`${
                       savedCoins.includes(market.id) ? 'bg-blue-500' : ''
                     }`}> */}
-                          <td className=" py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                          <td className=" py-4 text-center whitespace-nowrap  font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
                                 <Image
@@ -293,7 +293,7 @@ const Market = () => {
                           </td>
                        
 
-                          <td className="text-center whitespace-nowrap text-md text-white ">
+                          <td className="text-center whitespace-nowrap  text-white ">
 
                             <div className="flex flex-col items-center justify-center">
                               <div>{formatToUSD(market?.current_price)}</div>
@@ -310,7 +310,7 @@ const Market = () => {
                               </div> */}
                             </div>
                           </td>
-                          <td className= {`text-center whitespace-nowrap text-md text-white `} >
+                          <td className= {`text-center whitespace-nowrap  text-white `} >
                           <div
                                   className={`flex justify-center items-center ${
                                     market?.price_change_percentage_1h_in_currency === 0
@@ -339,7 +339,7 @@ const Market = () => {
                             </td>
                         
 
-                          <td className="  text-center whitespace-nowrap text-md text-white ">
+                          <td className="  text-center whitespace-nowrap  text-white ">
                           <div
                                   className={`flex justify-center items-center ${
                                     market?.price_change_percentage_24h_in_currency=== 0
@@ -366,7 +366,7 @@ const Market = () => {
                               {(market?.price_change_percentage_24h_in_currency * 100).toFixed(1)}%
                                 </div>
                                 </td>
-                          <td className="  text-center whitespace-nowrap text-md text-white ">
+                          <td className="  text-center whitespace-nowrap  text-white ">
                           <div
                                   className={`flex justify-center items-center ${
                                     market?.price_change_percentage_7d_in_currency=== 0
@@ -393,21 +393,21 @@ const Market = () => {
                      {(market?.price_change_percentage_7d_in_currency * 100).toFixed(1)}%
                                 </div>
                            </td>
-                          <td className=" text-center whitespace-nowrap text-md text-white ">
+                          <td className=" text-center whitespace-nowrap  text-white ">
                             
                             <div className="flex justify-center items-center ">
                              {formatToUSD(market?.total_volume)}
                             </div>
                           </td>
-                          <td className="  text-center whitespace-nowrap text-md text-white ">{formatToUSD(market?.market_cap)}</td>
-                          <td className=" text-center whitespace-nowrap text-md text-white ">
+                          <td className="  text-center whitespace-nowrap  text-white ">{formatToUSD(market?.market_cap)}</td>
+                          <td className=" text-center whitespace-nowrap  text-white ">
                           <div className="flex justify-center items-center ">
                           <Chart sparkline={market?.sparkline_in_7d.price} priceChange={market?.price_change_percentage_7d_in_currency} />
                             </div>
                         
                             
                           </td>
-                          <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
+                          <td className="   py-7   flex justify-end whitespace-nowrap  text-white  ">
                             
                             {token ? (savedData && savedData.includes(market?.id) ? (
                               // Render a filled bookmark if the coin is saved
@@ -476,10 +476,7 @@ const Market = () => {
                       {market?.name}
                     </div>
                   </div>
-                  <div className="border-b border-[#494949] flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Amount</div>
-                    <div className=" py-2 px-4 "></div>
-                  </div>
+               
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
                     <div className="flex flex-col items-center justify-center py-2  px-4">
@@ -498,16 +495,108 @@ const Market = () => {
                     </div>
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Today’s PnL</div>
-                    <div className="flex justify-end items-center py-2 px-4 "></div>
-                  </div>
-                  <div className=" flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Trade</div>
-                    <div className="flex justify-end items-center py-2 px-4  gap-1.5">
-                      <Link href="/">Trade</Link>
-
+                    <div className="py-2  pl-4 font-semibold">1h</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                  
+                          <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_1h_in_currency === 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_1h_in_currency < 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_1h_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_1h_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                              {(market?.price_change_percentage_1h_in_currency * 100 ).toFixed(1)}%
+                                </div>
+                            
                     </div>
                   </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">24h</div>
+                    <div className="flex justify-end items-center py-2 px-4 "> <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_24h_in_currency=== 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_24h_in_currency< 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_24h_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_24h_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                              {(market?.price_change_percentage_24h_in_currency * 100).toFixed(1)}%
+                                </div></div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">7d</div>
+                    <div className="flex justify-end items-center py-2 px-4 "> <div
+                                  className={`flex justify-center items-center ${
+                                    market?.price_change_percentage_7d_in_currency=== 0
+                                      ? "text-white"
+                                      : market?.price_change_percentage_7d_in_currency< 0
+                                      ? "text-red-500"
+                                      : "text-green-500"
+                                  }`}
+                                >
+                                  {market?.price_change_percentage_7d_in_currency === 0 ? (
+                                    <FaMinus size={15} className="text-white" />
+                                  ) : market?.price_change_percentage_7d_in_currency<
+                                    0 ? (
+                                    <FaCaretDown
+                                      size={15}
+                                      className="text-red-500"
+                                    />
+                                  ) : (
+                                    <FaCaretUp
+                                      size={15}
+                                      className="text-green-500"
+                                    />
+                                  )}
+                     {(market?.price_change_percentage_7d_in_currency * 100).toFixed(1)}%
+                                </div></div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold"> 24th Volume</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">   {formatToUSD(market?.total_volume)}</div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold"> Market Cap	</div>
+                    <div className="flex justify-end items-center py-2 px-4 "> {formatToUSD(market?.market_cap)}</div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">  Last 7 days	</div>
+                    <div className="flex justify-end items-center py-2 px-4 "> <div className="flex justify-center items-center ">
+                          <Chart sparkline={market?.sparkline_in_7d.price} priceChange={market?.price_change_percentage_7d_in_currency} />
+                            </div></div>
+                  </div>
+                 
                   {token && (<div className="flex justify-between border-t border-[#494949]">
                     <div className="py-2  pl-4 font-semibold">
                       Save
@@ -526,7 +615,7 @@ const Market = () => {
                               size={17}
                             />
                             {/* style={{ backgroundColor: "#1788FB" }} */}
-                          </button>
+                          </button> 
                         ) : (
                           // Render a button to save the coin
                           <button

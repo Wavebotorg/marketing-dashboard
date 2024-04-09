@@ -260,6 +260,7 @@ const Holder = () => {
              totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
+        
             currentPage={currentPage}
           />
         {/* </div> */}
@@ -287,6 +288,7 @@ const Holder = () => {
                         <div className="py-2  pl-4 font-semibold">Rewards</div>
                         <div className=" py-2 pr-4 pl-4"> ${d?.reward}</div>
                       </div>
+                    
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold"> Unlock</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4">
