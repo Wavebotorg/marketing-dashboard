@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from "react";
-
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import axiosInstance from "../../apiInstances/axiosInstance";
-// import useEncryption from "../../components/useEncryption/index"
 import { FaEye } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
@@ -81,7 +79,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
+    <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage overflow-y-auto">
       <div className="text-center">
         <Image
           src={Logo}

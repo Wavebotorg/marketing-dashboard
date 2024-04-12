@@ -1,4 +1,3 @@
-
 "use client";
 import { IoIosNotifications } from "react-icons/io";
 import Image from "next/image";
@@ -80,25 +79,25 @@ const Navbar = () => {
               : "flex  justify-between   py-7  lg:pl-10 pl-2 "
           }`}
         >
-          <div className=" flex w-full sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px] max-w-[70px]">
-            <div className=" flex items-center pl-3 pointer-events-none">
+          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
               type=""
               value={searchQuery}
-        onChange={handleSearchChange}
+              onChange={handleSearchChange}
               id="default-search"
-              className="bg-[#1C1C1C]  outline-none  rounded-lg "
+              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
               placeholder="Search "
             />
           </div>
-         
-    
+
           <div className=" flex items-center gap-1.5 mr-5 ">
             <button className="">
               <IoIosNotifications size={25} />
             </button>
+            <w3m-button />
             <div>
               {token ? (
                 <div>
@@ -106,7 +105,7 @@ const Navbar = () => {
                     onClick={(e) => setConfirmationPopUp(true)}
                     className="bg-[#1788FB] text-white p-2 rounded-xl "
                   >
-                   <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1">
                       <FiPower size={18} />
                       <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
                         Logout
@@ -183,19 +182,17 @@ const Navbar = () => {
         </div>
       </div>
       <div
-          className={`${
-            getPath === "/login" ||
-            getPath === "/signup" ||
-            getPath === "/forgotpassword" ||
-            getPath === "/passwordverify" ||
-            getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
-              ? "hidden"
-              : "border-b border-stone-500 "
-          }`}
-        >
-    
-      </div>
+        className={`${
+          getPath === "/login" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
+            ? "hidden"
+            : "border-b border-stone-500 "
+        }`}
+      ></div>
     </>
   );
 };
