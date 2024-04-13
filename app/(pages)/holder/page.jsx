@@ -1,63 +1,63 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 const Holder = () => {
   const [allCoinData, setAllCoinData] = useState([
     {
-      snapblock: "23",
+      snapblock: "33",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$87",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "27",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$30",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "20",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$60",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "03",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$20",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "43",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$85",
       unlock: "566",
       status: "true",
     },
     {
-      snapblock: "23",
+      snapblock: "66",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$26",
       unlock: "566",
       status: "true",
     },
     {
       snapblock: "277676732673627",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$505",
       unlock: "566",
       status: "true",
     },
     {
       snapblock: "2757573",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$905",
       unlock: "566",
       status: "true",
     },
@@ -71,14 +71,14 @@ const Holder = () => {
     {
       snapblock: "25353",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$585",
       unlock: "566",
       status: "true",
     },
     {
       snapblock: "273263",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$75",
       unlock: "566",
       status: "true",
     },
@@ -92,37 +92,49 @@ const Holder = () => {
     {
       snapblock: "423",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$45",
       unlock: "566",
       status: "true",
     },
     {
       snapblock: "3",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$35",
       unlock: "566",
       status: "true",
     },
     {
       snapblock: "10",
       time: "2:00:66",
-      reward: "$55",
+      reward: "$52",
       unlock: "566",
       status: "true",
     },
 
     // Add more data as needed
   ]);
+
   //pagination
+  const { searchQuery } = useSearch();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData.slice(startIndex, endIndex);
+  //search
+  const filteredData = allCoinData.filter((coin) =>
+  coin.snapblock.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  coin.reward.toLowerCase().includes(searchQuery.toLowerCase())
+ 
+);
+  const visibleData =  filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -243,16 +255,16 @@ const Holder = () => {
             </div>
           </div>
         </div>
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
-            totalItems={allCoinData.length}
+             totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
           />
-        </div>
-        {allCoinData?.length > 0 &&
-          allCoinData?.map((d, index) => (
+        {/* </div> */}
+        {visibleData?.length > 0 &&
+         visibleData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">

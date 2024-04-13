@@ -1,17 +1,83 @@
+
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
-
+import { useSearch } from "../../components/contexts/SearchContext";//search
 const TokenDashboard = () => {
   const [allCoinData, setAllCoinData] = useState([
-   {
+    {
       time: "23:00",
-      amounteth: "-2333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "567879809",
+      transaction: "567879819",
+    },
+    {
+      time: "23:00",
+      amounteth: "-8333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "527879809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-6333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "563879809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-5333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "567849809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-5333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "567859809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-7333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "767879809",
+    },
+
+    {
+      time: "23:00",
+      amounteth: "-5333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "867879809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "267879809",
+    },
+    {
+      time: "23:00",
+      amounteth: "-9333",
+      minamonut: "$55",
+      amountsol: "2300",
+      status: "true",
+      transaction: "167879809",
     },
     {
       time: "23:00",
@@ -19,7 +85,7 @@ const TokenDashboard = () => {
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "567879809",
+      transaction: "767879809",
     },
     {
       time: "23:00",
@@ -27,86 +93,32 @@ const TokenDashboard = () => {
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "567879809",
+      transaction: "562879809",
     },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "567879809",
-    }, 
     // Add more data as needed
   ]);
 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = allCoinData.slice(startIndex, endIndex);
+  //search
+  const filteredData = allCoinData.filter((coin) =>
+    coin.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    coin.amounteth.toLowerCase().includes(searchQuery.toLowerCase())
+    
+  );
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
+
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -277,16 +289,16 @@ const TokenDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
-            totalItems={allCoinData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
           />
-        </div>
-        {allCoinData?.length > 0 &&
-          allCoinData?.map((market, index) => (
+        {/* </div> */}
+        {visibleData?.length > 0 &&
+         visibleData?.map((market, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">
@@ -295,7 +307,7 @@ const TokenDashboard = () => {
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold">Time</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                          {market.time}
+                          {market?.time}
                         </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">

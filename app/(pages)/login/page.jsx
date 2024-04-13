@@ -49,7 +49,7 @@ const Login = () => {
           toast.success(myData?.msg);
           setTimeout(() => {
             router.push("/");
-          }, 1000);
+          }, 700);
         } else {
           toast.error(myData?.msg);
         }
@@ -78,6 +78,7 @@ const Login = () => {
           src={Logo}
           alt="Logo"
           className="2xl:h-[39px] w-full lg:h-[32px] sm:h-[32px] xsm:h-[30px]"
+          
         />
       </div>
 
@@ -107,7 +108,7 @@ const Login = () => {
             onKeyPress={handleKeyPress}
           />
           <button
-            className="absolute right-2 top-14  transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
+            className="absolute right-2 top-12 transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
             onClick={togglePasswordVisibility}
           >
             {isPasswordVisible ? (

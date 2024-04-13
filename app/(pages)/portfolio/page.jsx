@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import bit from "../../assets/bitcoin.png";
 import Image from "next/image";
 import Pagination from "../Pagination/Pagination";
-
+import { useSearch } from "../../components/contexts/SearchContext";
 const Portfolio = () => {
   // Sample data array
   const portfolioData = [
@@ -23,7 +23,7 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      coin: "Bitcoin BTC",
+      coin: "etherum",
       price: "0.07727",
       p: " -3.12% (-0.00)",
       units: "124858.18",
@@ -36,7 +36,7 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      coin: "Bitcoin BTC",
+      coin: "usdc",
       price: "0.07727",
       p: " -3.12% (-0.00)",
       units: "124858.18",
@@ -49,7 +49,7 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      coin: "Bitcoin BTC",
+      coin: "Sepolia",
       price: "0.07727",
       p: " -3.12% (-0.00)",
       units: "124858.18",
@@ -63,23 +63,41 @@ const Portfolio = () => {
   ];
 
   //pagination
+  const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleData = portfolioData.slice(startIndex, endIndex);
+  const filteredData =  portfolioData.filter((coin) =>
+
+  // coin.id.toLowerCase().includes(searchQuery.toLowerCase()) 
+  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
+  
+);
+  const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery]);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 ">
         <div className=" mt-7" />
-        <div className="flex  items-center justify-between mt-6">
-          <div>
-            <div className="text-2xl justify-start">My Portfolio</div>
+        <div className="flex items-center justify-between mt-6">
+          <div className="text-2xl justify-start">My Portfolio</div>
+          <div className=" flex w-96 gap-2 text-sm xsm:mr-0 rounded-lg  bg-[#1C1C1C] text-white ">
+            <div className=" flex items-center pl-3 pointer-events-none">
+              <CiSearch size={20} />
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="bg-[#1C1C1C]  outline-none my-2"
+              placeholder="Search"
+            />
           </div>
         </div>
         <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
@@ -140,13 +158,13 @@ const Portfolio = () => {
                                   className="rounded-full max-w-12"
                                 />
                               </div>
-                              <div>{item.coin}</div>
+                              <div>{item?.coin}</div>
                             </div>
                           </td>
 
                           <td className="px-3 py-4  whitespace-nowrap  text-white">
                             <div className="py-0.5 text-center">
-                              {item.price}
+                              {item?.price}
                             </div>
                             <p className="text-sm text-[#FF0000] text-center">
                               <span
@@ -224,16 +242,16 @@ const Portfolio = () => {
           currentPage={currentPage}
           style={{ display: "block !important" }}
         /> */}
-        <div className="xsm:hidden md:hidden lg:block">
+        {/* <div className="xsm:hidden md:hidden lg:block"> */}
           <Pagination
-            totalItems={portfolioData.length}
+            totalItems={filteredData.length}
             itemsPerPage={itemsPerPage}
             onPageChange={handlePageChange}
             currentPage={currentPage}
           />
-        </div>
-        {portfolioData?.length > 0 &&
-          portfolioData?.map((item, index) => (
+        {/* </div> */}
+        {visibleData?.length > 0 &&
+         visibleData?.map((item, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">
