@@ -78,6 +78,7 @@ const Login = () => {
           src={Logo}
           alt="Logo"
           className="2xl:h-[39px] w-full lg:h-[32px] sm:h-[32px] xsm:h-[30px]"
+          
         />
       </div>
 

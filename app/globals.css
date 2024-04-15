@@ -286,22 +286,27 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
+  gap: 2px;
   font-size: larger; 
   justify-content: center;
-}
-
-.pagination .page-item {
-  margin-right: 3px;
-  flex: 1; 
-  margin: 0 3px;
   
 }
 
+.pagination .page-item {
+  /* margin-right: 3px; */
+  /* flex: 1;  */
+  /* margin: 0 8px; */
+  
+
+}
+
 .pagination .page-item.active {
-  background-color: #007bff; 
+  background-color: #3b82F6; 
   color: #fff; 
-  padding: 5px 10px; 
+  text-align: center;
+  /* height: 25px;
+  width:25px; */
+  /* padding: 0px 3px;  */
   border-radius: 5px; 
   border: none;
   cursor: pointer;

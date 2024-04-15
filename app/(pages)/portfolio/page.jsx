@@ -158,13 +158,13 @@ const Portfolio = () => {
                                   className="rounded-full max-w-12"
                                 />
                               </div>
-                              <div>{item.coin}</div>
+                              <div>{item?.coin}</div>
                             </div>
                           </td>
 
                           <td className="px-3 py-4  whitespace-nowrap  text-white">
                             <div className="py-0.5 text-center">
-                              {item.price}
+                              {item?.price}
                             </div>
                             <p className="text-sm text-[#FF0000] text-center">
                               <span

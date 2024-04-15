@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";

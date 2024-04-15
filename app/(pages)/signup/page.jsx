@@ -94,13 +94,13 @@ const Signup = () => {
         </h2>
 
         <div className="relative">
-          <div className="text-[#CACACA] mb-2"> Enter Name </div>
+          <div className="text-[#CACACA] mb-2"> Enter Name </div>              
           <input
             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"
             type="text"
             name="name"
             value={signupdata.name}
-            onChange={onChangeInput}
+            onChange={onChangeInput}                                                                                                                                                                                       
           />
         </div>
         <div className="relative">

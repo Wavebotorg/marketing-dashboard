@@ -80,13 +80,15 @@ const WatchList = () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       const myData = res?.data?.data;
+      console.log("🚀 ~ getWatchlistdata ~ myData:", myData)
+      
       setWatchlist(myData);
-
       // Filter allCoinData based on watchlist IDs
-      const filteredData = allCoinData.filter((coin) =>
-        myData.includes(coin.id)
-      );
 
+      const filteredData = allCoinData.filter((coin) =>
+      myData.includes(coin.id)
+      );
+      
       setWatchlistData(filteredData);
       console.log("watchlistfilter-----------", filteredData);
     } catch (err) {
@@ -267,14 +269,14 @@ const WatchList = () => {
                             <div className="flex items-center  gap-2">
                               <div>
                                 <Image
-                                  src={d.image}
+                                  src={d?.image}
                                   alt="Picture of the author"
                                   className="rounded-full"
                                   width={30}
                                   height={30}
                                 />
                               </div>
-                              <div>{d.name}</div>
+                              <div>{d?.name}</div>
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
@@ -288,13 +290,13 @@ const WatchList = () => {
                               }`}
                             >
                               {" "}
-                              {d.circulating_supply}
+                              {d?.circulating_supply}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <span
                               className={`${
-                                d.current_price === 0
+                                d?.current_price === 0
                                   ? "text-white"
                                   : d.total_supply < 0
                                   ? "text-red-500"
@@ -302,33 +304,33 @@ const WatchList = () => {
                               }`}
                             >
                               {" "}
-                              {d.current_price}
+                              {d?.current_price}
                             </span>
                           </td>
 
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
                             <div className="flex items-center justify-center gap-5">
-                              <div>{d.max_supply}</div>
-                              <div>{d.price_change_24h}</div>
+                              <div>{d?.max_supply}</div>
+                              <div>{d?.price_change_24h}</div>
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                             <span
                               className={`${
-                                d.total_supply === 0
+                                d?.total_supply === 0
                                   ? "text-white"
-                                  : d.total_supply < 0
+                                  : d?.total_supply < 0
                                   ? "text-red-500"
                                   : "text-green-500"
                               }`}
                             >
-                              {d.total_supply}
+                              {d?.total_supply}
                             </span>
                             <div className="flex justify-center items-center">
                               <div className="">
-                                {d.price_change_percentage_24h === 0 ? (
+                                {d?.price_change_percentage_24h === 0 ? (
                                   <FaMinus size={15} className="text-white" />
-                                ) : d.price_change_percentage_24h < 0 ? (
+                                ) : d?.price_change_percentage_24h < 0 ? (
                                   <FaCaretDown
                                     size={15}
                                     className="text-red-500"
@@ -342,19 +344,19 @@ const WatchList = () => {
                               </div>
                               <div
                                 className={`${
-                                  d.price_change_percentage_24h === 0
+                                  d?.price_change_percentage_24h === 0
                                     ? "text-white"
-                                    : d.price_change_percentage_24h < 0
+                                    : d?.price_change_percentage_24h < 0
                                     ? "text-red-500"
                                     : "text-green-500"
                                 }`}
                               >
-                                ({d.price_change_percentage_24h}%)
+                                ({d?.price_change_percentage_24h}%)
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4  whitespace-nowrap text-md text-white ">
-                            {d.market_cap_rank} % Buying
+                            {d?.market_cap_rank} % Buying
                             <div className="w-full bg-[#262626] rounded-full h-1.5 mt-1.5">
                               <div
                                 className="bg-[#494949] h-1.5 rounded-full"
@@ -364,7 +366,7 @@ const WatchList = () => {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-md text-white ">
                             <Image
-                              src={d.chart}
+                              src={d?.chart}
                               alt="Picture of the author"
                               className="rounded-full"
                             />
@@ -455,7 +457,7 @@ const WatchList = () => {
                             height={30}
                           />
                         </span>
-                        {d.name}
+                        {d?.name}
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">
@@ -463,15 +465,15 @@ const WatchList = () => {
                       <div className=" py-2 pr-4 pl-4">
                         <span
                           className={`${
-                            d.circulating_supply === 0
+                            d?.circulating_supply === 0
                               ? "text-white"
-                              : d.total_supply < 0
+                              : d?.total_supply < 0
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
                         >
                           {" "}
-                          {d.circulating_supply}
+                          {d?.circulating_supply}
                         </span>
                       </div>
                     </div>
@@ -480,15 +482,15 @@ const WatchList = () => {
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         <span
                           className={`${
-                            d.current_price === 0
+                            d?.current_price === 0
                               ? "text-white"
-                              : d.total_supply < 0
+                              : d?.total_supply < 0
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
                         >
                           {" "}
-                          {d.current_price}
+                          {d?.current_price}
                         </span>
                       </div>
                     </div>
@@ -496,7 +498,7 @@ const WatchList = () => {
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">52W Range</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                        {d.max_supply} - {d.price_change_24h}
+                        {d?.max_supply} - {d?.price_change_24h}
                       </div>
                     </div>
                     {/* <div className="border-b border-[#494949] flex justify-between">
@@ -514,9 +516,9 @@ const WatchList = () => {
                       <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                         <span
                           className={`${
-                            d.total_supply === 0
+                            d?.total_supply === 0
                               ? "text-white"
-                              : d.total_supply < 0
+                              : d?.total_supply < 0
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
@@ -526,9 +528,9 @@ const WatchList = () => {
 
                         <div className="flex">
                           <div className="">
-                            {d.price_change_percentage_24h === 0 ? (
+                            {d?.price_change_percentage_24h === 0 ? (
                               <FaMinus size={15} className="text-white" />
-                            ) : d.price_change_percentage_24h < 0 ? (
+                            ) : d?.price_change_percentage_24h < 0 ? (
                               <FaCaretDown size={15} className="text-red-500" />
                             ) : (
                               <FaCaretUp size={15} className="text-green-500" />
@@ -536,14 +538,14 @@ const WatchList = () => {
                           </div>
                           <div
                             className={`${
-                              d.price_change_percentage_24h === 0
+                              d?.price_change_percentage_24h === 0
                                 ? "text-white"
-                                : d.price_change_percentage_24h < 0
+                                : d?.price_change_percentage_24h < 0
                                 ? "text-red-500"
                                 : "text-green-500"
                             }`}
                           >
-                            ({d.price_change_percentage_24h}%)
+                            ({d?.price_change_percentage_24h}%)
                           </div>
                         </div>
                       </div>
@@ -553,7 +555,7 @@ const WatchList = () => {
                       <div className="py-2  pl-4 font-semibold">Sentiment</div>
                       <div>
                         <div className="flex justify-end  py- pr-4 pl-4">
-                          {d.market_cap_rank} % Buying
+                          {d?.market_cap_rank} % Buying
                         </div>
                         <div className="flex justify-end  py-1.5 pr-4 pl-4">
                           <div className="w-44 bg-[#262626] rounded-full h-1.5 mt-1.5">
@@ -569,7 +571,7 @@ const WatchList = () => {
                       <div className="py-2  pl-4 font-semibold"></div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         <Image
-                          src={d.chart}
+                          src={d?.chart}
                           alt="Picture of the author"
                           className="rounded-full"
                         />
@@ -579,7 +581,7 @@ const WatchList = () => {
                       <div className="py-2  pl-4 font-semibold">Remove</div>
                       <div className="flex justify-end items-center py-2 pr-4 pl-4">
                         <button
-                         onClick={() => modelShows(d.id)}
+                         onClick={() => modelShows(d?.id)}
                           className="text-red-500"
                         >
                           Remove
