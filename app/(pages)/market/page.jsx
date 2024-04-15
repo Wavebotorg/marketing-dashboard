@@ -12,7 +12,7 @@ import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
 import { useRouter } from "next/navigation";
-import Chart from "../chart/Chart"
+import Chart from "../chart/ChartComponent"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 const Market = () => {
   const { id } = useParams();
@@ -31,6 +31,7 @@ const Market = () => {
     axios
       .get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+      
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -42,7 +43,30 @@ const Market = () => {
       });
   };
 
-
+  // const getUserdata = async () => {
+  //   const API_KEY = '6c7592de-1409-4ca4-8525-2177797f3b7b';
+  //   const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+    
+  //   const parameters = {
+  //     'start': '1',
+  //     'limit': '10',
+  //     'convert': 'USD'
+  //   };
+  
+  //   const headers = {
+  //     'Accepts': 'application/json',
+  //     'X-CMC_PRO_API_KEY': API_KEY
+  //   };
+  
+  //   try {
+  //     const response = await axios.get(url, { params: parameters, headers: headers });
+  //     setAllCoinData(response?.data);
+  //     console.log("🚀 ~ setAllCoinData:", response?.data);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+  
 
   
 
@@ -402,7 +426,11 @@ const Market = () => {
                           <td className="  text-center whitespace-nowrap  text-white ">{formatToUSD(market?.market_cap)}</td>
                           <td className=" text-center whitespace-nowrap  text-white ">
                           <div className="flex justify-center items-center ">
-                          <Chart sparkline={market?.sparkline_in_7d.price} priceChange={market?.price_change_percentage_7d_in_currency} />
+                          <Chart
+              sparkline={market?.sparkline_in_7d.price}
+              priceChange={market?.price_change_percentage_7d_in_currency}
+             
+            />
                             </div>
                         
                             
