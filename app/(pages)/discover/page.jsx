@@ -44,6 +44,18 @@ const Discover = () => {
     { img: Cro, name: "Cro", point: "84.65", percentage: "-9.43%" },
     { img: Lunc, name: "Lunc", point: "84.65", percentage: "-9.43%" },
     { img: Ftm, name: "Ftm", point: "84.65", percentage: "-9.43%" },
+    { img: Aave, name: "AAaaaaaVE", point: "84.65", percentage: "-9.43%" },
+    { img: Arbitrum, name: "ARB", point: "84.65", percentage: "-9.43%" },
+    { img: Imx, name: "Imx", point: "84.65", percentage: "-9.43%" },
+    { img: Cro, name: "Cro", point: "84.65", percentage: "-9.43%" },
+    { img: Lunc, name: "Lunc", point: "84.65", percentage: "-9.43%" },
+    { img: Ftm, name: "fffff", point: "84.65", percentage: "-9.43%" },
+    { img: Aave, name: "wertyuio", point: "84.65", percentage: "-9.43%" },
+    { img: Arbitrum, name: "ARB", point: "84.65", percentage: "-9.43%" },
+    { img: Imx, name: "Imx", point: "84.65", percentage: "-9.43%" },
+    { img: Cro, name: "Cro", point: "84.65", percentage: "-9.43%" },
+    { img: Lunc, name: "Lunc", point: "84.65", percentage: "-9.43%" },
+    { img: Ftm, name: "lkjhgf", point: "84.65", percentage: "-9.43%" },
   ];
   const discoverData = [
     {
@@ -99,6 +111,28 @@ const Discover = () => {
     setCurrentPage(1)
   }, [searchQuery]);
 
+  const cardsPerPage = 6;
+  const [position, setPosition] = useState(0);
+
+  const handleSlideLeft = () => {
+    setPosition((prevPosition) =>
+      prevPosition === 0
+        ? cards.length - cardsPerPage
+        : prevPosition - cardsPerPage
+    );
+  };
+
+  const handleSlideRight = () => {
+    setPosition((prevPosition) =>
+      prevPosition >= cards.length - cardsPerPage
+        ? 0
+        : prevPosition + cardsPerPage
+    );
+  };
+
+  const disableLeftArrow = position === 0;
+  const disableRightArrow = position >= cards.length - cardsPerPage;
+
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">
       <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
@@ -151,18 +185,30 @@ const Discover = () => {
               </button>
             </div>
             <div className="flex gap-1">
-              <Image src={Leftarraow} className="md:w-10 w-8"  alt="icon"/>
-              <Image src={Rightarraow} className="md:w-10 w-8" alt="icon" />
+              <Image
+                src={Leftarraow}
+                className={`md:w-10 w-8 cursor-pointer ${
+                  disableLeftArrow ? "opacity-50 pointer-events-none" : ""
+                }`}
+                onClick={handleSlideLeft}
+              />
+              <Image
+                src={Rightarraow}
+                className={`md:w-10 w-8 cursor-pointer ${
+                  disableRightArrow ? "opacity-50 pointer-events-none" : ""
+                }`}
+                onClick={handleSlideRight}
+              />
             </div>
           </div>
         </div>
-        <div class="lg:mx- md:p-  grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 mt-5">
-          {cards.map((card, index) => (
+        <div class="lg:mx- md:p- grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 mt-5">
+          {cards.slice(position, position + cardsPerPage).map((card, index) => (
             <div
               key={index}
               class="bg-[#1C1C1C] rounded-xl p-5 flex flex-col items-center"
             >
-              <Image src={card?.img} alt={card?.name} className="mx-auto  " />
+              <Image src={card.img} alt={card.name} className="mx-auto" />
               <div className="text-center md:space-y-4 space-y-1 md:mt-10 mt-4">
                 <h1 className="md:text-3xl text-xl font-semibold text-white">
                   {card?.name}
@@ -177,8 +223,7 @@ const Discover = () => {
             </div>
           ))}
         </div>
-
-        <div class="flex justify-between items-center p- lg:px- md:px- mt-5  mb-2">
+        <div class="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
           <div class="md:text-3xl text-xl font-semibold">
             Daily Movers
             <p class="text-[#7B7B7B] text-sm md:text-lg">

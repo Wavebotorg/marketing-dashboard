@@ -23,12 +23,11 @@ const ChartComponent = ({ sparkline, priceChange }) => {
               label: "Price",
               data: sparkline,
               fill: true,
-              // backgroundColor: priceChange < 0 ? "red" : "green",
-              borderColor: priceChange < 0 ? "red" : "green",
+                backgroundColor: priceChange < 0 ? "red" : "green",
+                borderColor: priceChange < 0 ? "red" : "green",
               borderWidth: 2,
               pointRadius: 0, // Hide points
-              
-            }
+            },
           ],
         },
         options: {
@@ -52,7 +51,11 @@ const ChartComponent = ({ sparkline, priceChange }) => {
     };
   }, [sparkline, priceChange]);
 
-  return <div className="chart-container"><canvas ref={chartRef}/></div>;
+  return (
+    <div className="chart-container">
+      <canvas ref={chartRef} />
+    </div>
+  );
 };
 
 export default ChartComponent;
