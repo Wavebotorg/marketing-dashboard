@@ -35,7 +35,7 @@ const Market = () => {
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -134,8 +134,6 @@ const Market = () => {
     }
   };
 
-
-
   const removeSavedCoin = async (coinId) => {
     try {
       // Make an API call to remove the coin from the watchlist
@@ -226,21 +224,7 @@ const Market = () => {
               Markets
             </h1>
             <div className="flex justify-end  mb-7 ">
-              {/* <div>
-            <label className=" text-sm md:text-lg">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          
-          </div> */}
+       
             </div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
@@ -307,9 +291,7 @@ const Market = () => {
                     visibleData?.map((market, index) => (
                       <>
                         <tr key={index} className="  2xl:text-md xl:text-base">
-                          {/* className={`${
-                      savedCoins.includes(market.id) ? 'bg-blue-500' : ''
-                    }`}> */}
+                          
                           <td className=" py-4 text-center whitespace-nowrap  font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
@@ -328,17 +310,7 @@ const Market = () => {
                           <td className="text-center whitespace-nowrap  text-white ">
                             <div className="flex flex-col items-center justify-center">
                               <div>{formatToUSD(market?.current_price)}</div>
-                              {/* <div
-                                className={
-                                  market?.price_change_percentage_24h === 0
-                                    ? "text-white"
-                                    : market?.price_change_percentage_24h < 0
-                                      ? "text-red-500"
-                                      : "text-green-500"
-                                }
-                              >
-                                ({market?.price_change_percentage_24h})
-                              </div> */}
+                         
                             </div>
                           </td>
                           <td
@@ -464,28 +436,7 @@ const Market = () => {
                               />
                             </div>
                           </td>
-                          {/* <td className="   py-7   flex justify-end whitespace-nowrap  text-white  ">
-                            {token ? (
-                              savedData && savedData.includes(market?.id) ? (
-                                // Render a filled bookmark if the coin is saved
-                                <button className="">
-                                  <IoBookmark
-                                    className="text-[#159055]"
-                                    size={17}
-                                  />
-                                  style={{ backgroundColor: "#1788FB" }}
-                                </button>
-                              ) : (
-                                // Render a button to save the coin
-                                <button
-                                  className=""
-                                  onClick={() => saveCoin(market?.id)}
-                                >
-                                  <IoBookmarkOutline size={17} />
-                                </button>
-                              )
-                            ) : null}
-                          </td> */}
+                        
                           <td className="py-7 flex justify-end whitespace-nowrap text-white">
                             {token ? (
                               savedData && savedData.includes(market?.id) ? (
@@ -672,7 +623,7 @@ const Market = () => {
                       {formatToUSD(market?.market_cap)}
                     </div>
                   </div>
-                  <div className="border-b border-[#494949]  justify-between">
+                  <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">
                       {" "}
                       Last 7 days{" "}
