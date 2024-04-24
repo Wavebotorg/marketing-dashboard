@@ -1,4 +1,3 @@
-
 "use client";
 import { IoIosNotifications } from "react-icons/io";
 import Image from "next/image";
@@ -79,8 +78,8 @@ const Navbar = () => {
               : "flex  justify-between   py-7  lg:pl-10 pl-2 "
             }`}
         >
-          <div className=" flex w-full sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white md:max-w-[700px] max-w-[70px]">
-            <div className=" flex items-center pl-3 pointer-events-none">
+          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
@@ -88,11 +87,10 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               id="default-search"
-              className="bg-[#1C1C1C]  outline-none  rounded-lg "
+              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
               placeholder="Search "
             />
           </div>
-
 
           <div className=" flex items-center gap-1.5 mr-5 ">
             <button className="">

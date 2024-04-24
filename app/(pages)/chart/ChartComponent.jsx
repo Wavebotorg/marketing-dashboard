@@ -20,11 +20,11 @@ const ChartComponent = ({ sparkline, priceChange }) => {
           labels: Array.from({ length: sparkline.length }, (_, i) => i + 1),
           datasets: [
             {
-              label: "Price",
+              // label: "Price",
               data: sparkline,
-              fill: true,
-                backgroundColor: priceChange < 0 ? "red" : "green",
-                borderColor: priceChange < 0 ? "red" : "green",
+              // fill: true,
+              // backgroundColor: priceChange < 0 ? "red" : "green",
+              borderColor: priceChange < 0 ? "red" : "green",
               borderWidth: 2,
               pointRadius: 0, // Hide points
             },

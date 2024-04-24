@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
 import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
+import { MdOutlineContentCopy } from "react-icons/md";
 import Market from "./(pages)/market/page";
-
 
 const Page = () => {
   const userData = [
@@ -24,6 +24,14 @@ const Page = () => {
     // following: 0,
     // followers: 0}
   ];
+
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(userData?.userId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+  };
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -63,14 +71,19 @@ const Page = () => {
                     <tr className="md:pl-2">
                       <td data-title="User Id" className="">
                         {items?.userId}
-                        <button className="text-xl text-[#828282] align-middle pb-1.5 ">
-                          <PiCopySimple className="" />
+                        <button
+                          onClick={copyToClipboard}
+                          className="text-xl text-[#828282] align-middle pb-1.5 "
+                        >
+                          <MdOutlineContentCopy className="ml-1.5 items-center" />
                         </button>
+                        {copied && (
+                          <span className="text-sm text-green-500 absolute top-full left-0">
+                            Copied!
+                          </span>
+                        )}
                       </td>
-                      <td
-                        data-title="VIP Level"
-                        className="flex items-center "
-                      >
+                      <td data-title="VIP Level" className="flex items-center ">
                         <span className="md:ml-[2rem] ">
                           {items?.vipLevel}
 

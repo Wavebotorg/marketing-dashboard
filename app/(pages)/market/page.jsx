@@ -693,7 +693,6 @@ import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
 import { useRouter } from "next/navigation";
 import Chart from "../chart/ChartComponent";
-
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 const Market = () => {
   const { id } = useParams();
@@ -702,7 +701,6 @@ const Market = () => {
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([]);
-
   console.log(
     "🚀 ~ Market--------------------------------- ~ savedData:",
     savedData

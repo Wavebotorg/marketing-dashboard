@@ -1,6 +1,6 @@
 .chart-container {
     width: 80%; /* Set the width to 100% of the parent container */
-    height: 200px; /* Set a fixed height, adjust as needed */
+    height: 80px; /* Set a fixed height, adjust as needed */
     /* Center the chart horizontally */
     text-align:center
   }

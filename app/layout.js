@@ -22,7 +22,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const initialState = cookieToInitialState(config, headers().get("cookie"));
-
   return (
     <html lang="en">
       <body className={inter.className}>

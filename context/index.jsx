@@ -30,7 +30,6 @@ createWeb3Modal({
   enableOnramp: true, // Optional - false as default
 });
 
-
 export default function Web3ModalProvider({ children, initialState }) {
   return (
     <WagmiProvider config={config} initialState={initialState}>
