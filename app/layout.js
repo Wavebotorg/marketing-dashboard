@@ -5,14 +5,16 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Navbar from "./components/Navbar/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 
+import { headers } from "next/headers";
+
+import { cookieToInitialState } from "wagmi";
+
+import { config } from "../config";
+import Web3ModalProvider from "@/context";
+
 // import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 import { SearchProvider } from "././components/contexts/SearchContext";
-import { cookieToInitialState } from "wagmi";
-import { config } from "@/config";
-import { headers } from "next/headers";
-import Web3ModalProvider from "@/context";
-
 export const metadata = {
   title: "wave",
   description: "wave app",
@@ -24,7 +26,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Web3ModalProvider initialState={initialState}>
-          {/* <Web3AuthSignerProvider> */}
           <SearchProvider>
             <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
               <div className="sidebar visible px-5  ">
@@ -40,10 +41,8 @@ export default function RootLayout({ children }) {
                 <div>{children}</div>
               </div>
             </div>
-
-            {/* </Web3AuthSignerProvider> */}
           </SearchProvider>
-        </Web3ModalProvider>
+          </Web3ModalProvider>
       </body>
     </html>
   );

@@ -555,8 +555,7 @@ function Sidebar() {
               >
                 {isNavbar === false ? (
                   <div className="mt-10 mx-auto cursor-pointer">
-                    {" "}
-                    <FaBars />{" "}
+                    <FaBars />
                   </div>
                 ) : (
                   <div className=" mt-8 ml-3.5 cursor-pointer"> X </div>

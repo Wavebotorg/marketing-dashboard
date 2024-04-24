@@ -11,12 +11,12 @@ import axios from "axios";
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Pagination from "../Pagination/Pagination";
-
-
-
+import { useRouter } from "next/navigation";
+import Chart from "../chart/ChartComponent";
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 const Market = () => {
   const { id } = useParams();
-
+  const router = useRouter();
   // console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
@@ -33,7 +33,7 @@ const Market = () => {
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -44,6 +44,30 @@ const Market = () => {
         console.log("err --->", err);
       });
   };
+
+  // const getUserdata = async () => {
+  //   const API_KEY = '6c7592de-1409-4ca4-8525-2177797f3b7b';
+  //   const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+
+  //   const parameters = {
+  //     'start': '1',
+  //     'limit': '10',
+  //     'convert': 'USD'
+  //   };
+
+  //   const headers = {
+  //     'Accepts': 'application/json',
+  //     'X-CMC_PRO_API_KEY': API_KEY
+  //   };
+
+  //   try {
+  //     const response = await axios.get(url, { params: parameters, headers: headers });
+  //     setAllCoinData(response?.data);
+  //     console.log("🚀 ~ setAllCoinData:", response?.data);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   // useEffect(() => {
   //   resetSearchQuery();
@@ -72,38 +96,26 @@ const Market = () => {
 
   useEffect(() => {
     getUserdata();
+
     saveCoin();
     // Check if the user is logged in when the component mounts
+
     const storedToken = localStorage.getItem("Token");
+    // if(!storedToken)
+    // {
+    // router.push("/login")
+    // }
     setToken(storedToken);
   }, []);
 
-  // const saveCoin = async (id) => {
-  //   try {
-  //     // Check if the coin is already saved
-  //     const res = await axiosInstanceAuth.get("/allWatchlistData");
-
-  //     setSavedData(res?.data?.data)
-  //     console.log("rres----------->>>", res);
-
-  //     if (savedData && savedData.includes(id)) {
-  //       // If saved, remove it from the saved list
-  //       setSavedCoins((prevSavedCoins) =>
-  //         prevSavedCoins.filter((coinId) => coinId !== id)
-  //       );
-  //     } else {
-  //       // If not saved, add it to the saved list
-  //       setSavedCoins((prevSavedCoins) => [...prevSavedCoins, id]);
-  //       if (token) {
-  //         await axiosInstanceAuth.post("watchlist", { coinId: id });
-  //       }
-  //       // Save the coin to the server (if needed)
-
-  //     }
-  //   } catch (err) {
-  //     console.log("Error while updating saved coins:", err);
-  //   }
-  // };
+  function formatToUSD(val) {
+    const formattedValue = val.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+    const trimmedValue = formattedValue.replace(".00", "");
+    return trimmedValue;
+  }
   const saveCoin = async (id) => {
     try {
       const isSaved = savedData.includes(id);
@@ -177,6 +189,7 @@ const Market = () => {
           </div>
           <div className="text-sm pb-4">{/* =${d.price} */} =$42,693.8</div>
           <div className="text-sm ">{/* {d.pnl} */} Todays PnL -$.550()</div>
+
           {/* </div>
                         </>
                    ))} */}
@@ -210,41 +223,57 @@ const Market = () => {
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  ">
-                    <th
-                      scope="col"
-                      className=" py-3  text-base font-medium text-start "
-                    >
+                  <tr className=" text-[#CECECE]  2xl:text-lg xl:text-base">
+                    <th scope="col" className=" py-3  font-medium text-start ">
                       Coin
                     </th>
+
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
-                    >
-                      Amount
-                    </th>
-                    <th
-                      scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
                       Coin Price
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium   whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
-                      Today’s PnL
+                      1h
                     </th>
                     <th
                       scope="col"
-                      className=" py-3 text-center text-base font-medium  whitespace-nowrap"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
                     >
-                      Trade
+                      24h
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
+                    >
+                      7d
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center  font-medium   whitespace-nowrap"
+                    >
+                      24th Volume
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center  font-medium  whitespace-nowrap"
+                    >
+                      Market Cap
+                    </th>
+                    <th
+                      scope="col"
+                      className=" py-3 text-center  font-medium  whitespace-nowrap"
+                    >
+                      Last 7 days
                     </th>
                     {token && (
                       <th
                         scope="col"
-                        className=" py-3 text-end text-base font-medium  whitespace-nowrap"
+                        className=" py-3 text-end font-medium  whitespace-nowrap"
                       >
                         Save
                       </th>
@@ -255,11 +284,11 @@ const Market = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index}>
+                        <tr key={index} className="  2xl:text-md xl:text-base">
                           {/* className={`${
                       savedCoins.includes(market.id) ? 'bg-blue-500' : ''
                     }`}> */}
-                          <td className=" py-4 text-center whitespace-nowrap text-md font-medium text-white ">
+                          <td className=" py-4 text-center whitespace-nowrap  font-medium text-white ">
                             <div className="flex items-center  gap-2">
                               <div>
                                 <Image
@@ -273,50 +302,147 @@ const Market = () => {
                               <div> {market?.name}</div>
                             </div>
                           </td>
-                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
 
-                          <td className="text-center whitespace-nowrap text-md text-white ">
+                          <td className="text-center whitespace-nowrap  text-white ">
                             <div className="flex flex-col items-center justify-center">
-                              <div>${market?.current_price}</div>
-                              <div
+                              <div>{formatToUSD(market?.current_price)}</div>
+                              {/* <div
                                 className={
                                   market?.price_change_percentage_24h === 0
                                     ? "text-white"
                                     : market?.price_change_percentage_24h < 0
-                                    ? "text-red-500"
-                                    : "text-green-500"
+                                      ? "text-red-500"
+                                      : "text-green-500"
                                 }
                               >
                                 ({market?.price_change_percentage_24h})
-                              </div>
+                              </div> */}
                             </div>
                           </td>
-
-                          <td className="  text-center whitespace-nowrap text-md text-white "></td>
-                          <td className=" text-center whitespace-nowrap text-md text-white ">
-                            {/* {d.ChangesD} */}
-                            <div className="flex justify-center items-center ">
-                              <Link href="/">Trade</Link>
-                            </div>
-                          </td>
-                          <td className="   py-7   flex justify-end whitespace-nowrap text-md text-white  ">
-                            {/* {token ? (savedData && savedData.includes(market?.id) ? (
-                              // Render a filled bookmark if the coin is saved
-                              <button className=""  >
-
-                                <BiBookmark
-                                  style={{ backgroundColor: "#1788FB" }}
+                          <td
+                            className={`text-center whitespace-nowrap  text-white `}
+                          >
+                            <div
+                              className={`flex justify-center items-center ${
+                                market?.price_change_percentage_1h_in_currency ===
+                                0
+                                  ? "text-white"
+                                  : market?.price_change_percentage_1h_in_currency <
+                                    0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {market?.price_change_percentage_1h_in_currency ===
+                              0 ? (
+                                <FaMinus size={15} className="text-white" />
+                              ) : market?.price_change_percentage_1h_in_currency <
+                                0 ? (
+                                <FaCaretDown
+                                  size={15}
+                                  className="text-red-500"
                                 />
-                              </button>
-                            ) : (
-                              // Render a button to save the coin
-                              <button
-                                className=""
-                                onClick={() => saveCoin(market?.id)}
-                              >
-                                <BiBookmark />
-                              </button>
-                            )) : null} */}
+                              ) : (
+                                <FaCaretUp
+                                  size={15}
+                                  className="text-green-500"
+                                />
+                              )}
+                              {(
+                                market?.price_change_percentage_1h_in_currency *
+                                100
+                              ).toFixed(1)}
+                              %
+                            </div>
+                          </td>
+
+                          <td className="  text-center whitespace-nowrap  text-white ">
+                            <div
+                              className={`flex justify-center items-center ${
+                                market?.price_change_percentage_24h_in_currency ===
+                                0
+                                  ? "text-white"
+                                  : market?.price_change_percentage_24h_in_currency <
+                                    0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {market?.price_change_percentage_24h_in_currency ===
+                              0 ? (
+                                <FaMinus size={15} className="text-white" />
+                              ) : market?.price_change_percentage_24h_in_currency <
+                                0 ? (
+                                <FaCaretDown
+                                  size={15}
+                                  className="text-red-500"
+                                />
+                              ) : (
+                                <FaCaretUp
+                                  size={15}
+                                  className="text-green-500"
+                                />
+                              )}
+                              {(
+                                market?.price_change_percentage_24h_in_currency *
+                                100
+                              ).toFixed(1)}
+                              %
+                            </div>
+                          </td>
+                          <td className="  text-center whitespace-nowrap  text-white ">
+                            <div
+                              className={`flex justify-center items-center ${
+                                market?.price_change_percentage_7d_in_currency ===
+                                0
+                                  ? "text-white"
+                                  : market?.price_change_percentage_7d_in_currency <
+                                    0
+                                  ? "text-red-500"
+                                  : "text-green-500"
+                              }`}
+                            >
+                              {market?.price_change_percentage_7d_in_currency ===
+                              0 ? (
+                                <FaMinus size={15} className="text-white" />
+                              ) : market?.price_change_percentage_7d_in_currency <
+                                0 ? (
+                                <FaCaretDown
+                                  size={15}
+                                  className="text-red-500"
+                                />
+                              ) : (
+                                <FaCaretUp
+                                  size={15}
+                                  className="text-green-500"
+                                />
+                              )}
+                              {(
+                                market?.price_change_percentage_7d_in_currency *
+                                100
+                              ).toFixed(1)}
+                              %
+                            </div>
+                          </td>
+                          <td className=" text-center whitespace-nowrap  text-white ">
+                            <div className="flex justify-center items-center ">
+                              {formatToUSD(market?.total_volume)}
+                            </div>
+                          </td>
+                          <td className="  text-center whitespace-nowrap  text-white ">
+                            {formatToUSD(market?.market_cap)}
+                          </td>
+                          <td className=" text-center whitespace-nowrap  text-white ">
+                            <div className="flex justify-center items-center ">
+                              <Chart
+                                sparkline={market?.sparkline_in_7d.price}
+                                priceChange={
+                                  market?.price_change_percentage_7d_in_currency
+                                }
+                              />
+                            </div>
+                          </td>
+                          <td className="   py-7   flex justify-end whitespace-nowrap  text-white  ">
                             {token ? (
                               savedData && savedData.includes(market?.id) ? (
                                 // Render a filled bookmark if the coin is saved
@@ -338,8 +464,6 @@ const Market = () => {
                               )
                             ) : null}
                           </td>
-                          
-
                         </tr>
                       </>
                     ))}
@@ -383,10 +507,7 @@ const Market = () => {
                       {market?.name}
                     </div>
                   </div>
-                  <div className="border-b border-[#494949] flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Amount</div>
-                    <div className=" py-2 px-4 "></div>
-                  </div>
+
                   <div className="border-b border-[#494949] flex justify-between">
                     <div className="py-2  pl-4 font-semibold">Coin Price</div>
                     <div className="flex flex-col items-center justify-center py-2  px-4">
@@ -405,15 +526,124 @@ const Market = () => {
                     </div>
                   </div>
                   <div className="border-b border-[#494949] flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Today’s PnL</div>
-                    <div className="flex justify-end items-center py-2 px-4 "></div>
-                  </div>
-                  <div className=" flex justify-between">
-                    <div className="py-2  pl-4 font-semibold">Trade</div>
-                    <div className="flex justify-end items-center py-2 px-4  gap-1.5">
-                      <Link href="/">Trade</Link>
+                    <div className="py-2  pl-4 font-semibold">1h</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      <div
+                        className={`flex justify-center items-center ${
+                          market?.price_change_percentage_1h_in_currency === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_1h_in_currency < 0
+                            ? "text-red-500"
+                            : "text-green-500"
+                        }`}
+                      >
+                        {market?.price_change_percentage_1h_in_currency ===
+                        0 ? (
+                          <FaMinus size={15} className="text-white" />
+                        ) : market?.price_change_percentage_1h_in_currency <
+                          0 ? (
+                          <FaCaretDown size={15} className="text-red-500" />
+                        ) : (
+                          <FaCaretUp size={15} className="text-green-500" />
+                        )}
+                        {(
+                          market?.price_change_percentage_1h_in_currency * 100
+                        ).toFixed(1)}
+                        %
+                      </div>
                     </div>
                   </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">24h</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      {" "}
+                      <div
+                        className={`flex justify-center items-center ${
+                          market?.price_change_percentage_24h_in_currency === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_24h_in_currency <
+                              0
+                            ? "text-red-500"
+                            : "text-green-500"
+                        }`}
+                      >
+                        {market?.price_change_percentage_24h_in_currency ===
+                        0 ? (
+                          <FaMinus size={15} className="text-white" />
+                        ) : market?.price_change_percentage_24h_in_currency <
+                          0 ? (
+                          <FaCaretDown size={15} className="text-red-500" />
+                        ) : (
+                          <FaCaretUp size={15} className="text-green-500" />
+                        )}
+                        {(
+                          market?.price_change_percentage_24h_in_currency * 100
+                        ).toFixed(1)}
+                        %
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">7d</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      {" "}
+                      <div
+                        className={`flex justify-center items-center ${
+                          market?.price_change_percentage_7d_in_currency === 0
+                            ? "text-white"
+                            : market?.price_change_percentage_7d_in_currency < 0
+                            ? "text-red-500"
+                            : "text-green-500"
+                        }`}
+                      >
+                        {market?.price_change_percentage_7d_in_currency ===
+                        0 ? (
+                          <FaMinus size={15} className="text-white" />
+                        ) : market?.price_change_percentage_7d_in_currency <
+                          0 ? (
+                          <FaCaretDown size={15} className="text-red-500" />
+                        ) : (
+                          <FaCaretUp size={15} className="text-green-500" />
+                        )}
+                        {(
+                          market?.price_change_percentage_7d_in_currency * 100
+                        ).toFixed(1)}
+                        %
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold"> 24th Volume</div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      {" "}
+                      {formatToUSD(market?.total_volume)}
+                    </div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold"> Market Cap </div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      {" "}
+                      {formatToUSD(market?.market_cap)}
+                    </div>
+                  </div>
+                  <div className="border-b border-[#494949] flex justify-between">
+                    <div className="py-2  pl-4 font-semibold">
+                      {" "}
+                      Last 7 days{" "}
+                    </div>
+                    <div className="flex justify-end items-center py-2 px-4 ">
+                      {" "}
+                      <div className="flex justify-center items-center ">
+                        <Chart
+                          sparkline={market?.sparkline_in_7d.price}
+                          priceChange={
+                            market?.price_change_percentage_7d_in_currency
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   {token && (
                     <div className="flex justify-between border-t border-[#494949]">
                       <div className="py-2  pl-4 font-semibold">Save</div>

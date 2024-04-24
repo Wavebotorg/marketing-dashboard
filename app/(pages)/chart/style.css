@@ -1,0 +1,12 @@
+.chart-container {
+    width: 80%; /* Set the width to 100% of the parent container */
+    height: 80px; /* Set a fixed height, adjust as needed */
+    /* Center the chart horizontally */
+    text-align:center
+  }
+  
+  /* Optionally, you can style the canvas element directly */
+  .chart-container canvas {
+    width: 100%;
+    height: 100%;
+  }

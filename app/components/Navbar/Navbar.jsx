@@ -68,16 +68,15 @@ const Navbar = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div
-          className={`${
-            getPath === "/login" ||
-            getPath === "/signup" ||
-            getPath === "/forgotpassword" ||
-            getPath === "/passwordverify" ||
-            getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
+          className={`${getPath === "/login" ||
+              getPath === "/signup" ||
+              getPath === "/forgotpassword" ||
+              getPath === "/passwordverify" ||
+              getPath === "/resetpassword" ||
+              getPath === "/sucessreset"
               ? "hidden"
               : "flex  justify-between   py-7  lg:pl-10 pl-2 "
-          }`}
+            }`}
         >
           <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             <div className="flex items-center pl-3 pointer-events-none">
@@ -97,7 +96,9 @@ const Navbar = () => {
             <button className="">
               <IoIosNotifications size={25} />
             </button>
+
             <w3m-button />
+
             <div>
               {token ? (
                 <div>
@@ -153,7 +154,7 @@ const Navbar = () => {
                               >
                                 No
                               </button>
-                              
+
                             </div>
                           </div>
                         </div>
@@ -183,17 +184,18 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`${
-          getPath === "/login" ||
-          getPath === "/signup" ||
-          getPath === "/forgotpassword" ||
-          getPath === "/passwordverify" ||
-          getPath === "/resetpassword" ||
-          getPath === "/sucessreset"
+        className={`${getPath === "/login" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset"
             ? "hidden"
             : "border-b border-stone-500 "
-        }`}
-      ></div>
+          }`}
+      >
+
+      </div>
     </>
   );
 };

@@ -36,7 +36,9 @@ const PasswordVerify = () => {
     otp: otp,
     types,
   };
-
+// const redirect=()=>{
+//   router.push("/login");
+// }
   const handleSubmit = async () => {
     await axiosInstance
       .post("verify", mydata)

@@ -68,7 +68,7 @@ const WatchList = () => {
   const getUserdata = async () => {
     try {
       const res = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&page=1&sparkline=false&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&page=1&sparkline=true&locale=en"
       );
       setAllCoinData(res?.data);
     } catch (err) {
@@ -143,6 +143,7 @@ const WatchList = () => {
     }
   }, []);
   return (
+
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
@@ -204,7 +205,7 @@ const WatchList = () => {
           </div> */}
           </div>
         </div>
-
+       
         <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
