@@ -23,7 +23,7 @@ const ChartComponent = ({ sparkline, priceChange }) => {
               label: "Price",
               data: sparkline,
               fill: true,
-              backgroundColor: priceChange < 0 ? "red" : "green",
+              // backgroundColor: priceChange < 0 ? "red" : "green",
               borderColor: priceChange < 0 ? "red" : "green",
               borderWidth: 2,
               pointRadius: 0, // Hide points
