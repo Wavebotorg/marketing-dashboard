@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import bit from "../../assets/bitcoin.png";
 import Image from "next/image";
@@ -63,23 +63,21 @@ const Portfolio = () => {
   ];
 
   //pagination
-  const { searchQuery } = useSearch();//search
+  const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const filteredData =  portfolioData.filter((coin) =>
-
-  // coin.id.toLowerCase().includes(searchQuery.toLowerCase()) 
-  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
-  
-);
+  const filteredData = portfolioData.filter((coin) =>
+    // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
+    coin.coin.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
   useEffect(() => {
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [searchQuery]);
 
   return (
@@ -88,7 +86,7 @@ const Portfolio = () => {
         <div className=" mt-7" />
         <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start">My Portfolio</div>
-          <div className=" flex w-96 gap-2 text-sm xsm:mr-0 rounded-lg  bg-[#1C1C1C] text-white ">
+          {/*     <div className=" flex w-96 gap-2 text-sm xsm:mr-0 rounded-lg  bg-[#1C1C1C] text-white ">
             <div className=" flex items-center pl-3 pointer-events-none">
               <CiSearch size={20} />
             </div>
@@ -98,7 +96,7 @@ const Portfolio = () => {
               className="bg-[#1C1C1C]  outline-none my-2"
               placeholder="Search"
             />
-          </div>
+          </div> */}
         </div>
         <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
           <div>
@@ -243,15 +241,15 @@ const Portfolio = () => {
           style={{ display: "block !important" }}
         /> */}
         {/* <div className="xsm:hidden md:hidden lg:block"> */}
-          <Pagination
-            totalItems={filteredData.length}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-            currentPage={currentPage}
-          />
+        <Pagination
+          totalItems={filteredData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
         {/* </div> */}
         {visibleData?.length > 0 &&
-         visibleData?.map((item, index) => (
+          visibleData?.map((item, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">

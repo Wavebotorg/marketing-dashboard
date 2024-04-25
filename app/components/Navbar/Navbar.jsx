@@ -68,35 +68,18 @@ const Navbar = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div
-          className={`${getPath === "/login" ||
-              getPath === "/signup" ||
-              getPath === "/forgotpassword" ||
-              getPath === "/passwordverify" ||
-              getPath === "/resetpassword" ||
-              getPath === "/sucessreset"
+          className={`${
+            getPath === "/login" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   py-7  lg:pl-10 pl-2 "
-            }`}
+              : "md:flex  justify-between   py-7  lg:pl-10 pl-2 "
+          }`}
         >
-          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
-            <div className="flex items-center pl-3 pointer-events-none">
-              <CiSearch size={20} />
-            </div>
-            <input
-              type=""
-              value={searchQuery}
-              onChange={handleSearchChange}
-              id="default-search"
-              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
-              placeholder="Search "
-            />
-          </div>
-
-          <div className=" flex items-center gap-1.5 mr-5 ">
-            <button className="">
-              <IoIosNotifications size={25} />
-            </button>
-
+          <div className="order-3 flex space-y-2 justify-end items-center gap-1.5 mr-5">
             <w3m-button />
 
             <div>
@@ -104,23 +87,22 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-2 rounded-xl "
+                    className="bg-[#1788FB] text-white p-2 rounded-xl"
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center  gap-1">
                       <FiPower size={18} />
                       <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
                         Logout
                       </span>
                     </div>
                   </button>
-                  {ConfirmationPopUp ? (
+                  {/* Confirmation Popup */}
+                  {ConfirmationPopUp && (
                     <>
-                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[9999999999]   ">
-                        <div className="relative min-w-[250px] max-w-[90%] mx-auto  my-10 shadow-black shadow-2xl">
-                          {/* ------ ContentManagement ------ */}
+                      <div className="fixed inset-0 z-[9999999999] flex justify-center items-center overflow-x-hidden overflow-y-auto">
+                        <div className="relative min-w-[250px] max-w-[90%] mx-auto my-10 shadow-black shadow-2xl">
                           <div className="border-0 rounded-lg shadow-2xl relative flex flex-col w-full bg-[#FFFFFF] outline-none focus:outline-none">
-                            {/* ------ Header ------ */}
-                            <div className="grid justify-end place-items-center place-ContentManagement-end">
+                            <div className="grid justify-end">
                               <button
                                 className="bg-transparent border-0 text-black opacity-9 text-2xl font-normal outline-none focus:outline-none mx-3 my-2"
                                 onClick={(e) => ClosePopUp()}
@@ -128,17 +110,14 @@ const Navbar = () => {
                                 ×
                               </button>
                             </div>
-                            {/* ------ Body ------ */}
                             <div className="relative grid place-items-center px-6 md:px-10 py-3 flex-auto">
-                              <h3 className="text-black font-semibold text-base md:text-lg  leading-relaxed text-center">
-                                Are You Sure ?
+                              <h3 className="text-black font-semibold text-base md:text-lg leading-relaxed text-center">
+                                Are You Sure?
                               </h3>
-                              <p className="text-black font-medium text-xs md:text-sm  leading-normal text-center mt-1">
+                              <p className="text-black font-medium text-xs md:text-sm leading-normal text-center mt-1">
                                 You want to Log Out
                               </p>
                             </div>
-
-                            {/* ------ Fotter ------ */}
                             <div className="flex justify-center items-center m-5">
                               <button
                                 className="bg-[#1788FB] text-white font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow outline-none focus:outline-none ease-linear transition-all duration-150 mx-2"
@@ -154,18 +133,17 @@ const Navbar = () => {
                               >
                                 No
                               </button>
-
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="opacity-30 fixed inset-0 z-40 bg-black"></div>
+                      <div className="fixed inset-0 z-40 bg-black opacity-30"></div>
                     </>
-                  ) : null}
+                  )}
                 </div>
               ) : (
-                <Link href="/login " className="">
-                  <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
+                <Link href="/login">
+                  <button className="bg-[#1788FB] text-white p-2 mb-2 rounded-xl">
                     <div className="flex items-center">
                       <Image
                         src={Loginicon}
@@ -180,22 +158,39 @@ const Navbar = () => {
                 </Link>
               )}
             </div>
+
+            <button className="order-2">
+              <IoIosNotifications size={25} />
+            </button>
+          </div>
+          <div className="order-1 flex w-auto mr-2 md:w-[350px] sm:gap-2 gap-1 mt-2 text-sm rounded-lg bg-[#1C1C1C] text-white">
+            <div className="flex items-center pl-3 pointer-events-none">
+              <CiSearch size={20} />
+            </div>
+            <input
+              type=""
+              value={searchQuery}
+              onChange={handleSearchChange}
+              id="default-search"
+              className="bg-[#1C1C1C] p-2 outline-none rounded-lg w-auto md:w-[300px]"
+              placeholder="Search"
+            />
           </div>
         </div>
       </div>
+
       <div
-        className={`${getPath === "/login" ||
-            getPath === "/signup" ||
-            getPath === "/forgotpassword" ||
-            getPath === "/passwordverify" ||
-            getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
+        className={`${
+          getPath === "/login" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
             ? "hidden"
             : "border-b border-stone-500 "
-          }`}
-      >
-
-      </div>
+        }`}
+      ></div>
     </>
   );
 };

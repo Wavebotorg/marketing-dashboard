@@ -68,7 +68,7 @@ const WatchList = () => {
   const getUserdata = async () => {
     try {
       const res = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&page=1&sparkline=true&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       );
       setAllCoinData(res?.data);
     } catch (err) {
@@ -80,15 +80,15 @@ const WatchList = () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       const myData = res?.data?.data;
-      console.log("🚀 ~ getWatchlistdata ~ myData:", myData)
-      
+      console.log("🚀 ~ getWatchlistdata ~ myData:", myData);
+
       setWatchlist(myData);
       // Filter allCoinData based on watchlist IDs
 
       const filteredData = allCoinData.filter((coin) =>
-      myData.includes(coin.id)
+        myData.includes(coin.id)
       );
-      
+
       setWatchlistData(filteredData);
       console.log("watchlistfilter-----------", filteredData);
     } catch (err) {
@@ -153,7 +153,6 @@ const WatchList = () => {
   }
 
   return (
-
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
       <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
         <div className=" mt-7" />
@@ -215,7 +214,7 @@ const WatchList = () => {
           </div> */}
           </div>
         </div>
-       
+
         <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
@@ -270,10 +269,7 @@ const WatchList = () => {
                     >
                       Last 7 days
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-center text-base font-medium  whitespace-nowrap"
-                    ></th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-start text-base font-medium  whitespace-nowrap"
@@ -439,7 +435,7 @@ const WatchList = () => {
                             <button
                               // onClick={() => removeCoinFromWatchlist(d.id)}
                               onClick={() => modelShows(d.id)}
-                              className="text-red-500 text-center"
+                              className="text-red-500 text-center "
                             >
                               Remove
                             </button>
@@ -630,8 +626,8 @@ const WatchList = () => {
                           ).toFixed(1)}
                           %
                         </div>
-                        {/* 
-                        <div className="flex">
+
+                        {/*   <div className="flex">
                           <div className="">
                             {d?.price_change_percentage_24h === 0 ? (
                               <FaMinus size={15} className="text-white" />
@@ -660,7 +656,7 @@ const WatchList = () => {
                         24th Volume
                       </div>
                       <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        <div className="flex justify-end items-center py-2 px-4 ">
+                        <div className="flex justify-end items-center py-2 ">
                           {" "}
                           {formatToUSD(d?.total_volume)}
                         </div>
@@ -669,20 +665,20 @@ const WatchList = () => {
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Market Cap</div>
                       <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        <div className="flex justify-end items-center py-2 px-4 ">
+                        <div className="flex justify-end items-center py-2 ">
                           {" "}
                           {formatToUSD(d?.market_cap)}
                         </div>
                       </div>
                     </div>
 
-                    <div className="border-b border-[#494949]   justify-between">
+                    <div className="border-b border-[#494949] flex  justify-between">
                       <div className="py-2  pl-4 font-semibold">
                         Last 7 days
                       </div>
                       <div className="flex-1 justify-end items-center py-2 px-4 ">
                         {" "}
-                        <div className="flex justify-center items-center  ">
+                        <div className="flex justify-end items-center  ">
                           <Chart
                             sparkline={d?.sparkline_in_7d.price}
                             priceChange={

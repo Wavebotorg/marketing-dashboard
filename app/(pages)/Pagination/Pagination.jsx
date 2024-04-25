@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const Pagination = ({
@@ -7,7 +6,6 @@ const Pagination = ({
   currentPage,
   onPageChange,
 }) => {
- 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageChange = (page) => {
@@ -16,7 +14,7 @@ const Pagination = ({
 
   const getPageNumbers = () => {
     const pages = [];
-    const maxPages = 5; // Maximum number of pages to show
+    const maxPages = 3; // Maximum number of pages to show
     const maxAdjacentPages = Math.floor((maxPages - 1) / 2); // Number of pages to show on each side of the current page
 
     if (totalPages <= maxPages) {
@@ -52,7 +50,7 @@ const Pagination = ({
   };
 
   return (
-    <div className=" flex justify-end mt-4" >
+    <div className=" flex justify-end mt-4">
       <nav>
         <ul className="pagination pb-10">
           {getPageNumbers().map((page, index) => (
@@ -62,11 +60,10 @@ const Pagination = ({
             >
               <button
                 onClick={() => handlePageChange(page)}
-                className="page-link px-3 "
+                className="page-link px-2 "
               >
                 {page === "..." ? page : page}
               </button>
-             
             </li>
           ))}
         </ul>
@@ -76,4 +73,3 @@ const Pagination = ({
 };
 
 export default Pagination;
-
