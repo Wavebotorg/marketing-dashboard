@@ -87,7 +87,7 @@ const Navbar = () => {
                 <div>
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-2 rounded-xl"
+                    className="bg-[#1788FB] mb-2 text-white p-2 rounded-xl"
                   >
                     <div className="flex items-center  gap-1">
                       <FiPower size={18} />
