@@ -31,8 +31,8 @@
 //   const getUserData= async () => {
 //     axios
 //       .get(
-//         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
-//         // "https://api.coinpaprika.com/v1/tickers"
+//         // "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+//         "https://api.coinpaprika.com/v1/tickers"
       
 //       )
 //       .then((res) => {
@@ -678,6 +678,11 @@
 // };
 
 // export default Market;
+
+
+
+
+
 "use client";
 import { useParams } from "react-router-dom";
 import Image from "next/image";
@@ -894,7 +899,7 @@ const Market = () => {
         </div>
 
         {/* Border */}
-        <div className="lg:border-t lg:border-white  lg:pb-2 pb-0"></div>
+        <div className="lg:border-t lg:border-opacity-15 lg:border-[#ffffff] lg:pb-2 pb-0"></div>
 
         <div className=" hidden lg:block ">
           <div className="rounded-lg">
@@ -1001,8 +1006,8 @@ const Market = () => {
                                   ? "text-white"
                                   : market?.price_change_percentage_1h_in_currency <
                                     0
-                                  ? "text-red-500"
-                                  : "text-green-500"
+                                  ? "text-[#F56565]"
+                                  : "text-[#68D391]"
                               }`}
                             >
                               {market?.price_change_percentage_1h_in_currency ===
@@ -1012,12 +1017,12 @@ const Market = () => {
                                 0 ? (
                                 <FaCaretDown
                                   size={15}
-                                  className="text-red-500"
+                                  className="text-[#F56565]"
                                 />
                               ) : (
                                 <FaCaretUp
                                   size={15}
-                                  className="text-green-500"
+                                  className="text-[#68D391]"
                                 />
                               )}
                               {(
@@ -1036,8 +1041,8 @@ const Market = () => {
                                   ? "text-white"
                                   : market?.price_change_percentage_24h_in_currency <
                                     0
-                                  ? "text-red-500"
-                                  : "text-green-500"
+                                  ? "text-[#F56565]"
+                                  : "text-[#68D391]"
                               }`}
                             >
                               {market?.price_change_percentage_24h_in_currency ===
@@ -1047,12 +1052,12 @@ const Market = () => {
                                 0 ? (
                                 <FaCaretDown
                                   size={15}
-                                  className="text-red-500"
+                                  className="text-[#F56565]"
                                 />
                               ) : (
                                 <FaCaretUp
                                   size={15}
-                                  className="text-green-500"
+                                  className="text-[#68D391]"
                                 />
                               )}
                               {(
@@ -1070,8 +1075,8 @@ const Market = () => {
                                   ? "text-white"
                                   : market?.price_change_percentage_7d_in_currency <
                                     0
-                                  ? "text-red-500"
-                                  : "text-green-500"
+                                  ? "text-[#F56565]"
+                                  : "text-[#68D391]"
                               }`}
                             >
                               {market?.price_change_percentage_7d_in_currency ===
@@ -1081,12 +1086,12 @@ const Market = () => {
                                 0 ? (
                                 <FaCaretDown
                                   size={15}
-                                  className="text-red-500"
+                                  className="text-[#F56565]"
                                 />
                               ) : (
                                 <FaCaretUp
                                   size={15}
-                                  className="text-green-500"
+                                  className="text-[#68D391]"
                                 />
                               )}
                               {(

@@ -97,7 +97,7 @@ const Navbar = () => {
               <IoIosNotifications size={25} />
             </button>
 
-            <w3m-button />
+            {/* <w3m-button /> */}
 
             <div>
               {token ? (
@@ -191,7 +191,7 @@ const Navbar = () => {
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
             ? "hidden"
-            : "border-b border-stone-500 "
+            : "border-b border-opacity-15  border-[#ffffff]"
           }`}
       >
 

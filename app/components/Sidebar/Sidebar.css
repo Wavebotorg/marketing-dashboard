@@ -11,6 +11,7 @@
     ); */
     color: white;
     background-color: #1788FB;
+    opacity: 26%;
     /* background: linear-gradient(89.95deg, #7f2163 1.28%, #3b3f4a 31.65%); */
   }
   .dropdown-left-border {
@@ -24,13 +25,7 @@
     height: 100%;
 
   }
-  .dashboardButtonGradiant {
-    background: linear-gradient(
-      268.39deg,
-      /* rgba(255, 0, 158, 0.2) -0.96%,
-      rgba(14, 134, 253, 0.2) 97.12% */
-    );
-  }
+  
   .buttonGradinat {
     position: relative;
   }
