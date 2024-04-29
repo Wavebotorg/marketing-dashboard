@@ -44,7 +44,7 @@ const Page = () => {
             </span>
           </div>
 
-          <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#828282]  border-0 ">
+          <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#ffffff] lg:border-opacity-15 border-0 ">
             <table className="responsive-table border1 ">
               <thead className="text-[#828282] md:text-[#828282]">
                 <tr className="   ">
@@ -61,7 +61,7 @@ const Page = () => {
               <tr>
                 <td data-title="User Id">_</td>
                 <td data-title="VIP Level">_</td>
-                <td data-title="User Type">_</td>
+                <td data-title="User Type">_</td>s
                 <td data-title="Following">_</td>
                 <td data-title="Followers">_</td>
               </tr>

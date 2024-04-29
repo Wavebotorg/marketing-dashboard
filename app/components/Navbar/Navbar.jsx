@@ -79,8 +79,26 @@ const Navbar = () => {
               : "md:flex  justify-between   py-7  lg:pl-10 pl-2 "
           }`}
         >
-          <div className="order-3 flex space-y-2 justify-end items-center gap-1.5 mr-5">
-            <w3m-button />
+          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3 pointer-events-none">
+              <CiSearch size={20} />
+            </div>
+            <input
+              type=""
+              value={searchQuery}
+              onChange={handleSearchChange}
+              id="default-search"
+              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
+              placeholder="Search "
+            />
+          </div>
+
+          <div className=" flex items-center gap-1.5 mr-5 ">
+            <button className="">
+              <IoIosNotifications size={25} />
+            </button>
+
+            {/* <w3m-button /> */}
 
             <div>
               {token ? (
@@ -188,9 +206,11 @@ const Navbar = () => {
           getPath === "/resetpassword" ||
           getPath === "/sucessreset"
             ? "hidden"
-            : "border-b border-stone-500 "
-        }`}
-      ></div>
+            : "border-b border-opacity-15  border-[#ffffff]"
+          }`}
+      >
+
+      </div>
     </>
   );
 };

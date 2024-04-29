@@ -240,6 +240,7 @@ const Swap = () => {
                                     </div>
                                 </div>
                             </div>
+                         
                             <div className="w-full">
                                 <button
                                     className={` px-3 py-2 w-full rounded-md text-xl bg-indigo-600 ${selectedTokenDatato?.input_from
@@ -258,12 +259,11 @@ const Swap = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
                         <div className=" space-y-5">
-                            <div className="flex justify-between items-center py-2  ">
+                            <div className="flex justify-between items-center py-2 ">
                                 <div className="text-xl">Select Token</div>
                                 <div
                                     onClick={() => setShowPopup(false)}
-                                    className="cursor-pointer"
-                                >
+                                     className="cursor-pointer">
                                     <IoMdClose size={24} />
                                 </div>
                             </div>
@@ -298,7 +298,7 @@ const Swap = () => {
                                         <p className="text-gray-200">
                                             ({token.symbol.toUpperCase()})
                                         </p>
-                                    </div>
+                                    </div> 
                                 </div>
                             ))}
                         </div> : null}
