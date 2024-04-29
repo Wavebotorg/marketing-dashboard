@@ -45,6 +45,16 @@ const Signup = () => {
   };
   // Signup API code
   const handleSubmit = async () => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(mydata.password)) {
+      toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
+      return;
+    }
+  
+    if (mydata.password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
     await axiosInstance
       .post("signup", mydata)
       .then((res) => {
@@ -99,8 +109,9 @@ const Signup = () => {
             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"
             type="text"
             name="name"
-            value={signupdata.name}
-            onChange={onChangeInput}                                                                                                                                                                                       
+            value={signupdata.name.toLowerCase()}
+            onChange={onChangeInput}    
+            maxLength={15}                                                                                                                                                                                   
           />
         </div>
         <div className="relative">

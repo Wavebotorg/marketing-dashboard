@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
@@ -7,8 +7,10 @@ import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
 import { MdOutlineContentCopy } from "react-icons/md";
 import Market from "./(pages)/market/page";
-
+import Login from "../app/(pages)/login/page"
+import { useRouter } from "next/navigation";
 const Page = () => {
+  const router = useRouter();
   const userData = [
     {
       userId: "95968227",
@@ -32,7 +34,16 @@ const Page = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
   };
-
+  // useEffect(() => {
+    
+  //   const token = localStorage.getItem('Token');
+  //   if (token) {
+  //     router.push('/'); // Change '/home' to your actual home page route
+  //   } else {
+  //     router.push('/login'); // Change '/login' to your actual login page route
+  //   }
+  // }, []);
+  
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">

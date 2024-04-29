@@ -520,6 +520,15 @@ function Sidebar() {
 
   const [userProfile, setUserProfile] = useState([]);
 
+    useEffect(() => {
+    
+    const token = localStorage.getItem('Token');
+    if (token) {
+      router.push('/'); // Change '/home' to your actual home page route
+    } else {
+      router.push('/login'); // Change '/login' to your actual login page route
+    }
+  }, []);
   useEffect(() => {
     const getUserProfile = async () => {
       try {
@@ -536,7 +545,7 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] ${matchPath ? "hidden" : "block"
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${matchPath ? "hidden" : "block"
         } `}
     >
       <div

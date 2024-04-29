@@ -10,11 +10,13 @@ import useEncryption from "../../components/useEncryption/index";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
+import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
-
+  const [validCaptcha, setValidCaptcha] = useState(false);
+  const [captchaError, setCaptchaError] = useState(false);
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
   //   if (checkAuth) {
@@ -38,7 +40,24 @@ const Login = () => {
     password: loginFields?.password,
   };
   const handleSubmit = async () => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(mydata.password)) {
+      toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
+      return;
+    }
+  
+    if (mydata.password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+    if (!validCaptcha) {
+   
+      setCaptchaError(true);
+      return;
+    }
+
     await axiosInstance
+    
       .post("login", mydata)
       .then((res) => {
         const myData = res?.data;
@@ -121,10 +140,24 @@ const Login = () => {
         <div className="flex justify-end text-xs  mt-2">
           <Link href="/forgotpassword"> Forget Password ?</Link>
         </div>
+        {captchaError && (
+<div className="text-red-500">Please complete the captcha.</div>
+)}
+         <ReCAPTCHA
+          // sitekey="6LcxWE4pAAAAADTuZPl7FRbwvRiUQ8cndvvTZsNW"
+          sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
+          // onChange={(value) => setValidCaptcha(value)}
+          onChange={(value) => {
+            setValidCaptcha(value);
+            setCaptchaError(false);
+          }}
+          className=" flex justify-center mt-5"
+        />
         <div className="flex justify-center mt-10">
           <button
             className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
             onClick={handleSubmit}
+            disabled={!validCaptcha}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSubmit();

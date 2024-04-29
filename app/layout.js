@@ -47,3 +47,56 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
+// "use client"
+// import { Inter } from "next/font/google";
+// import { useEffect, useState } from 'react';
+// import { useRouter } from 'next/router'; // Import useRouter hook
+// import Web3ModalProvider from "@/context";
+// import { SearchProvider } from "././components/contexts/SearchContext";
+// import LoginPage from '../app/(pages)/login/page'; // Import your login page component
+// import HomePage from './page'; // Import your home page component
+
+// // Initialize Inter font
+// const inter = Inter({ subsets: ["latin"] });
+
+// export default function RootLayout({ children }) {
+//   const router = useRouter(); // Use useRouter hook to get the router object
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+//   // Check authentication status on initial render
+//   useEffect(() => {
+//     const userIsLoggedIn = checkIfUserIsLoggedIn(); // Implement this function based on your authentication mechanism
+//     setIsLoggedIn(userIsLoggedIn);
+//   }, []);
+
+//   const checkIfUserIsLoggedIn = () => {
+//     return localStorage.getItem('authToken') !== null;
+//   };
+
+//   useEffect(() => {
+//     if (!isLoggedIn && router.pathname !== '/login') {
+//       router.push('/login');
+//     }
+//   }, [isLoggedIn, router]);
+
+//   return (
+//     <html lang="en">
+//       <body className={inter.className}>
+//         <Web3ModalProvider >
+//           <SearchProvider>
+//             {isLoggedIn ? (
+//               <HomePage>
+//                 {children}
+//               </HomePage>
+//             ) : (
+//               <LoginPage />
+//             )}
+//           </SearchProvider>
+//         </Web3ModalProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
