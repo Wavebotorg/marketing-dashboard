@@ -33,7 +33,7 @@
 //       .get(
 //         // "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
 //         "https://api.coinpaprika.com/v1/tickers"
-      
+
 //       )
 //       .then((res) => {
 //         setAllCoinData(res?.data);
@@ -659,10 +659,6 @@
 // };
 
 // export default Market;
-
-
-
-
 
 "use client";
 import { useParams } from "react-router-dom";

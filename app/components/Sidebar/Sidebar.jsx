@@ -29,7 +29,7 @@
 // import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
 // import axios from "axios";
-// import axiosInstance from "@/app/apiInstances/axiosInstance";                                                                                                                        
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
 // import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 // function Sidebar() {
@@ -358,8 +358,6 @@
 
 // export default Sidebar;
 
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -426,10 +424,6 @@ function Sidebar() {
       });
   };
 
-  useEffect(() => {
-    getUserdata();
-  }, [Token]);
-
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
@@ -451,7 +445,7 @@ function Sidebar() {
     },
     {
       id: 3,
-      pathname: "/holder",  
+      pathname: "/holder",
       icon: Holder,
       pagename: "Holder",
     },
@@ -512,6 +506,7 @@ function Sidebar() {
   };
   const matchPath =
     pathname === "/login" ||
+    // pathname === "/" ||
     pathname === "/signup" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
@@ -536,19 +531,21 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] ${matchPath ? "hidden" : "block"
-        } `}
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] ${
+        matchPath ? "hidden" : "block"
+      } `}
     >
       <div
-        className={`sidebar   ${isNavbar
+        className={`sidebar   ${
+          isNavbar
             ? "w-72"
             : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
-          }`}
+        }`}
       >
         <div className="sidebar h-full  -ml-[4px] hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
           <div className="flex h-screen flex-col  overflow-y-auto">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center text-white justify-center">
               <div
                 className={`xl:hidden text-3xl `}
                 onClick={() => setIsNavbar(!isNavbar)}
@@ -564,8 +561,9 @@ function Sidebar() {
               <Image
                 src={Logo}
                 alt="wave-logo"
-                className={`${isNavbar === false ? "hidden xl:block" : "block"
-                  } mt-10 mx-auto`}
+                className={`${
+                  isNavbar === false ? "hidden xl:block" : "block"
+                } mt-10 mx-auto`}
               />
             </div>
             <div>
@@ -574,11 +572,12 @@ function Sidebar() {
                   <li key={data?.id} className="min-w-max">
                     <Link
                       href={data?.pathname}
-                      className={`${(isHover && data?.id === isHover) ||
-                          data?.pathname === pathname
+                      className={`${
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
-                          : ""
-                        } flex md:px-2 lg:px-3  py-2 rounded-lg`}
+                          : "text-white"
+                      } flex md:px-2 lg:px-3  py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -586,13 +585,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover && data?.id === isHover) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border  -ml-[0px]"
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -605,11 +608,12 @@ function Sidebar() {
                   <li key={data?.id} className="min-w-max">
                     <Link
                       href={data?.pathname}
-                      className={`${(isHover && data?.id === isHover) ||
-                          data?.pathname === pathname
+                      className={`${
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
                           : ""
-                        } flex md:px-2 lg:px-3 py-2 rounded-lg`}
+                      } flex md:px-2 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -617,13 +621,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover1 && data?.id === isHover1) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border -ml-[0px] "
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}

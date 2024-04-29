@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
-import { FiPower } from "react-icons/fi";
+import { FiPower, FiLogIn } from "react-icons/fi";
 import { useSearch } from "../contexts/SearchContext";
 const Navbar = () => {
   const router = useRouter();
@@ -68,15 +68,17 @@ const Navbar = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div
-          className={`${getPath === "/login" ||
-              getPath === "/signup" ||
-              getPath === "/forgotpassword" ||
-              getPath === "/passwordverify" ||
-              getPath === "/resetpassword" ||
-              getPath === "/sucessreset"
+          className={`${
+            getPath === "/login" ||
+            // getPath === "/" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset"
               ? "hidden"
               : "flex  justify-between   py-7  lg:pl-10 pl-2 "
-            }`}
+          }`}
         >
           <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             <div className="flex items-center pl-3 pointer-events-none">
@@ -154,7 +156,6 @@ const Navbar = () => {
                               >
                                 No
                               </button>
-
                             </div>
                           </div>
                         </div>
@@ -167,12 +168,8 @@ const Navbar = () => {
                 <Link href="/login " className="">
                   <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center">
-                      <Image
-                        src={Loginicon}
-                        alt="loginicon"
-                        className="w-[20px] h-[20px] md:block hidden"
-                      />
-                      <span className="md:ml-2 md:text-md text-sm md:w-14">
+                      <FiLogIn size={18} />
+                      <span className="md:ml-2 md:text-md text-sm md:w-14 ">
                         Login
                       </span>
                     </div>
@@ -184,18 +181,18 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`${getPath === "/login" ||
-            getPath === "/signup" ||
-            getPath === "/forgotpassword" ||
-            getPath === "/passwordverify" ||
-            getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
+        className={`${
+          getPath === "/login" ||
+          // getPath === "/" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
             ? "hidden"
             : "border-b border-opacity-15  border-[#ffffff]"
-          }`}
-      >
-
-      </div>
+        }`}
+      ></div>
     </>
   );
 };

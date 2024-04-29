@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReCAPTCHA from "react-google-recaptcha";
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
@@ -59,7 +60,7 @@ const Login = () => {
       });
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible)
+  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -70,6 +71,9 @@ const Login = () => {
       handleSubmit();
     }
   };
+  const [validCaptcha, setValidCaptcha] = useState(false);
+
+  console.log("io---------------------->", validCaptcha);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
@@ -78,7 +82,6 @@ const Login = () => {
           src={Logo}
           alt="Logo"
           className="2xl:h-[39px] w-full lg:h-[32px] sm:h-[32px] xsm:h-[30px]"
-          
         />
       </div>
 
@@ -118,22 +121,33 @@ const Login = () => {
             )}
           </button>
         </div>
+
         <div className="flex justify-end text-xs  mt-2">
           <Link href="/forgotpassword"> Forget Password ?</Link>
         </div>
+        <ReCAPTCHA
+          // sitekey="6LcxWE4pAAAAADTuZPl7FRbwvRiUQ8cndvvTZsNW"
+          sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
+          onChange={(value) => setValidCaptcha(value)}
+          className=" flex justify-center mt-5"
+        />
         <div className="flex justify-center mt-10">
-          <button
-            className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
-            onClick={handleSubmit}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-                setCreateFolder(false);
-              }
-            }}
-          >
-            Login
-          </button>
+          {validCaptcha ? (
+            <button
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+              onClick={handleSubmit}
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded cursor-not-allowed opacity-50"
+              disabled
+            >
+              Login
+            </button>
+          )}
+
           <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">

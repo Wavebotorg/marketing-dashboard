@@ -10,8 +10,8 @@
       rgba(255, 0, 158, 0) 34.05%
     ); */
     color: white;
-    background-color: #1788FB;
-    opacity: 26%;
+    background-color: rgba(23, 136, 251, 0.26);
+    /* opacity: 26%; */
     /* background: linear-gradient(89.95deg, #7f2163 1.28%, #3b3f4a 31.65%); */
   }
   .dropdown-left-border {
