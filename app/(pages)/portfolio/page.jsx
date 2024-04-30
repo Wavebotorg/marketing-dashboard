@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
-import bit from "../../assets/bitcoin.png";
+import bit from "../../../public/assets/bitcoin.png";
 import Image from "next/image";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";

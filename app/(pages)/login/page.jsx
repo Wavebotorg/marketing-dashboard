@@ -16,6 +16,7 @@ const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
   const [validCaptcha, setValidCaptcha] = useState(false);
+ 
   const [captchaError, setCaptchaError] = useState(false);
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
@@ -24,7 +25,7 @@ const Login = () => {
   //   }
   // }, [])
   const [loginFields, setLoginFields] = useState({ email: "", password: "" });
-
+  const [errors, setErrors] = useState({ email: "", password: "" });
   const onChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -33,23 +34,45 @@ const Login = () => {
       ...loginFields,
       [name]: value,
     });
+    validateInput(name, value);
   };
 
   const mydata = {
     email: loginFields?.email,
     password: loginFields?.password,
   };
+  const validateInput = (name, value) => {
+    switch (name) {
+      
+      case "email":
+        setErrors((prevState) => ({
+          ...prevState,
+          email: value
+            ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+              ? ""
+              : "Invalid email address"
+            : "Email is required",
+        }));
+        break;
+      case "password":
+        setErrors((prevState) => ({
+          ...prevState,
+          password: value
+            ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
+              ? ""
+              : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
+            : "Password is required",
+        }));
+        break;
+      
+      default:
+        break;
+    }
+  };
   const handleSubmit = async () => {
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(mydata.password)) {
-      toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
-      return;
-    }
-  
-    if (mydata.password.length < 8) {
-      toast.error("Password must be at least 8 characters long.");
-      return;
-    }
+   
+    
+
     if (!validCaptcha) {
    
       setCaptchaError(true);
@@ -108,16 +131,19 @@ const Login = () => {
         <div>
           <div className="text-[#CACACA] mb-2"> Enter Email </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"
+            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
             type="email"
             name="email"
             value={loginFields?.email}
             onChange={onChangeInput}
             onKeyPress={handleKeyPress}
           />
+            {errors.email && (
+            <div className="text-red-500 text-sm mb-5">{errors.email}</div>
+          )}
         </div>
         <div className="relative">
-          <div className="text-[#CACACA] mb-2"> Enter Password </div>
+          <div className="text-[#CACACA] my-2"> Enter Password </div>
           <input
             className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
             type={isPasswordVisible ? "text" : "password"}
@@ -126,6 +152,10 @@ const Login = () => {
             onChange={onChangeInput}
             onKeyPress={handleKeyPress}
           />
+            {errors.password && (
+            <div className="text-red-500 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px]">{errors.password}</div>
+          )}
+         
           <button
             className="absolute right-2 top-12 transform -translate-y-1/2 text-[#CACACA] cursor-pointer"
             onClick={togglePasswordVisibility}
@@ -153,6 +183,7 @@ const Login = () => {
           }}
           className=" flex justify-center mt-5"
         />
+        
         <div className="flex justify-center mt-10">
           <button
             className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"

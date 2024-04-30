@@ -382,6 +382,7 @@ import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
 import WatchList from "../../../public/assets/sidebar/watchlist.svg";
 import Discover from "../../../public/assets/sidebar/discover.svg";
+import Swap from "../../../public/assets/sidebar/swap.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
 import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
@@ -446,36 +447,42 @@ function Sidebar() {
     },
     {
       id: 2,
+      pathname: "/swap",
+       icon: Swap,
+      pagename: "Swap",
+    },
+    {
+      id: 3,
       pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
     {
-      id: 3,
+      id: 4,
       pathname: "/holder",  
       icon: Holder,
       pagename: "Holder",
     },
     {
-      id: 4,
+      id: 5,
       pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
-      id: 5,
+      id: 6,
       pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
-      id: 6,
+      id: 7,
       pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
-      id: 7,
+      id: 8,
       pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
@@ -484,25 +491,25 @@ function Sidebar() {
 
   const headerbottom = [
     {
-      id: 8,
+      id: 9,
       pathname: "/watchList",
       icon: WatchList,
       pagename: "Watch List",
     },
     {
-      id: 9,
+      id: 10,
       pathname: "/discover",
       icon: Discover,
       pagename: "Discover",
     },
     {
-      id: 10,
+      id: 11,
       pathname: "/apecurdocs",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
     {
-      id: 11,
+      id: 12,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",
@@ -669,16 +676,16 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-            <div>
+            <div >
               {token ? (
-                <div className="grid place-items-center">
+                <div className=" grid place-items-center ">
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
                     className="bg-[#1788FB] text-white p-2 rounded-xl "
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1  px-5">
                       <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
+                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden ">
                         Logout
                       </span>
                     </div>
@@ -733,10 +740,11 @@ function Sidebar() {
                     </>
                   ) : null}
                 </div>
-              ) : (
+              ) : ( 
+                <div className=" grid place-items-center">
                 <Link href="/login " className="">
                   <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
-                    <div className="flex items-center">
+                    <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
                         alt="loginicon"
@@ -748,6 +756,7 @@ function Sidebar() {
                     </div>
                   </button>
                 </Link>
+                </div>
               )}
             </div>
             <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">

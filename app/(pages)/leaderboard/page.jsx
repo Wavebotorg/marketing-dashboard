@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import img from "../../assets/profile.PNG";
+import profileimg from "../../../public/assets/profile.PNG";
 import { useSearch } from "../../components/contexts/SearchContext";//search
 import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
@@ -193,7 +193,7 @@ const LeaderBoard = () => {
                           <div className="flex gap-2">
                             <div className="w-[2.5rem] sm:[1.5rem]">
                               <Image
-                                src={img}
+                                src={profileimg }
                                 alt="Picture of the author"
                                 className="rounded-full"
                               />
