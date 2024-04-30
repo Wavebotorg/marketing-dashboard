@@ -16,8 +16,30 @@ import Web3ModalProvider from "@/context";
 const inter = Inter({ subsets: ["latin"] });
 import { SearchProvider } from "././components/contexts/SearchContext";
 export const metadata = {
-  title: "wave",
-  description: "wave app",
+  // title: "Wave Dashboard",
+  // description: "wave app",
+  // icons: {
+  //   icon: "/wave_logo.png",
+  //   shortcut: "/wave_logo.png",
+  //   apple: "/wave_logo.png",
+  //   other: {
+  //     rel: "",
+  //     url: "/wave_logo.png",
+  //   },
+  // },
+  title:"Wave Dashboard",
+  description:
+  "wave app",
+  icons: {
+    icon: "/wave_logo.png",
+    shortcut: "/wave_logo.png",
+    apple: "/wave_logo.png",
+    other: {
+      rel: "tanthetaa-touch-icon-precomposed",
+      url: "/wave_logo.png",
+    },
+  },
+
 };
 
 export default function RootLayout({ children }) {
