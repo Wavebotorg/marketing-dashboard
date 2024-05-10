@@ -10,12 +10,14 @@ import useEncryption from "../../components/useEncryption/index";
 import { useRouter } from "next/navigation";
 import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import "react-toastify/dist/ReactToastify.css";
+// import ReCAPTCHA from "react-google-recaptcha";
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
-
+  const [validCaptcha, setValidCaptcha] = useState(false);
+  const [captchaError, setCaptchaError] = useState(false);
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
   //   if (checkAuth) {
@@ -39,7 +41,25 @@ const Login = () => {
     password: loginFields?.password,
   };
   const handleSubmit = async () => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(mydata.password)) {
+      toast.error(
+        "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long."
+      );
+      return;
+    }
+
+    if (mydata.password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+    if (!validCaptcha) {
+      setCaptchaError(true);
+      return;
+    }
+
     await axiosInstance
+
       .post("login", mydata)
       .then((res) => {
         const myData = res?.data;
@@ -71,7 +91,7 @@ const Login = () => {
       handleSubmit();
     }
   };
-  const [validCaptcha, setValidCaptcha] = useState(false);
+  // const [validCaptcha, setValidCaptcha] = useState(false);
 
   console.log("io---------------------->", validCaptcha);
 

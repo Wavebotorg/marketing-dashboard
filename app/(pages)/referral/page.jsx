@@ -1,5 +1,5 @@
 "use client";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -113,33 +113,440 @@ const Referral = () => {
       transaction: "eth56",
       status: "true",
     },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
+    {
+      block: "73",
+      date: "2:00:66",
+      wallet: "$95",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth45",
+      status: "true",
+    },
+    {
+      block: "88",
+      date: "2:00:66",
+      wallet: "$15",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth23",
+      status: "true",
+    },
+    {
+      block: "203",
+      date: "2:00:66",
+      wallet: "$52",
+      swapcost: "566",
+      refreward: "true",
+      transaction: "eth56",
+      status: "true",
+    },
     // Add more data as needed
   ]);
- 
+
   //pagination
-  const { searchQuery } = useSearch();//search
+  const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 30;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   //search
-  const filteredData = allCoinData.filter((coin) =>
-  coin.wallet.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.block.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  coin.transaction.toLowerCase().includes(searchQuery.toLowerCase())
-  // Add more fields for search filtering if needed
-);
+  const filteredData = allCoinData.filter(
+    (coin) =>
+      coin.wallet.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coin.block.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coin.transaction.toLowerCase().includes(searchQuery.toLowerCase())
+    // Add more fields for search filtering if needed
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
   useEffect(() => {
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [searchQuery]);
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10"> */}
+      <div className="flex flex-col xl:justify-center  xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
         <h1 className="text-[#1788FB]  text-2xl  md:text-3xl   text-center md:text-left font-medium max-w-screen-lg ">
           Referral Rewards
         </h1>
@@ -188,7 +595,7 @@ const Referral = () => {
         </div> */}
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C]  text-white  h-auto overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  ">
@@ -279,15 +686,15 @@ const Referral = () => {
           </div>
         </div>
         {/* <div className="xsm:hidden md:hidden lg:block"> */}
-          <Pagination
-            totalItems={allCoinData.length}
-            itemsPerPage={itemsPerPage}
-            onPageChange={handlePageChange}
-            currentPage={currentPage}
-          />
+        <Pagination
+          totalItems={allCoinData.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
         {/* </div> */}
         {visibleData?.length > 0 &&
-         visibleData?.map((d, index) => (
+          visibleData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
               <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
                 <div className="w-full  ">

@@ -837,7 +837,7 @@ const Market = () => {
 
   return (
     <>
-      <div className=" bg-[#1C1C1C] rounded-2xl">
+      <div className=" bg-[#1C1C1C] rounded-2xl ">
         <div className=" sm:pl-10 pl-2 sm:py-9 py-4">
           <div className="flex pb-3">
             <h1 className="font-bold text-2xl">Liquidity Intents</h1>
@@ -875,7 +875,7 @@ const Market = () => {
               Markets
             </h1>
             <div className="flex justify-end  mb-7 "></div>
-            <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
+            <div className="bg-[#1C1C1C]  text-white h-[750px] overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  2xl:text-lg xl:text-base">

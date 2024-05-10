@@ -66,22 +66,23 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      {/* <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto "> */}
+      <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto ">
         <div
           className={`${
             getPath === "/login" ||
-            // getPath === "/" ||
+            getPath === "/Profile" ||
             getPath === "/signup" ||
             getPath === "/forgotpassword" ||
             getPath === "/passwordverify" ||
             getPath === "/resetpassword" ||
             getPath === "/sucessreset"
               ? "hidden"
-              : "flex  justify-between   py-7  lg:pl-10 pl-2 "
+              : "flex  justify-between   py-7  xl:pl-[86px] pl-2 "
           }`}
         >
-          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
-            <div className="flex items-center pl-3 pointer-events-none">
+          <div className="flex w-auto md:w-[350px]    sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3  pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
@@ -89,19 +90,19 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               id="default-search"
-              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
+              className="bg-[#1C1C1C]  xsm:w-[10rem] p-2 outline-none rounded-lg w-auto md:w-[300px]"
               placeholder="Search "
             />
           </div>
 
-          <div className=" flex items-center gap-1.5 mr-5 ">
-            <button className="">
+          <div className=" flex items-center gap-1.5 mr-5 xl:mr-16 ">
+            <button className="xl:pr-6">
               <IoIosNotifications size={25} />
             </button>
 
             {/* <w3m-button /> */}
 
-            <div>
+            {/* <div>
               {token ? (
                 <div>
                   <button
@@ -119,9 +120,9 @@ const Navbar = () => {
                     <>
                       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[9999999999]   ">
                         <div className="relative min-w-[250px] max-w-[90%] mx-auto  my-10 shadow-black shadow-2xl">
-                          {/* ------ ContentManagement ------ */}
+                       
                           <div className="border-0 rounded-lg shadow-2xl relative flex flex-col w-full bg-[#FFFFFF] outline-none focus:outline-none">
-                            {/* ------ Header ------ */}
+                 
                             <div className="grid justify-end place-items-center place-ContentManagement-end">
                               <button
                                 className="bg-transparent border-0 text-black opacity-9 text-2xl font-normal outline-none focus:outline-none mx-3 my-2"
@@ -130,7 +131,7 @@ const Navbar = () => {
                                 ×
                               </button>
                             </div>
-                            {/* ------ Body ------ */}
+                          
                             <div className="relative grid place-items-center px-6 md:px-10 py-3 flex-auto">
                               <h3 className="text-black font-semibold text-base md:text-lg  leading-relaxed text-center">
                                 Are You Sure ?
@@ -140,7 +141,7 @@ const Navbar = () => {
                               </p>
                             </div>
 
-                            {/* ------ Fotter ------ */}
+                           
                             <div className="flex justify-center items-center m-5">
                               <button
                                 className="bg-[#1788FB] text-white font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow outline-none focus:outline-none ease-linear transition-all duration-150 mx-2"
@@ -176,7 +177,7 @@ const Navbar = () => {
                   </button>
                 </Link>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

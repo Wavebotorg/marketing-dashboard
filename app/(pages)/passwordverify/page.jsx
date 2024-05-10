@@ -14,6 +14,16 @@ import "react-toastify/dist/ReactToastify.css";
 const PasswordVerify = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
+  const [showResendButton, setShowResendButton] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(10);
+  const timer1 = setTimeout(() => {
+    setRemainingTime(remainingTime - 1);
+  }, 1000);
+
+
+  const timer = setTimeout(() => {
+    setShowResendButton(true);
+  }, 10000);
   const email =
     typeof window !== "undefined" ? localStorage.getItem("userEmail") : null;
   const types =
@@ -36,9 +46,9 @@ const PasswordVerify = () => {
     otp: otp,
     types,
   };
-// const redirect=()=>{
-//   router.push("/login");
-// }
+  // const redirect=()=>{
+  //   router.push("/login");
+  // }
   const handleSubmit = async () => {
     await axiosInstance
       .post("verify", mydata)
@@ -120,7 +130,7 @@ const PasswordVerify = () => {
                 numInputs={4}
                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
                 containerStyle={"otp-container"}
-                renderInput={(props) => <input {...props} onKeyDown={handleKeyPress}/>}
+                renderInput={(props) => <input {...props} onKeyDown={handleKeyPress} />}
               />
             </div>
 
@@ -130,21 +140,32 @@ const PasswordVerify = () => {
               </button>
               <ToastContainer />
             </div>
-           
-            <div className="flex justify-center mt-10 ">
+
+            {!showResendButton && (<div className="flex justify-center mt-10 ">
+              <Link
+                href="#"
+                className="text-xs text-[#CACACA] "
+
+              >
+                Resend OTP in <b>{remainingTime}</b> seconds
+              </Link>
+
+            </div>
+            )}
+            {showResendButton && (<div className="flex justify-center mt-10 ">
               <Link
                 href="#"
                 className="text-xs text-[#CACACA] "
                 onClick={resendOtp}
               >
-                Resend OTP
+              Resend Otp
               </Link>
-           
+
             </div>
-         
+            )}
           </div>
         </div>
-       
+
       </div>
     </>
   );

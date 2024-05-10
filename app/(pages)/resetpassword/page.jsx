@@ -46,6 +46,16 @@ const ResetPassword = () => {
   };
 
   const handleSubmit = async () => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
+      toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
+      return;
+    }
+  
+    if (mydata.newPassword.length < 8 && mydata.confirmPassword.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
     await axiosInstance
       .post("resetPassword", mydata)
       .then((res) => {
@@ -59,7 +69,7 @@ const ResetPassword = () => {
 
 
 
-          router.push("/sucessreset");
+          router.push("/");
           // setTimeout(() => {
           // }, 3000);
         } else {
