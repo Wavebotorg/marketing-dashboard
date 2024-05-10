@@ -382,6 +382,8 @@ import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
 import WatchList from "../../../public/assets/sidebar/watchlist.svg";
 import Discover from "../../../public/assets/sidebar/discover.svg";
+import Swap from "../../../public/assets/sidebar/swap.svg";
+import swaphistory  from "../../../public/assets/sidebar/swaphistory.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
 import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
@@ -390,26 +392,26 @@ import Twitter from "../../../public/assets/sidebar/twitter.png";
 import medium from "../../../public/assets/sidebar/medium.png";
 
 import discord from "../../../public/assets/sidebar/discord.png";
-import useEncryption from "@/app/components/useEncryption/index";
+// import useEncryption from "@/app/components/useEncryption/index";
 import axios from "axios";
-import axiosInstance from "@/app/apiInstances/axiosInstance";
-import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
-
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import { useWallet } from "../contexts/WalletContext";
 function Sidebar() {
   const router = useRouter();
-
+  const { setWalletAddress ,setEmail} = useWallet();
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =
     typeof window !== "undefined" ? localStorage.getItem("details") : null;
 
-  // ... (other code)
+ 
 
   if (getdata?.code) {
     toast.success(getdata.message);
   }
 
-  // ... (other code)
+
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
@@ -419,7 +421,9 @@ function Sidebar() {
       .then((res) => {
         const myData = res?.data?.data;
         setAllUser(myData || []);
-
+        setWalletAddress(myData?.wallet)
+        setEmail(myData?.email)
+        console.log("setWalletAddress:", myData?.wallet)
         console.log("getUserProfile---->", myData);
       })
       .catch((err) => {
@@ -446,36 +450,48 @@ function Sidebar() {
     },
     {
       id: 2,
+      pathname: "/swap",
+       icon: Swap,
+      pagename: "Swap",
+    },
+    {
+      id: 3,
+      pathname: "/swaphistory",
+      icon:  swaphistory  ,
+      pagename: "Swap History",
+    },
+    {
+      id: 4,
       pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
     {
-      id: 3,
+      id: 5,
       pathname: "/holder",  
       icon: Holder,
       pagename: "Holder",
     },
     {
-      id: 4,
+      id: 6,
       pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
-      id: 5,
+      id: 7,
       pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
-      id: 6,
+      id: 8,
       pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
-      id: 7,
+      id: 9,
       pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
@@ -484,25 +500,25 @@ function Sidebar() {
 
   const headerbottom = [
     {
-      id: 8,
+      id: 10,
       pathname: "/watchList",
       icon: WatchList,
       pagename: "Watch List",
     },
     {
-      id: 9,
+      id: 11,
       pathname: "/discover",
       icon: Discover,
       pagename: "Discover",
     },
     {
-      id: 10,
+      id: 12,
       pathname: "/apecurdocs",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
     {
-      id: 11,
+      id: 13,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",
@@ -521,15 +537,15 @@ function Sidebar() {
 
   const [userProfile, setUserProfile] = useState([]);
 
-    useEffect(() => {
+  //   useEffect(() => {
     
-    const token = localStorage.getItem('Token');
-    if (token) {
-      router.push('/'); // Change '/home' to your actual home page route
-    } else {
-      router.push('/login'); // Change '/login' to your actual login page route
-    }
-  }, []);
+  //   const token = localStorage.getItem('Token');
+  //   if (token) {
+  //     router.push('/'); // Change '/home' to your actual home page route
+  //   } else {
+  //     router.push('/login'); // Change '/login' to your actual login page route
+  //   }
+  // }, []);
   useEffect(() => {
     const getUserProfile = async () => {
       try {
@@ -669,16 +685,16 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-            <div>
+            <div >
               {token ? (
-                <div className="grid place-items-center">
+                <div className=" grid place-items-center ">
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
                     className="bg-[#1788FB] text-white p-2 rounded-xl "
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1  px-5">
                       <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden">
+                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden ">
                         Logout
                       </span>
                     </div>
@@ -733,10 +749,11 @@ function Sidebar() {
                     </>
                   ) : null}
                 </div>
-              ) : (
+              ) : ( 
+                <div className=" grid place-items-center">
                 <Link href="/login " className="">
                   <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
-                    <div className="flex items-center">
+                    <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
                         alt="loginicon"
@@ -748,9 +765,10 @@ function Sidebar() {
                     </div>
                   </button>
                 </Link>
+                </div>
               )}
             </div>
-            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-24̣ sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">
+            <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-20 sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>

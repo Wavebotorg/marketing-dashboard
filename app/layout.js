@@ -9,24 +9,16 @@ import { headers } from "next/headers";
 
 import { cookieToInitialState } from "wagmi";
 
-import { config } from "../config";
-import Web3ModalProvider from "@/context";
+// import { config } from "../config";
+// import Web3ModalProvider from "@/context";
 
 // import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 import { SearchProvider } from "././components/contexts/SearchContext";
+import { WalletProvider } from "./components/contexts/WalletContext";
+
 export const metadata = {
-  // title: "Wave Dashboard",
-  // description: "wave app",
-  // icons: {
-  //   icon: "/wave_logo.png",
-  //   shortcut: "/wave_logo.png",
-  //   apple: "/wave_logo.png",
-  //   other: {
-  //     rel: "",
-  //     url: "/wave_logo.png",
-  //   },
-  // },
+
   title:"Wave Dashboard",
   description:
   "wave app",
@@ -43,12 +35,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"));
+  // const initialState = cookieToInitialState(config, headers().get("cookie"));
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Web3ModalProvider initialState={initialState}>
+        {/* <Web3ModalProvider initialState={initialState}> */}
           <SearchProvider>
+          <WalletProvider>
             <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
               <div className="sidebar visible px-5  ">
                 <Sidebar />
@@ -63,8 +56,10 @@ export default function RootLayout({ children }) {
                 <div>{children}</div>
               </div>
             </div>
+            </WalletProvider>
           </SearchProvider>
-          </Web3ModalProvider>
+      
+          {/* </Web3ModalProvider> */}
       </body>
     </html>
   );
