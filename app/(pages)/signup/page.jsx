@@ -285,20 +285,32 @@ const Signup = () => {
       }
 
       const response = await axiosInstance.post("signup", signupdata);
-      const { data } = response.data;
-      localStorage.setItem("userEmail", data.email || "");
+      console.log(response,"-----------response")
+      const myData = response.data;
+      localStorage.setItem("userEmail",myData.email || "");
       localStorage.setItem("type", "signup");
-      if (response.data.status) {
-        toast.success(response.data.msg);
+      console.log( myData,"----------- myData")
+      if (response?.data?.status) {
+        toast.success(response?.data?.msg);
         router.push("/passwordverify");
+      
       } else {
-        toast.error(response.data.msg);
+        toast.error(response?.data?.msg);
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred. Please try again.");
+    
     }
   };
+  const handleKeyPress1 = (event) => {
+    const char = String.fromCharCode(event.charCode); // Get the typed character
+    const regex = /^[a-zA-Z0-9]+$/; // Allow only alphanumeric characters
+    if (!regex.test(char)) {
+      event.preventDefault(); // Prevent invalid input
+    }
+  };
+
+
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -327,12 +339,15 @@ const Signup = () => {
             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
             type="text"
             name="name"
-            value={signupdata.name.toLowerCase()}
+            value={signupdata.name.toLowerCase() }
             onChange={onChangeInput}
             maxLength={15}
+            minLength={5}
+         
+            onKeyPress={handleKeyPress1} 
           />
           {errors.name && (
-            <div className="text-red-500 text-sm mb-5">{errors.name}</div>
+            <div className="text-red-500 text-sm mb-5 mt-1">{errors.name}</div>
           )}
         </div>
         <div className="relative">
@@ -345,7 +360,7 @@ const Signup = () => {
             onChange={onChangeInput}
           />
           {errors.email && (
-            <div className="text-red-500 text-sm mb-5">{errors.email}</div>
+            <div className="text-red-500 text-sm mb-5 mt-1">{errors.email}</div>
           )}
         </div>
         <div className="relative">
@@ -364,7 +379,7 @@ const Signup = () => {
             {showPassword ? <FaEye /> : <FaRegEyeSlash />}
           </button>
           {errors.password && (
-            <div className="text-red-500 text-sm mb-5  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px]">{errors.password}</div>
+            <div className="text-red-500 text-sm mb-5  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">{errors.password}</div>
           )}
         </div>
         <div className="relative">
@@ -383,21 +398,21 @@ const Signup = () => {
             {showConfirmPassword ? <FaEye /> : <FaRegEyeSlash />}
           </button>
           {errors.confirmPassword && (
-            <div className="text-red-500 text-sm ">
+            <div className="text-red-500 text-sm mt-1">
               {errors.confirmPassword}
             </div>
           )}
         </div>
 
         <div className="flex justify-center mt-10" onClick={handleSubmit}>
-          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
+          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             Sign Up
           </button>
           <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">
           <Link href="/login" className="text-xs text-[#CACACA]">
-            Already a User? <span className="font-bold text-sm">Sign in </span>
+            Already a User? <span className="font-bold text-sm hover:text-[#1788FB]">Sign in </span>
           </Link>
         </div>
       </div>

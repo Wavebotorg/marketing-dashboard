@@ -130,7 +130,7 @@ const ResetPassword = () => {
             onChange={onChangeInput}
           />
             {errors.newPassword && (
-            <div className="text-red-500 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px]">{errors.newPassword}</div>
+            <div className="text-red-500 mb-5 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">{errors.newPassword}</div>
           )}
           <div className="absolute right-2 top-12  transform -translate-y-1/2 text-[#CACACA] cursor-pointer">
             {showNewPassword ? (
@@ -141,7 +141,7 @@ const ResetPassword = () => {
           </div>
         </div>
         <div className="relative">
-          <div className="text-[#CACACA] my-2"> Confirm Password </div>
+          <div className="text-[#CACACA] mt-5 mb-2"> Confirm Password </div>
           <input
             className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 pl-2 pr-10 bg-neutral-800"
             type={showConfirmPassword ? "text" : "password"}
@@ -150,7 +150,7 @@ const ResetPassword = () => {
             onChange={onChangeInput}
           />
        {errors.confirmPassword && (
-            <div className="text-red-500 text-sm ">
+            <div className="text-red-500 text-sm mt-1 ">
               {errors.confirmPassword}
             </div>
           )}
@@ -164,7 +164,7 @@ const ResetPassword = () => {
         </div>
 
         <div className="flex justify-center mt-10" onClick={handleSubmit}>
-          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
+          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             Submit
           </button>
           <ToastContainer />

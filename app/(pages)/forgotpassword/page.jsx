@@ -105,12 +105,12 @@ const ForgotPassword = () => {
             onKeyPress={handleKeyPress}
           />
            {errors.email && (
-            <div className="text-red-500 text-sm mb-5">{errors.email}</div>
+            <div className="text-red-500 text-sm mb-5 mt-1">{errors.email}</div>
           )}
         </div>
 
-        <div className="flex justify-center mt-10" onClick={handleSubmit}>
-          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
+        <div className="flex justify-center mt-10 " onClick={handleSubmit}>
+          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             send OTP
           </button>
           

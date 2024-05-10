@@ -59,6 +59,36 @@ const LeaderBoard = () => {
       points: "224,466,796",
     },
     // Add more student data as needed
+    {
+      Rank: "7",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
+    {
+      Rank: "8",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
+    {
+      Rank: "9",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
+    {
+      Rank: "10",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
+    {
+      Rank: "11",
+      name: "sanket",
+      email: "sanket@gmail.com",
+      points: "224,466,796",
+    },
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
@@ -85,7 +115,7 @@ const LeaderBoard = () => {
   //pagination
   const { searchQuery } = useSearch();//search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = students.filter((coin) =>

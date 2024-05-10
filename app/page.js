@@ -43,7 +43,10 @@ const Page = () => {
   //     router.push('/login'); // Change '/login' to your actual login page route
   //   }
   // }, []);
-  
+
+
+
+
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">

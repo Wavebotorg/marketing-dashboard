@@ -12,7 +12,9 @@ import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
+  
   const router = useRouter();
   const { decryptData } = useEncryption();
   const [validCaptcha, setValidCaptcha] = useState(false);
@@ -89,12 +91,15 @@ const Login = () => {
         if (myData?.status) {
           localStorage.setItem("Token", myData?.token);
           toast.success(myData?.msg);
+        
+         
           setTimeout(() => {
             router.push("/");
           }, 700);
         } else {
           toast.error(myData?.msg);
         }
+         
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -139,7 +144,7 @@ const Login = () => {
             onKeyPress={handleKeyPress}
           />
             {errors.email && (
-            <div className="text-red-500 text-sm mb-5">{errors.email}</div>
+            <div className="text-red-500 text-sm mb-5 mt-1">{errors.email}</div>
           )}
         </div>
         <div className="relative">
@@ -153,7 +158,7 @@ const Login = () => {
             onKeyPress={handleKeyPress}
           />
             {errors.password && (
-            <div className="text-red-500 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px]">{errors.password}</div>
+            <div className="text-red-500 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">{errors.password}</div>
           )}
          
           <button
@@ -186,7 +191,7 @@ const Login = () => {
         
         <div className="flex justify-center mt-10">
           <button
-            className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+            className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
             onClick={handleSubmit}
             disabled={!validCaptcha}
             onKeyDown={(e) => {
@@ -201,13 +206,15 @@ const Login = () => {
           <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">
-          <Link href="/signup" className="text-xs text-[#CACACA]">
+          <Link href="/signup" className="text-xs text-[#CACACA] ">
             {` Don't have an account ?`}{" "}
-            <span className="font-bold text-sm">Sign up</span>
+            <span className="font-bold text-sm hover:text-[#1788FB]">Sign up</span>
           </Link>
         </div>
       </div>
+  
     </div>
+  
   );
 };
 
