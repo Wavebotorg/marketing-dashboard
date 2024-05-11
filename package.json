@@ -19,6 +19,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "axios": "^1.6.8",
+    "build": "^0.1.4",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
