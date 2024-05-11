@@ -139,8 +139,8 @@ const About = () => {
 
   const formatTransactionID = (txid) => {
     if (!txid || txid.length <= 10) return txid; // Check if txid is defined and has a length greater than 10
-    const firstSix = txid.slice(0, 6); // Get the first 6 characters
-    const lastFour = txid.slice(-4); // Get the last 4 characters
+    const firstSix = txid.slice(0, 8); // Get the first 6 characters
+    const lastFour = txid.slice(-6); // Get the last 4 characters
     return `${firstSix}...${lastFour}`; // Concatenate with "..." in between
   };
 
@@ -249,15 +249,16 @@ const About = () => {
               <p>{userProfile.email}</p>
             </div>
           </div>
-
-          <div className="md:flex flex-1 mb-4">
-            <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
-              <p>Referral code :</p>
+          {userProfile && userProfile.referralId && (
+            <div className="md:flex flex-1 mb-4">
+              <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
+                <p>Referral code :</p>
+              </div>
+              <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[102px]">
+                <p>{userProfile.referralId}</p>
+              </div>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[102px]">
-              <p>{userProfile.referralId}</p>
-            </div>
-          </div>
+          )}
           {userProfile && userProfile.ReferredBy && (
             <div className="md:flex flex-1 mb-4">
               <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
@@ -269,11 +270,11 @@ const About = () => {
             </div>
           )}
 
-          <div className="md:flex flex-1 mb-4">
+          <div className="md:flex flex-1 mb-4 ">
             <div className="mr-4 md:text-[19px] text-[20px] text-[#CACACA] font-medium">
               <p>EVM Address :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[111px] flex">
+            <div className="text-[12px] text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[111px] flex">
               {/* <p className="truncate">{userProfile.wallet}</p> */}
               <p>{formatTransactionID(userProfile.wallet)}</p>
 
@@ -289,12 +290,13 @@ const About = () => {
             </div>
           </div>
 
-          <div className="md:flex flex-1 mb-4">
+          <div className="md:flex flex-1 mb-4 ">
             <div className="mr-4 text-[20px] md:text-[19px] text-[#CACACA] font-medium">
               <p>Solana Address :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[90px] flex">
-              <p className="truncate">{userProfile.solanawallet}</p>
+            <div className="text-[12px] text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[90px] flex">
+              {/* <p className="truncate">{userProfile.solanawallet}</p> */}
+              <p>{formatTransactionID(userProfile.solanawallet)}</p>
 
               <button
                 className="text-xl text-[#828282] align-middle pb-1.5"

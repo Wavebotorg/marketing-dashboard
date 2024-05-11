@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
+import Arror from "../../../public/assets/Vector.png";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -32,7 +33,6 @@ const ForgotPassword = () => {
   };
   const validateInput = (name, value) => {
     switch (name) {
-      
       case "email":
         setErrors((prevState) => ({
           ...prevState,
@@ -43,10 +43,10 @@ const ForgotPassword = () => {
             : "Email is required",
         }));
         break;
-        default:
-          break;
-      }
-    };
+      default:
+        break;
+    }
+  };
   // Forget Password API code
   const handleSubmit = async () => {
     await axiosInstance
@@ -77,7 +77,6 @@ const ForgotPassword = () => {
     }
   };
 
-
   return (
     <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
       <div className="text-center">
@@ -89,6 +88,10 @@ const ForgotPassword = () => {
       </div>
 
       <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+        {/* <Link href="/login">
+          <Image src={Arror} className="-ml-9 -mt-9" />
+        </Link> */}
+
         <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Forget Password
         </h2>
@@ -97,14 +100,15 @@ const ForgotPassword = () => {
             Enter Email
           </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "  
+            className="rounded-md w-full sm:w-[310px] placeholder:text-[12px] placeholder:font-normal md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
             type="email"
             name="email"
             value={forgetData?.email}
             onChange={onChangeInput}
+            placeholder="Your Enter Email"
             onKeyPress={handleKeyPress}
           />
-           {errors.email && (
+          {errors.email && (
             <div className="text-red-500 text-sm mb-5 mt-1">{errors.email}</div>
           )}
         </div>
@@ -113,7 +117,6 @@ const ForgotPassword = () => {
           <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             send OTP
           </button>
-          
         </div>
         <ToastContainer />
         {/* <div className="flex justify-center mt-10">

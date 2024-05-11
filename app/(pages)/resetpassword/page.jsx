@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
@@ -10,10 +9,12 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
+import Arror from "../../../public/assets/Vector.png";
 
 const ResetPassword = () => {
   const router = useRouter();
-  const email = typeof window !== 'undefined' ? localStorage.getItem("userEmail") : null;
+  const email =
+    typeof window !== "undefined" ? localStorage.getItem("userEmail") : null;
 
   const [resetPassData, setResetPassData] = useState({
     newPassword: "",
@@ -22,7 +23,10 @@ const ResetPassword = () => {
   const [isVerificationSuccess, setIsVerificationSuccess] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false); // Added state for newPassword visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Added state for confirmPassword visibility
-  const [errors, setErrors] = useState({newPassword: "",  confirmPassword: "" });
+  const [errors, setErrors] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
   };
@@ -47,8 +51,6 @@ const ResetPassword = () => {
   };
   const validateInput = (name, value) => {
     switch (name) {
-     
-      
       case "newPassword":
         setErrors((prevState) => ({
           ...prevState,
@@ -76,15 +78,17 @@ const ResetPassword = () => {
   const handleSubmit = async () => {
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
-      toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
+      toast.error(
+        "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long."
+      );
       return;
     }
-  
+
     if (mydata.newPassword.length < 8 && mydata.confirmPassword.length < 8) {
       toast.error("Password must be at least 8 characters long.");
       return;
     }
-    
+
     await axiosInstance
       .post("resetPassword", mydata)
       .then((res) => {
@@ -116,21 +120,27 @@ const ResetPassword = () => {
       </div>
 
       <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-        <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
+        {/* <Link href="">
+          <Image src={Arror} className="-ml-9 -mt-9" />
+        </Link> */}
+        <h2 className="text-xl  sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Reset Password
         </h2>
 
         <div className="relative">
           <div className="text-[#CACACA] mb-2"> Enter Password </div>
           <input
-            className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 pl-2 pr-10 bg-neutral-800"
+            className="rounded-md w-full  sm:w-[310px] placeholder:text-[12px] placeholder:font-normal md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 pl-2 pr-10 bg-neutral-800"
             type={showNewPassword ? "text" : "password"}
             name="newPassword"
+            placeholder="Your Enter Password"
             value={resetPassData?.newPassword}
             onChange={onChangeInput}
           />
-            {errors.newPassword && (
-            <div className="text-red-500 mb-5 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">{errors.newPassword}</div>
+          {errors.newPassword && (
+            <div className="text-red-500 mb-5 text-sm sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">
+              {errors.newPassword}
+            </div>
           )}
           <div className="absolute right-2 top-12  transform -translate-y-1/2 text-[#CACACA] cursor-pointer">
             {showNewPassword ? (
@@ -143,13 +153,14 @@ const ResetPassword = () => {
         <div className="relative">
           <div className="text-[#CACACA] mt-5 mb-2"> Confirm Password </div>
           <input
-            className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 pl-2 pr-10 bg-neutral-800"
+            className="rounded-md w-full  sm:w-[310px] placeholder:text-[12px] placeholder:font-normal md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] py-2 pl-2 pr-10 bg-neutral-800"
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
+            placeholder="Your Enter Password"
             value={resetPassData?.confirmPassword}
             onChange={onChangeInput}
           />
-       {errors.confirmPassword && (
+          {errors.confirmPassword && (
             <div className="text-red-500 text-sm mt-1 ">
               {errors.confirmPassword}
             </div>

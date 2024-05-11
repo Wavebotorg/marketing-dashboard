@@ -418,138 +418,141 @@ const Swap = () => {
   // onClick={redirecttolink()}
   return (
     <>
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-    <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
-        <div className="text-lg font-semibold flex justify-end">
-          <button
-            className="bg-blue-500 rounded-lg  px-2 mt-3"
-            onClick={getWalletBalance}
-          >
-            click to show Balance
-          </button>
-        </div>
-        {showPopup1 && (
-          <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
-            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
-              <div className=" space-y-5">
-                <div className="flex flex-col justify-between items-center py-2 ">
-                  <div className="text-xl flex justify-between w-full items-center ">
-                  <span>Balance Details</span>
-                    <div onClick={handleClosePopup1} className="cursor-pointer">
-                      <IoMdClose size={24} />
+      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+        <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+          <div className="text-lg font-semibold flex justify-end">
+            <button
+              className="bg-blue-500 rounded-lg  px-2 mt-3"
+              onClick={getWalletBalance}
+            >
+              click to show Balance
+            </button>
+          </div>
+          {showPopup1 && (
+            <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
+              <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+                <div className=" space-y-5">
+                  <div className="flex flex-col justify-between items-center py-2 ">
+                    <div className="text-xl flex justify-between w-full items-center ">
+                      <span>Balance Details</span>
+                      <div
+                        onClick={handleClosePopup1}
+                        className="cursor-pointer"
+                      >
+                        <IoMdClose size={24} />
+                      </div>
                     </div>
-                  </div>
-                  {showBalance?.map((item, index) => (
-                    <div className=" flex items-center " key={index}>
-                      <div className="flex">
-                        {" "}
-                        <img
-                          src={item?.logo}
-                          alt={item?.name}
-                          className="h-15 w-15 my-3"
-                        />
-                        <div className="flex flex-col justify-center pl-3">
-                          <div className="text-base font-bold ">
-                            {item?.name}
-                          </div>
-                          <div className="text-base">
-                            Balance:{" "}
-                            <span className="font-bold">{item?.balance}</span>{" "}
+                    {showBalance?.map((item, index) => (
+                      <div className=" flex items-center " key={index}>
+                        <div className="flex">
+                          {" "}
+                          <img
+                            src={item?.logo}
+                            alt={item?.name}
+                            className="h-15 w-15 my-3"
+                          />
+                          <div className="flex flex-col justify-center pl-3">
+                            <div className="text-base font-bold ">
+                              {item?.name}
+                            </div>
+                            <div className="text-base">
+                              Balance:{" "}
+                              <span className="font-bold">{item?.balance}</span>{" "}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div className="mt-48 space-y-10 px-5  ">
-          <div className="swap flex flex-col items-center justify-between   text-white ">
-            <div className="flex flex-col justify-center items-center space-y-5">
-              <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
-                <div className="flex justify-between items-center py-2">
-                  <div className="flex justify-between gap-5 text-lg mx-1 w-full">
-                    <button>Swap</button>
+          <div className="mt-48 space-y-10 px-5  ">
+            <div className="swap flex flex-col items-center justify-between   text-white ">
+              <div className="flex flex-col justify-center items-center space-y-5">
+                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
+                  <div className="flex justify-between items-center py-2">
+                    <div className="flex justify-between gap-5 text-lg mx-1 w-full">
+                      <button>Swap</button>
 
-                    <div className="dropdown-container relative">
-                      <button
-                        className="dropdown-toggle focus:outline-none flex"
-                        onClick={toggleDropdown}
-                      >
-                        {selectChain && (
-                          <Image
-                            src={selectChain}
-                            className="h-6 w-6  " // Adjust size as needed
-                          />
-                        )}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-gray-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                      <div className="dropdown-container relative">
+                        <button
+                          className="dropdown-toggle focus:outline-none flex"
+                          onClick={toggleDropdown}
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      </button>
-                      {showDropdown && (
-                        <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
-                          <ul>
+                          {selectChain && (
+                            <Image
+                              src={selectChain}
+                              className="h-6 w-6  " // Adjust size as needed
+                            />
+                          )}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                        {showDropdown && (
+                          <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
                             <ul>
-                              {NetworkData.map((item, index) => (
-                                <li
-                                  key={index}
-                                  onClick={() => {
-                                    handleOptionClick(item.name);
-                                    setSelectChain(item?.img);
-                                  }}
-                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                    selectedNetwork === item.name
-                                      ? "bg-blue-500"
-                                      : ""
-                                  }`}
-                                >
-                                  <Image
-                                    src={item.img}
-                                    alt={item.name}
-                                    className="h-6 w-6 mr-2" // Adjust size as needed
-                                  />
-                                  <span className="text-white">
-                                    {item.name}
-                                  </span>
-                                  {selectedNetwork === item.name && (
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="h-6 w-6 text-white mr-2"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M5 13l4 4L19 7"
-                                      />
-                                    </svg>
-                                  )}
-                                </li>
-                              ))}
+                              <ul>
+                                {NetworkData.map((item, index) => (
+                                  <li
+                                    key={index}
+                                    onClick={() => {
+                                      handleOptionClick(item.name);
+                                      setSelectChain(item?.img);
+                                    }}
+                                    className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                                      selectedNetwork === item.name
+                                        ? "bg-blue-500"
+                                        : ""
+                                    }`}
+                                  >
+                                    <Image
+                                      src={item.img}
+                                      alt={item.name}
+                                      className="h-6 w-6 mr-2" // Adjust size as needed
+                                    />
+                                    <span className="text-white">
+                                      {item.name}
+                                    </span>
+                                    {selectedNetwork === item.name && (
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-6 w-6 text-white mr-2"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M5 13l4 4L19 7"
+                                        />
+                                      </svg>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
                             </ul>
-                          </ul>
-                        </div>
-                      )}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  {/* <div
+                    {/* <div
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -558,282 +561,281 @@ const Swap = () => {
                     className={isHovered ? "rotate-90 cursor-pointer" : ""}
                   />
                 </div> */}
-                </div>
-                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                  <div className="text-gray-300">
-                    <p>You pay</p>
                   </div>
-                  <div className="flex justify-between py-2">
-                    <div className="space-y-2">
-                      <input
-                        type="number"
-                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                        placeholder="0"
-                        name="input_to"
-                        value={selectedTokenDatato?.input_to}
-                        onChange={(e) => handleInputChange(e)}
-                      />
+                  <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                    <div className="text-gray-300">
+                      <p>You pay</p>
                     </div>
-                    {/*{swap 1}*/}
-                    <div
-                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                      onClick={() => tokenpopup(1)}
-                    >
-                      <div>
-                        {selectedTokenDatato?.image_to ? (
-                          <Image
-                            src={selectedTokenDatato?.image_to}
-                            height={30}
-                            width={30}
-                            alt="logo"
-                            className="rounded-full"
-                          />
-                        ) : null}
+                    <div className="flex justify-between py-2">
+                      <div className="space-y-2">
+                        <input
+                          type="number"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                          placeholder="0"
+                          name="input_to"
+                          value={selectedTokenDatato?.input_to}
+                          onChange={(e) => handleInputChange(e)}
+                        />
                       </div>
-                      <div>
-                        {selectedTokenDatato?.name_to
-                          ? selectedTokenDatato?.name_to.toUpperCase()
-                          : "  Token"}
-                      </div>
-                      <div>
-                        <MdKeyboardArrowDown size={20} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
-                  onClick={() => handleSwapTokens()}
-                >
-                  <IoSwapVerticalOutline size={20} className="" />
-                </div>
-                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                  <div className="text-gray-300">
-                    <p>You receive</p>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <div className="space-y-2">
-                      <input
-                        type="text"
-                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                        placeholder="0"
-                        name="from"
-                        value={selectedTokenDatato?.input_from}
-                        onChange={(e) => {
-                          handleInputChange(e);
-                          getPrice();
-                        }}
-                      />
-                    </div>
-                    {/*{swap 2}*/}
-                    <div
-                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                      onClick={() => tokenpopup(2)}
-                    >
-                      <div>
-                        {selectedTokenDatato?.image_from ? (
-                          <Image
-                            src={selectedTokenDatato?.image_from}
-                            height={30}
-                            width={30}
-                            alt="logo"
-                            className="rounded-full"
-                          />
-                        ) : null}
-                      </div>
-                      <div>
-                        {selectedTokenDatato?.name_from
-                          ? selectedTokenDatato?.name_from.toUpperCase()
-                          : "Select Token"}
-                      </div>
-                      <div>
-                        <MdKeyboardArrowDown size={20} />
+                      {/*{swap 1}*/}
+                      <div
+                        className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                        onClick={() => tokenpopup(1)}
+                      >
+                        <div>
+                          {selectedTokenDatato?.image_to ? (
+                            <Image
+                              src={selectedTokenDatato?.image_to}
+                              height={30}
+                              width={30}
+                              alt="logo"
+                              className="rounded-full"
+                            />
+                          ) : null}
+                        </div>
+                        <div>
+                          {selectedTokenDatato?.name_to
+                            ? selectedTokenDatato?.name_to.toUpperCase()
+                            : "  Token"}
+                        </div>
+                        <div>
+                          <MdKeyboardArrowDown size={20} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="w-full">
-                  <button
-                    className=" px-3 py-2 w-full rounded-md text-xl bg-blue-500  "
-                    // ${
-                    //   selectedTokenDatato?.input_from
-                    //     ? " bg-opacity-50"
-                    //     : "bg-opacity-10"
-                    // }`}
-                    onClick={() => {
-                      handleSwapSubmit();
-                    }}
+                  <div
+                    className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
+                    onClick={() => handleSwapTokens()}
                   >
-                    Swap
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {showPopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
-            <div className=" space-y-5">
-              <div className="flex justify-between items-center py-2 ">
-                <div className="text-xl">Select Token</div>
-                <div
-                  onClick={() => setShowPopup(false)}
-                  className="cursor-pointer"
-                >
-                  <IoMdClose size={24} />
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row md:justify-between">
-                <div className="md:w-[360px] mb-4 md:mb-0">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
-                  />
-                </div>
-                <div className="dropdown-container relative">
-                  <button
-                    className="dropdown-toggle focus:outline-none"
-                    onClick={toggleDropdown}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-gray-400"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                  {showDropdown && (
-                    <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
-                      <ul>
-                        <ul>
-                          {NetworkData.map((item, index) => (
-                            <li
-                              key={index}
-                              onClick={() => handleOptionClick(item.name)}
-                              className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                selectedNetwork === item.name
-                                  ? "bg-blue-500"
-                                  : ""
-                              }`}
-                            >
-                              <Image
-                                src={item.img}
-                                alt={item.name}
-                                className="h-6 w-6 mr-2" // Adjust size as needed
-                              />
-                              <span className="text-white">{item.name}</span>
-                              {selectedNetwork === item.name && (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6 text-white mr-2"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M5 13l4 4L19 7"
-                                  />
-                                </svg>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      </ul>
+                    <IoSwapVerticalOutline size={20} className="" />
+                  </div>
+                  <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                    <div className="text-gray-300">
+                      <p>You receive</p>
                     </div>
-                  )}
-                </div>
-              </div>
-            </div>
-            {token_data_ETH && (
-              <div className="h-[60vh] overflow-y-auto">
-                {(selectedNetwork
-                  ? selectedNetwork === "Ethereum"
-                    ? token_data_ETH
-                    : selectedNetwork === "Solana"
-                    ? token_data_SOL
-                    : selectedNetwork === "Arbitrum"
-                    ? token_data_ARB
-                    : []
-                  : token_data_ETH
-                )
-                  .filter((token) =>
-                    token.tokenname
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  )
-                  .map((token, index) => (
-                    <div
-                      key={index}
-                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                        clickedTokens.includes(token.tokenname)
-                          ? // ||
-                            // token.symbol === selectedSymbol
-                            "opacity-50 cursor-not-allowed"
-                          : ""
-                      }`}
+                    <div className="flex justify-between py-2">
+                      <div className="space-y-2">
+                        <input
+                          type="text"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                          placeholder="0"
+                          name="from"
+                          value={selectedTokenDatato?.input_from}
+                          onChange={(e) => {
+                            handleInputChange(e);
+                            getPrice();
+                          }}
+                        />
+                      </div>
+                      {/*{swap 2}*/}
+                      <div
+                        className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                        onClick={() => tokenpopup(2)}
+                      >
+                        <div>
+                          {selectedTokenDatato?.image_from ? (
+                            <Image
+                              src={selectedTokenDatato?.image_from}
+                              height={30}
+                              width={30}
+                              alt="logo"
+                              className="rounded-full"
+                            />
+                          ) : null}
+                        </div>
+                        <div>
+                          {selectedTokenDatato?.name_from
+                            ? selectedTokenDatato?.name_from.toUpperCase()
+                            : "Select Token"}
+                        </div>
+                        <div>
+                          <MdKeyboardArrowDown size={20} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-full">
+                    <button
+                      className=" px-3 py-2 w-full rounded-md text-xl bg-blue-500  "
+                      // ${
+                      //   selectedTokenDatato?.input_from
+                      //     ? " bg-opacity-50"
+                      //     : "bg-opacity-10"
+                      // }`}
                       onClick={() => {
-                        if (
-                          !(
-                            clickedTokens.includes(token.tokenname)
-                            // ||
-                            // token.symbol === selectedSymbol
-                          )
-                        ) {
-                          selectToken(token);
-                        }
+                        handleSwapSubmit();
                       }}
                     >
-                      <Image
-                        src={token.imageURl}
-                        alt={token.tokenname}
-                        height={50}
-                        width={50}
-                        className="rounded-full"
-                      />
-                      <div className="flex gap-2">
-                        <p
-                          className={`font-semibold ${
-                            clickedTokens.includes(token.tokenname)
-                              ? // ||
-                                // token.symbol === selectedSymbol
-                                "text-gray-500"
-                              : ""
-                          }`}
-                        >
-                          {token.tokenname}
-                        </p>
-                        <p className="text-gray-200">
-                          ({token.symbol.toUpperCase()})
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                      Swap
+                    </button>
+                  </div>
+                </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
-      )}
-      <ToastContainer />
+        {showPopup && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+              <div className=" space-y-5">
+                <div className="flex justify-between items-center py-2 ">
+                  <div className="text-xl">Select Token</div>
+                  <div
+                    onClick={() => setShowPopup(false)}
+                    className="cursor-pointer"
+                  >
+                    <IoMdClose size={24} />
+                  </div>
+                </div>
+
+                <div className="flex flex-col md:flex-row md:justify-between">
+                  <div className="md:w-[360px] mb-4 md:mb-0">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchTerm}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
+                    />
+                  </div>
+                  <div className="dropdown-container relative">
+                    <button
+                      className="dropdown-toggle focus:outline-none"
+                      onClick={toggleDropdown}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {showDropdown && (
+                      <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
+                        <ul>
+                          <ul>
+                            {NetworkData.map((item, index) => (
+                              <li
+                                key={index}
+                                onClick={() => handleOptionClick(item.name)}
+                                className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                                  selectedNetwork === item.name
+                                    ? "bg-blue-500"
+                                    : ""
+                                }`}
+                              >
+                                <Image
+                                  src={item.img}
+                                  alt={item.name}
+                                  className="h-6 w-6 mr-2" // Adjust size as needed
+                                />
+                                <span className="text-white">{item.name}</span>
+                                {selectedNetwork === item.name && (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 text-white mr-2"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M5 13l4 4L19 7"
+                                    />
+                                  </svg>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              {token_data_ETH && (
+                <div className="h-[60vh] overflow-y-auto">
+                  {(selectedNetwork
+                    ? selectedNetwork === "Ethereum"
+                      ? token_data_ETH
+                      : selectedNetwork === "Solana"
+                      ? token_data_SOL
+                      : selectedNetwork === "Arbitrum"
+                      ? token_data_ARB
+                      : []
+                    : token_data_ETH
+                  )
+                    .filter((token) =>
+                      token.tokenname
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    )
+                    .map((token, index) => (
+                      <div
+                        key={index}
+                        className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                          clickedTokens.includes(token.tokenname)
+                            ? // ||
+                              // token.symbol === selectedSymbol
+                              "opacity-50 cursor-not-allowed"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          if (
+                            !(
+                              clickedTokens.includes(token.tokenname)
+                              // ||
+                              // token.symbol === selectedSymbol
+                            )
+                          ) {
+                            selectToken(token);
+                          }
+                        }}
+                      >
+                        <Image
+                          src={token.imageURl}
+                          alt={token.tokenname}
+                          height={50}
+                          width={50}
+                          className="rounded-full"
+                        />
+                        <div className="flex gap-2">
+                          <p
+                            className={`font-semibold ${
+                              clickedTokens.includes(token.tokenname)
+                                ? // ||
+                                  // token.symbol === selectedSymbol
+                                  "text-gray-500"
+                                : ""
+                            }`}
+                          >
+                            {token.tokenname}
+                          </p>
+                          <p className="text-gray-200">
+                            ({token.symbol.toUpperCase()})
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        <ToastContainer />
       </div>
-     
     </>
   );
 };

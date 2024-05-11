@@ -612,7 +612,7 @@ const TokenDashboard = () => {
   //pagination
   const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   //search
