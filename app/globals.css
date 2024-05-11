@@ -317,5 +317,37 @@ body {
   }
 }
  */
+ .back {
+  background: linear-gradient(to top, #1C1C1C 0%, #1C1C1C 50%, rgba(23, 136, 251, 0.26) 50%, rgba(23, 136, 251, 0.26) 100%);
+  border-top-left-radius: 0.75rem; 
+  border-top-right-radius: 0.75rem; 
+}
 
- 
+
+
+.table-container {
+  max-height: 400px; /* Set the maximum height of the table container */
+  overflow-y: auto; /* Enable vertical scroll for tbody */
+  position: relative; /* Ensure the sticky header is positioned relative to this container */
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+th, td {
+  padding: 8px;
+  /* border-bottom: 1px solid #ddd; */
+  text-align: left;
+}
+
+
+th {
+  position: sticky;
+  top: 0;
+  /* background-color: #f2f2f2; */
+  z-index: 1; /* Ensure the sticky header is above the tbody content */
+}
