@@ -380,6 +380,8 @@ import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
 import WatchList from "../../../public/assets/sidebar/watchlist.svg";
 import Discover from "../../../public/assets/sidebar/discover.svg";
+import Swap from "../../../public/assets/sidebar/swap.svg";
+import swaphistory  from "../../../public/assets/sidebar/swaphistory.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
 import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
 import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
@@ -388,42 +390,44 @@ import Twitter from "../../../public/assets/sidebar/twitter.png";
 import medium from "../../../public/assets/sidebar/medium.png";
 
 import discord from "../../../public/assets/sidebar/discord.png";
-import useEncryption from "@/app/components/useEncryption/index";
+// import useEncryption from "@/app/components/useEncryption/index";
 import axios from "axios";
-import axiosInstance from "@/app/apiInstances/axiosInstance";
-import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
-
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import { useWallet } from "../contexts/WalletContext";
 function Sidebar() {
   const router = useRouter();
-
+  const { setWalletAddress ,setEmail} = useWallet();
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =
     typeof window !== "undefined" ? localStorage.getItem("details") : null;
 
-  // ... (other code)
+ 
 
   if (getdata?.code) {
     toast.success(getdata.message);
   }
 
-  // ... (other code)
+
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  const getUserdata = async () => {
-    await axiosInstanceAuth
-      .get("getUserProfile")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setAllUser(myData || []);
-
-        console.log("getUserProfile---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
+  // const getUserdata = async () => {
+  //   await axiosInstanceAuth
+  //     .get("getUserProfile")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setAllUser(myData || []);
+  //       setWalletAddress(myData?.wallet)
+  //       setEmail(myData?.email)
+  //       console.log("setWalletAddress:", myData?.wallet)
+  //       console.log("getUserProfile---->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
   const pathname = usePathname();
   // const { pathname } = location;
@@ -440,36 +444,48 @@ function Sidebar() {
     },
     {
       id: 2,
+      pathname: "/swap",
+       icon: Swap,
+      pagename: "Swap",
+    },
+    {
+      id: 3,
+      pathname: "/swaphistory",
+      icon:  swaphistory  ,
+      pagename: "Swap History",
+    },
+    {
+      id: 4,
       pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
     {
-      id: 3,
-      pathname: "/holder",
+      id: 5,
+      pathname: "/holder",  
       icon: Holder,
       pagename: "Holder",
     },
     {
-      id: 4,
+      id: 6,
       pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
-      id: 5,
+      id: 7,
       pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
-      id: 6,
+      id: 8,
       pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
-      id: 7,
+      id: 9,
       pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
@@ -478,25 +494,25 @@ function Sidebar() {
 
   const headerbottom = [
     {
-      id: 8,
+      id: 10,
       pathname: "/watchList",
       icon: WatchList,
       pagename: "Watch List",
     },
     {
-      id: 9,
+      id: 11,
       pathname: "/discover",
       icon: Discover,
       pagename: "Discover",
     },
     {
-      id: 10,
+      id: 12,
       pathname: "/apecurdocs",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
     {
-      id: 11,
+      id: 13,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",
@@ -516,20 +532,22 @@ function Sidebar() {
 
   const [userProfile, setUserProfile] = useState([]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("Token");
+  //   useEffect(() => {
+    
+  //   const token = localStorage.getItem('Token');
   //   if (token) {
-  //     router.push("/"); // Change '/home' to your actual home page route
+  //     router.push('/'); // Change '/home' to your actual home page route
   //   } else {
-  //     router.push("/login"); // Change '/login' to your actual login page route
+  //     router.push('/login'); // Change '/login' to your actual login page route
   //   }
   // }, []);
-
   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
+        setWalletAddress(myData?.wallet)
+        setEmail(myData?.email)
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -677,10 +695,10 @@ function Sidebar() {
                 ))}
               </ul>
             </div>
-            <div>
+            <div >
               {token ? (
-                <div className="grid  place-items-center">
-                  <button
+                <div className=" grid place-items-center ">
+                 <button
                     onClick={(e) => setConfirmationPopUp(true)}
                     // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
                     className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
@@ -742,10 +760,11 @@ function Sidebar() {
                     </>
                   ) : null}
                 </div>
-              ) : (
-                <Link href="/login " className="grid place-items-center ">
-                  {/*   <button className="bg-[#1788FB] w-full xl:px-7 lg: px-3 text-white p-2 xl:rounded-r-xl place-items-center ">
-                    <div className="flex items-center">
+              ) : ( 
+                <div className=" grid place-items-center">
+                <Link href="/login " className="">
+                  {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
+                    <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
                         alt="loginicon"
@@ -755,7 +774,7 @@ function Sidebar() {
                         Login
                       </span>
                     </div>
-                  </button> */}
+                  </button>  */}
                   <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
                     <div className="flex items-center">
                       <Image
@@ -769,6 +788,7 @@ function Sidebar() {
                     </div>
                   </button>
                 </Link>
+                </div>
               )}
             </div>
             <div className="text-white xl:px-4 px-0 md:pb-3 pb-5 relative lg:mt-20 sm:mt-32 xsm:mt-20  lg:ml-2.5 md:ml-1.5">
@@ -838,10 +858,10 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                <div className={` ${isNavbar ? "" : "hidden"} `}>
-                  <p className="">{allUser.name}</p>
-                  <p className="text-xs">{allUser.email}</p>
-                </div>
+                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
+                  <p className="">{userProfile.name}</p>
+                  <p className="text-xs">{userProfile.email}</p>
+                {/* </div> */}
               </div>
             </div>
           </div>

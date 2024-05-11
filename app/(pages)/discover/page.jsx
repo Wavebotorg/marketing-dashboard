@@ -448,7 +448,7 @@ const Discover = () => {
             <div>
               <button
                 type="button"
-                class="text-white bg-[#1788FB] font-medium rounded-full text-sm md:px-5 px-2 py-1.5 md:py-2.5 text-center "
+                className="text-white bg-[#1788FB] font-medium rounded-full text-sm md:px-5 px-2 py-1.5 md:py-2.5 text-center "
               >
                 View All
               </button>
@@ -471,11 +471,11 @@ const Discover = () => {
             </div>
           </div>
         </div>
-        <div class="lg:mx- md:p- grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 mt-5">
+        <div className="lg:mx- md:p- grid xl:grid-cols-6 md:grid-cols-3 grid-cols-2 lg:gap-10 gap-5 mt-5">
           {cards.slice(position, position + cardsPerPage).map((card, index) => (
             <div
               key={index}
-              class="bg-[#1C1C1C] rounded-xl p-5 flex flex-col items-center"
+              className="bg-[#1C1C1C] rounded-xl p-5 flex flex-col items-center"
             >
               <Image src={card.img} alt={card.name} className="mx-auto" />
               <div className="text-center md:space-y-4 space-y-1 md:mt-10 mt-4">
@@ -492,10 +492,10 @@ const Discover = () => {
             </div>
           ))}
         </div>
-        <div class="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
-          <div class="md:text-3xl text-xl font-semibold">
+        <div className="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
+          <div className="md:text-3xl text-xl font-semibold">
             Daily Movers
-            <p class="text-[#7B7B7B] text-sm md:text-lg">
+            <p className="text-[#7B7B7B] text-sm md:text-lg">
               Explore the biggest crypto movers on the market.
             </p>
           </div>

@@ -18,8 +18,10 @@ import { SearchProvider } from "././components/contexts/SearchContext";
 import { WalletProvider } from "./components/contexts/WalletContext";
 
 export const metadata = {
-  title: "Wave Dashboard",
-  description: "wave app",
+
+  title:"Wave Dashboard",
+  description:
+  "wave app",
   icons: {
     icon: "/wave_logo.png",
     shortcut: "/wave_logo.png",
@@ -37,7 +39,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {/* <Web3ModalProvider initialState={initialState}> */}
-        <SearchProvider>
+          <SearchProvider>
           <WalletProvider>
             <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
               <div className="sidebar visible px-5  ">
@@ -53,10 +55,10 @@ export default function RootLayout({ children }) {
                 <div>{children}</div>
               </div>
             </div>
-          </WalletProvider>
-        </SearchProvider>
-
-        {/* </Web3ModalProvider> */}
+            </WalletProvider>
+          </SearchProvider>
+      
+          {/* </Web3ModalProvider> */}
       </body>
     </html>
   );

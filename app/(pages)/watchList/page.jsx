@@ -24,7 +24,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 // import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 import Chart from "../chart/ChartComponent";
 
@@ -460,14 +460,14 @@ const WatchList = () => {
                                       <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
                                         <button
                                           onClick={() => setShowModal(false)}
-                                          class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                          className="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
                                         >
                                           No
                                         </button>
 
                                         <button
                                           onClick={removeCoinFromWatchlist}
-                                          class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                          className="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
                                         >
                                           Yes
                                         </button>
@@ -741,14 +741,14 @@ const WatchList = () => {
                                   <div className="flex gap-11 items-center justify-end p-3 border-t border-solid border-slate-200 rounded-b">
                                     <button
                                       onClick={() => setShowModal(false)}
-                                      class="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
+                                      className="text-red-500 hover:text-white hover:bg-red-500  font-bold py-2 px-7  rounded"
                                     >
                                       No
                                     </button>
 
                                     <button
                                       onClick={removeCoinFromWatchlist}
-                                      class="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
+                                      className="bg-emerald-500 active:bg-emerald-600 px-6 py-2  text-white font-bold  rounded"
                                     >
                                       Yes
                                     </button>

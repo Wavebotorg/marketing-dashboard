@@ -266,7 +266,7 @@ const LeaderBoard = () => {
           <p className="text-[#1788FB]  text-3xl md:text-4xl font-medium max-w-screen-lg ">
             Recent Joins
           </p>
-          <div className="mt-6 rounded-lg overflow-hidden w-full">
+          <div className="mt-6 rounded-lg overflow-hidden w-full table-container">
             <div className="bg-[#1C1C1C] h-[40rem] overflow-y-auto text-white xl:block md:grid md:grid-cols-2 ">
               {allRecentUser?.length > 0 ? (
                 allRecentUser.map((d, index) => (

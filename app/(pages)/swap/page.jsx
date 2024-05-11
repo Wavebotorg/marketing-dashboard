@@ -19,13 +19,18 @@ import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import OXy from "../../../public/assets/tokenimg/OXy.png";
 import USDT from "../../../public/assets/tokenimg/USDT.png";
 import { useWallet } from "../../components/contexts/WalletContext";
+import { useRouter } from "next/navigation";
 import { IoSwapVerticalOutline } from "react-icons/io5";
+import axiosInstance from "../../apiInstances/axiosInstance";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import qs from "qs";
-//import eth from "../../components/assets/ethlogo.png";
+
 import axios from "axios";
 // import AllToken from "./alltoken.json";
 const Swap = () => {
-  const { walletAddress } = useWallet();
+  const { walletAddress, email } = useWallet();
+  const router = useRouter();
   const [tokendata, setTokendata] = useState(null);
 
   // const [selectedNetwork, setSelectedNetwork] = useState(null);
@@ -33,8 +38,11 @@ const Swap = () => {
   const [fetchtokendata, setFetchtokendata] = useState(null);
   const [selectedChainId, setSelectedChainId] = useState("");
   const [clickedTokens, setClickedTokens] = useState("");
+  const [showPopup1, setShowPopup1] = useState(false);
+  console.log("🚀 ~ Swap ~ showPopup1:", showPopup1);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedtofrom, setSelectedtofrom] = useState(0);
+  const [showBalance, setShowBalance] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectChain, setSelectChain] = useState(false);
   const [selectedTokenDatato, setSelectedTokenDatato] = useState({
@@ -52,10 +60,13 @@ const Swap = () => {
     decimals_from: "",
     chainid: "",
   });
-  console.log("--------------selectedTokenDatato", selectedTokenDatato);
+  // console.log(
+  //   "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
+  //   selectedTokenDatato
+  // );
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth },
-    { name: "Arbitrum", chainid: "42161", img: arbitrum },
+    { name: "Arbitrum", chainid: 42161, img: arbitrum },
     { name: "Optimism", chainid: "10", img: optimism },
     { name: "Polygon", chainid: "137", img: poly },
     { name: "Solana", chainid: "900", img: SOL },
@@ -107,6 +118,15 @@ const Swap = () => {
       imageURl: OXy,
       networkname: "Solana",
     },
+    {
+      tokenname: "USD Coin",
+      symbol: "USD",
+      chianid: "900",
+      address: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      decimal: "6",
+      imageURl: OXy,
+      networkname: "Solana",
+    },
   ];
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,7 +134,7 @@ const Swap = () => {
     {
       tokenname: "Wrapped BTC",
       symbol: "WBTC",
-      chianid: "42161",
+      chianid: 42161,
       address: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
       decimal: "8",
       imageURl: wrapped,
@@ -123,15 +143,31 @@ const Swap = () => {
     {
       tokenname: "ChainLink Token",
       symbol: "LINK",
-      chianid: "42161",
+      chianid: 42161,
       address: "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
       decimal: "18",
       imageURl: chainlink,
       networkname: "Arbitrum",
     },
+    {
+      tokenname: "USDT",
+      symbol: "USDT",
+      chianid: 42161,
+      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      decimal: "6",
+      imageURl: chainlink,
+      networkname: "Arbitrum",
+    },
+    {
+      tokenname: "Arbitrum",
+      symbol: "ARB",
+      chianid: 42161,
+      address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
+      decimal: "18",
+      imageURl: arbitrum,
+      networkname: "Arbitrum",
+    },
   ];
-
-  const Tokendata = tokendata;
 
   useEffect(() => {
     // Find Ethereum network data
@@ -216,45 +252,72 @@ const Swap = () => {
   };
 
   const [showDropdown, setShowDropdown] = useState(false);
-
-  const handleInputChange = (e) => {
-    setSelectedTokenDatato({
-      ...selectedTokenDatato,
-      input_to: e.target.value,
-    });
-  };
-  const data = {
+  const dataEvm = {
     token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
-
-    chainid: selectedChainId,
+    chainId: selectedChainId,
+    email: email,
   };
-  console.log(" data:", data);
-  const handleSubmit = async () => {
-    try {
-      // Make a POST request to your API endpoint
-      const response = await axiosInstanceAuth.post("/mainswap", data);
-      console.log("Response from API:", response?.data);
-    } catch (error) {
-      // Handle errors
-      console.error("Error occurred:", error);
+  // console.log(" dataEvm:", dataEvm);
+  const dataSolana = {
+    input: selectedTokenDatato?.address_to,
+    output: selectedTokenDatato?.address_from,
+    amount: selectedTokenDatato?.input_to,
+    email: email,
+  };
+  // console.log("🚀 ~ Swap ~ dataSolana:", dataSolana)
+
+  const handleSwapSubmit = () => {
+    let endpoint;
+    if (selectedNetwork === "Solana") {
+      endpoint = "/solanaSwap";
+    } else {
+      endpoint = "/mainswap";
     }
+
+    axiosInstance
+      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
+      .then((res) => {
+        const myData = res?.data;
+        console.log("Response from API:", myData);
+        if (myData?.status) {
+          toast.success(myData?.message);
+        } else {
+          toast.error(myData?.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+        toast.error("An error occurred while processing your request");
+      });
   };
 
-  const getPrice1 = async () => {
-    console.log(
-      "selectedTokenDatato?.input_to:",
-      selectedTokenDatato?.input_to
-    );
-    console.log(
-      "selectedTokenDatato?.address_from:",
-      selectedTokenDatato?.address_from
-    );
-    console.log(
-      "selectedTokenDatato?.address_to:",
-      selectedTokenDatato?.address_to
-    );
+  // const handleSwapSubmit = async () => {
+  //   try {
+
+  //     const response =
+  //       await axiosInstance.post("/mainswap", data)
+  //       if (response?.status) {
+  //         toast.success(response?.msg);
+
+  //         router.push("/passwordverify");
+  //         // setTimeout(() => {
+  //         // }, 3000);
+  //       } else {
+  //         toast.error(response?.msg);
+  //       }
+  //     console.log("Response from API:", response);
+  //   } catch (error) {
+  //     // Handle errors
+  //     console.error("Error occurred:", error);
+  //   }
+  // };
+  const handleClosePopup1 = () => {
+    setShowPopup1(false);
+  };
+
+  const getPrice = async () => {
     if (
       selectedTokenDatato?.input_to &&
       selectedTokenDatato?.address_from &&
@@ -264,7 +327,6 @@ const Swap = () => {
         Number(selectedTokenDatato?.input_to) *
         10 ** selectedTokenDatato?.decimals_to;
       console.log("--------amount", amount);
-
       const params = {
         sellToken: selectedTokenDatato?.address_to,
         buyToken: selectedTokenDatato?.address_from,
@@ -278,7 +340,7 @@ const Swap = () => {
 
       try {
         const response = await fetch(
-          `https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`,
+          `https://arbitrum.api.0x.org/swap/v1/quote?${qs.stringify(params)}`,
           {
             headers,
           }
@@ -290,7 +352,7 @@ const Swap = () => {
         const Tokenprice = swapPriceJSON.buyAmount;
         const Tokendecimals = 10 ** selectedTokenDatato?.decimals_from;
         const Finaltokenprice = Tokenprice / Tokendecimals;
-        console.log("buy amount:----------------------", Finaltokenprice);
+        // console.log("buy amount:----------------------", Finaltokenprice);
         if (Finaltokenprice) {
           setSelectedTokenDatato({
             ...selectedTokenDatato,
@@ -305,21 +367,41 @@ const Swap = () => {
     }
   };
 
+  const getWalletBalance = async () => {
+    setShowPopup1(true);
+    await axiosInstance
+      .post("/fetchbalance", { email: email })
+      .then((res) => {
+        const myData = res?.data;
+        console.log("fetchbalance--->", myData);
+        setShowBalance(myData);
+      })
+      .catch((err) => {
+        console.log("error--->", err);
+      });
+  };
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-  // const handleOptionClick = (name) => {
-  //   setSelectedNetwork(name);
-  //   setShowDropdown(false); // Close dropdown when an option is clicked
-  // };
+  const handleInputChange = async (e) => {
+    const { name, value } = e.target;
+    await setSelectedTokenDatato({
+      ...selectedTokenDatato,
+      [name]: value,
+    });
+  };
+  useEffect(() => {
+    getPrice();
+  }, [selectedTokenDatato?.input_to]);
+
   const handleOptionClick = (name) => {
     const selectedNetworkData = NetworkData.find(
       (network) => network.name === name
     );
     if (selectedNetworkData) {
       setSelectedNetwork(name);
-      setSelectedChainId(selectedNetworkData.chainid); // Assuming you have a state variable to store the chain ID
-      setShowDropdown(false); // Close dropdown when an option is clicked
+      setSelectedChainId(selectedNetworkData.chainid);
+      setShowDropdown(false);
     }
   };
   // const handleOptionClick = (name) => {
@@ -330,93 +412,144 @@ const Swap = () => {
     setSelectedButton(button);
   };
 
+  // const redirecttolink=()=>{
+  //   router.push("https://arbiscan.io/tx/")
+  // }
+  // onClick={redirecttolink()}
   return (
     <>
-      <div className="lg:ml-80 mt-24 space-y-10 px-5 ">
-        {/* <div className="text-2xl font-semibold">
-          <p>Swap</p>
-        </div> */}
-
-        <div className="swap flex flex-col items-center justify-between   text-white ">
-          <div className="flex flex-col justify-center items-center space-y-5">
-            <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
-              <div className="flex justify-between items-center py-2">
-                <div className="flex justify-between gap-5 text-lg mx-1 w-full">
-                  <button>Swap</button>
-                  <div className="dropdown-container relative">
-                    <button
-                      className="dropdown-toggle focus:outline-none flex"
-                      onClick={toggleDropdown}
-                    >
-                      {selectChain && (
-                        <Image
-                          src={selectChain}
-                          className="h-6 w-6  " // Adjust size as needed
-                        />
-                      )}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {showDropdown && (
-                      <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
-                        <ul>
-                          <ul>
-                            {NetworkData.map((item, index) => (
-                              <li
-                                key={index}
-                                onClick={() => {
-                                  handleOptionClick(item.name);
-                                  setSelectChain(item?.img);
-                                }}
-                                className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                  selectedNetwork === item.name
-                                    ? "bg-blue-500"
-                                    : ""
-                                }`}
-                              >
-                                <Image
-                                  src={item.img}
-                                  alt={item.name}
-                                  className="h-6 w-6 mr-2" // Adjust size as needed
-                                />
-                                <span className="text-white">{item.name}</span>
-                                {selectedNetwork === item.name && (
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-white mr-2"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M5 13l4 4L19 7"
-                                    />
-                                  </svg>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </ul>
-                      </div>
-                    )}
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+        <div className="text-lg font-semibold flex justify-end">
+          <button
+            className="bg-blue-500 rounded-lg  px-2 mt-3"
+            onClick={getWalletBalance}
+          >
+            click to show Balance
+          </button>
+        </div>
+        {showPopup1 && (
+          <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+              <div className=" space-y-5">
+                <div className="flex flex-col justify-between items-center py-2 ">
+                  <div className="text-xl flex justify-between w-full items-center ">
+                  <span>Balance Details</span>
+                    <div onClick={handleClosePopup1} className="cursor-pointer">
+                      <IoMdClose size={24} />
+                    </div>
                   </div>
+                  {showBalance?.map((item, index) => (
+                    <div className=" flex items-center " key={index}>
+                      <div className="flex">
+                        {" "}
+                        <img
+                          src={item?.logo}
+                          alt={item?.name}
+                          className="h-15 w-15 my-3"
+                        />
+                        <div className="flex flex-col justify-center pl-3">
+                          <div className="text-base font-bold ">
+                            {item?.name}
+                          </div>
+                          <div className="text-base">
+                            Balance:{" "}
+                            <span className="font-bold">{item?.balance}</span>{" "}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                {/* <div
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-48 space-y-10 px-5  ">
+          <div className="swap flex flex-col items-center justify-between   text-white ">
+            <div className="flex flex-col justify-center items-center space-y-5">
+              <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
+                <div className="flex justify-between items-center py-2">
+                  <div className="flex justify-between gap-5 text-lg mx-1 w-full">
+                    <button>Swap</button>
+
+                    <div className="dropdown-container relative">
+                      <button
+                        className="dropdown-toggle focus:outline-none flex"
+                        onClick={toggleDropdown}
+                      >
+                        {selectChain && (
+                          <Image
+                            src={selectChain}
+                            className="h-6 w-6  " // Adjust size as needed
+                          />
+                        )}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      {showDropdown && (
+                        <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
+                          <ul>
+                            <ul>
+                              {NetworkData.map((item, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() => {
+                                    handleOptionClick(item.name);
+                                    setSelectChain(item?.img);
+                                  }}
+                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                                    selectedNetwork === item.name
+                                      ? "bg-blue-500"
+                                      : ""
+                                  }`}
+                                >
+                                  <Image
+                                    src={item.img}
+                                    alt={item.name}
+                                    className="h-6 w-6 mr-2" // Adjust size as needed
+                                  />
+                                  <span className="text-white">
+                                    {item.name}
+                                  </span>
+                                  {selectedNetwork === item.name && (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-6 w-6 text-white mr-2"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M5 13l4 4L19 7"
+                                      />
+                                    </svg>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {/* <div
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -425,117 +558,116 @@ const Swap = () => {
                     className={isHovered ? "rotate-90 cursor-pointer" : ""}
                   />
                 </div> */}
-              </div>
-              <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                <div className="text-gray-300">
-                  <p>You pay</p>
                 </div>
-                <div className="flex justify-between py-2">
-                  <div className="space-y-2">
-                    <input
-                      type="number"
-                      className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                      placeholder="0"
-                      name="to"
-                      value={selectedTokenDatato?.input_to}
-                      onChange={(e) => {
-                        handleInputChange(e);
-                        getPrice1();
-                      }}
-                    />
+                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                  <div className="text-gray-300">
+                    <p>You pay</p>
                   </div>
-                  {/*{swap 1}*/}
-                  <div
-                    className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                    onClick={() => tokenpopup(1)}
-                  >
-                    <div>
-                      {selectedTokenDatato?.image_to ? (
-                        <Image
-                          src={selectedTokenDatato?.image_to}
-                          height={30}
-                          width={30}
-                          alt="logo"
-                          className="rounded-full"
-                        />
-                      ) : null}
+                  <div className="flex justify-between py-2">
+                    <div className="space-y-2">
+                      <input
+                        type="number"
+                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                        placeholder="0"
+                        name="input_to"
+                        value={selectedTokenDatato?.input_to}
+                        onChange={(e) => handleInputChange(e)}
+                      />
                     </div>
-                    <div>
-                      {selectedTokenDatato?.name_to
-                        ? selectedTokenDatato?.name_to.toUpperCase()
-                        : "  Token"}
-                    </div>
-                    <div>
-                      <MdKeyboardArrowDown size={20} />
+                    {/*{swap 1}*/}
+                    <div
+                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                      onClick={() => tokenpopup(1)}
+                    >
+                      <div>
+                        {selectedTokenDatato?.image_to ? (
+                          <Image
+                            src={selectedTokenDatato?.image_to}
+                            height={30}
+                            width={30}
+                            alt="logo"
+                            className="rounded-full"
+                          />
+                        ) : null}
+                      </div>
+                      <div>
+                        {selectedTokenDatato?.name_to
+                          ? selectedTokenDatato?.name_to.toUpperCase()
+                          : "  Token"}
+                      </div>
+                      <div>
+                        <MdKeyboardArrowDown size={20} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
-                onClick={() => handleSwapTokens()}
-              >
-                <IoSwapVerticalOutline size={20} className="" />
-              </div>
-              <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                <div className="text-gray-300">
-                  <p>You receive</p>
-                </div>
-                <div className="flex justify-between py-2">
-                  <div className="space-y-2">
-                    <input
-                      type="text"
-                      className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                      placeholder="0"
-                      name="from"
-                      value={selectedTokenDatato?.input_from}
-                      onChange={(e) => {
-                        handleInputChange(e);
-                        getPrice1();
-                      }}
-                    />
-                  </div>
-                  {/*{swap 2}*/}
-                  <div
-                    className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                    onClick={() => tokenpopup(2)}
-                  >
-                    <div>
-                      {selectedTokenDatato?.image_from ? (
-                        <Image
-                          src={selectedTokenDatato?.image_from}
-                          height={30}
-                          width={30}
-                          alt="logo"
-                          className="rounded-full"
-                        />
-                      ) : null}
-                    </div>
-                    <div>
-                      {selectedTokenDatato?.name_from
-                        ? selectedTokenDatato?.name_from.toUpperCase()
-                        : "Select Token"}
-                    </div>
-                    <div>
-                      <MdKeyboardArrowDown size={20} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full">
-                <button
-                  className={` px-3 py-2 w-full rounded-md text-xl bg-indigo-600 ${
-                    selectedTokenDatato?.input_from
-                      ? " bg-opacity-50"
-                      : "bg-opacity-10"
-                  }`}
-                  onClick={() => {
-                    handleSubmit();
-                  }}
+                <div
+                  className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
+                  onClick={() => handleSwapTokens()}
                 >
-                  Swap
-                </button>
+                  <IoSwapVerticalOutline size={20} className="" />
+                </div>
+                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                  <div className="text-gray-300">
+                    <p>You receive</p>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                        placeholder="0"
+                        name="from"
+                        value={selectedTokenDatato?.input_from}
+                        onChange={(e) => {
+                          handleInputChange(e);
+                          getPrice();
+                        }}
+                      />
+                    </div>
+                    {/*{swap 2}*/}
+                    <div
+                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                      onClick={() => tokenpopup(2)}
+                    >
+                      <div>
+                        {selectedTokenDatato?.image_from ? (
+                          <Image
+                            src={selectedTokenDatato?.image_from}
+                            height={30}
+                            width={30}
+                            alt="logo"
+                            className="rounded-full"
+                          />
+                        ) : null}
+                      </div>
+                      <div>
+                        {selectedTokenDatato?.name_from
+                          ? selectedTokenDatato?.name_from.toUpperCase()
+                          : "Select Token"}
+                      </div>
+                      <div>
+                        <MdKeyboardArrowDown size={20} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full">
+                  <button
+                    className=" px-3 py-2 w-full rounded-md text-xl bg-blue-500  "
+                    // ${
+                    //   selectedTokenDatato?.input_from
+                    //     ? " bg-opacity-50"
+                    //     : "bg-opacity-10"
+                    // }`}
+                    onClick={() => {
+                      handleSwapSubmit();
+                    }}
+                  >
+                    Swap
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -699,6 +831,9 @@ const Swap = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
+      </div>
+     
     </>
   );
 };
