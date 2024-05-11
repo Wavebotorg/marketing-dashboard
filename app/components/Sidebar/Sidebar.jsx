@@ -806,7 +806,7 @@ function Sidebar() {
                   <div>
                     <div className="flex  items-center">
                       <h1>{userProfile.name}</h1>
-                      <Link href="/profile">
+                      <Link >
                         <span>
                           <Image
                             src={Arrow}
