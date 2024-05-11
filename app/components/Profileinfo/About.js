@@ -7,7 +7,7 @@ import add from "../../../public/assets/add.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 
 const About = () => {
   const [resetPassData, setResetPassData] = useState({

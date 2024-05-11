@@ -71,12 +71,12 @@ const Navbar = () => {
         <div
           className={`${
             getPath === "/login" ||
-            getPath === "/Profile" ||
+            getPath === "/profile" ||
             getPath === "/signup" ||
             getPath === "/forgotpassword" ||
             getPath === "/passwordverify" ||
             getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
+            getPath === "/sucessreset" 
               ? "hidden"
               : "flex  justify-between   py-7  xl:pl-[86px] pl-2 "
           }`}

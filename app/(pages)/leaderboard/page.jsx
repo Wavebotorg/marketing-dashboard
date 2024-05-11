@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import profileimg from "../../../public/assets/profile.PNG";
-import { useSearch } from "../../components/contexts/SearchContext";//search
+import img from "../../../public/assets/profile.PNG";
+import { useSearch } from "../../components/contexts/SearchContext"; //search
 import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
@@ -90,36 +90,6 @@ const LeaderBoard = () => {
     },
 
     // Add more student data as needed
-    {
-      Rank: "7",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "8",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "9",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "10",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "11",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
@@ -296,7 +266,7 @@ const LeaderBoard = () => {
           <p className="text-[#1788FB]  text-3xl md:text-4xl font-medium max-w-screen-lg ">
             Recent Joins
           </p>
-          <div className="mt-6 rounded-lg overflow-hidden w-full">
+          <div className="mt-6 rounded-lg overflow-hidden w-full table-container">
             <div className="bg-[#1C1C1C] h-[40rem] overflow-y-auto text-white xl:block md:grid md:grid-cols-2 ">
               {allRecentUser?.length > 0 ? (
                 allRecentUser.map((d, index) => (
@@ -312,62 +282,12 @@ const LeaderBoard = () => {
                         </div>
                         <div className="lg:text-base text-sm">
                           <div className="flex gap-2">
-                            <div className="w-[2.5rem] sm:[1.5rem]">
-                              <Image
-                                src={profileimg }
-                                alt="Picture of the author"
-                                className="rounded-full"
-                              />
-                            </div>
-
-                            <div className="lg:text-base text-sm">
-                              <div className="flex gap-2">
-                                <p>{d?.name}</p>
-                                <p className="text-[#6B6B6B]">
-                                  {formatDistanceToNow(new Date(d?.createdAt), {
-                                    addSuffix: true,
-                                  })}
-                                </p>
-                              </div>
-
-                              {/* <p
-                                className="text-nowrap "
-                                title={
-                                  hoveredEmail === d.email
-                                    ? d.email
-                                    : truncateEmail(d.email)
-                                }
-                              >
-                                Invited by {truncateEmail(d.email)}
-                              </p> */}
-
-                              {/* <h1 data-tooltip-id="my-tooltip-1">
-                                Invited by {truncateEmail(d.email)}
-                              </h1>
-                              <ReactTooltip
-                                id="my-tooltip-1"
-                                place="top"
-                                content={d.email}
-                              /> */}
-
-                              <div
-                                data-tooltip-id={`tooltip-${index}`}
-                                className=""
-                              >
-                                <p className="text-nowrap ">
-                                  Invited by {truncateEmail(d?.email)}
-                                </p>
-                              </div>
-                              <ReactTooltip
-                                id={`tooltip-${index}`}
-                                place="bottom-end"
-                                effect="solid"
-                                variant="info"
-                              >
-                                {/* Display full email in the tooltip */}
-                                <span>{d?.email}</span>
-                              </ReactTooltip>
-                            </div>
+                            <p>{d?.name}</p>
+                            <p className="text-[#6B6B6B]">
+                              {formatDistanceToNow(new Date(d?.createdAt), {
+                                addSuffix: true,
+                              })}
+                            </p>
                           </div>
                           <div
                             data-tooltip-id={`tooltip-${index}`}

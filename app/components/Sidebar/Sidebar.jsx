@@ -413,21 +413,21 @@ function Sidebar() {
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  const getUserdata = async () => {
-    await axiosInstanceAuth
-      .get("getUserProfile")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setAllUser(myData || []);
-        setWalletAddress(myData?.wallet)
-        setEmail(myData?.email)
-        console.log("setWalletAddress:", myData?.wallet)
-        console.log("getUserProfile---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
+  // const getUserdata = async () => {
+  //   await axiosInstanceAuth
+  //     .get("getUserProfile")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setAllUser(myData || []);
+  //       setWalletAddress(myData?.wallet)
+  //       setEmail(myData?.email)
+  //       console.log("setWalletAddress:", myData?.wallet)
+  //       console.log("getUserProfile---->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
   const pathname = usePathname();
   // const { pathname } = location;
@@ -546,6 +546,8 @@ function Sidebar() {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
+        setWalletAddress(myData?.wallet)
+        setEmail(myData?.email)
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -696,14 +698,15 @@ function Sidebar() {
             <div >
               {token ? (
                 <div className=" grid place-items-center ">
-                  <button
+                 <button
                     onClick={(e) => setConfirmationPopUp(true)}
                     // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
                     className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
                   >
-                    <div className="flex items-center gap-1  px-5">
-                      <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden ">
+                    <div className="flex items-center gap-1">
+                      <FiPower size={18} className="xl:block hidden" />
+                      {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                      <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                         Logout
                       </span>
                     </div>
@@ -760,7 +763,7 @@ function Sidebar() {
               ) : ( 
                 <div className=" grid place-items-center">
                 <Link href="/login " className="">
-                  <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
+                  {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
@@ -771,7 +774,7 @@ function Sidebar() {
                         Login
                       </span>
                     </div>
-                  </button> 
+                  </button>  */}
                   <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
                     <div className="flex items-center">
                       <Image
@@ -803,7 +806,7 @@ function Sidebar() {
                   <div>
                     <div className="flex  items-center">
                       <h1>{userProfile.name}</h1>
-                      <Link href="/Profile">
+                      <Link href="/profile">
                         <span>
                           <Image
                             src={Arrow}
@@ -855,10 +858,10 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                <div className={` ${isNavbar ? "" : "hidden"} `}>
-                  <p className="">{allUser.name}</p>
-                  <p className="text-xs">{allUser.email}</p>
-                </div>
+                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
+                  <p className="">{userProfile.name}</p>
+                  <p className="text-xs">{userProfile.email}</p>
+                {/* </div> */}
               </div>
             </div>
           </div>
