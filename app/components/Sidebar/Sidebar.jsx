@@ -29,7 +29,7 @@
 // import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
 // import axios from "axios";
-// import axiosInstance from "@/app/apiInstances/axiosInstance";                                                                                                                        
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
 // import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 // function Sidebar() {
@@ -358,8 +358,6 @@
 
 // export default Sidebar;
 
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -415,25 +413,21 @@ function Sidebar() {
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  const getUserdata = async () => {
-    await axiosInstanceAuth
-      .get("getUserProfile")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setAllUser(myData || []);
-        setWalletAddress(myData?.wallet)
-        setEmail(myData?.email)
-        console.log("setWalletAddress:", myData?.wallet)
-        console.log("getUserProfile---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
-
-  useEffect(() => {
-    getUserdata();
-  }, [Token]);
+  // const getUserdata = async () => {
+  //   await axiosInstanceAuth
+  //     .get("getUserProfile")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setAllUser(myData || []);
+  //       setWalletAddress(myData?.wallet)
+  //       setEmail(myData?.email)
+  //       console.log("setWalletAddress:", myData?.wallet)
+  //       console.log("getUserProfile---->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
   const pathname = usePathname();
   // const { pathname } = location;
@@ -529,6 +523,7 @@ function Sidebar() {
   };
   const matchPath =
     pathname === "/login" ||
+    // pathname === "/" ||
     pathname === "/signup" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
@@ -551,6 +546,8 @@ function Sidebar() {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
+        setWalletAddress(myData?.wallet)
+        setEmail(myData?.email)
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -588,19 +585,21 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${matchPath ? "hidden" : "block"
-        } `}
+      className={` fixed  top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${
+        matchPath ? "hidden" : "block"
+      } `}
     >
       <div
-        className={`sidebar   ${isNavbar
+        className={`sidebar   ${
+          isNavbar
             ? "w-72"
             : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
-          }`}
+        }`}
       >
         <div className="sidebar h-full  -ml-[4px] hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-          <div className="flex h-screen flex-col  overflow-y-auto">
-            <div className="flex items-center justify-center">
+          <div className="flex h-screen flex-col   overflow-y-auto">
+            <div className="flex  items-center text-white justify-center">
               <div
                 className={`xl:hidden text-3xl `}
                 onClick={() => setIsNavbar(!isNavbar)}
@@ -616,21 +615,23 @@ function Sidebar() {
               <Image
                 src={Logo}
                 alt="wave-logo"
-                className={`${isNavbar === false ? "hidden xl:block" : "block"
-                  } mt-10 mx-auto`}
+                className={`${
+                  isNavbar === false ? "hidden xl:block" : "block"
+                } mt-10 mx-auto`}
               />
             </div>
             <div>
               <ul className="flex flex-col justify-start lg:pb-10 mt-10 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                 {headerdata?.map((data) => (
-                  <li key={data?.id} className="min-w-max">
+                  <li key={data?.id} className="min-w-max xl:mx-5  ">
                     <Link
                       href={data?.pathname}
-                      className={`${(isHover && data?.id === isHover) ||
-                          data?.pathname === pathname
-                          ? "navHover"
-                          : ""
-                        } flex md:px-2 lg:px-3  py-2 rounded-lg`}
+                      className={`${
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
+                          ? "navHover "
+                          : "text-white"
+                      } flex md:px-2 lg:px-3  py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -638,13 +639,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover && data?.id === isHover) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border  -ml-[0px]"
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -654,14 +659,15 @@ function Sidebar() {
                 ))}
                 <div className="border-b border-stone-500 my-2 " />
                 {headerbottom?.map((data) => (
-                  <li key={data?.id} className="min-w-max">
+                  <li key={data?.id} className="min-w-max xl:mx-5 ">
                     <Link
                       href={data?.pathname}
-                      className={`${(isHover && data?.id === isHover) ||
-                          data?.pathname === pathname
+                      className={`${
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
                           : ""
-                        } flex md:px-2 lg:px-3 py-2 rounded-lg`}
+                      } flex md:px-2 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -669,13 +675,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover1 && data?.id === isHover1) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border -ml-[0px] "
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -688,13 +698,15 @@ function Sidebar() {
             <div >
               {token ? (
                 <div className=" grid place-items-center ">
-                  <button
+                 <button
                     onClick={(e) => setConfirmationPopUp(true)}
-                    className="bg-[#1788FB] text-white p-2 rounded-xl "
+                    // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
+                    className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
                   >
-                    <div className="flex items-center gap-1  px-5">
-                      <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden ">
+                    <div className="flex items-center gap-1">
+                      <FiPower size={18} className="xl:block hidden" />
+                      {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                      <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                         Logout
                       </span>
                     </div>
@@ -740,7 +752,6 @@ function Sidebar() {
                               >
                                 No
                               </button>
-
                             </div>
                           </div>
                         </div>
@@ -752,14 +763,26 @@ function Sidebar() {
               ) : ( 
                 <div className=" grid place-items-center">
                 <Link href="/login " className="">
-                  <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
+                  {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
                         alt="loginicon"
-                        className="w-[20px] h-[20px] md:block hidden"
+                        className="w-[20px] h-[20px] xl:block hidden "
                       />
-                      <span className="md:ml-2 md:text-md text-sm md:w-14">
+                      <span className="lg:ml-2 md:text-md text-sm   block ">
+                        Login
+                      </span>
+                    </div>
+                  </button>  */}
+                  <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
+                    <div className="flex items-center">
+                      <Image
+                        src={Loginicon}
+                        alt="loginicon"
+                        className="w-[20px] h-[20px] xl:block hidden "
+                      />
+                      <span className="lg:ml-2 md:text-md text-sm xsm:text-[11.6px]  block ">
                         Login
                       </span>
                     </div>
@@ -782,18 +805,20 @@ function Sidebar() {
 
                   <div>
                     <div className="flex  items-center">
-                      <h1>{allUser.name}</h1>
-                      <span>
-                        <Image
-                          src={Arrow}
-                          alt="arrow"
-                          width="10px"
-                          height="10px"
-                          className="mb-3 ml-1.5"
-                        />
-                      </span>
+                      <h1>{userProfile.name}</h1>
+                      <Link href="/profile">
+                        <span>
+                          <Image
+                            src={Arrow}
+                            alt="arrow"
+                            width="10px"
+                            height="10px"
+                            className="mb-3 ml-1.5"
+                          />
+                        </span>
+                      </Link>
                     </div>
-                    <p className="text-xs">Invited by {allUser.email}</p>
+                    <p className="text-xs">Invited by {userProfile.email}</p>
                     <div className="flex mt-2">
                       <Image
                         src={discord}
@@ -833,10 +858,10 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                <div className={` ${isNavbar ? "" : "hidden"} `}>
-                  <p className="">{allUser.name}</p>
-                  <p className="text-xs">{allUser.email}</p>
-                </div>
+                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
+                  <p className="">{userProfile.name}</p>
+                  <p className="text-xs">{userProfile.email}</p>
+                {/* </div> */}
               </div>
             </div>
           </div>

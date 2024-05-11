@@ -421,7 +421,7 @@ const Swap = () => {
   return (
     <>
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+    <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
         <div className="text-lg font-semibold flex justify-end">
           <button
             className="bg-blue-500 rounded-lg  px-2 mt-3"
@@ -468,7 +468,7 @@ const Swap = () => {
           </div>
         )}
 
-        <div className="mt-24 space-y-10 px-5 ">
+        <div className="mt-48 space-y-10 px-5  ">
           <div className="swap flex flex-col items-center justify-between   text-white ">
             <div className="flex flex-col justify-center items-center space-y-5">
               <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">

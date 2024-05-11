@@ -31,7 +31,6 @@ export const metadata = {
       url: "/wave_logo.png",
     },
   },
-
 };
 
 export default function RootLayout({ children }) {
@@ -64,7 +63,6 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
 
 // "use client"
 // import { Inter } from "next/font/google";
@@ -116,4 +114,3 @@ export default function RootLayout({ children }) {
 //     </html>
 //   );
 // }
-
