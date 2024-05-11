@@ -71,7 +71,7 @@ const Navbar = () => {
         <div
           className={`${
             getPath === "/login" ||
-            getPath === "/Profile" ||
+            getPath === "/profile" ||
             getPath === "/signup" ||
             getPath === "/forgotpassword" ||
             getPath === "/passwordverify" ||

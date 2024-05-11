@@ -587,7 +587,7 @@ function Sidebar() {
                 onClick={() => setIsNavbar(!isNavbar)}
               >
                 {isNavbar === false ? (
-                  <div className="mt-10 mx-auto cursor-pointer">
+                  <div className="mt-10 mx-auto  cursor-pointer">
                     <FaBars />
                   </div>
                 ) : (
@@ -603,17 +603,17 @@ function Sidebar() {
               />
             </div>
             <div>
-              <ul className="flex flex-col justify-start lg:pb-10 mt-10 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
+              <ul className="flex flex-col  pr- justify-start lg:pb-10 mt-10 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                 {headerdata?.map((data) => (
-                  <li key={data?.id} className="min-w-max xl:mx-5  ">
+                  <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4   ">
                     <Link
                       href={data?.pathname}
                       className={`${
                         (isHover && data?.id === isHover) ||
                         data?.pathname === pathname
-                          ? "navHover "
-                          : "text-white"
-                      } flex md:px-2 lg:px-3  py-2 rounded-lg`}
+                          ? "navHover  "
+                          : "text-white "
+                      } flex md:px-1 lg:px-3   py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -641,7 +641,7 @@ function Sidebar() {
                 ))}
                 <div className="border-b border-stone-500 my-2 " />
                 {headerbottom?.map((data) => (
-                  <li key={data?.id} className="min-w-max xl:mx-5 ">
+                  <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4  ">
                     <Link
                       href={data?.pathname}
                       className={`${
@@ -649,7 +649,7 @@ function Sidebar() {
                         data?.pathname === pathname
                           ? "navHover"
                           : ""
-                      } flex md:px-2 lg:px-3 py-2 rounded-lg`}
+                      } flex md:px-1 lg:px-3 py-2 rounded-lg`}
                       onClick={() => setIsNavbar1(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
                       onMouseLeave={() => setIsHover(null)}
@@ -786,7 +786,7 @@ function Sidebar() {
                   <div>
                     <div className="flex  items-center">
                       <h1>{userProfile.name}</h1>
-                      <Link href="/Profile">
+                      <Link href="/profile">
                         <span>
                           <Image
                             src={Arrow}

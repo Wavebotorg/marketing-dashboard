@@ -556,7 +556,7 @@ const Referral = () => {
             <p>Paginated Results</p>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-6 mt-5">
+        <div className="flex flex-col lg:flex-row gap-6 mt-5">
           <div className="rounded-lg px-4 py-2 lg:py-4  bg-[#1C1C1C]">
             <p className=" text-nowrap ">Total Referrals</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--</p>

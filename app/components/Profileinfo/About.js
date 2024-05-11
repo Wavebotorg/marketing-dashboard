@@ -137,6 +137,13 @@ const About = () => {
       });
   };
 
+  const formatTransactionID = (txid) => {
+    if (!txid || txid.length <= 10) return txid; // Check if txid is defined and has a length greater than 10
+    const firstSix = txid.slice(0, 6); // Get the first 6 characters
+    const lastFour = txid.slice(-4); // Get the last 4 characters
+    return `${firstSix}...${lastFour}`; // Concatenate with "..." in between
+  };
+
   return (
     <>
       <div className="mt-4 ">
@@ -267,7 +274,8 @@ const About = () => {
               <p>EVM Address :</p>
             </div>
             <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[111px] flex">
-              <p className="truncate">{userProfile.wallet}</p>
+              {/* <p className="truncate">{userProfile.wallet}</p> */}
+              <p>{formatTransactionID(userProfile.wallet)}</p>
 
               <button
                 className="text-xl text-[#828282] align-middle pb-1.5"
