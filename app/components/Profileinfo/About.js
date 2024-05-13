@@ -7,39 +7,28 @@ import add from "../../../public/assets/add.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ChangePass from "./ChangePass";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import Link from "next/link";
 
 const About = () => {
-  const [resetPassData, setResetPassData] = useState({
-    newPassword: "",
-    confirmPassword: "",
-  });
+  const [showPopup, setShowPopup] = useState(false);
 
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const popupRef = useRef(null);
 
-  const toggleCurrentPasswordVisibility = () => {
-    setShowCurrentPassword(!showCurrentPassword);
-  };
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowPopup(false);
+      }
+    }
 
-  const toggleNewPasswordVisibility = () => {
-    setShowNewPassword(!showNewPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const onChangeInput = (e) => {
-    const { name, value } = e.target;
-    setResetPassData({
-      ...resetPassData,
-      [name]: value.trim(),
-    });
-  };
-
-  const handleSubmit = async () => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  /* const handleSubmit = async () => {
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
       toast.error(
@@ -72,17 +61,8 @@ const About = () => {
       });
     setIsVerificationSuccess(true);
   };
-
+ */
   const [userProfile, setUserProfile] = useState([]);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("Token");
-  //   if (token) {
-  //     router.push("/"); // Change '/home' to your actual home page route
-  //   } else {
-  //     router.push("/login"); // Change '/login' to your actual login page route
-  //   }
-  // }, []);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -106,7 +86,7 @@ const About = () => {
     setImage(imageUrl); // Set the selected image
   }; */
 
-  const [imageSrc, setImageSrc] = useState(Profile); // Assuming Profile is the initial image source
+  const [imageSrc, setImageSrc] = useState(Profile);
   const fileInputRef = useRef(null);
 
   const handleImageChange = (event) => {
@@ -129,19 +109,17 @@ const About = () => {
       .writeText(text)
       .then(() => {
         console.log("Copied to clipboard:", text);
-        // You can optionally show a success message or perform any other action here
       })
       .catch((error) => {
         console.error("Failed to copy:", error);
-        // You can handle errors here
       });
   };
 
   const formatTransactionID = (txid) => {
-    if (!txid || txid.length <= 10) return txid; // Check if txid is defined and has a length greater than 10
-    const firstSix = txid.slice(0, 8); // Get the first 6 characters
-    const lastFour = txid.slice(-6); // Get the last 4 characters
-    return `${firstSix}...${lastFour}`; // Concatenate with "..." in between
+    if (!txid || txid.length <= 10) return txid;
+    const firstSix = txid.slice(0, 8);
+    const lastFour = txid.slice(-6);
+    return `${firstSix}...${lastFour}`;
   };
 
   return (
@@ -312,102 +290,32 @@ const About = () => {
         </div>
       </div>
 
-      {/*  <div className="mt-4 ">
+      <div className="mt-4 ">
         <div className="flex justify-end">
           <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium">
             Save
           </button>
         </div>
-      </div> */}
-      <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-b-lg p-8 pl-16 ">
-        <p className="font-medium text-[20px] mb-5 xsm:text-base">
-          Change Password
-        </p>
-        <div className="relative">
-          <label
-            htmlFor="currentPassword"
-            className="text-[#CACACA] mb-2 block"
-          >
-            Current Password
-          </label>
-          <div className="flex ">
-            <input
-              id="currentPassword"
-              className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-              type={showCurrentPassword ? "text" : "password"}
-              name="currentPassword"
-              value={resetPassData?.currentPassword}
-              onChange={onChangeInput}
-              placeholder="Current Password"
-            />
-            <div
-              className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-              onClick={toggleCurrentPasswordVisibility}
-            >
-              {showCurrentPassword ? <FaEye /> : <FaEyeSlash />}
-            </div>
-          </div>
-        </div>
-
-        <div className="relative mt-5">
-          <label htmlFor="newPassword" className="text-[#CACACA] mb-2 block">
-            New Password
-          </label>
-          <div className="flex ">
-            <input
-              id="newPassword"
-              className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-              type={showNewPassword ? "text" : "password"}
-              name="newPassword"
-              value={resetPassData?.newPassword}
-              onChange={onChangeInput}
-              placeholder="New Password"
-            />
-            <div
-              className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-              onClick={toggleNewPasswordVisibility}
-            >
-              {showNewPassword ? <FaEye /> : <FaEyeSlash />}
-            </div>
-          </div>
-        </div>
-
-        <div className="relative mt-5">
-          <label
-            htmlFor="confirmPassword"
-            className="text-[#CACACA] mb-2 block"
-          >
-            Confirm Password
-          </label>
-          <div className="flex">
-            <input
-              id="confirmPassword"
-              className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={resetPassData?.confirmPassword}
-              onChange={onChangeInput}
-              placeholder="Confirm Password"
-            />
-            <div
-              className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-              onClick={toggleConfirmPasswordVisibility}
-            >
-              {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
-            </div>
-          </div>
-        </div>
       </div>
-      <div className="mt-4 ">
+      <div className="mt-4">
         <div className="flex justify-end mb-3">
+          {/* <Link href="/passwordverify"> */}
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-            onClick={handleSubmit}
+            onClick={() => setShowPopup(true)}
           >
             Change Password
           </button>
+          {/* </Link> */}
         </div>
       </div>
+      {showPopup && (
+        <div>
+          <div ref={popupRef}>
+            <ChangePass />
+          </div>
+        </div>
+      )}
     </>
   );
 };

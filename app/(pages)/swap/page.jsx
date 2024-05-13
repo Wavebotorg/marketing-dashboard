@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -416,6 +416,26 @@ const Swap = () => {
   //   router.push("https://arbiscan.io/tx/")
   // }
   // onClick={redirecttolink()}
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    // Function to handle clicks outside the popup
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        // Clicked outside the popup, so close it
+        setShowPopup(false);
+      }
+    };
+
+    // Adding event listener to detect clicks on the document body
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -430,9 +450,9 @@ const Swap = () => {
           </div>
           {showPopup1 && (
             <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
-              <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
-                <div className=" space-y-5">
-                  <div className="flex flex-col justify-between items-center py-2 ">
+              <div className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+                <div className=" space-y-5 ">
+                  <div className="flex flex-col justify-between items-center py-2  ">
                     <div className="text-xl flex justify-between w-full items-center ">
                       <span>Balance Details</span>
                       <div
@@ -446,7 +466,7 @@ const Swap = () => {
                       <div className=" flex items-center " key={index}>
                         <div className="flex">
                           {" "}
-                          <img
+                          <Image
                             src={item?.logo}
                             alt={item?.name}
                             className="h-15 w-15 my-3"
@@ -678,159 +698,163 @@ const Swap = () => {
         </div>
         {showPopup && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
-              <div className=" space-y-5">
-                <div className="flex justify-between items-center py-2 ">
-                  <div className="text-xl">Select Token</div>
-                  <div
-                    onClick={() => setShowPopup(false)}
-                    className="cursor-pointer"
-                  >
-                    <IoMdClose size={24} />
-                  </div>
-                </div>
-
-                <div className="flex flex-col md:flex-row md:justify-between">
-                  <div className="md:w-[360px] mb-4 md:mb-0">
-                    <input
-                      type="text"
-                      placeholder="Search..."
-                      value={searchTerm}
-                      onChange={handleInputChange}
-                      className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
-                    />
-                  </div>
-                  <div className="dropdown-container relative">
-                    <button
-                      className="dropdown-toggle focus:outline-none"
-                      onClick={toggleDropdown}
+            <div ref={popupRef}>
+              <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+                <div className=" space-y-5">
+                  <div className="flex justify-between items-center py-2 ">
+                    <div className="text-xl">Select Token</div>
+                    <div
+                      onClick={() => setShowPopup(false)}
+                      className="cursor-pointer"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                      <IoMdClose size={24} />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row md:justify-between">
+                    <div className="md:w-[360px] mb-4 md:mb-0">
+                      <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
+                      />
+                    </div>
+                    <div className="dropdown-container relative">
+                      <button
+                        className="dropdown-toggle focus:outline-none"
+                        onClick={toggleDropdown}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </button>
-                    {showDropdown && (
-                      <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
-                        <ul>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      {showDropdown && (
+                        <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
                           <ul>
-                            {NetworkData.map((item, index) => (
-                              <li
-                                key={index}
-                                onClick={() => handleOptionClick(item.name)}
-                                className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                  selectedNetwork === item.name
-                                    ? "bg-blue-500"
-                                    : ""
-                                }`}
-                              >
-                                <Image
-                                  src={item.img}
-                                  alt={item.name}
-                                  className="h-6 w-6 mr-2" // Adjust size as needed
-                                />
-                                <span className="text-white">{item.name}</span>
-                                {selectedNetwork === item.name && (
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-white mr-2"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M5 13l4 4L19 7"
-                                    />
-                                  </svg>
-                                )}
-                              </li>
-                            ))}
+                            <ul>
+                              {NetworkData.map((item, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() => handleOptionClick(item.name)}
+                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                                    selectedNetwork === item.name
+                                      ? "bg-blue-500"
+                                      : ""
+                                  }`}
+                                >
+                                  <Image
+                                    src={item.img}
+                                    alt={item.name}
+                                    className="h-6 w-6 mr-2" // Adjust size as needed
+                                  />
+                                  <span className="text-white">
+                                    {item.name}
+                                  </span>
+                                  {selectedNetwork === item.name && (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-6 w-6 text-white mr-2"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M5 13l4 4L19 7"
+                                      />
+                                    </svg>
+                                  )}
+                                </li>
+                              ))}
+                            </ul>
                           </ul>
-                        </ul>
-                      </div>
-                    )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {token_data_ETH && (
-                <div className="h-[60vh] overflow-y-auto">
-                  {(selectedNetwork
-                    ? selectedNetwork === "Ethereum"
-                      ? token_data_ETH
-                      : selectedNetwork === "Solana"
-                      ? token_data_SOL
-                      : selectedNetwork === "Arbitrum"
-                      ? token_data_ARB
-                      : []
-                    : token_data_ETH
-                  )
-                    .filter((token) =>
-                      token.tokenname
-                        .toLowerCase()
-                        .includes(searchTerm.toLowerCase())
+                {token_data_ETH && (
+                  <div className="h-[60vh] overflow-y-auto">
+                    {(selectedNetwork
+                      ? selectedNetwork === "Ethereum"
+                        ? token_data_ETH
+                        : selectedNetwork === "Solana"
+                        ? token_data_SOL
+                        : selectedNetwork === "Arbitrum"
+                        ? token_data_ARB
+                        : []
+                      : token_data_ETH
                     )
-                    .map((token, index) => (
-                      <div
-                        key={index}
-                        className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                          clickedTokens.includes(token.tokenname)
-                            ? // ||
-                              // token.symbol === selectedSymbol
-                              "opacity-50 cursor-not-allowed"
-                            : ""
-                        }`}
-                        onClick={() => {
-                          if (
-                            !(
-                              clickedTokens.includes(token.tokenname)
-                              // ||
-                              // token.symbol === selectedSymbol
-                            )
-                          ) {
-                            selectToken(token);
-                          }
-                        }}
-                      >
-                        <Image
-                          src={token.imageURl}
-                          alt={token.tokenname}
-                          height={50}
-                          width={50}
-                          className="rounded-full"
-                        />
-                        <div className="flex gap-2">
-                          <p
-                            className={`font-semibold ${
-                              clickedTokens.includes(token.tokenname)
-                                ? // ||
-                                  // token.symbol === selectedSymbol
-                                  "text-gray-500"
-                                : ""
-                            }`}
-                          >
-                            {token.tokenname}
-                          </p>
-                          <p className="text-gray-200">
-                            ({token.symbol.toUpperCase()})
-                          </p>
+                      .filter((token) =>
+                        token.tokenname
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      )
+                      .map((token, index) => (
+                        <div
+                          key={index}
+                          className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                            clickedTokens.includes(token.tokenname)
+                              ? // ||
+                                // token.symbol === selectedSymbol
+                                "opacity-50 cursor-not-allowed"
+                              : ""
+                          }`}
+                          onClick={() => {
+                            if (
+                              !(
+                                clickedTokens.includes(token.tokenname)
+                                // ||
+                                // token.symbol === selectedSymbol
+                              )
+                            ) {
+                              selectToken(token);
+                            }
+                          }}
+                        >
+                          <Image
+                            src={token.imageURl}
+                            alt={token.tokenname}
+                            height={50}
+                            width={50}
+                            className="rounded-full"
+                          />
+                          <div className="flex gap-2">
+                            <p
+                              className={`font-semibold ${
+                                clickedTokens.includes(token.tokenname)
+                                  ? // ||
+                                    // token.symbol === selectedSymbol
+                                    "text-gray-500"
+                                  : ""
+                              }`}
+                            >
+                              {token.tokenname}
+                            </p>
+                            <p className="text-gray-200">
+                              ({token.symbol.toUpperCase()})
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                </div>
-              )}
+                      ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

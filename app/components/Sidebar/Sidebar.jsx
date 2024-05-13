@@ -537,7 +537,7 @@ function Sidebar() {
   //     router.push('/login'); // Change '/login' to your actual login page route
   //   }
   // }, []);
-  useEffect(() => {
+  /*   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
@@ -547,6 +547,23 @@ function Sidebar() {
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []); */
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        setUserProfile(response?.data?.data || {});
+        setWalletAddress(response?.data?.data?.wallet || "");
+        setEmail(response?.data?.data?.email || "");
+        console.log("User Profile Data:", response?.data?.data);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        setError(error.message || "Error fetching user profile");
       }
     };
 
@@ -787,7 +804,7 @@ function Sidebar() {
                 </div>
               )}
             </div>
-            <div className="text-white xl:px-8 px-0 md:pb-3 pb-5 relative mt-[3rem]  lg:ml-2.5 md:ml-1.5">
+            <div className="text-white xl:px-8 px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
               {/* lg:mt-20 sm:mt-32 xsm:mt-20  */}
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
