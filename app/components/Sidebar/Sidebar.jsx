@@ -544,11 +544,12 @@ function Sidebar() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const response = await axiosInstanceAuth.get("/getUserProfile");
-        setUserProfile(response?.data?.data || []);
+        const res = await axiosInstanceAuth.get("/getUserProfile");
+        const myData = res?.data?.data;
+        setUserProfile(myData || []);
         setWalletAddress(myData?.wallet)
         setEmail(myData?.email)
-        console.log("User Profile Data:", response?.data?.data);
+        console.log("User Profile Data:", myData);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }

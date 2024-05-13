@@ -142,6 +142,16 @@ const Swap = () => {
       networkname: "Arbitrum",
     },
     {
+      tokenname: "USD Coin",
+      symbol: "USDC",
+      chianid: 42161,
+      address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      decimal: "6",
+      imageURl: wrapped,
+      networkname: "Arbitrum",
+    },
+    
+    {
       tokenname: "ChainLink Token",
       symbol: "LINK",
       chianid: 42161,
@@ -261,6 +271,7 @@ const Swap = () => {
     chainId: selectedChainId,
     email: email,
   };
+ 
   // console.log(" dataEvm:", dataEvm);
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
@@ -270,13 +281,24 @@ const Swap = () => {
   };
   // console.log("🚀 ~ Swap ~ dataSolana:", dataSolana)
 
+  // const handleSwapSubmit = () => {
+  //   let endpoint;
+  //   if (selectedNetwork === "Solana") {
+  //     endpoint = "/solanaSwap";
+  //   } else {
+  //     endpoint = "/mainswap";
+  //   }
   const handleSwapSubmit = () => {
     let endpoint;
-    if (selectedNetwork === "Solana") {
+    if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
       endpoint = "/solanaSwap";
+    } else if (selectedNetwork === "Arbitrum") {
+      endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
     } else {
       endpoint = "/mainswap";
     }
+
+    
 
     axiosInstance
       .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
@@ -421,7 +443,7 @@ const Swap = () => {
   return (
     <>
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-    <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+    <div className="xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
         <div className="text-lg font-semibold flex justify-end">
           <button
             className="bg-blue-500 rounded-lg  px-2 mt-3"
@@ -441,7 +463,7 @@ const Swap = () => {
                       <IoMdClose size={24} />
                     </div>
                   </div>
-                  {showBalance?.map((item, index) => (
+                  {showBalance?.map((item, index) => (  
                     <div className=" flex items-center " key={index}>
                       <div className="flex">
                         {" "}
@@ -468,7 +490,7 @@ const Swap = () => {
           </div>
         )}
 
-        <div className="mt-48 space-y-10 px-5  ">
+        <div className="mt-48 space-y-10 px-5 ">
           <div className="swap flex flex-col items-center justify-between   text-white ">
             <div className="flex flex-col justify-center items-center space-y-5">
               <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
