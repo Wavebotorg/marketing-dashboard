@@ -1,0 +1,42 @@
+.navHover {
+    /* background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.27) 1.18%,
+      rgba(255, 255, 255, 0.14) 100%
+    );
+    background: linear-gradient(
+      90deg,
+      rgba(255, 0, 158, 0.58) 1.18%,
+      rgba(255, 0, 158, 0) 34.05%
+    ); */
+    color: white;
+    background-color: rgba(23, 136, 251, 0.26);
+    /* opacity: 26%; */
+
+    /* background: linear-gradient(89.95deg, #7f2163 1.28%, #3b3f4a 31.65%); */
+  }
+  .dropdown-left-border {
+    /* border: 2px solid #ff009e; */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .sidebar {
+    /* transition: all 0.4s ease-in-out; */
+    overflow-y: scroll;
+    height: 100%;
+
+  }
+  
+  .buttonGradinat {
+    position: relative;
+  }
+  .buttonGradinat::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    /* padding: 2px; */
+    /* background: linear-gradient(to right, #c6037c, #0e86fd, #561fd8); */
+    /* -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); */
+    mask-composite: exclude;
+  }
