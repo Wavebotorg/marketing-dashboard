@@ -28,6 +28,7 @@ const Page = () => {
   ];
 
   const [copied, setCopied] = useState(false);
+  console.log("🚀 ~ copied:", copied)
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(userData?.userId);
