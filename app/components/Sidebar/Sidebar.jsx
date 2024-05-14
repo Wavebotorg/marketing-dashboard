@@ -549,9 +549,12 @@ function Sidebar() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const response = await axiosInstanceAuth.get("/getUserProfile");
-        setUserProfile(response?.data?.data || []);
-        console.log("User Profile Data:", response?.data?.data);
+        const res = await axiosInstanceAuth.get("/getUserProfile");
+        const myData = res?.data?.data;
+        setUserProfile(myData);
+        setWalletAddress(myData?.wallet)
+        setEmail(myData?.email)
+        console.log("User Profile Data:", myData);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -782,18 +785,20 @@ function Sidebar() {
 
                   <div>
                     <div className="flex  items-center">
-                      <h1>{allUser.name}</h1>
-                      <span>
-                        <Image
-                          src={Arrow}
-                          alt="arrow"
-                          width="10px"
-                          height="10px"
-                          className="mb-3 ml-1.5"
-                        />
-                      </span>
+                      <h1>{userProfile?.name}</h1>
+                      <Link href="/profile">
+                        <span>
+                          <Image
+                            src={Arrow}
+                            alt="arrow"
+                            width="10px"
+                            height="10px"
+                            className="mb-3 ml-1.5"
+                          />
+                        </span>
+                      </Link>
                     </div>
-                    <p className="text-xs">Invited by {allUser.email}</p>
+                    <p className="text-xs">Invited by {userProfile?.email}</p>
                     <div className="flex mt-2">
                       <Image
                         src={discord}
@@ -833,10 +838,10 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                <div className={` ${isNavbar ? "" : "hidden"} `}>
-                  <p className="">{allUser.name}</p>
-                  <p className="text-xs">{allUser.email}</p>
-                </div>
+                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
+                  <p className="">{userProfile?.name}</p>
+                  <p className="text-xs">{userProfile?.email}</p>
+                {/* </div> */}
               </div>
             </div>
           </div>

@@ -163,11 +163,17 @@ const ResetPassword = () => {
           </div>
         </div>
 
-        <div className="flex justify-center mt-10" onClick={handleSubmit}>
+        <div className="flex  justify-center mt-10" onClick={handleSubmit}>
           <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             Submit
           </button>
           <ToastContainer />
+         
+        </div>
+        <div className="flex  mt-5 justify-center ">
+          <Link href="/login" className="text-xs">
+           Back to login
+          </Link>
         </div>
       </div>
     </div>
