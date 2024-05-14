@@ -89,6 +89,15 @@ const Swap = () => {
       networkname: "Ethereum",
     },
     {
+      tokenname: "USD Coin",
+      symbol: "USDC",
+      chianid: "1",
+      address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      decimal: "6",
+      imageURl: OXy,
+      networkname: "Solana",
+    },
+    {
       tokenname: "Tether USD",
       symbol: "USDT",
       chianid: "1",
@@ -264,7 +273,7 @@ const Swap = () => {
   };
 
   const [showDropdown, setShowDropdown] = useState(false);
-  const dataEvm = {
+  const dataArb= {
     token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
@@ -281,27 +290,27 @@ const Swap = () => {
   };
   // console.log("🚀 ~ Swap ~ dataSolana:", dataSolana)
 
-  // const handleSwapSubmit = () => {
-  //   let endpoint;
-  //   if (selectedNetwork === "Solana") {
-  //     endpoint = "/solanaSwap";
-  //   } else {
-  //     endpoint = "/mainswap";
-  //   }
   const handleSwapSubmit = () => {
     let endpoint;
-    if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
-    } else if (selectedNetwork === "Arbitrum") {
-      endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
     } else {
       endpoint = "/mainswap";
     }
+  // const handleSwapSubmit = () => {
+  //   let endpoint;
+  //   if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+  //     endpoint = "/solanaSwap";
+  //   } else  (selectedNetwork === "Arbitrum") {
+  //     endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
+  //   } else {
+  //     endpoint = "/mainswap";
+  //   }
 
     
 
     axiosInstance
-      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
+      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataArb)
       .then((res) => {
         const myData = res?.data;
         console.log("Response from API:", myData);

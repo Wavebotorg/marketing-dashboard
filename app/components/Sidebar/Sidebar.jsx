@@ -546,7 +546,7 @@ function Sidebar() {
       try {
         const res = await axiosInstanceAuth.get("/getUserProfile");
         const myData = res?.data?.data;
-        setUserProfile(myData || []);
+        setUserProfile(myData);
         setWalletAddress(myData?.wallet)
         setEmail(myData?.email)
         console.log("User Profile Data:", myData);
@@ -806,7 +806,7 @@ function Sidebar() {
 
                   <div>
                     <div className="flex  items-center">
-                      <h1>{userProfile.name}</h1>
+                      <h1>{userProfile?.name}</h1>
                       <Link href="/profile">
                         <span>
                           <Image
@@ -819,7 +819,7 @@ function Sidebar() {
                         </span>
                       </Link>
                     </div>
-                    <p className="text-xs">Invited by {userProfile.email}</p>
+                    <p className="text-xs">Invited by {userProfile?.email}</p>
                     <div className="flex mt-2">
                       <Image
                         src={discord}
@@ -860,8 +860,8 @@ function Sidebar() {
                   className=" ml-2 items-center"
                 />
                 {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
-                  <p className="">{userProfile.name}</p>
-                  <p className="text-xs">{userProfile.email}</p>
+                  <p className="">{userProfile?.name}</p>
+                  <p className="text-xs">{userProfile?.email}</p>
                 {/* </div> */}
               </div>
             </div>

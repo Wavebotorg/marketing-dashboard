@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Appearance from "@/app/components/Profileinfo/Appearance";
-import About from "@/app/components/Profileinfo/About";
-import Setup from "@/app/components/Profileinfo/Setup";
-import Security from "@/app/components/Profileinfo/Security";
-import Notification from "@/app/components/Profileinfo/Notification";
+import Appearance from "../../components/Profileinfo/Appearance";
+import About from "../../components/Profileinfo/About";
+import Setup from "../../components/Profileinfo/Setup";
+import Security from "../../components/Profileinfo/Security";
+import Notification from "../../components/Profileinfo/Notification";
 
 const Profile = () => {
   const [isComponent1Visible, setComponent1Visible] = useState(true);
@@ -162,11 +162,15 @@ const Profile = () => {
             </div>
           </div>
           <div className="">
+         
             <div>{isComponent1Visible && <About />}</div>
             <div>{isComponent2Visible && <Setup />}</div>
             <div>{isComponent3Visible && <Appearance />}</div>
             <div>{isComponent4Visible && <Security />}</div>
             <div>{isComponent5Visible && <Notification />}</div>
+            <div className="flex justify-end mb-3">
+         
+        </div>
           </div>
         </div>
       </div>
