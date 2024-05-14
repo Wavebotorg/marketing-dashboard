@@ -480,7 +480,7 @@ const Swap = () => {
                         <IoMdClose size={24} />
                       </div>
                     </div>
-                    {showBalance?.map((item, index) => (
+                    { showBalance?.map((item, index) => (
                       <div className=" flex items-center " key={index}>
                         <div className="flex">
                           {" "}

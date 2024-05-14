@@ -849,7 +849,7 @@ function Sidebar() {
                         className="mr-2 cursor-pointer"
                       />
                     </div>
-                  </div>
+                  </div> 
                 </div>
               </div>
 
