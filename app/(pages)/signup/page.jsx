@@ -50,7 +50,7 @@
 //       toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
 //       return;
 //     }
-  
+
 //     if (mydata.password.length < 8) {
 //       toast.error("Password must be at least 8 characters long.");
 //       return;
@@ -104,14 +104,14 @@
 //         </h2>
 
 //         <div className="relative">
-//           <div className="text-[#CACACA] mb-2"> Enter Name </div>              
+//           <div className="text-[#CACACA] mb-2"> Enter Name </div>
 //           <input
 //             className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"
 //             type="text"
 //             name="name"
 //             value={signupdata.name.toLowerCase()}
-//             onChange={onChangeInput}    
-//             maxLength={15}                                                                                                                                                                                   
+//             onChange={onChangeInput}
+//             maxLength={15}
 //           />
 //         </div>
 //         <div className="relative">
@@ -175,7 +175,7 @@
 
 // export default Signup;
 
-"use client"
+"use client";
 import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
@@ -281,27 +281,26 @@ const Signup = () => {
     try {
       const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
       if (!passwordRegex.test(password)) {
-        toast.error("Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long.");
+        toast.error(
+          "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long."
+        );
         return;
       }
 
       const response = await axiosInstance.post("signup", signupdata);
-      console.log(response,"-----------response")
+      console.log(response, "-----------response");
       const myData = response.data;
-      localStorage.setItem("userEmail",myData?.data?.email || "");
-      console.log("signupppppp-----------------",myData?.data?.email)
+      localStorage.setItem("userEmail", myData.email || "");
       localStorage.setItem("type", "signup");
-      console.log( myData,"----------- myData")
+      console.log(myData, "----------- myData");
       if (response?.data?.status) {
         toast.success(response?.data?.msg);
         router.push("/passwordverify");
-      
       } else {
         toast.error(response?.data?.msg);
       }
     } catch (error) {
       console.error("Error:", error);
-    
     }
   };
   const handleKeyPress1 = (event) => {
@@ -311,8 +310,6 @@ const Signup = () => {
       event.preventDefault(); // Prevent invalid input
     }
   };
-
-
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
@@ -338,15 +335,15 @@ const Signup = () => {
         <div className="relative">
           <div className="text-[#CACACA] mb-2"> Enter Name </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
+            className="rounded-md w-full placeholder:text-[12px] placeholder:font-normal sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
             type="text"
             name="name"
-            value={signupdata.name.toLowerCase() }
+            value={signupdata.name.toLowerCase()}
             onChange={onChangeInput}
             maxLength={15}
             minLength={5}
-         
-            onKeyPress={handleKeyPress1} 
+            placeholder="Your Enter Name"
+            onKeyPress={handleKeyPress1}
           />
           {errors.name && (
             <div className="text-red-500 text-sm mb-5 mt-1">{errors.name}</div>
@@ -355,10 +352,11 @@ const Signup = () => {
         <div className="relative">
           <div className="text-[#CACACA] my-2"> Enter Email </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
+            className="rounded-md w-full placeholder:text-[12px] placeholder:font-normal sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "
             type="email"
             name="email"
             value={signupdata.email}
+            placeholder="Your Enter Email"
             onChange={onChangeInput}
           />
           {errors.email && (
@@ -368,9 +366,10 @@ const Signup = () => {
         <div className="relative">
           <div className="text-[#CACACA] my-2"> Enter Password </div>
           <input
-            className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800 "
+            className="rounded-md w-full  sm:w-[310px] placeholder:text-[12px] placeholder:font-normal md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800 "
             type={showPassword ? "text" : "password"}
             name="password"
+            placeholder="Your Enter Password"
             value={signupdata.password}
             onChange={onChangeInput}
           />
@@ -381,15 +380,18 @@ const Signup = () => {
             {showPassword ? <FaEye /> : <FaRegEyeSlash />}
           </button>
           {errors.password && (
-            <div className="text-red-500 text-sm mb-5  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">{errors.password}</div>
+            <div className="text-red-500 text-sm mb-5  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] mt-1">
+              {errors.password}
+            </div>
           )}
         </div>
         <div className="relative">
           <div className="text-[#CACACA] my-2"> Confirm Password </div>
           <input
-            className="rounded-md w-full  sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
+            className="rounded-md w-full  sm:w-[310px] md:w-[360px] placeholder:text-[12px] placeholder:font-normal lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
+            placeholder="Your Enter Password"
             value={signupdata.confirmPassword}
             onChange={onChangeInput}
           />
@@ -414,7 +416,10 @@ const Signup = () => {
         </div>
         <div className="flex justify-center mt-10">
           <Link href="/login" className="text-xs text-[#CACACA]">
-            Already a User? <span className="font-bold text-sm hover:text-[#1788FB]">Sign in </span>
+            Already a User?{" "}
+            <span className="font-bold text-sm hover:text-[#1788FB]">
+              Sign in{" "}
+            </span>
           </Link>
         </div>
       </div>
@@ -423,4 +428,3 @@ const Signup = () => {
 };
 
 export default Signup;
-

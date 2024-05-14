@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import axiosInstance from "../../apiInstances/axiosInstance";
+
 const ChangePass = () => {
-    const router = useRouter();
-    const [changePassData, setChangePassData] = useState({
-        oldpassword:"",
-        newPassword: "",
+  const [resetPassData, setResetPassData] = useState({
+    newPassword: "",
     confirmPassword: "",
-      });
-
-
-
+  });
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -30,61 +22,15 @@ const ChangePass = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-  const [errors, setErrors] = useState({ email: "" });
-  const validateInput = (name, value) => {
-    switch (name) {
-      
-      case "email":
-        setErrors((prevState) => ({
-          ...prevState,
-          email: value
-            ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-              ? ""
-              : "Invalid email address"
-            : "Email is required",
-        }));
-        break;
-        default:
-          break;
-      }
-    };
+
   const onChangeInput = (e) => {
-    const value = e.target.value.trim();
-    const name = e.target.name;
-
-    setForgetData({
-      ...changePassData,
-      [name]: value,
+    const { name, value } = e.target;
+    setResetPassData({
+      ...resetPassData,
+      [name]: value.trim(),
     });
-    validateInput(name, value);
   };
-  const handleSubmit = async () => {
-    await axiosInstance
-      .post("forgetPassword", mydata)
-      .then((res) => {
-        const myData = res?.data;
-        console.log("Forget Password Data --->", myData);
-        localStorage.setItem("type", "forget");
-        localStorage.setItem("userEmail", changePassData?.email);
-        if (myData?.status) {
-          toast.success(myData?.msg);
 
-          router.push("/passwordverify");
-          // setTimeout(() => {
-          // }, 3000);
-        } else {
-          toast.error(myData?.msg);
-        }
-      })
-      .catch((err) => {
-        console.log("err---->", err);
-      });
-  };
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit();
-    }
-  };
   return (
     <div>
       {" "}
@@ -105,7 +51,7 @@ const ChangePass = () => {
               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
               type={showCurrentPassword ? "text" : "password"}
               name="currentPassword"
-              value={changePassData?.currentPassword}
+              value={resetPassData?.currentPassword}
               onChange={onChangeInput}
               placeholder="Current Password"
             />
@@ -128,7 +74,7 @@ const ChangePass = () => {
               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
               type={showNewPassword ? "text" : "password"}
               name="newPassword"
-              value={changePassData?.newPassword}
+              value={resetPassData?.newPassword}
               onChange={onChangeInput}
               placeholder="New Password"
             />
@@ -154,7 +100,7 @@ const ChangePass = () => {
               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
               type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
-              value={changePassData?.confirmPassword}
+              value={resetPassData?.confirmPassword}
               onChange={onChangeInput}
               placeholder="Confirm Password"
             />
@@ -171,7 +117,7 @@ const ChangePass = () => {
         <div className="flex justify-end mb-3">
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-             onClick={handleSubmit}
+            // onClick={handleSubmit}
           >
             Save
           </button>

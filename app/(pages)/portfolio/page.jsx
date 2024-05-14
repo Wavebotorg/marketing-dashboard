@@ -65,7 +65,7 @@ const Portfolio = () => {
   //pagination
   const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = portfolioData.filter((coin) =>

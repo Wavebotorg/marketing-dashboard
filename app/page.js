@@ -45,12 +45,11 @@ const Page = () => {
   //   }
   // }, []);
 
-
-
-
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+      <div className="text-white flex flex-col xl:justify-center     xl:ml-28 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
+        {/* <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10"> */}
+
         <div className="mx-3  md:flex gap-5 ">
           <div className="flex items-center mb-5 md:mb-0">
             <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
@@ -60,7 +59,7 @@ const Page = () => {
           </div>
 
           <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#ffffff] lg:border-opacity-15 border-0 ">
-            <table className="responsive-table border1 ">
+            <table className="responsive-table  ">
               <thead className="text-[#828282] md:text-[#828282]">
                 <tr className="   ">
                   <th scope="col">User Id</th>
@@ -83,7 +82,7 @@ const Page = () => {
             ) : ( */}
                 {userData?.map((items) => (
                   <>
-                    <tr className="md:pl-2">
+                    <tr className="md:pl-2 ">
                       <td data-title="User Id" className="">
                         {items?.userId}
                         <button
@@ -102,7 +101,7 @@ const Page = () => {
                         <span className="md:ml-[2rem] ">
                           {items?.vipLevel}
 
-                          <button className=" text-xl  text-[#828282] align-middle pb-0.6 ">
+                          <button className=" text-xl  text-[#828282] align-middle  pb-0.6 ">
                             <GrFormNext />
                           </button>
                         </span>
@@ -125,9 +124,12 @@ const Page = () => {
                       <td data-title="Following" className=" ">
                         {items?.following}
                       </td>
-                      <td data-title="Followers" className=" flex items-center">
+                      <td
+                        data-title="Followers"
+                        className=" flex items-center pt-5"
+                      >
                         {items?.followers}
-                        <button className=" text-xl  text-[#828282] align-middle pb-1.5 ">
+                        <button className=" text-xl pt-[0.2rem] text-[#828282] align-middle pb-1.5 ">
                           <GrFormNext />
                         </button>{" "}
                       </td>
@@ -138,8 +140,7 @@ const Page = () => {
             </table>
           </div>
         </div>
-
-        <div className="mt-10  rounded-2xl ">
+        <div className="mt-5  rounded-2xl ">
           <Market />
         </div>
       </div>

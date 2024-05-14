@@ -1,8 +1,3 @@
-
-
-
-
-
 "use client";
 import { useParams } from "react-router-dom";
 import Image from "next/image";
@@ -49,8 +44,6 @@ const Market = () => {
       .catch((err) => {
         console.log("err --->", err);
       });
-
-
   };
   // useEffect(() => {
   //   resetSearchQuery();
@@ -506,8 +499,8 @@ const Market = () => {
                           market?.price_change_percentage_24h === 0
                             ? "text-white"
                             : market?.price_change_percentage_24h < 0
-                            ? "text-red-500 "
-                            : "text-green-500 "
+                            ? "text-[#FF0000] "
+                            : "text-[#1AA80D] "
                         }
                       >
                         ({market?.price_change_percentage_24h})
@@ -522,8 +515,8 @@ const Market = () => {
                           market?.price_change_percentage_1h_in_currency === 0
                             ? "text-white"
                             : market?.price_change_percentage_1h_in_currency < 0
-                            ? "text-red-500"
-                            : "text-green-500"
+                            ? "text-[#FF0000]"
+                            : "text-[#1AA80D]"
                         }`}
                       >
                         {market?.price_change_percentage_1h_in_currency ===
@@ -531,9 +524,9 @@ const Market = () => {
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_1h_in_currency <
                           0 ? (
-                          <FaCaretDown size={15} className="text-red-500" />
+                          <FaCaretDown size={15} className="text-[#FF0000]" />
                         ) : (
-                          <FaCaretUp size={15} className="text-green-500" />
+                          <FaCaretUp size={15} className="text-[#1AA80D]" />
                         )}
                         {(
                           market?.price_change_percentage_1h_in_currency * 100
@@ -552,8 +545,8 @@ const Market = () => {
                             ? "text-white"
                             : market?.price_change_percentage_24h_in_currency <
                               0
-                            ? "text-red-500"
-                            : "text-green-500"
+                            ? "text-[#FF0000]"
+                            : "text-[#1AA80D]"
                         }`}
                       >
                         {market?.price_change_percentage_24h_in_currency ===
@@ -561,9 +554,9 @@ const Market = () => {
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_24h_in_currency <
                           0 ? (
-                          <FaCaretDown size={15} className="text-red-500" />
+                          <FaCaretDown size={15} className="text-[#FF0000]" />
                         ) : (
-                          <FaCaretUp size={15} className="text-green-500" />
+                          <FaCaretUp size={15} className="text-[#1AA80D]" />
                         )}
                         {(
                           market?.price_change_percentage_24h_in_currency * 100
@@ -581,8 +574,8 @@ const Market = () => {
                           market?.price_change_percentage_7d_in_currency === 0
                             ? "text-white"
                             : market?.price_change_percentage_7d_in_currency < 0
-                            ? "text-red-500"
-                            : "text-green-500"
+                            ? "text-[#FF0000]"
+                            : "text-[#1AA80D]"
                         }`}
                       >
                         {market?.price_change_percentage_7d_in_currency ===
@@ -590,9 +583,9 @@ const Market = () => {
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_7d_in_currency <
                           0 ? (
-                          <FaCaretDown size={15} className="text-red-500" />
+                          <FaCaretDown size={15} className="text-[#FF0000]" />
                         ) : (
-                          <FaCaretUp size={15} className="text-green-500" />
+                          <FaCaretUp size={15} className="text-[#1AA80D]" />
                         )}
                         {(
                           market?.price_change_percentage_7d_in_currency * 100
@@ -671,4 +664,3 @@ const Market = () => {
 };
 
 export default Market;
-

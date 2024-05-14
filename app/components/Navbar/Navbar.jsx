@@ -68,12 +68,14 @@ const Navbar = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div
-          className={`${getPath === "/login" ||
-              getPath === "/signup" ||
-              getPath === "/forgotpassword" ||
-              getPath === "/passwordverify" ||
-              getPath === "/resetpassword" ||
-              getPath === "/sucessreset"
+          className={`${
+            getPath === "/login" ||
+            getPath === "/profile" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset"
               ? "hidden"
               : "flex  justify-between   py-7  lg:pl-10 pl-2 "
             }`}
