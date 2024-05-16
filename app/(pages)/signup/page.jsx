@@ -294,6 +294,7 @@ const Signup = () => {
       localStorage.setItem("type", "signup");
       console.log(myData, "----------- myData");
       if (response?.data?.status) {
+        localStorage.setItem("Token", myData?.token);
         toast.success(response?.data?.msg);
         router.push("/passwordverify");
       } else {
