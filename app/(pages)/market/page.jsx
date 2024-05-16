@@ -35,7 +35,7 @@ const Market = () => {
     axios
 
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=5&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -75,10 +75,8 @@ const Market = () => {
 
   useEffect(() => {
     getUserdata();
-
     saveCoin();
     // Check if the user is logged in when the component mounts
-
     const storedToken = localStorage.getItem("Token");
     // if(!storedToken)
     // {

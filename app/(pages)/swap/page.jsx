@@ -242,7 +242,7 @@ const Swap = () => {
       // If selecting a new token for the "from" field, enable and unblur the previously selected token for the "to" field
       else if (selectedtofrom === 2) {
         return [selectedTokenDatato.name_to, token.tokenname];
-      }
+      } 
       return prevTokens; // Return unchanged tokens for other cases
     });
     const [showDropdown, setShowDropdown] = useState(false);
@@ -315,9 +315,9 @@ const Swap = () => {
         const myData = res?.data;
         console.log("Response from API:", myData);
         if (myData?.status) {
-          toast.success(myData?.message);
+          toast.success(myData?.msg);
         } else {
-          toast.error(myData?.message);
+          toast.error(myData?.msg);
         }
       })
       .catch((error) => {
@@ -355,11 +355,13 @@ const Swap = () => {
       selectedTokenDatato?.input_to &&
       selectedTokenDatato?.address_from &&
       selectedTokenDatato?.address_to
+      
     ) {
       const amount =
         Number(selectedTokenDatato?.input_to) *
         10 ** selectedTokenDatato?.decimals_to;
       console.log("--------amount", amount);
+
       const params = {
         sellToken: selectedTokenDatato?.address_to,
         buyToken: selectedTokenDatato?.address_from,
@@ -472,7 +474,8 @@ const Swap = () => {
                       <IoMdClose size={24} />
                     </div>
                   </div>
-                  {showBalance?.map((item, index) => (  
+                  { showBalance?.length > 0 &&
+                    showBalance?.map((item, index) => (  
                     <div className=" flex items-center " key={index}>
                       <div className="flex">
                         {" "}
@@ -483,7 +486,7 @@ const Swap = () => {
                         />
                         <div className="flex flex-col justify-center pl-3">
                           <div className="text-base font-bold ">
-                            {item?.name}
+                            {item?.name}`+-* `
                           </div>
                           <div className="text-base">
                             Balance:{" "}

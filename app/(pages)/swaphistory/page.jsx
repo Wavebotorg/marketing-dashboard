@@ -171,7 +171,7 @@ const SwapHistory = () => {
    const itemsPerPage = 5;
  
    const startIndex = (currentPage - 1) * itemsPerPage;
-   const endIndex = startIndex + itemsPerPage;
+   const endIndex = startIndex + itemsPerPage;                     
    //search
    const filteredData = transactions.filter((coin) =>
    coin.txid.toLowerCase().includes(searchQuery.toLowerCase()) ||

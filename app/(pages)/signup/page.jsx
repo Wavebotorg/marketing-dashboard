@@ -286,13 +286,17 @@ const Signup = () => {
       }
 
       const response = await axiosInstance.post("signup", signupdata);
-      console.log(response,"-----------response")
+      console.log(response,"-----------response of signup data")
       const myData = response.data;
+      
       localStorage.setItem("userEmail",myData?.data?.email || "");
+  
+      console.log("token",myData?.token)
       console.log("signupppppp-----------------",myData?.data?.email)
       localStorage.setItem("type", "signup");
       console.log( myData,"----------- myData")
       if (response?.data?.status) {
+        localStorage.setItem("Token", myData?.token);
         toast.success(response?.data?.msg);
         router.push("/passwordverify");
       
