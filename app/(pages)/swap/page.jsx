@@ -91,20 +91,7 @@ const Swap = () => {
       networkname: "Ethereum",
     },
     {
-<<<<<<< HEAD
-      tokenname: "USD Coin",
-      symbol: "USDC",
-      chianid: "1",
-      address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      decimal: "6",
-      imageURl: OXy,
-      networkname: "Solana",
-    },
-    {
-      tokenname: "Tether USD",
-=======
       name: "Tether USD",
->>>>>>> 279e3a2f74a2f42638d3897a69d9bc72bcf860ee
       symbol: "USDT",
       chianid: "1",
       address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
@@ -267,13 +254,7 @@ const Swap = () => {
     setSearchTerm("");
   };
   const [showDropdown, setShowDropdown] = useState(false);
-<<<<<<< HEAD
   const dataArb= {
-=======
-
-  // const [showDropdown, setShowDropdown] = useState(false);
-  const dataEvm = {
->>>>>>> 279e3a2f74a2f42638d3897a69d9bc72bcf860ee
     token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
