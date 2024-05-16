@@ -104,7 +104,7 @@ const About = () => {
     fileInputRef.current.click();
   };
 
-  const copyToClipboard = (text) => {
+  /*   const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
@@ -113,6 +113,16 @@ const About = () => {
       .catch((error) => {
         console.error("Failed to copy:", error);
       });
+  }; */
+  const [copiedEvm, setCopiedEvm] = useState(false);
+  const [copiedSolana, setCopiedSolana] = useState(false);
+
+  const copyToClipboard = (text, setCopied) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000); // Hide the popup after 2 seconds
   };
 
   const formatTransactionID = (txid) => {
@@ -256,7 +266,7 @@ const About = () => {
               {/* <p className="truncate">{userProfile.wallet}</p> */}
               <p>{formatTransactionID(userProfile.wallet)}</p>
 
-              <button
+              {/*     <button
                 className="text-xl text-[#828282] align-middle pb-1.5"
                 onClick={() => copyToClipboard(userProfile.wallet)}
               >
@@ -264,7 +274,25 @@ const About = () => {
                   size={12}
                   className="ml-1.5 items-center"
                 />
-              </button>
+              </button> */}
+              <div className="relative">
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() =>
+                    copyToClipboard(userProfile.wallet, setCopiedEvm)
+                  }
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedEvm && (
+                  <div className="absolute bottom-[-30px] left-0 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -275,16 +303,24 @@ const About = () => {
             <div className="text-[12px] text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[90px] flex">
               {/* <p className="truncate">{userProfile.solanawallet}</p> */}
               <p>{formatTransactionID(userProfile.solanawallet)}</p>
-
-              <button
-                className="text-xl text-[#828282] align-middle pb-1.5"
-                onClick={() => copyToClipboard(userProfile.solanawallet)}
-              >
-                <MdOutlineContentCopy
-                  size={12}
-                  className="ml-1.5 items-center"
-                />
-              </button>
+              <div className="relative">
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() =>
+                    copyToClipboard(userProfile.solanawallet, setCopiedSolana)
+                  }
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedSolana && (
+                  <div className="absolute bottom-[-30px] left-0 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
