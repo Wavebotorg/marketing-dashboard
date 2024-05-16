@@ -72,10 +72,8 @@ const Market = () => {
 
   useEffect(() => {
     getUserdata();
-
     saveCoin();
     // Check if the user is logged in when the component mounts
-
     const storedToken = localStorage.getItem("Token");
     // if(!storedToken)
     // {

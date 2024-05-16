@@ -66,6 +66,10 @@ const PasswordVerify = () => {
             router.push("/resetpassword");
           }
 
+          if (myData?.data === "changepassword") {
+            router.push("/profile");
+          }
+  
           localStorage.removeItem("type");
           toast.success(myData?.msg);
         } else {

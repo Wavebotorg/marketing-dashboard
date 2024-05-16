@@ -325,9 +325,9 @@ const Swap = () => {
         const myData = res?.data;
         console.log("Response from API:", myData);
         if (myData?.status) {
-          toast.success(myData?.message);
+          toast.success(myData?.msg);
         } else {
-          toast.error(myData?.message);
+          toast.error(myData?.msg);
         }
       })
       .catch((error) => {
@@ -365,11 +365,13 @@ const Swap = () => {
       selectedTokenDatato?.input_to &&
       selectedTokenDatato?.address_from &&
       selectedTokenDatato?.address_to
+      
     ) {
       const amount =
         Number(selectedTokenDatato?.input_to) *
         10 ** selectedTokenDatato?.decimals_to;
       console.log("--------amount", amount);
+
       const params = {
         sellToken: selectedTokenDatato?.address_to,
         buyToken: selectedTokenDatato?.address_from,
