@@ -15,6 +15,8 @@ import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import CELO from "../../../public/assets/tokenimg/CELO.png";
 import BURST from "../../../public/assets/tokenimg/BURST.png";
+import USD from "../../../public/assets/tokenimg/USD.png";
+import SHU from "../../../public/assets/tokenimg/SHU.png";
 import tether from "../../../public/assets/tokenimg/tether.png";
 import wrapped from "../../../public/assets/tokenimg/wrapped.png";
 import chainlink from "../../../public/assets/tokenimg/chainlink.png";
@@ -34,9 +36,9 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 // import AllToken from "./alltoken.json";
 const Swap = () => {
   const { walletAddress, email, solanaAddress } = useWallet();
-  console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
-  console.log("🚀 ~ Swap ~ email:", email);
-  console.log("🚀 ~ Swap ~ SolanaAddress:", solanaAddress);
+  // console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
+  // console.log("🚀 ~ Swap ~ email:", email);
+  // console.log("🚀 ~ Swap ~ SolanaAddress:", solanaAddress);
   const router = useRouter();
   const [tokendata, setTokendata] = useState(null);
 
@@ -46,7 +48,7 @@ const Swap = () => {
   const [selectedChainId, setSelectedChainId] = useState("");
   const [clickedTokens, setClickedTokens] = useState("");
   const [showPopup1, setShowPopup1] = useState(false);
-  console.log("🚀 ~ Swap ~ showPopup1:", showPopup1);
+  // console.log("🚀 ~ Swap ~ showPopup1:", showPopup1);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedtofrom, setSelectedtofrom] = useState(0);
   const [showBalance, setShowBalance] = useState([]);
@@ -66,11 +68,13 @@ const Swap = () => {
     address_from: "",
     decimals_from: "",
     chainid: "",
+    descode: "",
+    chainname: "",
   });
-  // console.log(
-  //   "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
-  //   selectedTokenDatato
-  // );
+  console.log(
+    "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
+    selectedTokenDatato
+  );
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth },
     { name: "Arbitrum", chainid: "42161", img: arbitrum },
@@ -145,7 +149,8 @@ const Swap = () => {
       address: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
       decimal: "8",
       logoURI: wrapped,
-      networkname: "Arbitrum",
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
     },
     {
       name: "ChainLink Token",
@@ -154,7 +159,8 @@ const Swap = () => {
       address: "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
       decimal: "18",
       logoURI: chainlink,
-      networkname: "Arbitrum",
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
     },
     {
       name: "USDT",
@@ -163,7 +169,8 @@ const Swap = () => {
       address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
       decimal: "6",
       logoURI: chainlink,
-      networkname: "Arbitrum",
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
     },
     {
       name: "Arbitrum",
@@ -172,7 +179,50 @@ const Swap = () => {
       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
       decimal: "18",
       logoURI: arbitrum,
-      networkname: "Arbitrum",
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
+    },
+  ];
+  const token_data_POLY = [
+    {
+      name: "Tether USD",
+      symbol: "USDT",
+      chianid: 42161,
+      address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+      decimal: "6",
+      logoURI: tether,
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
+    },
+    {
+      name: "BNB",
+      symbol: "BNB",
+      chianid: 42161,
+      address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
+      decimal: "18",
+      logoURI: BNB,
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
+    },
+    {
+      name: "USD Coin",
+      symbol: "USDC",
+      chianid: 42161,
+      address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+      decimal: "6",
+      logoURI: USD,
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
+    },
+    {
+      name: "SHIBA INU",
+      symbol: "SHIB",
+      chianid: 42161,
+      address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
+      decimal: "18",
+      logoURI: SHU,
+      chainname: "Arbitrum",
+      descode: `0xa4b1`,
     },
   ];
 
@@ -199,6 +249,8 @@ const Swap = () => {
         chainid: token.chainid,
         address_to: token.address,
         decimals_to: token.decimal,
+        descode: token.descode,
+        chainname: token.chainname,
       });
     } else if (selectedtofrom === 2) {
       setSelectedTokenDatato({
@@ -208,6 +260,8 @@ const Swap = () => {
         chainid: token.chainid,
         address_from: token.address,
         decimals_from: token.decimal,
+        descode: token.descode,
+        chainname: token.chainname,
       });
     }
 
@@ -272,6 +326,15 @@ const Swap = () => {
     amount: selectedTokenDatato?.input_to,
     email: email,
   };
+  const dataPolygon = {
+    tokenIn: selectedTokenDatato?.address_to, // address_to is passed as sellToken
+    tokenOut: selectedTokenDatato?.address_from, // address_from is passed as buyToken
+    amount: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
+    chain: selectedChainId,
+    email: email,
+    chainId: selectedTokenDatato?.chainname,
+    desCode: selectedTokenDatato?.descode,
+  };
   // console.log("🚀 ~ Swap ~ dataSolana:", dataSolana)
 
   const [loading, setLoading] = useState(false);
@@ -287,7 +350,7 @@ const Swap = () => {
     }
 
     axiosInstance
-      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
+      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataArb)
       .then((res) => {
         const myData = res?.data;
         console.log("Response from API:", myData);
@@ -546,7 +609,7 @@ const Swap = () => {
   // const [selectedNetwork, setSelectedNetwork] = useState(""); // State to track the selected network
   // const [selectChain, setSelectChain] = useState(""); // State to store the selected network's image URL
   const [tokens, setTokens] = useState([]); // State to store the fetched tokens
-  console.log("🚀 ~ Swap ~ tokens:", tokens);
+  // console.log("🚀 ~ Swap ~ tokens:", tokens);
 
   // Function to handle option click
   // const handleOptionClick = (name) => {
@@ -1051,6 +1114,50 @@ const Swap = () => {
                       </>
                     ) : selectedNetwork === "Arbitrum" ? (
                       token_data_ARB
+                        .filter((token) =>
+                          token.name
+                            .toLowerCase()
+                            .includes(searchTerm.toLowerCase())
+                        )
+                        .map((token, index) => (
+                          <div
+                            key={index}
+                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                              clickedTokens.includes(token.name)
+                                ? "opacity-50 cursor-not-allowed"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              if (!clickedTokens.includes(token.name)) {
+                                selectToken(token);
+                              }
+                            }}
+                          >
+                            <Image
+                              src={token?.logoURI}
+                              alt={token.name}
+                              height={50}
+                              width={50}
+                              className="rounded-full"
+                            />
+                            <div className="flex gap-2">
+                              <p
+                                className={`font-semibold ${
+                                  clickedTokens.includes(token.name)
+                                    ? "text-gray-500"
+                                    : ""
+                                }`}
+                              >
+                                {token.name}
+                              </p>
+                              <p className="text-gray-200">
+                                ({token.symbol.toUpperCase()})
+                              </p>
+                            </div>
+                          </div>
+                        ))
+                    ) : selectedNetwork === "Polygon" ? (
+                      token_data_Po
                         .filter((token) =>
                           token.name
                             .toLowerCase()
