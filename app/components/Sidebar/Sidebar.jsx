@@ -29,7 +29,7 @@
 // import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
 // import axios from "axios";
-// import axiosInstance from "@/app/apiInstances/axiosInstance";                                                                                                                        
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
 // import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 // function Sidebar() {
@@ -358,8 +358,6 @@
 
 // export default Sidebar;
 
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -399,7 +397,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import { useWallet } from "../contexts/WalletContext";
 function Sidebar() {
   const router = useRouter();
-  const { setWalletAddress, setEmail } = useWallet();
+  const { setWalletAddress, setEmail, setSolanaAddress } = useWallet();
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =
@@ -417,9 +415,9 @@ function Sidebar() {
       .then((res) => {
         const myData = res?.data?.data;
         setAllUser(myData || []);
-        setWalletAddress(myData?.wallet)
-        setEmail(myData?.email)
-        console.log("setWalletAddress:", myData?.wallet)
+        setWalletAddress(myData?.wallet);
+        setEmail(myData?.email);
+        console.log("setWalletAddress:", myData?.wallet);
         console.log("getUserProfile---->", myData);
       })
       .catch((err) => {
@@ -546,24 +544,35 @@ function Sidebar() {
     const getUserProfile = async () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
+
         setUserProfile(response?.data?.data || []);
         setWalletAddress(myData?.wallet);
         setEmail(myData?.email);
+        // setWalletAddress(response?.data?.data?.wallet);
+        // setEmail(response?.data?.data?.email);
+        setSolanaAddress(response?.data?.data?.solanawallet);
+
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
+      console.log(
+        "🚀 ~ getUserProfile ~ response?.data?.data?.solanawallet:",
+        response?.data?.data?.solanawallet
+      );
     };
 
     getUserProfile();
   }, []); */
-
+  // const [solanaAddress, setSolanaAddress] = useState("");
+  // console.log("🚀 ~ Sidebar ~ solanaAddress:", solanaAddress);
   useEffect(() => {
     const getUserProfile = async () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || {});
         setWalletAddress(response?.data?.data?.wallet || "");
+        setSolanaAddress(response?.data?.data?.solanawallet || "");
         setEmail(response?.data?.data?.email || "");
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
@@ -603,14 +612,16 @@ function Sidebar() {
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${matchPath ? "hidden" : "block"
-        } `}
+      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${
+        matchPath ? "hidden" : "block"
+      } `}
     >
       <div
-        className={`sidebar   ${isNavbar
+        className={`sidebar   ${
+          isNavbar
             ? "w-72"
             : "w-[3rem] md:w-[3.5rem] lg:w-[4rem] xl:w-72 relative"
-          }`}
+        }`}
       >
         <div className="sidebar h-full  -ml-[4px] hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
@@ -631,8 +642,9 @@ function Sidebar() {
               <Image
                 src={Logo}
                 alt="wave-logo"
-                className={`${isNavbar === false ? "hidden xl:block" : "block"
-                  } mt-10 mx-auto`}
+                className={`${
+                  isNavbar === false ? "hidden xl:block" : "block"
+                } mt-10 mx-auto`}
               />
             </div>
             <div>
@@ -654,13 +666,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover && data?.id === isHover) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border  -ml-[0px]"
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center items-center px-4 relative ">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -673,8 +689,9 @@ function Sidebar() {
                   <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4  ">
                     <Link
                       href={data?.pathname}
-                      className={`${(isHover && data?.id === isHover) ||
-                          data?.pathname === pathname
+                      className={`${
+                        (isHover && data?.id === isHover) ||
+                        data?.pathname === pathname
                           ? "navHover"
                           : ""
                       } flex md:px-1 lg:px-2 py-2 rounded-lg`}
@@ -685,13 +702,17 @@ function Sidebar() {
                       <div
                         className={
                           (isHover1 && data?.id === isHover1) ||
-                            data?.pathname === pathname
+                          data?.pathname === pathname
                             ? "dropdown-left-border -ml-[0px] "
                             : "-ml-[0px]"
                         }
                       ></div>
                       <span className="inline-flex justify-center  px-4 items-center relative">
-                        <Image src={data?.icon} alt="icon" className="w-7 h-6" />
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          className="w-7 h-6"
+                        />
                       </span>
                       <span className="text-lg tracking-wide truncate">
                         {data?.pagename}
@@ -757,7 +778,6 @@ function Sidebar() {
                               >
                                 No
                               </button>
-
                             </div>
                           </div>
                         </div>
@@ -849,7 +869,7 @@ function Sidebar() {
                         className="mr-2 cursor-pointer"
                       />
                     </div>
-                  </div> 
+                  </div>
                 </div>
               </div>
 

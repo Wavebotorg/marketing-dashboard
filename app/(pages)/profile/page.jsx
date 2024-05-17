@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Appearance from "../../components/Profileinfo/Appearance"
-import About from "../../components/Profileinfo/About"
-import Setup from "../../components/Profileinfo/Setup"
-import Security from "../../components/Profileinfo/Security"
-import Notification from "../../components/Profileinfo/Notification"
+import Appearance from "../../components/Profileinfo/Appearance";
+import About from "../../components/Profileinfo/About";
+import Notification from "../../components/Profileinfo/Notification";
+import Security from "../../components/Profileinfo/Security";
+import Setup from "../../components/Profileinfo/Setup";
+
+
+
 const Profile = () => {
   const [isComponent1Visible, setComponent1Visible] = useState(true);
   const [isComponent2Visible, setComponent2Visible] = useState(false);
@@ -161,15 +164,12 @@ const Profile = () => {
             </div>
           </div>
           <div className="">
-         
             <div>{isComponent1Visible && <About />}</div>
             <div>{isComponent2Visible && <Setup />}</div>
             <div>{isComponent3Visible && <Appearance />}</div>
             <div>{isComponent4Visible && <Security />}</div>
             <div>{isComponent5Visible && <Notification />}</div>
-            <div className="flex justify-end mb-3">
-         
-        </div>
+            <div className="flex justify-end mb-3"></div>
           </div>
         </div>
       </div>

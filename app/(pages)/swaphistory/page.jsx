@@ -189,6 +189,7 @@ const SwapHistory = () => {
   );
 
   const visibleData = filteredData.slice(startIndex, endIndex);
+  console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -201,7 +202,7 @@ const SwapHistory = () => {
   //get history data of evm and solana chain
   const getTransactions = async (apiEndpoint) => {
     try {
-      const response = await axiosInstanceAuth.get(apiEndpoint);
+      const response = await axiosInstanceAuth.post(apiEndpoint);
       const data = response?.data?.transactions || [];
       setTransactions(data);
       console.log("dataofalltrasaction===============", data);
@@ -216,18 +217,29 @@ const SwapHistory = () => {
   }, []);
 
   //for copy id
-  const copyToClipboard = (text) => {
+
+  const [copiedFromId, setCopiedFromId] = useState(null);
+  const [copiedToId, setCopiedToId] = useState(null);
+
+  const copyToClipboard = (text, type, _id) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
         console.log("Copied to clipboard:", text);
-        // You can optionally show a success message or perform any other action here
+
+        if (type === "from") {
+          setCopiedFromId(_id);
+          setTimeout(() => setCopiedFromId(null), 500);
+        } else if (type === "to") {
+          setCopiedToId(_id);
+          setTimeout(() => setCopiedToId(null), 500);
+        }
       })
       .catch((error) => {
         console.error("Failed to copy:", error);
-        // You can handle errors here
       });
   };
+
   //for format id
   const formatTransactionID = (txid) => {
     if (txid.length <= 10) return txid; // If the transaction ID is too short, return as is
@@ -347,7 +359,7 @@ const SwapHistory = () => {
           </button>
         </div>
 
-        <div className="pt-8 hidden lg:block ">
+        <div className="pt-8 hidden lg:block  pb-3">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white h-auto overflow-auto rounded-lg">
               <table className="w-full">
@@ -413,25 +425,47 @@ const SwapHistory = () => {
                         {formatTransactionID(transaction?.from)}
                         <button
                           className="text-xl text-[#828282] align-middle pb-1.5"
-                          onClick={() => copyToClipboard(transaction?.from)}
+                          onClick={() =>
+                            copyToClipboard(
+                              transaction?.from,
+                              "from",
+                              transaction?._id
+                            )
+                          }
                         >
                           <MdOutlineContentCopy
                             size={12}
                             className="ml-1.5 items-center"
                           />
                         </button>
+                        {transaction?._id === copiedFromId && (
+                          <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                            Copied!
+                          </span>
+                        )}
                       </td>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                         {formatTransactionID(transaction?.to)}
                         <button
                           className="text-xl text-[#828282] align-middle pb-1.5"
-                          onClick={() => copyToClipboard(transaction?.to)}
+                          onClick={() =>
+                            copyToClipboard(
+                              transaction?.to,
+                              "to",
+                              transaction?._id
+                            )
+                          }
                         >
                           <MdOutlineContentCopy
                             size={12}
                             className="ml-1.5 items-center"
                           />
                         </button>
+                        {transaction?._id === copiedToId && (
+                          <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                            Copied!
+                          </span>
+                        )}
                       </td>
                     </tr>
                   ))}

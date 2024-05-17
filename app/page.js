@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import HomeUser from "../public/assets/homeuser.png";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import { GrFormNext } from "react-icons/gr";
 import { PiCopySimple } from "react-icons/pi";
 import { MdOutlineContentCopy } from "react-icons/md";
 import Market from "./(pages)/market/page";
-import Login from "../app/(pages)/login/page"
+import Login from "../app/(pages)/login/page";
 import { useRouter } from "next/navigation";
 const Page = () => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const Page = () => {
   ];
 
   const [copied, setCopied] = useState(false);
-  console.log("🚀 ~ copied:", copied)
+  console.log("🚀 ~ copied:", copied);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(userData?.userId);
@@ -36,7 +36,7 @@ const Page = () => {
     setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
   };
   // useEffect(() => {
-    
+
   //   const token = localStorage.getItem('Token');
   //   if (token) {
   //     router.push('/'); // Change '/home' to your actual home page route

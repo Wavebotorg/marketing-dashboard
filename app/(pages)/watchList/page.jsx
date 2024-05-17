@@ -154,7 +154,8 @@ const WatchList = () => {
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
-      <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 ">
+      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 "> */}
+      <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">

@@ -179,11 +179,10 @@ const ResetPassword = () => {
             Submit
           </button>
           <ToastContainer />
-         
         </div>
         <div className="flex  mt-5 justify-center ">
           <Link href="/login" className="text-xs">
-           Back to login
+            Back to login
           </Link>
         </div>
       </div>

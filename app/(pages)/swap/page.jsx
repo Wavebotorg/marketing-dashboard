@@ -30,9 +30,13 @@ import qs from "qs";
 import Loader from "react-js-loader";
 import axios from "axios";
 import PageLoader from "next/dist/client/page-loader";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 // import AllToken from "./alltoken.json";
 const Swap = () => {
-  const { walletAddress, email } = useWallet();
+  const { walletAddress, email, solanaAddress } = useWallet();
+  console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
+  console.log("🚀 ~ Swap ~ email:", email);
+  console.log("🚀 ~ Swap ~ SolanaAddress:", solanaAddress);
   const router = useRouter();
   const [tokendata, setTokendata] = useState(null);
 
@@ -254,7 +258,7 @@ const Swap = () => {
     setSearchTerm("");
   };
   const [showDropdown, setShowDropdown] = useState(false);
-  const dataArb= {
+  const dataArb = {
     token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
@@ -365,7 +369,6 @@ const Swap = () => {
       selectedTokenDatato?.input_to &&
       selectedTokenDatato?.address_from &&
       selectedTokenDatato?.address_to
-      
     ) {
       const amount =
         Number(selectedTokenDatato?.input_to) *
@@ -412,19 +415,76 @@ const Swap = () => {
     }
   };
 
-  const getWalletBalance = async () => {
+  /* onst getWalletBalance = async () => {
     setShowPopup1(true);
     await axiosInstance
       .post("/fetchbalance", { email: email })
       .then((res) => {
-        const myData = res?.data;
-        console.log("fetchbalance--->", myData);
+        const myData = res?.data?.data;
+        console.log("fetchbalance-------------------------->", myData);
         setShowBalance(myData);
       })
       .catch((err) => {
         console.log("error--->", err);
       });
+  }; */
+
+  /*   const getSolanaBalance = async () => {
+    if (selectedNetwork === "Solana") {
+      setShowPopup1(true);
+      try {
+        const res = await axiosInstance.post("/getSolanaWalletTokenBal", {
+          email: email,
+        });
+        const myData = res?.data?.data;
+        console.log("fetchbalance-------------------------->", myData);
+        setShowBalance(myData);
+      } catch (err) {
+        console.log("error--->", err);
+      }
+    } else {
+      console.log("Selected network is not Arbitrum. API call skipped.");
+    }
   };
+ */
+
+  const getSolanaBalance = async () => {
+    if (selectedNetwork === "Solana") {
+      setShowPopup1(true);
+      try {
+        const res = await axiosInstanceAuth.post("/getSolanaWalletTokenBal", {
+          wallet: solanaAddress,
+        });
+        const myData = res?.data?.response1?.tokens;
+        console.log("fetchSolanabalance-------------------------->", myData);
+        setShowBalance(myData);
+      } catch (err) {
+        console.log("error--->", err);
+      }
+    } else {
+      console.log("Selected network is not Solana. API call skipped.");
+    }
+  };
+
+  const getWalletBalance = async () => {
+    if (selectedNetwork === "Arbitrum") {
+      setShowPopup1(true);
+      try {
+        const res = await axiosInstance.post("/fetchbalance", { email: email });
+        const myData = res?.data?.data;
+        console.log("fetchbalance-------------------------->", myData);
+        setShowBalance(myData);
+      } catch (err) {
+        console.log("error--->", err);
+      }
+    } else {
+      console.log("Selected network is not Arbitrum. API call skipped.");
+    }
+  };
+
+  // Assuming selectedNetwork is passed as a prop or derived from state
+  // const selectedNetwork = props.selectedNetwork; // or useState/useSelector depending on your state management
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -533,7 +593,11 @@ const Swap = () => {
           <div className="text-lg font-semibold flex justify-end">
             <button
               className="bg-blue-500 rounded-lg  px-2 mt-3"
-              onClick={getWalletBalance}
+              // onClick={(getWalletBalance(), getSolanaBalance())}
+              onClick={() => {
+                getWalletBalance();
+                getSolanaBalance();
+              }}
             >
               click to show Balance
             </button>
@@ -577,12 +641,14 @@ const Swap = () => {
                     Array.isArray(showBalance) &&
                     showBalance.length > 0 ? (
                       showBalance.map((item, index) => (
-                        <div className="flex items-center" key={index}>
+                        <div className="flex items-center mt-2" key={index}>
                           <div className="flex">
-                            <Image
+                            <img
                               src={item?.logo}
                               alt={item?.name}
-                              className="h-15 w-15 my-3"
+                              height={30}
+                              width={30}
+                              className="h-15 w-15 my-3 "
                             />
                             <div className="flex flex-col justify-center pl-3">
                               <div className="text-base font-bold">
@@ -591,7 +657,9 @@ const Swap = () => {
                               <div className="text-base">
                                 Balance:{" "}
                                 <span className="font-bold">
-                                  {item?.balance}
+                                  {selectedNetwork === "Solana"
+                                    ? item?.amount
+                                    : item?.balance}
                                 </span>
                               </div>
                             </div>
