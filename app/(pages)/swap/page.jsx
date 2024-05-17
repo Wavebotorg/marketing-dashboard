@@ -81,7 +81,7 @@ const Swap = () => {
     { name: "Ethereum", chainid: "1", img: eth },
     { name: "Arbitrum", chainid: "42161", img: arbitrum },
     { name: "Optimism", chainid: "10", img: optimism },
-    { name: "Polygon", chainid: "137", img: poly },
+    { name: "Polygon", chainid: 137, img: poly },
     { name: "Solana", chainid: "900", img: SOL },
     { name: "BNB Chain", chainid: "56", img: BNB },
     { name: "Avalanche", chainid: "43114", img: avalanche },
@@ -193,7 +193,7 @@ const Swap = () => {
       address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
       decimal: "6",
       logoURI: tether,
-      chainname: "Polygon",
+      chainname: "polygon",
       descode: `0x89`,
     },
     {
@@ -203,7 +203,7 @@ const Swap = () => {
       address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
       decimal: "18",
       logoURI: BNB,
-      chainname: "Polygon",
+      chainname: "polygon",
       descode: `0x89`,
     },
     {
@@ -213,7 +213,7 @@ const Swap = () => {
       address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
       decimal: "6",
       logoURI: USD,
-      chainname: "Polygon",
+      chainname: "polygon",
       descode: `0x89`,
     },
     {
@@ -223,7 +223,7 @@ const Swap = () => {
       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
       decimal: "18",
       logoURI: SHU,
-      chainname: "Polygon",
+      chainname: "polygon",
       descode: `0x89`,
     },
   ];
@@ -364,7 +364,7 @@ const Swap = () => {
   const dataEvm = {
     tokenIn: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     tokenOut: selectedTokenDatato?.address_from, // address_from is passed as buyToken
-    amount: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
+    amount: Number(selectedTokenDatato?.input_to), // input_to is passed as sellAmount
     chain: selectedChainId,
     email: email,
     chainId: selectedTokenDatato?.chainname,
