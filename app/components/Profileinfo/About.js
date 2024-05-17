@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import Profile from "../../../public/assets/profile.PNG";
+import Profile from "../../../public/assets/profile.png";
 // import add from "../../../public/assets/add.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
@@ -132,11 +132,39 @@ const About = () => {
     return `${firstSix}...${lastFour}`;
   };
 
+  const [showSaveButton, setShowSaveButton] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  // console.log("🚀 ~ isEditing:", isEditing);
+  const [name, setName] = useState(userProfile.name);
+  const [email, setEmail] = useState(userProfile.email);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setShowSaveButton(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    setShowSaveButton(false);
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+    setName(e.target.value);
+  };
+
+  /*  const handlenameChange = (e) => {
+    setName(e.target.value);
+  }; */
+
   return (
     <>
       <div className="mt-4 ">
         <div className="flex justify-end">
-          <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium">
+          <button
+            onClick={handleEditClick}
+            className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+          >
             Edit
           </button>
         </div>
@@ -224,8 +252,21 @@ const About = () => {
             <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
               <p>Name :</p>
             </div>
+            {/* <div>
+              <input type="text"  className={`${isEditing ? 'block':'hidden'}`}/>
+            </div> */}
             <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-44">
-              <p>{userProfile.name}</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  // name="name"
+                  className="text-black"
+                  value={userProfile.name}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{userProfile.name}</p>
+              )}
             </div>
           </div>
 
@@ -234,9 +275,21 @@ const About = () => {
               <p>Email :</p>
             </div>
             <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[180px]">
-              <p>{userProfile.email}</p>
+              {/* <p>{userProfile.email}</p> */}
+              {isEditing ? (
+                <input
+                  type="text"
+                  // name="email"
+                  className="text-black"
+                  value={userProfile.email}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{userProfile.email}</p>
+              )}
             </div>
           </div>
+
           {userProfile && userProfile.referralId && (
             <div className="md:flex flex-1 mb-4">
               <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
@@ -327,11 +380,16 @@ const About = () => {
       </div>
 
       <div className="mt-4 ">
-        <div className="flex justify-end">
-          <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium">
-            Save
-          </button>
-        </div>
+        {showSaveButton && (
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={handleSaveClick}
+              className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
       <div className="mt-4">
         <div className="flex justify-end mb-3">
@@ -347,9 +405,9 @@ const About = () => {
       </div>
       {showPopup && (
         <div>
-          <div ref={popupRef}>
+          {/* <div ref={popupRef}> */}
             <ChangePass />
-          </div>
+          {/* </div> */}
         </div>
       )}
     </>

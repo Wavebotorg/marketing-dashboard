@@ -730,9 +730,9 @@ function Sidebar() {
                     // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
                     className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-lg xl:px-7 lg: px-3 place-items-center"
                   >
-                    <div className="flex items-center gap-1  px-5">
-                      <FiPower size={18} />
-                      <span className="md:ml-1 tracking-wide md:text-base text-sm md:block hidden ">
+                    <div className="flex items-center gap-1">
+                      <FiPower size={18} className="xl:block hidden" />
+                      <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                         Logout
                       </span>
                     </div>
@@ -885,10 +885,12 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
-                <p className="">{userProfile.name}</p>
-                <p className="text-xs">{userProfile.email}</p>
-                {/* </div> */}
+                {/* < className="ml-6"> */}
+                  <div className={` ${isNavbar ? "" : "hidden"} `}>
+                  <p className="">{userProfile.name}</p>
+                  <p className="text-xs">{userProfile.email}</p>
+                {/* </> */}
+                </div>
               </div>
             </div>
           </div>

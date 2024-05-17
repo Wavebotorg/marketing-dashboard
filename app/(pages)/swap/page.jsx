@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import TokenList from "../../components/ShowTokenSwap/TokensList";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
@@ -50,6 +51,7 @@ const Swap = () => {
   const [showPopup1, setShowPopup1] = useState(false);
   // console.log("🚀 ~ Swap ~ showPopup1:", showPopup1);
   const [searchTerm, setSearchTerm] = useState("");
+  console.log("🚀 ~ Swap ~ searchTerm:", searchTerm);
   const [selectedtofrom, setSelectedtofrom] = useState(0);
   const [showBalance, setShowBalance] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -187,42 +189,75 @@ const Swap = () => {
     {
       name: "Tether USD",
       symbol: "USDT",
-      chianid: 42161,
+      chianid: 137,
       address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
       decimal: "6",
       logoURI: tether,
-      chainname: "Arbitrum",
-      descode: `0xa4b1`,
+      chainname: "Polygon",
+      descode: `0x89`,
     },
     {
       name: "BNB",
       symbol: "BNB",
-      chianid: 42161,
+      chianid: 137,
       address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
       decimal: "18",
       logoURI: BNB,
-      chainname: "Arbitrum",
-      descode: `0xa4b1`,
+      chainname: "Polygon",
+      descode: `0x89`,
     },
     {
       name: "USD Coin",
       symbol: "USDC",
-      chianid: 42161,
+      chianid: 137,
       address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
       decimal: "6",
       logoURI: USD,
-      chainname: "Arbitrum",
-      descode: `0xa4b1`,
+      chainname: "Polygon",
+      descode: `0x89`,
     },
     {
       name: "SHIBA INU",
       symbol: "SHIB",
-      chianid: 42161,
+      chianid: 137,
       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
       decimal: "18",
       logoURI: SHU,
-      chainname: "Arbitrum",
-      descode: `0xa4b1`,
+      chainname: "Polygon",
+      descode: `0x89`,
+    },
+  ];
+
+  const token_data_BNB = [
+    {
+      name: "Wrapped BNB",
+      symbol: "WBNB",
+      chianid: 56,
+      address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      decimal: "18",
+      logoURI: wrapped,
+      chainname: "BNB",
+      descode: `0x38`,
+    },
+    {
+      name: "USDC",
+      symbol: "anyUSDC",
+      chianid: 56,
+      address: "0x8965349fb649A33a30cbFDa057D8eC2C48AbE2A2",
+      decimal: "18",
+      logoURI: USD,
+      chainname: "BNB",
+      descode: `0x38`,
+    },
+    {
+      name: "Tether USD",
+      symbol: "USDT.e",
+      chianid: 56,
+      address: "0x2B90E061a517dB2BbD7E39Ef7F733Fd234B494CA",
+      decimal: "6",
+      logoURI: tether,
+      chainname: "BNB",
+      descode: `0x38`,
     },
   ];
 
@@ -312,13 +347,13 @@ const Swap = () => {
     setSearchTerm("");
   };
   const [showDropdown, setShowDropdown] = useState(false);
-  const dataArb = {
+  /*  const dataArb = {
     token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
     chainId: selectedChainId,
     email: email,
-  };
+  }; */
   // console.log(" dataEvm:", dataEvm);
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
@@ -326,7 +361,7 @@ const Swap = () => {
     amount: selectedTokenDatato?.input_to,
     email: email,
   };
-  const dataPolygon = {
+  const dataEvm = {
     tokenIn: selectedTokenDatato?.address_to, // address_to is passed as sellToken
     tokenOut: selectedTokenDatato?.address_from, // address_from is passed as buyToken
     amount: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
@@ -346,11 +381,11 @@ const Swap = () => {
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
     } else {
-      endpoint = "/mainswap";
+      endpoint = "/EVMswap";
     }
 
     axiosInstance
-      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataArb)
+      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
       .then((res) => {
         const myData = res?.data;
         console.log("Response from API:", myData);
@@ -552,12 +587,17 @@ const Swap = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const handleInputChange = async (e) => {
+  const handleInputChanges = async (e) => {
     const { name, value } = e.target;
     await setSelectedTokenDatato({
       ...selectedTokenDatato,
       [name]: value,
     });
+  };
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
   };
   useEffect(() => {
     getPrice();
@@ -648,6 +688,23 @@ const Swap = () => {
         });
     }
   }, [selectedNetwork]);
+
+  const [tokenData, setTokenData] = useState({
+    Ethereum: token_data_ETH,
+    Solana: [],
+    Arbitrum: token_data_ARB,
+    Polygon: token_data_POLY,
+    "BNB Chain": token_data_BNB,
+  });
+
+  useEffect(() => {
+    setTokenData((prevTokenData) => ({
+      ...prevTokenData,
+      Solana: tokens,
+    }));
+  }, [tokens]);
+
+  console.log("🚀 ~ /*handleSwapSubmit ~ tokens:", tokens);
 
   return (
     <>
@@ -882,7 +939,7 @@ const Swap = () => {
                           placeholder="0"
                           name="input_to"
                           value={selectedTokenDatato?.input_to}
-                          onChange={(e) => handleInputChange(e)}
+                          onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
                       {/*{swap 1}*/}
@@ -931,7 +988,7 @@ const Swap = () => {
                           name="from"
                           value={selectedTokenDatato?.input_from}
                           onChange={(e) => {
-                            handleInputChange(e);
+                            handleInputChanges(e);
                             getPrice();
                           }}
                         />
@@ -1020,189 +1077,15 @@ const Swap = () => {
                     </div>
                   </div>
                 </div>
-                {token_data_ETH && (
-                  <div className="h-[60vh] overflow-y-auto">
-                    {selectedNetwork === "Ethereum" ? (
-                      token_data_ETH
-                        .filter((token) =>
-                          token.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        )
-                        .map((token, index) => (
-                          <div
-                            key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              if (!clickedTokens.includes(token.name)) {
-                                selectToken(token);
-                              }
-                            }}
-                          >
-                            <Image
-                              src={token.logoURI}
-                              alt={token.name}
-                              height={50}
-                              width={50}
-                              className="rounded-full"
-                            />
-                            <div className="flex gap-2">
-                              <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
-                                    ? "text-gray-500"
-                                    : ""
-                                }`}
-                              >
-                                {token.name}
-                              </p>
-                              <p className="text-gray-200">
-                                ({token.symbol.toUpperCase()})
-                              </p>
-                            </div>
-                          </div>
-                        ))
-                    ) : selectedNetwork === "Solana" ? (
-                      <>
-                        {tokens
-                          .filter((token) =>
-                            token.name
-                              .toLowerCase()
-                              .includes(searchTerm.toLowerCase())
-                          )
-                          .map((token, index) => (
-                            <div
-                              key={index}
-                              className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                                clickedTokens.includes(token.name)
-                                  ? "opacity-50 cursor-not-allowed"
-                                  : ""
-                              }`}
-                              onClick={() => {
-                                if (!clickedTokens.includes(token.name)) {
-                                  selectToken(token);
-                                }
-                              }}
-                            >
-                              <img
-                                src={token.logoURI}
-                                alt={token.name}
-                                height={50}
-                                width={50}
-                                className="rounded-full"
-                              />
-                              <div className="flex gap-2">
-                                <p
-                                  className={`font-semibold ${
-                                    clickedTokens.includes(token.name)
-                                      ? "text-gray-500"
-                                      : ""
-                                  }`}
-                                >
-                                  {token.name}
-                                </p>
-                                <p className="text-gray-200">
-                                  ({token.symbol.toUpperCase()})
-                                </p>
-                              </div>
-                            </div>
-                          ))}
-                      </>
-                    ) : selectedNetwork === "Arbitrum" ? (
-                      token_data_ARB
-                        .filter((token) =>
-                          token.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        )
-                        .map((token, index) => (
-                          <div
-                            key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              if (!clickedTokens.includes(token.name)) {
-                                selectToken(token);
-                              }
-                            }}
-                          >
-                            <Image
-                              src={token?.logoURI}
-                              alt={token.name}
-                              height={50}
-                              width={50}
-                              className="rounded-full"
-                            />
-                            <div className="flex gap-2">
-                              <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
-                                    ? "text-gray-500"
-                                    : ""
-                                }`}
-                              >
-                                {token.name}
-                              </p>
-                              <p className="text-gray-200">
-                                ({token.symbol.toUpperCase()})
-                              </p>
-                            </div>
-                          </div>
-                        ))
-                    ) : selectedNetwork === "Polygon" ? (
-                      token_data_Po
-                        .filter((token) =>
-                          token.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        )
-                        .map((token, index) => (
-                          <div
-                            key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              if (!clickedTokens.includes(token.name)) {
-                                selectToken(token);
-                              }
-                            }}
-                          >
-                            <Image
-                              src={token?.logoURI}
-                              alt={token.name}
-                              height={50}
-                              width={50}
-                              className="rounded-full"
-                            />
-                            <div className="flex gap-2">
-                              <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
-                                    ? "text-gray-500"
-                                    : ""
-                                }`}
-                              >
-                                {token.name}
-                              </p>
-                              <p className="text-gray-200">
-                                ({token.symbol.toUpperCase()})
-                              </p>
-                            </div>
-                          </div>
-                        ))
-                    ) : null}
-                  </div>
-                )}
+
+                <div className="h-[60vh] overflow-y-auto">
+                  <TokenList
+                    tokens={tokenData[selectedNetwork]}
+                    clickedTokens={clickedTokens}
+                    selectToken={selectToken}
+                    searchTerm={searchTerm}
+                  />
+                </div>
               </div>
             </div>
           </div>
