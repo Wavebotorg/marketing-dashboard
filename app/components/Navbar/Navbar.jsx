@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
-import { FiPower } from "react-icons/fi";
+import { FiPower, FiLogIn } from "react-icons/fi";
 import { useSearch } from "../contexts/SearchContext";
 const Navbar = () => {
   const router = useRouter();
@@ -66,20 +66,23 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      {/* <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto "> */}
+      <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto ">
         <div
-          className={`${getPath === "/login" ||
-              getPath === "/signup" ||
-              getPath === "/forgotpassword" ||
-              getPath === "/passwordverify" ||
-              getPath === "/resetpassword" ||
-              getPath === "/sucessreset"
+          className={`${
+            getPath === "/login" ||
+            getPath === "/profile" ||
+            getPath === "/signup" ||
+            getPath === "/forgotpassword" ||
+            getPath === "/passwordverify" ||
+            getPath === "/resetpassword" ||
+            getPath === "/sucessreset" 
               ? "hidden"
-              : "flex  justify-between   py-7  lg:pl-10 pl-2 "
-            }`}
+              : "flex  justify-between   py-7  xl:pl-[86px] pl-2 "
+          }`}
         >
-          <div className="flex w-auto md:w-[350px] sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
-            <div className="flex items-center pl-3 pointer-events-none">
+          <div className="flex w-auto md:w-[350px]    sm:gap-2 gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3  pointer-events-none">
               <CiSearch size={20} />
             </div>
             <input
@@ -87,13 +90,13 @@ const Navbar = () => {
               value={searchQuery}
               onChange={handleSearchChange}
               id="default-search"
-              className="bg-[#1C1C1C] outline-none rounded-lg w-auto md:w-[300px]"
+              className="bg-[#1C1C1C]  xsm:w-[10rem] p-2 outline-none rounded-lg w-auto md:w-[300px]"
               placeholder="Search "
             />
           </div>
 
-          <div className=" flex items-center gap-1.5 mr-5 ">
-            <button className="">
+          <div className=" flex items-center gap-1.5 mr-5 xl:mr-16 ">
+            <button className="xl:pr-6">
               <IoIosNotifications size={25} />
             </button>
 
@@ -154,7 +157,6 @@ const Navbar = () => {
                               >
                                 No
                               </button>
-
                             </div>
                           </div>
                         </div>
@@ -167,12 +169,8 @@ const Navbar = () => {
                 <Link href="/login " className="">
                   <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center">
-                      <Image
-                        src={Loginicon}
-                        alt="loginicon"
-                        className="w-[20px] h-[20px] md:block hidden"
-                      />
-                      <span className="md:ml-2 md:text-md text-sm md:w-14">
+                      <FiLogIn size={18} />
+                      <span className="md:ml-2 md:text-md text-sm md:w-14 ">
                         Login
                       </span>
                     </div>
@@ -184,18 +182,18 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`${getPath === "/login" ||
-            getPath === "/signup" ||
-            getPath === "/forgotpassword" ||
-            getPath === "/passwordverify" ||
-            getPath === "/resetpassword" ||
-            getPath === "/sucessreset"
+        className={`${
+          getPath === "/login" ||
+          // getPath === "/" ||
+          getPath === "/signup" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
             ? "hidden"
             : "border-b border-opacity-15  border-[#ffffff]"
-          }`}
-      >
-
-      </div>
+        }`}
+      ></div>
     </>
   );
 };

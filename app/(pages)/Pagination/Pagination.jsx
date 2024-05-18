@@ -60,7 +60,7 @@ const Pagination = ({
             >
               <button
                 onClick={() => handlePageChange(page)}
-                className="page-link px-2 "
+                className="page-link px-1 "
               >
                 {page === "..." ? page : page}
               </button>

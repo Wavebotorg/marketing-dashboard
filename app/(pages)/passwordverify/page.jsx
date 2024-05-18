@@ -8,7 +8,8 @@ import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
 import OtpInput from "react-otp-input";
 import { useRouter } from "next/navigation";
-import axiosInstance from "@/app/apiInstances/axiosInstance";
+import axiosInstance from "../../apiInstances/axiosInstance";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const PasswordVerify = () => {
@@ -58,13 +59,17 @@ const PasswordVerify = () => {
 
         if (myData?.status) {
           if (myData?.data === "signup") {
-            router.push("/login");
+            router.push("/");
           }
 
           if (myData?.data === "forget") {
             router.push("/resetpassword");
           }
 
+          if (myData?.data === "changepassword") {
+            router.push("/profile");
+          }
+  
           localStorage.removeItem("type");
           toast.success(myData?.msg);
         } else {

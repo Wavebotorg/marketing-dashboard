@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
 
 const ForgotPassword = () => {
@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const [forgetData, setForgetData] = useState({
     email: "",
   });
-
+  const [errors, setErrors] = useState({ email: "" });
   const onChangeInput = (e) => {
     const value = e.target.value.trim();
     const name = e.target.name;
@@ -24,12 +24,29 @@ const ForgotPassword = () => {
       ...forgetData,
       [name]: value,
     });
+    validateInput(name, value);
   };
 
   const mydata = {
     email: forgetData?.email,
   };
-
+  const validateInput = (name, value) => {
+    switch (name) {
+      
+      case "email":
+        setErrors((prevState) => ({
+          ...prevState,
+          email: value
+            ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+              ? ""
+              : "Invalid email address"
+            : "Email is required",
+        }));
+        break;
+        default:
+          break;
+      }
+    };
   // Forget Password API code
   const handleSubmit = async () => {
     await axiosInstance
@@ -80,26 +97,30 @@ const ForgotPassword = () => {
             Enter Email
           </div>
           <input
-            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 mb-5"  
+            className="rounded-md w-full sm:w-[310px] md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 bg-neutral-800 "  
             type="email"
             name="email"
             value={forgetData?.email}
             onChange={onChangeInput}
             onKeyPress={handleKeyPress}
           />
+           {errors.email && (
+            <div className="text-red-500 text-sm mb-5 mt-1">{errors.email}</div>
+          )}
         </div>
 
-        <div className="flex justify-center mt-10" onClick={handleSubmit}>
-          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
+        <div className="flex justify-center mt-10 " onClick={handleSubmit}>
+          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
             send OTP
           </button>
-          <ToastContainer />
+          
         </div>
-        {/* <div className="flex justify-center mt-10">
-          <Link href="/resetpassword" className="text-xs">
-            reset password ?
+        <ToastContainer />
+        <div className="flex justify-center mt-10">
+          <Link href="/login" className="text-xs">
+           Back to login
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );
