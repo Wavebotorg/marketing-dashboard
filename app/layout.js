@@ -27,9 +27,8 @@ export const metadata = {
   //     url: "/wave_logo.png",
   //   },
   // },
-  title:"Wave Dashboard",
-  description:
-  "wave app",
+  title: "Wave Dashboard",
+  description: "wave app",
   icons: {
     icon: "/wave_logo.png",
     shortcut: "/wave_logo.png",
@@ -64,7 +63,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </SearchProvider>
-          </Web3ModalProvider>
+        </Web3ModalProvider>
       </body>
     </html>
   );

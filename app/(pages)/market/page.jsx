@@ -33,7 +33,7 @@
 //       .get(
 //         // "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
 //         "https://api.coinpaprika.com/v1/tickers"
-      
+
 //       )
 //       .then((res) => {
 //         setAllCoinData(res?.data);
@@ -699,7 +699,7 @@ const Market = () => {
   const getUserdata = async () => {
     axios
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=5&per_page=260&order=market_cap_desc&sparkline=true&price_change_percentage=1h,24h,7d&locale=en&include_platform=true"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -968,18 +968,17 @@ const Market = () => {
                             className={`text-center whitespace-nowrap  text-white `}
                           >
                             <div
-                              className={`flex justify-center items-center ${
-                                market?.price_change_percentage_1h_in_currency ===
+                              className={`flex justify-center items-center ${market?.price_change_percentage_1h_in_currency ===
                                 0
-                                  ? "text-white"
-                                  : market?.price_change_percentage_1h_in_currency <
-                                    0
+                                ? "text-white"
+                                : market?.price_change_percentage_1h_in_currency <
+                                  0
                                   ? "text-[#F56565]"
                                   : "text-[#68D391]"
-                              }`}
+                                }`}
                             >
                               {market?.price_change_percentage_1h_in_currency ===
-                              0 ? (
+                                0 ? (
                                 <FaMinus size={15} className="text-white" />
                               ) : market?.price_change_percentage_1h_in_currency <
                                 0 ? (
@@ -1003,18 +1002,17 @@ const Market = () => {
 
                           <td className="  text-center whitespace-nowrap  text-white ">
                             <div
-                              className={`flex justify-center items-center ${
-                                market?.price_change_percentage_24h_in_currency ===
+                              className={`flex justify-center items-center ${market?.price_change_percentage_24h_in_currency ===
                                 0
-                                  ? "text-white"
-                                  : market?.price_change_percentage_24h_in_currency <
-                                    0
+                                ? "text-white"
+                                : market?.price_change_percentage_24h_in_currency <
+                                  0
                                   ? "text-[#F56565]"
                                   : "text-[#68D391]"
-                              }`}
+                                }`}
                             >
                               {market?.price_change_percentage_24h_in_currency ===
-                              0 ? (
+                                0 ? (
                                 <FaMinus size={15} className="text-white" />
                               ) : market?.price_change_percentage_24h_in_currency <
                                 0 ? (
@@ -1037,18 +1035,17 @@ const Market = () => {
                           </td>
                           <td className="  text-center whitespace-nowrap  text-white ">
                             <div
-                              className={`flex justify-center items-center ${
-                                market?.price_change_percentage_7d_in_currency ===
+                              className={`flex justify-center items-center ${market?.price_change_percentage_7d_in_currency ===
                                 0
-                                  ? "text-white"
-                                  : market?.price_change_percentage_7d_in_currency <
-                                    0
+                                ? "text-white"
+                                : market?.price_change_percentage_7d_in_currency <
+                                  0
                                   ? "text-[#F56565]"
                                   : "text-[#68D391]"
-                              }`}
+                                }`}
                             >
                               {market?.price_change_percentage_7d_in_currency ===
-                              0 ? (
+                                0 ? (
                                 <FaMinus size={15} className="text-white" />
                               ) : market?.price_change_percentage_7d_in_currency <
                                 0 ? (
@@ -1165,8 +1162,8 @@ const Market = () => {
                           market?.price_change_percentage_24h === 0
                             ? "text-white"
                             : market?.price_change_percentage_24h < 0
-                            ? "text-red-500 "
-                            : "text-green-500 "
+                              ? "text-red-500 "
+                              : "text-green-500 "
                         }
                       >
                         ({market?.price_change_percentage_24h})
@@ -1177,16 +1174,15 @@ const Market = () => {
                     <div className="py-2  pl-4 font-semibold">1h</div>
                     <div className="flex justify-end items-center py-2 px-4 ">
                       <div
-                        className={`flex justify-center items-center ${
-                          market?.price_change_percentage_1h_in_currency === 0
-                            ? "text-white"
-                            : market?.price_change_percentage_1h_in_currency < 0
+                        className={`flex justify-center items-center ${market?.price_change_percentage_1h_in_currency === 0
+                          ? "text-white"
+                          : market?.price_change_percentage_1h_in_currency < 0
                             ? "text-red-500"
                             : "text-green-500"
-                        }`}
+                          }`}
                       >
                         {market?.price_change_percentage_1h_in_currency ===
-                        0 ? (
+                          0 ? (
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_1h_in_currency <
                           0 ? (
@@ -1206,17 +1202,16 @@ const Market = () => {
                     <div className="flex justify-end items-center py-2 px-4 ">
                       {" "}
                       <div
-                        className={`flex justify-center items-center ${
-                          market?.price_change_percentage_24h_in_currency === 0
-                            ? "text-white"
-                            : market?.price_change_percentage_24h_in_currency <
-                              0
+                        className={`flex justify-center items-center ${market?.price_change_percentage_24h_in_currency === 0
+                          ? "text-white"
+                          : market?.price_change_percentage_24h_in_currency <
+                            0
                             ? "text-red-500"
                             : "text-green-500"
-                        }`}
+                          }`}
                       >
                         {market?.price_change_percentage_24h_in_currency ===
-                        0 ? (
+                          0 ? (
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_24h_in_currency <
                           0 ? (
@@ -1236,16 +1231,15 @@ const Market = () => {
                     <div className="flex justify-end items-center py-2 px-4 ">
                       {" "}
                       <div
-                        className={`flex justify-center items-center ${
-                          market?.price_change_percentage_7d_in_currency === 0
-                            ? "text-white"
-                            : market?.price_change_percentage_7d_in_currency < 0
+                        className={`flex justify-center items-center ${market?.price_change_percentage_7d_in_currency === 0
+                          ? "text-white"
+                          : market?.price_change_percentage_7d_in_currency < 0
                             ? "text-red-500"
                             : "text-green-500"
-                        }`}
+                          }`}
                       >
                         {market?.price_change_percentage_7d_in_currency ===
-                        0 ? (
+                          0 ? (
                           <FaMinus size={15} className="text-white" />
                         ) : market?.price_change_percentage_7d_in_currency <
                           0 ? (

@@ -12,6 +12,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from 'js-cookie';
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
@@ -65,6 +66,7 @@ const Login = () => {
         // console.log("token--", myData?.token);
         if (myData?.status) {
           localStorage.setItem("Token", myData?.token);
+          Cookies.set("Login",true)
           toast.success(myData?.msg);
           setTimeout(() => {
             router.push("/");
