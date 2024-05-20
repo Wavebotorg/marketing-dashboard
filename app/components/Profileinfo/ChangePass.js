@@ -1,221 +1,23 @@
-// import React, { useState } from "react";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { useRouter } from "next/navigation";
-// import axiosInstance from "../../apiInstances/axiosInstance";
-// import { useWallet } from "../contexts/WalletContext";
-// const ChangePass = () => {
-//   const { setWalletAddress ,setEmail} = useWallet();
-//     const router = useRouter();
-//     const [changePassData, setChangePassData] = useState({
-//       currentpassword:"",
-//         newpassword: "",
-//      confirmpassword: "",
-//       });
-//   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-//   const [showNewPassword, setShowNewPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-//   const toggleCurrentPasswordVisibility = () => {
-//     setShowCurrentPassword(!showCurrentPassword);
-//   };
-
-//   const toggleNewPasswordVisibility = () => {
-//     setShowNewPassword(!showNewPassword);
-//   };
-
-//   const toggleConfirmPasswordVisibility = () => {
-//     setShowConfirmPassword(!showConfirmPassword);
-//   };
-//   const [errors, setErrors] = useState(
-//     { currentpassword:"",
-//   newpassword: "",
-// confirmpassword: "", }
-// );
-
-//   const validateInput = (name, value) => {
-//     const errors = {};
-//     if (!changePassData.currentpassword) {
-//       errors.currentpassword = "Current Password is required";
-//     }
-//     if (!changePassData.newpassword) {
-//       errors.newpassword = "New Password is required";
-//     }
-//     if (!changePassData.confirmpassword) {
-//       errors.confirmpassword = "Confirm Password is required";
-//     }
-//     if (name === 'confirmpassword' || (changePassData.newpassword && changePassData.confirmpassword)) {
-//       if (changePassData.newpassword !== value) {
-//         errors.confirmpassword = "Passwords do not match";
-//       }
-//     }
-//     setErrors(errors);
-//     return Object.keys(errors).length === 0;
-//     };
-//     const mydata = {
-//       email:changePassData?.email,
-//     };
-//   const onChangeInput = (e) => {
-//     const value = e.target.value.trim();
-//     const name = e.target.name;
-
-//     setChangePassData({
-//       ...changePassData,
-//       [name]: value,
-//     });
-//   };
-//   const handleSubmit = async () => {
-//     if (validateInput()) {
-//     await axiosInstance
-//       .post("forgetPassword",mydata)
-//       .then((res) => {
-//         const myData = res?.data;
-//         console.log("chnage Password Data --->", myData);
-//         // localStorage.setItem("type", "forget");
-//         // localStorage.setItem("userEmail", changePassData?.email);
-//         if (myData?.status) {
-//           setEmail(myData?.email)
-//           toast.success(myData?.msg);
-
-//           router.push("/passwordverify");
-//           // setTimeout(() => {
-//           // }, 3000);
-//         } else {
-//           toast.error(myData?.msg);
-//         }
-//       })
-//       .catch((err) => {
-//         console.log("err---->", err);
-//       });
-//   };
-// }
-//   const handleKeyPress = (e) => {
-//     if (e.key === "Enter") {
-//       handleSubmit();c 
-//     }
-//   };
-//   return (
-//     <div>
-//       {" "}
-//       <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-b-lg p-8 pl-16 ">
-//         <p className="font-medium text-[20px] mb-5 xsm:text-base">
-//           Change Password
-//         </p>
-//         <div className="relative">
-//           <label
-//             htmlFor="currentPassword"
-//             className="text-[#CACACA] mb-2 block"
-//           >
-//             Current Password
-//           </label>
-//           <div className="flex ">
-//             <input
-//               id="currentPassword"
-//               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-//               type={showCurrentPassword ? "text" : "password"}
-//               name="currentpassword"
-//               value={changePassData?.currentpassword}
-//               onChange={onChangeInput}
-//               placeholder="Current Password"
-//             />
-//             <div
-//               className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-//               onClick={toggleCurrentPasswordVisibility}
-//             >
-//               {showCurrentPassword ? <FaEye /> : <FaEyeSlash />}
-//             </div>
-//           </div>
-//           {errors.currentpassword && (
-//             <div className="text-red-500 text-sm mb-2">{errors.currentpassword}</div>
-//           )}
-//         </div>
-
-//         <div className="relative mt-5">
-//           <label htmlFor="newPassword" className="text-[#CACACA] mb-2 block">
-//             New Password
-//           </label>
-//           <div className="flex ">
-//             <input
-//               id="newPassword"
-//               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-//               type={showNewPassword ? "text" : "password"}
-//               name="newpassword"
-//               value={changePassData?.newpassword}
-//               onChange={onChangeInput}
-//               placeholder="New Password"
-//             />
-//             <div
-//               className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-//               onClick={toggleNewPasswordVisibility}
-//             >
-//               {showNewPassword ? <FaEye /> : <FaEyeSlash />}
-//             </div>
-//           </div>
-//           {errors.newpassword && (
-//             <div className="text-red-500 text-sm mb-2">{errors.newpassword}</div>
-//           )}
-//         </div>
-
-//         <div className="relative mt-5">
-//           <label
-//             htmlFor="confirmPassword"
-//             className="text-[#CACACA] mb-2 block"
-//           >
-//             Confirm Password
-//           </label>
-//           <div className="flex">
-//             <input
-//               id="confirmPassword"
-//               className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
-//               type={showConfirmPassword ? "text" : "password"}
-//               name="confirmpassword"
-//               value={changePassData?.confirmpassword}
-//               onChange={onChangeInput}
-//               placeholder="Confirm Password"
-//             />
-//             <div
-//               className="bg-neutral-800 rounded-r-md pt-3 text-[#CACACA] cursor-pointer"
-//               onClick={toggleConfirmPasswordVisibility}
-//             >
-//               {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
-//             </div>
-//           </div>
-//           {errors.confirmpassword && (
-//             <div className="text-red-500 text-sm mb-2">{errors.confirmpassword}</div>
-//           )}
-//         </div>
-//       </div>
-//       <div className="mt-4 ">
-//         <div className="flex justify-end mb-3">
-//           <button
-//             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-//             // onClick={handleSubmit}
-            
-//           >
-//             Save
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ChangePass;
-
-
-
-
-
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axiosInstance from "../../apiInstances/axiosInstance";
+import { useWallet } from "../contexts/WalletContext";
 
+import OtpInput from "react-otp-input";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 const ChangePass = () => {
-  const [resetPassData, setResetPassData] = useState({
-    newPassword: "",
-    confirmPassword: "",
+  const { setWalletAddress, setEmail } = useWallet();
+  const router = useRouter();
+  const [changePassData, setChangePassData] = useState({
+    currentpassword: "",
+    newpassword: "",
+    confirmpassword: "",
   });
-
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -231,75 +33,249 @@ const ChangePass = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+  const [errors, setErrors] = useState(
+    {
+      currentpassword: "",
+      newpassword: "",
+      confirmpassword: "",
+    }
+  );
 
+  const validateInput = (name, value) => {
+    const errors = {};
+    if (!changePassData.currentpassword) {
+      errors.currentpassword = "Current Password is required";
+    }
+    if (!changePassData.newpassword) {
+      errors.newpassword = "New Password is required";
+    }
+    if (!changePassData.confirmpassword) {
+      errors.confirmpassword = "Confirm Password is required";
+    }
+    if (name === 'confirmpassword' || (changePassData.newpassword && changePassData.confirmpassword)) {
+      if (changePassData.newpassword !== value) {
+        errors.confirmpassword = "Passwords do not match";
+      }
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+  // const mydata = {
+  //   email: changePassData?.email,
+  // };
   const onChangeInput = (e) => {
     const { name, value } = e.target;
-    setResetPassData({
-      ...resetPassData,
+
+    setChangePassData({
+      ...changePassData,
       [name]: value.trim(),
     });
   };
-
   const [otp, setOtp] = useState("");
+ 
 
-  /*   const handleChange = (e) => {
-    const { value } = e.target;
-    // Allow only digits and limit input to 4 characters
-    if (/^\d{0,4}$/.test(value)) {
-      setOtp(value);
-    }
+  const mydata1 = {
+    currentPassword:changePassData?.currentpassword, 
+    newPassword:changePassData?.newpassword,
+     confirmNewPassword:changePassData?.confirmpassword
   };
+   const handleSubmit = async () => {
+    
+    // if (validateInput()) {
+    
+      await axiosInstanceAuth
+        .post("/changePassword", mydata1)
+        .then((res) => {
+          const myData = res?.data;
+          console.log("chnage Password Data111111 --->", res);
+         
+          if (myData?.status) {
+          
+            setVerified(true);
+            toast.success(myData?.msg);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your logic for OTP verification here
-    console.log("Entered OTP:", otp);
-    // Reset OTP input
-    setOtp("");
-  }; */
+      
+            // setTimeout(() => {
+            // }, 3000);
+          } else {
+            toast.error(myData?.msg);
+          }
+        })
+        .catch((err) => {
+          console.log("err---->", err);
+        });
+    // };
+  }
+ 
 
   const [verified, setVerified] = useState(false);
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    // Allow only digits and limit input to 4 characters
-    if (/^\d{0,4}$/.test(value)) {
-      setOtp(value);
+
+
+
+
+
+
+  const [showResendButton, setShowResendButton] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(10);
+  const timer1 = setTimeout(() => {
+    setRemainingTime(remainingTime - 1);
+  }, 1000);
+
+
+  // useEffect(() => {
+  //   const timer1 = setTimeout(() => {
+  //     setRemainingTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+  //   }, 1000);
+
+  //   if (remainingTime === 0) {
+  //     setShowResendButton(true);
+  //   }
+
+  //   return () => clearTimeout(timer1);
+  // }, [remainingTime]);
+
+  const timer = setTimeout(() => {
+    setShowResendButton(true);
+  }, 10000);
+  const email =
+    typeof window !== "undefined" ? localStorage.getItem("userEmail") : null;
+  const types =
+    typeof window !== "undefined" ? localStorage.getItem("type") : null;
+
+  useEffect(() => {
+    if (!email || !types) {
+      // Redirect to the appropriate page if user email or type is not available
+      router.push("/login");
+    }
+  }, []);
+
+  const handleOtpChange = (value) => {
+    const sanitizedValue = value.replace(/\D/g, "");
+    setOtp(sanitizedValue);
+  };
+
+  const mydata = {
+    email: email,
+    otp: otp,
+    types,
+  };
+  // const redirect=()=>{
+  //   router.push("/login");
+  // }
+  const handleOtp = async (e) => {
+    e.preventDefault();
+    await axiosInstance
+      .post("verify", mydata)
+      .then((res) => {
+        const myData = res?.data;
+        console.log("OTP Done--->", myData?.data);
+
+        if (myData?.status) {
+          if (myData?.data === "changepassword") {
+            setVerified(true);
+          }
+          localStorage.removeItem("type");
+          toast.success(myData?.msg);
+        } else {
+          toast.error(myData?.msg);
+        }
+      })
+      .catch((err) => {
+        console.log("error--->", err);
+      });
+  };
+
+  
+  const [resendStatus, setResendStatus] = useState(false);
+
+  const resendOtp = async () => {
+    try {
+      const res = await axiosInstance.post("/resendotp", {
+        email: email,
+        types,
+      });
+      const responseData = res?.data;
+      console.log("responseData--------", responseData);
+      if (responseData.status) {
+        toast.success(responseData?.msg);
+        setResendStatus(true);
+      } else {
+        toast.error(responseData?.msg);
+      }
+    } catch (error) {
+      console.error("Error resending OTP:", error);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your logic for OTP verification here
-    console.log("Entered OTP:", otp);
-    // For demo purposes, just set verified to true
-    setVerified(true);
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(); 
+    }
   };
 
   return (
-    <>
+     <>
       <div className=" justify-center items-center h-screen">
         {!verified ? (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-[#1C1C1C] p-8 rounded-lg shadow-md"
-          >
-            <h2 className="text-2xl font-semibold mb-4">OTP Verification</h2>
-            <div className="flex justify-center items-center mb-4">
-              <input
-                type="text"
-                maxLength="4"
-                value={otp}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-md px-3 py-2 w-12 text-center mr-2"
-              />
-              <input
-                type="submit"
-                value="Verify"
-                className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 cursor-pointer"
-              />
-            </div>
-          </form>
+         <div className="w-full h-full flex flex-col items-center justify-center ">
+        
+ 
+         <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8 sm:py-8 md:py-8 lg:py-10 2xl:py-14 w-[70%] sm:w-[70%] md:w-[40%] lg:w-[40%] 2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+           <div>
+             <h2 className="text-lg sm:text-lg md:text-xl lg:text-2xl 2xl:text-3xl tracking-wide text-white mb-3 sm:mb-3 md:mb-4 lg:mb-5 2xl:mb-5 font-semibold text-center">
+               OTP Verification
+             </h2>
+             <div>
+               <div className="text-center text-[#CACACA] tracking-wider text-sm sm:text-sm md:text-base lg:text-lg 2xl:text-xl mb-4 sm:mb-4 md:mb-5 lg:mb-5 2xl:mb-10 ">
+                 Enter the OTP you received at Email
+               </div>
+ 
+               <OtpInput
+                 value={otp}
+                 onChange={handleOtpChange}
+                 numInputs={4}
+                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
+                 containerStyle={"otp-container"}
+                 renderInput={(props) => <input {...props} onKeyDown={handleKeyPress} />}
+               />
+             </div>
+ 
+             <div className="flex justify-center mt-10" onClick={handleOtp}>
+               <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
+                 Verify
+               </button>
+               <ToastContainer />
+             </div>
+ 
+             {!showResendButton && (<div className="flex justify-center mt-10 ">
+               <Link
+                 href="#"
+                 className="text-xs text-[#CACACA] "
+ 
+               >
+                 Resend OTP in <b>{remainingTime}</b> seconds
+               </Link>
+ 
+             </div>
+             )}
+             {showResendButton && (<div className="flex justify-center mt-10 ">
+               <Link
+                 href="#"
+                 className="text-xs text-[#CACACA] "
+                 onClick={resendOtp}
+               >
+               Resend Otp
+               </Link>
+ 
+             </div>
+             )}
+           </div>
+         </div>
+ 
+       </div>
+
         ) : (
           <div>
             {" "}
@@ -319,8 +295,8 @@ const ChangePass = () => {
                     id="currentPassword"
                     className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
                     type={showCurrentPassword ? "text" : "password"}
-                    name="currentPassword"
-                    value={resetPassData?.currentPassword}
+                    name="currentpassword"
+                    value={changePassData?.currentpassword}
                     onChange={onChangeInput}
                     placeholder="Current Password"
                   />
@@ -331,13 +307,13 @@ const ChangePass = () => {
                     {showCurrentPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
+                {errors.currentpassword && (
+                  <div className="text-red-500 text-sm mb-2">{errors.currentpassword}</div>
+                )}
               </div>
 
               <div className="relative mt-5">
-                <label
-                  htmlFor="newPassword"
-                  className="text-[#CACACA] mb-2 block"
-                >
+                <label htmlFor="newPassword" className="text-[#CACACA] mb-2 block">
                   New Password
                 </label>
                 <div className="flex ">
@@ -345,8 +321,8 @@ const ChangePass = () => {
                     id="newPassword"
                     className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
                     type={showNewPassword ? "text" : "password"}
-                    name="newPassword"
-                    value={resetPassData?.newPassword}
+                    name="newpassword"
+                    value={changePassData?.newpassword}
                     onChange={onChangeInput}
                     placeholder="New Password"
                   />
@@ -357,6 +333,9 @@ const ChangePass = () => {
                     {showNewPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
+                {errors.newpassword && (
+                  <div className="text-red-500 text-sm mb-2">{errors.newpassword}</div>
+                )}
               </div>
 
               <div className="relative mt-5">
@@ -371,8 +350,8 @@ const ChangePass = () => {
                     id="confirmPassword"
                     className="rounded-l-md w-full sm:max-w-[450px] py-2 pl-2 pr-10 bg-neutral-800 outline-none"
                     type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={resetPassData?.confirmPassword}
+                    name="confirmpassword"
+                    value={changePassData?.confirmpassword}
                     onChange={onChangeInput}
                     placeholder="Confirm Password"
                   />
@@ -383,26 +362,33 @@ const ChangePass = () => {
                     {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
+                {errors.confirmpassword && (
+                  <div className="text-red-500 text-sm mb-2">{errors.confirmpassword}</div>
+                )}
               </div>
             </div>
             <div className="mt-4 ">
               <div className="flex justify-end mb-3">
                 <button
                   className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-                  // onClick={handleSubmit}
+                onClick={handleSubmit}
+
                 >
                   Save
                 </button>
+                <ToastContainer />
               </div>
+       </div></div>
+       
+)}
             </div>
-          </div>
-        )}
-      </div>
-    </>
-   
-  );
-};
+          </>
+        );
+}
 
-export default ChangePass;
+        export default ChangePass;
+
+
+
 
 

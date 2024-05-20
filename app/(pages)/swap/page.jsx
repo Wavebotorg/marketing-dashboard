@@ -901,7 +901,7 @@ const Swap = () => {
                     </div>
                   </div>
                 </div>
-                {token_data_ETH && (
+                {/* {token_data_ETH && ( */}
                   <div className="h-[60vh] overflow-y-auto">
                     {selectedNetwork === "Ethereum" ? (
                       token_data_ETH
@@ -1039,7 +1039,7 @@ const Swap = () => {
                         ))
                     ) : null}
                   </div>
-                )}
+                {/* )} */}
               </div>
             </div>
           </div>

@@ -13,6 +13,8 @@ import { ToastContainer, toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
 
+
+import Cookies from 'js-cookie';
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
@@ -84,11 +86,13 @@ const Login = () => {
         // console.log("token--", myData?.token);
         if (myData?.status) {
           localStorage.setItem("Token", myData?.token);
+          Cookies.set("auth-token", myData?.token)
+       
           toast.success(myData?.msg);
 
-          setTimeout(() => {
+          // setTimeout(() => {
             router.push("/");
-          }, 700);
+          // }, 700);
         } else {
           toast.error(myData?.msg);
         }

@@ -6,6 +6,8 @@ const Pagination = ({
   currentPage,
   onPageChange,
 }) => {
+  console.log("🚀 ~ onPageChange:", onPageChange)
+  console.log("🚀 ~ currentPage:", currentPage)
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageChange = (page) => {
@@ -53,19 +55,25 @@ const Pagination = ({
     <div className=" flex justify-end mt-4">
       <nav>
         <ul className="pagination pb-10">
+          < button onClick={() => handlePageChange(currentPage-1)}
+          >{"<"}</button>
           {getPageNumbers().map((page, index) => (
-            <li
-              key={index}
-              className={`page-item   ${currentPage === page ? "active" : ""}`}
-            >
-              <button
-                onClick={() => handlePageChange(page)}
-                className="page-link px-2 "
+            <>
+              <li
+                key={index}
+                className={`page-item   ${currentPage === page ? "active" : ""}`}
               >
-                {page === "..." ? page : page}
-              </button>
-            </li>
+                <button
+                  onClick={() => handlePageChange(page)}
+                  className="page-link px-2 "
+                >
+                  {page === "..." ? page : page}
+                </button>
+
+              </li>
+            </>
           ))}
+          < button onClick={() => handlePageChange(currentPage+1)}>{">"}</button>
         </ul>
       </nav>
     </div>
