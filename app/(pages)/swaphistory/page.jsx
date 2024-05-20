@@ -201,7 +201,7 @@ const SwapHistory = () => {
   //get history data of evm and solana chain
   const getTransactions = async (apiEndpoint) => {
     try {
-      const response = await axiosInstanceAuth.get(apiEndpoint);
+      const response = await axiosInstanceAuth.post(apiEndpoint);
       const data = response?.data?.transactions || [];
       setTransactions(data);
       console.log("dataofalltrasaction===============", data);

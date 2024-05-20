@@ -63,10 +63,11 @@ const Swap = () => {
     decimals_from: "",
     chainid: "",
   });
-  // console.log(
-  //   "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
-  //   selectedTokenDatato
-  // );
+  console.log(
+    "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
+    selectedTokenDatato
+  );
+  console.log("selectedChainId---",selectedChainId)
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth },
     { name: "Arbitrum", chainid: "42161", img: arbitrum },
@@ -268,6 +269,15 @@ const Swap = () => {
     amount: selectedTokenDatato?.input_to,
     email: email,
   };
+  const dataPolygon = {
+    tokenIn: selectedTokenDatato?.address_to,
+    tokenOut:selectedTokenDatato?.address_from,
+    chainId: "base",
+    amount: 1,
+    chain: 8453,
+    email: "m@gmail.com",
+    desCode: "0x2105"
+}
   // console.log("🚀 ~ Swap ~ dataSolana:", dataSolana)
 
   const [loading, setLoading] = useState(false);
@@ -278,7 +288,9 @@ const Swap = () => {
     let endpoint;
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
-    } else {
+    } else if  (selectedNetwork === "Polygon") {
+      endpoint ="/EVMswap"
+    }else {
       endpoint = "/mainswap";
     }
 

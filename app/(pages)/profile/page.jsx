@@ -88,7 +88,6 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent3Visible(false);
       setComponent5Visible(false);
-
       setActiveButton(4);
     } else if (activeButton === 5) {
       setComponent5Visible(true);
