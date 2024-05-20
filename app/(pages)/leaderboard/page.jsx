@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import img from "../../../public/assets/profile.PNG";
+import img from "../../../public/assets/profile.png";
 import { useSearch } from "../../components/contexts/SearchContext"; //search
 import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";

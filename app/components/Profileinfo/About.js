@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
-import Profile from "../../../public/assets/profile.PNG";
+import Profile from "../../../public/assets/profile.png";
 import add from "../../../public/assets/add.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
