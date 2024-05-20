@@ -29,7 +29,7 @@
 // import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
 // import axios from "axios";
-// import axiosInstance from "@/app/apiInstances/axiosInstance";                                                                                                                        
+// import axiosInstance from "@/app/apiInstances/axiosInstance";
 // import axiosInstanceAuth from "@/app/apiInstances/axiosInstanceAuth";
 
 // function Sidebar() {
@@ -358,8 +358,6 @@
 
 // export default Sidebar;
 
-
-
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -399,7 +397,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import { useWallet } from "../contexts/WalletContext";
 function Sidebar() {
   const router = useRouter();
-  const { setWalletAddress ,setEmail} = useWallet();
+  const { setWalletAddress, setEmail, setSolanaAddress } = useWallet();
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =

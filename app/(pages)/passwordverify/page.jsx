@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
@@ -20,7 +18,6 @@ const PasswordVerify = () => {
   const timer1 = setTimeout(() => {
     setRemainingTime(remainingTime - 1);
   }, 1000);
-
 
   const timer = setTimeout(() => {
     setShowResendButton(true);
@@ -135,7 +132,9 @@ const PasswordVerify = () => {
                 numInputs={4}
                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
                 containerStyle={"otp-container"}
-                renderInput={(props) => <input {...props} onKeyDown={handleKeyPress} />}
+                renderInput={(props) => (
+                  <input {...props} onKeyDown={handleKeyPress} />
+                )}
               />
             </div>
 
@@ -146,31 +145,26 @@ const PasswordVerify = () => {
               <ToastContainer />
             </div>
 
-            {!showResendButton && (<div className="flex justify-center mt-10 ">
-              <Link
-                href="#"
-                className="text-xs text-[#CACACA] "
-
-              >
-                Resend OTP in <b>{remainingTime}</b> seconds
-              </Link>
-
-            </div>
+            {!showResendButton && (
+              <div className="flex justify-center mt-10 ">
+                <Link href="#" className="text-xs text-[#CACACA] ">
+                  Resend OTP in <b>{remainingTime}</b> seconds
+                </Link>
+              </div>
             )}
-            {showResendButton && (<div className="flex justify-center mt-10 ">
-              <Link
-                href="#"
-                className="text-xs text-[#CACACA] "
-                onClick={resendOtp}
-              >
-              Resend Otp
-              </Link>
-
-            </div>
+            {showResendButton && (
+              <div className="flex justify-center mt-10 ">
+                <Link
+                  href="#"
+                  className="text-xs text-[#CACACA] "
+                  onClick={resendOtp}
+                >
+                  Resend Otp
+                </Link>
+              </div>
             )}
           </div>
         </div>
-
       </div>
     </>
   );

@@ -192,7 +192,6 @@ const Signup = () => {
   const router = useRouter();
 
   const [signupdata, setSignupData] = useState({
-
     name: "",
     email: "",
     password: "",

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Overview from "../../../public/assets/discover/overview.svg";
 import Stocks from "../../../public/assets/discover/stocks.svg";
@@ -91,24 +91,288 @@ const Discover = () => {
       signal: "Buy",
       indicator: "5/8 Indicators",
     },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "bnb",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "HOLD",
+      indicator: "5/8 Indicators",
+    },
+    {
+      coin: "USDC",
+      price: "$50,000",
+      priceper: "(-2.49%)",
+      chart: GreenChart,
+      marketcap: "829.67B",
+      volume: "250000",
+      volumper: "(61.70%)",
+      signal: "Buy",
+      indicator: "5/8 Indicators",
+    },
   ];
 
   //pagination
-  const { searchQuery } = useSearch();//search
+  const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const filteredData = discoverData.filter((coin) =>
-  coin.coin.toLowerCase().includes(searchQuery.toLowerCase()) 
-);
+    coin.coin.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
   useEffect(() => {
-    setCurrentPage(1)
+    setCurrentPage(1);
   }, [searchQuery]);
 
   const cardsPerPage = 6;
@@ -135,7 +399,8 @@ const Discover = () => {
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">
-      <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
+      {/* <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 "> */}
+      <div className="text-white xl:ml-24 xl:mr-[70px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
@@ -165,7 +430,11 @@ const Discover = () => {
                 >
                   <div className="text-sm">{image?.name}</div>
                 </ReactTooltip>
-                <Image className=" mx-auto" src={image?.img} alt={image?.name} />
+                <Image
+                  className=" mx-auto"
+                  src={image?.img}
+                  alt={image?.name}
+                />
               </div>
             ))}
           </div>
@@ -234,11 +503,11 @@ const Discover = () => {
 
         <div className="lg:mx-  md:p- mb-5 mt-3">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg">
+            <div className="bg-[#1C1C1C] table-container text-white h-auto overflow-auto rounded-lg">
               <table className="w-full">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className="text-[#CECECE]">
-                    <th className="px-6 py-3 text-center text-base font-medium  sticky left-0 bg-[#1C1C1C]">
+                    <th className="px-6 py-3 text-center text-base font-medium   sticky left-0 bg-[#1C1C1C]">
                       Coin
                     </th>
                     <th className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap">
@@ -263,7 +532,7 @@ const Discover = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((item, index) => (
                       <tr key={index}>
-                        <td className="px-3 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
+                        <td className="px-3 py-4 text-center whitespace-nowrap font-medium text-white bg-[#1C1C1C]">
                           <div className="flex items-center  gap-2">
                             <div>
                               <Image
@@ -280,7 +549,9 @@ const Discover = () => {
                         <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
                       </td> */}
                         <td className="px-3 py-4  whitespace-nowrap  text-white">
-                          <div className="py-0.5 text-center">{item?.price}</div>
+                          <div className="py-0.5 text-center">
+                            {item?.price}
+                          </div>
                           <p className="text-sm  text-[#FF0000] text-center">
                             <span
                               className={` ${
@@ -350,7 +621,7 @@ const Discover = () => {
           </div>
         </div>
         <Pagination
-        totalItems={filteredData.length}
+          totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
