@@ -60,9 +60,9 @@ const Login = () => {
         setErrors((prevState) => ({
           ...prevState,
           password: value
-            ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
+            // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
               ? ""
-              : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
+              // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
             : "Password is required",
         }));
         break;

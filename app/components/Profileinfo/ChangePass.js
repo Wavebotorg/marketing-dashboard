@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,34 +42,48 @@ const ChangePass = () => {
   );
 
   const validateInput = (name, value) => {
-    const errors = {};
-    if (!changePassData.currentpassword) {
-      errors.currentpassword = "Current Password is required";
+    switch (name) {
+      case "currentpassword":
+        setErrors((prevState) => ({
+          ...prevState,
+          currentpassword: value ? "" : "Current Password is required",
+        }));
+        break;
+      case "newpassword":
+        setErrors((prevState) => ({
+          ...prevState,
+          newpassword: value
+            ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
+              ? ""
+              : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
+            : "New Password is required",
+        }));
+        break;
+      case "confirmpassword":
+        setErrors((prevState) => ({
+          ...prevState,
+          confirmpassword: value
+            ? value === changePassData.newpassword
+              ? ""
+              : "Passwords do not match"
+            : "Confirm Password is required",
+        }));
+        break;
+      default:
+        break;
     }
-    if (!changePassData.newpassword) {
-      errors.newpassword = "New Password is required";
-    }
-    if (!changePassData.confirmpassword) {
-      errors.confirmpassword = "Confirm Password is required";
-    }
-    if (name === 'confirmpassword' || (changePassData.newpassword && changePassData.confirmpassword)) {
-      if (changePassData.newpassword !== value) {
-        errors.confirmpassword = "Passwords do not match";
-      }
-    }
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
   };
+
   // const mydata = {
   //   email: changePassData?.email,
   // };
   const onChangeInput = (e) => {
     const { name, value } = e.target;
-
     setChangePassData({
       ...changePassData,
       [name]: value.trim(),
     });
+    validateInput(name, value.trim());
   };
   const [otp, setOtp] = useState("");
  
@@ -80,9 +94,10 @@ const ChangePass = () => {
      confirmNewPassword:changePassData?.confirmpassword
   };
    const handleSubmit = async () => {
-    
-    // if (validateInput()) {
-    
+    validateInput("currentpassword", changePassData.currentpassword);
+    validateInput("newpassword", changePassData.newpassword);
+    validateInput("confirmpassword", changePassData.confirmpassword);
+    if (!errors.currentpassword && !errors.newpassword && !errors.confirmpassword) {
       await axiosInstanceAuth
         .post("/changePassword", mydata1)
         .then((res) => {
@@ -94,9 +109,12 @@ const ChangePass = () => {
             setVerified(true);
             toast.success(myData?.msg);
 
-      
-            // setTimeout(() => {
-            // }, 3000);
+            setChangePassData({
+              currentpassword: "",
+              newpassword: "",
+              confirmpassword: ""
+            });
+            
           } else {
             toast.error(myData?.msg);
           }
@@ -104,7 +122,7 @@ const ChangePass = () => {
         .catch((err) => {
           console.log("err---->", err);
         });
-    // };
+    };
   }
  
 
@@ -123,17 +141,7 @@ const ChangePass = () => {
   }, 1000);
 
 
-  // useEffect(() => {
-  //   const timer1 = setTimeout(() => {
-  //     setRemainingTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
-  //   }, 1000);
-
-  //   if (remainingTime === 0) {
-  //     setShowResendButton(true);
-  //   }
-
-  //   return () => clearTimeout(timer1);
-  // }, [remainingTime]);
+ 
 
   const timer = setTimeout(() => {
     setShowResendButton(true);
@@ -217,12 +225,12 @@ const ChangePass = () => {
 
   return (
      <>
-      <div className=" justify-center items-center h-screen">
+      {/* <div className=" justify-center items-center h-screen"> */}
         {!verified ? (
-         <div className="w-full h-full flex flex-col items-center justify-center ">
-        
+        //  <div className="w-full h-full flex flex-col items-center justify-center ">
+        <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-lg p-12 pl-16 ">
  
-         <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8 sm:py-8 md:py-8 lg:py-10 2xl:py-14 w-[70%] sm:w-[70%] md:w-[40%] lg:w-[40%] 2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+         {/* <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8 sm:py-8 md:py-8 lg:py-10 2xl:py-14 w-[70%] sm:w-[70%] md:w-[40%] lg:w-[40%] 2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12"> */}
            <div>
              <h2 className="text-lg sm:text-lg md:text-xl lg:text-2xl 2xl:text-3xl tracking-wide text-white mb-3 sm:mb-3 md:mb-4 lg:mb-5 2xl:mb-5 font-semibold text-center">
                OTP Verification
@@ -236,7 +244,7 @@ const ChangePass = () => {
                  value={otp}
                  onChange={handleOtpChange}
                  numInputs={4}
-                 inputStyle="otp-style-input outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[80px] mx-1 sm:mx-2 2xl:mx-3.5 "
+                 inputStyle="otp-style-input1 outline-none focus:ring-2 focus:ring-regal-blue bg-neutral-800 h-[35px] sm:h-[65px] md:h-[60px] lg:h-[70px] 2xl:h-[50px] mx-1 sm:mx-2 2xl:mx-3.5 "
                  containerStyle={"otp-container"}
                  renderInput={(props) => <input {...props} onKeyDown={handleKeyPress} />}
                />
@@ -274,12 +282,10 @@ const ChangePass = () => {
            </div>
          </div>
  
-       </div>
-
         ) : (
           <div>
             {" "}
-            <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-b-lg p-8 pl-16 ">
+            <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-lg p-8 pl-16 ">
               <p className="font-medium text-[20px] mb-5 xsm:text-base">
                 Change Password
               </p>
@@ -308,7 +314,7 @@ const ChangePass = () => {
                   </div>
                 </div>
                 {errors.currentpassword && (
-                  <div className="text-red-500 text-sm mb-2">{errors.currentpassword}</div>
+                  <div className="text-red-500 text-sm mb-5 mt-1">{errors.currentpassword}</div>
                 )}
               </div>
 
@@ -334,7 +340,7 @@ const ChangePass = () => {
                   </div>
                 </div>
                 {errors.newpassword && (
-                  <div className="text-red-500 text-sm mb-2">{errors.newpassword}</div>
+                  <div className="text-red-500 text-sm mb-5 mt-1">{errors.newpassword}</div>
                 )}
               </div>
 
@@ -363,7 +369,7 @@ const ChangePass = () => {
                   </div>
                 </div>
                 {errors.confirmpassword && (
-                  <div className="text-red-500 text-sm mb-2">{errors.confirmpassword}</div>
+                  <div className="text-red-500 text-sm mb-2 mt-1">{errors.confirmpassword}</div>
                 )}
               </div>
             </div>
@@ -378,10 +384,11 @@ const ChangePass = () => {
                 </button>
                 <ToastContainer />
               </div>
-       </div></div>
+       </div>
+       </div>
        
 )}
-            </div>
+            {/* </div> */}
           </>
         );
 }

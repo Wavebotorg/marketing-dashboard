@@ -17,6 +17,7 @@ const About = () => {
  const [email, setEmail] = useState("")
   const popupRef = useRef(null);
   const router = useRouter();
+  const changePassRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -59,13 +60,17 @@ const About = () => {
             localStorage.setItem("type", "changepassword");
             localStorage.setItem("userEmail",email);
             if (myData?.status) {
+              setShowPopup(true);
+          setTimeout(() => {
+            if (changePassRef.current) {
+              changePassRef.current.scrollIntoView({ behavior: "smooth" });
+            }
+          },1000);
              
              
              
-              // router.push("/passwordverify");
-               setShowPopup(true);
-              // setTimeout(() => {
-              // }, 3000);
+              //  setShowPopup(true);
+              
             } 
           })
           .catch((err) => {
@@ -306,7 +311,9 @@ const About = () => {
       {showPopup && (
         <div>
           <div ref={popupRef}>
+          <div ref={changePassRef}>
             <ChangePass />
+            </div>
           </div>
         </div>
       )}

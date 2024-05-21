@@ -148,20 +148,23 @@ const Holder = () => {
             <p>Paginated Results</p>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-6 mt-5 md:w-full ">
+        <div className="flex flex-col  md:flex-row gap-6 mt-5 md:w-full ">
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p>Total Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1  ">0ETH</p>
+            {/* <p className="text-[#EAEAEA]">Total Rewards</p> */}
+            <p className="text-[#e2dede] font-light">Total Rewards</p>
+
+            <p className="text-blue-400 text-2xl mt-1  w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p>Unclaimed Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+            <p className="text-[#EAEAEA]">Unclaimed Rewards</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p>Claimable Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1">0ETH</p>
+            <p className="text-[#EAEAEA]">Claimable Rewards</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
         </div>
+
         <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <h1 className="  ">Holder Rewards</h1>
         </div>
