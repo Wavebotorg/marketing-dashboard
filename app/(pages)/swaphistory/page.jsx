@@ -166,9 +166,11 @@ import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import CELO from "../../../public/assets/tokenimg/CELO.png";
 import BURST from "../../../public/assets/tokenimg/BURST.png";
 import Image from "next/image";
+import { MdDone } from "react-icons/md";
 
 const SwapHistory = () => {
   const [transactions, setTransactions] = useState([]);
+  const [selectedNetwork, setSelectedNetwork] = useState(null);
 
   //pagination
   const { searchQuery } = useSearch();
@@ -189,8 +191,19 @@ const SwapHistory = () => {
   );
 
   const visibleData = filteredData.slice(startIndex, endIndex);
-  console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
+  // console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
 
+  const NetworkData = [
+    { name: "Ethereum", chainid: "1", img: eth, desCode: "0x1" },
+    { name: "Arbitrum", chainid: "42161", img: arbitrum, desCode: "0xa4b1" },
+    { name: "Optimism", chainid: "10", img: optimism, desCode: "0xa" },
+    { name: "Polygon", chainid: "137", img: poly, desCode: "0x89" },
+    // { name: "Solana", chainid: "900", img: SOL, desCode: "" },
+    { name: "BNB Chain", chainid: "56", img: BNB, desCode: "0x38" },
+    { name: "Avalanche", chainid: "43114", img: avalanche, desCode: "0xa86a" },
+    { name: "Celo", chainid: "42220", img: CELO, desCode: "" },
+    { name: "Blast", chainid: "238", img: BURST, desCode: "" },
+  ];
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -199,22 +212,22 @@ const SwapHistory = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-  //get history data of evm and solana chain
-  const getTransactions = async (apiEndpoint) => {
+
+  const getSolanaTransactions = async () => {
     try {
-      const response = await axiosInstanceAuth.post(apiEndpoint);
+      const response = await axiosInstanceAuth.post("/solanaTransactions");
       const data = response?.data?.transactions || [];
       setTransactions(data);
-      console.log("dataofalltrasaction===============", data);
+      console.log("Solana transactions:", data);
     } catch (error) {
-      console.error("Error fetching transactions:", error);
-    } finally {
+      console.error("Error fetching Solana transactions:", error);
     }
   };
-  useEffect(() => {
-    // Fetch EVM transactions by default when component mounts
-    getTransactions("/evmTransactions");
-  }, []);
+
+  // useEffect(() => {
+  //   // Fetch EVM transactions by default when component mounts
+  //   getEvmTransactions("/evmTransactions");
+  // }, []);
 
   //for copy id
 
@@ -257,28 +270,54 @@ const SwapHistory = () => {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const NetworkData = [
-    { name: "Ethereum", chainid: "1", img: eth },
-    { name: "Arbitrum", chainid: "42161", img: arbitrum },
-    { name: "Optimism", chainid: "10", img: optimism },
-    { name: "Polygon", chainid: "137", img: poly },
-    { name: "Solana", chainid: "900", img: SOL },
-    { name: "BNB Chain", chainid: "56", img: BNB },
-    { name: "Avalanche", chainid: "43114", img: avalanche },
-    { name: "Celo", chainid: "42220", img: CELO },
-    { name: "Blast", chainid: "238", img: BURST },
-  ];
-
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const handleNetworkSelect = (network) => {
-    // Perform any necessary actions when a network is selected
-    // For example, you can trigger an action or update state
-    console.log("Selected network:", network);
+  // const handleNetworkSelect = (network) => {
+  //   console.log("Selected network:", network);
+  //   setSelectedNetwork(network);
 
-    // Close the dropdown after selecting a network
+  //   setShowDropdown(false);
+  // };
+  useEffect(() => {
+    // Call handleNetworkSelect with "Ethereum" as the default network name
+    handleNetworkSelect("Ethereum");
+  }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
+
+  // Function to handle network selection
+  const handleNetworkSelect = async (networkName) => {
+    console.log("Selected network:", networkName);
+
+    // Find the network object from NetworkData array based on its name
+    const selectedNetwork = NetworkData.find(
+      (network) => network.name === networkName
+    );
+
+    // If the network is found, set its desCode as the selectedNetwork state
+    if (selectedNetwork) {
+      console.log(
+        "🚀 ~ handleNetworkSelect ~ selectedNetwork:",
+        selectedNetwork
+      );
+      setSelectedNetwork(selectedNetwork);
+
+      try {
+        // Fetch transactions for the selected network
+        const response = await axiosInstanceAuth.post("/evmTransactions", {
+          chainId: Number(selectedNetwork.chainid),
+        });
+
+        const data = response?.data?.transactions || [];
+        setTransactions(data);
+        console.log("EVM transactions:", data);
+      } catch (error) {
+        console.error("Error fetching EVM transactions:", error);
+      }
+    } else {
+      console.error("Network not found");
+    }
+
     setShowDropdown(false);
   };
 
@@ -288,13 +327,15 @@ const SwapHistory = () => {
         <div className="mt-10 flex">
           <div className="flex">
             <button
-              onClick={() => getTransactions("/evmTransactions")}
+              onClick={handleDropdownToggle}
+              // onClick={() => getTransactions("/evmTransactions")}
+              // onClick={getEvmTransactions}
               className="bg-blue-500 rounded-lg px-2 py-1 mr-4 flex items-center gap-2 relative"
             >
               Evm
-              <svg
-                onClick={handleDropdownToggle}
-                xmlns="http://www.w3.org/2000/svg"
+              {/* <svg */}
+              {/* onClick={handleDropdownToggle} */}
+              {/* xmlns="http://www.w3.org/2000/svg"
                 className={`h-6 w-6 text-gray-400 ${
                   showDropdown ? "hidden" : ""
                 }`}
@@ -325,7 +366,7 @@ const SwapHistory = () => {
                   strokeWidth="2"
                   d="M5 15l7-7 7 7"
                 />
-              </svg>
+              </svg> */}
             </button>
 
             <div className="">
@@ -335,8 +376,15 @@ const SwapHistory = () => {
                     {NetworkData.map((item, index) => (
                       <li
                         key={index}
-                        className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 `}
-                        onClick={() => handleNetworkSelect(item.name)}
+                        className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                          selectedNetwork && selectedNetwork.name === item.name
+                            ? "bg-gray-700" // Add background color for selected item
+                            : ""
+                        }`}
+                        onClick={() => {
+                          handleNetworkSelect(item.name);
+                          // Call getEvmTransactions after selecting the network
+                        }}
                       >
                         <Image
                           src={item.img}
@@ -344,6 +392,10 @@ const SwapHistory = () => {
                           className="h-6 w-6 mr-2" // Adjust size as needed
                         />
                         <span className="text-white">{item.name}</span>
+                        {selectedNetwork &&
+                          selectedNetwork.name === item.name && (
+                            <MdDone className="ml-2 text-green-500" /> // Render tick mark if the item is selected
+                          )}
                       </li>
                     ))}
                   </ul>
@@ -352,7 +404,8 @@ const SwapHistory = () => {
             </div>
           </div>
           <button
-            onClick={() => getTransactions("/solanaTransactions")}
+            // onClick={() => getTransactions("/solanaTransactions")}
+            onClick={getSolanaTransactions}
             className="bg-blue-500 rounded-lg px-2 py-1"
           >
             Solana

@@ -7,8 +7,6 @@ import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
 
-
-
 const Profile = () => {
   const [isComponent1Visible, setComponent1Visible] = useState(true);
   const [isComponent2Visible, setComponent2Visible] = useState(false);
@@ -60,6 +58,7 @@ const Profile = () => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (activeButton === 1) {
       setComponent1Visible(true);
@@ -114,7 +113,7 @@ const Profile = () => {
           <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[7px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
                   activeButton === 1 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(1)}
@@ -124,7 +123,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[7px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
                   activeButton === 2 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(2)}
@@ -134,7 +133,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[7px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
                   activeButton === 3 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(3)}
@@ -144,7 +143,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[7px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
                   activeButton === 4 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(4)}
@@ -154,7 +153,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[7px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
                   activeButton === 5 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(5)}

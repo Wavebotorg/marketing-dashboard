@@ -636,7 +636,7 @@ function Sidebar() {
                     <FaBars />
                   </div>
                 ) : (
-                  <div className=" mt-8 ml-3.5 cursor-pointer"> X </div>
+                  <div className=" mt-8 ml-6 cursor-pointer"> X </div>
                 )}
               </div>
               <Image
@@ -886,10 +886,10 @@ function Sidebar() {
                   className=" ml-2 items-center"
                 />
                 {/* < className="ml-6"> */}
-                  <div className={` ${isNavbar ? "" : "hidden"} `}>
+                <div className={` ${isNavbar ? "" : "hidden "} `}>
                   <p className="">{userProfile.name}</p>
                   <p className="text-xs">{userProfile.email}</p>
-                {/* </> */}
+                  {/* </> */}
                 </div>
               </div>
             </div>

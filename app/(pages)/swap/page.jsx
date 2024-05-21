@@ -34,7 +34,7 @@ import Loader from "react-js-loader";
 import axios from "axios";
 import PageLoader from "next/dist/client/page-loader";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
-// import AllToken from "./alltoken.json";
+
 const Swap = () => {
   const { walletAddress, email, solanaAddress } = useWallet();
   // console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
@@ -546,7 +546,7 @@ const Swap = () => {
   };
  */
 
-  const getSolanaBalance = async () => {
+  /*   const getSolanaBalance = async () => {
     if (selectedNetwork === "Solana") {
       setShowPopup1(true);
       try {
@@ -556,6 +556,48 @@ const Swap = () => {
         const myData = res?.data?.response1?.tokens;
         console.log("fetchSolanabalance-------------------------->", myData);
         setShowBalance(myData);
+      } catch (err) {
+        console.log("error--->", err);
+      }
+    } else {
+      console.log("Selected network is not Solana. API call skipped.");
+    }
+  }; */
+
+  const getSolanaBalance = async () => {
+    if (selectedNetwork === "Solana") {
+      setShowPopup1(true);
+      try {
+        const balanceRes = await axiosInstanceAuth.post(
+          "/getSolanaWalletTokenBal",
+          {
+            wallet: solanaAddress,
+          }
+        );
+        const balanceData = balanceRes?.data?.response1?.tokens;
+        console.log(
+          "fetchSolanabalance-------------------------->",
+          balanceData
+        );
+
+        const imageRes = await axios.get("https://token.jup.ag/strict");
+
+        const tokenImages = imageRes?.data;
+        // console.log("🚀 ~ getSolanaBalance ~ tokenImages:", tokenImages);
+
+        // Merging balance data with images
+        const mergedData = balanceData.map((token) => {
+          const tokenImage = tokenImages.find(
+            (image) => image.address === token.mint
+          );
+          console.log("🚀 ~ mergedData ~ tokenImage:", tokenImage);
+          return {
+            ...token,
+            logo: tokenImage ? tokenImage.logoURI : null,
+          };
+        });
+
+        setShowBalance(mergedData);
       } catch (err) {
         console.log("error--->", err);
       }
@@ -765,10 +807,14 @@ const Swap = () => {
                           <div className="flex">
                             <img
                               src={item?.logo}
-                              alt={item?.name}
+                              alt={item?.name || "Token"}
                               height={30}
                               width={30}
-                              className="h-15 w-15 my-3 "
+                              className="h-15 w-15 my-3"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "fallback-image-url";
+                              }} // optional fallback image
                             />
                             <div className="flex flex-col justify-center pl-3">
                               <div className="text-base font-bold">
