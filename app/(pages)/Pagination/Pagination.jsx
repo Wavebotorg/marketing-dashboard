@@ -9,7 +9,9 @@ const Pagination = ({
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageChange = (page) => {
-    onPageChange(page);
+    if (page >= 1 && page <= totalPages) {
+      onPageChange(page);
+    }
   };
 
   const getPageNumbers = () => {
@@ -50,22 +52,37 @@ const Pagination = ({
   };
 
   return (
-    <div className=" flex justify-end mt-4">
+    <div className="flex justify-end mt-4">
       <nav>
-        <ul className="pagination pb-10">
+        <ul className="pagination pb-10 flex items-center space-x-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-2 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            {"<"}
+          </button>
           {getPageNumbers().map((page, index) => (
             <li
               key={index}
-              className={`page-item   ${currentPage === page ? "active" : ""}`}
+              className={`page-item ${currentPage === page ? "active" : ""}`}
             >
               <button
                 onClick={() => handlePageChange(page)}
-                className="page-link px-2 "
+                className="page-link px-2"
+                disabled={page === "..."}
               >
-                {page === "..." ? page : page}
+                {page}
               </button>
             </li>
           ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-2 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            {">"}
+          </button>
         </ul>
       </nav>
     </div>

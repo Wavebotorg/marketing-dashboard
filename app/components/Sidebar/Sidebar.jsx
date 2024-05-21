@@ -388,6 +388,7 @@ import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png"
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
 import medium from "../../../public/assets/sidebar/medium.png";
+import Cookies from 'js-cookie';
 
 import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
@@ -395,6 +396,7 @@ import axios from "axios";
 // import axiosInstance from "@/app/apiInstances/axiosInstance";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import { useWallet } from "../contexts/WalletContext";
+import { Cookie } from "next/font/google";
 function Sidebar() {
   const router = useRouter();
   const { setWalletAddress, setEmail, setSolanaAddress } = useWallet();
@@ -580,7 +582,8 @@ function Sidebar() {
 
   const ConfirmLogOut = () => {
     localStorage.clear();
-    router.push("/login");
+    Cookies.remove('auth-token')
+       router.push("/login");
     setConfirmationPopUp(false);
   };
 

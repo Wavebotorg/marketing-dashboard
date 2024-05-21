@@ -104,6 +104,7 @@ const Market = () => {
         setSavedCoins((prevSavedCoins) =>
           prevSavedCoins.filter((coinId) => coinId !== id)
         );
+
         setSavedData((prevSavedData) => {
           if (Array.isArray(prevSavedData)) {
             return prevSavedData.filter((coinId) => coinId !== id);
@@ -119,6 +120,7 @@ const Market = () => {
             return [...prevSavedData, id];
           } else {
             return [id];
+            
           }
         });
 

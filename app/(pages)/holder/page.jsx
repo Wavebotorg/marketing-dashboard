@@ -439,6 +439,7 @@ const Holder = () => {
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
         </div>
+
         <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <h1 className="  ">Holder Rewards</h1>
         </div>

@@ -75,7 +75,7 @@ const Swap = () => {
     "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
     selectedTokenDatato
   );
-  console.log("selectedChainId---",selectedChainId)
+  console.log("selectedChainId---", selectedChainId)
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth },
     { name: "Arbitrum", chainid: "42161", img: arbitrum },
@@ -346,9 +346,9 @@ const Swap = () => {
     let endpoint;
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
-    } else if  (selectedNetwork === "Polygon") {
-      endpoint ="/EVMswap"
-    }else {
+    } else if (selectedNetwork === "Polygon") {
+      endpoint = "/EVMswap"
+    } else {
       endpoint = "/mainswap";
     }
 
@@ -480,209 +480,191 @@ const Swap = () => {
       }
     }
   };
+  // const getPrice1 = async () => {
+  //   if (
+  //     selectedTokenDatato?.input_to &&
+  //     selectedTokenDatato?.address_from &&
+  //     selectedTokenDatato?.address_to
 
-  /* onst getWalletBalance = async () => {
-    setShowPopup1(true);
-    await axiosInstance
-      .post("/fetchbalance", { email: email })
-      .then((res) => {
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      })
-      .catch((err) => {
-        console.log("error--->", err);
-      });
-  }; */
+  //   ) {
+  //     const amount =
+  //       Number(selectedTokenDatato?.input_to) *
+  //       10 ** selectedTokenDatato?.decimals_to;
+  //     console.log("--------amount", amount);
 
-  /*   const getSolanaBalance = async () => {
-    if (selectedNetwork === "Solana") {
-      setShowPopup1(true);
-      try {
-        const res = await axiosInstance.post("/getSolanaWalletTokenBal", {
-          email: email,
-        });
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        console.log("error--->", err);
-      }
-    } else {
-      console.log("Selected network is not Arbitrum. API call skipped.");
-    }
-  };
- */
-
-  const getSolanaBalance = async () => {
-    if (selectedNetwork === "Solana") {
-      setShowPopup1(true);
-      try {
-        const res = await axiosInstanceAuth.post("/getSolanaWalletTokenBal", {
-          wallet: solanaAddress,
-        });
-        const myData = res?.data?.response1?.tokens;
-        console.log("fetchSolanabalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        console.log("error--->", err);
-      }
-    } else {
-      console.log("Selected network is not Solana. API call skipped.");
-    }
-  };
-
-  const getWalletBalance = async () => {
-    if (selectedNetwork === "Arbitrum") {
-      setShowPopup1(true);
-      try {
-        const res = await axiosInstance.post("/fetchbalance", { email: email });
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        console.log("error--->", err);
-      }
-    } else {
-      console.log("Selected network is not Arbitrum. API call skipped.");
-    }
-  };
-
-  // Assuming selectedNetwork is passed as a prop or derived from state
-  // const selectedNetwork = props.selectedNetwork; // or useState/useSelector depending on your state management
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-
-  const handleInputChange = async (e) => {
-    const { name, value } = e.target;
-    await setSelectedTokenDatato({
-      ...selectedTokenDatato,
-      [name]: value,
-    });
-  };
-  useEffect(() => {
-    getPrice();
-  }, [selectedTokenDatato?.input_to]);
-
-  const handleOptionClick = (name) => {
-    const selectedNetworkData = NetworkData.find(
-      (network) => network.name === name
-    );
-    if (selectedNetworkData) {
-      setSelectedNetwork(name);
-      setSelectedChainId(selectedNetworkData.chainid);
-      setShowDropdown(false);
-    }
-  };
-
-  // const handleOptionClick= (name) => {
-  //   setSelectedNetwork(name);
-  //   setShowDropdown(false); // Close dropdown when an option is clicked
-  // };
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
-  };
-
-  // const redirecttolink=()=>{
-  //   router.push("https://arbiscan.io/tx/")
+  //     const params = {
+  //       token: selectedTokenDatato?.address_to,
+  //       token2: selectedTokenDatato?.address_from,
+  //       sellAmount: amount,
+  //       takerAddress: walletAddress,
+  //     };
+  //     const tokenRes = await axios.post(
+  //       `${API_URL}/getEvmTokenPrice`,
+  //       {
+  //         token: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+  //         token2: token0,
+  //         chain: "0x38",
+  //       }
+  //     );
+  //     const tokensPrice = tokenRes?.data?.finalRes;
+  //     const buyAmt = amountIn * tokensPrice?.token2;
+  //     const finalAmt = buyAmt / tokensPrice?.token1;
+  //     if (Finaltokenprice) {
+  //       setSelectedTokenDatato({
+  //         ...selectedTokenDatato,
+  //         input_from: Finaltokenprice,
+  //       });
+  //       //   // newsinglegetPrice();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching price:", error);
+  //   } 
   // }
-  // onClick={redirecttolink()}
-  const popupRef = useRef(null);
 
-  useEffect(() => {
-    // Function to handle clicks outside the popup
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        // Clicked outside the popup, so close it
-        setShowPopup(false);
-      }
-    };
 
-    // Adding event listener to detect clicks on the document body
-    document.addEventListener("mousedown", handleClickOutside);
 
-    // Cleanup function to remove event listener when component unmounts
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
-  // const [selectedNetwork, setSelectedNetwork] = useState(""); // State to track the selected network
-  // const [selectChain, setSelectChain] = useState(""); // State to store the selected network's image URL
-  const [tokens, setTokens] = useState([]); // State to store the fetched tokens
-  // console.log("🚀 ~ Swap ~ tokens:", tokens);
+const getWalletBalance = async () => {
+  setShowPopup1(true);
+  await axiosInstance
+    .post("/fetchbalance", { email: email })
+    .then((res) => {
+      const myData = res?.data;
+      console.log("fetchbalance--->", myData);
+      setShowBalance(myData);
+    })
+    .catch((err) => {
+      console.log("error--->", err);
+    });
+};
+const toggleDropdown = () => {
+  setShowDropdown(!showDropdown);
+};
 
-  // Function to handle option click
-  // const handleOptionClick = (name) => {
-  //   setSelectedNetwork(name); // Update the selected network
-  // };
+const handleInputChange = async (e) => {
+  const { name, value } = e.target;
+  await setSelectedTokenDatato({
+    ...selectedTokenDatato,
+    [name]: value,
+  });
+};
+useEffect(() => {
+  getPrice();
+}, [selectedTokenDatato?.input_to]);
 
-  // Fetch tokens when selected network changes
-  /*  useEffect(() => {
-    // Check if the selected network is Solana
-    if (selectedNetwork === "Solana") {
-      // Make API call to fetch tokens
-      axios
-        .get("https://token.jup.ag/strict")
-        .then((response) => {
-          // Assuming the response contains an array of tokens
-          setTokens(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching tokens:", error);
-        });
+const handleOptionClick = (name) => {
+  const selectedNetworkData = NetworkData.find(
+    (network) => network.name === name
+  );
+  if (selectedNetworkData) {
+    setSelectedNetwork(name);
+    setSelectedChainId(selectedNetworkData.chainid);
+    setShowDropdown(false);
+  }
+};
+
+// const handleOptionClick= (name) => {
+//   setSelectedNetwork(name);
+//   setShowDropdown(false); // Close dropdown when an option is clicked
+// };
+const handleButtonClick = (button) => {
+  setSelectedButton(button);
+};
+
+// const redirecttolink=()=>{
+//   router.push("https://arbiscan.io/tx/")
+// }
+// onClick={redirecttolink()}
+const popupRef = useRef(null);
+
+useEffect(() => {
+  // Function to handle clicks outside the popup
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      // Clicked outside the popup, so close it
+      setShowPopup(false);
     }
-  }, [selectedNetwork]); */
+  };
 
-  useEffect(() => {
-    // Check if the selected network is Solana
-    if (selectedNetwork === "Solana") {
-      // Make API call to fetch tokens
-      axios
-        .get("https://token.jup.ag/strict")
-        .then((response) => {
-          // Assuming the response contains an array of tokens
-          setTokens(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching tokens:", error);
-        });
-    }
-  }, [selectedNetwork]);
+  // Adding event listener to detect clicks on the document body
+  document.addEventListener("mousedown", handleClickOutside);
 
-  return (
-    <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-        <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
-          <div className="text-lg font-semibold flex justify-end">
-            <button
-              className="bg-blue-500 rounded-lg  px-2 mt-3"
-              // onClick={(getWalletBalance(), getSolanaBalance())}
-              onClick={() => {
-                getWalletBalance();
-                getSolanaBalance();
-              }}
-            >
-              click to show Balance
-            </button>
-          </div>
-          {showPopup1 && (
-            <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
-              <div className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
-                <div className=" space-y-5 ">
-                  <div className="flex flex-col justify-between items-center py-2  ">
-                    <div className="text-xl flex justify-between w-full items-center ">
-                      <span>Balance Details</span>
-                      <div
-                        onClick={handleClosePopup1}
-                        className="cursor-pointer"
-                      >
-                        <IoMdClose size={24} />
-                      </div>
+  // Cleanup function to remove event listener when component unmounts
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+// const [selectedNetwork, setSelectedNetwork] = useState(""); // State to track the selected network
+// const [selectChain, setSelectChain] = useState(""); // State to store the selected network's image URL
+const [tokens, setTokens] = useState([]); // State to store the fetched tokens
+console.log("🚀 ~ Swap ~ tokens:", tokens);
+
+// Function to handle option click
+// const handleOptionClick = (name) => {
+//   setSelectedNetwork(name); // Update the selected network
+// };
+
+// Fetch tokens when selected network changes
+/*  useEffect(() => {
+  // Check if the selected network is Solana
+  if (selectedNetwork === "Solana") {
+    // Make API call to fetch tokens
+    axios
+      .get("https://token.jup.ag/strict")
+      .then((response) => {
+        // Assuming the response contains an array of tokens
+        setTokens(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tokens:", error);
+      });
+  }
+}, [selectedNetwork]); */
+
+useEffect(() => {
+  // Check if the selected network is Solana
+  if (selectedNetwork === "Solana") {
+    // Make API call to fetch tokens
+    axios
+      .get("https://token.jup.ag/strict")
+      .then((response) => {
+        // Assuming the response contains an array of tokens
+        setTokens(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tokens:", error);
+      });
+  }
+}, [selectedNetwork]);
+
+return (
+  <>
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+        <div className="text-lg font-semibold flex justify-end">
+          <button
+            className="bg-blue-500 rounded-lg  px-2 mt-3"
+            onClick={getWalletBalance}
+          >
+            click to show Balance
+          </button>
+        </div>
+        {showPopup1 && (
+          <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
+            <div className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+              <div className=" space-y-5 ">
+                <div className="flex flex-col justify-between items-center py-2  ">
+                  <div className="text-xl flex justify-between w-full items-center ">
+                    <span>Balance Details</span>
+                    <div
+                      onClick={handleClosePopup1}
+                      className="cursor-pointer"
+                    >
+                      <IoMdClose size={24} />
                     </div>
-                    {/*   {showBalance?.map((item, index) => (
+                  </div>
+                  {/*   {showBalance?.map((item, index) => (
                       <div className=" flex items-center " key={index}>
                         <div className="flex">
                           {" "}
@@ -703,83 +685,79 @@ const Swap = () => {
                         </div>
                       </div>
                     ))} */}
-                    {showBalance &&
+                  {showBalance &&
                     Array.isArray(showBalance) &&
                     showBalance.length > 0 ? (
-                      showBalance.map((item, index) => (
-                        <div className="flex items-center mt-2" key={index}>
-                          <div className="flex">
-                            <img
-                              src={item?.logo}
-                              alt={item?.name}
-                              height={30}
-                              width={30}
-                              className="h-15 w-15 my-3 "
-                            />
-                            <div className="flex flex-col justify-center pl-3">
-                              <div className="text-base font-bold">
-                                {item?.name}
-                              </div>
-                              <div className="text-base">
-                                Balance:{" "}
-                                <span className="font-bold">
-                                  {selectedNetwork === "Solana"
-                                    ? item?.amount
-                                    : item?.balance}
-                                </span>
-                              </div>
+                    showBalance.map((item, index) => (
+                      <div className="flex items-center" key={index}>
+                        <div className="flex">
+                          <Image
+                            src={item?.logo}
+                            alt={item?.name}
+                            className="h-15 w-15 my-3"
+                          />
+                          <div className="flex flex-col justify-center pl-3">
+                            <div className="text-base font-bold">
+                              {item?.name}
+                            </div>
+                            <div className="text-base">
+                              Balance:{" "}
+                              <span className="font-bold">
+                                {item?.balance}
+                              </span>
                             </div>
                           </div>
                         </div>
-                      ))
-                    ) : (
-                      <div className="mt-16 text-xl">No data</div>
-                    )}
-                  </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mt-16 text-xl">No data</div>
+                  )}
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        )}
 
-          <div className="mt-48 space-y-10 px-5  ">
-            <div className="swap flex flex-col items-center justify-between   text-white ">
-              <div className="flex flex-col justify-center items-center space-y-5">
-                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
-                  <div className="flex justify-between items-center py-2">
-                    <div className="flex justify-between gap-5 text-lg mx-1 w-full">
-                      <button>Swap</button>
+        <div className="mt-48 space-y-10 px-5  ">
+          <div className="swap flex flex-col items-center justify-between   text-white ">
+            <div className="flex flex-col justify-center items-center space-y-5">
+              <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
+                <div className="flex justify-between items-center py-2">
+                  <div className="flex justify-between gap-5 text-lg mx-1 w-full">
+                    <button>Swap</button>
 
-                      <div className="dropdown-container relative">
-                        <button
-                          className="dropdown-toggle focus:outline-none flex"
-                          onClick={toggleDropdown}
+                    <div className="dropdown-container relative">
+                      <button
+                        className="dropdown-toggle focus:outline-none flex"
+                        onClick={toggleDropdown}
+                      >
+                        {selectChain && (
+                          <Image
+                            src={selectChain}
+                            className="h-6 w-6  " // Adjust size as needed
+                          />
+                        )}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          {selectChain && (
-                            <Image
-                              src={selectChain}
-                              className="h-6 w-6  " // Adjust size as needed
-                            />
-                          )}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
-                        {showDropdown && (
-                          <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      {showDropdown && (
+                        <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-1 w-48 md:min-w-fit z-10 ml-[-162px]">
+                          <ul>
                             <ul>
-                              <ul>
-                                {/*   {NetworkData.map((item, index) => (
+                              {/*   {NetworkData.map((item, index) => (
                                   <li
                                     key={index}
                                     onClick={() => {
@@ -818,52 +796,51 @@ const Swap = () => {
                                     )}
                                   </li>
                                 ))} */}
-                                {NetworkData.map((item, index) => (
-                                  <li
-                                    key={index}
-                                    onClick={() => {
-                                      handleOptionClick(item.name);
-                                      setSelectChain(item?.img);
-                                    }}
-                                    className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                      selectedNetwork === item.name
-                                        ? "bg-blue-500"
-                                        : ""
+                              {NetworkData.map((item, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() => {
+                                    handleOptionClick(item.name);
+                                    setSelectChain(item?.img);
+                                  }}
+                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${selectedNetwork === item.name
+                                      ? "bg-blue-500"
+                                      : ""
                                     }`}
-                                  >
-                                    <Image
-                                      src={item.img}
-                                      alt={item.name}
-                                      className="h-6 w-6 mr-2" // Adjust size as needed
-                                    />
-                                    <span className="text-white">
-                                      {item.name}
-                                    </span>
-                                    {selectedNetwork === item.name && (
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-6 w-6 text-white mr-2"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                      >
-                                        <path
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          strokeWidth={2}
-                                          d="M5 13l4 4L19 7"
-                                        />
-                                      </svg>
-                                    )}
-                                  </li>
-                                ))}
-                              </ul>
+                                >
+                                  <Image
+                                    src={item.img}
+                                    alt={item.name}
+                                    className="h-6 w-6 mr-2" // Adjust size as needed
+                                  />
+                                  <span className="text-white">
+                                    {item.name}
+                                  </span>
+                                  {selectedNetwork === item.name && (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-6 w-6 text-white mr-2"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M5 13l4 4L19 7"
+                                      />
+                                    </svg>
+                                  )}
+                                </li>
+                              ))}
                             </ul>
-                          </div>
-                        )}
-                      </div>
+                          </ul>
+                        </div>
+                      )}
                     </div>
-                    {/* <div
+                  </div>
+                  {/* <div
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -872,161 +849,205 @@ const Swap = () => {
                     className={isHovered ? "rotate-90 cursor-pointer" : ""}
                   />
                 </div> */}
+                </div>
+                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                  <div className="text-gray-300">
+                    <p>You pay</p>
                   </div>
-                  <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                    <div className="text-gray-300">
-                      <p>You pay</p>
+                  <div className="flex justify-between py-2">
+                    <div className="space-y-2">
+                      <input
+                        type="number"
+                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                        placeholder="0"
+                        name="input_to"
+                        value={selectedTokenDatato?.input_to}
+                        onChange={(e) => handleInputChange(e)}
+                      />
                     </div>
-                    <div className="flex justify-between py-2">
-                      <div className="space-y-2">
-                        <input
-                          type="number"
-                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                          placeholder="0"
-                          name="input_to"
-                          value={selectedTokenDatato?.input_to}
-                          onChange={(e) => handleInputChange(e)}
-                        />
-                      </div>
-                      {/*{swap 1}*/}
-                      <div
-                        className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                        onClick={() => tokenpopup(1)}
-                      >
-                        <div>
-                          {selectedTokenDatato?.image_to ? (
-                            <img
-                              src={selectedTokenDatato?.image_to}
-                              height={30}
-                              width={30}
-                              alt="logo"
-                              className="rounded-full"
-                            />
-                          ) : null}
-                        </div>
-                        <div>
-                          {selectedTokenDatato?.name_to
-                            ? selectedTokenDatato?.name_to.toUpperCase()
-                            : "  Token"}
-                        </div>
-                        <div>
-                          <MdKeyboardArrowDown size={20} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
-                    onClick={() => handleSwapTokens()}
-                  >
-                    <IoSwapVerticalOutline size={20} className="" />
-                  </div>
-                  <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                    <div className="text-gray-300">
-                      <p>You receive</p>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
-                          placeholder="0"
-                          name="from"
-                          value={selectedTokenDatato?.input_from}
-                          onChange={(e) => {
-                            handleInputChange(e);
-                            getPrice();
-                          }}
-                        />
-                      </div>
-                      {/*{swap 2}*/}
-                      <div
-                        className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                        onClick={() => tokenpopup(2)}
-                      >
-                        <div>
-                          {selectedTokenDatato?.image_from ? (
-                            <img
-                              src={selectedTokenDatato?.image_from}
-                              height={30}
-                              width={30}
-                              alt="logo"
-                              className="rounded-full"
-                            />
-                          ) : null}
-                        </div>
-                        <div>
-                          {selectedTokenDatato?.name_from
-                            ? selectedTokenDatato?.name_from.toUpperCase()
-                            : "Select Token"}
-                        </div>
-                        <div>
-                          <MdKeyboardArrowDown size={20} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-full">
-                    <button
-                      className=" px-3 py-2 w-full rounded-md text-xl bg-blue-500  "
-                      // ${
-                      //   selectedTokenDatato?.input_from
-                      //     ? " bg-opacity-50"
-                      //     : "bg-opacity-10"
-                      // }`}
-                      onClick={() => {
-                        handleSwapSubmit();
-                      }}
-                      disabled={loading}
+                    {/*{swap 1}*/}
+                    <div
+                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                      onClick={() => tokenpopup(1)}
                     >
-                      Swap
-                    </button>
+                      <div>
+                        {selectedTokenDatato?.image_to ? (
+                          <img
+                            src={selectedTokenDatato?.image_to}
+                            height={30}
+                            width={30}
+                            alt="logo"
+                            className="rounded-full"
+                          />
+                        ) : null}
+                      </div>
+                      <div>
+                        {selectedTokenDatato?.name_to
+                          ? selectedTokenDatato?.name_to.toUpperCase()
+                          : "  Token"}
+                      </div>
+                      <div>
+                        <MdKeyboardArrowDown size={20} />
+                      </div>
+                    </div>
                   </div>
                 </div>
-                {loading && (
-                  <Loader
-                    type="spinner-default"
-                    // color=""
-                    size={50}
-                    title="Transaction loading"
-                  />
-                )}
+                <div
+                  className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
+                  onClick={() => handleSwapTokens()}
+                >
+                  <IoSwapVerticalOutline size={20} className="" />
+                </div>
+                <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                  <div className="text-gray-300">
+                    <p>You receive</p>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl "
+                        placeholder="0"
+                        name="from"
+                        value={selectedTokenDatato?.input_from}
+                        onChange={(e) => {
+                          handleInputChange(e);
+                          getPrice();
+                        }}
+                      />
+                    </div>
+                    {/*{swap 2}*/}
+                    <div
+                      className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
+                      onClick={() => tokenpopup(2)}
+                    >
+                      <div>
+                        {selectedTokenDatato?.image_from ? (
+                          <img
+                            src={selectedTokenDatato?.image_from}
+                            height={30}
+                            width={30}
+                            alt="logo"
+                            className="rounded-full"
+                          />
+                        ) : null}
+                      </div>
+                      <div>
+                        {selectedTokenDatato?.name_from
+                          ? selectedTokenDatato?.name_from.toUpperCase()
+                          : "Select Token"}
+                      </div>
+                      <div>
+                        <MdKeyboardArrowDown size={20} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full">
+                  <button
+                    className=" px-3 py-2 w-full rounded-md text-xl bg-blue-500  "
+                    // ${
+                    //   selectedTokenDatato?.input_from
+                    //     ? " bg-opacity-50"
+                    //     : "bg-opacity-10"
+                    // }`}
+                    onClick={() => {
+                      handleSwapSubmit();
+                    }}
+                    disabled={loading}
+                  >
+                    Swap
+                  </button>
+                </div>
               </div>
+              {loading && (
+                <Loader
+                  type="spinner-default"
+                  // color=""
+                  size={50}
+                  title="Transaction loading"
+                />
+              )}
             </div>
           </div>
         </div>
-        {showPopup && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div ref={popupRef}>
-              <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
-                <div className=" space-y-5">
-                  <div className="flex justify-between items-center py-2 ">
-                    <div className="text-xl">Select Token</div>
-                    <div
-                      onClick={() => setShowPopup(false)}
-                      className="cursor-pointer"
-                    >
-                      <IoMdClose size={24} />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col md:flex-row md:justify-between">
-                    <div className="md:w-[360px] mb-4 md:mb-0">
-                      <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        onChange={handleInputChange}
-                        className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
-                      />
-                    </div>
+      </div>
+      {showPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div ref={popupRef}>
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+              <div className=" space-y-5">
+                <div className="flex justify-between items-center py-2 ">
+                  <div className="text-xl">Select Token</div>
+                  <div
+                    onClick={() => setShowPopup(false)}
+                    className="cursor-pointer"
+                  >
+                    <IoMdClose size={24} />
                   </div>
                 </div>
-                {token_data_ETH && (
-                  <div className="h-[60vh] overflow-y-auto">
-                    {selectedNetwork === "Ethereum" ? (
-                      token_data_ETH
+
+                <div className="flex flex-col md:flex-row md:justify-between">
+                  <div className="md:w-[360px] mb-4 md:mb-0">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchTerm}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+              {token_data_ETH && (
+                <div className="h-[60vh] overflow-y-auto">
+                  {selectedNetwork === "Ethereum" ? (
+                    token_data_ETH
+                      .filter((token) =>
+
+                        token.name
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      )
+                      .map((token, index) => (
+                        <div
+                          key={index}
+                          className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(token.name)
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
+                            }`}
+                          onClick={() => {
+                            if (!clickedTokens.includes(token.name)) {
+                              selectToken(token);
+                            }
+                          }}
+                        >
+                          <Image
+                            src={token.logoURI}
+                            alt={token.name}
+                            height={50}
+                            width={50}
+                            className="rounded-full"
+                          />
+                          <div className="flex gap-2">
+                            <p
+                              className={`font-semibold ${clickedTokens.includes(token.name)
+                                  ? "text-gray-500"
+                                  : ""
+                                }`}
+                            >
+                              {token.name}
+                            </p>
+                            <p className="text-gray-200">
+                              ({token.symbol.toUpperCase()})
+                            </p>
+                          </div>
+                        </div>
+                      ))
+                  ) : selectedNetwork === "Solana" ? (
+                    <>
+                      {tokens
                         .filter((token) =>
                           token.name
                             .toLowerCase()
@@ -1035,18 +1056,17 @@ const Swap = () => {
                         .map((token, index) => (
                           <div
                             key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
+                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(token.name)
                                 ? "opacity-50 cursor-not-allowed"
                                 : ""
-                            }`}
+                              }`}
                             onClick={() => {
                               if (!clickedTokens.includes(token.name)) {
                                 selectToken(token);
                               }
                             }}
                           >
-                            <Image
+                            <img
                               src={token.logoURI}
                               alt={token.name}
                               height={50}
@@ -1055,101 +1075,10 @@ const Swap = () => {
                             />
                             <div className="flex gap-2">
                               <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
+                                className={`font-semibold ${clickedTokens.includes(token.name)
                                     ? "text-gray-500"
                                     : ""
-                                }`}
-                              >
-                                {token.name}
-                              </p>
-                              <p className="text-gray-200">
-                                ({token.symbol.toUpperCase()})
-                              </p>
-                            </div>
-                          </div>
-                        ))
-                    ) : selectedNetwork === "Solana" ? (
-                      <>
-                        {tokens
-                          .filter((token) =>
-                            token.name
-                              .toLowerCase()
-                              .includes(searchTerm.toLowerCase())
-                          )
-                          .map((token, index) => (
-                            <div
-                              key={index}
-                              className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                                clickedTokens.includes(token.name)
-                                  ? "opacity-50 cursor-not-allowed"
-                                  : ""
-                              }`}
-                              onClick={() => {
-                                if (!clickedTokens.includes(token.name)) {
-                                  selectToken(token);
-                                }
-                              }}
-                            >
-                              <img
-                                src={token.logoURI}
-                                alt={token.name}
-                                height={50}
-                                width={50}
-                                className="rounded-full"
-                              />
-                              <div className="flex gap-2">
-                                <p
-                                  className={`font-semibold ${
-                                    clickedTokens.includes(token.name)
-                                      ? "text-gray-500"
-                                      : ""
                                   }`}
-                                >
-                                  {token.name}
-                                </p>
-                                <p className="text-gray-200">
-                                  ({token.symbol.toUpperCase()})
-                                </p>
-                              </div>
-                            </div>
-                          ))}
-                      </>
-                    ) : selectedNetwork === "Arbitrum" ? (
-                      token_data_ARB
-                        .filter((token) =>
-                          token.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        )
-                        .map((token, index) => (
-                          <div
-                            key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              if (!clickedTokens.includes(token.name)) {
-                                selectToken(token);
-                              }
-                            }}
-                          >
-                            <Image
-                              src={token?.logoURI}
-                              alt={token.name}
-                              height={50}
-                              width={50}
-                              className="rounded-full"
-                            />
-                            <div className="flex gap-2">
-                              <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
-                                    ? "text-gray-500"
-                                    : ""
-                                }`}
                               >
                                 {token.name}
                               </p>
@@ -1158,62 +1087,61 @@ const Swap = () => {
                               </p>
                             </div>
                           </div>
-                        ))
-                    ) : selectedNetwork === "Polygon" ? (
-                      token_data_Po
-                        .filter((token) =>
-                          token.name
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        )
-                        .map((token, index) => (
-                          <div
-                            key={index}
-                            className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                              clickedTokens.includes(token.name)
-                                ? "opacity-50 cursor-not-allowed"
-                                : ""
+                        ))}
+                    </>
+                  ) : selectedNetwork === "Arbitrum" ? (
+                    token_data_ARB
+                      .filter((token) =>
+                        token.name
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      )
+                      .map((token, index) => (
+                        <div
+                          key={index}
+                          className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(token.name)
+                              ? "opacity-50 cursor-not-allowed"
+                              : ""
                             }`}
-                            onClick={() => {
-                              if (!clickedTokens.includes(token.name)) {
-                                selectToken(token);
-                              }
-                            }}
-                          >
-                            <Image
-                              src={token?.logoURI}
-                              alt={token.name}
-                              height={50}
-                              width={50}
-                              className="rounded-full"
-                            />
-                            <div className="flex gap-2">
-                              <p
-                                className={`font-semibold ${
-                                  clickedTokens.includes(token.name)
-                                    ? "text-gray-500"
-                                    : ""
+                          onClick={() => {
+                            if (!clickedTokens.includes(token.name)) {
+                              selectToken(token);
+                            }
+                          }}
+                        >
+                          <Image
+                            src={token?.logoURI}
+                            alt={token.name}
+                            height={50}
+                            width={50}
+                            className="rounded-full"
+                          />
+                          <div className="flex gap-2">
+                            <p
+                              className={`font-semibold ${clickedTokens.includes(token.name)
+                                  ? "text-gray-500"
+                                  : ""
                                 }`}
-                              >
-                                {token.name}
-                              </p>
-                              <p className="text-gray-200">
-                                ({token.symbol.toUpperCase()})
-                              </p>
-                            </div>
+                            >
+                              {token.name}
+                            </p>
+                            <p className="text-gray-200">
+                              ({token.symbol.toUpperCase()})
+                            </p>
                           </div>
-                        ))
-                    ) : null}
-                  </div>
-                )}
-              </div>
+                        </div>
+                      ))
+                  ) : null}
+                </div>
+              )}
             </div>
           </div>
-        )}
-        <ToastContainer />
-      </div>
-    </>
-  );
+        </div>
+      )}
+      <ToastContainer />
+    </div>
+  </>
+);
 };
 
 export default Swap;
