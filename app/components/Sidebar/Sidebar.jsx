@@ -550,8 +550,9 @@ function Sidebar() {
         const myData = res?.data?.data;
         setUserProfile(myData);
         setWalletAddress(myData?.wallet)
+        setSolanaAddress(myData?.solanawallet || "");
         setEmail(myData?.email)
-        console.log("User Profile Data:", myData);
+        console.log("User Profile Data:", myData?.solanawallet);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -613,7 +614,7 @@ function Sidebar() {
                     <FaBars />
                   </div>
                 ) : (
-                  <div className=" mt-8 ml-3.5 cursor-pointer"> X </div>
+                  <div className=" mt-8 ml-6 cursor-pointer"> X </div>
                 )}
               </div>
               <Image
@@ -863,10 +864,12 @@ function Sidebar() {
                   height="30px"
                   className=" ml-2 items-center"
                 />
-                {/* <div className={` ${isNavbar ? "" : "hidden"} `}> */}
-                  <p className="">{userProfile?.name}</p>
-                  <p className="text-xs">{userProfile?.email}</p>
-                {/* </div> */}
+                {/* < className="ml-6"> */}
+                {/* <div className={` ${isNavbar ? "" : "hidden "} `}>
+                  <p className="">{userProfile.name}</p>
+                  <p className="text-xs">{userProfile.email}</p>
+              
+                </div> */}
               </div>
             </div>
           </div>

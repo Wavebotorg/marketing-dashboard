@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import Profile from "../../../public/assets/profile.png";
-import add from "../../../public/assets/add.png";
+// import add from "../../../public/assets/add.png";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -109,22 +109,52 @@ const About = () => {
 
   const formatTransactionID = (txid) => {
     if (!txid || txid.length <= 10) return txid;
-    const firstSix = txid.slice(0, 8);
-    const lastFour = txid.slice(-6);
+    // const firstSix = txid.slice(0, 2);
+    // const lastFour = txid.slice(-3);
+    const firstSix = txid.slice(0, 4);
+    const lastFour = txid.slice(-3);
     return `${firstSix}...${lastFour}`;
   };
+
+  const [showSaveButton, setShowSaveButton] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  // console.log("🚀 ~ isEditing:", isEditing);
+  const [name, setName] = useState(userProfile.name);
+  // const [email, setEmail] = useState(userProfile.email);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setShowSaveButton(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    setShowSaveButton(false);
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+    setName(e.target.value);
+  };
+
+  /*  const handlenameChange = (e) => {
+    setName(e.target.value);
+  }; */
 
   return (
     <>
       <div className="mt-4 ">
         <div className="flex justify-end">
-          <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium">
+          <button
+            onClick={handleEditClick}
+            className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+          >
             Edit
           </button>
         </div>
       </div>
       <div className="">
-        <div className="pl-16 pt-4 back mt-5 flex">
+        <div className="md:pl-16 xsm:pl-6  pt-4 back mt-5 flex">
           <Image
             src={imageSrc}
             alt="Profilelogo"
@@ -201,50 +231,75 @@ const About = () => {
         </div>
       </div> */}
       <div className=" bg-[#1C1C1C] shadow-2xl rounded-b-lg ">
-        <div className="text-[#CECECE]  p-8 pl-16  ">
-          <div className="md:flex flex-1 mb-4">
-            <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
+        <div className="text-[#CECECE]  p-8 md:pl-16 xsm:pl-6  ">
+          <div className="md:flex flex mb-4">
+            <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>Name :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-44">
-              <p>{userProfile.name}</p>
+            {/* <div>
+              <input type="text"  className={`${isEditing ? 'block':'hidden'}`}/>
+            </div> */}
+            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[174px]">
+              {isEditing ? (
+                <input
+                  type="text"
+                  // name="name"
+                  className="text-black"
+                  value={userProfile.name}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{userProfile.name}</p>
+              )}
             </div>
           </div>
 
-          <div className="md:flex flex-1 mb-4">
-            <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
+          <div className="md:flex flex mb-4">
+            <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>Email :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[180px]">
-              <p>{userProfile.email}</p>
+            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[179px]">
+              {/* <p>{userProfile.email}</p> */}
+              {isEditing ? (
+                <input
+                  type="email"
+                  // name="email"
+                  className="text-black"
+                  value={userProfile.email}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{userProfile.email}</p>
+              )}
             </div>
           </div>
+
           {userProfile && userProfile.referralId && (
-            <div className="md:flex flex-1 mb-4">
-              <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
+            <div className="md:flex flex mb-4">
+              <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referral code :</p>
               </div>
-              <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[102px]">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[102px]">
                 <p>{userProfile.referralId}</p>
               </div>
             </div>
           )}
           {userProfile && userProfile.ReferredBy && (
-            <div className="md:flex flex-1 mb-4">
-              <div className="mr-4 text-[20px] text-[#CACACA] font-medium">
+            <div className="md:flex flex mb-4">
+              <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referred by :</p>
               </div>
-              <div className="text-[12px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[119px]">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[119px]">
                 <p>{userProfile.ReferredBy}</p>
               </div>
             </div>
           )}
 
-          <div className="md:flex flex-1 mb-4 ">
-            <div className="mr-4 md:text-[19px] text-[20px] text-[#CACACA] font-medium">
+          <div className="md:flex flex mb-4 ">
+            <div className="mr-4  md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>EVM Address :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[111px] flex">
+            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
               {/* <p className="truncate">{userProfile.wallet}</p> */}
               <p>{formatTransactionID(userProfile.wallet)}</p>
 
@@ -260,11 +315,11 @@ const About = () => {
             </div>
           </div>
 
-          <div className="md:flex flex-1 mb-4 ">
-            <div className="mr-4 text-[20px] md:text-[19px] text-[#CACACA] font-medium">
+          <div className="md:flex flex mb-4 ">
+            <div className="mr-4 md:text-[20px] text-[18px]  text-[#CACACA] font-medium">
               <p>Solana Address :</p>
             </div>
-            <div className="text-[12px] text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[90px] flex">
+            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
               {/* <p className="truncate">{userProfile.solanawallet}</p> */}
               <p>{formatTransactionID(userProfile.solanawallet)}</p>
 
