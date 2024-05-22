@@ -388,6 +388,7 @@ import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png"
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
 import Twitter from "../../../public/assets/sidebar/twitter.png";
 import medium from "../../../public/assets/sidebar/medium.png";
+import Cookies from "js-cookie";
 
 import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
@@ -395,6 +396,7 @@ import axios from "axios";
 // import axiosInstance from "@/app/apiInstances/axiosInstance";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import { useWallet } from "../contexts/WalletContext";
+import { Cookie } from "next/font/google";
 function Sidebar() {
   const router = useRouter();
   const { setWalletAddress, setEmail, setSolanaAddress } = useWallet();
@@ -409,25 +411,21 @@ function Sidebar() {
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  const getUserdata = async () => {
-    await axiosInstanceAuth
-      .get("getUserProfile")
-      .then((res) => {
-        const myData = res?.data?.data;
-        setAllUser(myData || []);
-        setWalletAddress(myData?.wallet);
-        setEmail(myData?.email);
-        console.log("setWalletAddress:", myData?.wallet);
-        console.log("getUserProfile---->", myData);
-      })
-      .catch((err) => {
-        console.log("err --->", err);
-      });
-  };
-
-  useEffect(() => {
-    getUserdata();
-  }, [Token]);
+  // const getUserdata = async () => {
+  //   await axiosInstanceAuth
+  //     .get("getUserProfile")
+  //     .then((res) => {
+  //       const myData = res?.data?.data;
+  //       setAllUser(myData || []);
+  //       setWalletAddress(myData?.wallet)
+  //       setEmail(myData?.email)
+  //       console.log("setWalletAddress:", myData?.wallet)
+  //       console.log("getUserProfile---->", myData);
+  //     })
+  //     .catch((err) => {
+  //       console.log("err --->", err);
+  //     });
+  // };
 
   const pathname = usePathname();
   // const { pathname } = location;
@@ -523,6 +521,7 @@ function Sidebar() {
   };
   const matchPath =
     pathname === "/login" ||
+    // pathname === "/" ||
     pathname === "/signup" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
@@ -540,44 +539,18 @@ function Sidebar() {
   //     router.push('/login'); // Change '/login' to your actual login page route
   //   }
   // }, []);
-  /*   useEffect(() => {
-    const getUserProfile = async () => {
-      try {
-        const response = await axiosInstanceAuth.get("/getUserProfile");
-
-        setUserProfile(response?.data?.data || []);
-        setWalletAddress(myData?.wallet);
-        setEmail(myData?.email);
-        // setWalletAddress(response?.data?.data?.wallet);
-        // setEmail(response?.data?.data?.email);
-        setSolanaAddress(response?.data?.data?.solanawallet);
-
-        console.log("User Profile Data:", response?.data?.data);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-      console.log(
-        "🚀 ~ getUserProfile ~ response?.data?.data?.solanawallet:",
-        response?.data?.data?.solanawallet
-      );
-    };
-
-    getUserProfile();
-  }, []); */
-  // const [solanaAddress, setSolanaAddress] = useState("");
-  // console.log("🚀 ~ Sidebar ~ solanaAddress:", solanaAddress);
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const response = await axiosInstanceAuth.get("/getUserProfile");
-        setUserProfile(response?.data?.data || {});
-        setWalletAddress(response?.data?.data?.wallet || "");
-        setSolanaAddress(response?.data?.data?.solanawallet || "");
-        setEmail(response?.data?.data?.email || "");
-        console.log("User Profile Data:", response?.data?.data);
+        const res = await axiosInstanceAuth.get("/getUserProfile");
+        const myData = res?.data?.data;
+        setUserProfile(myData);
+        setWalletAddress(myData?.wallet);
+        setSolanaAddress(myData?.solanawallet || "");
+        setEmail(myData?.email);
+        console.log("User Profile Data:", myData?.solanawallet);
       } catch (error) {
         console.error("Error fetching user profile:", error);
-        setError(error.message || "Error fetching user profile");
       }
     };
 
@@ -606,13 +579,14 @@ function Sidebar() {
 
   const ConfirmLogOut = () => {
     localStorage.clear();
+    Cookies.remove("auth-token");
     router.push("/login");
     setConfirmationPopUp(false);
   };
 
   return (
     <div
-      className={` fixed top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${
+      className={` fixed  top-0 left-0 bg-[#1C1C1C] h-full z-[9999] text-white ${
         matchPath ? "hidden" : "block"
       } `}
     >
@@ -625,14 +599,14 @@ function Sidebar() {
       >
         <div className="sidebar h-full  -ml-[4px] hover:shadow-lg ">
           {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-          <div className="flex h-screen flex-col  overflow-y-auto">
-            <div className="flex items-center justify-center">
+          <div className="flex h-screen flex-col   overflow-y-auto">
+            <div className="flex  items-center text-white justify-center">
               <div
                 className={`xl:hidden text-3xl `}
                 onClick={() => setIsNavbar(!isNavbar)}
               >
                 {isNavbar === false ? (
-                  <div className="mt-10 mx-auto  cursor-pointer">
+                  <div className="mt-10 mx-auto ml-2 cursor-pointer">
                     <FaBars />
                   </div>
                 ) : (
@@ -656,8 +630,8 @@ function Sidebar() {
                       className={`${
                         (isHover && data?.id === isHover) ||
                         data?.pathname === pathname
-                          ? "navHover  "
-                          : "text-white "
+                          ? "navHover "
+                          : "text-white"
                       } flex md:px-1 lg:px-2   py-2 rounded-lg`}
                       onClick={() => setIsNavbar(false)}
                       onMouseEnter={() => HoverStyle(data?.id)}
@@ -686,7 +660,7 @@ function Sidebar() {
                 ))}
                 <div className="border-b border-stone-500 my-2 " />
                 {headerbottom?.map((data) => (
-                  <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4  ">
+                  <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4 ">
                     <Link
                       href={data?.pathname}
                       className={`${
@@ -728,10 +702,11 @@ function Sidebar() {
                   <button
                     onClick={(e) => setConfirmationPopUp(true)}
                     // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
-                    className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-lg xl:px-7 lg: px-3 place-items-center"
+                    className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
                   >
                     <div className="flex items-center gap-1">
                       <FiPower size={18} className="xl:block hidden" />
+                      {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
                       <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                         Logout
                       </span>
@@ -789,19 +764,19 @@ function Sidebar() {
               ) : (
                 <div className=" grid place-items-center">
                   <Link href="/login " className="">
-                    {/* <button className="bg-[#1788FB] text-white p-2 rounded-lg ">
+                    {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center  px-5 ">
                       <Image
                         src={Loginicon}
                         alt="loginicon"
-                        className="w-[20px] h-[20px] md:block hidden"
+                        className="w-[20px] h-[20px] xl:block hidden "
                       />
                       <span className="lg:ml-2 md:text-md text-sm   block ">
                         Login
                       </span>
                     </div>
                   </button>  */}
-                    <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-lg xl:px-7 lg: px-3 place-items-center">
+                    <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
                       <div className="flex items-center">
                         <Image
                           src={Loginicon}
@@ -818,7 +793,6 @@ function Sidebar() {
               )}
             </div>
             <div className="text-white xl:px-8 px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
-              {/* lg:mt-20 sm:mt-32 xsm:mt-20  */}
               <div className="hidden 2xl:flex xl:flex">
                 <div className="flex gap-2">
                   <div>
@@ -889,7 +863,6 @@ function Sidebar() {
                 <div className={` ${isNavbar ? "" : "hidden "} `}>
                   <p className="">{userProfile.name}</p>
                   <p className="text-xs">{userProfile.email}</p>
-                  {/* </> */}
                 </div>
               </div>
             </div>

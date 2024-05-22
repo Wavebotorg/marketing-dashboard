@@ -34,7 +34,7 @@ const Market = () => {
     axios
 
       .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=270&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
       .then((res) => {
         setAllCoinData(res?.data);
@@ -104,6 +104,7 @@ const Market = () => {
         setSavedCoins((prevSavedCoins) =>
           prevSavedCoins.filter((coinId) => coinId !== id)
         );
+
         setSavedData((prevSavedData) => {
           if (Array.isArray(prevSavedData)) {
             return prevSavedData.filter((coinId) => coinId !== id);
@@ -119,6 +120,7 @@ const Market = () => {
             return [...prevSavedData, id];
           } else {
             return [id];
+            
           }
         });
 

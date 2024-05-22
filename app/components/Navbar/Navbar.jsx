@@ -72,6 +72,7 @@ const Navbar = () => {
           className={`${
             getPath === "/login" ||
             getPath === "/profile" ||
+            getPath === "/swap" ||
             getPath === "/signup" ||
             getPath === "/swap" ||
             getPath === "/forgotpassword" ||

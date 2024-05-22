@@ -59,7 +59,7 @@ const Page = () => {
           </div>
 
           <div className="lg:container lg:mx- md:mx-6 mx-3  lg:border-l-2 lg:border-[#ffffff] lg:border-opacity-15 border-0 ">
-            <table className="responsive-table  ">
+            <table className="responsive-table home-head-title ">
               <thead className="text-[#828282] md:text-[#828282]">
                 <tr className="   ">
                   <th scope="col">User Id</th>
@@ -98,7 +98,7 @@ const Page = () => {
                         )}
                       </td>
                       <td data-title="VIP Level" className="flex items-center ">
-                        <span className="md:ml-[2rem] ">
+                        <span className="">
                           {items?.vipLevel}
 
                           <button className=" text-xl  text-[#828282] align-middle  pb-0.6 ">

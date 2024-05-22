@@ -9,14 +9,17 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import ChangePass from "./ChangePass";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import axiosInstance from "../../apiInstances/axiosInstance";
 import Link from "next/link";
 import sol from "../../../public/assets/sol.png";
+import { useRouter } from "next/navigation";
 
 const About = () => {
   const [showPopup, setShowPopup] = useState(false);
-
+  const [email, setEmail] = useState("");
   const popupRef = useRef(null);
-
+  const router = useRouter();
+  const changePassRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -29,40 +32,7 @@ const About = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  /* const handleSubmit = async () => {
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
-      toast.error(
-        "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long."
-      );
-      return;
-    }
 
-    if (mydata.newPassword.length < 8 && mydata.confirmPassword.length < 8) {
-      toast.error("Password must be at least 8 characters long.");
-      return;
-    }
-    await axiosInstance
-      .post("resetPassword", mydata)
-      .then((res) => {
-        const myData = res?.data;
-        console.log("Reset Password Data --->", myData?.msg);
-        if (myData?.status) {
-          toast.success(myData?.msg);
-
-          router.push("/");
-          // setTimeout(() => {
-          // }, 3000);
-        } else {
-          toast.error(myData?.msg);
-        }
-      })
-      .catch((err) => {
-        console.log("err---->", err);
-      });
-    setIsVerificationSuccess(true);
-  };
- */
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
@@ -70,6 +40,9 @@ const About = () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
+        setEmail(response?.data?.data?.email);
+        // console.log("🚀 ~ getUserProfile ~ setEmail:",   response?.data?.data?.email)
+
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -79,13 +52,29 @@ const About = () => {
     getUserProfile();
   }, []);
 
-  /*   const [image, setImage] = useState(null); 
+  const handleSubmit = async () => {
+    await axiosInstance
+      .post("forgetPassword", { email: email })
+      .then((res) => {
+        const myData = res?.data;
+        console.log("chnage Password Data --->", myData);
+        localStorage.setItem("type", "changepassword");
+        localStorage.setItem("userEmail", email);
+        if (myData?.status) {
+          setShowPopup(true);
+          setTimeout(() => {
+            if (changePassRef.current) {
+              changePassRef.current.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 1000);
 
-  const handleImageChange = (event) => {
-    const selectedImage = event.target.files[0];
-    const imageUrl = URL.createObjectURL(selectedImage);
-    setImage(imageUrl); // Set the selected image
-  }; */
+          //  setShowPopup(true);
+        }
+      })
+      .catch((err) => {
+        console.log("err---->", err);
+      });
+  };
 
   const [imageSrc, setImageSrc] = useState(Profile);
   const fileInputRef = useRef(null);
@@ -105,7 +94,7 @@ const About = () => {
     fileInputRef.current.click();
   };
 
-  /*   const copyToClipboard = (text) => {
+  const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
@@ -114,16 +103,6 @@ const About = () => {
       .catch((error) => {
         console.error("Failed to copy:", error);
       });
-  }; */
-  const [copiedEvm, setCopiedEvm] = useState(false);
-  const [copiedSolana, setCopiedSolana] = useState(false);
-
-  const copyToClipboard = (text, setCopied) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000); // Hide the popup after 2 seconds
   };
 
   const formatTransactionID = (txid) => {
@@ -139,7 +118,7 @@ const About = () => {
   const [isEditing, setIsEditing] = useState(false);
   // console.log("🚀 ~ isEditing:", isEditing);
   const [name, setName] = useState(userProfile.name);
-  const [email, setEmail] = useState(userProfile.email);
+  // const [email, setEmail] = useState(userProfile.email);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -325,7 +304,7 @@ const About = () => {
               {/* <p className="truncate">{userProfile.wallet}</p> */}
               <p>{formatTransactionID(userProfile.wallet)}</p>
 
-              {/*     <button
+              <button
                 className="text-xl text-[#828282] align-middle pb-1.5"
                 onClick={() => copyToClipboard(userProfile.wallet)}
               >
@@ -333,25 +312,7 @@ const About = () => {
                   size={12}
                   className="ml-1.5 items-center"
                 />
-              </button> */}
-              <div className="relative">
-                <button
-                  className="text-xl text-[#828282] align-middle pb-1.5"
-                  onClick={() =>
-                    copyToClipboard(userProfile.wallet, setCopiedEvm)
-                  }
-                >
-                  <MdOutlineContentCopy
-                    size={12}
-                    className="ml-1.5 items-center"
-                  />
-                </button>
-                {copiedEvm && (
-                  <div className="absolute bottom-[-30px] left-0 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
-                    Copied!
-                  </div>
-                )}
-              </div>
+              </button>
             </div>
           </div>
 
@@ -362,47 +323,41 @@ const About = () => {
             <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
               {/* <p className="truncate">{userProfile.solanawallet}</p> */}
               <p>{formatTransactionID(userProfile.solanawallet)}</p>
-              <div className="relative">
-                <button
-                  className="text-xl text-[#828282] align-middle pb-1.5"
-                  onClick={() =>
-                    copyToClipboard(userProfile.solanawallet, setCopiedSolana)
-                  }
-                >
-                  <MdOutlineContentCopy
-                    size={12}
-                    className="ml-1.5 items-center"
-                  />
-                </button>
-                {copiedSolana && (
-                  <div className="absolute bottom-[-30px] left-0 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
-                    Copied!
-                  </div>
-                )}
-              </div>
+
+              <button
+                className="text-xl text-[#828282] align-middle pb-1.5"
+                onClick={() => copyToClipboard(userProfile.solanawallet)}
+              >
+                <MdOutlineContentCopy
+                  size={12}
+                  className="ml-1.5 items-center"
+                />
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       <div className="mt-4 ">
-        {showSaveButton && (
-          <div className="flex justify-end mt-4">
-            <button
-              onClick={handleSaveClick}
-              className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-            >
-              Save
-            </button>
-          </div>
-        )}
+        <div className="flex justify-end">
+          <button
+            className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            Save
+          </button>
+        </div>
       </div>
       <div className="mt-4">
         <div className="flex justify-end mb-3">
           {/* <Link href="/passwordverify"> */}
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
-            onClick={() => setShowPopup(true)}
+            onClick={() => {
+              handleSubmit();
+            }}
           >
             Change Password
           </button>
@@ -411,9 +366,11 @@ const About = () => {
       </div>
       {showPopup && (
         <div>
-          {/* <div ref={popupRef}> */}
-          <ChangePass />
-          {/* </div> */}
+          <div ref={popupRef}>
+            <div ref={changePassRef}>
+              <ChangePass />
+            </div>
+          </div>
         </div>
       )}
     </>
