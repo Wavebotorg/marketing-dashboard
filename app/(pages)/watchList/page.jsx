@@ -182,19 +182,19 @@ const WatchList = () => {
           </div>
           <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
-              <button className="bg-blue-500 px-2 rounded-full">All</button>
+              <button className="bg-blue-500 px-3 rounded-full">All</button>
             </div>
             <div>
-              <button className="  ">Crypto</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">Crypto</button>
             </div>
             <div>
-              <button className="  ">Stocks</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">Stocks</button>
             </div>
             <div>
-              <button className="  ">People</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">People</button>
             </div>
             <div>
-              <button className="  ">Smart Portfolios</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">Smart Portfolios</button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
             {/*  <div className="flex items-center  ml-auto  ">

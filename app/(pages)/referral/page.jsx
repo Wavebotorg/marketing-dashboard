@@ -551,25 +551,25 @@ const Referral = () => {
           Referral Rewards
         </h1>
         <div className="flex flex-col md:flex-row gap-6 mt-5">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2">
             <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
             <p>Paginated Results</p>
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 mt-5">
-          <div className="rounded-lg px-4 py-2 lg:py-4  bg-[#1C1C1C]">
+          <div className="rounded-lg px-4 py-2 lg:py-4 text-[#CECECE]   bg-[#1C1C1C]">
             <p className=" text-nowrap text-[#EAEAEA] ">Total Referrals</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--</p>
           </div>
-          <div className="rounded-lg px-4 py-2 lg:py-4  bg-[#1C1C1C] ">
+          <div className="rounded-lg px-4 py-2 lg:py-4 text-[#CECECE]   bg-[#1C1C1C] ">
             <p className=" text-nowrap text-[#EAEAEA] ">Transactions</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--</p>
           </div>
-          <div className="rounded-lg px-4 py-2 lg:py-4 bg-[#1C1C1C] ">
+          <div className="rounded-lg px-4 py-2 lg:py-4 text-[#CECECE]  bg-[#1C1C1C] ">
             <p className=" text-nowrap text-[#EAEAEA] ">Total Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--ETH</p>
           </div>
-          <div className="rounded-lg px-4 py-2 lg:py-4  bg-[#1C1C1C] ">
+          <div className="rounded-lg px-4 py-2 lg:py-4 text-[#CECECE]   bg-[#1C1C1C] ">
             <p className=" text-nowrap text-[#EAEAEA] ">Claimable Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--ETH</p>
           </div>

@@ -638,11 +638,11 @@ const TokenDashboard = () => {
           Revenue Share Dashboard
         </h1>
         <div className="flex flex-col md:flex-row  md:justify-center md: items-center gap-6 mt-5 lg:justify-start">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
             <IoIosInformationCircleOutline size={20} />
             <p>Rewards Forfeiture</p>
           </div>
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
             <IoIosInformationCircleOutline size={20} />
             <p>Paginated Results</p>
           </div>
@@ -676,7 +676,7 @@ const TokenDashboard = () => {
               name="text"
               id="text"
               placeholder="Wallet:"
-              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+              className="bg-[#1C1C1C] placeholder:text-[#626262] rounded-lg p-3 w-full"
             />
           </div>
 
@@ -686,7 +686,7 @@ const TokenDashboard = () => {
               name="text"
               id="text"
               placeholder="AUTO-COMPOUND:"
-              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+              className="bg-[#1C1C1C] placeholder:text-[#626262] rounded-lg p-3 w-full"
             />
           </div>
         </div>

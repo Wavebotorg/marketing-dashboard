@@ -53,7 +53,7 @@ const Page = () => {
         <div className="mx-3  md:flex gap-5 ">
           <div className="flex items-center mb-5 md:mb-0">
             <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-            <span className="ml-5 mr-5 text-wrap md:text-nowrap">
+            <span className="ml-5 mr-16 text-wrap md:text-nowrap">
               Anonymous-User-810b1
             </span>
           </div>

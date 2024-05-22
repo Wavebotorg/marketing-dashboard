@@ -418,7 +418,7 @@ const Holder = () => {
           Holder Rewards
         </p>
         <div className="flex flex-col md:flex-row gap-6 mt-5">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2">
             <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
             <p className="">Paginated Results</p>
           </div>
@@ -426,16 +426,16 @@ const Holder = () => {
         <div className="flex flex-col  md:flex-row gap-6 mt-5 md:w-full ">
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
             {/* <p className="text-[#EAEAEA]">Total Rewards</p> */}
-            <p className="text-[#e2dede] font-light">Total Rewards</p>
+            <p className="text-[#CECECE]  font-light">Total Rewards</p>
 
             <p className="text-blue-400 text-2xl mt-1  w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#EAEAEA]">Unclaimed Rewards</p>
+            <p className="text-[#CECECE] ">Unclaimed Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#EAEAEA]">Claimable Rewards</p>
+            <p className="text-[#CECECE] ">Claimable Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
         </div>

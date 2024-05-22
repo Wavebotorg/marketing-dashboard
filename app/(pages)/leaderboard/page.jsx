@@ -169,12 +169,12 @@ const LeaderBoard = () => {
 
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
-              <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-lg ">
+              <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
                 <table className="w-full">
                   <thead className="sticky top-0 leader-color shadow-2xl">
                     <tr
-                      className=" text-[#FFFFFF] bg-[#1C1C1C]  "
-                      // style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                      className="  text-[#CECECE]   bg-[#1C1C1C]  "
+                      style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                     >
                       <th
                         scope="col"
@@ -283,7 +283,7 @@ const LeaderBoard = () => {
                             className="rounded-full"
                           />
                         </div>
-                        <div className="lg:text-base text-sm">
+                        <div className="lg:text-base text-[#ffffffe0]  text-sm">
                           <div className="flex gap-2">
                             <p>{d?.name}</p>
                             <p className="text-[#6B6B6B]">

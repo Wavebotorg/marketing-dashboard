@@ -10,6 +10,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import ChangePass from "./ChangePass";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Link from "next/link";
+import sol from "../../../public/assets/sol.png";
 
 const About = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -182,9 +183,12 @@ const About = () => {
           />
           <button
             onClick={openFileInput}
-            className="absolute text-black bg-white rounded-full top-[19rem] cursor-pointer"
+            className="absolute  rounded-full top-[19rem] cursor-pointer"
+
+            // className="absolute text-black bg-white rounded-full top-[19rem] cursor-pointer"
           >
-            <IoIosAddCircleOutline size={30} />
+            <Image src={sol} alt="logo" />
+            {/* <IoIosAddCircleOutline size={30} /> */}
           </button>
           <input
             ref={fileInputRef}
@@ -261,8 +265,8 @@ const About = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  // name="name"
-                  className="text-black"
+                  name="name"
+                  className=" p-0.5 bg-[#1C1C1C]  text-white border border-gray-500 outline-none"
                   value={userProfile.name}
                   onChange={handleChange}
                 />
@@ -281,8 +285,8 @@ const About = () => {
               {isEditing ? (
                 <input
                   type="email"
-                  // name="email"
-                  className="text-black"
+                  name="email"
+                  className=" p-0.5 bg-[#1C1C1C]  text-white border border-gray-500 outline-none"
                   value={userProfile.email}
                   onChange={handleChange}
                 />

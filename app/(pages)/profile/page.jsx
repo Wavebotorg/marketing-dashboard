@@ -109,11 +109,12 @@ const Profile = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
-          <div className="text-[35px] font-medium">My Profile</div>
+          <div className="text-[30px] font-medium">My Profile</div>
+
           <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 1 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(1)}
@@ -123,7 +124,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 2 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(2)}
@@ -133,7 +134,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 3 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(3)}
@@ -143,7 +144,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 4 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(4)}
@@ -153,7 +154,7 @@ const Profile = () => {
             </div>
             <div>
               <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[20px] text-[9px] font-normal ${
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 5 && "bg-blue-500"
                 }`}
                 onClick={() => handleButtonClick(5)}

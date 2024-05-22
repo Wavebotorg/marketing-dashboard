@@ -37,9 +37,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 
 const Swap = () => {
   const { walletAddress, email, solanaAddress } = useWallet();
-  // console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
-  // console.log("🚀 ~ Swap ~ email:", email);
-  // console.log("🚀 ~ Swap ~ SolanaAddress:", solanaAddress);
+
   const router = useRouter();
   const [tokendata, setTokendata] = useState(null);
 
@@ -110,37 +108,6 @@ const Swap = () => {
       networkname: "Ethereum",
     },
   ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  /*  const token_data_SOL = [
-    {
-      name: "USDT",
-      symbol: "USDT",
-      chianid: "900",
-      address: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
-      decimal: "6",
-      logoURI: USDT,
-      networkname: "Solana",
-    },
-    {
-      name: "Oxygen Protocol",
-      symbol: "OXY",
-      chianid: "900",
-      address: "z3dn17yLaGMKffVogeFHQ9zWVcXgqgf3PQnDsNs2g6M",
-      decimal: "6",
-      logoURI: OXy,
-      networkname: "Solana",
-    },
-    {
-      name: "USD Coin",
-      symbol: "USD",
-      chianid: "900",
-      address: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-      decimal: "6",
-      logoURI: OXy,
-      networkname: "Solana",
-    },
-  ]; */
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const token_data_ARB = [
@@ -404,60 +371,6 @@ const Swap = () => {
       });
   };
 
-  /* const handleSwapSubmit = () => {
-    let endpoint;
-    if (selectedNetwork === "Solana") {
-      endpoint = "/solanaSwap";
-    } else {
-      endpoint = "/mainswap";
-    }
-  // const handleSwapSubmit = () => {
-  //   let endpoint;
-  //   if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-  //     endpoint = "/solanaSwap";
-  //   } else  (selectedNetwork === "Arbitrum") {
-  //     endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
-  //   } else {
-  //     endpoint = "/mainswap";
-  //   }
-
-    axiosInstance
-      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataArb)
-      .then((res) => {
-        const myData = res?.data;
-        console.log("Response from API:", myData);
-        if (myData?.status) {
-          toast.success(myData?.msg);
-        } else {
-          toast.error(myData?.msg);
-        }
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-        toast.error("An error occurred while processing your request");
-      });
-  }; */
-
-  // const handleSwapSubmit = async () => {
-  //   try {
-
-  //     const response =
-  //       await axiosInstance.post("/mainswap", data)
-  //       if (response?.status) {
-  //         toast.success(response?.msg);
-
-  //         router.push("/passwordverify");
-  //         // setTimeout(() => {
-  //         // }, 3000);
-  //       } else {
-  //         toast.error(response?.msg);
-  //       }
-  //     console.log("Response from API:", response);
-  //   } catch (error) {
-  //     // Handle errors
-  //     console.error("Error occurred:", error);
-  //   }
-  // };
   const handleClosePopup1 = () => {
     setShowPopup1(false);
   };
@@ -512,57 +425,6 @@ const Swap = () => {
       }
     }
   };
-
-  /* onst getWalletBalance = async () => {
-    setShowPopup1(true);
-    await axiosInstance
-      .post("/fetchbalance", { email: email })
-      .then((res) => {
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      })
-      .catch((err) => {
-        console.log("error--->", err);
-      });
-  }; */
-
-  /*   const getSolanaBalance = async () => {
-    if (selectedNetwork === "Solana") {
-      setShowPopup1(true);
-      try {
-        const res = await axiosInstance.post("/getSolanaWalletTokenBal", {
-          email: email,
-        });
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        console.log("error--->", err);
-      }
-    } else {
-      console.log("Selected network is not Arbitrum. API call skipped.");
-    }
-  };
- */
-
-  /*   const getSolanaBalance = async () => {
-    if (selectedNetwork === "Solana") {
-      setShowPopup1(true);
-      try {
-        const res = await axiosInstanceAuth.post("/getSolanaWalletTokenBal", {
-          wallet: solanaAddress,
-        });
-        const myData = res?.data?.response1?.tokens;
-        console.log("fetchSolanabalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        console.log("error--->", err);
-      }
-    } else {
-      console.log("Selected network is not Solana. API call skipped.");
-    }
-  }; */
 
   const getSolanaBalance = async () => {
     if (selectedNetwork === "Solana") {
@@ -622,6 +484,18 @@ const Swap = () => {
     }
   };
 
+  const handleButtonClick = async () => {
+    setShowPopup1(true);
+
+    if (selectedNetwork === "Solana") {
+      await getSolanaBalance();
+    } else if (selectedNetwork === "Arbitrum") {
+      await getWalletBalance();
+    } else {
+      setShowBalance([]);
+    }
+  };
+
   // Assuming selectedNetwork is passed as a prop or derived from state
   // const selectedNetwork = props.selectedNetwork; // or useState/useSelector depending on your state management
 
@@ -660,9 +534,9 @@ const Swap = () => {
   //   setSelectedNetwork(name);
   //   setShowDropdown(false); // Close dropdown when an option is clicked
   // };
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
-  };
+  // const handleButtonClick = (button) => {
+  //   setSelectedButton(button);
+  // };
 
   // const redirecttolink=()=>{
   //   router.push("https://arbiscan.io/tx/")
@@ -748,12 +622,30 @@ const Swap = () => {
 
   console.log("🚀 ~ /*handleSwapSubmit ~ tokens:", tokens);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowPopup1(false);
+      }
+    };
+
+    if (showPopup1) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPopup1]);
+
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
           <div className="text-lg font-semibold flex justify-end">
-            <button
+            {/*        <button
               className="bg-blue-500 rounded-lg  px-2 mt-3"
               // onClick={(getWalletBalance(), getSolanaBalance())}
               onClick={() => {
@@ -762,11 +654,20 @@ const Swap = () => {
               }}
             >
               click to show Balance
+            </button> */}
+            <button
+              className="bg-blue-500 rounded-lg px-2 mt-6"
+              onClick={handleButtonClick}
+            >
+              Click to show Balance
             </button>
           </div>
           {showPopup1 && (
-            <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
-              <div className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+            <div className="fixed inset-0 z-50 top-16 flex items-start justify-end ">
+              <div
+                ref={popupRef}
+                className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] "
+              >
                 <div className=" space-y-5 ">
                   <div className="flex flex-col justify-between items-center py-2  ">
                     <div className="text-xl flex justify-between w-full items-center ">
