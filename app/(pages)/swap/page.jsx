@@ -416,7 +416,7 @@
 //     }
 //   // const handleSwapSubmit = () => {
 //   //   let endpoint;
-//   //   if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+//   //   if (selectedNetwork === "Solana") {
 //   //     endpoint = "/solanaSwap";
 //   //   } else  (selectedNetwork === "Arbitrum") {
 //   //     endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
@@ -667,9 +667,6 @@
 //   // const redirecttolink=()=>{
 //   //   router.push("https://arbiscan.io/tx/")
 //   // }
-
-
-
 
 // const getWalletBalance = async () => {
 //   setShowPopup1(true);
@@ -1313,15 +1310,15 @@ const Swap = () => {
     selectedTokenDatato
   );
   const NetworkData = [
-    { name: "Ethereum", chainid: "1", img: eth },
-    { name: "Arbitrum", chainid: "42161", img: arbitrum },
-    { name: "Optimism", chainid: "10", img: optimism },
-    { name: "Polygon", chainid: 137, img: poly },
-    { name: "Solana", chainid: "900", img: SOL },
-    { name: "BNB Chain", chainid: "56", img: BNB },
-    { name: "Avalanche", chainid: "43114", img: avalanche },
-    { name: "Celo", chainid: "42220", img: CELO },
-    { name: "Blast", chainid: "238", img: BURST },
+    { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
+    { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
+    { name: "Optimism", chainid: "10", img: optimism, descode: "0xa" },
+    { name: "Polygon", chainid: "137", img: poly, descode: "0x89" },
+    { name: "Solana", chainid: "900", img: SOL, desCode: "" },
+    { name: "BNB Chain", chainid: "56", img: BNB, descode: "0x38" },
+    { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
+    { name: "Celo", chainid: "42220", img: CELO, descode: "" },
+    { name: "Blast", chainid: "238", img: BURST, descode: "" },
   ];
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1551,14 +1548,7 @@ const Swap = () => {
     setSearchTerm("");
   };
   const [showDropdown, setShowDropdown] = useState(false);
-  /*  const dataArb = {
-    token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
-    token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
-    amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
-    chainId: selectedChainId,
-    email: email,
-  }; */
-  // console.log(" dataEvm:", dataEvm);
+
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
     output: selectedTokenDatato?.address_from,
@@ -1705,7 +1695,7 @@ const Swap = () => {
     }
   };
 
-  const getWalletBalance = async () => {
+  /*  const getWalletBalance = async () => {
     if (selectedNetwork === "Arbitrum") {
       setShowPopup1(true);
       try {
@@ -1719,23 +1709,77 @@ const Swap = () => {
     } else {
       console.log("Selected network is not Arbitrum. API call skipped.");
     }
+  }; */
+  /*   const myDatawallet = {
+    email: email,
+    chainId: setSelectedNetwork?.descode,
   };
-
-  const handleButtonClick = async () => {
+  const getWalletBalance = async (networkName) => {
     setShowPopup1(true);
 
-    if (selectedNetwork === "Solana") {
-      await getSolanaBalance();
-    } else if (selectedNetwork === "Arbitrum") {
-      await getWalletBalance();
+    const selectedNetwork = NetworkData.find(
+      (network) => network.name === networkName
+    );
+    // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
+    // If the network is found, set its desCode as the selectedNetwork state
+    if (selectedNetwork) {
+      console.log(
+        "🚀 ~ handleNetworkSelect ~ selectedNetwork:----------------",
+        selectedNetwork
+      );
+      setSelectedNetwork(selectedNetwork);
+
+      try {
+        const res = await axiosInstance.post("/fetchbalance", {
+          myDatawallet,
+        });
+
+        const myData = res?.data?.data;
+        console.log("fetchbalance-------------------------->", myData);
+        setShowBalance(myData);
+      } catch (err) {
+        +console.log("error--->", err);
+        setShowBalance([]);
+      }
     } else {
-      setShowBalance([]);
+      console.error("Network not found");
     }
   };
+ */
 
-  // Assuming selectedNetwork is passed as a prop or derived from state
-  // const selectedNetwork = props.selectedNetwork; // or useState/useSelector depending on your state management
+  const getWalletBalance = async (networkName) => {
+    setShowPopup1(true);
 
+    const selectedNetwork = NetworkData.find(
+      (network) => network.name === networkName
+    );
+    // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
+    // If the network is found, set its desCode as the selectedNetwork state
+    if (selectedNetwork) {
+      console.log(
+        "🚀 ~ handleNetworkSelect ~ selectedNetwork:----------------",
+        selectedNetwork
+      );
+      setSelectedNetwork(selectedNetwork);
+      const myDatawallet = {
+        email: email,
+        chainId: selectedNetwork?.descode,
+      };
+
+      try {
+        const res = await axiosInstance.post("/fetchbalance", myDatawallet);
+
+        const myData = res?.data?.data;
+        console.log("fetchbalance-------------------------->", myData);
+        setShowBalance(myData);
+      } catch (err) {
+        +console.log("error--->", err);
+        setShowBalance([]);
+      }
+    } else {
+      console.error("Network not found");
+    }
+  };
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -1799,32 +1843,7 @@ const Swap = () => {
     };
   }, []);
 
-  // const [selectedNetwork, setSelectedNetwork] = useState(""); // State to track the selected network
-  // const [selectChain, setSelectChain] = useState(""); // State to store the selected network's image URL
   const [tokens, setTokens] = useState([]); // State to store the fetched tokens
-  // console.log("🚀 ~ Swap ~ tokens:", tokens);
-
-  // Function to handle option click
-  // const handleOptionClick = (name) => {
-  //   setSelectedNetwork(name); // Update the selected network
-  // };
-
-  // Fetch tokens when selected network changes
-  /*  useEffect(() => {
-    // Check if the selected network is Solana
-    if (selectedNetwork === "Solana") {
-      // Make API call to fetch tokens
-      axios
-        .get("https://token.jup.ag/strict")
-        .then((response) => {
-          // Assuming the response contains an array of tokens
-          setTokens(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching tokens:", error);
-        });
-    }
-  }, [selectedNetwork]); */
 
   useEffect(() => {
     // Check if the selected network is Solana
@@ -1882,7 +1901,7 @@ const Swap = () => {
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
         <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
           <div className="text-lg font-semibold flex justify-end">
-            {/*        <button
+            <button
               className="bg-blue-500 rounded-lg  px-2 mt-3"
               // onClick={(getWalletBalance(), getSolanaBalance())}
               onClick={() => {
@@ -1891,13 +1910,13 @@ const Swap = () => {
               }}
             >
               click to show Balance
-            </button> */}
-            <button
+            </button>
+            {/*   <button
               className="bg-blue-500 rounded-lg px-2 mt-6"
               onClick={handleButtonClick}
             >
               Click to show Balance
-            </button>
+            </button> */}
           </div>
           {showPopup1 && (
             <div className="fixed inset-0 z-50 top-16 flex items-start justify-end ">
@@ -1973,6 +1992,43 @@ const Swap = () => {
                     ) : (
                       <div className="mt-16 text-xl">No data</div>
                     )}
+
+                    {/*  {showBalance &&
+                    Array.isArray(showBalance) &&
+                    showBalance.length > 0 ? (
+                      showBalance.map((item, index) => (
+                        <div className="flex items-center mt-2" key={index}>
+                          <div className="flex">
+                            <img
+                              src={item?.logo}
+                              alt={item?.name || "Token"}
+                              height={30}
+                              width={30}
+                              className="h-15 w-15 my-3"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "fallback-image-url";
+                              }}
+                            />
+                            <div className="flex flex-col justify-center pl-3">
+                              <div className="text-base font-bold">
+                                {item?.name}
+                              </div>
+                              <div className="text-base">
+                                Balance:{" "}
+                                <span className="font-bold">
+                                  {selectedNetwork === "Solana"
+                                    ? item?.amount
+                                    : item?.balance}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mt-16 text-xl">No data</div>
+                    )} */}
                   </div>
                 </div>
               </div>
@@ -2062,6 +2118,7 @@ const Swap = () => {
                                     onClick={() => {
                                       handleOptionClick(item.name);
                                       setSelectChain(item?.img);
+                                      getWalletBalance(item?.name);
                                     }}
                                     className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
                                       selectedNetwork === item.name
@@ -2076,6 +2133,7 @@ const Swap = () => {
                                     />
                                     <span className="text-white">
                                       {item.name}
+                                      {/* {item.descode} */}
                                     </span>
                                     {selectedNetwork === item.name && (
                                       <svg

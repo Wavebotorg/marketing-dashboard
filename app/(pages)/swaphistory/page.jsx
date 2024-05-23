@@ -212,7 +212,6 @@ const SwapHistory = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-
   const getSolanaTransactions = async () => {
     try {
       const response = await axiosInstanceAuth.post("/solanaTransactions");

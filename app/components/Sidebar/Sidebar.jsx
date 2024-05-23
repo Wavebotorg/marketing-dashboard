@@ -860,10 +860,10 @@ function Sidebar() {
                   className=" ml-2 items-center"
                 />
                 {/* < className="ml-6"> */}
-                <div className={` ${isNavbar ? "" : "hidden "} `}>
+                {/* <div className={` ${isNavbar ? "" : "hidden "} `}>
                   <p className="">{userProfile.name}</p>
                   <p className="text-xs">{userProfile.email}</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
