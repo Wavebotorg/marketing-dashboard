@@ -422,32 +422,32 @@ const SwapHistory = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium"
                     >
-                      Amount From
+                      Amount
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      Transaction Hash To
+                      Transaction Hash
                     </th>
 
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      CreatedAt Amount
+                      CreatedAt
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      UpdatedAt Transaction Hash
+                      UpdatedAt
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      From Transaction Date
+                      From
                     </th>
                     <th
                       scope="col"
