@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 const About = () => {
   const [showPopup, setShowPopup] = useState(false);
- const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const popupRef = useRef(null);
   const router = useRouter();
   const changePassRef = useRef(null);
@@ -30,7 +30,7 @@ const About = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
- 
+
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
@@ -38,9 +38,9 @@ const About = () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
-        setEmail(response?.data?.data?.email)
+        setEmail(response?.data?.data?.email);
         // console.log("🚀 ~ getUserProfile ~ setEmail:",   response?.data?.data?.email)
-      
+
         console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -49,35 +49,31 @@ const About = () => {
 
     getUserProfile();
   }, []);
- 
+
   const handleSubmit = async () => {
-     
-        await axiosInstance
-          .post("forgetPassword",{email:email})
-          .then((res) => {
-            const myData = res?.data;
-            console.log("chnage Password Data --->", myData);
-            localStorage.setItem("type", "changepassword");
-            localStorage.setItem("userEmail",email);
-            if (myData?.status) {
-              setShowPopup(true);
+    await axiosInstance
+      .post("forgetPassword", { email: email })
+      .then((res) => {
+        const myData = res?.data;
+        console.log("chnage Password Data --->", myData);
+        localStorage.setItem("type", "changepassword");
+        localStorage.setItem("userEmail", email);
+        if (myData?.status) {
+          setShowPopup(true);
           setTimeout(() => {
             if (changePassRef.current) {
               changePassRef.current.scrollIntoView({ behavior: "smooth" });
             }
-          },1000);
-             
-             
-             
-              //  setShowPopup(true);
-              
-            } 
-          })
-          .catch((err) => {
-            console.log("err---->", err);
-          });
-      };
-    
+          }, 1000);
+
+          //  setShowPopup(true);
+        }
+      })
+      .catch((err) => {
+        console.log("err---->", err);
+      });
+  };
+
   const [imageSrc, setImageSrc] = useState(Profile);
   const fileInputRef = useRef(null);
 
@@ -346,7 +342,7 @@ const About = () => {
             Save
           </button>
         </div> */}
-          {showSaveButton && (
+        {showSaveButton && (
           <div className="flex justify-end">
             <button
               className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
@@ -363,12 +359,10 @@ const About = () => {
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
             onClick={() => {
-           
               handleSubmit();
             }}
           >
             Change Password
-           
           </button>
           {/* </Link> */}
         </div>
@@ -376,8 +370,8 @@ const About = () => {
       {showPopup && (
         <div>
           <div ref={popupRef}>
-          <div ref={changePassRef}>
-            <ChangePass />
+            <div ref={changePassRef}>
+              <ChangePass />
             </div>
           </div>
         </div>

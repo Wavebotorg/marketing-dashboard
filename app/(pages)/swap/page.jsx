@@ -416,7 +416,7 @@
 //     }
 //   // const handleSwapSubmit = () => {
 //   //   let endpoint;
-//   //   if (selectedNetwork === "Solana") {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+//   //   if (selectedNetwork === "Solana") {
 //   //     endpoint = "/solanaSwap";
 //   //   } else  (selectedNetwork === "Arbitrum") {
 //   //     endpoint = "/mainswap"; // Assuming you have an endpoint for Arbitrum
@@ -667,9 +667,6 @@
 //   // const redirecttolink=()=>{
 //   //   router.push("https://arbiscan.io/tx/")
 //   // }
-
-
-
 
 // const getWalletBalance = async () => {
 //   setShowPopup1(true);
@@ -1698,45 +1695,39 @@ const Swap = () => {
     }
   };
 
- 
-  
-  const getWalletBalance = async (networkName) => {
-    setShowPopup1(true);
+  // const getWalletBalance = async (networkName) => {
+  //   setShowPopup1(true);
 
-    const selectedNetwork = NetworkData.find(
-      (network) => network.name === networkName
-    );
-    // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
-    // If the network is found, set its desCode as the selectedNetwork state
-    if (selectedNetwork) {
-      console.log(
-        "🚀 ~ handleNetworkSelect ~ selectedNetwork:----------------",
-        selectedNetwork
-      );
-      setSelectedNetwork(selectedNetwork);
-      const myDatawallet = {
-        email: email,
-        chainId: selectedNetwork?.descode
-       }
-      
-       
-      try {
-        const res = await axiosInstance.post("/fetchbalance", 
-          myDatawallet
-        
-        );
+  //   const selectedNetwork = NetworkData.find(
+  //     (network) => network.name === networkName
+  //   );
+  //   // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
+  //   // If the network is found, set its desCode as the selectedNetwork state
+  //   if (selectedNetwork) {
+  //     console.log(
+  //       "🚀 ~ handleNetworkSelect ~ selectedNetwork:----------------",
+  //       selectedNetwork
+  //     );
+  //     setSelectedNetwork(selectedNetwork);
+  //     const myDatawallet = {
+  //       email: email,
+  //       chainId: selectedNetwork?.descode,
+  //     };
 
-        const myData = res?.data?.data;
-        console.log("fetchbalance-------------------------->", myData);
-        setShowBalance(myData);
-      } catch (err) {
-        +console.log("error--->", err);
-        setShowBalance([]);
-      }
-    } else {
-      console.error("Network not found");
-    }
-  };
+  //     try {
+  //       const res = await axiosInstance.post("/fetchbalance", myDatawallet);
+
+  //       const myData = res?.data?.data;
+  //       console.log("fetchbalance-------------------------->", myData);
+  //       setShowBalance(myData);
+  //     } catch (err) {
+  //       +console.log("error--->", err);
+  //       setShowBalance([]);
+  //     }
+  //   } else {
+  //     console.error("Network not found");
+  //   }
+  // };
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -1759,11 +1750,12 @@ const Swap = () => {
   }, [selectedTokenDatato?.input_to]);
 
   const handleOptionClick = (name) => {
+    console.log("🚀 ~ handleOptionClick ~ name:", name);
     const selectedNetworkData = NetworkData.find(
       (network) => network.name === name
     );
+    setSelectedNetwork(name);
     if (selectedNetworkData) {
-      setSelectedNetwork(name);
       setSelectedChainId(selectedNetworkData.chainid);
       setShowDropdown(false);
     }
@@ -1805,11 +1797,12 @@ const Swap = () => {
 
   useEffect(() => {
     // Check if the selected network is Solana
-    if (selectedNetwork === "Solana") {
+    if (selectedNetwork == "Solana") {
       // Make API call to fetch tokens
       axios
         .get("https://token.jup.ag/strict")
         .then((response) => {
+          console.log("🚀 ~ .then ~ response:solana tokenn", response);
           // Assuming the response contains an array of tokens
           setTokens(response.data);
         })

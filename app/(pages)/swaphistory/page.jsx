@@ -199,7 +199,7 @@ const SwapHistory = () => {
     { name: "Arbitrum", chainid: "42161", img: arbitrum, desCode: "0xa4b1" },
     { name: "Optimism", chainid: "10", img: optimism, desCode: "0xa" },
     { name: "Polygon", chainid: "137", img: poly, desCode: "0x89" },
-     { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
+    { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
     { name: "BNB Chain", chainid: "56", img: BNB, desCode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, desCode: "0xa86a" },
     { name: "Celo", chainid: "42220", img: CELO, desCode: "" },
@@ -212,7 +212,6 @@ const SwapHistory = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
-
 
   // const getSolanaTransactions = async () => {
   //   try {
@@ -423,32 +422,32 @@ const SwapHistory = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium"
                     >
-                      Amount
+                      Amount From
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      Transaction Hash{" "}
+                      Transaction Hash To
                     </th>
 
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      CreatedAt
+                      CreatedAt Amount
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      UpdatedAt
+                      UpdatedAt Transaction Hash
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      From
+                      From Transaction Date
                     </th>
                     <th
                       scope="col"
