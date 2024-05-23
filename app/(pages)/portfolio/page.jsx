@@ -234,14 +234,7 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-        {/* <Pagination
-          totalItems={portfolioData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-          style={{ display: "block !important" }}
-        /> */}
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}

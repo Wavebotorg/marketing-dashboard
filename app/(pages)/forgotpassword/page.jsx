@@ -88,10 +88,6 @@ const ForgotPassword = () => {
       </div>
 
       <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-        {/* <Link href="/login">
-          <Image src={Arror} className="-ml-9 -mt-9" />
-        </Link> */}
-
         <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Forget Password
         </h2>
@@ -119,11 +115,6 @@ const ForgotPassword = () => {
           </button>
         </div>
         <ToastContainer />
-        {/* <div className="flex justify-center mt-10">
-          <Link href="/resetpassword" className="text-xs">
-            reset password ?
-          </Link>
-        </div> */}
       </div>
     </div>
   );

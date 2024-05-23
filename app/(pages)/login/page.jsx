@@ -13,13 +13,12 @@ import { ToastContainer, toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
 
-
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
   const [validCaptcha, setValidCaptcha] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
@@ -60,10 +59,10 @@ const Login = () => {
         setErrors((prevState) => ({
           ...prevState,
           password: value
-            // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
-              ? ""
-              // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
-            : "Password is required",
+            ? // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
+              ""
+            : // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
+              "Password is required",
         }));
         break;
 
@@ -76,7 +75,7 @@ const Login = () => {
       setCaptchaError(true);
       return;
     }
-
+    setLoading(true);
     await axiosInstance
 
       .post("login", mydata)
@@ -85,19 +84,23 @@ const Login = () => {
         console.log("=========mydata:", myData);
         // console.log("token--", myData?.token);
         if (myData?.status) {
+          setLoading(false);
           localStorage.setItem("Token", myData?.token);
-          Cookies.set("auth-token", myData?.token)
-       
+          localStorage.setItem("Token", myData?.email);
+
+          Cookies.set("auth-token", myData?.token);
+
           toast.success(myData?.msg);
 
           // setTimeout(() => {
-            router.push("/");
+          router.push("/");
           // }, 700);
         } else {
           toast.error(myData?.msg);
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("err --->", err);
       });
   };
@@ -200,7 +203,8 @@ const Login = () => {
               }
             }}
           >
-            Login
+            {/* Login */}
+            {loading ? <span className="loader"></span> : "Login"}
           </button>
           <ToastContainer />
         </div>

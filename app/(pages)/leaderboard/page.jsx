@@ -134,30 +134,6 @@ const LeaderBoard = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-  // const [allRecentUser, setAllRecentUser] = useState([]);
-  // const [token, setToken] = useState("");
-
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem("Token");
-  //   // if(!storedToken)
-  //   // {
-  //   // router.push("/login")
-  //   // }
-  //   setToken(storedToken);
-  // }, []);
-
-  // useEffect(() => {
-  //   // Check if token exists in local storage
-  //   const storedToken = localStorage.getItem("token");
-  //   if (storedToken) {
-  //     // Token exists, set it to state
-  //     setToken(storedToken);
-
-  //     // Fetch recent users or perform any other necessary actions
-  //     // setAllRecentUser([...]); // Update allRecentUser state with fetched data
-  //   }
-  // }, []);
-
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
       {/* <div className="xl:flex my-10 xl:ml-16  xl:mr-11 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5"> */}
@@ -231,26 +207,6 @@ const LeaderBoard = () => {
                         </td>
                       </tr>
                     )}
-
-                    {/*  {visibleData?.length > 0 &&
-                      visibleData?.map((student, index) => (
-                        <>
-                          <tr key={index}>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.Rank}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.name}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.email}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.points}
-                            </td>
-                          </tr>
-                        </>
-                      ))} */}
                   </tbody>
                 </table>
               </div>

@@ -577,22 +577,7 @@ const Referral = () => {
         <div className=" mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <p>Referral Reward History</p>
         </div>
-        {/*   <div className="flex justify-end  ">
-          <div>
-            <label className=" text-sm md:text-lg">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          </div>
-        </div> */}
+
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
@@ -664,7 +649,6 @@ const Referral = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                            
                             {d?.swapcost}
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
