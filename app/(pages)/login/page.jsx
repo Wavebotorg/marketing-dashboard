@@ -13,8 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 import "react-toastify/dist/ReactToastify.css";
 
-
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
@@ -60,10 +59,10 @@ const Login = () => {
         setErrors((prevState) => ({
           ...prevState,
           password: value
-            // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
-              ? ""
-              // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
-            : "Password is required",
+            ? // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
+              ""
+            : // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
+              "Password is required",
         }));
         break;
 
@@ -86,12 +85,13 @@ const Login = () => {
         // console.log("token--", myData?.token);
         if (myData?.status) {
           localStorage.setItem("Token", myData?.token);
-          Cookies.set("auth-token", myData?.token)
-       
+          localStorage.setItem("email", myData?.email);
+          Cookies.set("auth-token", myData?.token);
+
           toast.success(myData?.msg);
 
           // setTimeout(() => {
-            router.push("/");
+          router.push("/");
           // }, 700);
         } else {
           toast.error(myData?.msg);

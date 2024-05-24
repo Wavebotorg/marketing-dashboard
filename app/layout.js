@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
           <SearchProvider>
           <WalletProvider>
             <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
-              <div className="sidebar visible px-5  ">
+              <div className="sidebar visible px-5">
                 <Sidebar />
               </div>
               {/* <div className="fixed top-0 w-full z-50"><Navbar /></div> */}
