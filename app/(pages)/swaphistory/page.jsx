@@ -191,6 +191,7 @@ const SwapHistory = () => {
   );
 
   const visibleData = filteredData.slice(startIndex, endIndex);
+
   // console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
 
   const NetworkData = [
@@ -198,7 +199,7 @@ const SwapHistory = () => {
     { name: "Arbitrum", chainid: "42161", img: arbitrum, desCode: "0xa4b1" },
     { name: "Optimism", chainid: "10", img: optimism, desCode: "0xa" },
     { name: "Polygon", chainid: "137", img: poly, desCode: "0x89" },
-    // { name: "Solana", chainid: "900", img: SOL, desCode: "" },
+     { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
     { name: "BNB Chain", chainid: "56", img: BNB, desCode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, desCode: "0xa86a" },
     { name: "Celo", chainid: "42220", img: CELO, desCode: "" },
@@ -213,16 +214,16 @@ const SwapHistory = () => {
   }, [searchQuery]);
 
 
-  const getSolanaTransactions = async () => {
-    try {
-      const response = await axiosInstanceAuth.post("/solanaTransactions");
-      const data = response?.data?.transactions || [];
-      setTransactions(data);
-      console.log("Solana transactions:", data);
-    } catch (error) {
-      console.error("Error fetching Solana transactions:", error);
-    }
-  };
+  // const getSolanaTransactions = async () => {
+  //   try {
+  //     const response = await axiosInstanceAuth.post("/solanaTransactions");
+  //     const data = response?.data?.transactions || [];
+  //     setTransactions(data);
+  //     console.log("Solana transactions:", data);
+  //   } catch (error) {
+  //     console.error("Error fetching Solana transactions:", error);
+  //   }
+  // };
 
   // useEffect(() => {
   //   // Fetch EVM transactions by default when component mounts
@@ -304,7 +305,7 @@ const SwapHistory = () => {
 
       try {
         // Fetch transactions for the selected network
-        const response = await axiosInstanceAuth.post("/evmTransactions", {
+        const response = await axiosInstanceAuth.post("/transactions", {
           chainId: Number(selectedNetwork.chainid),
         });
 
@@ -332,7 +333,7 @@ const SwapHistory = () => {
               // onClick={getEvmTransactions}
               className="bg-blue-500 rounded-lg px-2 py-1 mr-4 flex items-center gap-2 relative"
             >
-              Evm
+              Transactions
               {/* <svg */}
               {/* onClick={handleDropdownToggle} */}
               {/* xmlns="http://www.w3.org/2000/svg"
@@ -403,13 +404,13 @@ const SwapHistory = () => {
               )}
             </div>
           </div>
-          <button
+          {/* <button
             // onClick={() => getTransactions("/solanaTransactions")}
             onClick={getSolanaTransactions}
             className="bg-blue-500 rounded-lg px-2 py-1"
           >
             Solana
-          </button>
+          </button> */}
         </div>
 
         <div className="pt-8 hidden lg:block  pb-3">

@@ -95,18 +95,18 @@
 //     {
 //       name: "BNB",
 //       symbol: "BNB",
-//       chianid: "1",
+//       chianid: 1,
 //       address: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: BNB,
 //       networkname: "Ethereum",
 //     },
 //     {
 //       name: "Tether USD",
 //       symbol: "USDT",
-//       chianid: "1",
+//       chianid: 1,
 //       address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: tether,
 //       networkname: "Ethereum",
 //     },
@@ -117,27 +117,27 @@
 //     {
 //       name: "USDT",
 //       symbol: "USDT",
-//       chianid: "900",
+//       chianid: 90",
 //       address: "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: USDT,
 //       networkname: "Solana",
 //     },
 //     {
 //       name: "Oxygen Protocol",
 //       symbol: "OXY",
-//       chianid: "900",
+//       chianid: 90",
 //       address: "z3dn17yLaGMKffVogeFHQ9zWVcXgqgf3PQnDsNs2g6M",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: OXy,
 //       networkname: "Solana",
 //     },
 //     {
 //       name: "USD Coin",
 //       symbol: "USD",
-//       chianid: "900",
+//       chianid: 90",
 //       address: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: OXy,
 //       networkname: "Solana",
 //     },
@@ -148,9 +148,9 @@
 //     {
 //       name: "Wrapped BTC",
 //       symbol: "WBTC",
-//       chianid: 42161,
+//       chianid: 261,
 //       address: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
-//       decimal: "8",
+//       decimal: 8,
 //       logoURI: wrapped,
 //       chainname: "Arbitrum",
 //       descode: `0xa4b1`,
@@ -158,9 +158,9 @@
 //     {
 //       name: "ChainLink Token",
 //       symbol: "LINK",
-//       chianid: 42161,
+//       chianid: 261,
 //       address: "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: chainlink,
 //       chainname: "Arbitrum",
 //       descode: `0xa4b1`,
@@ -168,9 +168,9 @@
 //     {
 //       name: "USDT",
 //       symbol: "USDT",
-//       chianid: 42161,
+//       chianid: 261,
 //       address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: chainlink,
 //       chainname: "Arbitrum",
 //       descode: `0xa4b1`,
@@ -178,9 +178,9 @@
 //     {
 //       name: "Arbitrum",
 //       symbol: "ARB",
-//       chianid: 42161,
+//       chianid: 261,
 //       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: arbitrum,
 //       chainname: "Arbitrum",
 //       descode: `0xa4b1`,
@@ -190,9 +190,9 @@
 //     {
 //       name: "Tether USD",
 //       symbol: "USDT",
-//       chianid: 137,
+//       chianid: 3,
 //       address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: tether,
 //       chainname: "polygon",
 //       descode: `0x89`,
@@ -200,9 +200,9 @@
 //     {
 //       name: "BNB",
 //       symbol: "BNB",
-//       chianid: 137,
+//       chianid: 3,
 //       address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: BNB,
 //       chainname: "polygon",
 //       descode: `0x89`,
@@ -210,9 +210,9 @@
 //     {
 //       name: "USD Coin",
 //       symbol: "USDC",
-//       chianid: 137,
+//       chianid: 3,
 //       address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: USD,
 //       chainname: "polygon",
 //       descode: `0x89`,
@@ -220,9 +220,9 @@
 //     {
 //       name: "SHIBA INU",
 //       symbol: "SHIB",
-//       chianid: 137,
+//       chianid: 3,
 //       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: SHU,
 //       chainname: "polygon",
 //       descode: `0x89`,
@@ -233,9 +233,9 @@
 //     {
 //       name: "Wrapped BNB",
 //       symbol: "WBNB",
-//       chianid: 56,
+//       chianid: 6
 //       address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-//       decimal: "18",
+//       decimal: 1",
 //       logoURI: wrapped,
 //       chainname: "BNB",
 //       descode: `0x38`,
@@ -243,9 +243,9 @@
 //     {
 //       name: "USDC",
 //       symbol: "anyUSDC",
-//       chianid: 56,
+//       chianid: 6
 //       address: "0x8965349fb649A33a30cbFDa057D8eC2C48AbE2A2",
-//       decimal: "18",
+//       decimal: 1,
 //       logoURI: USD,
 //       chainname: "BNB",
 //       descode: `0x38`,
@@ -253,9 +253,9 @@
 //     {
 //       name: "Tether USD",
 //       symbol: "USDT.e",
-//       chianid: 56,
+//       chianid: 6
 //       address: "0x2B90E061a517dB2BbD7E39Ef7F733Fd234B494CA",
-//       decimal: "6",
+//       decimal: 6,
 //       logoURI: tether,
 //       chainname: "BNB",
 //       descode: `0x38`,
@@ -1308,20 +1308,20 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
-  console.log(
-    "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
-    selectedTokenDatato
-  );
+  // console.log(
+  //   "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
+  //   selectedTokenDatato
+  // );
   const NetworkData = [
-    { name: "Ethereum", chainid: "1", img: eth },
-    { name: "Arbitrum", chainid: "42161", img: arbitrum },
-    { name: "Optimism", chainid: "10", img: optimism },
-    { name: "Polygon", chainid: 137, img: poly },
-    { name: "Solana", chainid: "900", img: SOL },
-    { name: "BNB Chain", chainid: "56", img: BNB },
-    { name: "Avalanche", chainid: "43114", img: avalanche },
-    { name: "Celo", chainid: "42220", img: CELO },
-    { name: "Blast", chainid: "238", img: BURST },
+    { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
+    { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
+    { name: "Optimism", chainid: "10", img: optimism, descode: "0xa" },
+    { name: "Polygon", chainid: "137", img: poly, descode: "0x89" },
+    { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
+    { name: "BNB Chain", chainid: "56", img: BNB, descode: "0x38" },
+    { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
+    { name: "Celo", chainid: "42220", img: CELO, descode: "" },
+    { name: "Blast", chainid: "238", img: BURST, descode: "" },
   ];
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -1346,7 +1346,6 @@ const Swap = () => {
     },
   ];
 
- 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const token_data_ARB = [
     {
@@ -1552,14 +1551,7 @@ const Swap = () => {
     setSearchTerm("");
   };
   const [showDropdown, setShowDropdown] = useState(false);
-  /*  const dataArb = {
-    token0: selectedTokenDatato?.address_to, // address_to is passed as sellToken
-    token1: selectedTokenDatato?.address_from, // address_from is passed as buyToken
-    amountIn: selectedTokenDatato?.input_to, // input_to is passed as sellAmount
-    chainId: selectedChainId,
-    email: email,
-  }; */
-  // console.log(" dataEvm:", dataEvm);
+
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
     output: selectedTokenDatato?.address_from,
@@ -1690,7 +1682,7 @@ const Swap = () => {
           const tokenImage = tokenImages.find(
             (image) => image.address === token.mint
           );
-          console.log("🚀 ~ mergedData ~ tokenImage:", tokenImage);
+          // console.log("🚀 ~ mergedData ~ tokenImage:", tokenImage);
           return {
             ...token,
             logo: tokenImage ? tokenImage.logoURI : null,
@@ -1706,24 +1698,45 @@ const Swap = () => {
     }
   };
 
-  const getWalletBalance = async () => {
-    if (selectedNetwork === "Arbitrum") {
-      setShowPopup1(true);
+ 
+  
+  const getWalletBalance = async (networkName) => {
+    setShowPopup1(true);
+
+    const selectedNetwork = NetworkData.find(
+      (network) => network.name === networkName
+    );
+    // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
+    // If the network is found, set its desCode as the selectedNetwork state
+    if (selectedNetwork) {
+      console.log(
+        "🚀 ~ handleNetworkSelect ~ selectedNetwork:----------------",
+        selectedNetwork
+      );
+      setSelectedNetwork(selectedNetwork);
+      const myDatawallet = {
+        email: email,
+        chainId: selectedNetwork?.descode
+       }
+      
+       
       try {
-        const res = await axiosInstance.post("/fetchbalance", { email: email });
+        const res = await axiosInstance.post("/fetchbalance", 
+          myDatawallet
+        
+        );
+
         const myData = res?.data?.data;
         console.log("fetchbalance-------------------------->", myData);
         setShowBalance(myData);
       } catch (err) {
-        console.log("error--->", err);
+        +console.log("error--->", err);
+        setShowBalance([]);
       }
     } else {
-      console.log("Selected network is not Arbitrum. API call skipped.");
+      console.error("Network not found");
     }
   };
-
-  // Assuming selectedNetwork is passed as a prop or derived from state
-  // const selectedNetwork = props.selectedNetwork; // or useState/useSelector depending on your state management
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -1760,9 +1773,9 @@ const Swap = () => {
   //   setSelectedNetwork(name);
   //   setShowDropdown(false); // Close dropdown when an option is clicked
   // };
-  const handleButtonClick = (button) => {
-    setSelectedButton(button);
-  };
+  // const handleButtonClick = (button) => {
+  //   setSelectedButton(button);
+  // };
 
   // const redirecttolink=()=>{
   //   router.push("https://arbiscan.io/tx/")
@@ -1788,32 +1801,7 @@ const Swap = () => {
     };
   }, []);
 
-  // const [selectedNetwork, setSelectedNetwork] = useState(""); // State to track the selected network
-  // const [selectChain, setSelectChain] = useState(""); // State to store the selected network's image URL
   const [tokens, setTokens] = useState([]); // State to store the fetched tokens
-  // console.log("🚀 ~ Swap ~ tokens:", tokens);
-
-  // Function to handle option click
-  // const handleOptionClick = (name) => {
-  //   setSelectedNetwork(name); // Update the selected network
-  // };
-
-  // Fetch tokens when selected network changes
-  /*  useEffect(() => {
-    // Check if the selected network is Solana
-    if (selectedNetwork === "Solana") {
-      // Make API call to fetch tokens
-      axios
-        .get("https://token.jup.ag/strict")
-        .then((response) => {
-          // Assuming the response contains an array of tokens
-          setTokens(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching tokens:", error);
-        });
-    }
-  }, [selectedNetwork]); */
 
   useEffect(() => {
     // Check if the selected network is Solana
@@ -1848,6 +1836,24 @@ const Swap = () => {
 
   console.log("🚀 ~ /*handleSwapSubmit ~ tokens:", tokens);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowPopup1(false);
+      }
+    };
+
+    if (showPopup1) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPopup1]);
+
   return (
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -1863,10 +1869,19 @@ const Swap = () => {
             >
               click to show Balance
             </button>
+            {/*   <button
+              className="bg-blue-500 rounded-lg px-2 mt-6"
+              onClick={handleButtonClick}
+            >
+              Click to show Balance
+            </button> */}
           </div>
           {showPopup1 && (
-            <div className="fixed inset-0 z-50 top-40 flex items-start justify-end ">
-              <div className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] ">
+            <div className="fixed inset-0 z-50 top-16 flex items-start justify-end ">
+              <div
+                ref={popupRef}
+                className="bg-[#1c1c1c] mr-4 xl:mr-16 shadow-blue-700 shadow-sm p-3 rounded-2xl w-[300px] "
+              >
                 <div className=" space-y-5 ">
                   <div className="flex flex-col justify-between items-center py-2  ">
                     <div className="text-xl flex justify-between w-full items-center ">
@@ -1935,6 +1950,43 @@ const Swap = () => {
                     ) : (
                       <div className="mt-16 text-xl">No data</div>
                     )}
+
+                    {/*  {showBalance &&
+                    Array.isArray(showBalance) &&
+                    showBalance.length > 0 ? (
+                      showBalance.map((item, index) => (
+                        <div className="flex items-center mt-2" key={index}>
+                          <div className="flex">
+                            <img
+                              src={item?.logo}
+                              alt={item?.name || "Token"}
+                              height={30}
+                              width={30}
+                              className="h-15 w-15 my-3"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "fallback-image-url";
+                              }}
+                            />
+                            <div className="flex flex-col justify-center pl-3">
+                              <div className="text-base font-bold">
+                                {item?.name}
+                              </div>
+                              <div className="text-base">
+                                Balance:{" "}
+                                <span className="font-bold">
+                                  {selectedNetwork === "Solana"
+                                    ? item?.amount
+                                    : item?.balance}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mt-16 text-xl">No data</div>
+                    )} */}
                   </div>
                 </div>
               </div>
@@ -2024,6 +2076,7 @@ const Swap = () => {
                                     onClick={() => {
                                       handleOptionClick(item.name);
                                       setSelectChain(item?.img);
+                                      getWalletBalance(item?.name);
                                     }}
                                     className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
                                       selectedNetwork === item.name
@@ -2038,6 +2091,7 @@ const Swap = () => {
                                     />
                                     <span className="text-white">
                                       {item.name}
+                                      {/* {item.descode} */}
                                     </span>
                                     {selectedNetwork === item.name && (
                                       <svg

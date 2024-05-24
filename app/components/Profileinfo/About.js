@@ -338,14 +338,24 @@ const About = () => {
       </div>
 
       <div className="mt-4 ">
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"    onClick={() => {
               
-              handleSubmit();
+              // handleSubmit();
             }}>
             Save
           </button>
-        </div>
+        </div> */}
+          {showSaveButton && (
+          <div className="flex justify-end">
+            <button
+              className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+              onClick={handleSaveClick}
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
       <div className="mt-4">
         <div className="flex justify-end mb-3">
