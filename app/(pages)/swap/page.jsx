@@ -441,7 +441,7 @@ const Swap = () => {
     );
     // console.log("selectedNetwork?.descode", selectedNetwork?.descode);
     // If the network is found, set its desCode as the selectedNetwork state
-    if (selectedNetwork) {
+    if (selectedNetwork !== "Solana") {
       const myDatawallet = {
         email: localStorage.getItem("email"),
         chainId: selectedNetwork?.descode,
@@ -544,13 +544,13 @@ const Swap = () => {
     }
   }
 
-  useEffect(() => {
-    getToQty();
-  }, [
-    selectedTokenDatato?.address_from,
-    selectedTokenDatato?.address_to,
-    selectedTokenDatato?.input_to,
-  ]);
+  // useEffect(() => {
+  //   getToQty();
+  // }, [
+  //   selectedTokenDatato?.address_from,
+  //   selectedTokenDatato?.address_to,
+  //   selectedTokenDatato?.input_to,
+  // ]);
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
     await setSelectedTokenDatato({

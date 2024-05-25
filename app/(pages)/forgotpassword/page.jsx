@@ -53,7 +53,7 @@ const ForgotPassword = () => {
       .post("forgetPassword", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("Forget Password Data --->", myData);
+        // console.log("Forget Password Data --->", myData);
         localStorage.setItem("type", "forget");
         localStorage.setItem("userEmail", forgetData?.email);
         if (myData?.status) {

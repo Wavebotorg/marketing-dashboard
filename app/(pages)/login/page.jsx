@@ -80,14 +80,14 @@ const Login = () => {
       .post("login", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("=========mydata:==================================================================", myData);
-        // console.log("token--", myData?.token);
+        console.log("=========mydata:", myData);
+        console.log("token--", myData?.token);
         if (myData?.status) {
           setLoading(false);
           localStorage.setItem("Token", myData?.token);
+          localStorage.setItem("userId", myData?.userId);
           localStorage.setItem("email", myData?.email);
           Cookies.set("auth-token", myData?.token);
-
           toast.success(myData?.msg);
 
           // setTimeout(() => {
@@ -103,7 +103,7 @@ const Login = () => {
       });
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
+  // console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);

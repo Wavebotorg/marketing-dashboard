@@ -80,7 +80,7 @@ const WatchList = () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       const myData = res?.data?.data;
-      console.log("🚀 ~ getWatchlistdata ~ myData:", myData);
+      // console.log("🚀 ~ getWatchlistdata ~ myData:", myData);
 
       setWatchlist(myData);
       // Filter allCoinData based on watchlist IDs
@@ -90,7 +90,7 @@ const WatchList = () => {
       );
 
       setWatchlistData(filteredData);
-      console.log("watchlistfilter-----------", filteredData);
+      // console.log("watchlistfilter-----------", filteredData);
     } catch (err) {
       console.log("err --->", err);
     }
@@ -108,20 +108,20 @@ const WatchList = () => {
       );
 
       setWatchlist(updatedWatchlist);
-      console.log(
-        "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
-        updatedWatchlist
-      );
+      // console.log(
+      //   "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
+      //   updatedWatchlist
+      // );
 
       const updatedWatchlistData = allCoinData.filter((coin) =>
         updatedWatchlist.includes(coin.id)
       );
 
       setWatchlistData(updatedWatchlistData);
-      console.log(
-        "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
-        updatedWatchlistData
-      );
+      // console.log(
+      //   "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
+      //   updatedWatchlistData
+      // );
       setShowModal(false);
     } catch (err) {
       console.log("Error removing coin from watchlist:", err);
@@ -135,12 +135,14 @@ const WatchList = () => {
     if (allCoinData.length > 0) {
       getWatchlistdata();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCoinData]); // Only trigger if allCoinData changes
 
   useEffect(() => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -185,19 +187,26 @@ const WatchList = () => {
               <button className="bg-blue-500 px-3 rounded-full">All</button>
             </div>
             <div>
-              <button className=" hover:bg-blue-500 px-3 rounded-full">Crypto</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Crypto
+              </button>
             </div>
             <div>
-              <button className=" hover:bg-blue-500 px-3 rounded-full">Stocks</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Stocks
+              </button>
             </div>
             <div>
-              <button className=" hover:bg-blue-500 px-3 rounded-full">People</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                People
+              </button>
             </div>
             <div>
-              <button className=" hover:bg-blue-500 px-3 rounded-full">Smart Portfolios</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Smart Portfolios
+              </button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
-    
           </div>
         </div>
 
@@ -673,29 +682,6 @@ const WatchList = () => {
                           />
                         </div>
                       </div>
-                      {/*  <div>
-                        <div className="flex justify-end  py- pr-4 pl-4">
-                          {d?.market_cap_rank} % Buying
-                        </div>
-                        <div className="flex justify-end  py-1.5 pr-4 pl-4">
-                          <div className="w-44 bg-[#262626] rounded-full h-1.5 mt-1.5">
-                            <div
-                              className="bg-[#494949] h-1.5 rounded-full"
-                              style={{ width: "90%" }}
-                            />
-                          </div>
-                        </div>
-                      </div> */}
-                      {/* <div className=" border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"></div>
-                        <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                          <Image
-                            // src={d?.chart}
-                            alt="Picture of the author"
-                            className="rounded-full"
-                          />
-                        </div>
-                      </div> */}
                     </div>
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Remove</div>

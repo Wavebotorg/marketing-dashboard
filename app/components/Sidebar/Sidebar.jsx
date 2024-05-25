@@ -188,7 +188,7 @@ function Sidebar() {
         setWalletAddress(myData?.wallet);
         setSolanaAddress(myData?.solanawallet || "");
         setEmail(myData?.email);
-        console.log("User Profile Data:", myData?.solanawallet);
+        // console.log("User Profile Data:", myData?.solanawallet);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }

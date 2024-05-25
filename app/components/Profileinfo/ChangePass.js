@@ -103,7 +103,7 @@ const ChangePass = () => {
         .post("/changePassword", mydata1)
         .then((res) => {
           const myData = res?.data;
-          console.log("chnage Password Data111111 --->", res);
+          // console.log("chnage Password Data111111 --->", res);
 
           if (myData?.status) {
             setVerified(true);
@@ -166,7 +166,7 @@ const ChangePass = () => {
       .post("verify", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("OTP Done--->", myData?.data);
+        // console.log("OTP Done--->", myData?.data);
 
         if (myData?.status) {
           if (myData?.data === "changepassword") {
@@ -192,7 +192,7 @@ const ChangePass = () => {
         types,
       });
       const responseData = res?.data;
-      console.log("responseData--------", responseData);
+      // console.log("responseData--------", responseData);
       if (responseData.status) {
         toast.success(responseData?.msg);
         setResendStatus(true);

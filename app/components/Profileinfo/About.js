@@ -43,7 +43,7 @@ const About = () => {
         setEmail(response?.data?.data?.email);
         // console.log("🚀 ~ getUserProfile ~ setEmail:",   response?.data?.data?.email)
 
-        console.log("User Profile Data:", response?.data?.data);
+        // console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -57,7 +57,7 @@ const About = () => {
       .post("forgetPassword", { email: email })
       .then((res) => {
         const myData = res?.data;
-        console.log("chnage Password Data --->", myData);
+        // console.log("chnage Password Data --->", myData);
         localStorage.setItem("type", "changepassword");
         localStorage.setItem("userEmail", email);
         if (myData?.status) {
@@ -98,7 +98,7 @@ const About = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        console.log("Copied to clipboard:", text);
+        // console.log("Copied to clipboard:", text);
       })
       .catch((error) => {
         console.error("Failed to copy:", error);
