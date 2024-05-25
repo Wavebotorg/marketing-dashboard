@@ -383,6 +383,7 @@ const SwapHistory = () => {
                     <>
                       <div className=" border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold">From</div>
+
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.from)}
                           <button
@@ -405,6 +406,7 @@ const SwapHistory = () => {
                       </div>
                       <div className=" flex border-b border-[#494949] justify-between">
                         <div className="py-2  pl-4 font-semibold">To</div>
+
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.to)}
                           <button
@@ -423,12 +425,15 @@ const SwapHistory = () => {
                           )}
                         </div>
                       </div>
+
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold"> Amount</div>
+
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {d?.amount?.toFixed(2)}
                         </div>
                       </div>
+
                       <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold">
                           {" "}
@@ -463,11 +468,11 @@ const SwapHistory = () => {
                         <div className="py-2  pl-4 font-semibold">
                           Transaction Date
                         </div>
+
                         <div className=" py-2 pr-4 pl-4">
                           {formatDate(d?.createdAt)}
                         </div>
                       </div>
-
                       {/* <div className="border-b border-[#494949] flex justify-between">
                         <div className="py-2  pl-4 font-semibold">
                           UpdatedAt
