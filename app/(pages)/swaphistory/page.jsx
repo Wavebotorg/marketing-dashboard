@@ -385,12 +385,42 @@ const SwapHistory = () => {
                         <div className="py-2  pl-4 font-semibold">From</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.from)}
+                          <button
+                            className="text-xl text-[#828282] align-middle pb-1.5"
+                            onClick={() =>
+                              copyToClipboard(d?.from, "from", d?._id)
+                            }
+                          >
+                            <MdOutlineContentCopy
+                              size={12}
+                              className="ml-1.5 items-center"
+                            />
+                          </button>
+                          {d?._id === copiedFromId && (
+                            <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                              Copied!
+                            </span>
+                          )}
                         </div>
                       </div>
-                      <div className=" flex justify-between">
+                      <div className=" flex border-b border-[#494949] justify-between">
                         <div className="py-2  pl-4 font-semibold">To</div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.to)}
+                          <button
+                            className="text-xl text-[#828282] align-middle pb-1.5"
+                            onClick={() => copyToClipboard(d?.to, "to", d?._id)}
+                          >
+                            <MdOutlineContentCopy
+                              size={12}
+                              className="ml-1.5 items-center"
+                            />
+                          </button>
+                          {d?._id === copiedToId && (
+                            <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                              Copied!
+                            </span>
+                          )}
                         </div>
                       </div>
                       <div className="border-b border-[#494949] flex justify-between">
@@ -404,12 +434,32 @@ const SwapHistory = () => {
                           {" "}
                           Transaction Hash
                         </div>
-                        <div className=" py-2 pr-4 pl-4">
+                        <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {" "}
                           {formatTransactionID(d?.txid)}
+                          <button
+                            className="text-xl text-[#828282] align-middle pb-1.5"
+                            onClick={() =>
+                              copyToClipboard(
+                                d?.txid,
+                                "Transaction Hash",
+                                d?._id
+                              )
+                            }
+                          >
+                            <MdOutlineContentCopy
+                              size={12}
+                              className="ml-1.5 items-center"
+                            />
+                          </button>
+                          {d?._id === copiedTransactionId && (
+                            <span className="absolute xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                              Copied!
+                            </span>
+                          )}
                         </div>
                       </div>
-                      <div className="border-b border-[#494949] flex justify-between">
+                      <div className=" flex justify-between">
                         <div className="py-2  pl-4 font-semibold">
                           Transaction Date
                         </div>

@@ -94,6 +94,8 @@ const Login = () => {
           router.push("/");
           // }, 700);
         } else {
+          setLoading(false);
+
           toast.error(myData?.msg);
         }
       })
