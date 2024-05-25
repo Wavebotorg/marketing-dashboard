@@ -40,6 +40,7 @@ const Swap = () => {
 
   // const [selectedNetwork, setSelectedNetwork] = useState(null);
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
+  const [totalBalance, setTotalBalance] = useState(0.0);
   const [fetchtokendata, setFetchtokendata] = useState(null);
   const [balancePopup, setBalancePopup] = useState(false);
   const [selectedChainId, setSelectedChainId] = useState("");
@@ -688,12 +689,12 @@ const Swap = () => {
         <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
           <div className="text-lg font-semibold flex justify-end">
             <button
-              className="bg-[#1e2529] rounded-lg  px-5 py-1 mt-3"
+              className="bg-[#1e2529] hover:bg-[#323b41] rounded-lg  px-5 py-1 mt-3 text-[17px]"
               onClick={() => {
                 setBalancePopup(true);
               }}
             >
-              Balance : 25.00$
+              Show Balance
             </button>
           </div>
           <div className="mt-48 space-y-10 px-5  ">
