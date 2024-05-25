@@ -37,8 +37,8 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 
 const Swap = () => {
   const { walletAddress, email, solanaAddress } = useWallet();
-  console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
-  console.log("🚀 ~ Swap ~ email:", email);
+  // console.log("🚀 ~ Swap ~ walletAddress:", walletAddress);
+  // console.log("🚀 ~ Swap ~ email:", email);
 
   const router = useRouter();
   const [tokendata, setTokendata] = useState(null);
@@ -51,7 +51,7 @@ const Swap = () => {
   const [showPopup1, setShowPopup1] = useState(false);
   // console.log("🚀 ~ Swap ~ showPopup1:", showPopup1);
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("🚀 ~ Swap ~ searchTerm:", searchTerm);
+  // console.log("🚀 ~ Swap ~ searchTerm:", searchTerm);
   const [selectedtofrom, setSelectedtofrom] = useState(0);
   const [showBalance, setShowBalance] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -73,10 +73,10 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
-  console.log(
-    "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
-    selectedTokenDatato
-  );
+  // console.log(
+  //   "--------->>>>>>>>>>>>><<<<<<<<<<<<-----selectedTokenDatato",
+  //   selectedTokenDatato
+  // );
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
@@ -509,10 +509,6 @@ const Swap = () => {
     }
   };
 
-  /*   useEffect(() => {
-    getWalletBalance("Ethereum");
-  }, []); */
-
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -609,7 +605,7 @@ const Swap = () => {
     }));
   }, [tokens]);
 
-  console.log("🚀 ~ /*handleSwapSubmit ~ tokens:", tokens);
+  // console.log("🚀 ~ /*handleSwapSubmit ~ tokens:", tokens);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -747,6 +743,7 @@ const Swap = () => {
                           {selectChain && (
                             <Image
                               src={selectChain}
+                              alt="Chain"
                               className="h-6 w-6  " // Adjust size as needed
                               // className="h-6 w-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                             />

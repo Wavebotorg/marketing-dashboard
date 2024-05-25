@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 "use client";
 import React, { useState, useEffect } from "react";
 
@@ -456,6 +457,7 @@ const Discover = () => {
             <div className="flex gap-1">
               <Image
                 src={Leftarraow}
+                alt="Leftarraow"
                 className={`md:w-10 w-8 cursor-pointer ${
                   disableLeftArrow ? "opacity-50 pointer-events-none" : ""
                 }`}
@@ -463,6 +465,7 @@ const Discover = () => {
               />
               <Image
                 src={Rightarraow}
+                alt="Rightarraow"
                 className={`md:w-10 w-8 cursor-pointer ${
                   disableRightArrow ? "opacity-50 pointer-events-none" : ""
                 }`}

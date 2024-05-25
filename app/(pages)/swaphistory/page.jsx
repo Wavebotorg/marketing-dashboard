@@ -15,6 +15,7 @@ import CELO from "../../../public/assets/tokenimg/CELO.png";
 import BURST from "../../../public/assets/tokenimg/BURST.png";
 import Image from "next/image";
 import { MdDone } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const SwapHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -63,12 +64,13 @@ const SwapHistory = () => {
 
   const [copiedFromId, setCopiedFromId] = useState(null);
   const [copiedToId, setCopiedToId] = useState(null);
+  const [copiedTransactionId, setCopiedTransactionId] = useState(null);
 
   const copyToClipboard = (text, type, _id) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        console.log("Copied to clipboard:", text);
+        // console.log("Copied to clipboard:", text);
 
         if (type === "from") {
           setCopiedFromId(_id);
@@ -76,6 +78,9 @@ const SwapHistory = () => {
         } else if (type === "to") {
           setCopiedToId(_id);
           setTimeout(() => setCopiedToId(null), 500);
+        } else if (type === "Transaction Hash") {
+          setCopiedTransactionId(_id);
+          setTimeout(() => setCopiedTransactionId(null), 500);
         }
       })
       .catch((error) => {
@@ -109,11 +114,16 @@ const SwapHistory = () => {
   useEffect(() => {
     // Call handleNetworkSelect with "Ethereum" as the default network name
     handleNetworkSelect("Ethereum");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
   // Function to handle network selection
   const handleNetworkSelect = async (networkName) => {
-    console.log("Selected network:", networkName);
+    // console.log("Selected network:", networkName);
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      return toast.error("please uthenticate yourself!!");
+    }
 
     // Find the network object from NetworkData array based on its name
     const selectedNetwork = NetworkData.find(
@@ -122,21 +132,22 @@ const SwapHistory = () => {
 
     // If the network is found, set its desCode as the selectedNetwork state
     if (selectedNetwork) {
-      console.log(
-        "🚀 ~ handleNetworkSelect ~ selectedNetwork:",
-        selectedNetwork
-      );
+      // console.log(
+      //   "🚀 ~ handleNetworkSelect ~ selectedNetwork:",
+      //   selectedNetwork
+      // );
       setSelectedNetwork(selectedNetwork);
 
       try {
         // Fetch transactions for the selected network
         const response = await axiosInstanceAuth.post("/transactions", {
+          id: userId,
           chainId: Number(selectedNetwork.chainid),
         });
 
         const data = response?.data?.transactions || [];
         setTransactions(data);
-        console.log("EVM transactions:", data);
+        // console.log("EVM transactions:", data);
       } catch (error) {
         console.error("Error fetching EVM transactions:", error);
       }
@@ -163,7 +174,7 @@ const SwapHistory = () => {
 
             <div className="">
               {showDropdown && (
-                <div className="dropdown absolute bg-gray-800 rounded-lg py-2 mt-9 w-36 md:min-w-fit z-10 ml-[-80px]">
+                <div className="dropdown animate-popup absolute bg-gray-800 rounded-lg py-2 mt-9 w-36 md:min-w-fit z-10 ml-[-80px]">
                   <ul>
                     {NetworkData.map((item, index) => (
                       <li
@@ -254,7 +265,7 @@ const SwapHistory = () => {
                   {visibleData?.map((transaction, index) => (
                     <tr key={`transaction-${index}`}>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                        {index + 1}
+                        {startIndex + index + 1}
                       </td>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                         {formatTransactionID(transaction?.from)}
@@ -307,6 +318,26 @@ const SwapHistory = () => {
                       </td>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                         {formatTransactionID(transaction?.txid)}
+                        <button
+                          className="text-xl text-[#828282] align-middle pb-1.5"
+                          onClick={() =>
+                            copyToClipboard(
+                              transaction?.txid,
+                              "Transaction Hash",
+                              transaction?._id
+                            )
+                          }
+                        >
+                          <MdOutlineContentCopy
+                            size={12}
+                            className="ml-1.5 items-center"
+                          />
+                        </button>
+                        {transaction?._id === copiedTransactionId && (
+                          <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                            Copied!
+                          </span>
+                        )}
                       </td>
 
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">

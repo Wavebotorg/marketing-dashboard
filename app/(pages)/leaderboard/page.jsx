@@ -93,7 +93,7 @@ const LeaderBoard = () => {
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
-  console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
+  // console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
 
   // Get All Admin Show
   const getAdmindata = async () => {
@@ -102,7 +102,7 @@ const LeaderBoard = () => {
       .then((res) => {
         const myData = res?.data;
         setAllRecentUser(myData?.data || []);
-        console.log("recentUsers---->", myData);
+        // console.log("recentUsers---->", myData);
       })
       .catch((err) => {
         console.log("err --->", err);

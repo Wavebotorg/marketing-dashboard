@@ -93,7 +93,7 @@ const ResetPassword = () => {
       .post("resetPassword", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("Reset Password Data --->", myData?.msg);
+        // console.log("Reset Password Data --->", myData?.msg);
         if (myData?.status) {
           toast.success(myData?.msg);
           router.push("/");

@@ -8,7 +8,7 @@ export const useWallet = () => useContext(WalletContext);
 export const WalletProvider = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [email, setEmail] = useState(null);
-  console.log("🚀 ~ WalletProvider ~ email:", email)
+  // console.log("🚀 ~ WalletProvider ~ email:", email)
   const [solanaAddress, setSolanaAddress] = useState(null);
   return (
     <WalletContext.Provider

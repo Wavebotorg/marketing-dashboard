@@ -77,16 +77,15 @@ const Login = () => {
     }
     setLoading(true);
     await axiosInstance
-
       .post("login", mydata)
       .then((res) => {
         const myData = res?.data;
         console.log("=========mydata:", myData);
-        // console.log("token--", myData?.token);
+        console.log("token--", myData?.token);
         if (myData?.status) {
           setLoading(false);
           localStorage.setItem("Token", myData?.token);
-          localStorage.setItem("Token", myData?.email);
+          localStorage.setItem("userId", myData?.userId);
 
           Cookies.set("auth-token", myData?.token);
 
@@ -105,7 +104,7 @@ const Login = () => {
       });
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
+  // console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);

@@ -379,6 +379,12 @@ th {
   background-repeat: no-repeat;
   animation: l23 1s infinite steps(12);
 }
+
+@keyframes l23 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
  
 .loader::before,
 .loader::after {
@@ -394,6 +400,7 @@ th {
   opacity: 0.83;
   transform: rotate(60deg);
 }
+
 
 @keyframes popup {
   0% {

@@ -21,15 +21,15 @@ const Market = () => {
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([]);
-  console.log(
-    "🚀 ~ Market--------------------------------- ~ savedData:",
-    savedData
-  );
+  // console.log(
+  //   "🚀 ~ Market--------------------------------- ~ savedData:",
+  //   savedData
+  // );
 
   const [token, setToken] = useState(null);
-  console.log(savedData, "<,----------------savedData");
-  console.log("getAllCoin------->>>", allCoinData);
-  console.log("savedcoins-----------------", savedCoins);
+  // console.log(savedData, "<,----------------savedData");
+  // console.log("getAllCoin------->>>", allCoinData);
+  // console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
     axios
 
@@ -38,7 +38,7 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
-        console.log("🚀 ~ .then ~  setAllCoinData:", res?.data);
+        // console.log("🚀 ~ .then ~  setAllCoinData:", res?.data);
       })
 
       .catch((err) => {
@@ -80,6 +80,7 @@ const Market = () => {
     // router.push("/login")
     // }
     setToken(storedToken);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -96,7 +97,7 @@ const Market = () => {
 
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
-      console.log("rres----------->>>", res);
+      // console.log("rres----------->>>", res);
       setSavedData(res?.data?.data);
 
       if (isSaved) {

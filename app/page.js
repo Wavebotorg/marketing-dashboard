@@ -19,31 +19,16 @@ const Page = () => {
       following: 0,
       followers: 0,
     },
-
-    // {userId: "95968223",
-    // vipLevel: "Regular User",
-    // userType: "Personal",
-    // following: 0,
-    // followers: 0}
   ];
 
   const [copied, setCopied] = useState(false);
-  console.log("🚀 ~ copied:", copied);
+  // console.log("🚀 ~ copied:", copied);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(userData?.userId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
   };
-  // useEffect(() => {
-
-  //   const token = localStorage.getItem('Token');
-  //   if (token) {
-  //     router.push('/'); // Change '/home' to your actual home page route
-  //   } else {
-  //     router.push('/login'); // Change '/login' to your actual login page route
-  //   }
-  // }, []);
 
   return (
     <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
@@ -71,15 +56,6 @@ const Page = () => {
               </thead>
 
               <tbody>
-                {/* {!userData?.length > 0 ? (
-              <tr>
-                <td data-title="User Id">_</td>
-                <td data-title="VIP Level">_</td>
-                <td data-title="User Type">_</td>s
-                <td data-title="Following">_</td>
-                <td data-title="Followers">_</td>
-              </tr>
-            ) : ( */}
                 {userData?.map((items) => (
                   <>
                     <tr className="md:pl-2 ">
