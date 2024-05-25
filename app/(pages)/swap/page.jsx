@@ -16,6 +16,8 @@ import BURST from "../../../public/assets/tokenimg/BURST.png";
 import USD from "../../../public/assets/tokenimg/USD.png";
 import SHU from "../../../public/assets/tokenimg/SHU.png";
 import tether from "../../../public/assets/tokenimg/tether.png";
+import cronos from "../../../public/assets/tokenimg/cronos.jpg";
+import fantom from "../../../public/assets/tokenimg/fantom.png";
 import wrapped from "../../../public/assets/tokenimg/wrapped.png";
 import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import OXy from "../../../public/assets/tokenimg/OXy.png";
@@ -76,8 +78,8 @@ const Swap = () => {
     { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
     { name: "BNB Chain", chainid: "56", img: BNB, descode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
-    { name: "Celo", chainid: "42220", img: CELO, descode: "" },
-    { name: "Blast", chainid: "238", img: BURST, descode: "" },
+    { name: "Cronos", chainid: "25", img: cronos, descode: "0x19" },
+    { name: "Fantom", chainid: "250", img: fantom, descode: "0xfa" },
   ];
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -761,7 +763,7 @@ const Swap = () => {
                                     <Image
                                       src={item.img}
                                       alt={item.name}
-                                      className="h-6 w-6 mr-2" // Adjust size as needed
+                                      className="!h-[30px] !w-[30px] mr-2 rounded-full" // Adjust size as needed
                                     />
                                     <span className="text-white">
                                       {item.name}
@@ -914,45 +916,54 @@ const Swap = () => {
             </div>
           </div>
         </div>
-        {showPopup && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div ref={popupRef}>
-              <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
-                <div className=" space-y-5">
-                  <div className="flex justify-between items-center py-2 ">
-                    <div className="text-xl">Select Token</div>
-                    <div
-                      onClick={() => setShowPopup(false)}
-                      className="cursor-pointer"
-                    >
-                      <IoMdClose size={24} />
-                    </div>
+        {/* {showPopup && ( */}
+        <div
+          className={`${
+            showPopup ? "scale-[1]" : "scale-0"
+          } fixed duration-75 ease-in-out transition-all inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
+        >
+          <div
+            ref={popupRef}
+            className={`${
+              showPopup ? "scale-[1]" : "scale-0"
+            } fixed duration-300 ease-in-out transition-all`}
+          >
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+              <div className=" space-y-5">
+                <div className="flex justify-between items-center py-2 ">
+                  <div className="text-xl">Select Token</div>
+                  <div
+                    onClick={() => setShowPopup(false)}
+                    className="cursor-pointer"
+                  >
+                    <IoMdClose size={24} />
                   </div>
+                </div>
 
-                  <div className="flex flex-col md:flex-row md:justify-between">
-                    <div className="md:w-[360px] mb-4 md:mb-0">
-                      <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        onChange={handleInputChange}
-                        className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
-                      />
-                    </div>
+                <div className="flex flex-col md:flex-row md:justify-between">
+                  <div className="md:w-[360px] mb-4 md:mb-0">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchTerm}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border border-zinc-500 text-white rounded-lg p-2 outline-none"
+                    />
                   </div>
                 </div>
-                <div className="h-[60vh] overflow-y-auto">
-                  <TokenList
-                    tokens={tokenData[selectedNetwork]}
-                    clickedTokens={clickedTokens}
-                    selectToken={selectToken}
-                    searchTerm={searchTerm}
-                  />
-                </div>
+              </div>
+              <div className="h-[60vh] overflow-y-auto">
+                <TokenList
+                  tokens={tokenData[selectedNetwork]}
+                  clickedTokens={clickedTokens}
+                  selectToken={selectToken}
+                  searchTerm={searchTerm}
+                />
               </div>
             </div>
           </div>
-        )}
+        </div>
+        {/* )} */}
 
         <div
           className={`${
