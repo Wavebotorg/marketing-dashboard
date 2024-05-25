@@ -18,7 +18,7 @@ const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
   const [validCaptcha, setValidCaptcha] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
   // useEffect(() => {
   //   const checkAuth = localStorage.getItem("Token")
@@ -75,15 +75,15 @@ const Login = () => {
       setCaptchaError(true);
       return;
     }
-
+    setLoading(true);
     await axiosInstance
-
       .post("login", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("=========mydata:", myData);
+        console.log("=========mydata:==================================================================", myData);
         // console.log("token--", myData?.token);
         if (myData?.status) {
+          setLoading(false);
           localStorage.setItem("Token", myData?.token);
           localStorage.setItem("email", myData?.email);
           Cookies.set("auth-token", myData?.token);
@@ -98,6 +98,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("err --->", err);
       });
   };
@@ -200,7 +201,8 @@ const Login = () => {
               }
             }}
           >
-            Login
+            {/* Login */}
+            {loading ? <span className="loader"></span> : "Login"}
           </button>
           <ToastContainer />
         </div>

@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+
 import Image from "next/image";
 
 const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
