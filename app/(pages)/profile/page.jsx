@@ -106,7 +106,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
         <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
           <div className="text-[35px] font-medium">My Profile</div>
 

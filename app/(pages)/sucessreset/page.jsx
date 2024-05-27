@@ -14,7 +14,7 @@ const SucessReset = () => {
 
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
         <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage">
           <div className="text-center">
             <Image
