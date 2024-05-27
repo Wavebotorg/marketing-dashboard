@@ -135,7 +135,7 @@ const LeaderBoard = () => {
   }, [searchQuery]);
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="xl:flex my-10 xl:ml-16  xl:mr-11 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5"> */}
       <div className="xl:flex my-10 xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
@@ -147,31 +147,35 @@ const LeaderBoard = () => {
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
                 <table className="w-full">
-                  <thead className="sticky top-0 leader-color shadow-2xl">
+                  <thead className="sticky top-0 leader-color shadow-2xl ">
                     <tr
                       className="  text-[#CECECE]   bg-[#1C1C1C]  "
-                      style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                      // style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                     >
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium "
                       >
                         Rank
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Name
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Invited by
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Points
@@ -183,16 +187,16 @@ const LeaderBoard = () => {
                     {visibleData?.length > 0 ? (
                       visibleData.map((student, index) => (
                         <tr key={index}>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.Rank}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.name}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.email}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.points}
                           </td>
                         </tr>

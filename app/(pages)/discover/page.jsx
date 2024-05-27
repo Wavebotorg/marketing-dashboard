@@ -399,7 +399,7 @@ const Discover = () => {
   const disableRightArrow = position >= cards.length - cardsPerPage;
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">
+    <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-0 mx-auto lg:m-5 h-full">
       {/* <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 "> */}
       <div className="text-white xl:ml-24 xl:mr-[70px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="">

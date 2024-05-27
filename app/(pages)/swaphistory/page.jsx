@@ -177,7 +177,7 @@ const SwapHistory = () => {
     };
   }, [showDropdown]);
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
       <div className=" my-10 xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="mt-10 flex">
           <div className="flex">
@@ -386,7 +386,6 @@ const SwapHistory = () => {
 
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.from)}
-
                           <button
                             className="text-xl text-[#828282] align-middle pb-1.5"
                             onClick={() =>
@@ -398,7 +397,6 @@ const SwapHistory = () => {
                               className="ml-1.5 items-center"
                             />
                           </button>
-
                           {d?._id === copiedFromId && (
                             <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
                               Copied!
@@ -406,13 +404,11 @@ const SwapHistory = () => {
                           )}
                         </div>
                       </div>
-
                       <div className=" flex border-b border-[#494949] justify-between">
                         <div className="py-2  pl-4 font-semibold">To</div>
 
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {formatTransactionID(d?.to)}
-
                           <button
                             className="text-xl text-[#828282] align-middle pb-1.5"
                             onClick={() => copyToClipboard(d?.to, "to", d?._id)}
@@ -422,7 +418,6 @@ const SwapHistory = () => {
                               className="ml-1.5 items-center"
                             />
                           </button>
-
                           {d?._id === copiedToId && (
                             <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
                               Copied!
@@ -444,8 +439,7 @@ const SwapHistory = () => {
                           {" "}
                           Transaction Hash
                         </div>
-
-                        <div className=" py-2 pr-4 pl-4">
+                        <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {" "}
                           {formatTransactionID(d?.txid)}
                           <button
@@ -453,9 +447,7 @@ const SwapHistory = () => {
                             onClick={() =>
                               copyToClipboard(
                                 d?.txid,
-
                                 "Transaction Hash",
-
                                 d?._id
                               )
                             }
@@ -466,13 +458,12 @@ const SwapHistory = () => {
                             />
                           </button>
                           {d?._id === copiedTransactionId && (
-                            <span className="absolute  bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                            <span className="absolute xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
                               Copied!
                             </span>
                           )}
                         </div>
                       </div>
-
                       <div className=" flex justify-between">
                         <div className="py-2  pl-4 font-semibold">
                           Transaction Date

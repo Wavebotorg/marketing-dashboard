@@ -135,14 +135,14 @@ const WatchList = () => {
     if (allCoinData.length > 0) {
       getWatchlistdata();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCoinData]); // Only trigger if allCoinData changes
 
   useEffect(() => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -155,7 +155,7 @@ const WatchList = () => {
   }
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 "> */}
       <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />

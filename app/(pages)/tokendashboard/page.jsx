@@ -631,7 +631,7 @@ const TokenDashboard = () => {
   }, [searchQuery]);
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10"> */}
       <div className="flex flex-col xl:justify-center   xl:ml-28 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
         <h1 className="text-[#1788FB]   font-medium max-w-screen-lg   text-2xl  md:text-3xl  text-center md:text-left ">
@@ -701,7 +701,7 @@ const TokenDashboard = () => {
             </button>
           </div>
         </div>
-    
+
         <div className="mt-6 hidden lg:block  ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container  text-white h-auto  overflow-auto rounded-lg">
