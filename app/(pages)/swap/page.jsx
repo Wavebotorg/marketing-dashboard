@@ -84,7 +84,7 @@ const Swap = () => {
       chianid: "1",
       address: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
       decimal: "18",
-      logoURI: BNB,
+      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
       networkname: "Ethereum",
     },
     {
@@ -93,7 +93,7 @@ const Swap = () => {
       chianid: "1",
       address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
       decimal: "6",
-      logoURI: tether,
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       networkname: "Ethereum",
     },
   ];
@@ -101,22 +101,12 @@ const Swap = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const token_data_ARB = [
     {
-      name: "Wrapped BTC",
-      symbol: "WBTC",
-      chianid: 42161,
-      address: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
-      decimal: "8",
-      logoURI: wrapped,
-      chainname: "arbitrum",
-      descode: `0xa4b1`,
-    },
-    {
       name: "ChainLink Token",
       symbol: "LINK",
       chianid: 42161,
       address: "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
       decimal: "18",
-      logoURI: chainlink,
+      logoURI: "https://cryptologos.cc/logos/chainlink-link-logo.png",
       chainname: "arbitrum",
       descode: `0xa4b1`,
     },
@@ -126,7 +116,7 @@ const Swap = () => {
       chianid: 42161,
       address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
       decimal: "6",
-      logoURI: chainlink,
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       chainname: "arbitrum",
       descode: `0xa4b1`,
     },
@@ -136,7 +126,7 @@ const Swap = () => {
       chianid: 42161,
       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
       decimal: "18",
-      logoURI: arbitrum,
+      logoURI: "https://cryptologos.cc/logos/arbitrum-arb-logo.png",
       chainname: "arbitrum",
       descode: `0xa4b1`,
     },
@@ -146,7 +136,7 @@ const Swap = () => {
       chianid: 42161,
       address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
       decimal: "6",
-      logoURI: arbitrum,
+      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
       chainname: "arbitrum",
       descode: `0xa4b1`,
     },
@@ -158,7 +148,7 @@ const Swap = () => {
       chianid: 137,
       address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
       decimal: "6",
-      logoURI: tether,
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       chainname: "polygon",
       descode: `0x89`,
     },
@@ -168,7 +158,7 @@ const Swap = () => {
       chianid: 137,
       address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
       decimal: "18",
-      logoURI: BNB,
+      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
       chainname: "polygon",
       descode: `0x89`,
     },
@@ -178,7 +168,7 @@ const Swap = () => {
       chianid: 137,
       address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
       decimal: "6",
-      logoURI: USD,
+      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
       chainname: "polygon",
       descode: `0x89`,
     },
@@ -188,7 +178,8 @@ const Swap = () => {
       chianid: 137,
       address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
       decimal: "18",
-      logoURI: SHU,
+      logoURI:
+        "https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png",
       chainname: "polygon",
       descode: `0x89`,
     },
@@ -201,7 +192,7 @@ const Swap = () => {
       chianid: 56,
       address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       decimal: "18",
-      logoURI: wrapped,
+      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
       chainname: "bsc",
       descode: `0x38`,
     },
@@ -211,37 +202,29 @@ const Swap = () => {
       chianid: 56,
       address: "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3",
       decimal: "18",
-      logoURI: wrapped,
+      logoURI:
+        "https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png",
       chainname: "bsc",
       descode: `0x38`,
     },
-    {
-      name: "USDC",
-      symbol: "anyUSDC",
-      chianid: 56,
-      address: "0x8965349fb649A33a30cbFDa057D8eC2C48AbE2A2",
-      decimal: "18",
-      logoURI: USD,
-      chainname: "bsc",
-      descode: `0x38`,
-    },
+
     {
       name: "USDC",
       symbol: "USDC",
       chianid: 56,
       address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       decimal: "18",
-      logoURI: USD,
+      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
       chainname: "bsc",
       descode: `0x38`,
     },
     {
       name: "Tether USD",
-      symbol: "USDT.e",
+      symbol: "USDT",
       chianid: 56,
       address: "0x2B90E061a517dB2BbD7E39Ef7F733Fd234B494CA",
       decimal: "6",
-      logoURI: tether,
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       chainname: "bsc",
       descode: `0x38`,
     },
@@ -312,6 +295,8 @@ const Swap = () => {
       price_from: selectedTokenDatato?.price_to,
       input_to: selectedTokenDatato?.input_from,
       input_from: selectedTokenDatato?.input_to,
+      address_to: selectedTokenDatato?.address_from,
+      address_from: selectedTokenDatato?.address_to,
     });
   };
 
@@ -504,7 +489,7 @@ const Swap = () => {
     const tokensPrice = tokenRes?.data?.finalRes;
     const buyAmt = selectedTokenDatato?.input_to * tokensPrice?.sol;
     const finalAmt = buyAmt / tokensPrice?.to;
-    return finalAmt;
+    return finalAmt?.toFixed(4);
   }
 
   async function evmTokenSwapPrice() {
@@ -524,7 +509,7 @@ const Swap = () => {
     const tokensPrice = tokenRes?.data?.finalRes;
     const buyAmt = selectedTokenDatato?.input_to * tokensPrice?.token1;
     const finalAmt = buyAmt / tokensPrice?.token2;
-    return finalAmt;
+    return finalAmt?.toFixed(4);
   }
 
   useEffect(() => {
@@ -843,7 +828,7 @@ const Swap = () => {
                         <div>
                           {selectedTokenDatato?.name_to
                             ? selectedTokenDatato?.name_to.toUpperCase()
-                            : "  Token"}
+                            : "Select Token"}
                         </div>
                         <div>
                           <MdKeyboardArrowDown size={20} />
