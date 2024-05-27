@@ -2,7 +2,7 @@
 import { IoIosNotifications } from "react-icons/io";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa6";
 
@@ -68,10 +68,24 @@ const Navbar = () => {
   };
 
   // const [isNavbar, setIsNavbar] = useState(false);
+  const navbarRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      setIsNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
-      <div className="flex justify-between p-2 xl:pl-60 ">
+      <div ref={navbarRef} className="flex justify-between p-2 xl:pl-60 ">
         <div
           className={`lg:hidden block text-3xl `}
           onClick={() => setIsNavbar(!isNavbar)}

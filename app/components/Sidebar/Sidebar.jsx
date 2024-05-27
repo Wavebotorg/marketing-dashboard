@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -202,7 +202,7 @@ function Sidebar() {
     };
 
     getUserProfile();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getPath = usePathname() || "/default-path";
 
@@ -232,6 +232,21 @@ function Sidebar() {
     setConfirmationPopUp(false);
   };
 
+  const navbarRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      setIsNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -249,7 +264,10 @@ function Sidebar() {
         >
           <div className="sidebar h-full  -ml-[4px] hover:shadow-lg">
             {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
-            <div className="flex h-screen flex-col   overflow-y-auto">
+            <div
+              ref={navbarRef}
+              className="flex h-screen flex-col   overflow-y-auto"
+            >
               <div className="flex  items-center text-white justify-center">
                 <div
                   className={`xl:hidden text-3xl `}
