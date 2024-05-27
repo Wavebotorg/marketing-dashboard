@@ -202,6 +202,7 @@ function Sidebar() {
     };
 
     getUserProfile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getPath = usePathname() || "/default-path";
 
