@@ -11,13 +11,13 @@ export default function BalancePopUp({
     <div
       className={`${
         balancePopup ? "scale-1" : "scale-0"
-      } transition-all ease-in-out !duration-300 h-[350px] overflow-y-auto rounded-lg w-[300px] p-3 shadow-sm !shadow-blue-500 bg-[#1e2529] ms-10 md:ms-0`}
+      } transition-all ease-in-out !duration-300 h-[350px] relative overflow-y-auto rounded-lg w-[300px] px-3 pb-3 shadow-sm !shadow-blue-500 bg-[#1e2529] ms-10 md:ms-0`}
       onClick={(e) => e?.stopPropagation()}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center sticky top-0 bg-[#1e2529] pt-2">
         <h1 className="text-[20px] text-[#979797] font-bold">Tokens</h1>
         <button
-          className="text-[25px]"
+          className="text-[20px]"
           onClick={() => {
             setBalancePopup(false);
           }}
