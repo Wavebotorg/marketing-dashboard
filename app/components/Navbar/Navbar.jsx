@@ -71,7 +71,21 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between p-2 xl:pl-60 ">
+      <div
+        className={`${
+          getPath === "/login" ||
+          getPath === "/profile" ||
+          getPath === "/swap" ||
+          getPath === "/signup" ||
+          getPath === "/swap" ||
+          getPath === "/forgotpassword" ||
+          getPath === "/passwordverify" ||
+          getPath === "/resetpassword" ||
+          getPath === "/sucessreset"
+            ? "hidden"
+            : "flex w-full justify-between"
+        } flex justify-between p-0 xl:pl-60 py-3`}
+      >
         <div
           className={`lg:hidden block text-3xl `}
           onClick={() => setIsNavbar(!isNavbar)}
@@ -85,42 +99,24 @@ const Navbar = () => {
           )}
         </div>
         {/* <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto "> */}
-        <div className="">
-          <div
-            className={`${
-              getPath === "/login" ||
-              getPath === "/profile" ||
-              getPath === "/swap" ||
-              getPath === "/signup" ||
-              getPath === "/swap" ||
-              getPath === "/forgotpassword" ||
-              getPath === "/passwordverify" ||
-              getPath === "/resetpassword" ||
-              getPath === "/sucessreset"
-                ? "hidden"
-                : "flex w-full justify-between"
-            }`}
-          >
-            <div className="flex w-auto md:w-[350px]    sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
-              <div className="flex items-center pl-3  pointer-events-none">
-                <CiSearch size={20} />
-              </div>
-              <input
-                type=""
-                value={searchQuery}
-                onChange={handleSearchChange}
-                id="default-search"
-                className="bg-[#1C1C1C]  xsm:w-[10rem] p-2 outline-none rounded-lg w-auto md:w-[300px]"
-                placeholder="Search"
-              />
+        <div className="flex items-center gap-2">
+          <div className="flex w-auto md:w-[350px]    sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+            <div className="flex items-center pl-3  pointer-events-none">
+              <CiSearch size={20} />
             </div>
-
-            <div className=" flex items-center  ">
-              <button className="">
-                <IoIosNotifications size={25} />
-              </button>
-            </div>
+            <input
+              type=""
+              value={searchQuery}
+              onChange={handleSearchChange}
+              id="default-search"
+              className="bg-[#1C1C1C]  xsm:w-[10rem] p-2 outline-none rounded-lg w-auto md:w-[300px]"
+              placeholder="Search"
+            />
           </div>
+
+          <button>
+            <IoIosNotifications size={25} />
+          </button>
         </div>
         {/* <div
           className={`${
