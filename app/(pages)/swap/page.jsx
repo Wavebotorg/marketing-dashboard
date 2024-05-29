@@ -29,9 +29,11 @@ import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FiRefreshCcw } from "react-icons/fi";
+import { FaBars } from "react-icons/fa6";
 
 const Swap = () => {
-  const { walletAddress, email, solanaAddress } = useWallet();
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
   const router = useRouter();
 
   // const [selectedNetwork, setSelectedNetwork] = useState(null);
@@ -496,7 +498,6 @@ const Swap = () => {
     const desCode = NetworkData.filter(
       (ele, index) => ele?.name == selectedNetwork
     );
-    console.log("🚀 ~ evmTokenSwapPrice ~ desCode:", desCode[0].descode);
     const tokenRes = await axios({
       method: "post",
       url: "http://localhost:3332/getEvmTokenPrice",
@@ -673,9 +674,21 @@ const Swap = () => {
     <>
       <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto relative">
         <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
-          <div className="text-lg font-semibold flex justify-end">
+          <div className="text-lg font-semibold flex justify-between pt-2">
+            <div
+              className={`lg:scale-0 scale-[1] text-3xl `}
+              onClick={() => setIsNavbar(!isNavbar)}
+            >
+              {isNavbar === false ? (
+                <div className="cursor-pointer">
+                  <FaBars />
+                </div>
+              ) : (
+                <div className="  cursor-pointer"> X </div>
+              )}
+            </div>
             <button
-              className="bg-[#1e2529] hover:bg-[#323b41] rounded-lg  px-5 py-1 mt-3 text-[17px]"
+              className="bg-[#1e2529] hover:bg-[#323b41] rounded-lg  px-5 py-1  text-[17px]"
               onClick={() => {
                 setBalancePopup(true);
               }}
@@ -683,7 +696,7 @@ const Swap = () => {
               Show Balance
             </button>
           </div>
-          <div className="mt-48 space-y-10 px-5  ">
+          <div className="h-[94vh] w-full flex justify-center items-center px-5">
             <div className="swap flex flex-col items-center justify-between   text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
                 <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
@@ -828,7 +841,7 @@ const Swap = () => {
                         <div>
                           {selectedTokenDatato?.name_to
                             ? selectedTokenDatato?.name_to.toUpperCase()
-                            : "Select Token"}
+                            : "Token"}
                         </div>
                         <div>
                           <MdKeyboardArrowDown size={20} />
@@ -880,7 +893,7 @@ const Swap = () => {
                         <div>
                           {selectedTokenDatato?.name_from
                             ? selectedTokenDatato?.name_from.toUpperCase()
-                            : "Select Token"}
+                            : "Token"}
                         </div>
                         <div>
                           <MdKeyboardArrowDown size={20} />
@@ -958,7 +971,7 @@ const Swap = () => {
         <div
           className={`${
             balancePopup ? "scale-1" : "scale-0"
-          } transition-all ease-in-out !duration-75 absolute top-0 h-svh w-full left-0 z-[9999] flex justify-center items-center bg-[#0000007a]`}
+          } transition-all ease-in-out !duration-75 absolute top-0 h-[94vh] lg:h-[100vh] w-full left-0 z-[9999] flex justify-center items-center bg-[#0000007a]`}
           onClick={(e) => setBalancePopup(false)}
         >
           <BalancePopUp

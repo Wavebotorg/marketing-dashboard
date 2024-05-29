@@ -38,7 +38,7 @@ const Market = () => {
       )
       .then((res) => {
         setAllCoinData(res?.data);
-        // console.log("🚀 ~ .then ~  setAllCoinData:", res?.data);
+        console.log("🚀 ~ .then ~  setAllCoinData:", res?.data);
       })
 
       .catch((err) => {
@@ -80,7 +80,7 @@ const Market = () => {
     // router.push("/login")
     // }
     setToken(storedToken);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -121,7 +121,6 @@ const Market = () => {
             return [...prevSavedData, id];
           } else {
             return [id];
-            
           }
         });
 
