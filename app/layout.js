@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
         {/* <Web3ModalProvider initialState={initialState}> */}
         <SearchProvider>
           <WalletProvider>
-            <div className="flex flex-col sm:flex-row lg:pl-20  w-full ">
+            <div className="flex flex-col sm:flex-row  w-full ">
               <div className="sidebar visible ">
                 <Sidebar />
               </div>

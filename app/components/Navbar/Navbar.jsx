@@ -90,6 +90,7 @@ const Navbar = () => {
           getPath === "/login" ||
           getPath === "/profile" ||
           getPath === "/swap" ||
+          getPath === "/TransferToken" ||
           getPath === "/signup" ||
           getPath === "/swap" ||
           getPath === "/forgotpassword" ||
@@ -98,7 +99,7 @@ const Navbar = () => {
           getPath === "/sucessreset"
             ? "hidden"
             : "flex w-full justify-between"
-        } flex justify-between p-0 xl:pl-60 py-3`}
+        } flex justify-between p-0xl:pl-60 py-3`}
       >
         <div
           className={`lg:hidden block text-3xl xsm:ml-5`}
@@ -112,9 +113,9 @@ const Navbar = () => {
             <div className="  cursor-pointer"> X </div>
           )}
         </div>
-        {/* <div className=" 2xl:pl-[14.5rem] xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto "> */}
+        {/* <div className=" 2xsm:pl-64[14.5rem]xl:pl-[265px]   md:pl-[0.70rem] sm:pl-4 xsm:pl-[3.7rem] mx-auto "> */}
         <div className="">
-          <div className="flex w-auto md:w-[350px] lg:ml-7 xl:ml-[5rem]   sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
+          <div className="flex w-auto md:w-[350px] lg:ml-24 xl:ml-96   sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             <div className="flex items-center pl-3  pointer-events-none">
               <CiSearch size={20} />
             </div>

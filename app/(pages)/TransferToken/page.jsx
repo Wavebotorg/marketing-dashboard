@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import TokenList from "../../components/ShowTokenSwap/TokensList";
 import React, { useEffect, useState, useRef } from "react";
@@ -31,7 +32,7 @@ import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FiRefreshCcw } from "react-icons/fi";
 import { FaBars } from "react-icons/fa6";
 
-const Swap = () => {
+const TransferToken = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
   const router = useRouter();
@@ -286,21 +287,21 @@ const Swap = () => {
     setShowPopup(false);
   };
 
-  const handleSwapTokens = () => {
-    setSelectedTokenDatato({
-      ...selectedTokenDatato,
-      name_to: selectedTokenDatato?.name_from,
-      image_to: selectedTokenDatato?.image_from,
-      price_to: selectedTokenDatato?.price_from,
-      name_from: selectedTokenDatato?.name_to,
-      image_from: selectedTokenDatato?.image_to,
-      price_from: selectedTokenDatato?.price_to,
-      input_to: selectedTokenDatato?.input_from,
-      input_from: selectedTokenDatato?.input_to,
-      address_to: selectedTokenDatato?.address_from,
-      address_from: selectedTokenDatato?.address_to,
-    });
-  };
+  // const handleSwapTokens = () => {
+  //   setSelectedTokenDatato({
+  //     ...selectedTokenDatato,
+  //     name_to: selectedTokenDatato?.name_from,
+  //     image_to: selectedTokenDatato?.image_from,
+  //     price_to: selectedTokenDatato?.price_from,
+  //     name_from: selectedTokenDatato?.name_to,
+  //     image_from: selectedTokenDatato?.image_to,
+  //     price_from: selectedTokenDatato?.price_to,
+  //     input_to: selectedTokenDatato?.input_from,
+  //     input_from: selectedTokenDatato?.input_to,
+  //     address_to: selectedTokenDatato?.address_from,
+  //     address_from: selectedTokenDatato?.address_to,
+  //   });
+  // };
 
   const tokenpopup = (e) => {
     setShowPopup(true);
@@ -517,47 +518,47 @@ const Swap = () => {
     getPrice();
   }, [selectedTokenDatato?.address_from]);
 
-  async function getToQty() {
-    if (selectedNetwork == "Solana") {
-      if (
-        selectedTokenDatato.address_from &&
-        selectedTokenDatato.address_to &&
-        selectedTokenDatato.input_to
-      ) {
-        setRefresh(true);
-        solanaTokenSwapPrice()
-          .then((res) => {
-            setRefresh(false);
-            setSelectedTokenDatato({
-              ...selectedTokenDatato,
-              input_from: res,
-            });
-          })
-          .catch((error) => {
-            setRefresh(false);
-          });
-      }
-    } else {
-      if (
-        selectedTokenDatato.address_from &&
-        selectedTokenDatato.address_to &&
-        selectedTokenDatato.input_to
-      ) {
-        setRefresh(true);
-        evmTokenSwapPrice()
-          .then((res) => {
-            setRefresh(false);
-            setSelectedTokenDatato({
-              ...selectedTokenDatato,
-              input_from: res,
-            });
-          })
-          .catch((err) => {
-            setRefresh(false);
-          });
-      }
-    }
-  }
+  // async function getToQty() {
+  //   if (selectedNetwork == "Solana") {
+  //     if (
+  //       selectedTokenDatato.address_from &&
+  //       selectedTokenDatato.address_to &&
+  //       selectedTokenDatato.input_to
+  //     ) {
+  //       setRefresh(true);
+  //       solanaTokenSwapPrice()
+  //         .then((res) => {
+  //           setRefresh(false);
+  //           setSelectedTokenDatato({
+  //             ...selectedTokenDatato,
+  //             input_from: res,
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           setRefresh(false);
+  //         });
+  //     }
+  //   } else {
+  //     if (
+  //       selectedTokenDatato.address_from &&
+  //       selectedTokenDatato.address_to &&
+  //       selectedTokenDatato.input_to
+  //     ) {
+  //       setRefresh(true);
+  //       evmTokenSwapPrice()
+  //         .then((res) => {
+  //           setRefresh(false);
+  //           setSelectedTokenDatato({
+  //             ...selectedTokenDatato,
+  //             input_from: res,
+  //           });
+  //         })
+  //         .catch((err) => {
+  //           setRefresh(false);
+  //         });
+  //     }
+  //   }
+  // }
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
     if (!value || value == 0) {
@@ -670,6 +671,7 @@ const Swap = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
+
   return (
     <>
       <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
@@ -701,9 +703,7 @@ const Swap = () => {
               <div className="flex flex-col justify-center items-center space-y-5">
                 <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
                   <div className="flex justify-between items-center py-2">
-                    <div className="flex justify-between gap-5 text-lg mx-1 w-full">
-                      <button>Swap</button>
-
+                    <div className="flex justify-end gap-5 text-lg mx-1 w-full">
                       <div
                         ref={dropdownRef}
                         className="dropdown-container relative"
@@ -849,56 +849,23 @@ const Swap = () => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="flex justify-center items-center bg-gray-600 bg-opacity-50 text-white  p-2 mx-auto rounded-md cursor-pointer"
-                    onClick={() => handleSwapTokens()}
-                  >
-                    <IoSwapVerticalOutline size={20} className="" />
-                  </div>
-                  <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+
+                  <div className=" flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                     <div className="text-gray-300 flex items-center gap-3">
-                      <p>You receive</p>
-                      <button onClick={() => getToQty()}>
-                        <FiRefreshCcw
-                          className={`text-[18px] ${
-                            refresh ? "animate-spin" : null
-                          }`}
-                        />
-                      </button>
+                      <p>Wallet Address</p>
                     </div>
                     <div className="flex justify-between py-2">
                       <div className="space-y-2">
-                        <h1 className="text-[24px] text-slate-400">
-                          {selectedTokenDatato?.input_from
-                            ? selectedTokenDatato?.input_from
-                            : 0}
-                        </h1>
+                        <input
+                          type="text"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
+                          placeholder="Enter Wallet Address"
+                          name="input_to"
+                          value={selectedTokenDatato?.input_to}
+                          onChange={(e) => handleInputChanges(e)}
+                        />
                       </div>
                       {/*{swap 2}*/}
-                      <div
-                        className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
-                        onClick={() => tokenpopup(2)}
-                      >
-                        <div>
-                          {selectedTokenDatato?.image_from ? (
-                            <img
-                              src={selectedTokenDatato?.image_from}
-                              height={30}
-                              width={30}
-                              alt="logo"
-                              className="rounded-full"
-                            />
-                          ) : null}
-                        </div>
-                        <div>
-                          {selectedTokenDatato?.name_from
-                            ? selectedTokenDatato?.name_from.toUpperCase()
-                            : "Token"}
-                        </div>
-                        <div>
-                          <MdKeyboardArrowDown size={20} />
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -956,12 +923,49 @@ const Swap = () => {
                 </div>
               </div>
               <div className="h-[60vh] overflow-y-auto">
-                <TokenList
-                  tokens={tokenData[selectedNetwork]}
-                  clickedTokens={clickedTokens}
-                  selectToken={selectToken}
-                  searchTerm={searchTerm}
-                />
+                {showBalance?.length > 0 ? (
+                  showBalance?.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                        clickedTokens.includes(item.name)
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        if (!clickedTokens.includes(item.name)) {
+                          selectToken(item);
+                        }
+                      }}
+                    >
+                      <img
+                        src={item.logo}
+                        alt={item.name || "Token"}
+                        height={30}
+                        width={30}
+                        className="h-15 w-15 my-3 rounded-full"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "fallback-image-url";
+                        }}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <div className="text-base font-bold">{item.name}</div>
+                        <div className="text-base font-bold">{item.symbol}</div>
+                        <div className="text-base">
+                          Balance:{" "}
+                          <span className="font-bold">
+                            {selectedNetwork === "Solana"
+                              ? Number(item?.amount)?.toFixed(3)
+                              : Number(item?.balance_formatted)?.toFixed(3)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="mt-16 text-xl">No data</div>
+                )}
               </div>
             </div>
           </div>
@@ -987,4 +991,44 @@ const Swap = () => {
   );
 };
 
-export default Swap;
+export default TransferToken;
+
+// ADD after 850
+
+{
+  /* <div className=" flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
+                    <div className="text-gray-300 flex items-center gap-3">
+                      <p>Wallet Address</p>
+                    </div>
+                    <div className="flex justify-between py-2">
+                      <div className="space-y-2">
+                        <input
+                          type="text"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
+                          placeholder="Enter Wallet Address"
+                          name="input_to"
+                          value={selectedTokenDatato?.input_to}
+                          onChange={(e) => handleInputChanges(e)}
+                        />
+                      </div>
+                      {/*{swap 2}*
+                    </div>
+                  </div> */
+}
+
+{
+  /* <div className="w-full">
+                    <button
+                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                      onClick={() => {
+                        handleSwapSubmit();
+                      }}
+                      disabled={loading}
+                    >
+                      {/* Swap */
+}
+{
+  /* {loading ? <span className="loader "></span> : "Swap"}
+                    </button>
+                  </div>  */
+}
