@@ -68,7 +68,6 @@ const TransferToken = () => {
     descode: "",
     chainname: "",
   });
-
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },

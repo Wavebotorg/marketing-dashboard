@@ -7,8 +7,12 @@ import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
 import Referral from "../../components/Profileinfo/Referral ";
+import { FaBars } from "react-icons/fa6";
+import { useWallet } from "../../components/contexts/WalletContext";
 
 const Profile = () => {
+  const { isNavbar, setIsNavbar } = useWallet();
+
   const [isComponent1Visible, setComponent1Visible] = useState(true);
   const [isComponent2Visible, setComponent2Visible] = useState(false);
   const [isComponent3Visible, setComponent3Visible] = useState(false);
@@ -137,9 +141,23 @@ const Profile = () => {
 
   return (
     <>
-      <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+      <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
         <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
-          <div className="text-[35px] font-medium">My Profile</div>
+          <div className="flex items-center gap-3">
+            <div
+              className={`lg:scale-0 scale-[1] text-3xl `}
+              onClick={() => setIsNavbar(!isNavbar)}
+            >
+              {isNavbar === false ? (
+                <div className="cursor-pointer">
+                  <FaBars />
+                </div>
+              ) : (
+                <div className="cursor-pointer"> X </div>
+              )}
+            </div>
+            <div className="text-[35px] font-medium ml-2">My Profile</div>
+          </div>
 
           <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
