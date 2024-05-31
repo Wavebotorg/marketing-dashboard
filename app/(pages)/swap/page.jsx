@@ -266,7 +266,11 @@ const Swap = () => {
       descode: "",
       chainname: "",
     });
-    // setSelectChain(null);
+   
+
+
+
+
   };
   const selectToken = (token, networkData, e) => {
     if (selectedtofrom === 1) {
