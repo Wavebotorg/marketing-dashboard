@@ -68,6 +68,7 @@ const TransferToken = () => {
     descode: "",
     chainname: "",
   });
+
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
@@ -165,41 +166,46 @@ const TransferToken = () => {
   };
   const [loading, setLoading] = useState(false);
 
-  const handleSwapSubmit = async () => {
+  const handleTransferSubmit = async (networkName) => {
+    console.log("dadadad3333");
     setLoading(true);
 
-    let endpoint;
-    if (selectedNetwork === "Solana") {
-      endpoint = "/solanaSwap";
-    } else {
-      endpoint = "/EVMswap";
-    }
+    const data = {
+      email: email,
+      token: selectedTokenDatato?.address_to,
+      toWallet: selectedTokenDatato?.address_from,
+      chain: Number(selectedChainId),
+      amount: selectedTokenDatato?.input_to,
+    };
+    console.log("dadadad222222");
 
-    axiosInstance
-      .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
-      .then(async (res) => {
-        const myData = res?.data;
-        console.log("Response from API:", myData);
-        if (myData?.status) {
-          toast.success(myData?.message);
-          setTimeout(async () => {
-            if (selectedNetwork == "Solana") {
-              await getSolanaBalance();
-            } else {
-              await getWalletBalance(selectedNetwork);
-            }
-          }, 3000);
-        } else {
-          toast.error(myData?.message);
-        }
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-        toast.error("An error occurred while processing your request");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const response = await axiosInstance.post("transferEvmToken", data);
+      console.log("dadadad11111");
+
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setTimeout(async () => {
+          if (selectedNetwork == "Solana") {
+            await getSolanaBalance();
+          } else {
+            await getWalletBalance(selectedNetwork);
+          }
+        }, 3000);
+      } else {
+        toast.error(response?.data?.message);
+      }
+
+      console.log(
+        "------------------------------------------------------LOG",
+        response
+      );
+    } catch (error) {
+      console.error("There was a problem with the API call:", error);
+      toast.error("An error occurred while processing your request");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getSolanaBalance = async () => {
@@ -556,12 +562,11 @@ const TransferToken = () => {
                   <div className="w-full">
                     <button
                       className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={() => {
-                        handleSwapSubmit();
-                      }}
+                      onClick={handleTransferSubmit}
                       disabled={loading}
                     >
                       {/* Swap */}
+
                       {loading ? <span className="loader "></span> : "Transfer"}
                     </button>
                   </div>
