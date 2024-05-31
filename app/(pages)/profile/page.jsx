@@ -6,6 +6,7 @@ import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
+import Referral from "../../components/Profileinfo/Referral ";
 
 const Profile = () => {
   const [isComponent1Visible, setComponent1Visible] = useState(true);
@@ -13,6 +14,7 @@ const Profile = () => {
   const [isComponent3Visible, setComponent3Visible] = useState(false);
   const [isComponent4Visible, setComponent4Visible] = useState(false);
   const [isComponent5Visible, setComponent5Visible] = useState(false);
+  const [isComponent6Visible, setComponent6Visible] = useState(false);
 
   const handleButtonClick = (component) => {
     if (component === 1) {
@@ -21,6 +23,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(1);
     } else if (component === 2) {
@@ -29,6 +32,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(2);
     } else if (component === 3) {
@@ -37,6 +41,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(3);
     } else if (component === 4) {
@@ -45,6 +50,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent3Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(4);
     } else if (component === 5) {
@@ -53,8 +59,18 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent3Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(5);
+    } else if (component === 6) {
+      setComponent6Visible(true);
+      setComponent5Visible(false);
+      setComponent2Visible(false);
+      setComponent1Visible(false);
+      setComponent4Visible(false);
+      setComponent3Visible(false);
+
+      setActiveButton(6);
     }
   };
 
@@ -66,6 +82,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(1);
     } else if (activeButton === 2) {
@@ -74,6 +91,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(2);
     } else if (activeButton === 3) {
@@ -82,6 +100,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(3);
     } else if (activeButton === 4) {
@@ -90,9 +109,21 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent3Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
+
       setActiveButton(4);
     } else if (activeButton === 5) {
       setComponent5Visible(true);
+      setComponent2Visible(false);
+      setComponent1Visible(false);
+      setComponent4Visible(false);
+      setComponent3Visible(false);
+      setComponent6Visible(false);
+
+      setActiveButton(5);
+    } else if (activeButton === 5) {
+      setComponent5Visible(true);
+      setComponent5Visible(false);
       setComponent2Visible(false);
       setComponent1Visible(false);
       setComponent4Visible(false);
@@ -161,13 +192,25 @@ const Profile = () => {
                 Notification
               </button>
             </div>
+            <div>
+              <button
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
+                  activeButton === 6 && "bg-blue-500"
+                }`}
+                onClick={() => handleButtonClick(6)}
+              >
+                Referral
+              </button>
+            </div>
           </div>
           <div className="">
             <div>{isComponent1Visible && <About />}</div>
+            <div>{isComponent6Visible && <Referral />}</div>
             <div>{isComponent2Visible && <Setup />}</div>
             <div>{isComponent3Visible && <Appearance />}</div>
             <div>{isComponent4Visible && <Security />}</div>
             <div>{isComponent5Visible && <Notification />}</div>
+
             <div className="flex justify-end mb-3"></div>
           </div>
         </div>
