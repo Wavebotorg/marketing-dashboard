@@ -231,7 +231,6 @@ const TransferToken = () => {
           logo: tokenImage ? tokenImage.logoURI : null,
         };
       });
-
       setShowBalance(mergedData);
     } catch (err) {
       console.log("error--->", err);

@@ -20,6 +20,7 @@ import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
 import WatchList from "../../../public/assets/sidebar/watchlist.svg";
 import Discover from "../../../public/assets/sidebar/discover.svg";
+import send from "../../../public/send.svg";
 import Swap from "../../../public/assets/sidebar/swap.svg";
 import swaphistory from "../../../public/assets/sidebar/swaphistory.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
@@ -96,7 +97,7 @@ function Sidebar() {
     {
       id: 3,
       pathname: "/TransferToken",
-      icon: Swap,
+      icon: send,
       pagename: "Transfer Token",
     },
     {
