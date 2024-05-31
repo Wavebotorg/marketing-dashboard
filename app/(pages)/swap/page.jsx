@@ -35,7 +35,7 @@ const Swap = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
   const router = useRouter();
-  const [activeButton, setActiveButton] = useState('swap'); 
+  const [activeButton, setActiveButton] = useState('Swap'); 
   // const [selectedNetwork, setSelectedNetwork] = useState(null);
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
   const [fetchtokendata, setFetchtokendata] = useState(null);
@@ -249,6 +249,24 @@ const Swap = () => {
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName); // Update the active button
+    setSelectedTokenDatato({
+      name_to: "",
+      image_to: "",
+      price_to: "",
+      address_to: "",
+      decimals_to: "",
+      input_to: "",
+      name_from: "",
+      image_from: "",
+      input_from: "",
+      price_from: "",
+      address_from: "",
+      decimals_from: "",
+      chainid: "",
+      descode: "",
+      chainname: "",
+    });
+    // setSelectChain(null);
   };
   const selectToken = (token, networkData, e) => {
     if (selectedtofrom === 1) {
@@ -430,8 +448,9 @@ return finalAmt
   };
   // console.log( walletAddressbuysell,"address_from-------")
   const handleBuySubmit= async () => {
+    setLoading(true);
     handleBuyprice().then((e)=>{
-      setLoading(true);
+      
 
       let endpoint;
       if (selectedNetwork === "Solana") {
@@ -922,7 +941,7 @@ return finalAmt
                     <div>
         <button
           className={`mr-10 ${activeButton === 'Swap' ? 'bg-blue-500 px-2 rounded-lg'  : ''}`}
-          onClick={() => handleButtonClick('Swap')}
+          onClick={() => handleButtonClick('Swap') }
         >
           Swap
         </button>
