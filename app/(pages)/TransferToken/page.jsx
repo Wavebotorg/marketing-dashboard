@@ -17,6 +17,7 @@ import SHU from "../../../public/assets/tokenimg/SHU.png";
 import tether from "../../../public/assets/tokenimg/tether.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
+import base from "../../../public/assets/tokenimg/base.webp";
 import wrapped from "../../../public/assets/tokenimg/wrapped.png";
 import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import { useWallet } from "../../components/contexts/WalletContext";
@@ -73,165 +74,16 @@ const TransferToken = () => {
     { name: "Optimism", chainid: "10", img: optimism, descode: "0xa" },
     { name: "Polygon", chainid: "137", img: poly, descode: "0x89" },
     { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
+    { name: "Base", chainid: "8453", img: base, desCode: "0x2105" },
     { name: "BNB Chain", chainid: "56", img: BNB, descode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
     { name: "Cronos", chainid: "25", img: cronos, descode: "0x19" },
     { name: "Fantom", chainid: "250", img: fantom, descode: "0xfa" },
   ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const token_data_ETH = [
-    {
-      name: "BNB",
-      symbol: "BNB",
-      chianid: "1",
-      address: "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
-      decimal: "18",
-      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
-      networkname: "Ethereum",
-    },
-    {
-      name: "Tether USD",
-      symbol: "USDT",
-      chianid: "1",
-      address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
-      decimal: "6",
-      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
-      networkname: "Ethereum",
-    },
-  ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const token_data_ARB = [
-    {
-      name: "ChainLink Token",
-      symbol: "LINK",
-      chianid: 42161,
-      address: "0xf97f4df75117a78c1A5a0DBb814Af92458539FB4",
-      decimal: "18",
-      logoURI: "https://cryptologos.cc/logos/chainlink-link-logo.png",
-      chainname: "arbitrum",
-      descode: `0xa4b1`,
-    },
-    {
-      name: "USDT",
-      symbol: "USDT",
-      chianid: 42161,
-      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-      decimal: "6",
-      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
-      chainname: "arbitrum",
-      descode: `0xa4b1`,
-    },
-    {
-      name: "Arbitrum",
-      symbol: "ARB",
-      chianid: 42161,
-      address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
-      decimal: "18",
-      logoURI: "https://cryptologos.cc/logos/arbitrum-arb-logo.png",
-      chainname: "arbitrum",
-      descode: `0xa4b1`,
-    },
-    {
-      name: "USDC",
-      symbol: "USDC",
-      chianid: 42161,
-      address: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
-      decimal: "6",
-      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
-      chainname: "arbitrum",
-      descode: `0xa4b1`,
-    },
-  ];
-  const token_data_POLY = [
-    {
-      name: "Tether USD",
-      symbol: "USDT",
-      chianid: 137,
-      address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
-      decimal: "6",
-      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
-      chainname: "polygon",
-      descode: `0x89`,
-    },
-    {
-      name: "BNB",
-      symbol: "BNB",
-      chianid: 137,
-      address: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
-      decimal: "18",
-      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
-      chainname: "polygon",
-      descode: `0x89`,
-    },
-    {
-      name: "USD Coin",
-      symbol: "USDC",
-      chianid: 137,
-      address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
-      decimal: "6",
-      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
-      chainname: "polygon",
-      descode: `0x89`,
-    },
-    {
-      name: "SHIBA INU",
-      symbol: "SHIB",
-      chianid: 137,
-      address: "0x912CE59144191C1204E64559FE8253a0e49E6548",
-      decimal: "18",
-      logoURI:
-        "https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png",
-      chainname: "polygon",
-      descode: `0x89`,
-    },
-  ];
-
-  const token_data_BNB = [
-    {
-      name: "Wrapped BNB",
-      symbol: "WBNB",
-      chianid: 56,
-      address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
-      decimal: "18",
-      logoURI: "https://cryptologos.cc/logos/bnb-bnb-logo.png",
-      chainname: "bsc",
-      descode: `0x38`,
-    },
-    {
-      name: "TRX",
-      symbol: "TRX",
-      chianid: 56,
-      address: "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3",
-      decimal: "18",
-      logoURI:
-        "https://s3.coinmarketcap.com/static/img/portraits/62837c68ab0e763d5f77e9a6.png",
-      chainname: "bsc",
-      descode: `0x38`,
-    },
-
-    {
-      name: "USDC",
-      symbol: "USDC",
-      chianid: 56,
-      address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-      decimal: "18",
-      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
-      chainname: "bsc",
-      descode: `0x38`,
-    },
-    {
-      name: "Tether USD",
-      symbol: "USDT",
-      chianid: 56,
-      address: "0x2B90E061a517dB2BbD7E39Ef7F733Fd234B494CA",
-      decimal: "6",
-      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
-      chainname: "bsc",
-      descode: `0x38`,
-    },
-  ];
+  console.log(
+    "------------------------------------------------set addredess",
+    selectedTokenDatato
+  );
 
   useEffect(() => {
     const ethereumNetwork = NetworkData.find(
@@ -241,22 +93,24 @@ const TransferToken = () => {
       setSelectChain(ethereumNetwork.img);
     }
   }, []);
-  const [selectedSymbol, setSelectedSymbol] = useState("");
 
   const selectToken = (token, networkData, e) => {
-    if (selectedtofrom === 1) {
+    if (selectedtofrom == 1) {
       setSelectedTokenDatato({
         ...selectedTokenDatato,
 
         name_to: token.symbol,
-        image_to: token.logoURI,
+        image_to: token.logo,
         chainid: token.chainid,
-        address_to: token.address,
+        address_to:
+          selectedNetwork == "Solana"
+            ? token.associatedTokenAddress
+            : token.token_address,
         decimals_to: token.decimal,
         descode: token.descode,
         chainname: token.chainname,
       });
-    } else if (selectedtofrom === 2) {
+    } /*  else if (selectedtofrom == 2) {
       setSelectedTokenDatato({
         ...selectedTokenDatato,
         name_from: token.symbol,
@@ -267,9 +121,9 @@ const TransferToken = () => {
         descode: token.descode,
         chainname: token.chainname,
       });
-    }
+    } */
 
-    setSelectedSymbol(token.symbol);
+    // setSelectedSymbol(token.symbol);
 
     setClickedTokens((prevTokens) => {
       const tokensArray = Array.isArray(prevTokens) ? prevTokens : [];
@@ -286,22 +140,6 @@ const TransferToken = () => {
 
     setShowPopup(false);
   };
-
-  // const handleSwapTokens = () => {
-  //   setSelectedTokenDatato({
-  //     ...selectedTokenDatato,
-  //     name_to: selectedTokenDatato?.name_from,
-  //     image_to: selectedTokenDatato?.image_from,
-  //     price_to: selectedTokenDatato?.price_from,
-  //     name_from: selectedTokenDatato?.name_to,
-  //     image_from: selectedTokenDatato?.image_to,
-  //     price_from: selectedTokenDatato?.price_to,
-  //     input_to: selectedTokenDatato?.input_from,
-  //     input_from: selectedTokenDatato?.input_to,
-  //     address_to: selectedTokenDatato?.address_from,
-  //     address_from: selectedTokenDatato?.address_to,
-  //   });
-  // };
 
   const tokenpopup = (e) => {
     setShowPopup(true);
@@ -362,54 +200,6 @@ const TransferToken = () => {
       .finally(() => {
         setLoading(false);
       });
-  };
-
-  const getPrice = async () => {
-    if (
-      selectedTokenDatato?.input_to &&
-      selectedTokenDatato?.address_from &&
-      selectedTokenDatato?.address_to
-    ) {
-      const amount =
-        Number(selectedTokenDatato?.input_to) *
-        10 ** selectedTokenDatato?.decimals_to;
-      console.log("--------amount", amount);
-
-      const params = {
-        sellToken: selectedTokenDatato?.address_to,
-        buyToken: selectedTokenDatato?.address_from,
-        sellAmount: amount,
-        takerAddress: walletAddress,
-      };
-
-      const headers = {
-        "0x-api-key": process.env.NEXT_PUBLIC_0X_API_KEY,
-      };
-
-      try {
-        const response = await fetch(
-          `https://arbitrum.api.0x.org/swap/v1/quote?${qs.stringify(params)}`,
-          {
-            headers,
-          }
-        );
-
-        const swapPriceJSON = await response.json();
-        setFetchtokendata(swapPriceJSON);
-        const Tokenprice = swapPriceJSON.buyAmount;
-        const Tokendecimals = 10 ** selectedTokenDatato?.decimals_from;
-        const Finaltokenprice = Tokenprice / Tokendecimals;
-        if (Finaltokenprice) {
-          setSelectedTokenDatato({
-            ...selectedTokenDatato,
-            input_from: Finaltokenprice,
-          });
-        }
-      } catch (error) {
-        console.error("Error fetching price:", error);
-      } finally {
-      }
-    }
   };
 
   const getSolanaBalance = async () => {
@@ -480,99 +270,14 @@ const TransferToken = () => {
     const { value } = e.target;
     setSearchTerm(value);
   };
-  async function solanaTokenSwapPrice() {
-    const tokenRes = await axios({
-      method: "post",
-      url: "http://localhost:3332/getSolanaTokenPrice",
-      data: {
-        token: selectedTokenDatato.address_to,
-        token2: selectedTokenDatato.address_from,
-      },
-    });
-    const tokensPrice = tokenRes?.data?.finalRes;
-    const buyAmt = selectedTokenDatato?.input_to * tokensPrice?.sol;
-    const finalAmt = buyAmt / tokensPrice?.to;
-    return finalAmt?.toFixed(4);
-  }
 
-  async function evmTokenSwapPrice() {
-    const desCode = NetworkData.filter(
-      (ele, index) => ele?.name == selectedNetwork
-    );
-    const tokenRes = await axios({
-      method: "post",
-      url: "http://localhost:3332/getEvmTokenPrice",
-      data: {
-        token: selectedTokenDatato.address_to,
-        token2: selectedTokenDatato.address_from,
-        chain: desCode[0].descode,
-      },
-    });
-    const tokensPrice = tokenRes?.data?.finalRes;
-    const buyAmt = selectedTokenDatato?.input_to * tokensPrice?.token1;
-    const finalAmt = buyAmt / tokensPrice?.token2;
-    return finalAmt?.toFixed(4);
-  }
-
-  useEffect(() => {
-    getPrice();
-  }, [selectedTokenDatato?.address_from]);
-
-  // async function getToQty() {
-  //   if (selectedNetwork == "Solana") {
-  //     if (
-  //       selectedTokenDatato.address_from &&
-  //       selectedTokenDatato.address_to &&
-  //       selectedTokenDatato.input_to
-  //     ) {
-  //       setRefresh(true);
-  //       solanaTokenSwapPrice()
-  //         .then((res) => {
-  //           setRefresh(false);
-  //           setSelectedTokenDatato({
-  //             ...selectedTokenDatato,
-  //             input_from: res,
-  //           });
-  //         })
-  //         .catch((error) => {
-  //           setRefresh(false);
-  //         });
-  //     }
-  //   } else {
-  //     if (
-  //       selectedTokenDatato.address_from &&
-  //       selectedTokenDatato.address_to &&
-  //       selectedTokenDatato.input_to
-  //     ) {
-  //       setRefresh(true);
-  //       evmTokenSwapPrice()
-  //         .then((res) => {
-  //           setRefresh(false);
-  //           setSelectedTokenDatato({
-  //             ...selectedTokenDatato,
-  //             input_from: res,
-  //           });
-  //         })
-  //         .catch((err) => {
-  //           setRefresh(false);
-  //         });
-  //     }
-  //   }
-  // }
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
-    if (!value || value == 0) {
-      await setSelectedTokenDatato({
-        ...selectedTokenDatato,
-        input_from: 0,
-        input_to: value,
-      });
-    } else {
-      await setSelectedTokenDatato({
-        ...selectedTokenDatato,
-        [name]: value,
-      });
-    }
+
+    await setSelectedTokenDatato({
+      ...selectedTokenDatato,
+      [name]: value,
+    });
   };
 
   const handleOptionClick = (name) => {
@@ -607,33 +312,11 @@ const TransferToken = () => {
   useEffect(() => {
     if (selectedNetwork == "Solana") {
       getSolanaBalance();
-      axios
-        .get("https://token.jup.ag/strict")
-        .then((response) => {
-          setTokens(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching tokens:", error);
-        });
     } else {
       getWalletBalance(selectedNetwork);
     }
   }, [selectedNetwork]);
 
-  const [tokenData, setTokenData] = useState({
-    Ethereum: token_data_ETH,
-    Solana: [],
-    Arbitrum: token_data_ARB,
-    Polygon: token_data_POLY,
-    "BNB Chain": token_data_BNB,
-  });
-
-  useEffect(() => {
-    setTokenData((prevTokenData) => ({
-      ...prevTokenData,
-      Solana: tokens,
-    }));
-  }, [tokens]);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -703,7 +386,8 @@ const TransferToken = () => {
               <div className="flex flex-col justify-center items-center space-y-5">
                 <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
                   <div className="flex justify-between items-center py-2">
-                    <div className="flex justify-end gap-5 text-lg mx-1 w-full">
+                    <div className="flex justify-between gap-5 text-lg mx-1 w-full">
+                      <button>Transfer Token</button>
                       <div
                         ref={dropdownRef}
                         className="dropdown-container relative"
@@ -809,7 +493,7 @@ const TransferToken = () => {
                   </div>
                   <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                     <div className="text-gray-300">
-                      <p>You pay</p>
+                      <p>Select Token</p>
                     </div>
                     <div className="flex justify-between py-2">
                       <div className="space-y-2">
@@ -858,10 +542,10 @@ const TransferToken = () => {
                       <div className="space-y-2">
                         <input
                           type="text"
-                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl placeholder:text-[17px]"
                           placeholder="Enter Wallet Address"
-                          name="input_to"
-                          value={selectedTokenDatato?.input_to}
+                          name="address_from"
+                          value={selectedTokenDatato?.address_from}
                           onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
@@ -878,7 +562,7 @@ const TransferToken = () => {
                       disabled={loading}
                     >
                       {/* Swap */}
-                      {loading ? <span className="loader "></span> : "Swap"}
+                      {loading ? <span className="loader "></span> : "Transfer"}
                     </button>
                   </div>
                 </div>
@@ -992,43 +676,3 @@ const TransferToken = () => {
 };
 
 export default TransferToken;
-
-// ADD after 850
-
-{
-  /* <div className=" flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                    <div className="text-gray-300 flex items-center gap-3">
-                      <p>Wallet Address</p>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
-                          placeholder="Enter Wallet Address"
-                          name="input_to"
-                          value={selectedTokenDatato?.input_to}
-                          onChange={(e) => handleInputChanges(e)}
-                        />
-                      </div>
-                      {/*{swap 2}*
-                    </div>
-                  </div> */
-}
-
-{
-  /* <div className="w-full">
-                    <button
-                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={() => {
-                        handleSwapSubmit();
-                      }}
-                      disabled={loading}
-                    >
-                      {/* Swap */
-}
-{
-  /* {loading ? <span className="loader "></span> : "Swap"}
-                    </button>
-                  </div>  */
-}
