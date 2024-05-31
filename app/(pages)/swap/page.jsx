@@ -889,8 +889,8 @@ return finalAmt
   }, [showDropdown]);
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto relative">
-        <div className="  xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+      <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
+        <div className="  xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
           <div className="text-lg font-semibold flex justify-between pt-2">
             <div
               className={`lg:scale-0 scale-[1] text-3xl `}

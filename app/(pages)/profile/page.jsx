@@ -6,13 +6,19 @@ import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
+import Referral from "../../components/Profileinfo/Referral ";
+import { useWallet } from "../../components/contexts/WalletContext";
+import { FaBars } from "react-icons/fa6";
 
 const Profile = () => {
+  const { isNavbar, setIsNavbar } = useWallet();
+
   const [isComponent1Visible, setComponent1Visible] = useState(true);
   const [isComponent2Visible, setComponent2Visible] = useState(false);
   const [isComponent3Visible, setComponent3Visible] = useState(false);
   const [isComponent4Visible, setComponent4Visible] = useState(false);
   const [isComponent5Visible, setComponent5Visible] = useState(false);
+  const [isComponent6Visible, setComponent6Visible] = useState(false);
 
   const handleButtonClick = (component) => {
     if (component === 1) {
@@ -21,6 +27,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(1);
     } else if (component === 2) {
@@ -29,6 +36,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(2);
     } else if (component === 3) {
@@ -37,6 +45,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(3);
     } else if (component === 4) {
@@ -45,6 +54,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent3Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(4);
     } else if (component === 5) {
@@ -53,8 +63,18 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent3Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(5);
+    } else if (component === 6) {
+      setComponent6Visible(true);
+      setComponent5Visible(false);
+      setComponent2Visible(false);
+      setComponent1Visible(false);
+      setComponent4Visible(false);
+      setComponent3Visible(false);
+
+      setActiveButton(6);
     }
   };
 
@@ -66,6 +86,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(1);
     } else if (activeButton === 2) {
@@ -74,6 +95,7 @@ const Profile = () => {
       setComponent3Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(2);
     } else if (activeButton === 3) {
@@ -82,6 +104,7 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent4Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
 
       setActiveButton(3);
     } else if (activeButton === 4) {
@@ -90,9 +113,21 @@ const Profile = () => {
       setComponent1Visible(false);
       setComponent3Visible(false);
       setComponent5Visible(false);
+      setComponent6Visible(false);
+
       setActiveButton(4);
     } else if (activeButton === 5) {
       setComponent5Visible(true);
+      setComponent2Visible(false);
+      setComponent1Visible(false);
+      setComponent4Visible(false);
+      setComponent3Visible(false);
+      setComponent6Visible(false);
+
+      setActiveButton(5);
+    } else if (activeButton === 5) {
+      setComponent5Visible(true);
+      setComponent5Visible(false);
       setComponent2Visible(false);
       setComponent1Visible(false);
       setComponent4Visible(false);
@@ -106,9 +141,23 @@ const Profile = () => {
 
   return (
     <>
-      <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
-        <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
-          <div className="text-[35px] font-medium">My Profile</div>
+      <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+        <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+        <div className="flex items-center gap-3">
+            <div
+              className={`lg:scale-0 scale-[1] text-3xl `}
+              onClick={() => setIsNavbar(!isNavbar)}
+            >
+              {isNavbar === false ? (
+                <div className="cursor-pointer">
+                  <FaBars />
+                </div>
+              ) : (
+                <div className="cursor-pointer"> X </div>
+              )}
+            </div>
+            <div className="text-[35px] font-medium ml-2">My Profile</div>
+          </div>
 
           <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
@@ -161,13 +210,25 @@ const Profile = () => {
                 Notification
               </button>
             </div>
+            <div>
+              <button
+                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
+                  activeButton === 6 && "bg-blue-500"
+                }`}
+                onClick={() => handleButtonClick(6)}
+              >
+                Referral
+              </button>
+            </div>
           </div>
           <div className="">
             <div>{isComponent1Visible && <About />}</div>
+            <div>{isComponent6Visible && <Referral />}</div>
             <div>{isComponent2Visible && <Setup />}</div>
             <div>{isComponent3Visible && <Appearance />}</div>
             <div>{isComponent4Visible && <Security />}</div>
             <div>{isComponent5Visible && <Notification />}</div>
+
             <div className="flex justify-end mb-3"></div>
           </div>
         </div>

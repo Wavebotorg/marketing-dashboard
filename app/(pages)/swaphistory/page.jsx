@@ -177,8 +177,9 @@ const SwapHistory = () => {
     };
   }, [showDropdown]);
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className=" my-10 xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
+      <div className=" my-10 xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="mt-10 flex">
           <div className="flex">
             <button
@@ -238,7 +239,10 @@ const SwapHistory = () => {
             <div className="bg-[#1C1C1C] text-white h-auto overflow-auto rounded-lg">
               <table className="w-full">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
-                  <tr className="text-[#CECECE]">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className="text-[#CECECE]"
+                  >
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium"

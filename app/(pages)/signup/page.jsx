@@ -1,5 +1,3 @@
-
-
 "use client";
 import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
@@ -21,6 +19,7 @@ const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    refferal: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -231,6 +230,17 @@ const Signup = () => {
               {errors.confirmPassword}
             </div>
           )}
+        </div>
+        <div>
+          <div className="text-[#CACACA] my-2"> Refferal Code(Optional)</div>
+          <input
+            className="rounded-md w-full  sm:w-[310px] md:w-[360px] placeholder:text-[12px] placeholder:font-normal lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
+            type="text"
+            name="refferal"
+            placeholder="Your Enter Password"
+            value={signupdata.refferal}
+            onChange={onChangeInput}
+          />
         </div>
 
         <div className="flex justify-center mt-10" onClick={handleSubmit}>

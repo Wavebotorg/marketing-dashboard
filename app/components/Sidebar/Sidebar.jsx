@@ -561,6 +561,7 @@ import Tokendashboard from "../../../public/assets/sidebar/token_dashboard.svg";
 import Volumestats from "../../../public/assets/sidebar/volume_stats.svg";
 import WatchList from "../../../public/assets/sidebar/watchlist.svg";
 import Discover from "../../../public/assets/sidebar/discover.svg";
+import send from "../../../public/send.svg";
 import Swap from "../../../public/assets/sidebar/swap.svg";
 import swaphistory from "../../../public/assets/sidebar/swaphistory.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
@@ -636,42 +637,48 @@ function Sidebar() {
     },
     {
       id: 3,
+      pathname: "/transfertoken",
+      icon: send,
+      pagename: "Transfer Token",
+    },
+    {
+      id: 4,
       pathname: "/swaphistory",
       icon: swaphistory,
       pagename: "Swap History",
     },
     {
-      id: 4,
+      id: 5,
       pathname: "/tokendashboard",
       icon: Tokendashboard,
       pagename: "Token Dashboard",
     },
     {
-      id: 5,
+      id: 6,
       pathname: "/holder",
       icon: Holder,
       pagename: "Holder",
     },
     {
-      id: 6,
+      id: 7,
       pathname: "/referral",
       icon: Referral,
       pagename: "Referral",
     },
     {
-      id: 7,
+      id: 8,
       pathname: "/leaderboard",
       icon: Leaderboard,
       pagename: "Leader Board",
     },
     {
-      id: 8,
+      id: 9,
       pathname: "/portfolio",
       icon: Portfolio,
       pagename: "Portfolio",
     },
     {
-      id: 9,
+      id: 10,
       pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
@@ -680,25 +687,25 @@ function Sidebar() {
 
   const headerbottom = [
     {
-      id: 10,
+      id: 11,
       pathname: "/watchList",
       icon: WatchList,
       pagename: "Watch List",
     },
     {
-      id: 11,
+      id: 12,
       pathname: "/discover",
       icon: Discover,
       pagename: "Discover",
     },
     {
-      id: 12,
+      id: 13,
       pathname: "/apecurdocs",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
     {
-      id: 13,
+      id: 14,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",

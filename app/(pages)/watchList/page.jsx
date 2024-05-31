@@ -155,9 +155,10 @@ const WatchList = () => {
   }
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 "> */}
-      <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
@@ -215,7 +216,10 @@ const WatchList = () => {
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  ">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className=" text-[#CECECE]  "
+                  >
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  "
