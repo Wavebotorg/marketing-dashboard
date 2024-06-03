@@ -90,7 +90,7 @@ const Navbar = () => {
           getPath === "/login" ||
           getPath === "/profile" ||
           getPath === "/swap" ||
-          getPath === "/TransferToken" ||
+          getPath === "/transfertoken" ||
           getPath === "/signup" ||
           getPath === "/swap" ||
           getPath === "/forgotpassword" ||
@@ -153,3 +153,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

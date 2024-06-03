@@ -19,7 +19,7 @@ export default function BalancePopUp({
         <button
           className="text-[20px]"
           onClick={() => {
-            setBalancePopup(false);
+            setBalancePopup(false); 
           }}
         >
           <RxCross1 className="!text-[#979797]" />
