@@ -540,11 +540,11 @@ const TransferToken = () => {
                     <div className="text-gray-300 flex items-center gap-3">
                       <p>Wallet Address</p>
                     </div>
-                    <div className="flex justify-between py-2">
-                      <div className="space-y-2">
+                    <div className="flex ">
+                      <div className="space-y-2 w-full">
                         <input
                           type="text"
-                          className="border-none bg-transparent w-full md:w-auto overflow-hidden outline-none text-lg placeholder:text-[17px]"
+                          className="border-none bg-transparent w-full outline-none text-lg placeholder:text-[17px]"
                           placeholder="Enter Wallet Address"
                           name="address_from"
                           value={selectedTokenDatato?.address_from}
