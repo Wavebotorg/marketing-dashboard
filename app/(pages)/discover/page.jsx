@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 "use client";
 import React, { useState, useEffect } from "react";
 
@@ -398,9 +399,10 @@ const Discover = () => {
   const disableRightArrow = position >= cards.length - cardsPerPage;
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl- sm:pl-4 xsm:pl-12 mx-auto lg:m-5 h-full">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl- sm:pl-4 xsm:pl-0 mx-auto lg:m-5 h-full">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full ">
       {/* <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 "> */}
-      <div className="text-white xl:ml-24 xl:mr-[70px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
+      <div className="text-white xl:ml-[8rem] xl:mr-[92px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="">
           {/* laptop & tablate screen  */}
           <div className="md:flex hidden justify-center items-center gap-9 mt-7 ">
@@ -456,6 +458,7 @@ const Discover = () => {
             <div className="flex gap-1">
               <Image
                 src={Leftarraow}
+                alt="Leftarraow"
                 className={`md:w-10 w-8 cursor-pointer ${
                   disableLeftArrow ? "opacity-50 pointer-events-none" : ""
                 }`}
@@ -463,6 +466,7 @@ const Discover = () => {
               />
               <Image
                 src={Rightarraow}
+                alt="Rightarraow"
                 className={`md:w-10 w-8 cursor-pointer ${
                   disableRightArrow ? "opacity-50 pointer-events-none" : ""
                 }`}
@@ -506,8 +510,11 @@ const Discover = () => {
             <div className="bg-[#1C1C1C] table-container text-white h-auto overflow-auto rounded-lg">
               <table className="w-full">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className="text-[#CECECE]">
-                    <th className="px-6 py-3 text-center text-base font-medium   sticky left-0 bg-[#1C1C1C]">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className="text-[#CECECE]"
+                  >
+                    <th className="px-6 py-3 text-center text-base font-medium   sticky left-0 ">
                       Coin
                     </th>
                     <th className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap">

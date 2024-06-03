@@ -26,365 +26,7 @@ const Holder = () => {
       unlock: "566",
       status: "true",
     },
-    /*  {
-      snapblock: "03",
-      time: "2:00:66",
-      reward: "$20",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "43",
-      time: "2:00:66",
-      reward: "$85",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "66",
-      time: "2:00:66",
-      reward: "$26",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "277676732673627",
-      time: "2:00:66",
-      reward: "$505",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "2757573",
-      time: "2:00:66",
-      reward: "$905",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "25353533",
-      time: "2:00:66",
-      reward: "$55",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "25353",
-      time: "2:00:66",
-      reward: "$585",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "273263",
-      time: "2:00:66",
-      reward: "$75",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "4223",
-      time: "2:00:66",
-      reward: "$55",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "423",
-      time: "2:00:66",
-      reward: "$45",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "3",
-      time: "2:00:66",
-      reward: "$35",
-      unlock: "566",
-      status: "true",
-    },
-    {
-      snapblock: "10",
-      time: "2:00:66",
-      reward: "$52",
-      unlock: "566",
-      status: "true",
-    } */
 
-    // Add more data as needed
     ,
   ]);
 
@@ -409,16 +51,16 @@ const Holder = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
-
+  /* 2xsm:pl-6464xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto */
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem]  sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">   */}
-      <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
         </p>
         <div className="flex flex-col md:flex-row gap-6 mt-5">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2">
             <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
             <p className="">Paginated Results</p>
           </div>
@@ -426,16 +68,16 @@ const Holder = () => {
         <div className="flex flex-col  md:flex-row gap-6 mt-5 md:w-full ">
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
             {/* <p className="text-[#EAEAEA]">Total Rewards</p> */}
-            <p className="text-[#e2dede] font-light">Total Rewards</p>
+            <p className="text-[#CECECE]  font-light">Total Rewards</p>
 
             <p className="text-blue-400 text-2xl mt-1  w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#EAEAEA]">Unclaimed Rewards</p>
+            <p className="text-[#CECECE] ">Unclaimed Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#EAEAEA]">Claimable Rewards</p>
+            <p className="text-[#CECECE] ">Claimable Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
           </div>
         </div>
@@ -443,29 +85,16 @@ const Holder = () => {
         <div className="mt-7 font-medium text-2xl mb-4 mb:mb-0">
           <h1 className="  ">Holder Rewards</h1>
         </div>
-        {/*  <div className="flex justify-end  ">
-          <div>
-            <label className=" text-sm md:text-lg">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          </div>
-        </div> */}
 
         <div className="mt-4 hidden lg:block ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container  text-white h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 overflow-auto bg-[#1C1C1C] shadow-2xl ">
-                  <tr className=" text-[#CECECE]  ">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className=" text-[#CECECE]  "
+                  >
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  "

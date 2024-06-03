@@ -19,41 +19,27 @@ const Page = () => {
       following: 0,
       followers: 0,
     },
-
-    // {userId: "95968223",
-    // vipLevel: "Regular User",
-    // userType: "Personal",
-    // following: 0,
-    // followers: 0}
   ];
 
   const [copied, setCopied] = useState(false);
-  console.log("🚀 ~ copied:", copied);
+  // console.log("🚀 ~ copied:", copied);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(userData?.userId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
   };
-  // useEffect(() => {
-
-  //   const token = localStorage.getItem('Token');
-  //   if (token) {
-  //     router.push('/'); // Change '/home' to your actual home page route
-  //   } else {
-  //     router.push('/login'); // Change '/login' to your actual login page route
-  //   }
-  // }, []);
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
-      <div className="text-white flex flex-col xl:justify-center     xl:ml-28 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+    <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
+      <div className="text-white flex flex-col xl:justify-center     xl:ml-32 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
         {/* <div className="text-white flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10"> */}
 
         <div className="mx-3  md:flex gap-5 ">
           <div className="flex items-center mb-5 md:mb-0">
             <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
-            <span className="ml-5 mr-5 text-wrap md:text-nowrap">
+            <span className="ml-5 mr-16 text-wrap md:text-nowrap">
               Anonymous-User-810b1
             </span>
           </div>
@@ -71,15 +57,6 @@ const Page = () => {
               </thead>
 
               <tbody>
-                {/* {!userData?.length > 0 ? (
-              <tr>
-                <td data-title="User Id">_</td>
-                <td data-title="VIP Level">_</td>
-                <td data-title="User Type">_</td>s
-                <td data-title="Following">_</td>
-                <td data-title="Followers">_</td>
-              </tr>
-            ) : ( */}
                 {userData?.map((items) => (
                   <>
                     <tr className="md:pl-2 ">

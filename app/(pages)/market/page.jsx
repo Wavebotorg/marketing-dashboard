@@ -21,15 +21,15 @@ const Market = () => {
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([]);
-  console.log(
-    "🚀 ~ Market--------------------------------- ~ savedData:",
-    savedData
-  );
+  // console.log(
+  //   "🚀 ~ Market--------------------------------- ~ savedData:",
+  //   savedData
+  // );
 
   const [token, setToken] = useState(null);
-  console.log(savedData, "<,----------------savedData");
-  console.log("getAllCoin------->>>", allCoinData);
-  console.log("savedcoins-----------------", savedCoins);
+  // console.log(savedData, "<,----------------savedData");
+  // console.log("getAllCoin------->>>", allCoinData);
+  // console.log("savedcoins-----------------", savedCoins);
   const getUserdata = async () => {
     axios
 
@@ -80,6 +80,7 @@ const Market = () => {
     // router.push("/login")
     // }
     setToken(storedToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -96,7 +97,7 @@ const Market = () => {
 
       // Check if the coin is already saved
       const res = await axiosInstanceAuth.get("/allWatchlistData");
-      console.log("rres----------->>>", res);
+      // console.log("rres----------->>>", res);
       setSavedData(res?.data?.data);
 
       if (isSaved) {
@@ -120,7 +121,6 @@ const Market = () => {
             return [...prevSavedData, id];
           } else {
             return [id];
-            
           }
         });
 
@@ -216,7 +216,7 @@ const Market = () => {
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  2xl:text-lg xl:text-base">
+                  <tr className=" text-[#CECECE]  2xl:text-base xl:text-base">
                     <th scope="col" className=" py-3  font-medium text-start ">
                       Coin
                     </th>
@@ -277,9 +277,9 @@ const Market = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index} className="  2xl:text-md xl:text-base">
-                          <td className=" py-4 text-center whitespace-nowrap  font-medium text-white ">
-                            <div className="flex items-center  gap-2">
+                        <tr key={index} className="2xl:text-md xl:text-[.875rem]">
+                          <td className="py-4 text-center whitespace-nowrap font-medium text-white ">
+                            <div className="flex items-center gap-2">
                               <div>
                                 <Image
                                   src={market?.image}

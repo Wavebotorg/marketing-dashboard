@@ -11,10 +11,12 @@ import ChangePass from "./ChangePass";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import Link from "next/link";
+import sol from "../../../public/assets/sol.png";
 import { useRouter } from "next/navigation";
+
 const About = () => {
   const [showPopup, setShowPopup] = useState(false);
- const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const popupRef = useRef(null);
   const router = useRouter();
   const changePassRef = useRef(null);
@@ -30,7 +32,7 @@ const About = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
- 
+
   const [userProfile, setUserProfile] = useState([]);
 
   useEffect(() => {
@@ -38,10 +40,10 @@ const About = () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserProfile");
         setUserProfile(response?.data?.data || []);
-        setEmail(response?.data?.data?.email)
+        setEmail(response?.data?.data?.email);
         // console.log("🚀 ~ getUserProfile ~ setEmail:",   response?.data?.data?.email)
-      
-        console.log("User Profile Data:", response?.data?.data);
+
+        // console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -49,35 +51,31 @@ const About = () => {
 
     getUserProfile();
   }, []);
- 
+
   const handleSubmit = async () => {
-     
-        await axiosInstance
-          .post("forgetPassword",{email:email})
-          .then((res) => {
-            const myData = res?.data;
-            console.log("chnage Password Data --->", myData);
-            localStorage.setItem("type", "changepassword");
-            localStorage.setItem("userEmail",email);
-            if (myData?.status) {
-              setShowPopup(true);
+    await axiosInstance
+      .post("forgetPassword", { email: email })
+      .then((res) => {
+        const myData = res?.data;
+        // console.log("chnage Password Data --->", myData);
+        localStorage.setItem("type", "changepassword");
+        localStorage.setItem("userEmail", email);
+        if (myData?.status) {
+          setShowPopup(true);
           setTimeout(() => {
             if (changePassRef.current) {
               changePassRef.current.scrollIntoView({ behavior: "smooth" });
             }
-          },1000);
-             
-             
-             
-              //  setShowPopup(true);
-              
-            } 
-          })
-          .catch((err) => {
-            console.log("err---->", err);
-          });
-      };
-    
+          }, 1000);
+
+          //  setShowPopup(true);
+        }
+      })
+      .catch((err) => {
+        console.log("err---->", err);
+      });
+  };
+
   const [imageSrc, setImageSrc] = useState(Profile);
   const fileInputRef = useRef(null);
 
@@ -100,7 +98,7 @@ const About = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        console.log("Copied to clipboard:", text);
+        // console.log("Copied to clipboard:", text);
       })
       .catch((error) => {
         console.error("Failed to copy:", error);
@@ -132,9 +130,17 @@ const About = () => {
     setShowSaveButton(false);
   };
 
-  const handleChange = (e) => {
+  /*   const handleChange = (e) => {
     setEmail(e.target.value);
     setName(e.target.value);
+  }; */
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value,
+    }));
   };
 
   /*  const handlenameChange = (e) => {
@@ -164,9 +170,12 @@ const About = () => {
           />
           <button
             onClick={openFileInput}
-            className="absolute text-black bg-white rounded-full top-[19rem] cursor-pointer"
+            className="absolute  rounded-full top-[19rem] cursor-pointer"
+
+            // className="absolute text-black bg-white rounded-full top-[19rem] cursor-pointer"
           >
-            <IoIosAddCircleOutline size={30} />
+            <Image src={sol} alt="logo" />
+            {/* <IoIosAddCircleOutline size={30} /> */}
           </button>
           <input
             ref={fileInputRef}
@@ -243,8 +252,8 @@ const About = () => {
               {isEditing ? (
                 <input
                   type="text"
-                  // name="name"
-                  className="text-black"
+                  name="name"
+                  className=" p-0.5 bg-[#1C1C1C]  text-white border border-gray-500 outline-none"
                   value={userProfile.name}
                   onChange={handleChange}
                 />
@@ -263,8 +272,8 @@ const About = () => {
               {isEditing ? (
                 <input
                   type="email"
-                  // name="email"
-                  className="text-black"
+                  name="email"
+                  className=" p-0.5 bg-[#1C1C1C]  text-white border border-gray-500 outline-none"
                   value={userProfile.email}
                   onChange={handleChange}
                 />
@@ -338,14 +347,24 @@ const About = () => {
       </div>
 
       <div className="mt-4 ">
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"    onClick={() => {
               
-              handleSubmit();
+              // handleSubmit();
             }}>
             Save
           </button>
-        </div>
+        </div> */}
+        {showSaveButton && (
+          <div className="flex justify-end">
+            <button
+              className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
+              onClick={handleSaveClick}
+            >
+              Save
+            </button>
+          </div>
+        )}
       </div>
       <div className="mt-4">
         <div className="flex justify-end mb-3">
@@ -353,12 +372,10 @@ const About = () => {
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
             onClick={() => {
-           
               handleSubmit();
             }}
           >
             Change Password
-           
           </button>
           {/* </Link> */}
         </div>
@@ -366,8 +383,8 @@ const About = () => {
       {showPopup && (
         <div>
           <div ref={popupRef}>
-          <div ref={changePassRef}>
-            <ChangePass />
+            <div ref={changePassRef}>
+              <ChangePass />
             </div>
           </div>
         </div>

@@ -80,7 +80,7 @@ const WatchList = () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
       const myData = res?.data?.data;
-      console.log("🚀 ~ getWatchlistdata ~ myData:", myData);
+      // console.log("🚀 ~ getWatchlistdata ~ myData:", myData);
 
       setWatchlist(myData);
       // Filter allCoinData based on watchlist IDs
@@ -90,7 +90,7 @@ const WatchList = () => {
       );
 
       setWatchlistData(filteredData);
-      console.log("watchlistfilter-----------", filteredData);
+      // console.log("watchlistfilter-----------", filteredData);
     } catch (err) {
       console.log("err --->", err);
     }
@@ -108,20 +108,20 @@ const WatchList = () => {
       );
 
       setWatchlist(updatedWatchlist);
-      console.log(
-        "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
-        updatedWatchlist
-      );
+      // console.log(
+      //   "🚀 ~ removeCoinFromWatchlist ~  updatedWatchlist:",
+      //   updatedWatchlist
+      // );
 
       const updatedWatchlistData = allCoinData.filter((coin) =>
         updatedWatchlist.includes(coin.id)
       );
 
       setWatchlistData(updatedWatchlistData);
-      console.log(
-        "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
-        updatedWatchlistData
-      );
+      // console.log(
+      //   "🚀 ~ removeCoinFromWatchlist ~ updatedWatchlistData:",
+      //   updatedWatchlistData
+      // );
       setShowModal(false);
     } catch (err) {
       console.log("Error removing coin from watchlist:", err);
@@ -135,12 +135,14 @@ const WatchList = () => {
     if (allCoinData.length > 0) {
       getWatchlistdata();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCoinData]); // Only trigger if allCoinData changes
 
   useEffect(() => {
     if (watchlist.length > 0) {
       getWatchlistdata();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatToUSD(val) {
@@ -153,9 +155,10 @@ const WatchList = () => {
   }
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 "> */}
-      <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
@@ -182,37 +185,29 @@ const WatchList = () => {
           </div>
           <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             <div>
-              <button className="bg-blue-500 px-2 rounded-full">All</button>
+              <button className="bg-blue-500 px-3 rounded-full">All</button>
             </div>
             <div>
-              <button className="  ">Crypto</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Crypto
+              </button>
             </div>
             <div>
-              <button className="  ">Stocks</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Stocks
+              </button>
             </div>
             <div>
-              <button className="  ">People</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                People
+              </button>
             </div>
             <div>
-              <button className="  ">Smart Portfolios</button>
+              <button className=" hover:bg-blue-500 px-3 rounded-full">
+                Smart Portfolios
+              </button>
             </div>
             <div className="">{/* <GrFormNext size={22} /> */}</div>
-            {/*  <div className="flex items-center  ml-auto  ">
-            <div>
-              <label className=" text-sm md:text-lg ">Rows per page </label>
-              <select
-                name="select Row"
-                className="bg-blue-500 rounded-lg p-1 !outline-none "
-                defaultValue="Show 5"
-              >
-                <option value="Show 1">Show 1</option>
-                <option value="Show 2">Show 2</option>
-                <option value="Show 3">Show 3</option>
-                <option value="Show 4">Show 4</option>
-                <option value="Show 5">Show 5</option>
-              </select>
-            </div>
-          </div> */}
           </div>
         </div>
 
@@ -221,7 +216,10 @@ const WatchList = () => {
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  ">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className=" text-[#CECECE]  "
+                  >
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  "
@@ -688,29 +686,6 @@ const WatchList = () => {
                           />
                         </div>
                       </div>
-                      {/*  <div>
-                        <div className="flex justify-end  py- pr-4 pl-4">
-                          {d?.market_cap_rank} % Buying
-                        </div>
-                        <div className="flex justify-end  py-1.5 pr-4 pl-4">
-                          <div className="w-44 bg-[#262626] rounded-full h-1.5 mt-1.5">
-                            <div
-                              className="bg-[#494949] h-1.5 rounded-full"
-                              style={{ width: "90%" }}
-                            />
-                          </div>
-                        </div>
-                      </div> */}
-                      {/* <div className=" border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"></div>
-                        <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                          <Image
-                            // src={d?.chart}
-                            alt="Picture of the author"
-                            className="rounded-full"
-                          />
-                        </div>
-                      </div> */}
                     </div>
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">Remove</div>

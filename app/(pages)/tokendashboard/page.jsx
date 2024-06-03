@@ -631,18 +631,19 @@ const TokenDashboard = () => {
   }, [searchQuery]);
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10"> */}
-      <div className="flex flex-col xl:justify-center   xl:ml-28 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
+      <div className="flex flex-col xl:justify-center   xl:ml-32 xl:mr-[93px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
         <h1 className="text-[#1788FB]   font-medium max-w-screen-lg   text-2xl  md:text-3xl  text-center md:text-left ">
           Revenue Share Dashboard
         </h1>
         <div className="flex flex-col md:flex-row  md:justify-center md: items-center gap-6 mt-5 lg:justify-start">
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
             <IoIosInformationCircleOutline size={20} />
             <p>Rewards Forfeiture</p>
           </div>
-          <div className="rounded-lg p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
+          <div className="rounded-lg text-[#CECECE]  p-4 bg-[#1C1C1C] flex items-center gap-2 md:w-full w-52 lg:w-64">
             <IoIosInformationCircleOutline size={20} />
             <p>Paginated Results</p>
           </div>
@@ -676,7 +677,7 @@ const TokenDashboard = () => {
               name="text"
               id="text"
               placeholder="Wallet:"
-              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+              className="bg-[#1C1C1C] placeholder:text-[#626262] rounded-lg p-3 w-full"
             />
           </div>
 
@@ -686,7 +687,7 @@ const TokenDashboard = () => {
               name="text"
               id="text"
               placeholder="AUTO-COMPOUND:"
-              className="bg-[#1C1C1C] rounded-lg p-3 w-full"
+              className="bg-[#1C1C1C] placeholder:text-[#626262] rounded-lg p-3 w-full"
             />
           </div>
         </div>
@@ -701,28 +702,16 @@ const TokenDashboard = () => {
             </button>
           </div>
         </div>
-        {/*  <div className="flex justify-end mt-8 ">
-          <div>
-            <label className=" text-sm md:text-lg">Rows per page </label>
-            <select
-              name="select Row"
-              className="bg-blue-500 rounded-lg p-1 !outline-none "
-              defaultValue="Show 5"
-            >
-              <option value="Show 1">Show 1</option>
-              <option value="Show 2">Show 2</option>
-              <option value="Show 3">Show 3</option>
-              <option value="Show 4">Show 4</option>
-              <option value="Show 5">Show 5</option>
-            </select>
-          </div>
-        </div> */}
+
         <div className="mt-6 hidden lg:block  ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container  text-white h-auto  overflow-auto rounded-lg">
               <table className="w-full   ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  ">
+                  <tr
+                    style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                    className=" text-[#CECECE]  "
+                  >
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium  "

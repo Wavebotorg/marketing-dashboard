@@ -52,7 +52,7 @@ const PasswordVerify = () => {
       .post("verify", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("OTP Done--->", myData?.data);
+        // console.log("OTP Done--->", myData?.data);
 
         if (myData?.status) {
           if (myData?.data === "signup") {
@@ -93,7 +93,7 @@ const PasswordVerify = () => {
         types,
       });
       const responseData = res?.data;
-      console.log("responseData--------", responseData);
+      // console.log("responseData--------", responseData);
       if (responseData.status) {
         toast.success(responseData?.msg);
         setResendStatus(true);

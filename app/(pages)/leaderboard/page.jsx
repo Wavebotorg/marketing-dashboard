@@ -93,7 +93,7 @@ const LeaderBoard = () => {
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
-  console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
+  // console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
 
   // Get All Admin Show
   const getAdmindata = async () => {
@@ -102,7 +102,7 @@ const LeaderBoard = () => {
       .then((res) => {
         const myData = res?.data;
         setAllRecentUser(myData?.data || []);
-        console.log("recentUsers---->", myData);
+        // console.log("recentUsers---->", myData);
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -134,34 +134,10 @@ const LeaderBoard = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-  // const [allRecentUser, setAllRecentUser] = useState([]);
-  // const [token, setToken] = useState("");
-
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem("Token");
-  //   // if(!storedToken)
-  //   // {
-  //   // router.push("/login")
-  //   // }
-  //   setToken(storedToken);
-  // }, []);
-
-  // useEffect(() => {
-  //   // Check if token exists in local storage
-  //   const storedToken = localStorage.getItem("token");
-  //   if (storedToken) {
-  //     // Token exists, set it to state
-  //     setToken(storedToken);
-
-  //     // Fetch recent users or perform any other necessary actions
-  //     // setAllRecentUser([...]); // Update allRecentUser state with fetched data
-  //   }
-  // }, []);
-
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-12 mx-auto ">
+    <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
       {/* <div className="xl:flex my-10 xl:ml-16  xl:mr-11 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5"> */}
-      <div className="xl:flex my-10 xl:ml-28 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className="xl:flex my-10 xl:ml-32 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
           <p className="text-[#1788FB] text-3xl md:text-4xl font-medium w-auto  ">
             Leader Board
@@ -169,33 +145,37 @@ const LeaderBoard = () => {
 
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
-              <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-lg ">
+              <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
                 <table className="w-full">
-                  <thead className="sticky top-0 leader-color shadow-2xl">
+                  <thead className="sticky top-0 leader-color shadow-2xl ">
                     <tr
-                      className=" text-[#FFFFFF] bg-[#1C1C1C]  "
+                      className="  text-[#CECECE]   bg-[#1C1C1C]  "
                       // style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                     >
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium "
                       >
                         Rank
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Name
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Invited by
                       </th>
                       <th
                         scope="col"
+                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                         className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
                         Points
@@ -207,16 +187,16 @@ const LeaderBoard = () => {
                     {visibleData?.length > 0 ? (
                       visibleData.map((student, index) => (
                         <tr key={index}>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.Rank}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.name}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.email}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                             {student?.points}
                           </td>
                         </tr>
@@ -231,26 +211,6 @@ const LeaderBoard = () => {
                         </td>
                       </tr>
                     )}
-
-                    {/*  {visibleData?.length > 0 &&
-                      visibleData?.map((student, index) => (
-                        <>
-                          <tr key={index}>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.Rank}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.name}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.email}
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">
-                              {student?.points}
-                            </td>
-                          </tr>
-                        </>
-                      ))} */}
                   </tbody>
                 </table>
               </div>
@@ -283,7 +243,7 @@ const LeaderBoard = () => {
                             className="rounded-full"
                           />
                         </div>
-                        <div className="lg:text-base text-sm">
+                        <div className="lg:text-base text-[#ffffffe0]  text-sm">
                           <div className="flex gap-2">
                             <p>{d?.name}</p>
                             <p className="text-[#6B6B6B]">

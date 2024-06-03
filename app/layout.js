@@ -18,10 +18,8 @@ import { SearchProvider } from "././components/contexts/SearchContext";
 import { WalletProvider } from "./components/contexts/WalletContext";
 
 export const metadata = {
-
-  title:"Wave Dashboard",
-  description:
-  "wave app",
+  title: "Wave Dashboard",
+  description: "wave app",
   icons: {
     icon: "/wave_logo.png",
     shortcut: "/wave_logo.png",
@@ -31,7 +29,6 @@ export const metadata = {
       url: "/wave_logo.png",
     },
   },
-
 };
 
 export default function RootLayout({ children }) {
@@ -40,10 +37,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {/* <Web3ModalProvider initialState={initialState}> */}
-          <SearchProvider>
+        <SearchProvider>
           <WalletProvider>
-            <div className="flex flex-col sm:flex-row  sm:space-x-5 w-full ">
-              <div className="sidebar visible px-5  ">
+            <div className="flex flex-col sm:flex-row  w-full ">
+              <div className="sidebar visible ">
                 <Sidebar />
               </div>
               {/* <div className="fixed top-0 w-full z-50"><Navbar /></div> */}
@@ -56,64 +53,11 @@ export default function RootLayout({ children }) {
                 <div>{children}</div>
               </div>
             </div>
-            </WalletProvider>
-          </SearchProvider>
-      
-          {/* </Web3ModalProvider> */}
+          </WalletProvider>
+        </SearchProvider>
+
+        {/* </Web3ModalProvider> */}
       </body>
     </html>
   );
 }
-
-
-// "use client"
-// import { Inter } from "next/font/google";
-// import { useEffect, useState } from 'react';
-// import { useRouter } from 'next/router'; // Import useRouter hook
-// import Web3ModalProvider from "@/context";
-// import { SearchProvider } from "././components/contexts/SearchContext";
-// import LoginPage from '../app/(pages)/login/page'; // Import your login page component
-// import HomePage from './page'; // Import your home page component
-
-// // Initialize Inter font
-// const inter = Inter({ subsets: ["latin"] });
-
-// export default function RootLayout({ children }) {
-//   const router = useRouter(); // Use useRouter hook to get the router object
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-//   // Check authentication status on initial render
-//   useEffect(() => {
-//     const userIsLoggedIn = checkIfUserIsLoggedIn(); // Implement this function based on your authentication mechanism
-//     setIsLoggedIn(userIsLoggedIn);
-//   }, []);
-
-//   const checkIfUserIsLoggedIn = () => {
-//     return localStorage.getItem('authToken') !== null;
-//   };
-
-//   useEffect(() => {
-//     if (!isLoggedIn && router.pathname !== '/login') {
-//       router.push('/login');
-//     }
-//   }, [isLoggedIn, router]);
-
-//   return (
-//     <html lang="en">
-//       <body className={inter.className}>
-//         <Web3ModalProvider >
-//           <SearchProvider>
-//             {isLoggedIn ? (
-//               <HomePage>
-//                 {children}
-//               </HomePage>
-//             ) : (
-//               <LoginPage />
-//             )}
-//           </SearchProvider>
-//         </Web3ModalProvider>
-//       </body>
-//     </html>
-//   );
-// }
-

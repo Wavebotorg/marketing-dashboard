@@ -81,9 +81,10 @@ const Portfolio = () => {
   }, [searchQuery]);
 
   return (
-    <div className="2xl:pl-52 xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
+    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 "> */}
-      <div className="flex flex-col xl:justify-center xl:ml-28 xl:mr-[90px]  lg:ml-2 md:mr-5  xsm:mr-4 ">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5  xsm:mr-4 ">
         <div className=" mt-7" />
         <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start">My Portfolio</div>
@@ -114,8 +115,11 @@ const Portfolio = () => {
               <>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                    <tr className="text-[#CECECE]">
-                      <th className="px-2 py-3 text-center text-base font-medium  sticky left-0 bg-[#1C1C1C]">
+                    <tr
+                      style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                      className="text-[#CECECE]"
+                    >
+                      <th className="px-2 py-3 text-center text-base font-medium  sticky left-0 ">
                         Coin
                       </th>
                       <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
@@ -234,14 +238,7 @@ const Portfolio = () => {
             </div>
           </div>
         </div>
-        {/* <Pagination
-          totalItems={portfolioData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-          style={{ display: "block !important" }}
-        /> */}
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}

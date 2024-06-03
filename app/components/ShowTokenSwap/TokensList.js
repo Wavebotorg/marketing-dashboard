@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+
 import Image from "next/image";
 
-const TokenList = ({ tokens, clickedTokens, selectToken, searchTerm }) => {
+const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
   const filteredTokens = tokens.filter((token) =>
     token.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -12,11 +13,11 @@ const TokenList = ({ tokens, clickedTokens, selectToken, searchTerm }) => {
           key={index}
           className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
             clickedTokens.includes(token.name)
-              ? "opacity-50 cursor-not-allowed"
+              ? "opacity-50 "
               : ""
           }`}
           onClick={() => {
-            if (!clickedTokens.includes(token.name)) {
+         {
               selectToken(token);
             }
           }}
@@ -30,9 +31,7 @@ const TokenList = ({ tokens, clickedTokens, selectToken, searchTerm }) => {
           />
           <div className="flex gap-2">
             <p
-              className={`font-semibold ${
-                clickedTokens.includes(token.name) ? "text-gray-500" : ""
-              }`}
+              className={`font-semibold ${clickedTokens.includes(token.name) ? "opacity-50" : ""}`}
             >
               {token.name}
             </p>
