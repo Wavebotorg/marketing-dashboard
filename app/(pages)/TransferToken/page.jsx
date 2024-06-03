@@ -614,12 +614,11 @@ const TransferToken = () => {
                   showBalance?.map((item, index) => (
                     <div
                       key={index}
-                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                        clickedTokens.includes(item.name)
-                   
-                      }`}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(
+                        item.name
+                      )}`}
                       onClick={() => {
-                       {
+                        {
                           selectToken(item);
                         }
                       }}
