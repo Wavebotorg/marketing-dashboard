@@ -117,55 +117,6 @@ const SwapHistory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
-  // const mydata = {
-  //   id: userId,
-  //   chainId: Number(selectedNetwork.chainid),
-  //   method: "",
-  // };
-
-  // Function to handle network selection
-  /*   const handleNetworkSelect = async (networkName) => {
-    // console.log("Selected network:", networkName);
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      return toast.error("please uthenticate yourself!!");
-    }
-
-    // Find the network object from NetworkData array based on its name
-    const selectedNetwork = NetworkData.find(
-      (network) => network.name === networkName
-    );
-
-    // If the network is found, set its desCode as the selectedNetwork state
-    if (selectedNetwork) {
-      // console.log(
-      //   "🚀 ~ handleNetworkSelect ~ selectedNetwork:",
-      //   selectedNetwork
-      // );
-      setSelectedNetwork(selectedNetwork);
-
-      try {
-        // Fetch transactions for the selected network
-        const response = await axiosInstanceAuth.post(
-          "/transactionsBuyMethod",
-          {
-            mydata,
-          }
-        );
-
-        const data = response?.data?.transactions || [];
-        setTransactions(data);
-        // console.log("EVM transactions:", data);
-      } catch (error) {
-        console.error("Error fetching EVM transactions:", error);
-      }
-    } else {
-      console.error("Network not found");
-    }
-
-    setShowDropdown(false);
-  };
- */
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -186,23 +137,23 @@ const SwapHistory = () => {
     };
   }, [showDropdown]);
 
-  const [activeButton, setActiveButton] = useState("Swap");
+  const [activeButton, setActiveButton] = useState("All");
 
   // Function to handle button click
-  const handleButtonClick = async (method = "Swap") => {
+  const handleButtonClick = async (method = "All") => {
     setActiveButton(method);
     if (method === "Transfer") {
       // If Transfer button is clicked, pass only the chainId to handleNetworkSelect
-      await handleNetworkSelect(selectedNetwork.name, method, null);
+      await handleNetworkSelect(selectedNetwork?.name, method, null);
     } else {
       // For other methods, call handleNetworkSelect with method as provided
-      await handleNetworkSelect(selectedNetwork.name, method);
+      await handleNetworkSelect(selectedNetwork?.name, method);
     }
   };
 
   const handleNetworkSelect = async (
     networkName,
-    method = "Swap",
+    method = "All",
     chainId = null
   ) => {
     const selectedNetwork = NetworkData.find(
@@ -226,7 +177,7 @@ const SwapHistory = () => {
       try {
         // Fetch transactions for the selected network
         const response = await axiosInstanceAuth.post(
-          "/transactionsBuyMethod",
+          "/transactionsByMethod",
           mydata
         );
         const data = response?.data?.transactions || [];
@@ -272,6 +223,7 @@ const SwapHistory = () => {
                         }`}
                         onClick={() => {
                           handleNetworkSelect(item.name);
+                          setActiveButton("All");
                           // Call getEvmTransactions after selecting the network
                         }}
                       >
@@ -301,6 +253,14 @@ const SwapHistory = () => {
           </button> */}
         </div>
         <div className="">
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "All" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("All")}
+          >
+            All
+          </button>
           <button
             className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
               activeButton === "Swap" ? "active bg-blue-500" : ""
