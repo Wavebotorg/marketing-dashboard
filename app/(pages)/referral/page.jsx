@@ -605,7 +605,7 @@ const Referral = () => {
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10"> */}
       <div className="flex flex-col xl:justify-center  xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
-        <h1 className="text-[#1788FB]  text-2xl  md:text-3xl   text-center md:text-left font-medium max-w-screen-lg ">
+        {/* <h1 className="text-[#1788FB]  text-2xl  md:text-3xl   text-center md:text-left font-medium max-w-screen-lg ">
           Referral
         </h1>
         <div className="flex flex-col md:flex-row gap-6 mt-5">
@@ -613,8 +613,8 @@ const Referral = () => {
             <IoIosInformationCircleOutline size={20} className="mt-[2px]" />
             <p>Paginated Results</p>
           </div>
-        </div>
-        <div className="flex flex-col lg:flex-row gap-6 mt-5">
+        </div> */}
+        {/* <div className="flex flex-col lg:flex-row gap-6 mt-5">
           <div className="rounded-lg px-4 py-2 lg:py-4 text-[#CECECE]   bg-[#1C1C1C]">
             <p className=" text-nowrap text-[#EAEAEA] ">Total Referrals</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--</p>
@@ -631,14 +631,14 @@ const Referral = () => {
             <p className=" text-nowrap text-[#EAEAEA] ">Claimable Rewards</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px] ">--ETH</p>
           </div>
-        </div>
-        <div className=" mt-7 font-medium text-2xl mb-4 mb:mb-0">
+        </div> */}
+        <div className=" font-medium mb-4 mb:mb-0  text-3xl text-[#1788FB]">
           <p>Referral Reward History</p>
         </div>
 
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <h1 className="text-center text-5xl mb-3">Level 1</h1>
+            <h1 className="text-center text-3xl mb-3">Level 1</h1>
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -702,7 +702,7 @@ const Referral = () => {
 
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <h1 className="text-center text-5xl mb-3">Level 2</h1>
+            <h1 className="text-center text-3xl mb-3">Level 2</h1>
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -768,7 +768,7 @@ const Referral = () => {
 
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <h1 className="text-center text-5xl mb-3">Level 3</h1>
+            <h1 className="text-center text-3xl mb-3">Level 3</h1>
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -834,7 +834,7 @@ const Referral = () => {
 
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <h1 className="text-center text-5xl mb-3">Level 4</h1>
+            <h1 className="text-center text-3xl mb-3">Level 4</h1>
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -900,7 +900,7 @@ const Referral = () => {
 
         <div className="mt-4 hidden lg:block">
           <div className="rounded-lg">
-            <h1 className="text-center text-5xl mb-3">Level 5</h1>
+            <h1 className="text-center text-3xl mb-3">Level 5</h1>
             <div className="bg-[#1C1C1C] table-container text-white  h-auto overflow-auto rounded-lg">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
