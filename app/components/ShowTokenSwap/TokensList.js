@@ -31,9 +31,7 @@ const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
           />
           <div className="flex gap-2">
             <p
-              className={`font-semibold ${
-                clickedTokens.includes(token.name) 
-              }`}
+              className={`font-semibold ${clickedTokens.includes(token.name)}`}
             >
               {token.name}
             </p>

@@ -617,11 +617,10 @@ const TransferToken = () => {
                       key={index}
                       className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
                         clickedTokens.includes(item.name)
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
+                   
                       }`}
                       onClick={() => {
-                        if (!clickedTokens.includes(item.name)) {
+                       {
                           selectToken(item);
                         }
                       }}
