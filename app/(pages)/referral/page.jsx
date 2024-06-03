@@ -564,7 +564,7 @@ const Referral = () => {
     // const formattedTime = date.toLocaleTimeString();
     // return `${formattedDate}, ${formattedTime}`;
   };
- useEffect(() => {
+  useEffect(() => {
     const fetchUserReferals = async () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserReferals");
