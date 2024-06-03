@@ -174,7 +174,7 @@ const TransferToken = () => {
       token: selectedTokenDatato?.address_to,
       toWallet: selectedTokenDatato?.address_from,
       chain: Number(selectedChainId),
-      amount: selectedTokenDatato?.input_to,
+      amount: Number(selectedTokenDatato?.input_to),
     };
     console.log("dadadad222222");
 
