@@ -136,18 +136,18 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
                         {d?.email}
                       </div>
                     </div>
+             
 
+                      {level > 1 && (
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">
-                        {" "}
                         Referral BY
                       </div>
-                      {level > 1 && (
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {refData[startIndex + index]}
                         </div>
-                      )}
                     </div>
+                      )}
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">
                         Joining Date
@@ -228,7 +228,7 @@ const Referral = () => {
           <p>Referral </p>
         </div>
 
-        <div className="hidden md:block">
+        <div className="">
           <ReferralTable
             level={1}
             data={userReferals}
