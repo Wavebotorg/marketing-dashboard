@@ -31,7 +31,7 @@ const SwapHistory = () => {
   //search
   const filteredData = transactions.filter(
     (coin) =>
-      coin.txid.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coin?.txid?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (coin.amount &&
         coin.amount
           .toString()
@@ -39,7 +39,7 @@ const SwapHistory = () => {
           .includes(searchQuery.toLowerCase()))
   );
 
-  const visibleData = filteredData.slice(startIndex, endIndex);
+  const visibleData = filteredData?.slice(startIndex, endIndex);
 
   // console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
 
@@ -90,9 +90,9 @@ const SwapHistory = () => {
 
   //for format id
   const formatTransactionID = (txid) => {
-    if (txid.length <= 10) return txid; // If the transaction ID is too short, return as is
-    const firstSix = txid.slice(0, 6); // Get the first 6 characters
-    const lastFour = txid.slice(-4); // Get the last 4 characters
+    if (txid?.length <= 10) return txid; // If the transaction ID is too short, return as is
+    const firstSix = txid?.slice(0, 6); // Get the first 6 characters
+    const lastFour = txid?.slice(-4); // Get the last 4 characters
     return `${firstSix}...${lastFour}`; // Concatenate with "..." in between
   };
   //for format date
@@ -118,34 +118,78 @@ const SwapHistory = () => {
   }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
   // Function to handle network selection
-  const handleNetworkSelect = async (networkName) => {
-    // console.log("Selected network:", networkName);
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-      return toast.error("please uthenticate yourself!!");
+  // const handleNetworkSelect = async (networkName) => {
+  //   // console.log("Selected network:", networkName);
+  //   const userId = localStorage.getItem("userId");
+  //   if (!userId) {
+  //     return toast.error("please uthenticate yourself!!");
+  //   }
+  // }
+  // const dropdownRef = useRef(null);
+
+  // const handleClickOutside = (event) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //     setShowDropdown(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
-    // Find the network object from NetworkData array based on its name
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
+  const [activeButton, setActiveButton] = useState("All");
+
+  // Function to handle button click
+  const handleButtonClick = async (method = "All") => {
+    setActiveButton(method);
+    if (method === "Transfer") {
+      // If Transfer button is clicked, pass only the chainId to handleNetworkSelect
+      await handleNetworkSelect(selectedNetwork?.name, method, null);
+    } else {
+      // For other methods, call handleNetworkSelect with method as provided
+      await handleNetworkSelect(selectedNetwork?.name, method);
+    }
+  };
+
+  const handleNetworkSelect = async (
+    networkName,
+    method = "All",
+    chainId = null
+  ) => {
     const selectedNetwork = NetworkData.find(
       (network) => network.name === networkName
     );
 
-    // If the network is found, set its desCode as the selectedNetwork state
     if (selectedNetwork) {
-      // console.log(
-      //   "🚀 ~ handleNetworkSelect ~ selectedNetwork:",
-      //   selectedNetwork
-      // );
       setSelectedNetwork(selectedNetwork);
+
+      const mydata = {
+        chainId:
+          chainId !== null ? Number(chainId) : Number(selectedNetwork.chainid),
+      };
+
+      if (method !== "Transfer") {
+        // Include method if it's not "Transfer"
+        mydata.method = method;
+      }
+      console.log("🚀 ~ handleNetworkSelect ~ mydata.chainId:", mydata.chainId);
 
       try {
         // Fetch transactions for the selected network
-        const response = await axiosInstanceAuth.post("/transactions", {
-          id: userId,
-          chainId: Number(selectedNetwork.chainid),
-        });
-
+        const response = await axiosInstanceAuth.post(
+          "/transactionsByMethod",
+          mydata
+        );
         const data = response?.data?.transactions || [];
+        console.log("🚀 ~ handleNetworkSelect ~ data:", data);
         setTransactions(data);
         // console.log("EVM transactions:", data);
       } catch (error) {
@@ -205,6 +249,7 @@ const SwapHistory = () => {
                         }`}
                         onClick={() => {
                           handleNetworkSelect(item.name);
+                          setActiveButton("All");
                           // Call getEvmTransactions after selecting the network
                         }}
                       >
@@ -233,6 +278,49 @@ const SwapHistory = () => {
             Solana
           </button> */}
         </div>
+        <div className="">
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "All" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("All")}
+          >
+            All
+          </button>
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "Swap" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("Swap")}
+          >
+            Swap
+          </button>
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "Buy" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("Buy")}
+          >
+            Buy
+          </button>
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "Sell" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("Sell")}
+          >
+            Sell
+          </button>
+
+          <button
+            className={` mt-5 rounded-lg px-2 py-1 mr-4 items-center gap-2 ${
+              activeButton === "Transfer" ? "active bg-blue-500" : ""
+            }`}
+            onClick={() => handleButtonClick("Transfer")}
+          >
+            Transfer
+          </button>
+        </div>
 
         <div className="pt-8 hidden lg:block  pb-3">
           <div className="rounded-lg">
@@ -253,13 +341,32 @@ const SwapHistory = () => {
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium"
                     >
-                      From
+                      {activeButton === "Transfer" ? "Token" : "From"}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                     >
-                      To
+                      {activeButton === "Transfer" ? "ToWallet" : "To"}
+                    </th>
+
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                    >
+                      Amount
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                    >
+                      Transaction Hash
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                    >
+                      Transaction Date
                     </th>
 
                     <th
@@ -290,12 +397,16 @@ const SwapHistory = () => {
                         {startIndex + index + 1}
                       </td>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                        {formatTransactionID(transaction?.from)}
+                        {activeButton === "Transfer"
+                          ? formatTransactionID(transaction?.token)
+                          : formatTransactionID(transaction?.from)}
                         <button
                           className="text-xl text-[#828282] align-middle pb-1.5"
                           onClick={() =>
                             copyToClipboard(
-                              transaction?.from,
+                              activeButton === "Transfer"
+                                ? transaction?.token
+                                : transaction?.from,
                               "from",
                               transaction?._id
                             )
@@ -312,13 +423,18 @@ const SwapHistory = () => {
                           </span>
                         )}
                       </td>
+
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                        {formatTransactionID(transaction?.to)}
+                        {activeButton === "Transfer"
+                          ? formatTransactionID(transaction?.toWallet)
+                          : formatTransactionID(transaction?.to)}
                         <button
                           className="text-xl text-[#828282] align-middle pb-1.5"
                           onClick={() =>
                             copyToClipboard(
-                              transaction?.to,
+                              activeButton === "Transfer"
+                                ? transaction?.toWallet
+                                : transaction?.to,
                               "to",
                               transaction?._id
                             )
@@ -339,12 +455,16 @@ const SwapHistory = () => {
                         {transaction?.amount?.toFixed(2)}
                       </td>
                       <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                        {formatTransactionID(transaction?.txid)}
+                        {activeButton === "Transfer"
+                          ? formatTransactionID(transaction?.tx)
+                          : formatTransactionID(transaction?.txid)}
                         <button
                           className="text-xl text-[#828282] align-middle pb-1.5"
                           onClick={() =>
                             copyToClipboard(
-                              transaction?.txid,
+                              activeButton === "Transfer"
+                                ? transaction?.tx
+                                : transaction?.txid,
                               "Transaction Hash",
                               transaction?._id
                             )

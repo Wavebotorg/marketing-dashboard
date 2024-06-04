@@ -466,64 +466,64 @@ const Swap = () => {
    
   };
   // console.log( walletAddressbuysell,"address_from-------")
-  // const handleBuySubmit= async () => {
-  //   setLoading(true);
-  //   handleBuyprice().then((e)=>{
+  const handleBuySubmit= async () => {
+    setLoading(true);
+    handleBuyprice().then((e)=>{
       
 
-  //     let endpoint;
-  //     if (selectedNetwork === "Solana") {
-  //       endpoint = "/solanaSwap";
-  //     } else {
-  //       endpoint = "/EVMswap";
-  //     }
+      let endpoint;
+      if (selectedNetwork === "Solana") {
+        endpoint = "/solanaSwap";
+      } else {
+        endpoint = "/EVMswap";
+      }
   
-  //     axiosInstance
-  //       .post(endpoint, selectedNetwork === "Solana" ? {
-  //          input: walletAddressbuysell,
-  //         output: selectedTokenDatato?.address_to,
-  //         amount: Number(selectedTokenDatato?.input_to),
-  //         email: email,
-  //         method:"buy"
-  //       }    : 
-  //          { tokenIn: walletAddressbuysell,
-  //         tokenOut: selectedTokenDatato?.address_to,
-  //         amount: Number(e),
-  //         chain: Number(selectedChainId),
-  //         email: email,
-  //         chainId: selectedTokenDatato?.chainname,
-  //         desCode: selectedTokenDatato?.descode,
-  //         method:"buy"
-  //       })
-  //       .then(async (res) => {
-  //         const myData = res?.data;
-  //         console.log("Response from API:", myData);
-  //         if (myData?.status) {
-  //           toast.success(myData?.message);
-  //           setTimeout(async () => {
-  //             if (selectedNetwork == "Solana") {
-  //               await getSolanaBalance();
-  //             } else {
-  //               await getWalletBalance(selectedNetwork);
-  //             }
-  //           }, 3000);
+      axiosInstance
+        .post(endpoint, selectedNetwork === "Solana" ? {
+           input: walletAddressbuysell,
+          output: selectedTokenDatato?.address_to,
+          amount: Number(e),
+          email: email,
+          method:"buy"
+        }    : 
+           { tokenIn: walletAddressbuysell,
+          tokenOut: selectedTokenDatato?.address_to,
+          amount: Number(e),
+          chain: Number(selectedChainId),
+          email: email,
+          chainId: selectedTokenDatato?.chainname,
+          desCode: selectedTokenDatato?.descode,
+          method:"buy"
+        })
+        .then(async (res) => {
+          const myData = res?.data;
+          console.log("Response from API:", myData);
+          if (myData?.status) {
+            toast.success(myData?.message);
+            setTimeout(async () => {
+              if (selectedNetwork == "Solana") {
+                await getSolanaBalance();
+              } else {
+                await getWalletBalance(selectedNetwork);
+              }
+            }, 3000);
   
-  //         } else {
-  //           toast.error(myData?.message);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error occurred:", error);
-  //         toast.error("An error occurred while processing your request");
-  //       })
-  //       .finally(() => {
-  //         setLoading(false);
-  //       });
-  //   }).catch((err)=>{
-  //     console.err("Error occurred:", err);
-  //   })
+          } else {
+            toast.error(myData?.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          toast.error("An error occurred while processing your request");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }).catch((err)=>{
+      console.err("Error occurred:", err);
+    })
   
-  // };
+  };
 
 
   const dataEvmSell = {
