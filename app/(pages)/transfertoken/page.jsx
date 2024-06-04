@@ -312,7 +312,7 @@ const TransferToken = () => {
     };
   }, []);
 
-  const [tokens, setTokens] = useState([]);
+
 
   useEffect(() => {
     if (selectedNetwork == "Solana") {

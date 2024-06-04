@@ -1,5 +1,7 @@
 "use client";
 import TokenList from "../../components/ShowTokenSwap/TokensList";
+
+import TokenSellList from "../../components/ShowTokenSell/TokenSellList";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
@@ -41,6 +43,8 @@ const Swap = () => {
   const [fetchtokendata, setFetchtokendata] = useState(null);
   const [balancePopup, setBalancePopup] = useState(false);
   const [selectedChainId, setSelectedChainId] = useState("");
+  const [ SelectedDescode, setSelectedDescode] = useState("");
+  // const [ Selectedchainname,setSelectedchainname] = useState("");
   const [walletAddressbuysell, setwalletAddressbuysell] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [clickedTokens, setClickedTokens] = useState("");
@@ -67,6 +71,7 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
+  console.log("selectedTokenDatato---",selectedTokenDatato)
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" ,walletAddressbuysell:"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" ,walletAddressbuysell:"0x912CE59144191C1204E64559FE8253a0e49E6548"},
@@ -276,14 +281,14 @@ const Swap = () => {
     if (selectedtofrom === 1) {
       setSelectedTokenDatato({
         ...selectedTokenDatato,
-
-        name_to: token.symbol,
-        image_to: token.logoURI,
+       
+        name_to: token.symbol, 
+        image_to: token.logoURI ||  token.logo ,
         chainid: token.chainid,
-        address_to: token.address,
+        address_to: token.address || token.token_address || token.mint,
         decimals_to: token.decimal,
-        descode: token.descode,
-        chainname: token.chainname,
+        descode: token.descode ,
+        chainname: token.chainname || token.name,
       });
     } else if (selectedtofrom === 2) {
       setSelectedTokenDatato({
@@ -440,7 +445,7 @@ const Swap = () => {
     finalAmt = buyAmt / tokensPrice?.token1;
   }
   console.log("finalllll--------",finalAmt)
-      return finalAmt
+      return finalAmt?.toFixed(4)
   // if (finalAmt) {
   //   setSelectedTokenDatato({
   //     ...selectedTokenDatato,
@@ -482,13 +487,14 @@ const Swap = () => {
         .post(endpoint, selectedNetwork === "Solana" ? {
            input: walletAddressbuysell,
           output: selectedTokenDatato?.address_to,
-          amount: Number(e),
+        
+          amount:Number(e),
           email: email,
           method:"buy"
         }    : 
            { tokenIn: walletAddressbuysell,
           tokenOut: selectedTokenDatato?.address_to,
-          amount: Number(e),
+          amount:Number(e),
           chain: Number(selectedChainId),
           email: email,
           chainId: selectedTokenDatato?.chainname,
@@ -532,13 +538,14 @@ const Swap = () => {
     amount: Number(selectedTokenDatato?.input_to),
     chain: Number(selectedChainId),
     email: email,
-    chainId: selectedTokenDatato?.chainname,
-    desCode: selectedTokenDatato?.descode,
+    chainId: selectedNetwork.toLowerCase(),
+    desCode: SelectedDescode,
     method:"sell"
   };
+  console.log("🚀 ~ Swap ~ dataEvmSell:", dataEvmSell)
 
  const dataSolanaSell ={
-  input:  selectedTokenDatato?.address_to,
+  input: selectedTokenDatato?.address_to,
   output: walletAddressbuysell, 
   amount: Number(selectedTokenDatato?.input_to),
   email: email,
@@ -850,6 +857,7 @@ const Swap = () => {
     if (selectedNetworkData) {
       setSelectedChainId(selectedNetworkData.chainid);
       setwalletAddressbuysell(selectedNetworkData.walletAddressbuysell)
+      setSelectedDescode(selectedNetworkData.descode);
       setShowDropdown(false);
     }
   };
@@ -1319,19 +1327,67 @@ const Swap = () => {
                   </div>
                 </div>
               </div>
+
               <div className="h-[60vh] overflow-y-auto">
-                <TokenList
-                  tokens={tokenData[selectedNetwork]}
-                  clickedTokens={clickedTokens}
-                  selectToken={selectToken}
-                  searchTerm={searchTerm}
-                />
+
+                {activeButton == "Sell" ? (<>  {showBalance?.length > 0 ? (
+                  showBalance?.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                        clickedTokens.includes(item.name)
+                   
+                      }`}
+                      onClick={() => {
+                       {
+                          selectToken(item);
+                        }
+                      }}
+                    >
+                      <img
+                        src={item.logo}
+                        alt={item.name || "Token"}
+                        height={30}
+                        width={30}
+                        className="h-15 w-15 my-3 rounded-full"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "fallback-image-url";
+                        }}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <div className={`text-base font-bold ${clickedTokens.includes(item.name) }`}>{item.name}</div>
+                        <div className="text-base font-bold">{item.symbol}</div>
+                        <div className="text-base">
+                          Balance:{" "}
+                          <span className="font-bold">
+                            {selectedNetwork === "Solana"
+                              ? Number(item?.amount)?.toFixed(3)
+                              : Number(item?.balance_formatted)?.toFixed(3)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="mt-16 text-xl">No data</div>
+                )}</>): <TokenList
+      tokens={tokenData[selectedNetwork]}
+      clickedTokens={clickedTokens}
+      selectToken={selectToken}
+      searchTerm={searchTerm}
+      showBalance={showBalance}
+    />}
+             
+               
               </div>
             </div>
           </div>
         </div>
         {/* )} */}
+        
 
+        
         <div
           className={`${
             balancePopup ? "scale-1" : "scale-0"
