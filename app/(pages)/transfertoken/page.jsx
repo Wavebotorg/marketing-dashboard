@@ -104,9 +104,7 @@ const TransferToken = () => {
         image_to: token.logo,
         chainid: token.chainid,
         address_to:
-          selectedNetwork == "Solana"
-            ? token.associatedTokenAddress
-            : token.token_address,
+          selectedNetwork == "Solana" ? token.mint : token.token_address,
         decimals_to: token.decimal,
         descode: token.descode,
         chainname: token.chainname,
@@ -164,9 +162,16 @@ const TransferToken = () => {
     chainId: selectedTokenDatato?.chainname,
     desCode: selectedTokenDatato?.descode,
   };
-  const [loading, setLoading] = useState(false);
 
-  const handleTransferSubmit = async (networkName) => {
+  const handleTransferSubmit = async () => {
+    if (selectedNetwork === "Solana") {
+      await handleSolanaTransfer(selectedNetwork);
+    } else {
+      await handleEvmTransfer(selectedNetwork);
+    }
+  };
+
+  const handleSolanaTransfer = async (networkName) => {
     console.log("dadadad3333");
     setLoading(true);
 
@@ -174,13 +179,12 @@ const TransferToken = () => {
       email: email,
       token: selectedTokenDatato?.address_to,
       toWallet: selectedTokenDatato?.address_from,
-      chain: Number(selectedChainId),
-      amount: selectedTokenDatato?.input_to,
+      amount: Number(selectedTokenDatato?.input_to),
     };
     console.log("dadadad222222");
 
     try {
-      const response = await axiosInstance.post("transferEvmToken", data);
+      const response = await axiosInstance.post("/transferSolanaToken", data);
       console.log("dadadad11111");
 
       if (response?.data?.status) {
@@ -200,6 +204,54 @@ const TransferToken = () => {
         "------------------------------------------------------LOG",
         response
       );
+    } catch (error) {
+      console.error("There was a problem with the API call:", error);
+      toast.error("An error occurred while processing your request");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  const handleEvmTransfer = async (networkName) => {
+    // console.log("dadadad3333");
+    setLoading(true);
+
+    const data = {
+      email: email,
+      token: selectedTokenDatato?.address_to,
+      toWallet: selectedTokenDatato?.address_from,
+      chain: Number(selectedChainId),
+      amount: Number(selectedTokenDatato?.input_to),
+    };
+    // console.log("dadadad222222");
+
+    try {
+      let response;
+      if (networkName === "Solana") {
+        response = await handleSolanaTransfer(networkName);
+      } else {
+        response = await axiosInstance.post("transferEvmToken", data);
+      }
+
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setTimeout(async () => {
+          if (selectedNetwork == "Solana") {
+            await getSolanaBalance();
+          } else {
+            await getWalletBalance(selectedNetwork);
+          }
+        }, 3000);
+      } else {
+        toast.error(response?.data?.message);
+      }
+
+      // console.log(
+      //   "------------------------------------------------------LOG",
+      //   response
+      // );
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
