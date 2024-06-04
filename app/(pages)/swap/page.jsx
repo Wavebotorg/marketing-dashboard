@@ -1,5 +1,7 @@
 "use client";
 import TokenList from "../../components/ShowTokenSwap/TokensList";
+
+import TokenSellList from "../../components/ShowTokenSell/TokenSellList";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
@@ -41,6 +43,8 @@ const Swap = () => {
   const [fetchtokendata, setFetchtokendata] = useState(null);
   const [balancePopup, setBalancePopup] = useState(false);
   const [selectedChainId, setSelectedChainId] = useState("");
+  const [SelectedDescode, setSelectedDescode] = useState("");
+  // const [ Selectedchainname,setSelectedchainname] = useState("");
   const [walletAddressbuysell, setwalletAddressbuysell] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [clickedTokens, setClickedTokens] = useState("");
@@ -67,6 +71,7 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
+  console.log("selectedTokenDatato---", selectedTokenDatato);
   const NetworkData = [
     {
       name: "Ethereum",
@@ -330,12 +335,12 @@ const Swap = () => {
         ...selectedTokenDatato,
 
         name_to: token.symbol,
-        image_to: token.logoURI,
+        image_to: token.logoURI || token.logo,
         chainid: token.chainid,
-        address_to: token.address,
+        address_to: token.address || token.token_address || token.mint,
         decimals_to: token.decimal,
         descode: token.descode,
-        chainname: token.chainname,
+        chainname: token.chainname || token.name,
       });
     } else if (selectedtofrom === 2) {
       setSelectedTokenDatato({
@@ -490,7 +495,7 @@ const Swap = () => {
           finalAmt = buyAmt / tokensPrice?.token1;
         }
         console.log("finalllll--------", finalAmt);
-        return finalAmt;
+        return finalAmt?.toFixed(4);
         // if (finalAmt) {
         //   setSelectedTokenDatato({
         //     ...selectedTokenDatato,
@@ -513,63 +518,68 @@ const Swap = () => {
 
   const dataEvmBuy = {};
   // console.log( walletAddressbuysell,"address_from-------")
-  // const handleBuySubmit= async () => {
-  //   setLoading(true);
-  //   handleBuyprice().then((e)=>{
+  const handleBuySubmit = async () => {
+    setLoading(true);
+    handleBuyprice()
+      .then((e) => {
+        let endpoint;
+        if (selectedNetwork === "Solana") {
+          endpoint = "/solanaSwap";
+        } else {
+          endpoint = "/EVMswap";
+        }
 
-  //     let endpoint;
-  //     if (selectedNetwork === "Solana") {
-  //       endpoint = "/solanaSwap";
-  //     } else {
-  //       endpoint = "/EVMswap";
-  //     }
+        axiosInstance
+          .post(
+            endpoint,
+            selectedNetwork === "Solana"
+              ? {
+                  input: walletAddressbuysell,
+                  output: selectedTokenDatato?.address_to,
 
-  //     axiosInstance
-  //       .post(endpoint, selectedNetwork === "Solana" ? {
-  //          input: walletAddressbuysell,
-  //         output: selectedTokenDatato?.address_to,
-  //         amount: Number(selectedTokenDatato?.input_to),
-  //         email: email,
-  //         method:"buy"
-  //       }    :
-  //          { tokenIn: walletAddressbuysell,
-  //         tokenOut: selectedTokenDatato?.address_to,
-  //         amount: Number(e),
-  //         chain: Number(selectedChainId),
-  //         email: email,
-  //         chainId: selectedTokenDatato?.chainname,
-  //         desCode: selectedTokenDatato?.descode,
-  //         method:"buy"
-  //       })
-  //       .then(async (res) => {
-  //         const myData = res?.data;
-  //         console.log("Response from API:", myData);
-  //         if (myData?.status) {
-  //           toast.success(myData?.message);
-  //           setTimeout(async () => {
-  //             if (selectedNetwork == "Solana") {
-  //               await getSolanaBalance();
-  //             } else {
-  //               await getWalletBalance(selectedNetwork);
-  //             }
-  //           }, 3000);
-
-  //         } else {
-  //           toast.error(myData?.message);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error occurred:", error);
-  //         toast.error("An error occurred while processing your request");
-  //       })
-  //       .finally(() => {
-  //         setLoading(false);
-  //       });
-  //   }).catch((err)=>{
-  //     console.err("Error occurred:", err);
-  //   })
-
-  // };
+                  amount: Number(e),
+                  email: email,
+                  method: "buy",
+                }
+              : {
+                  tokenIn: walletAddressbuysell,
+                  tokenOut: selectedTokenDatato?.address_to,
+                  amount: Number(e),
+                  chain: Number(selectedChainId),
+                  email: email,
+                  chainId: selectedTokenDatato?.chainname,
+                  desCode: selectedTokenDatato?.descode,
+                  method: "buy",
+                }
+          )
+          .then(async (res) => {
+            const myData = res?.data;
+            console.log("Response from API:", myData);
+            if (myData?.status) {
+              toast.success(myData?.message);
+              setTimeout(async () => {
+                if (selectedNetwork == "Solana") {
+                  await getSolanaBalance();
+                } else {
+                  await getWalletBalance(selectedNetwork);
+                }
+              }, 3000);
+            } else {
+              toast.error(myData?.message);
+            }
+          })
+          .catch((error) => {
+            console.error("Error occurred:", error);
+            toast.error("An error occurred while processing your request");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      })
+      .catch((err) => {
+        console.err("Error occurred:", err);
+      });
+  };
 
   const dataEvmSell = {
     tokenIn: selectedTokenDatato?.address_to,
@@ -577,10 +587,11 @@ const Swap = () => {
     amount: Number(selectedTokenDatato?.input_to),
     chain: Number(selectedChainId),
     email: email,
-    chainId: selectedTokenDatato?.chainname,
-    desCode: selectedTokenDatato?.descode,
+    chainId: selectedNetwork.toLowerCase(),
+    desCode: SelectedDescode,
     method: "sell",
   };
+  console.log("🚀 ~ Swap ~ dataEvmSell:", dataEvmSell);
 
   const dataSolanaSell = {
     input: selectedTokenDatato?.address_to,
@@ -885,6 +896,7 @@ const Swap = () => {
     if (selectedNetworkData) {
       setSelectedChainId(selectedNetworkData.chainid);
       setwalletAddressbuysell(selectedNetworkData.walletAddressbuysell);
+      setSelectedDescode(selectedNetworkData.descode);
       setShowDropdown(false);
     }
   };
@@ -1253,40 +1265,27 @@ const Swap = () => {
                       </div>
                     </>
                   )}
-
                   <div className="w-full">
-                    {loading ? (
-                      <button
-                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                        onClick={() => {
-                          if (activeButton === "Swap") {
-                            handleSwapSubmit();
-                          } else if (activeButton === "Buy") {
-                            handleBuySubmit();
-                          } else if (activeButton === "Sell") {
-                            handleSellSubmit();
-                          }
-                        }}
-                        disabled={loading}
-                      >
-                        <span className="loader"></span>
-                      </button>
-                    ) : (
-                      <button
-                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                        onClick={() => {
-                          if (activeButton === "Swap") {
-                            handleSwapSubmit();
-                          } else if (activeButton === "Buy") {
-                            handleBuySubmit();
-                          } else if (activeButton === "Sell") {
-                            handleSellSubmit();
-                          }
-                        }}
-                      >
-                        {activeButton}
-                      </button>
-                    )}
+                    <button
+                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                      onClick={() => {
+                        if (activeButton === "Swap") {
+                          handleSwapSubmit();
+                        } else if (activeButton === "Buy") {
+                          handleBuySubmit();
+                        } else if (activeButton === "Sell") {
+                          handleSellSubmit();
+                        }
+                      }}
+                      disabled={loading}
+                    >
+                      {/* Swap */}
+                      {loading ? (
+                        <span className="loader "></span>
+                      ) : (
+                        activeButton
+                      )}
+                    </button>
                   </div>
 
                   {/* </>
@@ -1381,13 +1380,70 @@ const Swap = () => {
                   </div>
                 </div>
               </div>
+
               <div className="h-[60vh] overflow-y-auto">
-                <TokenList
-                  tokens={tokenData[selectedNetwork]}
-                  clickedTokens={clickedTokens}
-                  selectToken={selectToken}
-                  searchTerm={searchTerm}
-                />
+                {activeButton == "Sell" ? (
+                  <>
+                    {" "}
+                    {showBalance?.length > 0 ? (
+                      showBalance?.map((item, index) => (
+                        <div
+                          key={index}
+                          className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(
+                            item.name
+                          )}`}
+                          onClick={() => {
+                            {
+                              selectToken(item);
+                            }
+                          }}
+                        >
+                          <img
+                            src={item.logo}
+                            alt={item.name || "Token"}
+                            height={30}
+                            width={30}
+                            className="h-15 w-15 my-3 rounded-full"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "fallback-image-url";
+                            }}
+                          />
+                          <div className="flex flex-col justify-center">
+                            <div
+                              className={`text-base font-bold ${clickedTokens.includes(
+                                item.name
+                              )}`}
+                            >
+                              {item.name}
+                            </div>
+                            <div className="text-base font-bold">
+                              {item.symbol}
+                            </div>
+                            <div className="text-base">
+                              Balance:{" "}
+                              <span className="font-bold">
+                                {selectedNetwork === "Solana"
+                                  ? Number(item?.amount)?.toFixed(3)
+                                  : Number(item?.balance_formatted)?.toFixed(3)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mt-16 text-xl">No data</div>
+                    )}
+                  </>
+                ) : (
+                  <TokenList
+                    tokens={tokenData[selectedNetwork]}
+                    clickedTokens={clickedTokens}
+                    selectToken={selectToken}
+                    searchTerm={searchTerm}
+                    showBalance={showBalance}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -1412,5 +1468,4 @@ const Swap = () => {
     </>
   );
 };
-
 export default Swap;
