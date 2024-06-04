@@ -260,7 +260,7 @@ const TransferToken = () => {
     }
   };
 
-  const getSolanaBalance = async () => {
+  /*   const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
         "/getSolanaWalletTokenBal",
@@ -286,6 +286,54 @@ const TransferToken = () => {
       setShowBalance(mergedData);
     } catch (err) {
       console.log("error--->", err);
+    }
+  }; */
+
+  const getSolanaBalance = async () => {
+    try {
+      const balanceRes = await axiosInstanceAuth.post(
+        "/getSolanaWalletTokenBal",
+        {
+          wallet: solanaAddress,
+        }
+      );
+      const balanceData = balanceRes?.data?.response1?.tokens;
+      console.log("fetchSolanabalance-------------------------->", balanceData);
+
+      const tokenImages = await fetchTokenImages([
+        "https://token.jup.ag/strict",
+        // Add more API endpoints here if needed
+      ]);
+
+      const mergedData = balanceData.map((token) => {
+        const tokenImage = tokenImages.find(
+          (image) => image.address === token.mint
+        );
+        return {
+          ...token,
+          logo: tokenImage ? tokenImage.logoURI : null,
+        };
+      });
+      setShowBalance(mergedData);
+    } catch (err) {
+      console.log("error--->", err);
+    }
+  };
+
+  const fetchTokenImages = async (endpoints) => {
+    try {
+      for (const endpoint of endpoints) {
+        const imageRes = await axios.get(endpoint);
+        const tokenImages = imageRes?.data;
+        if (tokenImages && tokenImages.length > 0) {
+          return tokenImages;
+        }
+      }
+      // If no images found
+      return [];
+    } catch (err) {
+      console.log("Error fetching token images:", err);
+      return [];
     }
   };
 
