@@ -216,7 +216,7 @@ const Market = () => {
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                  <tr className=" text-[#CECECE]  2xl:text-lg xl:text-base">
+                  <tr className=" text-[#CECECE]  2xl:text-base xl:text-base">
                     <th scope="col" className=" py-3  font-medium text-start ">
                       Coin
                     </th>
@@ -277,9 +277,9 @@ const Market = () => {
                   {visibleData?.length > 0 &&
                     visibleData?.map((market, index) => (
                       <>
-                        <tr key={index} className="  2xl:text-md xl:text-base">
-                          <td className=" py-4 text-center whitespace-nowrap  font-medium text-white ">
-                            <div className="flex items-center  gap-2">
+                        <tr key={index} className="2xl:text-md xl:text-[.875rem]">
+                          <td className="py-4 text-center whitespace-nowrap font-medium text-white ">
+                            <div className="flex items-center gap-2">
                               <div>
                                 <Image
                                   src={market?.image}

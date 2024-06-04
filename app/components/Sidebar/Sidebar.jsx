@@ -891,7 +891,7 @@ function Sidebar() {
                       >
                         <div
                           className={
-                            (isHover1 && data?.id === isHover1) ||
+                            (isHover && data?.id === isHover) ||
                             data?.pathname === pathname
                               ? "dropdown-left-border -ml-[0px] "
                               : "-ml-[0px]"

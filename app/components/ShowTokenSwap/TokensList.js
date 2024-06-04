@@ -12,10 +12,12 @@ const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
         <div
           key={index}
           className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-            clickedTokens.includes(token.name) ? "opacity-50 " : ""
+            clickedTokens.includes(token.name)
+              ? "opacity-50 "
+              : ""
           }`}
           onClick={() => {
-            {
+         {
               selectToken(token);
             }
           }}
@@ -29,7 +31,7 @@ const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
           />
           <div className="flex gap-2">
             <p
-              className={`font-semibold ${clickedTokens.includes(token.name)}`}
+              className={`font-semibold ${clickedTokens.includes(token.name) ? "opacity-50" : ""}`}
             >
               {token.name}
             </p>

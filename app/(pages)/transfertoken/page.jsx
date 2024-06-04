@@ -68,6 +68,7 @@ const TransferToken = () => {
     descode: "",
     chainname: "",
   });
+
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
@@ -161,9 +162,16 @@ const TransferToken = () => {
     chainId: selectedTokenDatato?.chainname,
     desCode: selectedTokenDatato?.descode,
   };
-  const [loading, setLoading] = useState(false);
 
-  const handleTransferSubmit = async (networkName) => {
+  const handleTransferSubmit = async () => {
+    if (selectedNetwork === "Solana") {
+      await handleSolanaTransfer(selectedNetwork);
+    } else {
+      await handleEvmTransfer(selectedNetwork);
+    }
+  };
+
+  const handleSolanaTransfer = async (networkName) => {
     console.log("dadadad3333");
     setLoading(true);
 
@@ -171,13 +179,12 @@ const TransferToken = () => {
       email: email,
       token: selectedTokenDatato?.address_to,
       toWallet: selectedTokenDatato?.address_from,
-      chain: Number(selectedChainId),
       amount: Number(selectedTokenDatato?.input_to),
     };
     console.log("dadadad222222");
 
     try {
-      const response = await axiosInstance.post("transferEvmToken", data);
+      const response = await axiosInstance.post("/transferSolanaToken", data);
       console.log("dadadad11111");
 
       if (response?.data?.status) {
@@ -197,6 +204,54 @@ const TransferToken = () => {
         "------------------------------------------------------LOG",
         response
       );
+    } catch (error) {
+      console.error("There was a problem with the API call:", error);
+      toast.error("An error occurred while processing your request");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  const handleEvmTransfer = async (networkName) => {
+    // console.log("dadadad3333");
+    setLoading(true);
+
+    const data = {
+      email: email,
+      token: selectedTokenDatato?.address_to,
+      toWallet: selectedTokenDatato?.address_from,
+      chain: Number(selectedChainId),
+      amount: Number(selectedTokenDatato?.input_to),
+    };
+    // console.log("dadadad222222");
+
+    try {
+      let response;
+      if (networkName === "Solana") {
+        response = await handleSolanaTransfer(networkName);
+      } else {
+        response = await axiosInstance.post("transferEvmToken", data);
+      }
+
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setTimeout(async () => {
+          if (selectedNetwork == "Solana") {
+            await getSolanaBalance();
+          } else {
+            await getWalletBalance(selectedNetwork);
+          }
+        }, 3000);
+      } else {
+        toast.error(response?.data?.message);
+      }
+
+      // console.log(
+      //   "------------------------------------------------------LOG",
+      //   response
+      // );
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
@@ -544,7 +599,7 @@ const TransferToken = () => {
                       <div className="space-y-2 w-full">
                         <input
                           type="text"
-                          className="border-none bg-transparent w-full outline-none text-lg placeholder:text-[17px]"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl placeholder:text-[17px]"
                           placeholder="Enter Wallet Address"
                           name="address_from"
                           value={selectedTokenDatato?.address_from}
@@ -556,15 +611,23 @@ const TransferToken = () => {
                   </div>
 
                   <div className="w-full">
-                    <button
-                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={handleTransferSubmit}
-                      disabled={loading}
-                    >
-                      {/* Swap */}
-
-                      {loading ? <span className="loader "></span> : "Transfer"}
-                    </button>
+                    {loading ? (
+                      <button
+                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                        onClick={handleTransferSubmit}
+                        disabled={loading}
+                      >
+                        <span className="loader "></span>
+                      </button>
+                    ) : (
+                      <button
+                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                        onClick={handleTransferSubmit}
+                        disabled={loading}
+                      >
+                        Transfer
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
