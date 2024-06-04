@@ -206,7 +206,7 @@ const SwapHistory = () => {
               // onClick={getEvmTransactions}
               className="bg-blue-500 rounded-lg px-2 py-1 mr-4 flex items-center gap-2 relative"
             >
-              Transactions
+              {selectedNetwork ? selectedNetwork.name : "Transactions"}
             </button>
 
             <div className="" ref={dropdownRef}>
