@@ -68,6 +68,7 @@ const TransferToken = () => {
     descode: "",
     chainname: "",
   });
+
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
@@ -103,7 +104,9 @@ const TransferToken = () => {
         image_to: token.logo,
         chainid: token.chainid,
         address_to:
-          selectedNetwork == "Solana" ? token.mint : token.token_address,
+          selectedNetwork == "Solana"
+            ? token.associatedTokenAddress
+            : token.token_address,
         decimals_to: token.decimal,
         descode: token.descode,
         chainname: token.chainname,
@@ -172,7 +175,7 @@ const TransferToken = () => {
       token: selectedTokenDatato?.address_to,
       toWallet: selectedTokenDatato?.address_from,
       chain: Number(selectedChainId),
-      amount: Number(selectedTokenDatato?.input_to),
+      amount: selectedTokenDatato?.input_to,
     };
     console.log("dadadad222222");
 
@@ -544,7 +547,7 @@ const TransferToken = () => {
                       <div className="space-y-2">
                         <input
                           type="text"
-                          className="border-none bg-transparent w-full md:w-auto overflow-hidden outline-none text-lg placeholder:text-[17px]"
+                          className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl placeholder:text-[17px]"
                           placeholder="Enter Wallet Address"
                           name="address_from"
                           value={selectedTokenDatato?.address_from}
