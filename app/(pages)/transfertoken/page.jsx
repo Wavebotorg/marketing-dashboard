@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import TokenList from "../../components/ShowTokenSwap/TokensList";
+
 import React, { useEffect, useState, useRef } from "react";
-import { IoMdClose, IoMdSettings } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import eth from "../../../public/assets/tokenimg/eth.png";
@@ -12,25 +12,17 @@ import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
-import USD from "../../../public/assets/tokenimg/USD.png";
-import SHU from "../../../public/assets/tokenimg/SHU.png";
-import tether from "../../../public/assets/tokenimg/tether.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
 import base from "../../../public/assets/tokenimg/base.webp";
-import wrapped from "../../../public/assets/tokenimg/wrapped.png";
-import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
-import { IoSwapVerticalOutline } from "react-icons/io5";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import qs from "qs";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FiRefreshCcw } from "react-icons/fi";
 import { FaBars } from "react-icons/fa6";
 
 const TransferToken = () => {
@@ -81,11 +73,12 @@ const TransferToken = () => {
     { name: "Cronos", chainid: "25", img: cronos, descode: "0x19" },
     { name: "Fantom", chainid: "250", img: fantom, descode: "0xfa" },
   ];
-  console.log(
-    "------------------------------------------------set addredess",
-    selectedTokenDatato
-  );
+  // console.log(
+  //   "------------------------------------------------set addredess",
+  //   selectedTokenDatato
+  // );
 
+  //default network selected
   useEffect(() => {
     const ethereumNetwork = NetworkData.find(
       (network) => network.name === "Ethereum"
@@ -93,8 +86,10 @@ const TransferToken = () => {
     if (ethereumNetwork) {
       setSelectChain(ethereumNetwork.img);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //select token info.
   const selectToken = (token, networkData, e) => {
     if (selectedtofrom == 1) {
       setSelectedTokenDatato({
@@ -109,20 +104,7 @@ const TransferToken = () => {
         descode: token.descode,
         chainname: token.chainname,
       });
-    } /*  else if (selectedtofrom == 2) {
-      setSelectedTokenDatato({
-        ...selectedTokenDatato,
-        name_from: token.symbol,
-        image_from: token.logoURI,
-        chainid: token.chainid,
-        address_from: token.address,
-        decimals_from: token.decimal,
-        descode: token.descode,
-        chainname: token.chainname,
-      });
-    } */
-
-    // setSelectedSymbol(token.symbol);
+    }
 
     setClickedTokens((prevTokens) => {
       const tokensArray = Array.isArray(prevTokens) ? prevTokens : [];
@@ -140,6 +122,7 @@ const TransferToken = () => {
     setShowPopup(false);
   };
 
+  //popup for select token after dropdown
   const tokenpopup = (e) => {
     setShowPopup(true);
     setSelectedtofrom(e);
@@ -147,22 +130,7 @@ const TransferToken = () => {
   };
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const dataSolana = {
-    input: selectedTokenDatato?.address_to,
-    output: selectedTokenDatato?.address_from,
-    amount: selectedTokenDatato?.input_to,
-    email: email,
-  };
-  const dataEvm = {
-    tokenIn: selectedTokenDatato?.address_to,
-    tokenOut: selectedTokenDatato?.address_from,
-    amount: Number(selectedTokenDatato?.input_to),
-    chain: Number(selectedChainId),
-    email: email,
-    chainId: selectedTokenDatato?.chainname,
-    desCode: selectedTokenDatato?.descode,
-  };
-
+  //For trnasfer Token for both network Solana And EVM
   const handleTransferSubmit = async () => {
     if (selectedNetwork === "Solana") {
       await handleSolanaTransfer(selectedNetwork);
@@ -171,8 +139,9 @@ const TransferToken = () => {
     }
   };
 
+  //For Solana Transfer
   const handleSolanaTransfer = async (networkName) => {
-    console.log("dadadad3333");
+    // console.log("dadadad3333");
     setLoading(true);
 
     const data = {
@@ -181,11 +150,11 @@ const TransferToken = () => {
       toWallet: selectedTokenDatato?.address_from,
       amount: Number(selectedTokenDatato?.input_to),
     };
-    console.log("dadadad222222");
+    // console.log("dadadad222222");
 
     try {
       const response = await axiosInstance.post("/transferSolanaToken", data);
-      console.log("dadadad11111");
+      // console.log("dadadad11111");
 
       if (response?.data?.status) {
         toast.success(response?.data?.message);
@@ -200,10 +169,10 @@ const TransferToken = () => {
         toast.error(response?.data?.message);
       }
 
-      console.log(
-        "------------------------------------------------------LOG",
-        response
-      );
+      // console.log(
+      //   "------------------------------------------------------LOG",
+      //   response
+      // );
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
@@ -214,8 +183,8 @@ const TransferToken = () => {
 
   const [loading, setLoading] = useState(false);
 
+  //For EVM Transfer
   const handleEvmTransfer = async (networkName) => {
-    // console.log("dadadad3333");
     setLoading(true);
 
     const data = {
@@ -225,7 +194,6 @@ const TransferToken = () => {
       chain: Number(selectedChainId),
       amount: Number(selectedTokenDatato?.input_to),
     };
-    // console.log("dadadad222222");
 
     try {
       let response;
@@ -247,11 +215,6 @@ const TransferToken = () => {
       } else {
         toast.error(response?.data?.message);
       }
-
-      // console.log(
-      //   "------------------------------------------------------LOG",
-      //   response
-      // );
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
@@ -289,7 +252,7 @@ const TransferToken = () => {
     }
   }; */
 
-  const getSolanaBalance = async () => {
+  /* const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
         "/getSolanaWalletTokenBal",
@@ -318,8 +281,50 @@ const TransferToken = () => {
     } catch (err) {
       console.log("error--->", err);
     }
+  }; */
+
+  //For Solana Balance
+  const getSolanaBalance = async () => {
+    try {
+      const balanceRes = await axiosInstanceAuth.post(
+        "/getSolanaWalletTokenBal",
+        {
+          wallet: solanaAddress,
+        }
+      );
+      const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+      console.log("fetchSolanabalance-------------------------->", balanceData);
+
+      const tokenImages = await fetchTokenImages([
+        "https://token.jup.ag/strict",
+      ]);
+
+      const mergedData = balanceData.map((token) => {
+        const tokenImage = tokenImages.find(
+          (image) => image.address === token.mint
+        );
+        return {
+          ...token,
+          logo: tokenImage ? tokenImage.logoURI : null,
+        };
+      });
+
+      mergedData.unshift({
+        mint: "SOL",
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+      });
+
+      setShowBalance(mergedData);
+    } catch (err) {
+      console.log("error--->", err);
+    }
   };
 
+  //For Solana Image Merge To above Function
   const fetchTokenImages = async (endpoints) => {
     try {
       for (const endpoint of endpoints) {
@@ -329,7 +334,7 @@ const TransferToken = () => {
           return tokenImages;
         }
       }
-      // If no images found
+
       return [];
     } catch (err) {
       console.log("Error fetching token images:", err);
@@ -337,6 +342,7 @@ const TransferToken = () => {
     }
   };
 
+  //For EVM Balance
   const getWalletBalance = async (networkName) => {
     const selectedNetwork = NetworkData.find(
       (network) => network.name == networkName
@@ -367,15 +373,18 @@ const TransferToken = () => {
     }
   };
 
+  //For Close Dropdown
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
+  //For Take input Value
   const handleInputChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
 
+  //For Take Merge Value
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
 
@@ -385,6 +394,7 @@ const TransferToken = () => {
     });
   };
 
+  //For selection Of Network
   const handleOptionClick = (name) => {
     const selectedNetworkData = NetworkData.find(
       (network) => network.name === name
@@ -397,6 +407,7 @@ const TransferToken = () => {
     }
   };
 
+  //Close popup when click outside of it
   const popupRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -422,32 +433,13 @@ const TransferToken = () => {
     }
   }, [selectedNetwork]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setShowPopup1(false);
-      }
-    };
-
-    if (showPopup1) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showPopup1]);
-
+  //Close DropDown when click outside of it
   const dropdownRef = useRef(null);
-
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
     }
   };
-
   useEffect(() => {
     if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -502,6 +494,7 @@ const TransferToken = () => {
                           onClick={toggleDropdown}
                         >
                           {selectChain && (
+                            // eslint-disable-next-line jsx-a11y/alt-text
                             <Image
                               src={selectChain}
                               className="h-6 w-6 rounded-full"
@@ -525,7 +518,6 @@ const TransferToken = () => {
                           </svg>
                         </button>
 
-                        {/* {showDropdown && ( */}
                         <div
                           className={`overflow-hidden ${
                             showDropdown ? "h-[430px] py-2" : "h-0"
@@ -611,7 +603,7 @@ const TransferToken = () => {
                           onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
-                      {/*{swap 1}*/}
+
                       <div
                         className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
                         onClick={() => tokenpopup(1)}
@@ -654,7 +646,6 @@ const TransferToken = () => {
                           onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
-                      {/*{swap 2}*/}
                     </div>
                   </div>
 
@@ -682,7 +673,7 @@ const TransferToken = () => {
             </div>
           </div>
         </div>
-        {/* {showPopup && ( */}
+
         <div
           className={`${
             showPopup ? "scale-[1]" : "scale-0"
@@ -764,7 +755,6 @@ const TransferToken = () => {
             </div>
           </div>
         </div>
-        {/* )} */}
 
         <div
           className={`${

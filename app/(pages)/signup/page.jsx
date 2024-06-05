@@ -4,7 +4,6 @@ import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import { FaEye } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -31,12 +30,14 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  //Get Value from Input
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setSignupData({ ...signupdata, [name]: value });
     validateInput(name, value);
   };
 
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "name":
@@ -80,14 +81,17 @@ const Signup = () => {
     }
   };
 
+  //To see Password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  //To see ConfirmPassword
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  //While Submit if any field is left the show error according to  Details
   const handleSubmit = async () => {
     const { name, email, password, confirmPassword } = signupdata;
 
@@ -95,11 +99,6 @@ const Signup = () => {
       toast.error("Please fill in all fields");
       return;
     }
-
-    // if (Object.values(errors).some((error) => error !== "")) {
-    //   toast.error("Please fix validation errors");
-    //   return;
-    // }
 
     try {
       const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
@@ -127,6 +126,8 @@ const Signup = () => {
       console.error("Error:", error);
     }
   };
+
+  //Prevent Number to enter only Alphabets can enter
   const handleKeyPress1 = (event) => {
     const char = String.fromCharCode(event.charCode); // Get the typed character
     const regex = /^[a-zA-Z0-9]+$/; // Allow only alphanumeric characters
@@ -135,6 +136,7 @@ const Signup = () => {
     }
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();

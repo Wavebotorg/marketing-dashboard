@@ -1,19 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
-import Bit from "../../../public/assets/watchlist/bitcoin.svg";
-import ETH from "../../../public/assets/watchlist/eth.svg";
-import XRP from "../../../public/assets/watchlist/xrp.svg";
-import MATIC from "../../../public/assets/watchlist/matic.svg";
-import DOGE from "../../../public/assets/watchlist/doge.svg";
-import USDC from "../../../public/assets/watchlist/usdc.svg";
-import ARB from "../../../public/assets/watchlist/arb.svg";
-import LTC from "../../../public/assets/watchlist/ltc.svg";
-import SOL from "../../../public/assets/watchlist/sol.svg";
-import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
-import RedChart from "../../../public/assets/watchlist/redchart.svg";
 import { AiFillDelete } from "react-icons/ai";
-import axiosInstance from "../../apiInstances/axiosInstance";
 import axios from "axios";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
@@ -23,7 +10,6 @@ import { RiGridFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
-// import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 import Chart from "../chart/ChartComponent";
@@ -33,7 +19,6 @@ const WatchList = () => {
   const [allCoinData, setAllCoinData] = useState([]);
   const [watchlistData, setWatchlistData] = useState([]);
 
-  // const [open, setOpen] = React.useState(false); // Add user popup open
   const [open, setOpen] = React.useState(false); // Add user popup open
   const [selectedCoinId, setSelectedCoinId] = useState(""); // use Delete API
   const [showModal, setShowModal] = React.useState(false); // Delete Popup
@@ -44,6 +29,8 @@ const WatchList = () => {
   const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  //search
   const filteredData = watchlistData.filter(
     (coin) =>
       // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
@@ -58,13 +45,13 @@ const WatchList = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
-  const handleOpen = () => setOpen(!open);
   // Delete Modal Open
   const modelShows = (id) => {
     setShowModal(true);
     setSelectedCoinId(id);
   };
 
+//get data from coingecko Api
   const getUserdata = async () => {
     try {
       const res = await axios.get(
@@ -76,6 +63,7 @@ const WatchList = () => {
     }
   };
 
+  //To Get Coins From Backend and merge with coingecko api for watchlist data
   const getWatchlistdata = async () => {
     try {
       const res = await axiosInstanceAuth.get("/allWatchlistData");
@@ -95,6 +83,8 @@ const WatchList = () => {
       console.log("err --->", err);
     }
   };
+
+  //To remove Coin From WatchList
   const removeCoinFromWatchlist = async () => {
     try {
       // Make an API call to remove the coin from the watchlist
@@ -145,6 +135,7 @@ const WatchList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //To show Value in Doller
   function formatToUSD(val) {
     const formattedValue = val.toLocaleString("en-US", {
       style: "currency",
@@ -155,9 +146,7 @@ const WatchList = () => {
   }
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 "> */}
       <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />
         <div className="p-2">
@@ -207,13 +196,14 @@ const WatchList = () => {
                 Smart Portfolios
               </button>
             </div>
-            <div className="">{/* <GrFormNext size={22} /> */}</div>
+            <div className=""></div>
           </div>
         </div>
 
         <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
+              {/* for 2xl ,xl and lg size  */}
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr
@@ -413,9 +403,7 @@ const WatchList = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4  whitespace-nowrap text-md text-white ">
-                            {/* <div className="flex justify-center items-center "> */}
                             {formatToUSD(d?.total_volume)}
-                            {/* </div> */}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-md text-white ">
                             {formatToUSD(d?.market_cap)}
@@ -432,7 +420,6 @@ const WatchList = () => {
                           </td>
                           <td className="px-6 py-4   whitespace-nowrap text-md text-white ">
                             <button
-                              // onClick={() => removeCoinFromWatchlist(d.id)}
                               onClick={() => modelShows(d.id)}
                               className="text-red-500 text-center "
                             >
@@ -485,7 +472,7 @@ const WatchList = () => {
             </div>
           </div>
         </div>
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
@@ -493,8 +480,9 @@ const WatchList = () => {
           currentPage={currentPage}
           style={{ display: "block !important" }}
         />
-        {/* </div> */}
       </div>
+
+      {/* for md and sm size */}
 
       {visibleData?.length > 0 &&
         visibleData?.map((d, index) => (
@@ -591,16 +579,7 @@ const WatchList = () => {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="border-b border-[#494949] flex justify-between">
-                      <div className="py-2  pl-4 font-semibold">Change 1D</div>
-                      <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                        {d.total_supply}{" "}
-                        <span className="flex items-center text-red-500 text-[11px]">
-                          <FaCaretDown size={12} />
-                          (-0.73%)
-                        </span>
-                      </div>
-                    </div> */}
+
                     <div className="border-b border-[#494949] flex justify-between">
                       <div className="py-2  pl-4 font-semibold">7d</div>
                       <div className=" justify-end items-center py-2 pr-4 pl-4 gap-1.5">
@@ -625,29 +604,6 @@ const WatchList = () => {
                           ).toFixed(1)}
                           %
                         </div>
-
-                        {/*   <div className="flex">
-                          <div className="">
-                            {d?.price_change_percentage_24h === 0 ? (
-                              <FaMinus size={15} className="text-white" />
-                            ) : d?.price_change_percentage_24h < 0 ? (
-                              <FaCaretDown size={15} className="text-red-500" />
-                            ) : (
-                              <FaCaretUp size={15} className="text-green-500" />
-                            )}
-                          </div>
-                          <div
-                            className={`${
-                              d?.price_change_percentage_24h === 0
-                                ? "text-white"
-                                : d?.price_change_percentage_24h < 0
-                                ? "text-red-500"
-                                : "text-green-500"
-                            }`}
-                          >
-                            ({d?.price_change_percentage_24h}%)
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                     <div className="border-b border-[#494949] flex justify-between">

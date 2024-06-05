@@ -722,6 +722,8 @@ const Swap = () => {
         }
       );
       const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+
       console.log("fetchSolanabalance-------------------------->", balanceData);
 
       const imageRes = await axios.get("https://token.jup.ag/strict");
@@ -735,6 +737,16 @@ const Swap = () => {
           ...token,
           logo: tokenImage ? tokenImage.logoURI : null,
         };
+      });
+
+      mergedData.unshift({
+        mint: "SOL", // Assuming SOL is the native token symbol
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+
+        // Add more properties if needed
       });
 
       setShowBalance(mergedData);

@@ -2,13 +2,10 @@
 import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
-import Link from "next/link";
-import { FaRegEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
-import Arror from "../../../public/assets/Vector.png";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -17,6 +14,8 @@ const ForgotPassword = () => {
     email: "",
   });
   const [errors, setErrors] = useState({ email: "" });
+
+  //Get Value from Input
   const onChangeInput = (e) => {
     const value = e.target.value.trim();
     const name = e.target.name;
@@ -28,9 +27,12 @@ const ForgotPassword = () => {
     validateInput(name, value);
   };
 
+  //Pass data to backend for Forget password
   const mydata = {
     email: forgetData?.email,
   };
+
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "email":
@@ -47,6 +49,7 @@ const ForgotPassword = () => {
         break;
     }
   };
+
   // Forget Password API code
   const handleSubmit = async () => {
     await axiosInstance
@@ -71,6 +74,7 @@ const ForgotPassword = () => {
       });
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();

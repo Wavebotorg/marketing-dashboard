@@ -612,15 +612,17 @@ const TokenDashboard = () => {
   //pagination
   const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 3;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
   //search
   const filteredData = allCoinData.filter(
     (coin) =>
       coin.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
       coin.amounteth.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -631,9 +633,7 @@ const TokenDashboard = () => {
   }, [searchQuery]);
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10"> */}
       <div className="flex flex-col xl:justify-center   xl:ml-32 xl:mr-[93px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
         <h1 className="text-[#1788FB]   font-medium max-w-screen-lg   text-2xl  md:text-3xl  text-center md:text-left ">
           Revenue Share Dashboard
@@ -789,7 +789,7 @@ const TokenDashboard = () => {
             </div>
           </div>
         </div>
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
@@ -797,7 +797,6 @@ const TokenDashboard = () => {
           currentPage={currentPage}
         />
 
-        {/* </div> */}
         {visibleData?.length > 0 &&
           visibleData?.map((market, index) => (
             <div key={index} className="lg:hidden mt-4 ">

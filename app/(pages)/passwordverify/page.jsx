@@ -34,19 +34,20 @@ const PasswordVerify = () => {
     }
   }, []);
 
+  //OTP Change
   const handleOtpChange = (value) => {
     const sanitizedValue = value.replace(/\D/g, "");
     setOtp(sanitizedValue);
   };
 
+  //Pass data to backend for Verification
   const mydata = {
     email: email,
     otp: otp,
     types,
   };
-  // const redirect=()=>{
-  //   router.push("/login");
-  // }
+
+  //Submit
   const handleSubmit = async () => {
     await axiosInstance
       .post("verify", mydata)
@@ -63,10 +64,6 @@ const PasswordVerify = () => {
             router.push("/resetpassword");
           }
 
-          // if (myData?.data === "changepassword") {
-          //   router.push("/profile");
-          // }
-  
           localStorage.removeItem("type");
           toast.success(myData?.msg);
         } else {
@@ -78,14 +75,15 @@ const PasswordVerify = () => {
       });
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
     }
   };
 
+  //send OTP  For Verification
   const [resendStatus, setResendStatus] = useState(false);
-
   const resendOtp = async () => {
     try {
       const res = await axiosInstance.post("/resendotp", {
