@@ -1064,23 +1064,25 @@ function Sidebar() {
                 </div>
 
                 {/* Only show the image on screens smaller than 2xl and xl */}
-                <div
-                  className="2xl:hidden xl:hidden flex gap-2"
-                  style={{ position: "absolute", bottom: "0" }}
-                >
-                  <Image
-                    src={Sidebaruserlogo}
-                    alt="Sidebaruserlogo"
-                    width="30px"
-                    height="30px"
-                    className=" ml-2 items-center"
-                  />
-                  {/* < className="ml-6"> */}
-                  {/* <div className={` ${isNavbar ? "" : "hidden "} `}>
-                  <p className="">{userProfile.name}</p> 
-                  <p className="text-xs">{userProfile.email}</p>
-                </div> */}
-                </div>
+                <Link href="/profile">
+                  <div
+                    className="2xl:hidden xl:hidden flex gap-2"
+                    style={{ position: "absolute", bottom: "0" }}
+                  >
+                    <Image
+                      src={Sidebaruserlogo}
+                      alt="Sidebaruserlogo"
+                      width="30px"
+                      height="30px"
+                      className=" ml-2 items-center"
+                    />
+                    {/* < className="ml-6"> */}
+                   {/*  <div className={` ${isNavbar ? "" : "hidden "} `}>
+                      <p className="">{userProfile.name}</p>
+                      <p className="text-xs">{userProfile.email}</p>
+                    </div> */}
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

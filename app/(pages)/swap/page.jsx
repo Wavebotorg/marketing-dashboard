@@ -1,5 +1,5 @@
 "use client";
-import TokenList from "../../components/ShowTokenSwap/TokensList";
+import TokenList from "../../components/ShowTokenSwap/TokensList"
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
@@ -11,13 +11,8 @@ import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
-import USD from "../../../public/assets/tokenimg/USD.png";
-import SHU from "../../../public/assets/tokenimg/SHU.png";
-import tether from "../../../public/assets/tokenimg/tether.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
-import wrapped from "../../../public/assets/tokenimg/wrapped.png";
-import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
 import { IoSwapVerticalOutline } from "react-icons/io5";
@@ -28,12 +23,10 @@ import qs from "qs";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FiRefreshCcw } from "react-icons/fi";
 import { FaBars } from "react-icons/fa6";
 
 const Swap = () => {
-  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
-    useWallet();
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } = useWallet();
   const router = useRouter();
   const [activeButton, setActiveButton] = useState('Swap'); 
   // const [selectedNetwork, setSelectedNetwork] = useState(null);
@@ -41,8 +34,8 @@ const Swap = () => {
   const [fetchtokendata, setFetchtokendata] = useState(null);
   const [balancePopup, setBalancePopup] = useState(false);
   const [selectedChainId, setSelectedChainId] = useState("");
+  const [ SelectedDescode, setSelectedDescode] = useState("");
   const [walletAddressbuysell, setwalletAddressbuysell] = useState("");
-  const [refresh, setRefresh] = useState(false);
   const [clickedTokens, setClickedTokens] = useState("");
   const [showPopup1, setShowPopup1] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,6 +43,8 @@ const Swap = () => {
   const [showBalance, setShowBalance] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectChain, setSelectChain] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedTokenDatato, setSelectedTokenDatato] = useState({
     name_to: "",
     image_to: "",
@@ -67,6 +62,9 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
+  // console.log("selectedTokenDatato---",selectedTokenDatato)
+
+
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" ,walletAddressbuysell:"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" ,walletAddressbuysell:"0x912CE59144191C1204E64559FE8253a0e49E6548"},
@@ -82,7 +80,7 @@ const Swap = () => {
 
 
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const token_data_ETH = [
     {
       name: "BNB",
@@ -104,7 +102,7 @@ const Swap = () => {
     },
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const token_data_ARB = [
     {
       name: "ChainLink Token",
@@ -236,6 +234,7 @@ const Swap = () => {
     },
   ];
 
+  //for nwtwork select and bydefaultm evm network select
   useEffect(() => {
     const ethereumNetwork = NetworkData.find(
       (network) => network.name === "Ethereum"
@@ -246,7 +245,7 @@ const Swap = () => {
   }, []);
   const [selectedSymbol, setSelectedSymbol] = useState("");
 
-
+//for active button click sell,buy and swap
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName); // Update the active button
     setSelectedTokenDatato({
@@ -266,24 +265,21 @@ const Swap = () => {
       descode: "",
       chainname: "",
     });
-   
-
-
-
-
   };
+
+//for select token value info.
   const selectToken = (token, networkData, e) => {
     if (selectedtofrom === 1) {
       setSelectedTokenDatato({
         ...selectedTokenDatato,
-
-        name_to: token.symbol,
-        image_to: token.logoURI,
+       
+        name_to: token.symbol, 
+        image_to: token.logoURI ||  token.logo ,
         chainid: token.chainid,
-        address_to: token.address,
+        address_to: token.address || token.token_address || token.mint,
         decimals_to: token.decimal,
-        descode: token.descode,
-        chainname: token.chainname,
+        descode: token.descode ,
+        chainname: token.chainname || token.name,
       });
     } else if (selectedtofrom === 2) {
       setSelectedTokenDatato({
@@ -316,6 +312,7 @@ const Swap = () => {
     setShowPopup(false);
   };
 
+  //for swap amount and token value to to from || from to to value
   const handleSwapTokens = () => {
     setSelectedTokenDatato({
       ...selectedTokenDatato,
@@ -331,23 +328,23 @@ const Swap = () => {
       address_from: selectedTokenDatato?.address_to,
     });
   };
-  // useEffect(() => {
   
-  //   setActiveButton('Swap');
-  // }, []);
+  //for token select in dropdown after show popup 
   const tokenpopup = (e) => {
     setShowPopup(true);
     setSelectedtofrom(e);
     setSearchTerm("");
   };
-  const [showDropdown, setShowDropdown] = useState(false);
+  
 
+  //for pass value to swap solana submit 
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
     output: selectedTokenDatato?.address_from,
     amount: selectedTokenDatato?.input_to,
     email: email,
   };
+  //for pass value to swap evm submit 
   const dataEvm = {
     tokenIn: selectedTokenDatato?.address_to,
     tokenOut: selectedTokenDatato?.address_from,
@@ -358,8 +355,8 @@ const Swap = () => {
     desCode: selectedTokenDatato?.descode,
     method:"swap"
   };
-  const [loading, setLoading] = useState(false);
 
+//for submit swap
   const handleSwapSubmit = async () => {
     setLoading(true);
 
@@ -374,7 +371,7 @@ const Swap = () => {
       .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
       .then(async (res) => {
         const myData = res?.data;
-        console.log("Response from API:", myData);
+        // console.log("Response from API:", myData);
         if (myData?.status) {
           toast.success(myData?.message);
           setTimeout(async () => {
@@ -397,6 +394,7 @@ const Swap = () => {
       });
   };
 
+  //for buy amount convert for both network
   const handleBuyprice = async () => {
    
     if (
@@ -407,7 +405,7 @@ const Swap = () => {
     ) {
       const amount =
         Number(selectedTokenDatato?.input_to)
-      console.log("--------amount", amount);
+      // console.log("--------amount", amount);
     
  try{
   let endpoint;
@@ -439,8 +437,9 @@ const Swap = () => {
     buyAmt = amount * tokensPrice?.token2;
     finalAmt = buyAmt / tokensPrice?.token1;
   }
-  console.log("finalllll--------",finalAmt)
-      return finalAmt
+  // console.log("finalllll--------",finalAmt)
+
+      return finalAmt?.toFixed(4)
   // if (finalAmt) {
   //   setSelectedTokenDatato({
   //     ...selectedTokenDatato,
@@ -455,100 +454,90 @@ const Swap = () => {
 }
 } 
 
-  // const dataSolana = {
-  //   input: selectedTokenDatato?.address_to,
-  //   output: selectedTokenDatato?.address_from,
-  //   amount: selectedTokenDatato?.input_to,
-  //   email: email,
-  // };
 
-  const dataEvmBuy = {
-   
+  //for buy submit for both network
+  const handleBuySubmit= async () => {
+    setLoading(true);
+    handleBuyprice().then((e)=>{
+    let endpoint;
+      if (selectedNetwork === "Solana") {
+        endpoint = "/solanaSwap";
+      } else {
+        endpoint = "/EVMswap";
+      }
+  
+      axiosInstance
+        .post(endpoint, selectedNetwork === "Solana" ? {
+           input: walletAddressbuysell,
+          output: selectedTokenDatato?.address_to,
+        
+          amount:Number(e),
+          email: email,
+          method:"buy"
+        }    : 
+           { tokenIn: walletAddressbuysell,
+          tokenOut: selectedTokenDatato?.address_to,
+          amount:Number(e),
+          chain: Number(selectedChainId),
+          email: email,
+          chainId: selectedTokenDatato?.chainname,
+          desCode: selectedTokenDatato?.descode,
+          method:"buy"
+        })
+        .then(async (res) => {
+          const myData = res?.data;
+          console.log("Response from API:", myData);
+          if (myData?.status) {
+            toast.success(myData?.message);
+            setTimeout(async () => {
+              if (selectedNetwork == "Solana") {
+                await getSolanaBalance();
+              } else {
+                await getWalletBalance(selectedNetwork);
+              }
+            }, 3000);
+  
+          } else {
+            toast.error(myData?.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error occurred:", error);
+          toast.error("An error occurred while processing your request");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }).catch((err)=>{
+      console.err("Error occurred:", err);
+    })
+  
   };
-  // console.log( walletAddressbuysell,"address_from-------")
-  // const handleBuySubmit= async () => {
-  //   setLoading(true);
-  //   handleBuyprice().then((e)=>{
-      
 
-  //     let endpoint;
-  //     if (selectedNetwork === "Solana") {
-  //       endpoint = "/solanaSwap";
-  //     } else {
-  //       endpoint = "/EVMswap";
-  //     }
-  
-  //     axiosInstance
-  //       .post(endpoint, selectedNetwork === "Solana" ? {
-  //          input: walletAddressbuysell,
-  //         output: selectedTokenDatato?.address_to,
-  //         amount: Number(selectedTokenDatato?.input_to),
-  //         email: email,
-  //         method:"buy"
-  //       }    : 
-  //          { tokenIn: walletAddressbuysell,
-  //         tokenOut: selectedTokenDatato?.address_to,
-  //         amount: Number(e),
-  //         chain: Number(selectedChainId),
-  //         email: email,
-  //         chainId: selectedTokenDatato?.chainname,
-  //         desCode: selectedTokenDatato?.descode,
-  //         method:"buy"
-  //       })
-  //       .then(async (res) => {
-  //         const myData = res?.data;
-  //         console.log("Response from API:", myData);
-  //         if (myData?.status) {
-  //           toast.success(myData?.message);
-  //           setTimeout(async () => {
-  //             if (selectedNetwork == "Solana") {
-  //               await getSolanaBalance();
-  //             } else {
-  //               await getWalletBalance(selectedNetwork);
-  //             }
-  //           }, 3000);
-  
-  //         } else {
-  //           toast.error(myData?.message);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error occurred:", error);
-  //         toast.error("An error occurred while processing your request");
-  //       })
-  //       .finally(() => {
-  //         setLoading(false);
-  //       });
-  //   }).catch((err)=>{
-  //     console.err("Error occurred:", err);
-  //   })
-  
-  // };
-
-
+  //for pass value to sell evm submit 
   const dataEvmSell = {
     tokenIn:selectedTokenDatato?.address_to,
     tokenOut:walletAddressbuysell,
     amount: Number(selectedTokenDatato?.input_to),
     chain: Number(selectedChainId),
     email: email,
-    chainId: selectedTokenDatato?.chainname,
-    desCode: selectedTokenDatato?.descode,
+    chainId: selectedNetwork.toLowerCase(),
+    desCode: SelectedDescode,
     method:"sell"
   };
-
+  
+  //for pass value to sell solana submit 
  const dataSolanaSell ={
-  input:  selectedTokenDatato?.address_to,
+  input: selectedTokenDatato?.address_to,
   output: walletAddressbuysell, 
   amount: Number(selectedTokenDatato?.input_to),
   email: email,
   method:"sell"
  }
 
+ //for sell submit
  const handleSellSubmit= async () => {
- 
     setLoading(true);
-
     let endpoint;
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
@@ -585,11 +574,7 @@ const Swap = () => {
   };
 
 
-
-
-
-
-  
+//amount convert evm from ox.arg 
 //   const getPrice = async () => {
 //     if (
 //       selectedTokenDatato?.input_to &&
@@ -637,7 +622,9 @@ const Swap = () => {
 //       }
 //     }
 //   };
- //api
+
+
+ //evmamount convert from backend api 
  const getPrice = async () => {
       
     if (
@@ -664,7 +651,7 @@ const Swap = () => {
       const tokensPrice = tokenRes?.data?.finalRes;
       const buyAmt = amount * tokensPrice?.token2;
       const finalAmt = buyAmt / tokensPrice?.token1;
-      console.log("finalllll--------",finalAmt)
+      // console.log("finalllll--------",finalAmt)
       if (finalAmt) {
         setSelectedTokenDatato({
           ...selectedTokenDatato,
@@ -678,6 +665,7 @@ const Swap = () => {
   }
   }
 
+ //solana amount convert from backend api 
   const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
@@ -687,7 +675,7 @@ const Swap = () => {
         }
       );
       const balanceData = balanceRes?.data?.response1?.tokens;
-      console.log("fetchSolanabalance-------------------------->", balanceData);
+      // console.log("fetchSolanabalance-------------------------->", balanceData);
 
       const imageRes = await axios.get("https://token.jup.ag/strict");
 
@@ -719,15 +707,10 @@ const Swap = () => {
       };
       try {
         const res = await axiosInstance.post("/fetchbalance", myDatawallet);
-        console.log(
-          "-------------------------------- fetch balance api called=-------------------------------------------"
-        );
+       
 
         const myData = res?.data?.data;
-        console.log(
-          "fetchbalance--------------------------------------------------------------------------------->",
-          myData
-        );
+        // console.log( "fetchbalance------------------->", myData );
         setShowBalance(myData);
       } catch (err) {
         console.log("error--->", err);
@@ -738,14 +721,18 @@ const Swap = () => {
     }
   };
 
+  //for dropdown close and open 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
+  //for take input value 
   const handleInputChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
+
+  //amountconvert for both network
 //   async function solanaTokenSwapPrice() {
 //     const tokenRes = await axios({
 //       method: "post",
@@ -784,6 +771,7 @@ const Swap = () => {
     getPrice();
   }, [selectedTokenDatato?.address_from]);
 
+  //
 //    async function getToQty() {
 //     if (selectedNetwork == "Solana") {
 //       if (
@@ -825,6 +813,9 @@ const Swap = () => {
 //       }
 //     }
 //   }
+
+
+//for take input and merge value
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
     if (!value || value == 0) {
@@ -841,6 +832,7 @@ const Swap = () => {
     }
   };
 
+  //for network select and networkdata array and other select value
   const handleOptionClick = (name) => {
     const selectedNetworkData = NetworkData.find(
       (network) => network.name === name
@@ -850,10 +842,13 @@ const Swap = () => {
     if (selectedNetworkData) {
       setSelectedChainId(selectedNetworkData.chainid);
       setwalletAddressbuysell(selectedNetworkData.walletAddressbuysell)
+      setSelectedDescode(selectedNetworkData.descode);
       setShowDropdown(false);
     }
   };
 
+  
+//Close popup when click outside of it
   const popupRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -861,9 +856,7 @@ const Swap = () => {
         setShowPopup(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -871,6 +864,7 @@ const Swap = () => {
 
   const [tokens, setTokens] = useState([]);
 
+  //for solana image 
   useEffect(() => {
     if (selectedNetwork == "Solana") {
       getSolanaBalance();
@@ -887,6 +881,7 @@ const Swap = () => {
     }
   }, [selectedNetwork]);
 
+  //for statice all array merge in 1 state
   const [tokenData, setTokenData] = useState({
     Ethereum: token_data_ETH,
     Solana: [],
@@ -901,6 +896,8 @@ const Swap = () => {
       Solana: tokens,
     }));
   }, [tokens]);
+
+  //Close showpopup1 token select second in dropdown when click outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -919,8 +916,9 @@ const Swap = () => {
     };
   }, [showPopup1]);
 
-  const dropdownRef = useRef(null);
 
+//Close DropDown when click outside of it
+  const dropdownRef = useRef(null);
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
@@ -1095,8 +1093,7 @@ const Swap = () => {
                       </div>
                     </div>
                   </div>
-                  {/* {activeButton === 'Swap' && (
-                    <> */}
+                 
                   <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                     <div className="text-gray-300">
                       <p>You pay</p>
@@ -1112,7 +1109,7 @@ const Swap = () => {
                           onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
-                      {/*{swap 1}*/}
+                   
                       <div
                         className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
                         onClick={() => tokenpopup(1)}
@@ -1222,68 +1219,18 @@ const Swap = () => {
                       }}
                       disabled={loading}
                     >
-                      {/* Swap */}
+                     
                       {loading ? <span className="loader "></span> :  activeButton}
                     </button>
                   </div>
            
-                    {/* </>
-                      )} */}
-                        {/* {(activeButton === 'Buy' || activeButton === 'Sell') && (
-                    <>
-                      <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                        <div className="text-gray-300">
-                          <p>You pay</p>
-                        </div>
-                        <div className="flex justify-between py-2">
-                          <div className="space-y-2">
-                            <input
-                              type="number"
-                              className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
-                              placeholder="0"
-                              name="input_to"
-                              value={selectedTokenDatato?.input_to}
-                              onChange={(e) => handleInputChanges(e)}
-                            />
-                          </div>
-                          <div
-                            className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full"
-                            onClick={() => tokenpopup(1)}
-                          >
-                            <div>
-                              {selectedTokenDatato?.image_to ? (
-                                <img src={selectedTokenDatato?.image_to} height={30} width={30} alt="logo" className="rounded-full" />
-                              ) : null}
-                            </div>
-                            <div>
-                              {selectedTokenDatato?.name_to ? selectedTokenDatato?.name_to.toUpperCase() : 'Token'}
-                            </div>
-                            <div>
-                              <MdKeyboardArrowDown size={20} />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-full">
-                         <button
-                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={() => {
-                        handleSwapSubmit();
-                      }}
-                      disabled={loading}
-                    >
-                    
-                      {loading ? <span className="loader "></span> :   activeButton}
-                    </button>
-                      </div>
-                    </>
-                  )} */}
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* {showPopup && ( */}
+      
         <div
           className={`${
             showPopup ? "scale-[1]" : "scale-0"
@@ -1319,19 +1266,66 @@ const Swap = () => {
                   </div>
                 </div>
               </div>
+
               <div className="h-[60vh] overflow-y-auto">
-                <TokenList
-                  tokens={tokenData[selectedNetwork]}
-                  clickedTokens={clickedTokens}
-                  selectToken={selectToken}
-                  searchTerm={searchTerm}
-                />
+
+                {activeButton == "Sell" ? (<>  {showBalance?.length > 0 ? (
+                  showBalance?.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
+                        clickedTokens.includes(item.name)
+                   
+                      }`}
+                      onClick={() => {
+                       {
+                          selectToken(item);
+                        }
+                      }}
+                    >
+                      <img
+                        src={item.logo}
+                        alt={item.name || "Token"}
+                        height={30}
+                        width={30}
+                        className="h-15 w-15 my-3 rounded-full"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "fallback-image-url";
+                        }}
+                      />
+                      <div className="flex flex-col justify-center">
+                        <div className={`text-base font-bold ${clickedTokens.includes(item.name) }`}>{item.name}</div>
+                        <div className="text-base font-bold">{item.symbol}</div>
+                        <div className="text-base">
+                          Balance:{" "}
+                          <span className="font-bold">
+                            {selectedNetwork === "Solana"
+                              ? Number(item?.amount)?.toFixed(3)
+                              : Number(item?.balance_formatted)?.toFixed(3)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="mt-16 text-xl">No data</div>
+                )}</>): <TokenList
+      tokens={tokenData[selectedNetwork]}
+      clickedTokens={clickedTokens}
+      selectToken={selectToken}
+      searchTerm={searchTerm}
+      showBalance={showBalance}
+    />}
+             
               </div>
             </div>
           </div>
         </div>
         {/* )} */}
+        
 
+        
         <div
           className={`${
             balancePopup ? "scale-1" : "scale-0"

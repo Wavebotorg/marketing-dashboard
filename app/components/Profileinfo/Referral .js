@@ -70,6 +70,40 @@ const Referral = () => {
           </div>
         </div>
       </div>
+      <div>
+        {userReferals?.length > 0 ? (
+          userReferals.map((referal, index) => (
+            <div key={index} className="lg:hidden mt-4 ">
+              <div className="w-full mx-auto bg-[#1C1C1C] shadow-md rounded-md">
+                <div className="w-full">
+                  <div className="">
+                    <div className=" flex border-b border-[#494949] justify-between">
+                      <div className="py-2 pl-4 font-semibold">No.</div>
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        {index + 1}
+                      </div>
+                    </div>
+                    <div className=" flex border-b border-[#494949] justify-between">
+                      <div className="py-2 pl-4 font-semibold">Email</div>
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        {referal.email}
+                      </div>
+                    </div>
+                    <div className=" flex  justify-between">
+                      <div className="py-2 pl-4 font-semibold">Name</div>
+                      <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
+                        {referal.name}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="text-center text-3xl mt-4">No data</div>
+        )}
+      </div>
     </>
   );
 };

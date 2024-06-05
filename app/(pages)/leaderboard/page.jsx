@@ -6,9 +6,9 @@ import { useSearch } from "../../components/contexts/SearchContext"; //search
 import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
-import axiosInstance from "../../apiInstances/axiosInstance";
 import Pagination from "../Pagination/Pagination";
 
+//for show email structure 
 const truncateEmail = (email) => {
   if (email.length < 20) {
     // Show full email if length is greater than 50
@@ -89,20 +89,20 @@ const LeaderBoard = () => {
       points: "224,466,796",
     },
 
-    // Add more student data as needed
+  
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
-  // console.log("🚀 ~ LeaderBoard ~ allRecentUser:", allRecentUser);
 
-  // Get All Admin Show
+
+  // Get All recenet user show
   const getAdmindata = async () => {
     await axiosInstanceAuth
       .get("recentUsers")
       .then((res) => {
         const myData = res?.data;
         setAllRecentUser(myData?.data || []);
-        // console.log("recentUsers---->", myData);
+        
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -119,6 +119,8 @@ const LeaderBoard = () => {
   const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  //search
   const filteredData = students.filter(
     (coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -136,7 +138,6 @@ const LeaderBoard = () => {
 
   return (
     <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
-      {/* <div className="xl:flex my-10 xl:ml-16  xl:mr-11 gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5"> */}
       <div className="xl:flex my-10 xl:ml-32 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
           <p className="text-[#1788FB] text-3xl md:text-4xl font-medium w-auto  ">
@@ -146,11 +147,12 @@ const LeaderBoard = () => {
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
+                  {/* for with points and recent join user data show */}
                 <table className="w-full">
                   <thead className="sticky top-0 leader-color shadow-2xl ">
                     <tr
                       className="  text-[#CECECE]   bg-[#1C1C1C]  "
-                      // style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+              
                     >
                       <th
                         scope="col"
@@ -224,7 +226,7 @@ const LeaderBoard = () => {
             currentPage={currentPage}
           />
         </div>
-
+          {/* for recent join user data show */}
         <div className="">
           <p className="text-[#1788FB]  text-3xl md:text-4xl font-medium max-w-screen-lg ">
             Recent Joins

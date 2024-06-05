@@ -34,9 +34,10 @@ const Holder = () => {
   const { searchQuery } = useSearch();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+
   //search
   const filteredData = allCoinData.filter(
     (coin) =>
@@ -47,14 +48,13 @@ const Holder = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
-  /* 2xsm:pl-6464xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto */
+
+
   return (
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem]  sm:pl-4 xsm:pl-0 mx-auto ">
-      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">   */}
       <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
         <p className="text-[#1788FB]   text-2xl  md:text-3xl text-center md:text-left font-medium max-w-screen-lg ">
           Holder Rewards
@@ -67,9 +67,7 @@ const Holder = () => {
         </div>
         <div className="flex flex-col  md:flex-row gap-6 mt-5 md:w-full ">
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            {/* <p className="text-[#EAEAEA]">Total Rewards</p> */}
             <p className="text-[#CECECE]  font-light">Total Rewards</p>
-
             <p className="text-blue-400 text-2xl mt-1  w-[178px] ">0ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
@@ -89,6 +87,7 @@ const Holder = () => {
         <div className="mt-4 hidden lg:block ">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container  text-white h-auto overflow-auto rounded-lg">
+              {/* for 2xl ,xl and lg size  */}
               <table className="w-full  ">
                 <thead className="sticky top-0 overflow-auto bg-[#1C1C1C] shadow-2xl ">
                   <tr
@@ -127,7 +126,8 @@ const Holder = () => {
                     </th>
                   </tr>
                 </thead>
-                {/* {visibleData?.map((d, index) => ( */}
+          
+       
                 <tbody>
                   {visibleData?.length > 0 &&
                     visibleData?.map((d, index) => (
@@ -162,14 +162,15 @@ const Holder = () => {
             </div>
           </div>
         </div>
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+        
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
           onPageChange={handlePageChange}
           currentPage={currentPage}
         />
-        {/* </div> */}
+     
+      {/* for md and sm size */}
         {visibleData?.length > 0 &&
           visibleData?.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
