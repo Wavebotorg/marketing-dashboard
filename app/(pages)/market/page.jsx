@@ -4,9 +4,7 @@ import Image from "next/image";
 import "./market.css";
 import React, { useEffect, useState } from "react";
 import { LiaEyeSolid } from "react-icons/lia";
-import { BiBookmark } from "react-icons/bi";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
-import Link from "next/link";
 import axios from "axios";
 import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useSearch } from "../../components/contexts/SearchContext";
@@ -15,24 +13,18 @@ import { useRouter } from "next/navigation";
 import Chart from "../chart/ChartComponent";
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 const Market = () => {
+
   const { id } = useParams();
   const router = useRouter();
-  // console.log("🚀 ~ Market ~ searchQuery:", searchQuery)
+  
   const [allCoinData, setAllCoinData] = useState([]);
   const [savedCoins, setSavedCoins] = useState([]);
   const [savedData, setSavedData] = useState([]);
-  // console.log(
-  //   "🚀 ~ Market--------------------------------- ~ savedData:",
-  //   savedData
-  // );
-
   const [token, setToken] = useState(null);
-  // console.log(savedData, "<,----------------savedData");
-  // console.log("getAllCoin------->>>", allCoinData);
-  // console.log("savedcoins-----------------", savedCoins);
+  
+  //coingecko api 
   const getUserdata = async () => {
     axios
-
       .get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&page=1&per_page=250&order=market_cap_desc&sparkline=true&price_change_percentage=1h%2C24h%2C7d&locale=en"
       )
@@ -45,9 +37,7 @@ const Market = () => {
         console.log("err --->", err);
       });
   };
-  // useEffect(() => {
-  //   resetSearchQuery();
-  // }, [resetSearchQuery]);
+
 
   //pagination
   const { searchQuery } = useSearch(); //search
@@ -65,10 +55,10 @@ const Market = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
+
 
   useEffect(() => {
     getUserdata();
@@ -80,9 +70,10 @@ const Market = () => {
     // router.push("/login")
     // }
     setToken(storedToken);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, []);
 
+//for value tranfer in usd
   function formatToUSD(val) {
     const formattedValue = val.toLocaleString("en-US", {
       style: "currency",
@@ -91,6 +82,8 @@ const Market = () => {
     const trimmedValue = formattedValue.replace(".00", "");
     return trimmedValue;
   }
+
+  //for save coin and show watchlist data 
   const saveCoin = async (id) => {
     try {
       const isSaved = savedData.includes(id);
@@ -123,7 +116,6 @@ const Market = () => {
             return [id];
           }
         });
-
         // Save the coin to the server (if needed)
         await axiosInstanceAuth.post("watchlist", { coinId: id });
       }
@@ -132,6 +124,7 @@ const Market = () => {
     }
   };
 
+  //remove coin watchlistdata show and remove backeground color
   const removeSavedCoin = async (coinId) => {
     try {
       // Make an API call to remove the coin from the watchlist
@@ -166,12 +159,7 @@ const Market = () => {
     }
   };
 
-  // const removeSavedCoin = (coinId) => {
-  //   // Filter out the coin ID from saved data
-  //   const updatedSavedData = savedData.filter((id) => id !== coinId);
-  //   setSavedData(updatedSavedData);
-  // };
-  // const removeCoinFromWatchlist = async () => {};
+
 
   return (
     <>
@@ -204,7 +192,7 @@ const Market = () => {
           <div className="text-sm "> Todays PnL -$.550()</div>
         </div>
 
-        {/* Border */}
+       
         <div className="lg:border-t lg:border-opacity-15 lg:border-[#ffffff] lg:pb-2 pb-0"></div>
 
         <div className=" hidden lg:block ">
@@ -214,6 +202,7 @@ const Market = () => {
             </h1>
             <div className="flex justify-end  mb-7 "></div>
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg px-10 ">
+              {/* for 2xl ,xl and lg size  */}
               <table className="w-full  ">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                   <tr className=" text-[#CECECE]  2xl:text-base xl:text-base">
@@ -463,6 +452,8 @@ const Market = () => {
         currentPage={currentPage}
       />
 
+       
+      {/* for md and sm size */}
       {visibleData?.length > 0 &&
         visibleData?.map((market, index) => (
           <div

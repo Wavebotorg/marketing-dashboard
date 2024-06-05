@@ -15,7 +15,6 @@ import CELO from "../../../public/assets/tokenimg/CELO.png";
 import BURST from "../../../public/assets/tokenimg/BURST.png";
 import Image from "next/image";
 import { MdDone } from "react-icons/md";
-import { toast } from "react-toastify";
 
 const SwapHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -28,6 +27,7 @@ const SwapHistory = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
   //search
   const filteredData = transactions.filter(
     (coin) =>
@@ -38,7 +38,6 @@ const SwapHistory = () => {
           .toLowerCase()
           .includes(searchQuery.toLowerCase()))
   );
-
   const visibleData = filteredData?.slice(startIndex, endIndex);
 
   // console.log("🚀 ~ SwapHistory ~ visibleData:", visibleData);
@@ -58,14 +57,11 @@ const SwapHistory = () => {
     setCurrentPage(page);
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery]);
-
   const [copiedFromId, setCopiedFromId] = useState(null);
   const [copiedToId, setCopiedToId] = useState(null);
   const [copiedTransactionId, setCopiedTransactionId] = useState(null);
 
+  //Function for Copy
   const copyToClipboard = (text, type, _id) => {
     navigator.clipboard
       .writeText(text)
@@ -95,18 +91,17 @@ const SwapHistory = () => {
     const lastFour = txid?.slice(-4); // Get the last 4 characters
     return `${firstSix}...${lastFour}`; // Concatenate with "..." in between
   };
+
   //for format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleDateString();
     return `${formattedDate}`;
-
-    // const formattedTime = date.toLocaleTimeString();
-    // return `${formattedDate}, ${formattedTime}`;
   };
 
   const [showDropdown, setShowDropdown] = useState(false);
 
+  //Close DropDown
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
@@ -114,17 +109,15 @@ const SwapHistory = () => {
   useEffect(() => {
     // Call handleNetworkSelect with "Ethereum" as the default network name
     handleNetworkSelect("Ethereum");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
+  //Close DropDown when Click Outside Of It
   const dropdownRef = useRef(null);
-
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
     }
   };
-
   useEffect(() => {
     if (showDropdown) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -151,6 +144,7 @@ const SwapHistory = () => {
     }
   };
 
+  //Active Button Wise Method Pass to Backend to Fetch Data and get all Data
   const handleNetworkSelect = async (
     networkName,
     method = "All",
@@ -195,15 +189,12 @@ const SwapHistory = () => {
   };
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
       <div className=" my-10 xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="mt-10 flex">
           <div className="flex">
             <button
               onClick={handleDropdownToggle}
-              // onClick={() => getTransactions("/evmTransactions")}
-              // onClick={getEvmTransactions}
               className="bg-blue-500 rounded-lg px-2 py-1 mr-4 flex items-center gap-2 relative"
             >
               {selectedNetwork ? selectedNetwork.name : "Transactions"}
@@ -244,13 +235,6 @@ const SwapHistory = () => {
               )}
             </div>
           </div>
-          {/* <button
-            // onClick={() => getTransactions("/solanaTransactions")}
-            onClick={getSolanaTransactions}
-            className="bg-blue-500 rounded-lg px-2 py-1"
-          >
-            Solana
-          </button> */}
         </div>
         <div className="">
           <button
@@ -299,6 +283,7 @@ const SwapHistory = () => {
         <div className="pt-8 hidden lg:block  pb-3">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white h-auto overflow-auto rounded-lg">
+              {/* for 2xl ,xl and lg size  */}
               <table className="w-full">
                 <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl ">
                   <tr
@@ -453,6 +438,8 @@ const SwapHistory = () => {
           onPageChange={handlePageChange}
           currentPage={currentPage}
         />
+
+        {/* for md and sm size */}
         {visibleData?.length > 0 ? (
           visibleData.map((d, index) => (
             <div key={index} className="lg:hidden mt-4 ">
@@ -552,14 +539,6 @@ const SwapHistory = () => {
                           {formatDate(d?.createdAt)}
                         </div>
                       </div>
-                      {/* <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">
-                          UpdatedAt
-                        </div>
-                        <div className="flex justify-end items-center py-2 pr-4 pl-4">
-                          {formatDate(d?.updatedAt)}
-                        </div>
-                      </div> */}
 
                       <div></div>
                     </>

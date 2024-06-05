@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { CiSearch } from "react-icons/ci";
 import bit from "../../../public/assets/bitcoin.png";
 import Image from "next/image";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
+
 const Portfolio = () => {
   // Sample data array
   const portfolioData = [
@@ -62,12 +62,15 @@ const Portfolio = () => {
     },
   ];
 
-  //pagination
   const { searchQuery } = useSearch(); //search
+
+  //pagination
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  //search
   const filteredData = portfolioData.filter((coin) =>
     // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
     coin.coin.toLowerCase().includes(searchQuery.toLowerCase())
@@ -81,24 +84,11 @@ const Portfolio = () => {
   }, [searchQuery]);
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4  xsm:pl-16 mx-auto  ">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 md:mr-5  xsm:mr-4 "> */}
       <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5  xsm:mr-4 ">
         <div className=" mt-7" />
         <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start">My Portfolio</div>
-          {/*     <div className=" flex w-96 gap-2 text-sm xsm:mr-0 rounded-lg  bg-[#1C1C1C] text-white ">
-            <div className=" flex items-center pl-3 pointer-events-none">
-              <CiSearch size={20} />
-            </div>
-            <input
-              type="search"
-              id="default-search"
-              className="bg-[#1C1C1C]  outline-none my-2"
-              placeholder="Search"
-            />
-          </div> */}
         </div>
         <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
           <div>
@@ -112,6 +102,7 @@ const Portfolio = () => {
         <div className="mt-5 mb-5 lg:block hidden">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg ">
+                {/* for 2xl ,xl and lg size  */}
               <>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -148,6 +139,7 @@ const Portfolio = () => {
                       </th>
                     </tr>
                   </thead>
+                
                   <tbody>
                     {visibleData?.length > 0 &&
                       visibleData?.map((item, index) => (
@@ -245,7 +237,8 @@ const Portfolio = () => {
           onPageChange={handlePageChange}
           currentPage={currentPage}
         />
-        {/* </div> */}
+
+        {/* for md and sm size */}
         {visibleData?.length > 0 &&
           visibleData?.map((item, index) => (
             <div key={index} className="lg:hidden mt-4 ">

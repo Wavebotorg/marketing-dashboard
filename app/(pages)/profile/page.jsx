@@ -212,7 +212,7 @@ const Profile = () => {
                 Notification
               </button>
             </div>
-            <div>
+            {/* <div>
               <button
                 className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
                   activeButton === 6 && "bg-blue-500"
@@ -221,11 +221,11 @@ const Profile = () => {
               >
                 Referral
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="">
             <div>{isComponent1Visible && <About />}</div>
-            <div>{isComponent6Visible && <Referral />}</div>
+            {/* <div>{isComponent6Visible && <Referral />}</div> */}
             <div>{isComponent2Visible && <Setup />}</div>
             <div>{isComponent3Visible && <Appearance />}</div>
             <div>{isComponent4Visible && <Security />}</div>

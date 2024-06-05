@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,14 +19,10 @@ const Login = () => {
   const [validCaptcha, setValidCaptcha] = useState(false);
   const [loading, setLoading] = useState(false);
   const [captchaError, setCaptchaError] = useState(false);
-  // useEffect(() => {
-  //   const checkAuth = localStorage.getItem("Token")
-  //   if (checkAuth) {
-  //     router.push("/")
-  //   }
-  // }, [])
   const [loginFields, setLoginFields] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
+
+  //Get Value from Input
   const onChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -43,6 +38,8 @@ const Login = () => {
     email: loginFields?.email,
     password: loginFields?.password,
   };
+
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "email":
@@ -58,11 +55,7 @@ const Login = () => {
       case "password":
         setErrors((prevState) => ({
           ...prevState,
-          password: value
-            ? // ? /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/.test(value)
-              ""
-            : // : "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long"
-              "Password is required",
+          password: value ? "" : "Password is required",
         }));
         break;
 
@@ -70,6 +63,8 @@ const Login = () => {
         break;
     }
   };
+
+  //Login Submit
   const handleSubmit = async () => {
     if (!validCaptcha) {
       setCaptchaError(true);
@@ -103,6 +98,8 @@ const Login = () => {
         console.log("err --->", err);
       });
   };
+
+  //To see Password
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   // console.log("🚀 ~ Login ~ isPasswordVisible:", isPasswordVisible);
 
@@ -110,6 +107,7 @@ const Login = () => {
     setIsPasswordVisible((prevState) => !prevState);
   }
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -180,9 +178,7 @@ const Login = () => {
           <div className="text-red-500">Please complete the captcha.</div>
         )}
         <ReCAPTCHA
-          // sitekey="6LcxWE4pAAAAADTuZPl7FRbwvRiUQ8cndvvTZsNW"
           sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
-          // onChange={(value) => setValidCaptcha(value)}
           onChange={(value) => {
             setValidCaptcha(value);
             setCaptchaError(false);
@@ -191,20 +187,35 @@ const Login = () => {
         />
 
         <div className="flex justify-center mt-10">
-          <button
-            className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
-            onClick={handleSubmit}
-            disabled={!validCaptcha}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSubmit();
-                setCreateFolder(false);
-              }
-            }}
-          >
-            {/* Login */}
-            {loading ? <span className="loader"></span> : "Login"}
-          </button>
+          {loading ? (
+            <button
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
+              onClick={handleSubmit}
+              disabled={!validCaptcha}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                  setCreateFolder(false);
+                }
+              }}
+            >
+              <span className="loader "></span>
+            </button>
+          ) : (
+            <button
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
+              onClick={handleSubmit}
+              disabled={!validCaptcha}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                  setCreateFolder(false);
+                }
+              }}
+            >
+              Login
+            </button>
+          )}
           <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">

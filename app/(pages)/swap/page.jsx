@@ -1,7 +1,5 @@
 "use client";
 import TokenList from "../../components/ShowTokenSwap/TokensList";
-
-import TokenSellList from "../../components/ShowTokenSell/TokenSellList";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
@@ -13,13 +11,8 @@ import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
-import USD from "../../../public/assets/tokenimg/USD.png";
-import SHU from "../../../public/assets/tokenimg/SHU.png";
-import tether from "../../../public/assets/tokenimg/tether.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
-import wrapped from "../../../public/assets/tokenimg/wrapped.png";
-import chainlink from "../../../public/assets/tokenimg/chainlink.png";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
 import { IoSwapVerticalOutline } from "react-icons/io5";
@@ -30,7 +23,6 @@ import qs from "qs";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FiRefreshCcw } from "react-icons/fi";
 import { FaBars } from "react-icons/fa6";
 
 const Swap = () => {
@@ -44,9 +36,7 @@ const Swap = () => {
   const [balancePopup, setBalancePopup] = useState(false);
   const [selectedChainId, setSelectedChainId] = useState("");
   const [SelectedDescode, setSelectedDescode] = useState("");
-  // const [ Selectedchainname,setSelectedchainname] = useState("");
   const [walletAddressbuysell, setwalletAddressbuysell] = useState("");
-  const [refresh, setRefresh] = useState(false);
   const [clickedTokens, setClickedTokens] = useState("");
   const [showPopup1, setShowPopup1] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -54,6 +44,8 @@ const Swap = () => {
   const [showBalance, setShowBalance] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [selectChain, setSelectChain] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedTokenDatato, setSelectedTokenDatato] = useState({
     name_to: "",
     image_to: "",
@@ -71,7 +63,8 @@ const Swap = () => {
     descode: "",
     chainname: "",
   });
-  console.log("selectedTokenDatato---", selectedTokenDatato);
+  // console.log("selectedTokenDatato---",selectedTokenDatato)
+
   const NetworkData = [
     {
       name: "Ethereum",
@@ -145,7 +138,6 @@ const Swap = () => {
     },
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const token_data_ETH = [
     {
       name: "BNB",
@@ -167,7 +159,6 @@ const Swap = () => {
     },
   ];
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const token_data_ARB = [
     {
       name: "ChainLink Token",
@@ -299,6 +290,7 @@ const Swap = () => {
     },
   ];
 
+  //for nwtwork select and bydefaultm evm network select
   useEffect(() => {
     const ethereumNetwork = NetworkData.find(
       (network) => network.name === "Ethereum"
@@ -309,6 +301,7 @@ const Swap = () => {
   }, []);
   const [selectedSymbol, setSelectedSymbol] = useState("");
 
+  //for active button click sell,buy and swap
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName); // Update the active button
     setSelectedTokenDatato({
@@ -329,6 +322,8 @@ const Swap = () => {
       chainname: "",
     });
   };
+
+  //for select token value info.
   const selectToken = (token, networkData, e) => {
     if (selectedtofrom === 1) {
       setSelectedTokenDatato({
@@ -373,6 +368,7 @@ const Swap = () => {
     setShowPopup(false);
   };
 
+  //for swap amount and token value to to from || from to to value
   const handleSwapTokens = () => {
     setSelectedTokenDatato({
       ...selectedTokenDatato,
@@ -388,23 +384,22 @@ const Swap = () => {
       address_from: selectedTokenDatato?.address_to,
     });
   };
-  // useEffect(() => {
 
-  //   setActiveButton('Swap');
-  // }, []);
+  //for token select in dropdown after show popup
   const tokenpopup = (e) => {
     setShowPopup(true);
     setSelectedtofrom(e);
     setSearchTerm("");
   };
-  const [showDropdown, setShowDropdown] = useState(false);
 
+  //for pass value to swap solana submit
   const dataSolana = {
     input: selectedTokenDatato?.address_to,
     output: selectedTokenDatato?.address_from,
     amount: selectedTokenDatato?.input_to,
     email: email,
   };
+  //for pass value to swap evm submit
   const dataEvm = {
     tokenIn: selectedTokenDatato?.address_to,
     tokenOut: selectedTokenDatato?.address_from,
@@ -415,8 +410,8 @@ const Swap = () => {
     desCode: selectedTokenDatato?.descode,
     method: "swap",
   };
-  const [loading, setLoading] = useState(false);
 
+  //for submit swap
   const handleSwapSubmit = async () => {
     setLoading(true);
 
@@ -431,7 +426,7 @@ const Swap = () => {
       .post(endpoint, selectedNetwork === "Solana" ? dataSolana : dataEvm)
       .then(async (res) => {
         const myData = res?.data;
-        console.log("Response from API:", myData);
+        // console.log("Response from API:", myData);
         if (myData?.status) {
           toast.success(myData?.message);
           setTimeout(async () => {
@@ -454,6 +449,7 @@ const Swap = () => {
       });
   };
 
+  //for buy amount convert for both network
   const handleBuyprice = async () => {
     if (
       selectedTokenDatato?.input_to &&
@@ -461,7 +457,7 @@ const Swap = () => {
       selectedTokenDatato?.address_to
     ) {
       const amount = Number(selectedTokenDatato?.input_to);
-      console.log("--------amount", amount);
+      // console.log("--------amount", amount);
 
       try {
         let endpoint;
@@ -494,7 +490,8 @@ const Swap = () => {
           buyAmt = amount * tokensPrice?.token2;
           finalAmt = buyAmt / tokensPrice?.token1;
         }
-        console.log("finalllll--------", finalAmt);
+        // console.log("finalllll--------",finalAmt)
+
         return finalAmt?.toFixed(4);
         // if (finalAmt) {
         //   setSelectedTokenDatato({
@@ -509,15 +506,7 @@ const Swap = () => {
     }
   };
 
-  // const dataSolana = {
-  //   input: selectedTokenDatato?.address_to,
-  //   output: selectedTokenDatato?.address_from,
-  //   amount: selectedTokenDatato?.input_to,
-  //   email: email,
-  // };
-
-  const dataEvmBuy = {};
-  // console.log( walletAddressbuysell,"address_from-------")
+  //for buy submit for both network
   const handleBuySubmit = async () => {
     setLoading(true);
     handleBuyprice()
@@ -581,6 +570,7 @@ const Swap = () => {
       });
   };
 
+  //for pass value to sell evm submit
   const dataEvmSell = {
     tokenIn: selectedTokenDatato?.address_to,
     tokenOut: walletAddressbuysell,
@@ -591,8 +581,8 @@ const Swap = () => {
     desCode: SelectedDescode,
     method: "sell",
   };
-  console.log("🚀 ~ Swap ~ dataEvmSell:", dataEvmSell);
 
+  //for pass value to sell solana submit
   const dataSolanaSell = {
     input: selectedTokenDatato?.address_to,
     output: walletAddressbuysell,
@@ -601,9 +591,9 @@ const Swap = () => {
     method: "sell",
   };
 
+  //for sell submit
   const handleSellSubmit = async () => {
     setLoading(true);
-
     let endpoint;
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
@@ -641,6 +631,7 @@ const Swap = () => {
       });
   };
 
+  //amount convert evm from ox.arg
   //   const getPrice = async () => {
   //     if (
   //       selectedTokenDatato?.input_to &&
@@ -688,7 +679,8 @@ const Swap = () => {
   //       }
   //     }
   //   };
-  //api
+
+  //evmamount convert from backend api
   const getPrice = async () => {
     if (
       selectedTokenDatato?.input_to &&
@@ -710,7 +702,7 @@ const Swap = () => {
         const tokensPrice = tokenRes?.data?.finalRes;
         const buyAmt = amount * tokensPrice?.token2;
         const finalAmt = buyAmt / tokensPrice?.token1;
-        console.log("finalllll--------", finalAmt);
+        // console.log("finalllll--------",finalAmt)
         if (finalAmt) {
           setSelectedTokenDatato({
             ...selectedTokenDatato,
@@ -724,6 +716,7 @@ const Swap = () => {
     }
   };
 
+  //solana amount convert from backend api
   const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
@@ -733,6 +726,8 @@ const Swap = () => {
         }
       );
       const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+
       console.log("fetchSolanabalance-------------------------->", balanceData);
 
       const imageRes = await axios.get("https://token.jup.ag/strict");
@@ -746,6 +741,16 @@ const Swap = () => {
           ...token,
           logo: tokenImage ? tokenImage.logoURI : null,
         };
+      });
+
+      mergedData.unshift({
+        mint: "SOL", // Assuming SOL is the native token symbol
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+
+        // Add more properties if needed
       });
 
       setShowBalance(mergedData);
@@ -765,15 +770,9 @@ const Swap = () => {
       };
       try {
         const res = await axiosInstance.post("/fetchbalance", myDatawallet);
-        console.log(
-          "-------------------------------- fetch balance api called=-------------------------------------------"
-        );
 
         const myData = res?.data?.data;
-        console.log(
-          "fetchbalance--------------------------------------------------------------------------------->",
-          myData
-        );
+        // console.log( "fetchbalance------------------->", myData );
         setShowBalance(myData);
       } catch (err) {
         console.log("error--->", err);
@@ -784,14 +783,18 @@ const Swap = () => {
     }
   };
 
+  //for dropdown close and open
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
+  //for take input value
   const handleInputChange = (e) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
+
+  //amountconvert for both network
   //   async function solanaTokenSwapPrice() {
   //     const tokenRes = await axios({
   //       method: "post",
@@ -830,6 +833,7 @@ const Swap = () => {
     getPrice();
   }, [selectedTokenDatato?.address_from]);
 
+  //
   //    async function getToQty() {
   //     if (selectedNetwork == "Solana") {
   //       if (
@@ -871,6 +875,8 @@ const Swap = () => {
   //       }
   //     }
   //   }
+
+  //for take input and merge value
   const handleInputChanges = async (e) => {
     const { name, value } = e.target;
     if (!value || value == 0) {
@@ -887,6 +893,7 @@ const Swap = () => {
     }
   };
 
+  //for network select and networkdata array and other select value
   const handleOptionClick = (name) => {
     const selectedNetworkData = NetworkData.find(
       (network) => network.name === name
@@ -901,6 +908,7 @@ const Swap = () => {
     }
   };
 
+  //Close popup when click outside of it
   const popupRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -908,9 +916,7 @@ const Swap = () => {
         setShowPopup(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -918,6 +924,7 @@ const Swap = () => {
 
   const [tokens, setTokens] = useState([]);
 
+  //for solana image
   useEffect(() => {
     if (selectedNetwork == "Solana") {
       getSolanaBalance();
@@ -934,6 +941,7 @@ const Swap = () => {
     }
   }, [selectedNetwork]);
 
+  //for statice all array merge in 1 state
   const [tokenData, setTokenData] = useState({
     Ethereum: token_data_ETH,
     Solana: [],
@@ -948,6 +956,8 @@ const Swap = () => {
       Solana: tokens,
     }));
   }, [tokens]);
+
+  //Close showpopup1 token select second in dropdown when click outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -966,8 +976,8 @@ const Swap = () => {
     };
   }, [showPopup1]);
 
+  //Close DropDown when click outside of it
   const dropdownRef = useRef(null);
-
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
@@ -1154,8 +1164,7 @@ const Swap = () => {
                       </div>
                     </div>
                   </div>
-                  {/* {activeButton === 'Swap' && (
-                    <> */}
+
                   <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                     <div className="text-gray-300">
                       <p>You pay</p>
@@ -1171,7 +1180,7 @@ const Swap = () => {
                           onChange={(e) => handleInputChanges(e)}
                         />
                       </div>
-                      {/*{swap 1}*/}
+
                       <div
                         className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full "
                         onClick={() => tokenpopup(1)}
@@ -1279,7 +1288,6 @@ const Swap = () => {
                       }}
                       disabled={loading}
                     >
-                      {/* Swap */}
                       {loading ? (
                         <span className="loader "></span>
                       ) : (
@@ -1287,64 +1295,12 @@ const Swap = () => {
                       )}
                     </button>
                   </div>
-
-                  {/* </>
-                      )} */}
-                  {/* {(activeButton === 'Buy' || activeButton === 'Sell') && (
-                    <>
-                      <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
-                        <div className="text-gray-300">
-                          <p>You pay</p>
-                        </div>
-                        <div className="flex justify-between py-2">
-                          <div className="space-y-2">
-                            <input
-                              type="number"
-                              className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl"
-                              placeholder="0"
-                              name="input_to"
-                              value={selectedTokenDatato?.input_to}
-                              onChange={(e) => handleInputChanges(e)}
-                            />
-                          </div>
-                          <div
-                            className="bg-gray-600 bg-opacity-50 cursor-pointer flex justify-center items-center px-2 py-1 gap-2 rounded-full"
-                            onClick={() => tokenpopup(1)}
-                          >
-                            <div>
-                              {selectedTokenDatato?.image_to ? (
-                                <img src={selectedTokenDatato?.image_to} height={30} width={30} alt="logo" className="rounded-full" />
-                              ) : null}
-                            </div>
-                            <div>
-                              {selectedTokenDatato?.name_to ? selectedTokenDatato?.name_to.toUpperCase() : 'Token'}
-                            </div>
-                            <div>
-                              <MdKeyboardArrowDown size={20} />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-full">
-                         <button
-                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={() => {
-                        handleSwapSubmit();
-                      }}
-                      disabled={loading}
-                    >
-                    
-                      {loading ? <span className="loader "></span> :   activeButton}
-                    </button>
-                      </div>
-                    </>
-                  )} */}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* {showPopup && ( */}
+
         <div
           className={`${
             showPopup ? "scale-[1]" : "scale-0"
@@ -1468,4 +1424,5 @@ const Swap = () => {
     </>
   );
 };
+
 export default Swap;

@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 const PasswordVerify = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showResendButton, setShowResendButton] = useState(false);
   const [remainingTime, setRemainingTime] = useState(10);
   const timer1 = setTimeout(() => {
@@ -34,20 +35,22 @@ const PasswordVerify = () => {
     }
   }, []);
 
+  //OTP Change
   const handleOtpChange = (value) => {
     const sanitizedValue = value.replace(/\D/g, "");
     setOtp(sanitizedValue);
   };
 
+  //Pass data to backend for Verification
   const mydata = {
     email: email,
     otp: otp,
     types,
   };
-  // const redirect=()=>{
-  //   router.push("/login");
-  // }
+
+  //Submit
   const handleSubmit = async () => {
+    setLoading(true);
     await axiosInstance
       .post("verify", mydata)
       .then((res) => {
@@ -63,29 +66,28 @@ const PasswordVerify = () => {
             router.push("/resetpassword");
           }
 
-          // if (myData?.data === "changepassword") {
-          //   router.push("/profile");
-          // }
-  
           localStorage.removeItem("type");
           toast.success(myData?.msg);
         } else {
+          setLoading(false);
           toast.error(myData?.msg);
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("error--->", err);
       });
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
     }
   };
 
+  //send OTP  For Verification
   const [resendStatus, setResendStatus] = useState(false);
-
   const resendOtp = async () => {
     try {
       const res = await axiosInstance.post("/resendotp", {
@@ -138,10 +140,24 @@ const PasswordVerify = () => {
               />
             </div>
 
-            <div className="flex justify-center mt-10" onClick={handleSubmit}>
-              <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
-                Verify
-              </button>
+            <div className="flex justify-center mt-10">
+              {loading ? (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+                >
+                  <span className="loader "></span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+                >
+                  Verify
+                </button>
+              )}
               <ToastContainer />
             </div>
 

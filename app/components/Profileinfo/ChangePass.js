@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import { useWallet } from "../contexts/WalletContext";
-
 import OtpInput from "react-otp-input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+
 const ChangePass = () => {
   const { setWalletAddress, setEmail } = useWallet();
   const router = useRouter();
@@ -22,14 +21,17 @@ const ChangePass = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  //To see Current Password
   const toggleCurrentPasswordVisibility = () => {
     setShowCurrentPassword(!showCurrentPassword);
   };
 
+  //To see New Password
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
   };
 
+  //To see Confirm Password
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
@@ -39,6 +41,7 @@ const ChangePass = () => {
     confirmpassword: "",
   });
 
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "currentpassword":
@@ -72,9 +75,7 @@ const ChangePass = () => {
     }
   };
 
-  // const mydata = {
-  //   email: changePassData?.email,
-  // };
+  //Get Value from Input
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setChangePassData({
@@ -90,6 +91,8 @@ const ChangePass = () => {
     newPassword: changePassData?.newpassword,
     confirmNewPassword: changePassData?.confirmpassword,
   };
+
+  //Submit
   const handleSubmit = async () => {
     validateInput("currentpassword", changePassData.currentpassword);
     validateInput("newpassword", changePassData.newpassword);
@@ -147,19 +150,20 @@ const ChangePass = () => {
     }
   }, []);
 
+  //OTP Change
   const handleOtpChange = (value) => {
     const sanitizedValue = value.replace(/\D/g, "");
     setOtp(sanitizedValue);
   };
 
+  //Pass data to backend for Change password
   const mydata = {
     email: email,
     otp: otp,
     types,
   };
-  // const redirect=()=>{
-  //   router.push("/login");
-  // }
+
+  //handle OTP
   const handleOtp = async (e) => {
     e.preventDefault();
     await axiosInstance
@@ -183,8 +187,8 @@ const ChangePass = () => {
       });
   };
 
+  //send OTP  For Verification
   const [resendStatus, setResendStatus] = useState(false);
-
   const resendOtp = async () => {
     try {
       const res = await axiosInstance.post("/resendotp", {
@@ -204,6 +208,7 @@ const ChangePass = () => {
     }
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -212,11 +217,8 @@ const ChangePass = () => {
 
   return (
     <>
-      {/* <div className=" justify-center items-center h-screen"> */}
       {!verified ? (
-        //  <div className="w-full h-full flex flex-col items-center justify-center ">
         <div className=" bg-[#1C1C1C] shadow-2xl mt-8 rounded-lg p-12 pl-16 ">
-          {/* <div className="px-0 sm:px-5 md:px-10 bg-black shadow-xl py-8 sm:py-8 md:py-8 lg:py-10 2xl:py-14 w-[70%] sm:w-[70%] md:w-[40%] lg:w-[40%] 2xl:w-[30%] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12"> */}
           <div>
             <h2 className="text-lg sm:text-lg md:text-xl lg:text-2xl 2xl:text-3xl tracking-wide text-white mb-3 sm:mb-3 md:mb-4 lg:mb-5 2xl:mb-5 font-semibold text-center">
               OTP Verification
@@ -378,7 +380,6 @@ const ChangePass = () => {
           </div>
         </div>
       )}
-      {/* </div> */}
     </>
   );
 };

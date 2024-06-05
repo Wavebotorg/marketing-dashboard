@@ -15,12 +15,14 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
     setCurrentPage(page);
   };
 
+  //For Format Date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleDateString();
     return `${formattedDate}`;
   };
 
+  //For Search
   const filteredData = data?.filter(
     (item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -45,6 +47,7 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
         <div className="rounded-lg mb-10">
           <h1 className="text-center text-3xl mb-3">{`Level ${level}`}</h1>
           <div className="bg-[#1C1C1C] table-container text-white h-auto overflow-auto rounded-lg">
+            {/* for 2xl ,xl and lg size  */}
             <table className="w-full">
               <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
                 <tr
@@ -114,6 +117,7 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
           currentPage={currentPage}
         />
       )}
+      {/* for md and sm size */}
       <h1 className="text-center text-3xl mb-3 mt-5 lg:hidden block">{`Level ${level}`}</h1>
       {paginatedData?.length > 0 ? (
         paginatedData.map((d, index) => (
@@ -136,18 +140,17 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
                         {d?.email}
                       </div>
                     </div>
-             
 
-                      {level > 1 && (
-                    <div className="border-b border-[#494949] flex justify-between">
-                      <div className="py-2  pl-4 font-semibold">
-                        Referral BY
-                      </div>
+                    {level > 1 && (
+                      <div className="border-b border-[#494949] flex justify-between">
+                        <div className="py-2  pl-4 font-semibold">
+                          Referral BY
+                        </div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {refData[startIndex + index]}
                         </div>
-                    </div>
-                      )}
+                      </div>
+                    )}
                     <div className=" flex justify-between">
                       <div className="py-2  pl-4 font-semibold">
                         Joining Date
@@ -187,6 +190,7 @@ const Referral = () => {
 
   const [loading, setLoading] = useState(true);
 
+  //Api for Fetch Data
   useEffect(() => {
     const fetchUserReferals = async () => {
       setLoading(true);
@@ -227,7 +231,7 @@ const Referral = () => {
         <div className="font-medium mb-4 text-3xl text-[#1788FB]">
           <p>Referral </p>
         </div>
-
+        {/* pass this Ref. table to above ReferralTable to set Data in Table  */}
         <div className="">
           <ReferralTable
             level={1}

@@ -3,13 +3,11 @@ import React, { useState } from "react";
 import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
-import { FaRegEyeSlash } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
-import Arror from "../../../public/assets/Vector.png";
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -27,14 +25,18 @@ const ResetPassword = () => {
     newPassword: "",
     confirmPassword: "",
   });
+
+  //To see Password
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword(!showNewPassword);
   };
 
+  //To see ConfirmPassword
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  //Get Value from Input
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setResetPassData({
@@ -44,11 +46,14 @@ const ResetPassword = () => {
     validateInput(name, value);
   };
 
+  //Pass data to backend for Reset password
   const mydata = {
     newPassword: resetPassData?.newPassword,
     confirmPassword: resetPassData?.confirmPassword,
     email: email,
   };
+
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "newPassword":
@@ -75,6 +80,8 @@ const ResetPassword = () => {
         break;
     }
   };
+
+  //While Submit show error according to  Details
   const handleSubmit = async () => {
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
     if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
@@ -120,9 +127,6 @@ const ResetPassword = () => {
       </div>
 
       <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-        {/* <Link href="">
-          <Image src={Arror} className="-ml-9 -mt-9" />
-        </Link> */}
         <h2 className="text-xl  sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Reset Password
         </h2>
