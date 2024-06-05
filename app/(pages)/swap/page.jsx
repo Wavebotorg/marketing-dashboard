@@ -646,9 +646,9 @@ const Swap = () => {
           selectedTokenDatato?.address_to
         ) {
           const amount =
-            Number(selectedTokenDatato?.input_to) *
-            10 ** selectedTokenDatato?.decimals_to;
-          console.log("--------amount", amount);
+            Number(selectedTokenDatato?.input_to) 
+          //   10 ** selectedTokenDatato?.decimals_to;
+          // console.log("--------amount", amount);
      try{
       const tokenRes = 
       await axiosInstance.post(
