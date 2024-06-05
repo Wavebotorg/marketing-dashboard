@@ -163,7 +163,7 @@ const TransferToken = () => {
     chainId: selectedTokenDatato?.chainname,
     desCode: selectedTokenDatato?.descode,
   };
-  const [loading, setLoading] = useState(false);
+
 
   const handleTransferSubmit = async (networkName) => {
     console.log("dadadad3333");
@@ -199,6 +199,54 @@ const TransferToken = () => {
         "------------------------------------------------------LOG",
         response
       );
+    } catch (error) {
+      console.error("There was a problem with the API call:", error);
+      toast.error("An error occurred while processing your request");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  const handleEvmTransfer = async (networkName) => {
+    // console.log("dadadad3333");
+    setLoading(true);
+
+    const data = {
+      email: email,
+      token: selectedTokenDatato?.address_to,
+      toWallet: selectedTokenDatato?.address_from,
+      chain: Number(selectedChainId),
+      amount: Number(selectedTokenDatato?.input_to),
+    };
+    // console.log("dadadad222222");
+
+    try {
+      let response;
+      if (networkName === "Solana") {
+        response = await handleSolanaTransfer(networkName);
+      } else {
+        response = await axiosInstance.post("transferEvmToken", data);
+      }
+
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        setTimeout(async () => {
+          if (selectedNetwork == "Solana") {
+            await getSolanaBalance();
+          } else {
+            await getWalletBalance(selectedNetwork);
+          }
+        }, 3000);
+      } else {
+        toast.error(response?.data?.message);
+      }
+
+      // console.log(
+      //   "------------------------------------------------------LOG",
+      //   response
+      // );
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
@@ -311,7 +359,7 @@ const TransferToken = () => {
     };
   }, []);
 
-  const [tokens, setTokens] = useState([]);
+
 
   useEffect(() => {
     if (selectedNetwork == "Solana") {
@@ -542,8 +590,8 @@ const TransferToken = () => {
                     <div className="text-gray-300 flex items-center gap-3">
                       <p>Wallet Address</p>
                     </div>
-                    <div className="flex justify-between py-2">
-                      <div className="space-y-2">
+                    <div className="flex ">
+                      <div className="space-y-2 w-full">
                         <input
                           type="text"
                           className="border-none bg-transparent w-32 md:w-auto overflow-hidden outline-none text-2xl placeholder:text-[17px]"
@@ -558,15 +606,23 @@ const TransferToken = () => {
                   </div>
 
                   <div className="w-full">
-                    <button
-                      className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
-                      onClick={handleTransferSubmit}
-                      disabled={loading}
-                    >
-                      {/* Swap */}
-
-                      {loading ? <span className="loader "></span> : "Transfer"}
-                    </button>
+                    {loading ? (
+                      <button
+                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                        onClick={handleTransferSubmit}
+                        disabled={loading}
+                      >
+                        <span className="loader "></span>
+                      </button>
+                    ) : (
+                      <button
+                        className={`px-3 py-2 w-full rounded-md text-xl bg-blue-500 flex items-center justify-center`}
+                        onClick={handleTransferSubmit}
+                        disabled={loading}
+                      >
+                        Transfer
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
