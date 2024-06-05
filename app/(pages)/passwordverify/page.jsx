@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 const PasswordVerify = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showResendButton, setShowResendButton] = useState(false);
   const [remainingTime, setRemainingTime] = useState(10);
   const timer1 = setTimeout(() => {
@@ -49,6 +50,7 @@ const PasswordVerify = () => {
 
   //Submit
   const handleSubmit = async () => {
+    setLoading(true);
     await axiosInstance
       .post("verify", mydata)
       .then((res) => {
@@ -67,10 +69,12 @@ const PasswordVerify = () => {
           localStorage.removeItem("type");
           toast.success(myData?.msg);
         } else {
+          setLoading(false);
           toast.error(myData?.msg);
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log("error--->", err);
       });
   };
@@ -136,10 +140,24 @@ const PasswordVerify = () => {
               />
             </div>
 
-            <div className="flex justify-center mt-10" onClick={handleSubmit}>
-              <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded">
-                Verify
-              </button>
+            <div className="flex justify-center mt-10">
+              {loading ? (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+                >
+                  <span className="loader "></span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded"
+                >
+                  Verify
+                </button>
+              )}
               <ToastContainer />
             </div>
 
