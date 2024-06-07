@@ -20,55 +20,45 @@ const truncateEmail = (email) => {
   }
 };
 
-
 const LeaderBoard = () => {
- 
-
   const [selectedLeaderboard, setSelectedLeaderboard] = useState("referral");
-const [refrealList,setRefrealList] = useState([])
-const fetchLeaderboardData = async () => {
-  if (selectedLeaderboard === "referral") {
-    await refrealLeader();
-  } else {
-    await defiLeader();
-  }
-};
- const refrealLeader= async () => {
+  const [refrealList, setRefrealList] = useState([]);
+  const fetchLeaderboardData = async () => {
+    if (selectedLeaderboard === "referral") {
+      await refrealLeader();
+    } else {
+      await defiLeader();
+    }
+  };
+  const refrealLeader = async () => {
     await axiosInstanceAuth
       .get("/leaderBoardList")
       .then((res) => {
         const myData = res?.data?.leaderboard;
-        console.log("🚀 ~ .then ~ myData:", myData)
-        setRefrealList(myData|| []);
-        
+        console.log("🚀 ~ .then ~ myData:", myData);
+        setRefrealList(myData || []);
       })
       .catch((err) => {
         console.log("err --->", err);
       });
   };
-function shortenName(name) {
-  return name.length > 4 ? name.slice(0, 4) + "..." : name;
-}
+  function shortenName(name) {
+    return name.length > 4 ? name.slice(0, 4) + "..." : name;
+  }
 
-
-  
-
-
-  const [defiList,setDefiList] = useState([])
- const defiLeader= async () => {
+  const [defiList, setDefiList] = useState([]);
+  const defiLeader = async () => {
     await axiosInstanceAuth
       .get("/transactionBoardList")
       .then((res) => {
-        const myData = res?.data?.userTransactionCount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
-        console.log("🚀 ~ .then ~ myData:", myData)
-        setDefiList(myData|| []);
-        
+        const myData = res?.data?.userTransactionCount;
+        console.log("🚀 ~ .then ~ myData:", myData);
+        setDefiList(myData || []);
       })
       .catch((err) => {
         console.log("err --->", err);
       });
   };
-
 
   useEffect(() => {
     fetchLeaderboardData();
@@ -100,7 +90,8 @@ function shortenName(name) {
   const endIndex = startIndex + itemsPerPage;
 
   //search
-  const currentLeaderboard = selectedLeaderboard === "referral" ? refrealList : defiList;
+  const currentLeaderboard =
+    selectedLeaderboard === "referral" ? refrealList : defiList;
   const filteredData = currentLeaderboard?.filter(
     (coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -125,13 +116,21 @@ function shortenName(name) {
           </p>
           <div className="flex gap-4 my-4">
             <button
-              className={`px-4 py-2 rounded ${selectedLeaderboard === "referral" ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
+              className={`px-4 py-2 rounded ${
+                selectedLeaderboard === "referral"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-black"
+              }`}
               onClick={() => setSelectedLeaderboard("referral")}
             >
               Referral Leaderboard
             </button>
             <button
-              className={`px-4 py-2 rounded ${selectedLeaderboard === "defi" ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
+              className={`px-4 py-2 rounded ${
+                selectedLeaderboard === "defi"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-black"
+              }`}
               onClick={() => setSelectedLeaderboard("defi")}
             >
               Defi Leaderboard
@@ -140,71 +139,80 @@ function shortenName(name) {
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl ">
-                  {/* for with points and recent join user data show */}
+                {/* for with points and recent join user data show */}
                 <table className="w-full">
                   <thead className="sticky top-0 leader-color shadow-2xl ">
-                    <tr
-                      className="  text-[#CECECE]   bg-[#1C1C1C]  "
-              
-                    >
-                        {selectedLeaderboard === "referral" ? (
-                          <>
-                       
-                      <th
-                        scope="col"
-                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope="col"
-                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                        Invited by
-                      </th>
-                      <th
-                        scope="col"
-                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                        className="px-4 py-3 text-center text-base font-medium   whitespace-nowrap"
-                      >
-                       Referall of leader board
-                      </th>
-                      </>
-                        ): (
-                          <>
-                            <th
-                              scope="col"
-                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
-                            >
-                              Name
-                            </th>
-                            <th
-                              scope="col"
-                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
-                            >
-                              Email
-                            </th>
-                            <th
-                              scope="col"
-                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                              className="px-4 py-3 text-center text-base font-medium whitespace-nowrap"
-                            >
-                              Total Transactions
-                            </th>
-                            <th
-                              scope="col"
-                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
-                            >
-                              Total Transfer Token
-                            </th>
-                          
-                          </>
-                        )}
+                    <tr className="  text-[#CECECE]   bg-[#1C1C1C]  ">
+                      {selectedLeaderboard === "referral" ? (
+                        <>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                          >
+                            Name
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                          >
+                            Invited by
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-4 py-3 text-center text-base font-medium   whitespace-nowrap"
+                          >
+                            Referall of leader board
+                          </th>
+                        </>
+                      ) : (
+                        <>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                          >
+                            Name
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                          >
+                            Email
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-4 py-3 text-center text-base font-medium whitespace-nowrap"
+                          >
+                            Total Transactions
+                          </th>
+                          <th
+                            scope="col"
+                            style={{
+                              backgroundColor: "rgba(23, 136, 251, 0.26)",
+                            }}
+                            className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                          >
+                            Total Transfer Token
+                          </th>
+                        </>
+                      )}
                     </tr>
                   </thead>
 
@@ -212,22 +220,20 @@ function shortenName(name) {
                     {visibleData?.length > 0 ? (
                       visibleData.map((leader, index) => (
                         <tr key={index}>
-                           {selectedLeaderboard === "referral" ? (
-                                <>
-                        
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {leader?.name}
-                          </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {leader?.email}
-                          </td>
-                          <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {leader?.referrals}
-                          </td>
-                          </>
+                          {selectedLeaderboard === "referral" ? (
+                            <>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.name}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.email}
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.referrals}
+                              </td>
+                            </>
                           ) : (
                             <>
-                              
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                                 {leader?.name}
                               </td>
@@ -238,7 +244,8 @@ function shortenName(name) {
                                 {leader?.totalTransaction}
                               </td>
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                                {leader?.totalTransferToken}
+                                {Math.floor(leader?.totalTransferToken)}
+                                {/* {leader?.totalTransferToken.toFixed(2)} */}
                               </td>
                             </>
                           )}
@@ -342,6 +349,5 @@ function shortenName(name) {
       </div>
     </div>
   );
-
-}
+};
 export default LeaderBoard;

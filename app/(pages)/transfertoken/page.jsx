@@ -364,7 +364,7 @@ const TransferToken = () => {
       };
       try {
         const res = await axiosInstance.post("/fetchbalance", myDatawallet);
-        
+
         const myData = res?.data?.data;
         // console.log(
         //   "fetchbalance--------------------------------------------------------------------------------->",
@@ -484,9 +484,9 @@ const TransferToken = () => {
             </button>
           </div>
           <div className="h-[93vh] w-full flex justify-center items-center px-5">
-            <div className="swap flex flex-col items-center justify-between   text-white ">
+            <div className="swap flex flex-col items-center justify-between text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
-                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
+                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3 rounded-lg shadow-lg space-y-2 md:w-full flex-container">
                   <div className="flex justify-between items-center py-2">
                     <div className="flex justify-between gap-5 text-lg mx-1 w-full">
                       <button>Transfer Token</button>
@@ -719,12 +719,11 @@ const TransferToken = () => {
                   showBalance?.map((item, index) => (
                     <div
                       key={index}
-                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                        clickedTokens.includes(item.name)
-                   
-                      }`}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(
+                        item.name
+                      )}`}
                       onClick={() => {
-                       {
+                        {
                           selectToken(item);
                         }
                       }}
