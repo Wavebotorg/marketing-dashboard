@@ -294,7 +294,7 @@ const TransferToken = () => {
   }; */
 
   //For Solana Balance
-  const getSolanaBalance = async () => {
+  /* const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
         "/getSolanaWalletTokenBal",
@@ -309,7 +309,7 @@ const TransferToken = () => {
       const tokenImages = await fetchTokenImages([
         "https://token.jup.ag/strict",
       ]);
-
+ 
       const mergedData = balanceData.map((token) => {
         const tokenImage = tokenImages.find(
           (image) => image.address === token.mint
@@ -349,6 +349,49 @@ const TransferToken = () => {
     } catch (err) {
       console.log("Error fetching token images:", err);
       return [];
+    }
+  };
+ */
+
+  const getSolanaBalance = async () => {
+    try {
+      const balanceRes = await axiosInstanceAuth.post(
+        "/getSolanaWalletTokenBal",
+        {
+          wallet: solanaAddress,
+        }
+      );
+      const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+
+      console.log("fetchSolanabalance-------------------------->", balanceData);
+
+      const imageRes = await axios.get("https://token.jup.ag/strict");
+
+      const tokenImages = imageRes?.data;
+      const mergedData = balanceData.map((token) => {
+        const tokenImage = tokenImages.find(
+          (image) => image.address === token.mint
+        );
+        return {
+          ...token,
+          logo: tokenImage ? tokenImage.logoURI : null,
+        };
+      });
+
+      mergedData.unshift({
+        mint: "SOL", // Assuming SOL is the native token symbol
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+
+        // Add more properties if needed
+      });
+
+      setShowBalance(mergedData);
+    } catch (err) {
+      console.log("error--->", err);
     }
   };
 
