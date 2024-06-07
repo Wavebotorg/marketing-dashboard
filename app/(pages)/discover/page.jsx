@@ -493,7 +493,7 @@ const Discover = () => {
             </div>
           ))}
         </div>
-        <div className="flex justify-between items-center p-4 lg:px-8 md:px-6 mt-4 mb-2">
+        <div className="flex justify-between items-center py-4  mt-4 mb-2">
           <div className="md:text-3xl text-xl font-semibold">
             Daily Movers
             <p className="text-[#7B7B7B] text-sm md:text-lg">

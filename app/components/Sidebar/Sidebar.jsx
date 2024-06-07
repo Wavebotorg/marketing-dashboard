@@ -79,9 +79,9 @@ function Sidebar() {
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
-  const [isHover1, setIsHover1] = useState(null);
+  // const [isHover1, setIsHover1] = useState(null);
   // const [isNavbar, setIsNavbar] = useState(false);
-  const [isNavbar1, setIsNavbar1] = useState(false);
+  // const [isNavbar1, setIsNavbar1] = useState(false);
   const headerdata = [
     {
       id: 1,
@@ -183,35 +183,25 @@ function Sidebar() {
     pathname === "/resetpassword" ||
     pathname === "/sucessreset";
 
- 
+const [  userProfile1,setUserProfile1] = useState([])
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const res = await axiosInstanceAuth.get("/getUserProfile");
+        const myData = res?.data?.data;
+        setUserProfile1(myData);
+        setWalletAddress(myData?.wallet);
+        setSolanaAddress(myData?.solanawallet || "");
+        setEmail(myData?.email);
+        // console.log("User Profile Data:", myData?.solanawallet);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
 
-  //   useEffect(() => {
-
-  //   const token = localStorage.getItem('Token');
-  //   if (token) {
-  //     router.push('/'); // Change '/home' to your actual home page route
-  //   } else {
-  //     router.push('/login'); // Change '/login' to your actual login page route
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   const getUserProfile = async () => {
-  //     try {
-  //       const res = await axiosInstanceAuth.get("/getUserProfile");
-  //       const myData = res?.data?.data;
-  //       setUserProfile(myData);
-  //       setWalletAddress(myData?.wallet);
-  //       setSolanaAddress(myData?.solanawallet || "");
-  //       setEmail(myData?.email);
-  //       // console.log("User Profile Data:", myData?.solanawallet);
-  //     } catch (error) {
-  //       console.error("Error fetching user profile:", error);
-  //     }
-  //   };
-
-  //   getUserProfile();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    getUserProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const getPath = usePathname() || "/default-path";
 
   const [token, setToken] = useState(null);
@@ -354,7 +344,7 @@ function Sidebar() {
                             ? "navHover"
                             : ""
                         } flex md:px-1 lg:px-2 py-2 rounded-lg`}
-                        onClick={() => setIsNavbar1(false)}
+                        onClick={() => setIsNavbar(false)}
                         onMouseEnter={() => HoverStyle(data?.id)}
                         onMouseLeave={() => setIsHover(null)}
                       >
@@ -384,6 +374,29 @@ function Sidebar() {
               <div>
                 {token ? (
                   <div className=" grid place-items-center xl:mb-3 mb-10">
+                     {isNavbar ? (
+                 
+                    <button
+                      onClick={(e) => setConfirmationPopUp(true)}
+                    
+                      className="bg-[#1788FB] w-64 xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
+                    >
+                      <div className="flex items-center gap-1 ">
+                        <FiPower size={18} className="block ml-2" />
+                        {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                        <span className="ml-4 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                          Logout
+                        </span>
+                      </div>
+                    </button> 
+
+
+
+
+
+
+
+                  ) : (
                     <button
                       onClick={(e) => setConfirmationPopUp(true)}
                       // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
@@ -397,6 +410,7 @@ function Sidebar() {
                         </span>
                       </div>
                     </button>
+                  )}
                     {ConfirmationPopUp ? (
                       <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[999999]   ">
@@ -448,7 +462,7 @@ function Sidebar() {
                   </div>
                 ) : (
                   <div className=" grid place-items-center">
-                    <Link href="/login " className="">
+                    <Link href="/login" className="">
                       {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center  px-5 ">
                       <Image
@@ -492,12 +506,12 @@ function Sidebar() {
                       className="text-lg rounded-full profile-bg
                        w-14 h-14 text-center pt-3"
                     >
-                      {capitalizeFirstAndLast(userProfile?.name)}
+                      {capitalizeFirstAndLast(userProfile1?.name || userProfile?.name)}
                     </div>
 
                     <div>
                       <div className="flex  items-center">
-                        <h1>{userProfile?.name}</h1>
+                        <h1>{userProfile1?.name || userProfile?.name  }</h1>
                         <Link href="/profile">
                           <span>
                             <Image
@@ -510,7 +524,7 @@ function Sidebar() {
                           </span>
                         </Link>
                       </div>
-                      <p className="text-xs">Invited by {userProfile?.email}</p>
+                      <p className="text-xs">Invited by {userProfile1?.email || userProfile?.email}</p>
                       <div className="flex mt-2">
                         <Image
                           src={discord}
@@ -539,7 +553,7 @@ function Sidebar() {
                 </div>
 
                 {/* Only show the image on screens smaller than 2xl and xl */}
-                <Link href="/profile">
+                <Link href="/profile" onClick={() => setIsNavbar(false)}>
                   <div
                     className="2xl:hidden xl:hidden flex gap-2 lg:ml-0 ml-3  "
                     style={{ position: "absolute", bottom: "0" }}
@@ -555,12 +569,12 @@ function Sidebar() {
                       className="text-lg rounded-full profile-bg
                        w-14 h-14 text-center pt-3 "
                     >
-                      {capitalizeFirstAndLast(userProfile?.name)}
+                      {capitalizeFirstAndLast(userProfile1?.name || userProfile?.name)}
                     </div>
                     {/* < className="ml-6">  */}
                     <div className={` ${isNavbar ? "" : "hidden "} `}>
-                      <p className="">{userProfile?.name}</p>
-                      <p className="text-xs">{userProfile?.email}</p>
+                      <p className="">{userProfile1?.name || userProfile?.name}</p>
+                      <p className="text-xs">{userProfile1?.email || userProfile?.email}</p>
                     </div>
                   </div>
                 </Link>

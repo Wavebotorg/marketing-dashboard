@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+// import Loader from "react-js-loader";
 import Loader from "react-js-loader";
 
 const ReferralTable = ({ level, data, refData, searchQuery }) => {
@@ -263,13 +264,13 @@ const Referral = () => {
             searchQuery={searchQuery}
           />
         </div>
-        {loading && (
-          <Loader
-            type="spinner-cub"
-            // size={50}
-            // title="Transaction loading"
-          />
-        )}
+        <div>
+          <div className="fixed xl:pl-40 top-0 left-0 w-full h-full flex items-center justify-center">
+            {loading && (
+              <Loader type="spinner-cub" bgColor="#1788FB" size={40} />
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

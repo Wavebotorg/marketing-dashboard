@@ -8,7 +8,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 
-//for show email structure 
+//for show email structure
 const truncateEmail = (email) => {
   if (email.length < 20) {
     // Show full email if length is greater than 50
@@ -46,6 +46,12 @@ const fetchLeaderboardData = async () => {
         console.log("err --->", err);
       });
   };
+function shortenName(name) {
+  return name.length > 4 ? name.slice(0, 4) + "..." : name;
+}
+
+
+  
 
 
   const [defiList,setDefiList] = useState([])
@@ -69,7 +75,6 @@ const fetchLeaderboardData = async () => {
   }, [selectedLeaderboard]);
   const [allRecentUser, setAllRecentUser] = useState([]);
 
-
   // Get All recenet user show
   const getAdmindata = async () => {
     await axiosInstanceAuth
@@ -77,7 +82,6 @@ const fetchLeaderboardData = async () => {
       .then((res) => {
         const myData = res?.data;
         setAllRecentUser(myData?.data || []);
-        
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -263,7 +267,7 @@ const fetchLeaderboardData = async () => {
             currentPage={currentPage}
           />
         </div>
-          {/* for recent join user data show */}
+        {/* for recent join user data show */}
         <div className="">
           <p className="text-[#1788FB]   text-2xl  md:text-3xl font-medium max-w-screen-lg ">
             Recent Joins
@@ -282,32 +286,46 @@ const fetchLeaderboardData = async () => {
                             className="rounded-full"
                           />
                         </div>
-                        <div className="lg:text-base text-[#ffffffe0]  text-sm">
-                          <div className="flex gap-2">
-                            <p>{d?.name}</p>
+                        <div className="lg:text-base text-[#ffffffe0] text-sm">
+                          <div key={index} className="flex gap-2">
+                            {/* Tooltip for Name */}
+                            <div
+                              data-tooltip-id={`tooltip-name-${index}`}
+                              className="flex gap-2"
+                            >
+                              <ReactTooltip
+                                id={`tooltip-name-${index}`}
+                                place="top-end"
+                                effect="solid"
+                                variant="info"
+                              >
+                                <span>{d.name}</span>
+                              </ReactTooltip>
+
+                              {shortenName(d.name)}
+                            </div>
                             <p className="text-[#6B6B6B]">
-                              {formatDistanceToNow(new Date(d?.createdAt), {
+                              {formatDistanceToNow(new Date(d.createdAt), {
                                 addSuffix: true,
                               })}
                             </p>
                           </div>
-                          <div
-                            data-tooltip-id={`tooltip-${index}`}
-                            className=""
-                          >
-                            <p className="text-nowrap ">
-                              Invited by {truncateEmail(d?.email)}
+                          <div>
+                            <p
+                              data-tooltip-id={`tooltip-email-${index}`}
+                              className="text-nowrap"
+                            >
+                              Invited by {truncateEmail(d.email)}
                             </p>
+                            <ReactTooltip
+                              id={`tooltip-email-${index}`}
+                              place="bottom-end"
+                              effect="solid"
+                              variant="info"
+                            >
+                              <span>{d.email}</span>
+                            </ReactTooltip>
                           </div>
-                          <ReactTooltip
-                            id={`tooltip-${index}`}
-                            place="bottom-end"
-                            effect="solid"
-                            variant="info"
-                          >
-                            {/* Display full email in the tooltip */}
-                            <span>{d?.email}</span>
-                          </ReactTooltip>
                         </div>
                       </div>
                     </div>
@@ -324,6 +342,6 @@ const fetchLeaderboardData = async () => {
       </div>
     </div>
   );
-};
 
+}
 export default LeaderBoard;

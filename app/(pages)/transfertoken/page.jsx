@@ -262,6 +262,8 @@ const TransferToken = () => {
         }
       );
       const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+
       console.log("fetchSolanabalance-------------------------->", balanceData);
 
       const tokenImages = await fetchTokenImages([
@@ -277,6 +279,13 @@ const TransferToken = () => {
           ...token,
           logo: tokenImage ? tokenImage.logoURI : null,
         };
+      });
+        mergedData.unshift({
+        mint: "SOL",
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
       });
       setShowBalance(mergedData);
     } catch (err) {
@@ -474,7 +483,7 @@ const TransferToken = () => {
               Show Balance
             </button>
           </div>
-          <div className="h-[94vh] w-full flex justify-center items-center px-5">
+          <div className="h-[93vh] w-full flex justify-center items-center px-5">
             <div className="swap flex flex-col items-center justify-between   text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
                 <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
@@ -681,7 +690,7 @@ const TransferToken = () => {
               showPopup ? "scale-[1]" : "scale-0"
             } fixed duration-300 ease-in-out transition-all`}
           >
-            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl  md:w-[45vh] xsm:w-[19rem] ">
               <div className=" space-y-5">
                 <div className="flex justify-between items-center py-2 ">
                   <div className="text-xl">Select Token</div>

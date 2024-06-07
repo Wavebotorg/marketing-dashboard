@@ -9,7 +9,6 @@ import Market from "./(pages)/market/page";
 import Login from "../app/(pages)/login/page";
 import { useRouter } from "next/navigation";
 const Page = () => {
-
   const userData = [
     {
       userId: "95968227",
@@ -29,10 +28,8 @@ const Page = () => {
   };
 
   return (
-
     <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
       <div className="text-white flex flex-col xl:justify-center     xl:ml-32 xl:mr-[90px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
-      
         <div className="mx-3  md:flex gap-5 ">
           <div className="flex items-center mb-5 md:mb-0">
             <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
@@ -72,7 +69,7 @@ const Page = () => {
                         )}
                       </td>
                       <td data-title="VIP Level" className="flex items-center ">
-                        <span className="">
+                        <span className="ml-4">
                           {items?.vipLevel}
 
                           <button className=" text-xl  text-[#828282] align-middle  pb-0.6 ">
@@ -80,7 +77,7 @@ const Page = () => {
                           </button>
                         </span>
                       </td>
-                    
+
                       <td data-title="User Type" className=" ">
                         {items?.userType}
                       </td>

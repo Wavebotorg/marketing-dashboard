@@ -448,14 +448,25 @@ const SwapHistory = () => {
                   <div className="">
                     <>
                       <div className=" border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">From</div>
+                        <div className="py-2  pl-4 font-semibold">
+                          {" "}
+                          {activeButton === "Transfer" ? "Token" : "From"}
+                        </div>
 
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                          {formatTransactionID(d?.from)}
+                          {activeButton === "Transfer"
+                            ? formatTransactionID(d?.token)
+                            : formatTransactionID(d?.from)}
                           <button
                             className="text-xl text-[#828282] align-middle pb-1.5"
                             onClick={() =>
-                              copyToClipboard(d?.from, "from", d?._id)
+                              copyToClipboard(
+                                activeButton === "Transfer"
+                                  ? d?.token
+                                  : d?.from,
+                                "from",
+                                d?._id
+                              )
                             }
                           >
                             <MdOutlineContentCopy
@@ -471,13 +482,26 @@ const SwapHistory = () => {
                         </div>
                       </div>
                       <div className=" flex border-b border-[#494949] justify-between">
-                        <div className="py-2  pl-4 font-semibold">To</div>
+                        <div className="py-2  pl-4 font-semibold">
+                          {" "}
+                          {activeButton === "Transfer" ? "ToWallet" : "To"}
+                        </div>
 
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                          {formatTransactionID(d?.to)}
+                          {activeButton === "Transfer"
+                            ? formatTransactionID(d?.toWallet)
+                            : formatTransactionID(d?.to)}
                           <button
                             className="text-xl text-[#828282] align-middle pb-1.5"
-                            onClick={() => copyToClipboard(d?.to, "to", d?._id)}
+                            onClick={() =>
+                              copyToClipboard(
+                                activeButton === "Transfer"
+                                  ? d?.toWallet
+                                  : d?.to,
+                                "to",
+                                d?._id
+                              )
+                            }
                           >
                             <MdOutlineContentCopy
                               size={12}
@@ -507,12 +531,14 @@ const SwapHistory = () => {
                         </div>
                         <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
                           {" "}
-                          {formatTransactionID(d?.txid)}
+                          {activeButton === "Transfer"
+                            ? formatTransactionID(d?.tx)
+                            : formatTransactionID(d?.txid)}
                           <button
                             className="text-xl text-[#828282] align-middle pb-1.5"
                             onClick={() =>
                               copyToClipboard(
-                                d?.txid,
+                                activeButton === "Transfer" ? d?.tx : d?.txid,
                                 "Transaction Hash",
                                 d?._id
                               )
