@@ -33,5 +33,5 @@ export function middleware(request) {
   }
 }
 export const config = {
-  matcher: ["/login", "/","/resetpassword"],
+  matcher: ["/login", "/","/resetpassword","/forgotpassword"],
 };

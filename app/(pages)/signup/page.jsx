@@ -4,13 +4,13 @@ import Logo from "../../../public/assets/loginpopuplogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
 import axiosInstance from "../../apiInstances/axiosInstance";
 import { FaEye } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Cookies from "js-cookie";
 const Signup = () => {
   const router = useRouter();
 
@@ -22,6 +22,7 @@ const Signup = () => {
     refferal: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({
@@ -31,12 +32,14 @@ const Signup = () => {
     confirmPassword: "",
   });
 
+  //Get Value from Input
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setSignupData({ ...signupdata, [name]: value });
     validateInput(name, value);
   };
 
+  //Show Error When Value not Fill According to Given Details
   const validateInput = (name, value) => {
     switch (name) {
       case "name":
@@ -80,26 +83,26 @@ const Signup = () => {
     }
   };
 
+  //To see Password
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  //To see ConfirmPassword
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  //While Submit if any field is left the show error according to  Details
   const handleSubmit = async () => {
+    setLoading(true);
+
     const { name, email, password, confirmPassword } = signupdata;
 
     if (!name || !email || !password || !confirmPassword) {
       toast.error("Please fill in all fields");
       return;
     }
-
-    // if (Object.values(errors).some((error) => error !== "")) {
-    //   toast.error("Please fix validation errors");
-    //   return;
-    // }
 
     try {
       const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
@@ -111,22 +114,27 @@ const Signup = () => {
       }
 
       const response = await axiosInstance.post("signup", signupdata);
-      // console.log(response, "-----------response");
+      console.log(response, "-----------response");
       const myData = response.data;
       localStorage.setItem("userEmail", myData?.data?.email || "");
       localStorage.setItem("type", "signup");
-      // console.log(myData, "----------- myData");
+      console.log(myData, "----------- myData");
       if (response?.data?.status) {
         localStorage.setItem("Token", myData?.token);
+        Cookies.set("auth-token", myData?.token);
         toast.success(response?.data?.msg);
         router.push("/passwordverify");
       } else {
+        setLoading(false);
         toast.error(response?.data?.msg);
       }
     } catch (error) {
+      setLoading(false);
       console.error("Error:", error);
     }
   };
+
+  //Prevent Number to enter only Alphabets can enter
   const handleKeyPress1 = (event) => {
     const char = String.fromCharCode(event.charCode); // Get the typed character
     const regex = /^[a-zA-Z0-9]+$/; // Allow only alphanumeric characters
@@ -135,6 +143,7 @@ const Signup = () => {
     }
   };
 
+  //Press Enter Key to submit
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSubmit();
@@ -166,7 +175,7 @@ const Signup = () => {
             onChange={onChangeInput}
             maxLength={15}
             minLength={5}
-            placeholder="Your Enter Name"
+            placeholder=" Enter Name"
             onKeyPress={handleKeyPress1}
           />
           {errors.name && (
@@ -180,7 +189,7 @@ const Signup = () => {
             type="email"
             name="email"
             value={signupdata.email}
-            placeholder="Your Enter Email"
+            placeholder=" Enter Email"
             onChange={onChangeInput}
           />
           {errors.email && (
@@ -193,7 +202,7 @@ const Signup = () => {
             className="rounded-md w-full  sm:w-[310px] placeholder:text-[12px] placeholder:font-normal md:w-[360px] lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800 "
             type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="Your Enter Password"
+            placeholder=" Enter Password"
             value={signupdata.password}
             onChange={onChangeInput}
           />
@@ -215,7 +224,7 @@ const Signup = () => {
             className="rounded-md w-full  sm:w-[310px] md:w-[360px] placeholder:text-[12px] placeholder:font-normal lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
             type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
-            placeholder="Your Enter Password"
+            placeholder=" Enter Password"
             value={signupdata.confirmPassword}
             onChange={onChangeInput}
           />
@@ -232,21 +241,35 @@ const Signup = () => {
           )}
         </div>
         <div>
-          <div className="text-[#CACACA] my-2"> Refferal Code(Optional)</div>
+          <div className="text-[#CACACA] my-2"> Referral Code(Optional)</div>
           <input
             className="rounded-md w-full  sm:w-[310px] md:w-[360px] placeholder:text-[12px] placeholder:font-normal lg:w-[410px] xl:w-[450px] 2xl:w-[450px] p-2 pl-2 pr-10 bg-neutral-800"
             type="text"
             name="refferal"
-            placeholder="Your Enter Password"
+            placeholder=" Enter Referral Code"
             value={signupdata.refferal}
             onChange={onChangeInput}
           />
         </div>
 
-        <div className="flex justify-center mt-10" onClick={handleSubmit}>
-          <button className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]">
-            Sign Up
-          </button>
+        <div className="flex justify-center mt-10">
+          {loading ? (
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
+            >
+              <span className="loader "></span>
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
+            >
+              Sign Up
+            </button>
+          )}
           <ToastContainer />
         </div>
         <div className="flex justify-center mt-10">

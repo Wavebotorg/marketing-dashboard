@@ -334,6 +334,12 @@ body {
   border-top-right-radius: 0.75rem;
 }
 
+.profile-bg{
+  background: 
+    
+    rgba(23, 136, 251, 0.26) 100%
+
+}
 .table-container {
   max-height: 400px; /* Set the maximum height of the table container */
   overflow-y: auto; /* Enable vertical scroll for tbody */

@@ -9,7 +9,7 @@ export const WalletProvider = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState(null);
   const [email, setEmail] = useState(null);
   const [isNavbar, setIsNavbar] = useState(false);
-
+  const [userProfile, setUserProfile] = useState([]);
   // console.log("🚀 ~ WalletProvider ~ email:", email)
   const [solanaAddress, setSolanaAddress] = useState(null);
   return (
@@ -23,6 +23,8 @@ export const WalletProvider = ({ children }) => {
         setSolanaAddress,
         isNavbar,
         setIsNavbar,
+        userProfile,
+        setUserProfile
       }}
     >
       {children}

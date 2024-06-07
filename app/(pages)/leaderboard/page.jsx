@@ -20,78 +20,53 @@ const truncateEmail = (email) => {
   }
 };
 
+
 const LeaderBoard = () => {
-  const students = [
-    {
-      Rank: "1",
-      name: "rahul",
-      email: "rahul@gmail.com",
-      points: "254,466,796",
-    },
-    {
-      Rank: "2",
-      name: "nikhil",
-      email: "nikhil@gmail.com",
-      points: "724,466,796",
-    },
-    {
-      Rank: "3",
-      name: "pari",
-      email: "pari@gmail.com",
-      points: "824,466,796",
-    },
-    {
-      Rank: "4",
-      name: "parth",
-      email: "parth@gmail.com",
-      points: "324,466,796",
-    },
-    {
-      Rank: "5",
-      name: "pintu",
-      email: "pintu@gmail.com",
-      points: "924,466,796",
-    },
-    {
-      Rank: "6",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "7",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "8",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "9",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "10",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
-    {
-      Rank: "11",
-      name: "sanket",
-      email: "sanket@gmail.com",
-      points: "224,466,796",
-    },
+ 
 
-  
-  ];
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState("referral");
+const [refrealList,setRefrealList] = useState([])
+const fetchLeaderboardData = async () => {
+  if (selectedLeaderboard === "referral") {
+    await refrealLeader();
+  } else {
+    await defiLeader();
+  }
+};
+ const refrealLeader= async () => {
+    await axiosInstanceAuth
+      .get("/leaderBoardList")
+      .then((res) => {
+        const myData = res?.data?.leaderboard;
+        console.log("🚀 ~ .then ~ myData:", myData)
+        setRefrealList(myData|| []);
+        
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
 
+
+  const [defiList,setDefiList] = useState([])
+ const defiLeader= async () => {
+    await axiosInstanceAuth
+      .get("/transactionBoardList")
+      .then((res) => {
+        const myData = res?.data?.userTransactionCount                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
+        console.log("🚀 ~ .then ~ myData:", myData)
+        setDefiList(myData|| []);
+        
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
+  };
+
+
+  useEffect(() => {
+    fetchLeaderboardData();
+  }, [selectedLeaderboard]);
   const [allRecentUser, setAllRecentUser] = useState([]);
 
 
@@ -121,7 +96,8 @@ const LeaderBoard = () => {
   const endIndex = startIndex + itemsPerPage;
 
   //search
-  const filteredData = students.filter(
+  const currentLeaderboard = selectedLeaderboard === "referral" ? refrealList : defiList;
+  const filteredData = currentLeaderboard?.filter(
     (coin) =>
       coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -140,13 +116,26 @@ const LeaderBoard = () => {
     <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
       <div className="xl:flex my-10 xl:ml-32 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         <div className="w-full">
-          <p className="text-[#1788FB] text-3xl md:text-4xl font-medium w-auto  ">
+          <p className="text-[#1788FB]  text-2xl  md:text-3xl font-medium w-auto  ">
             Leader Board
           </p>
-
+          <div className="flex gap-4 my-4">
+            <button
+              className={`px-4 py-2 rounded ${selectedLeaderboard === "referral" ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
+              onClick={() => setSelectedLeaderboard("referral")}
+            >
+              Referral Leaderboard
+            </button>
+            <button
+              className={`px-4 py-2 rounded ${selectedLeaderboard === "defi" ? "bg-blue-500 text-white" : "bg-gray-200 text-black"}`}
+              onClick={() => setSelectedLeaderboard("defi")}
+            >
+              Defi Leaderboard
+            </button>
+          </div>
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
-              <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
+              <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl ">
                   {/* for with points and recent join user data show */}
                 <table className="w-full">
                   <thead className="sticky top-0 leader-color shadow-2xl ">
@@ -154,13 +143,9 @@ const LeaderBoard = () => {
                       className="  text-[#CECECE]   bg-[#1C1C1C]  "
               
                     >
-                      <th
-                        scope="col"
-                        style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                        className="px-6 py-3 text-center text-base font-medium "
-                      >
-                        Rank
-                      </th>
+                        {selectedLeaderboard === "referral" ? (
+                          <>
+                       
                       <th
                         scope="col"
                         style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
@@ -178,29 +163,81 @@ const LeaderBoard = () => {
                       <th
                         scope="col"
                         style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                        className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        className="px-4 py-3 text-center text-base font-medium   whitespace-nowrap"
                       >
-                        Points
+                       Referall of leader board
                       </th>
+                      </>
+                        ): (
+                          <>
+                            <th
+                              scope="col"
+                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope="col"
+                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                            >
+                              Email
+                            </th>
+                            <th
+                              scope="col"
+                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                              className="px-4 py-3 text-center text-base font-medium whitespace-nowrap"
+                            >
+                              Total Transactions
+                            </th>
+                            <th
+                              scope="col"
+                              style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
+                              className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
+                            >
+                              Total Transfer Token
+                            </th>
+                          
+                          </>
+                        )}
                     </tr>
                   </thead>
 
                   <tbody>
                     {visibleData?.length > 0 ? (
-                      visibleData.map((student, index) => (
+                      visibleData.map((leader, index) => (
                         <tr key={index}>
+                           {selectedLeaderboard === "referral" ? (
+                                <>
+                        
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {student?.Rank}
+                            {leader?.name}
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {student?.name}
+                            {leader?.email}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {student?.email}
+                          <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                            {leader?.referrals}
                           </td>
-                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                            {student?.points}
-                          </td>
+                          </>
+                          ) : (
+                            <>
+                              
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.name}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.email}
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.totalTransaction}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.totalTransferToken}
+                              </td>
+                            </>
+                          )}
                         </tr>
                       ))
                     ) : (
@@ -228,10 +265,10 @@ const LeaderBoard = () => {
         </div>
           {/* for recent join user data show */}
         <div className="">
-          <p className="text-[#1788FB]  text-3xl md:text-4xl font-medium max-w-screen-lg ">
+          <p className="text-[#1788FB]   text-2xl  md:text-3xl font-medium max-w-screen-lg ">
             Recent Joins
           </p>
-          <div className="mt-6 rounded-lg overflow-hidden w-full table-container">
+          <div className="mt-6 rounded-lg overflow-hidden w-full table-container xl:mt-20">
             <div className="bg-[#1C1C1C] h-[40rem] overflow-y-auto text-white xl:block md:grid md:grid-cols-2 ">
               {allRecentUser?.length > 0 ? (
                 allRecentUser.map((d, index) => (

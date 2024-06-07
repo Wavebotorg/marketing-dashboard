@@ -6,7 +6,7 @@ export default function BalancePopUp({
   showBalance,
   selectedNetwork,
 }) {
-  console.log("🚀 ~ showBalance:", showBalance);
+  // console.log("🚀 ~ showBalance:", showBalance);
   return (
     <div
       className={`${

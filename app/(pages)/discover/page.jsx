@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 "use client";
-import React, { useState, useEffect } from "react";
 
+import React, { useState, useEffect } from "react";
 import Overview from "../../../public/assets/discover/overview.svg";
 import Stocks from "../../../public/assets/discover/stocks.svg";
 import Crypto from "../../../public/assets/discover/crypto.svg";
@@ -9,7 +9,6 @@ import ETFs from "../../../public/assets/discover/etf.svg";
 import CopyTrader from "../../../public/assets/discover/copytrader.svg";
 import SmartPortfolios from "../../../public/assets/discover/smartportfolio.svg";
 import Nft from "../../../public/assets/discover/nft.svg";
-
 import Leftarraow from "../../../public/assets/discover/back.svg";
 import Rightarraow from "../../../public/assets/discover/next.svg";
 import Aave from "../../../public/assets/discover/aave-token-explained.png";
@@ -23,7 +22,6 @@ import GreenChart from "../../../public/assets/watchlist/greenchart.svg";
 import RedChart from "../../../public/assets/watchlist/redchart.svg";
 import { useSearch } from "../../components/contexts/SearchContext";
 import Image from "next/image";
-
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import Pagination from "../Pagination/Pagination";
 
@@ -365,6 +363,8 @@ const Discover = () => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  //Search
   const filteredData = discoverData.filter((coin) =>
     coin.coin.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -376,9 +376,9 @@ const Discover = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
+  //to change card By select Left And Right Button to change according to It
   const cardsPerPage = 6;
   const [position, setPosition] = useState(0);
-
   const handleSlideLeft = () => {
     setPosition((prevPosition) =>
       prevPosition === 0
@@ -386,7 +386,6 @@ const Discover = () => {
         : prevPosition - cardsPerPage
     );
   };
-
   const handleSlideRight = () => {
     setPosition((prevPosition) =>
       prevPosition >= cards.length - cardsPerPage
@@ -399,9 +398,7 @@ const Discover = () => {
   const disableRightArrow = position >= cards.length - cardsPerPage;
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl- sm:pl-4 xsm:pl-0 mx-auto lg:m-5 h-full">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full ">
-      {/* <div className="text-white xl:ml-11 xl:mr-5 lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 "> */}
       <div className="text-white xl:ml-[8rem] xl:mr-[92px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="">
           {/* laptop & tablate screen  */}
@@ -508,13 +505,14 @@ const Discover = () => {
         <div className="lg:mx-  md:p- mb-5 mt-3">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] table-container text-white h-auto overflow-auto rounded-lg">
+              {/* for 2xl ,xl and lg size  */}
               <table className="w-full">
-                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+                <thead className="bg-[#1C1C1C] shadow-2xl">
                   <tr
                     style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                     className="text-[#CECECE]"
                   >
-                    <th className="px-6 py-3 text-center text-base font-medium   sticky left-0 ">
+                    <th className="px-6 py-3 text-center text-base font-medium    ">
                       Coin
                     </th>
                     <th className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap">
@@ -551,10 +549,7 @@ const Discover = () => {
                             <div>{item?.coin}</div>
                           </div>
                         </td>
-                        {/* <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                        <div className="py-0.5 ">{item.price}</div>
-                        <p className="text-sm text-[#FF0000]">-3.12% (-0.00)</p>
-                      </td> */}
+
                         <td className="px-3 py-4  whitespace-nowrap  text-white">
                           <div className="py-0.5 text-center">
                             {item?.price}

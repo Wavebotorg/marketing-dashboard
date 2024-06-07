@@ -88,7 +88,7 @@ const Portfolio = () => {
       <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5  xsm:mr-4 ">
         <div className=" mt-7" />
         <div className="flex items-center justify-between mt-6">
-          <div className="text-2xl justify-start">My Portfolio</div>
+          <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">My Portfolio</div>
         </div>
         <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
           <div>

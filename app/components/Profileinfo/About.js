@@ -3,14 +3,10 @@
 import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import Profile from "../../../public/assets/profile.png";
-// import add from "../../../public/assets/add.png";
-import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineContentCopy } from "react-icons/md";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import ChangePass from "./ChangePass";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import axiosInstance from "../../apiInstances/axiosInstance";
-import Link from "next/link";
 import sol from "../../../public/assets/sol.png";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +15,8 @@ const About = () => {
   const [email, setEmail] = useState("");
   const popupRef = useRef(null);
   const router = useRouter();
+
+  //Close Popup while click out side of it
   const changePassRef = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
@@ -33,8 +31,8 @@ const About = () => {
     };
   }, []);
 
+  //Api for Get User Data
   const [userProfile, setUserProfile] = useState([]);
-
   useEffect(() => {
     const getUserProfile = async () => {
       try {
@@ -42,7 +40,6 @@ const About = () => {
         setUserProfile(response?.data?.data || []);
         setEmail(response?.data?.data?.email);
         // console.log("🚀 ~ getUserProfile ~ setEmail:",   response?.data?.data?.email)
-
         // console.log("User Profile Data:", response?.data?.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -52,6 +49,7 @@ const About = () => {
     getUserProfile();
   }, []);
 
+  //submit for Change Password
   const handleSubmit = async () => {
     await axiosInstance
       .post("forgetPassword", { email: email })
@@ -79,6 +77,7 @@ const About = () => {
   const [imageSrc, setImageSrc] = useState(Profile);
   const fileInputRef = useRef(null);
 
+  //set image
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -94,6 +93,7 @@ const About = () => {
     fileInputRef.current.click();
   };
 
+  //copy
   const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
@@ -105,10 +105,9 @@ const About = () => {
       });
   };
 
+  //Format For Id
   const formatTransactionID = (txid) => {
     if (!txid || txid.length <= 10) return txid;
-    // const firstSix = txid.slice(0, 2);
-    // const lastFour = txid.slice(-3);
     const firstSix = txid.slice(0, 4);
     const lastFour = txid.slice(-3);
     return `${firstSix}...${lastFour}`;
@@ -118,23 +117,19 @@ const About = () => {
   const [isEditing, setIsEditing] = useState(false);
   // console.log("🚀 ~ isEditing:", isEditing);
   const [name, setName] = useState(userProfile.name);
-  // const [email, setEmail] = useState(userProfile.email);
 
   const handleEditClick = () => {
     setIsEditing(true);
     setShowSaveButton(true);
   };
 
+  //show Save button
   const handleSaveClick = () => {
     setIsEditing(false);
     setShowSaveButton(false);
   };
 
-  /*   const handleChange = (e) => {
-    setEmail(e.target.value);
-    setName(e.target.value);
-  }; */
-
+  //get Value for input
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserProfile((prevProfile) => ({
@@ -143,13 +138,9 @@ const About = () => {
     }));
   };
 
-  /*  const handlenameChange = (e) => {
-    setName(e.target.value);
-  }; */
-
   return (
     <>
-      <div className="mt-4 ">
+      <div className="my-4 ">
         <div className="flex justify-end">
           <button
             onClick={handleEditClick}
@@ -159,7 +150,7 @@ const About = () => {
           </button>
         </div>
       </div>
-      <div className="">
+      {/* <div className="">
         <div className="md:pl-16 xsm:pl-6  pt-4 back mt-5 flex">
           <Image
             src={imageSrc}
@@ -171,11 +162,8 @@ const About = () => {
           <button
             onClick={openFileInput}
             className="absolute  rounded-full top-[19rem] cursor-pointer"
-
-            // className="absolute text-black bg-white rounded-full top-[19rem] cursor-pointer"
           >
             <Image src={sol} alt="logo" />
-            {/* <IoIosAddCircleOutline size={30} /> */}
           </button>
           <input
             ref={fileInputRef}
@@ -186,68 +174,15 @@ const About = () => {
             onChange={handleImageChange}
           />
         </div>
-      </div>
-      {/*   <div className="">
-        <div className="pl-16 pt-4 back mt-5">
-          {image ? ( // If an image is selected, display it
-            <div style={{ position: "relative" }}>
-              <Image
-                src={image}
-                alt="Selected Image"
-                width={100}
-                height={100}
-                className="rounded-full"
-              />
-              {/* <Image
-                src={arrow}
-                alt="Add Icon"
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  right: 0,
-                  width: 20,
-                  height: 20,
-                  cursor: "pointer",
-                }}
-              /> *
-            </div>
-          ) : (
-            // If no image is selected, display an empty area with the option to add an image
-            <label htmlFor="imageUpload">
-              <div
-                className="rounded-full border border-dashed border-gray-400 w-24 h-24 flex items-center justify-center cursor-pointer"
-                style={{ position: "relative" }}
-              >
-                <input
-                  type="file"
-                  id="imageUpload"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  style={{ display: "none" }}
-                />
-                <Image
-                  src={add}
-                  alt="Add Icon"
-                  style={{
-                    width: 40,
-                    height: 40,
-                    position: "absolute",
-                  }}
-                />
-              </div>
-            </label>
-          )}
-        </div>
       </div> */}
-      <div className=" bg-[#1C1C1C] shadow-2xl rounded-b-lg ">
+
+      <div className=" bg-[#1C1C1C] shadow-2xl rounded-lg ">
         <div className="text-[#CECECE]  p-8 md:pl-16 xsm:pl-6  ">
           <div className="md:flex flex mb-4">
             <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>Name :</p>
             </div>
-            {/* <div>
-              <input type="text"  className={`${isEditing ? 'block':'hidden'}`}/>
-            </div> */}
+
             <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[174px]">
               {isEditing ? (
                 <input
@@ -268,7 +203,6 @@ const About = () => {
               <p>Email :</p>
             </div>
             <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[179px]">
-              {/* <p>{userProfile.email}</p> */}
               {isEditing ? (
                 <input
                   type="email"
@@ -309,7 +243,6 @@ const About = () => {
               <p>EVM Address :</p>
             </div>
             <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
-              {/* <p className="truncate">{userProfile.wallet}</p> */}
               <p>{formatTransactionID(userProfile.wallet)}</p>
 
               <button
@@ -329,7 +262,6 @@ const About = () => {
               <p>Solana Address :</p>
             </div>
             <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
-              {/* <p className="truncate">{userProfile.solanawallet}</p> */}
               <p>{formatTransactionID(userProfile.solanawallet)}</p>
 
               <button
@@ -347,14 +279,6 @@ const About = () => {
       </div>
 
       <div className="mt-4 ">
-        {/* <div className="flex justify-end">
-          <button className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"    onClick={() => {
-              
-              // handleSubmit();
-            }}>
-            Save
-          </button>
-        </div> */}
         {showSaveButton && (
           <div className="flex justify-end">
             <button
@@ -368,7 +292,6 @@ const About = () => {
       </div>
       <div className="mt-4">
         <div className="flex justify-end mb-3">
-          {/* <Link href="/passwordverify"> */}
           <button
             className="rounded-md bg-blue-500 text-sm p-1 px-4 md:text-[18px] font-medium"
             onClick={() => {
@@ -377,7 +300,6 @@ const About = () => {
           >
             Change Password
           </button>
-          {/* </Link> */}
         </div>
       </div>
       {showPopup && (

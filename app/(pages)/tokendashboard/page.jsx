@@ -96,27 +96,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -128,27 +112,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -160,27 +128,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -192,27 +144,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -224,27 +160,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -256,27 +176,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -288,27 +192,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -320,27 +208,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -352,27 +224,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -384,27 +240,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -416,187 +256,11 @@ const TokenDashboard = () => {
     },
     {
       time: "23:00",
-      amounteth: "-333",
+      amounteth: "-2833",
       minamonut: "$55",
       amountsol: "2300",
       status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "562879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "562879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "562879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "562879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "562879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "267879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-9333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "167879809",
-    },
-    {
-      time: "23:00",
-      amounteth: "-2333",
-      minamonut: "$55",
-      amountsol: "2300",
-      status: "true",
-      transaction: "767879809",
+      transaction: "567879819",
     },
     {
       time: "23:00",
@@ -612,15 +276,17 @@ const TokenDashboard = () => {
   //pagination
   const { searchQuery } = useSearch(); //search
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 3;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
   //search
   const filteredData = allCoinData.filter(
     (coin) =>
       coin.transaction.toLowerCase().includes(searchQuery.toLowerCase()) ||
       coin.amounteth.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -631,9 +297,7 @@ const TokenDashboard = () => {
   }, [searchQuery]);
 
   return (
-    // <div className="2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      {/* <div className="flex flex-col xl:justify-center xl:ml-16 xl:mr-12 lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10"> */}
       <div className="flex flex-col xl:justify-center   xl:ml-32 xl:mr-[93px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
         <h1 className="text-[#1788FB]   font-medium max-w-screen-lg   text-2xl  md:text-3xl  text-center md:text-left ">
           Revenue Share Dashboard
@@ -705,9 +369,10 @@ const TokenDashboard = () => {
 
         <div className="mt-6 hidden lg:block  ">
           <div className="rounded-lg">
-            <div className="bg-[#1C1C1C] table-container  text-white h-auto  overflow-auto rounded-lg">
-              <table className="w-full   ">
-                <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
+            <div className="bg-[#1C1C1C] table-container  text-white h-auto overflow-auto rounded-lg">
+              {/* for 2xl ,xl and lg size  */}
+              <table className="w-full  ">
+                <thead className="sticky top-0 overflow-auto bg-[#1C1C1C] shadow-2xl ">
                   <tr
                     style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
                     className=" text-[#CECECE]  "
@@ -753,7 +418,7 @@ const TokenDashboard = () => {
 
                 <tbody>
                   {visibleData?.length > 0 &&
-                    visibleData?.slice(0, 1).map((market, index) => (
+                    visibleData?.map((market, index) => (
                       <>
                         <tr key={index}>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md font-medium text-white ">
@@ -789,7 +454,7 @@ const TokenDashboard = () => {
             </div>
           </div>
         </div>
-        {/* <div className="xsm:hidden md:hidden lg:block"> */}
+
         <Pagination
           totalItems={filteredData.length}
           itemsPerPage={itemsPerPage}
@@ -797,7 +462,6 @@ const TokenDashboard = () => {
           currentPage={currentPage}
         />
 
-        {/* </div> */}
         {visibleData?.length > 0 &&
           visibleData?.map((market, index) => (
             <div key={index} className="lg:hidden mt-4 ">
