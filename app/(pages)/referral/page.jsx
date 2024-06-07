@@ -204,18 +204,10 @@ const Referral = () => {
         setLevel4(response?.data?.data?.level4 || []);
         setLevel5(response?.data?.data?.level5 || []);
 
-        setLevel2ref(
-          response?.data?.data?.level2?.map((d) => d?.referred?.name)
-        );
-        setLevel3ref(
-          response?.data?.data?.level3?.map((d) => d?.referred?.name)
-        );
-        setLevel4ref(
-          response?.data?.data?.level4?.map((d) => d?.referred?.name)
-        );
-        setLevel5ref(
-          response?.data?.data?.level5?.map((d) => d?.referred?.name)
-        );
+        setLevel2ref(response?.data?.data?.level2?.map((d) => d?.referred));
+        setLevel3ref(response?.data?.data?.level3?.map((d) => d?.referred));
+        setLevel4ref(response?.data?.data?.level4?.map((d) => d?.referred));
+        setLevel5ref(response?.data?.data?.level5?.map((d) => d?.referred));
       } catch (error) {
         console.error("Error fetching user referals:", error);
       } finally {
