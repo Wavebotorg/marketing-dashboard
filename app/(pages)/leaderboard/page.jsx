@@ -8,7 +8,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 
-//for show email structure 
+//for show email structure
 const truncateEmail = (email) => {
   if (email.length < 20) {
     // Show full email if length is greater than 50
@@ -19,6 +19,10 @@ const truncateEmail = (email) => {
     return truncatedEmail;
   }
 };
+
+function shortenName(name) {
+  return name.length > 4 ? name.slice(0, 4) + "..." : name;
+}
 
 const LeaderBoard = () => {
   const students = [
@@ -88,12 +92,9 @@ const LeaderBoard = () => {
       email: "sanket@gmail.com",
       points: "224,466,796",
     },
-
-  
   ];
 
   const [allRecentUser, setAllRecentUser] = useState([]);
-
 
   // Get All recenet user show
   const getAdmindata = async () => {
@@ -102,7 +103,6 @@ const LeaderBoard = () => {
       .then((res) => {
         const myData = res?.data;
         setAllRecentUser(myData?.data || []);
-        
       })
       .catch((err) => {
         console.log("err --->", err);
@@ -147,13 +147,10 @@ const LeaderBoard = () => {
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-[37rem] table-container overflow-y-auto text-white  overflow-auto rounded-xl ">
-                  {/* for with points and recent join user data show */}
+                {/* for with points and recent join user data show */}
                 <table className="w-full">
                   <thead className="sticky top-0 leader-color shadow-2xl ">
-                    <tr
-                      className="  text-[#CECECE]   bg-[#1C1C1C]  "
-              
-                    >
+                    <tr className="  text-[#CECECE]   bg-[#1C1C1C]  ">
                       <th
                         scope="col"
                         style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
@@ -226,7 +223,7 @@ const LeaderBoard = () => {
             currentPage={currentPage}
           />
         </div>
-          {/* for recent join user data show */}
+        {/* for recent join user data show */}
         <div className="">
           <p className="text-[#1788FB]  text-3xl md:text-4xl font-medium max-w-screen-lg ">
             Recent Joins
@@ -245,32 +242,46 @@ const LeaderBoard = () => {
                             className="rounded-full"
                           />
                         </div>
-                        <div className="lg:text-base text-[#ffffffe0]  text-sm">
-                          <div className="flex gap-2">
-                            <p>{d?.name}</p>
+                        <div className="lg:text-base text-[#ffffffe0] text-sm">
+                          <div key={index} className="flex gap-2">
+                            {/* Tooltip for Name */}
+                            <div
+                              data-tooltip-id={`tooltip-name-${index}`}
+                              className="flex gap-2"
+                            >
+                              <ReactTooltip
+                                id={`tooltip-name-${index}`}
+                                place="top-end"
+                                effect="solid"
+                                variant="info"
+                              >
+                                <span>{d.name}</span>
+                              </ReactTooltip>
+
+                              {shortenName(d.name)}
+                            </div>
                             <p className="text-[#6B6B6B]">
-                              {formatDistanceToNow(new Date(d?.createdAt), {
+                              {formatDistanceToNow(new Date(d.createdAt), {
                                 addSuffix: true,
                               })}
                             </p>
                           </div>
-                          <div
-                            data-tooltip-id={`tooltip-${index}`}
-                            className=""
-                          >
-                            <p className="text-nowrap ">
-                              Invited by {truncateEmail(d?.email)}
+                          <div>
+                            <p
+                              data-tooltip-id={`tooltip-email-${index}`}
+                              className="text-nowrap"
+                            >
+                              Invited by {truncateEmail(d.email)}
                             </p>
+                            <ReactTooltip
+                              id={`tooltip-email-${index}`}
+                              place="bottom-end"
+                              effect="solid"
+                              variant="info"
+                            >
+                              <span>{d.email}</span>
+                            </ReactTooltip>
                           </div>
-                          <ReactTooltip
-                            id={`tooltip-${index}`}
-                            place="bottom-end"
-                            effect="solid"
-                            variant="info"
-                          >
-                            {/* Display full email in the tooltip */}
-                            <span>{d?.email}</span>
-                          </ReactTooltip>
                         </div>
                       </div>
                     </div>

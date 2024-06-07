@@ -2,10 +2,10 @@ import React from "react";
 
 const OfficialWebsite = () => {
   return (
-    <div className="container 2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+    <div className="container  2xl:pl-64 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
       <div>
-        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-          <div className="mx-auto max-w-screen-sm text-center">
+        <div className="py-8  px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+          <div className="mx-auto  max-w-screen-sm text-center">
             <h1 className="mb-4 text-4xl tracking-tight font-extrabold lg:text-4xl text-primary-600 text-primary-500">
               OfficialWebsite Page
             </h1>

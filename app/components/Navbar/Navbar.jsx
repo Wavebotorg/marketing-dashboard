@@ -99,7 +99,7 @@ const Navbar = () => {
           getPath === "/sucessreset"
             ? "hidden"
             : "flex w-full justify-between"
-        } flex justify-between p-0xl:pl-60 py-3`}
+        } flex justify-between p-0xl:pl-60 py-7`}
       >
         <div
           className={`lg:hidden block text-3xl xsm:ml-5`}

@@ -5,7 +5,7 @@ const Apecurdocs = () => {
   const [count, setCount] = useState(0);
   return (
     <>
-      <div className="container 2xsm:pl-6452xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
+      <div className="container 2xl:pl-64 xl:pl-60 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto ">
         <div>
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center">

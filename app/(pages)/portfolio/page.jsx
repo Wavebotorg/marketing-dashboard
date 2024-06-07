@@ -85,7 +85,7 @@ const Portfolio = () => {
 
   return (
     <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5  xsm:mr-4 ">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5 md:ml-0  xsm:mr-4 xsm:ml-5">
         <div className=" mt-7" />
         <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start">My Portfolio</div>
@@ -102,7 +102,7 @@ const Portfolio = () => {
         <div className="mt-5 mb-5 lg:block hidden">
           <div className="rounded-lg">
             <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg ">
-                {/* for 2xl ,xl and lg size  */}
+              {/* for 2xl ,xl and lg size  */}
               <>
                 <table className="w-full">
                   <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
@@ -139,7 +139,7 @@ const Portfolio = () => {
                       </th>
                     </tr>
                   </thead>
-                
+
                   <tbody>
                     {visibleData?.length > 0 &&
                       visibleData?.map((item, index) => (

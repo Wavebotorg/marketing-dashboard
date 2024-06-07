@@ -1304,7 +1304,7 @@ const Swap = () => {
         <div
           className={`${
             showPopup ? "scale-[1]" : "scale-0"
-          } fixed duration-75 ease-in-out transition-all inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
+          } fixed duration-75 ease-in-out transition-all inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 `}
         >
           <div
             ref={popupRef}
@@ -1312,7 +1312,7 @@ const Swap = () => {
               showPopup ? "scale-[1]" : "scale-0"
             } fixed duration-300 ease-in-out transition-all`}
           >
-            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl w-[45vh] ">
+            <div className="bg-[#1c1c1c] shadow-blue-700 shadow-sm p-3 rounded-2xl md:w-[45vh] xsm:w-[19rem]  ">
               <div className=" space-y-5">
                 <div className="flex justify-between items-center py-2 ">
                   <div className="text-xl">Select Token</div>

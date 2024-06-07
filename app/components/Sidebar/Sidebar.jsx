@@ -525,7 +525,7 @@
 //                   />
 //                   {/* < className="ml-6"> */}
 //                   {/* <div className={` ${isNavbar ? "" : "hidden "} `}>
-//                   <p className="">{userProfile.name}</p> 
+//                   <p className="">{userProfile.name}</p>
 //                   <p className="text-xs">{userProfile.email}</p>
 //                 </div> */}
 //                 </div>
@@ -619,9 +619,9 @@ function Sidebar() {
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
-  const [isHover1, setIsHover1] = useState(null);
+  // const [isHover1, setIsHover1] = useState(null);
   // const [isNavbar, setIsNavbar] = useState(false);
-  const [isNavbar1, setIsNavbar1] = useState(false);
+  // const [isNavbar1, setIsNavbar1] = useState(false);
   const headerdata = [
     {
       id: 1,
@@ -885,7 +885,7 @@ function Sidebar() {
                             ? "navHover"
                             : ""
                         } flex md:px-1 lg:px-2 py-2 rounded-lg`}
-                        onClick={() => setIsNavbar1(false)}
+                        onClick={() => setIsNavbar(false)}
                         onMouseEnter={() => HoverStyle(data?.id)}
                         onMouseLeave={() => setIsHover(null)}
                       >
@@ -915,19 +915,35 @@ function Sidebar() {
               <div>
                 {token ? (
                   <div className=" grid place-items-center ">
-                    <button
-                      onClick={(e) => setConfirmationPopUp(true)}
-                      // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
-                      className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
-                    >
-                      <div className="flex items-center gap-1">
-                        <FiPower size={18} className="xl:block hidden" />
-                        {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
-                        <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
-                          Logout
-                        </span>
-                      </div>
-                    </button>
+                    {isNavbar ? (
+                      <button
+                        onClick={(e) => setConfirmationPopUp(true)}
+                        // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
+                        className="bg-[#1788FB] w-64 xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
+                      >
+                        <div className="flex items-center gap-1">
+                          <FiPower size={18} className="block ml-2" />
+                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                          <span className="ml-4 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                            Logout
+                          </span>
+                        </div>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) => setConfirmationPopUp(true)}
+                        // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
+                        className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
+                      >
+                        <div className="flex items-center gap-1">
+                          <FiPower size={18} className="xl:block hidden" />
+                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                          <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                            Logout
+                          </span>
+                        </div>
+                      </button>
+                    )}
                     {ConfirmationPopUp ? (
                       <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[999999]   ">
@@ -979,7 +995,7 @@ function Sidebar() {
                   </div>
                 ) : (
                   <div className=" grid place-items-center">
-                    <Link href="/login " className="">
+                    <Link href="/login" className="">
                       {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
                     <div className="flex items-center  px-5 ">
                       <Image
@@ -1064,7 +1080,7 @@ function Sidebar() {
                 </div>
 
                 {/* Only show the image on screens smaller than 2xl and xl */}
-                <Link href="/profile">
+                <Link href="/profile" onClick={() => setIsNavbar(false)}>
                   <div
                     className="2xl:hidden xl:hidden flex gap-2"
                     style={{ position: "absolute", bottom: "0" }}
@@ -1077,7 +1093,7 @@ function Sidebar() {
                       className=" ml-2 items-center"
                     />
                     {/* < className="ml-6"> */}
-                   {/*  <div className={` ${isNavbar ? "" : "hidden "} `}>
+                    {/*  <div className={` ${isNavbar ? "" : "hidden "} `}>
                       <p className="">{userProfile.name}</p>
                       <p className="text-xs">{userProfile.email}</p>
                     </div> */}
