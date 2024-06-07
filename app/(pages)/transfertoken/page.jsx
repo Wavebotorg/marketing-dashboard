@@ -485,7 +485,7 @@ const TransferToken = () => {
               Show Balance
             </button>
           </div>
-          <div className="h-[94vh] w-full flex justify-center items-center px-5">
+          <div className="h-[93vh] w-full flex justify-center items-center px-5">
             <div className="swap flex flex-col items-center justify-between   text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
                 <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
