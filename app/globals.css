@@ -419,3 +419,25 @@ th {
 .animate-popup {
   animation: popup 0.1s ease-out;
 }
+
+
+
+
+
+@media (min-width: 320px) {
+  .flex-container {
+    width: 300px;
+  }
+}
+
+@media (min-width: 375px) {
+  .flex-container {
+    width: 350px;
+  }
+}
+
+@media (min-width: 425px) {
+  .flex-container {
+    width: 400px;
+  }
+}
