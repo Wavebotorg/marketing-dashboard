@@ -1272,7 +1272,6 @@ const Swap = () => {
                               value={selectedTokenDatato?.input_from}
                               onChange={(e) => {
                                 handleInputChanges(e);
-                              
                               }}
                             />
                           </div>
