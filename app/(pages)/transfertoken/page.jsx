@@ -294,7 +294,7 @@ const TransferToken = () => {
   }; */
 
   //For Solana Balance
-  const getSolanaBalance = async () => {
+  /* const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
         "/getSolanaWalletTokenBal",
@@ -309,7 +309,7 @@ const TransferToken = () => {
       const tokenImages = await fetchTokenImages([
         "https://token.jup.ag/strict",
       ]);
-
+ 
       const mergedData = balanceData.map((token) => {
         const tokenImage = tokenImages.find(
           (image) => image.address === token.mint
@@ -351,6 +351,49 @@ const TransferToken = () => {
       return [];
     }
   };
+ */
+
+  const getSolanaBalance = async () => {
+    try {
+      const balanceRes = await axiosInstanceAuth.post(
+        "/getSolanaWalletTokenBal",
+        {
+          wallet: solanaAddress,
+        }
+      );
+      const balanceData = balanceRes?.data?.response1?.tokens;
+      const nativeBalance = balanceRes?.data?.response1?.nativeBalance;
+
+      console.log("fetchSolanabalance-------------------------->", balanceData);
+
+      const imageRes = await axios.get("https://token.jup.ag/strict");
+
+      const tokenImages = imageRes?.data;
+      const mergedData = balanceData.map((token) => {
+        const tokenImage = tokenImages.find(
+          (image) => image.address === token.mint
+        );
+        return {
+          ...token,
+          logo: tokenImage ? tokenImage.logoURI : null,
+        };
+      });
+
+      mergedData.unshift({
+        mint: "SOL", // Assuming SOL is the native token symbol
+        amount: nativeBalance.solana,
+        name: "Solana",
+        symbol: "SOL",
+        logo: "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png",
+
+        // Add more properties if needed
+      });
+
+      setShowBalance(mergedData);
+    } catch (err) {
+      console.log("error--->", err);
+    }
+  };
 
   //For EVM Balance
   const getWalletBalance = async (networkName) => {
@@ -364,7 +407,7 @@ const TransferToken = () => {
       };
       try {
         const res = await axiosInstance.post("/fetchbalance", myDatawallet);
-        
+
         const myData = res?.data?.data;
         // console.log(
         //   "fetchbalance--------------------------------------------------------------------------------->",
@@ -484,9 +527,9 @@ const TransferToken = () => {
             </button>
           </div>
           <div className="h-[93vh] w-full flex justify-center items-center px-5">
-            <div className="swap flex flex-col items-center justify-between   text-white ">
+            <div className="swap flex flex-col items-center justify-between text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
-                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3  rounded-lg shadow-lg  space-y-2">
+                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-3 rounded-lg shadow-lg space-y-2 md:w-full flex-container">
                   <div className="flex justify-between items-center py-2">
                     <div className="flex justify-between gap-5 text-lg mx-1 w-full">
                       <button>Transfer Token</button>
@@ -719,12 +762,11 @@ const TransferToken = () => {
                   showBalance?.map((item, index) => (
                     <div
                       key={index}
-                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${
-                        clickedTokens.includes(item.name)
-                   
-                      }`}
+                      className={`flex gap-3 justify-start items-center mx-5 py-2 cursor-pointer ${clickedTokens.includes(
+                        item.name
+                      )}`}
                       onClick={() => {
-                       {
+                        {
                           selectToken(item);
                         }
                       }}

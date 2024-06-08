@@ -25,7 +25,6 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FaBars } from "react-icons/fa6";
 
-
 const Swap = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
@@ -47,7 +46,8 @@ const Swap = () => {
   const [selectChain, setSelectChain] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false);
-  const errorMessage = "Note : Do not select  native token of selected Network.";
+  const errorMessage =
+    "Note : Do not select  native token of selected Network.";
   const [selectedTokenDatato, setSelectedTokenDatato] = useState({
     name_to: "",
     image_to: "",
@@ -323,7 +323,6 @@ const Swap = () => {
       descode: "",
       chainname: "",
     });
-   
   };
 
   //for select token value info.
@@ -511,7 +510,6 @@ const Swap = () => {
 
   //for buy submit for both network
   const handleBuySubmit = async () => {
-
     setLoading(true);
     handleBuyprice()
       .then((e) => {
@@ -597,7 +595,6 @@ const Swap = () => {
 
   //for sell submit
   const handleSellSubmit = async () => {
-   
     setLoading(true);
     let endpoint;
     if (selectedNetwork === "Solana") {
@@ -692,8 +689,7 @@ const Swap = () => {
       selectedTokenDatato?.address_from &&
       selectedTokenDatato?.address_to
     ) {
-      const amount =
-        Number(selectedTokenDatato?.input_to) 
+      const amount = Number(selectedTokenDatato?.input_to);
       //   10 ** selectedTokenDatato?.decimals_to;
       // console.log("--------amount", amount);
       try {
@@ -711,9 +707,9 @@ const Swap = () => {
                 token2: selectedTokenDatato?.address_from,
               }
             : {
-              token: selectedTokenDatato?.address_to,
-              token2: selectedTokenDatato?.address_from,
-              chain: selectedTokenDatato?.descode,
+                token: selectedTokenDatato?.address_to,
+                token2: selectedTokenDatato?.address_from,
+                chain: selectedTokenDatato?.descode,
               }
         );
         console.log("🚀 ~ getPrice1 ~ tokenRes:", tokenRes);
@@ -727,14 +723,13 @@ const Swap = () => {
           buyAmt = amount * tokensPrice?.token2;
           finalAmt = buyAmt / tokensPrice?.token1;
         }
-        console.log("finalllll--------",finalAmt)
+        console.log("finalllll--------", finalAmt);
         // return finalAmt?.toFixed(4);
         if (finalAmt) {
           setSelectedTokenDatato({
             ...selectedTokenDatato,
             input_from: finalAmt,
           });
-         
         }
       } catch (error) {
         console.error("Error fetching price:", error);
@@ -742,9 +737,7 @@ const Swap = () => {
     }
   };
 
- 
-
-  //show solana  balance at top 
+  //show solana  balance at top
   const getSolanaBalance = async () => {
     try {
       const balanceRes = await axiosInstanceAuth.post(
@@ -1053,7 +1046,7 @@ const Swap = () => {
           <div className="h-[94vh] w-full flex justify-center items-center px-5">
             <div className="swap flex flex-col items-center justify-between   text-white ">
               <div className="flex flex-col justify-center items-center space-y-5">
-                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-6 rounded-lg shadow-lg  space-y-2">
+                <div className="flex flex-col bg-slate-600 bg-opacity-10 p-6 rounded-lg shadow-lg  space-y-2 md:w-full flex-container">
                   <div className="flex justify-between items-center py-2">
                     <div className="flex justify-between gap-5 text-lg mx-1 w-full">
                       <div>
@@ -1206,9 +1199,10 @@ const Swap = () => {
                           placeholder="0"
                           name="input_to"
                           value={selectedTokenDatato?.input_to}
-                          onChange={(e) =>{ handleInputChanges(e)
-                            getPrice()}
-                          }
+                          onChange={(e) => {
+                            handleInputChanges(e);
+                            getPrice();
+                          }}
                         />
                       </div>
 
@@ -1272,7 +1266,6 @@ const Swap = () => {
                               value={selectedTokenDatato?.input_from}
                               onChange={(e) => {
                                 handleInputChanges(e);
-                              
                               }}
                             />
                           </div>
@@ -1311,10 +1304,8 @@ const Swap = () => {
                       onClick={() => {
                         if (activeButton === "Swap") {
                           handleSwapSubmit();
-
                         } else if (activeButton === "Buy") {
                           handleBuySubmit();
-
                         } else if (activeButton === "Sell") {
                           handleSellSubmit();
                         }
@@ -1327,20 +1318,17 @@ const Swap = () => {
                         activeButton
                       )}
                     </button>
-                  
-
                   </div>
-                  {activeButton === "Buy"   && (
-                      <div className="mt-2 text-yellow-500 text-center">
-                        {errorMessage}
-                      </div>
-                    )}
-                    {activeButton === "Sell"   && (
-                      <div className="mt-2 text-yellow-500 text-center">
-                        {errorMessage}
-                      </div>
-                    )}
-                  
+                  {activeButton === "Buy" && (
+                    <div className="mt-2 text-yellow-500 text-center">
+                      {errorMessage}
+                    </div>
+                  )}
+                  {activeButton === "Sell" && (
+                    <div className="mt-2 text-yellow-500 text-center">
+                      {errorMessage}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
