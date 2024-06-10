@@ -198,11 +198,11 @@ const Referral = () => {
       try {
         const response = await axiosInstanceAuth.get("/getUserReferals");
         console.log("🚀 ~ fetchUserReferals ~ response:", response);
-        setUserReferals(response?.data?.level1 || []);
-        setLevel2(response?.data?.level2 || []);
-        setLevel3(response?.data?.level3 || []);
-        setLevel4(response?.data?.level4 || []);
-        setLevel5(response?.data?.level5 || []);
+        setUserReferals(response?.data?.data?.level1 || []);
+        setLevel2(response?.data?.data?.level2 || []);
+        setLevel3(response?.data?.data?.level3 || []);
+        setLevel4(response?.data?.data?.level4 || []);
+        setLevel5(response?.data?.data?.level5 || []);
 
         setLevel2ref(response?.data?.data?.level2?.map((d) => d?.referred));
         setLevel3ref(response?.data?.data?.level3?.map((d) => d?.referred));
