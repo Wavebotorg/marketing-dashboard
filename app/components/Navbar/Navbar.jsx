@@ -69,6 +69,7 @@ const Navbar = () => {
 
   // const [isNavbar, setIsNavbar] = useState(false);
   const navbarRef = useRef(null);
+  const signupRefRegex = /^\/signupRef\/(.*)/;
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -96,6 +97,7 @@ const Navbar = () => {
           getPath === "/forgotpassword" ||
           getPath === "/passwordverify" ||
           getPath === "/resetpassword" ||
+          signupRefRegex.test(getPath) ||
           getPath === "/sucessreset"
             ? "hidden"
             : "flex w-full justify-between"
@@ -153,4 +155,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
