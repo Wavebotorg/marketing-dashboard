@@ -145,11 +145,11 @@ const About = () => {
     }));
   };
 
-  const generateReferralLink = () => {
-    return `${window.location.origin}/signupRef/${userProfile.referralId}`;
-  };
+  // const generateReferralLink = () => {
+  //   return `${window.location.origin}/signupRef/${userProfile.referralId}`;
+  // };
 
-  const referralLink = generateReferralLink();
+  // const referralLink = generateReferralLink();
 
   return (
     <>
@@ -247,7 +247,7 @@ const About = () => {
                 <p>Referral link :</p>
               </div>
               <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
-                <p>{formatlink(referralLink)}</p>
+                <p>{`https://marketing-dashboard-d22655001f93.herokuapp.com/signupRef/${userProfile.referralId}`}</p>
                 <button
                   className="text-xl text-[#828282] align-middle pb-1.5"
                   onClick={() => copyToClipboard(referralLink)}

@@ -1,17 +1,16 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Appearance from "../../components/Profileinfo/Appearance";
 import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
-import Referral from "../../components/Profileinfo/Referral ";
 import { FaBars } from "react-icons/fa6";
 import { useWallet } from "../../components/contexts/WalletContext";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
+  const [activeButton, setActiveButton] = useState(1);
 
   const [isComponent1Visible, setComponent1Visible] = useState(true);
   const [isComponent2Visible, setComponent2Visible] = useState(false);
@@ -135,9 +134,7 @@ const Profile = () => {
 
       setActiveButton(5);
     }
-  });
-
-  const [activeButton, setActiveButton] = useState(1);
+  },[]);
 
   return (
     <>
