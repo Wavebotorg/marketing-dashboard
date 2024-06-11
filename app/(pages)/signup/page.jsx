@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 const Signup = () => {
   const router = useRouter();
 
@@ -54,6 +54,8 @@ const Signup = () => {
           email: value
             ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
               ? ""
+              : /^[^\s@]+@[^\s@]+\.$/.test(value)
+              ? "Domain name is incomplete"
               : "Invalid email address"
             : "Email is required",
         }));
@@ -120,8 +122,8 @@ const Signup = () => {
       localStorage.setItem("type", "signup");
       console.log(myData, "----------- myData");
       if (response?.data?.status) {
-        localStorage.setItem("Token", myData?.token);
-        Cookies.set("auth-token", myData?.token);
+        // localStorage.setItem("Token", myData?.token);
+        // Cookies.set("auth-token", myData?.token);
         toast.success(response?.data?.msg);
         router.push("/passwordverify");
       } else {

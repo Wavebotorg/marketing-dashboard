@@ -60,6 +60,28 @@ const TransferToken = () => {
     descode: "",
     chainname: "",
   });
+
+  // Function to reset all fields
+  const resetFields = () => {
+    setSelectedTokenDatato({
+      name_to: "",
+      image_to: "",
+      price_to: "",
+      address_to: "",
+      decimals_to: "",
+      input_to: "",
+      name_from: "",
+      image_from: "",
+      input_from: "",
+      price_from: "",
+      address_from: "",
+      decimals_from: "",
+      chainid: "",
+      descode: "",
+      chainname: "",
+    });
+  };
+
   const NetworkData = [
     { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
@@ -169,6 +191,7 @@ const TransferToken = () => {
       } else {
         toast.error(response?.data?.message);
       }
+      resetFields(); // Reset all fields after successful transfer
 
       // console.log(
       //   "------------------------------------------------------LOG",
@@ -216,6 +239,7 @@ const TransferToken = () => {
       } else {
         toast.error(response?.data?.message);
       }
+      resetFields(); // Reset all fields after successful transfer
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");
