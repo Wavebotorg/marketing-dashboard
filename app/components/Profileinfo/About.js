@@ -113,6 +113,13 @@ const About = () => {
     return `${firstSix}...${lastFour}`;
   };
 
+  const formatlink = (txid) => {
+    if (!txid || txid.length <= 10) return txid;
+    const firstSix = txid.slice(0, 17);
+    const lastFour = txid.slice(-10);
+    return `${firstSix}...${lastFour}`;
+  };
+
   const [showSaveButton, setShowSaveButton] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   // console.log("🚀 ~ isEditing:", isEditing);
@@ -137,6 +144,12 @@ const About = () => {
       [name]: value,
     }));
   };
+
+  const generateReferralLink = () => {
+    return `${window.location.origin}/signupRef/${userProfile.referralId}`;
+  };
+
+  const referralLink = generateReferralLink();
 
   return (
     <>
@@ -227,6 +240,27 @@ const About = () => {
               </div>
             </div>
           )}
+
+          {userProfile && userProfile.referralId && (
+            <div className="md:flex flex mb-4">
+              <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
+                <p>Referral link :</p>
+              </div>
+              <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
+                <p>{formatlink(referralLink)}</p>
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() => copyToClipboard(referralLink)}
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+              </div>
+            </div>
+          )}
+
           {userProfile && userProfile.ReferredBy && (
             <div className="md:flex flex mb-4">
               <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
