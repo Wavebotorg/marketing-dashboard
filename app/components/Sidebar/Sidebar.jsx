@@ -190,8 +190,9 @@ function Sidebar() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const res = await axiosInstanceAuth.get("/getUserProfile");
+        const res = await axiosInstanceAuth.get("/getUserProfile");0
         const myData = res?.data?.data;
+        console.log("🚀 ~ getUserProfile ~ getUserProfile:",  res)
         setUserProfile1(myData);
         setWalletAddress(myData?.wallet);
         setSolanaAddress(myData?.solanawallet || "");
@@ -201,6 +202,7 @@ function Sidebar() {
         console.error("Error fetching user profile:", error);
       }
     };
+  
 
     getUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
