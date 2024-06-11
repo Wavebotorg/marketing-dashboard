@@ -159,11 +159,11 @@ const About = () => {
     }));
   };
 
-  const generateReferralLink = () => {
-    return `${window.location.origin}/signupRef/${userProfile.referralId}`;
-  };
+  // const generateReferralLink = () => {
+  //   return `${window.location.origin}/signupRef/${userProfile.referralId}`;
+  // };
 
-  const referralLink = generateReferralLink();
+  const referralLink = `https://marketing-dashboard-d22655001f93.herokuapp.com/signupRef/${userProfile.referralId}`;
 
   return (
     <>
@@ -260,7 +260,8 @@ const About = () => {
               <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referral link :</p>
               </div>
-              <div className="block md:hidden">
+
+              <div className="block lg:hidden">
                 <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
                   <p>{formatlink(referralLink)}</p>
                   <button
@@ -281,7 +282,6 @@ const About = () => {
               </div>
 
               <div className="md:block hidden">
-                {" "}
                 <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
                   <p>{referralLink}</p>
                   <button
