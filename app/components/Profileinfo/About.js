@@ -281,7 +281,7 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="md:block hidden">
+              <div className="lg:block hidden">
                 <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
                   <p>{referralLink}</p>
                   <button
