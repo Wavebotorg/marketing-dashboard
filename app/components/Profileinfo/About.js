@@ -94,11 +94,25 @@ const About = () => {
   };
 
   //copy
-  const copyToClipboard = (text) => {
+  /*   const copyToClipboard = (text) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
         // console.log("Copied to clipboard:", text);
+      })
+      .catch((error) => {
+        console.error("Failed to copy:", error);
+      });
+  }; */
+
+  const [copiedText, setCopiedText] = useState("");
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedText(text);
+        setTimeout(() => setCopiedText(""), 200); // Hide after 2 seconds
       })
       .catch((error) => {
         console.error("Failed to copy:", error);
@@ -115,7 +129,7 @@ const About = () => {
 
   const formatlink = (txid) => {
     if (!txid || txid.length <= 10) return txid;
-    const firstSix = txid.slice(0, 17);
+    const firstSix = txid.slice(0, 10);
     const lastFour = txid.slice(-10);
     return `${firstSix}...${lastFour}`;
   };
@@ -246,17 +260,45 @@ const About = () => {
               <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referral link :</p>
               </div>
-              <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
-                <p>{formatlink(referralLink)}</p>
-                <button
-                  className="text-xl text-[#828282] align-middle pb-1.5"
-                  onClick={() => copyToClipboard(referralLink)}
-                >
-                  <MdOutlineContentCopy
-                    size={12}
-                    className="ml-1.5 items-center"
-                  />
-                </button>
+              <div className="block md:hidden">
+                <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
+                  <p>{formatlink(referralLink)}</p>
+                  <button
+                    className="text-xl text-[#828282] align-middle pb-1.5"
+                    onClick={() => copyToClipboard(referralLink)}
+                  >
+                    <MdOutlineContentCopy
+                      size={12}
+                      className="ml-1.5 items-center"
+                    />
+                  </button>
+                  {copiedText === referralLink && (
+                    <span className=" xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                      Copied!
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="md:block hidden">
+                {" "}
+                <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
+                  <p>{referralLink}</p>
+                  <button
+                    className="text-xl text-[#828282] align-middle pb-1.5"
+                    onClick={() => copyToClipboard(referralLink)}
+                  >
+                    <MdOutlineContentCopy
+                      size={12}
+                      className="ml-1.5 items-center"
+                    />
+                  </button>
+                  {copiedText === referralLink && (
+                    <span className=" xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                      Copied!
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           )}
@@ -276,18 +318,45 @@ const About = () => {
             <div className="mr-4  md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>EVM Address :</p>
             </div>
-            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
-              <p>{formatTransactionID(userProfile.wallet)}</p>
 
-              <button
-                className="text-xl text-[#828282] align-middle pb-1.5"
-                onClick={() => copyToClipboard(userProfile.wallet)}
-              >
-                <MdOutlineContentCopy
-                  size={12}
-                  className="ml-1.5 items-center"
-                />
-              </button>
+            <div className="block md:hidden">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
+                <p>{formatTransactionID(userProfile.wallet)}</p>
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() => copyToClipboard(userProfile.wallet)}
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedText === userProfile.wallet && (
+                  <span className=" xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="md:block hidden">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
+                <p>{userProfile.wallet}</p>
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() => copyToClipboard(userProfile.wallet)}
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedText === userProfile.wallet && (
+                  <span className=" xsm:pl-1 bg-gray-900 text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -295,18 +364,47 @@ const About = () => {
             <div className="mr-4 md:text-[20px] text-[18px]  text-[#CACACA] font-medium">
               <p>Solana Address :</p>
             </div>
-            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
-              <p>{formatTransactionID(userProfile.solanawallet)}</p>
 
-              <button
-                className="text-xl text-[#828282] align-middle pb-1.5"
-                onClick={() => copyToClipboard(userProfile.solanawallet)}
-              >
-                <MdOutlineContentCopy
-                  size={12}
-                  className="ml-1.5 items-center"
-                />
-              </button>
+            <div className="block md:hidden">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
+                <p>{formatTransactionID(userProfile.solanawallet)}</p>
+
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() => copyToClipboard(userProfile.solanawallet)}
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedText === userProfile.solanawallet && (
+                  <span className=" xsm:pl-1 bg-gray-900  text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="md:block hidden">
+              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
+                <p>{userProfile.solanawallet}</p>
+
+                <button
+                  className="text-xl text-[#828282] align-middle pb-1.5"
+                  onClick={() => copyToClipboard(userProfile.solanawallet)}
+                >
+                  <MdOutlineContentCopy
+                    size={12}
+                    className="ml-1.5 items-center"
+                  />
+                </button>
+                {copiedText === userProfile.solanawallet && (
+                  <span className=" xsm:pl-1 bg-gray-900  text-white px-3 py-1 rounded-md text-sm">
+                    Copied!
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
