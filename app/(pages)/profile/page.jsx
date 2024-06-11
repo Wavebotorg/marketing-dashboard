@@ -12,7 +12,6 @@ const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
   const [activeButton, setActiveButton] = useState(1);
 
-  // State to manage component visibility
   const [componentVisibility, setComponentVisibility] = useState({
     1: true,
     2: false,
@@ -23,13 +22,12 @@ const Profile = () => {
   });
 
   const handleButtonClick = (component) => {
-    // Update visibility state based on the clicked button
     setComponentVisibility((prevState) => ({
       ...prevState,
-      [activeButton]: false, // Hide previously active component
-      [component]: true, // Show clicked component
+      [activeButton]: false,
+      [component]: true,
     }));
-    setActiveButton(component); // Update active button
+    setActiveButton(component);
   };
 
   return (
@@ -74,7 +72,6 @@ const Profile = () => {
           </div>
 
           <div className="">
-            {/* Render components based on visibility state */}
             {Object.keys(componentVisibility).map((key) => (
               <div key={key}>
                 {componentVisibility[key] && renderComponent(key)}
@@ -87,7 +84,6 @@ const Profile = () => {
   );
 };
 
-// Helper function to render components based on key
 const renderComponent = (key) => {
   switch (parseInt(key)) {
     case 1:
