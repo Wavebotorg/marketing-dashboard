@@ -23,12 +23,8 @@ const Login = () => {
   const [captchaError, setCaptchaError] = useState(false);
   const [loginFields, setLoginFields] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const {
-    setWalletAddress,
-    setEmail,
-    setSolanaAddress,
-    setUserProfile
-  } = useWallet();
+  const { setWalletAddress, setEmail, setSolanaAddress, setUserProfile } =
+    useWallet();
   //Get Value from Input
   const onChangeInput = (e) => {
     const value = e.target.value;
@@ -71,23 +67,21 @@ const Login = () => {
     }
   };
 
+  const getUserProfile = async () => {
+    try {
+      const res = await axiosInstanceAuth.get("/getUserProfile");
+      const myData = res?.data?.data;
+      setUserProfile(myData);
+      setWalletAddress(myData?.wallet);
+      setSolanaAddress(myData?.solanawallet || "");
+      setEmail(myData?.email);
+      // console.log("User Profile Data:", myData?.solanawallet);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
+  };
 
-    const getUserProfile = async () => {
-      try {
-        const res = await axiosInstanceAuth.get("/getUserProfile");
-        const myData = res?.data?.data;
-        setUserProfile(myData);
-        setWalletAddress(myData?.wallet);
-        setSolanaAddress(myData?.solanawallet || "");
-        setEmail(myData?.email);
-        // console.log("User Profile Data:", myData?.solanawallet);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    };
-
-   
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   //Login Submit
   const handleSubmit = async () => {
@@ -109,7 +103,7 @@ const Login = () => {
           localStorage.setItem("email", myData?.email);
           Cookies.set("auth-token", myData?.token);
           toast.success(myData?.msg);
-          getUserProfile();   
+          getUserProfile();
           // setTimeout(() => {
           router.push("/");
           // }, 700);
@@ -149,7 +143,7 @@ const Login = () => {
         />
       </div>
 
-      <div className="px-4 sm:px-5 md:px-5 2xl:px-10 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+      <div className="px-4 sm:px-5 md:px-5 2xl:px-10 bg-black shadow-xl py-4 flex-container md:w-[25rem] lg:w-[28rem] 2xl:w-[33rem]  xl:w-[30rem]  md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-4 md:mt-10 lg:mt-10 xl:mt-12">
         <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl  tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Login
         </h2>
@@ -208,7 +202,7 @@ const Login = () => {
             setValidCaptcha(value);
             setCaptchaError(false);
           }}
-          className=" flex justify-center mt-5"
+          className=" flex justify-center mt-5 "
         />
 
         <div className="flex justify-center mt-10">

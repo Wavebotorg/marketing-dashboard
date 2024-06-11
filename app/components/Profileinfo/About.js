@@ -210,7 +210,7 @@ const About = () => {
               <p>Name :</p>
             </div>
 
-            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[174px]">
+            <div className="text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[174px]">
               {isEditing ? (
                 <input
                   type="text"
@@ -229,7 +229,7 @@ const About = () => {
             <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
               <p>Email :</p>
             </div>
-            <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[179px]">
+            <div className="text-[13px]  text-[#FFFFFF] font-normal mt-1 ml-0 md:ml-[179px]">
               {isEditing ? (
                 <input
                   type="email"
@@ -249,7 +249,7 @@ const About = () => {
               <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referral code :</p>
               </div>
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[102px]">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-1 ml-0 md:ml-[102px]">
                 <p>{userProfile.referralId}</p>
               </div>
             </div>
@@ -262,7 +262,7 @@ const About = () => {
               </div>
 
               <div className="block lg:hidden">
-                <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
+                <div className="text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
                   <p>{formatlink(referralLink)}</p>
                   <button
                     className="text-xl text-[#828282] align-middle pb-1.5"
@@ -282,7 +282,7 @@ const About = () => {
               </div>
 
               <div className="lg:block hidden">
-                <div className="text-[11.8px] md:text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
+                <div className="text-[13px] text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[112px] flex">
                   <p>{referralLink}</p>
                   <button
                     className="text-xl text-[#828282] align-middle pb-1.5"
@@ -308,7 +308,7 @@ const About = () => {
               <div className="mr-4 md:text-[20px] text-[18px] text-[#CACACA] font-medium">
                 <p>Referred by :</p>
               </div>
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[119px]">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-2 ml-0 md:ml-[119px]">
                 <p>{userProfile.ReferredBy}</p>
               </div>
             </div>
@@ -319,8 +319,8 @@ const About = () => {
               <p>EVM Address :</p>
             </div>
 
-            <div className="block md:hidden">
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
+            <div className="block lg:hidden">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
                 <p>{formatTransactionID(userProfile.wallet)}</p>
                 <button
                   className="text-xl text-[#828282] align-middle pb-1.5"
@@ -339,8 +339,8 @@ const About = () => {
               </div>
             </div>
 
-            <div className="md:block hidden">
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
+            <div className="lg:block hidden">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem] ml-0 md:ml-[100px] flex">
                 <p>{userProfile.wallet}</p>
                 <button
                   className="text-xl text-[#828282] align-middle pb-1.5"
@@ -365,8 +365,8 @@ const About = () => {
               <p>Solana Address :</p>
             </div>
 
-            <div className="block md:hidden">
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
+            <div className="block lg:hidden">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
                 <p>{formatTransactionID(userProfile.solanawallet)}</p>
 
                 <button
@@ -386,8 +386,8 @@ const About = () => {
               </div>
             </div>
 
-            <div className="md:block hidden">
-              <div className="text-[11.8px] md:text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
+            <div className="lg:block hidden">
+              <div className="text-[13px]  text-[#FFFFFF] font-normal mt-[0.50rem]  ml-0 md:ml-[79px] flex">
                 <p>{userProfile.solanawallet}</p>
 
                 <button
