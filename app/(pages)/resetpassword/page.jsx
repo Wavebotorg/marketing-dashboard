@@ -126,7 +126,7 @@ const ResetPassword = () => {
         />
       </div>
 
-      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14  flex-container md:w-[26rem] lg:w-[29rem] 2xl:w-[35rem]  xl:w-[31.5rem]  rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
         <h2 className="text-xl  sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Reset Password
         </h2>

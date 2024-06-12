@@ -160,7 +160,7 @@ function Sidebar() {
     },
     {
       id: 13,
-      pathname: "/apecurdocs",
+      pathname:"https://wavebot.gitbook.io/wave-manual" ,
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
@@ -391,13 +391,6 @@ const [  userProfile1,setUserProfile1] = useState([])
                         </span>
                       </div>
                     </button> 
-
-
-
-
-
-
-
                   ) : (
                     <button
                       onClick={(e) => setConfirmationPopUp(true)}
@@ -528,27 +521,30 @@ const [  userProfile1,setUserProfile1] = useState([])
                       </div>
                       <p className="text-xs">Invited by {userProfile1?.email || userProfile?.email}</p>
                       <div className="flex mt-2">
-                        <Image
+                        <Link href="/" > <Image
                           src={discord}
                           alt="discord"
                           width="10px"
                           height="10px"
                           className="mr-2 cursor-pointer"
-                        />
-                        <Image
+                        /></Link>
+                        <Link    href="/"> <Image
                           src={Twitter}
                           alt="twitter"
                           width="10px"
                           height="10px"
                           className="mr-2 cursor-pointer"
-                        />
-                        <Image
+                        /></Link>
+                        <Link  href="/"> <Image
                           src={medium}
                           alt="medium"
                           width="10px"
                           height="10px"
                           className="mr-2 cursor-pointer"
-                        />
+                        /></Link>
+                       
+                       
+                       
                       </div>
                     </div>
                   </div>

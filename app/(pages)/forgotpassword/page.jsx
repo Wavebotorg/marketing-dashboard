@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../apiInstances/axiosInstance";
+import Link from "next/link";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -91,7 +92,7 @@ const ForgotPassword = () => {
         />
       </div>
 
-      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
+      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14  flex-container md:w-[26rem] lg:w-[29rem] 2xl:w-[35rem]  xl:w-[31.5rem] rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
         <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Forget Password
         </h2>
@@ -119,7 +120,13 @@ const ForgotPassword = () => {
           </button>
         </div>
         <ToastContainer />
+        <div className="flex  mt-5 justify-center ">
+          <Link href="/login" className="text-xs">
+            Back to login
+          </Link>
+        </div>
       </div>
+      
     </div>
   );
 };
