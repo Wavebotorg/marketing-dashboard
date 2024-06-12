@@ -47,7 +47,7 @@ function Sidebar() {
     setSolanaAddress,
     isNavbar,
     setIsNavbar,
-    userProfile
+    userProfile,
   } = useWallet();
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
@@ -107,7 +107,7 @@ function Sidebar() {
       icon: swaphistory,
       pagename: "Swap History",
     },
-    {
+    /*     {
       id: 5,
       pathname: "/tokendashboard",
       icon: Tokendashboard,
@@ -118,7 +118,7 @@ function Sidebar() {
       pathname: "/holder",
       icon: Holder,
       pagename: "Holder",
-    },
+    }, */
     {
       id: 7,
       pathname: "/referral",
@@ -137,12 +137,12 @@ function Sidebar() {
       icon: Portfolio,
       pagename: "Portfolio",
     },
-    {
+    /*     {
       id: 10,
       pathname: "/volumestats",
       icon: Volumestats,
       pagename: "Volume Stats",
-    },
+    }, */
   ];
 
   const headerbottom = [
@@ -164,16 +164,17 @@ function Sidebar() {
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
-    {
+    /*     {
       id: 14,
       pathname: "/officialwebsite",
       icon: Officialwebsite,
       pagename: "Officialwebsite",
-    },
+    }, */
   ];
   const HoverStyle = (id) => {
     setIsHover(id);
   };
+  const signupRefRegex = /^\/signupRef\/(.*)/;
   const matchPath =
     pathname === "/login" ||
     // pathname === "/" ||
@@ -181,9 +182,11 @@ function Sidebar() {
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
     pathname === "/resetpassword" ||
-    pathname === "/sucessreset";
+    pathname === "/sucessreset" ||
+    signupRefRegex.test(pathname);
+  // pathname === "/signupRef/*";
 
-const [  userProfile1,setUserProfile1] = useState([])
+  const [userProfile1, setUserProfile1] = useState([]);
   useEffect(() => {
     const getUserProfile = async () => {
       try {
@@ -376,36 +379,34 @@ const [  userProfile1,setUserProfile1] = useState([])
               <div>
                 {token ? (
                   <div className=" grid place-items-center xl:mb-3 mb-10">
-                     {isNavbar ? (
-                 
-                    <button
-                      onClick={(e) => setConfirmationPopUp(true)}
-                    
-                      className="bg-[#1788FB] w-64 xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
-                    >
-                      <div className="flex items-center gap-1 ">
-                        <FiPower size={18} className="block ml-2" />
-                        {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
-                        <span className="ml-4 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
-                          Logout
-                        </span>
-                      </div>
-                    </button> 
-                  ) : (
-                    <button
-                      onClick={(e) => setConfirmationPopUp(true)}
-                      // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
-                      className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
-                    >
-                      <div className="flex items-center gap-1">
-                        <FiPower size={18} className="xl:block hidden" />
-                        {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
-                        <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
-                          Logout
-                        </span>
-                      </div>
-                    </button>
-                  )}
+                    {isNavbar ? (
+                      <button
+                        onClick={(e) => setConfirmationPopUp(true)}
+                        className="bg-[#1788FB] w-64 xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
+                      >
+                        <div className="flex items-center gap-1 ">
+                          <FiPower size={18} className="block ml-2" />
+                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                          <span className="ml-4 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                            Logout
+                          </span>
+                        </div>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={(e) => setConfirmationPopUp(true)}
+                        // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
+                        className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
+                      >
+                        <div className="flex items-center gap-1">
+                          <FiPower size={18} className="xl:block hidden" />
+                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                          <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                            Logout
+                          </span>
+                        </div>
+                      </button>
+                    )}
                     {ConfirmationPopUp ? (
                       <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[999999]   ">
@@ -498,15 +499,17 @@ const [  userProfile1,setUserProfile1] = useState([])
                       />
                     </div> */}
                     <div
-                      className="text-lg rounded-full profile-bg
+                      className="text-lg mt-2 rounded-full profile-bg
                        w-14 h-14 text-center pt-3"
                     >
-                      {capitalizeFirstAndLast(userProfile1?.name || userProfile?.name)}
+                      {capitalizeFirstAndLast(
+                        userProfile1?.name || userProfile?.name
+                      )}
                     </div>
 
                     <div>
-                      <div className="flex  items-center">
-                        <h1>{userProfile1?.name || userProfile?.name  }</h1>
+                      <div className="flex mt-2  items-center">
+                        <h1>{userProfile1?.name || userProfile?.name}</h1>
                         <Link href="/profile">
                           <span>
                             <Image
@@ -519,7 +522,9 @@ const [  userProfile1,setUserProfile1] = useState([])
                           </span>
                         </Link>
                       </div>
-                      <p className="text-xs">Invited by {userProfile1?.email || userProfile?.email}</p>
+                      <p className="text-xs">
+                        Invited by {userProfile1?.email || userProfile?.email}
+                      </p>
                       <div className="flex mt-2">
                         <Link href="/" > <Image
                           src={discord}
@@ -567,12 +572,18 @@ const [  userProfile1,setUserProfile1] = useState([])
                       className="text-lg rounded-full profile-bg
                        w-14 h-14 text-center pt-3 "
                     >
-                      {capitalizeFirstAndLast(userProfile1?.name || userProfile?.name)}
+                      {capitalizeFirstAndLast(
+                        userProfile1?.name || userProfile?.name
+                      )}
                     </div>
                     {/* < className="ml-6">  */}
                     <div className={` ${isNavbar ? "" : "hidden "} `}>
-                      <p className="">{userProfile1?.name || userProfile?.name}</p>
-                      <p className="text-xs">{userProfile1?.email || userProfile?.email}</p>
+                      <p className="">
+                        {userProfile1?.name || userProfile?.name}
+                      </p>
+                      <p className="text-xs">
+                        {userProfile1?.email || userProfile?.email}
+                      </p>
                     </div>
                   </div>
                 </Link>

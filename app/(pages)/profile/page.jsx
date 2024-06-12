@@ -1,143 +1,34 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Appearance from "../../components/Profileinfo/Appearance";
 import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
-import Referral from "../../components/Profileinfo/Referral ";
 import { FaBars } from "react-icons/fa6";
 import { useWallet } from "../../components/contexts/WalletContext";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
+  const [activeButton, setActiveButton] = useState(1);
 
-  const [isComponent1Visible, setComponent1Visible] = useState(true);
-  const [isComponent2Visible, setComponent2Visible] = useState(false);
-  const [isComponent3Visible, setComponent3Visible] = useState(false);
-  const [isComponent4Visible, setComponent4Visible] = useState(false);
-  const [isComponent5Visible, setComponent5Visible] = useState(false);
-  const [isComponent6Visible, setComponent6Visible] = useState(false);
-
-  const handleButtonClick = (component) => {
-    if (component === 1) {
-      setComponent1Visible(true);
-      setComponent2Visible(false);
-      setComponent3Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(1);
-    } else if (component === 2) {
-      setComponent2Visible(true);
-      setComponent1Visible(false);
-      setComponent3Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(2);
-    } else if (component === 3) {
-      setComponent3Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(3);
-    } else if (component === 4) {
-      setComponent4Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent3Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(4);
-    } else if (component === 5) {
-      setComponent5Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent3Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(5);
-    } else if (component === 6) {
-      setComponent6Visible(true);
-      setComponent5Visible(false);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent3Visible(false);
-
-      setActiveButton(6);
-    }
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (activeButton === 1) {
-      setComponent1Visible(true);
-      setComponent2Visible(false);
-      setComponent3Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(1);
-    } else if (activeButton === 2) {
-      setComponent2Visible(true);
-      setComponent1Visible(false);
-      setComponent3Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(2);
-    } else if (activeButton === 3) {
-      setComponent3Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(3);
-    } else if (activeButton === 4) {
-      setComponent4Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent3Visible(false);
-      setComponent5Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(4);
-    } else if (activeButton === 5) {
-      setComponent5Visible(true);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent3Visible(false);
-      setComponent6Visible(false);
-
-      setActiveButton(5);
-    } else if (activeButton === 5) {
-      setComponent5Visible(true);
-      setComponent5Visible(false);
-      setComponent2Visible(false);
-      setComponent1Visible(false);
-      setComponent4Visible(false);
-      setComponent3Visible(false);
-
-      setActiveButton(5);
-    }
+  const [componentVisibility, setComponentVisibility] = useState({
+    1: true,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: false,
   });
 
-  const [activeButton, setActiveButton] = useState(1);
+  const handleButtonClick = (component) => {
+    setComponentVisibility((prevState) => ({
+      ...prevState,
+      [activeButton]: false,
+      [component]: true,
+    }));
+    setActiveButton(component);
+  };
 
   return (
     <>
@@ -162,81 +53,52 @@ const Profile = () => {
           </div>
 
           <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
-            <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 1 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(1)}
-              >
-                About
-              </button>
-            </div>
-            <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 2 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(2)}
-              >
-                Setup
-              </button>
-            </div>
-            <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 3 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(3)}
-              >
-                Appearance
-              </button>
-            </div>
-            <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 4 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(4)}
-              >
-                Security & Login
-              </button>
-            </div>
-            <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 5 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(5)}
-              >
-                Notification
-              </button>
-            </div>
-            {/* <div>
-              <button
-                className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
-                  activeButton === 6 && "bg-blue-500"
-                }`}
-                onClick={() => handleButtonClick(6)}
-              >
-                Referral
-              </button>
-            </div> */}
+            {[1, 2, 3, 4, 5].map((button) => (
+              <div key={button}>
+                <button
+                  className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
+                    activeButton === button && "bg-blue-500"
+                  }`}
+                  onClick={() => handleButtonClick(button)}
+                >
+                  {button === 1 && "About"}
+                  {button === 2 && "Setup"}
+                  {button === 3 && "Appearance"}
+                  {button === 4 && "Security & Login"}
+                  {button === 5 && "Notification"}
+                </button>
+              </div>
+            ))}
           </div>
-          <div className="">
-            <div>{isComponent1Visible && <About />}</div>
-            {/* <div>{isComponent6Visible && <Referral />}</div> */}
-            <div>{isComponent2Visible && <Setup />}</div>
-            <div>{isComponent3Visible && <Appearance />}</div>
-            <div>{isComponent4Visible && <Security />}</div>
-            <div>{isComponent5Visible && <Notification />}</div>
 
-            <div className="flex justify-end mb-3"></div>
+          <div className="">
+            {Object.keys(componentVisibility).map((key) => (
+              <div key={key}>
+                {componentVisibility[key] && renderComponent(key)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </>
   );
+};
+
+const renderComponent = (key) => {
+  switch (parseInt(key)) {
+    case 1:
+      return <About />;
+    case 2:
+      return <Setup />;
+    case 3:
+      return <Appearance />;
+    case 4:
+      return <Security />;
+    case 5:
+      return <Notification />;
+    default:
+      return null;
+  }
 };
 
 export default Profile;
