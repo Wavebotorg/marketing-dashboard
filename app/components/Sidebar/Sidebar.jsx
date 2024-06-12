@@ -162,7 +162,7 @@ function Sidebar() {
     },
     {
       id: 13,
-      pathname: "/apecurdocs",
+      pathname: "https://wavebot.gitbook.io/wave-manual",
       icon: Apecurdocs,
       pagename: "Apecurdocs",
     },
@@ -193,7 +193,9 @@ function Sidebar() {
     const getUserProfile = async () => {
       try {
         const res = await axiosInstanceAuth.get("/getUserProfile");
+        0;
         const myData = res?.data?.data;
+        console.log("🚀 ~ getUserProfile ~ getUserProfile:", res);
         setUserProfile1(myData);
         setWalletAddress(myData?.wallet);
         setSolanaAddress(myData?.solanawallet || "");
@@ -559,7 +561,7 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://t.me/onchain_wavebot">
+                        <Link href="https://www.tiktok.com/@wavebotapp">
                           <Image
                             src={tiktok}
                             alt="tiktok"
@@ -664,7 +666,7 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://t.me/onchain_wavebot">
+                      <Link href="https://www.tiktok.com/@wavebotapp">
                         <Image
                           src={tiktok}
                           alt="tiktok"

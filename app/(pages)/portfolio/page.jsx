@@ -1,357 +1,206 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import bit from "../../../public/assets/bitcoin.png";
+import React, { useState,useEffect,useRef } from "react";
+import { useNavigation } from "react-router-dom";
+import { useRouter } from "next/navigation";
+import NewPair from "../newpair/page";
+import Trending from "../trending/page";
 import Image from "next/image";
-import Pagination from "../Pagination/Pagination";
-import { useSearch } from "../../components/contexts/SearchContext";
+import Filter from "../../components/Filter/Filter.jsx";
+import eth from "../../../public/assets/tokenimg/eth.png";
+import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
+import optimism from "../../../public/assets/tokenimg/optimism.png";
+import poly from "../../../public/assets/tokenimg/poly.png";
+import SOL from "../../../public/assets/tokenimg/SOL.png";
+import BNB from "../../../public/assets/tokenimg/BNB.png";
+import avalanche from "../../../public/assets/tokenimg/avalanche.png";
+import cronos from "../../../public/assets/tokenimg/cronos.jpg";
+import fantom from "../../../public/assets/tokenimg/fantom.png";
 
-const Portfolio = () => {
-  // Sample data array
-  const portfolioData = [
-    {
-      id: 1,
-      coin: "Bitcoin BTC",
-      price: "0.07727",
-      p: " -3.12% (-0.00)",
-      units: "124858.18",
-      avgOpen: "0.08089",
-      pl: "-$452.21",
-      plPercentage: "-4.48%",
-      value: "$9647.79",
-      sell: "0.07727",
-      buy: "0.07984",
-    },
-    {
-      id: 2,
-      coin: "etherum",
-      price: "0.07727",
-      p: " -3.12% (-0.00)",
-      units: "124858.18",
-      avgOpen: "0.08089",
-      pl: "-$452.21",
-      plPercentage: "-4.48%",
-      value: "$9647.79",
-      sell: "0.07727",
-      buy: "0.07984",
-    },
-    {
-      id: 3,
-      coin: "usdc",
-      price: "0.07727",
-      p: " -3.12% (-0.00)",
-      units: "124858.18",
-      avgOpen: "0.08089",
-      pl: "-$452.21",
-      plPercentage: "-4.48%",
-      value: "$9647.79",
-      sell: "0.07727",
-      buy: "0.07984",
-    },
-    {
-      id: 4,
-      coin: "Sepolia",
-      price: "0.07727",
-      p: " -3.12% (-0.00)",
-      units: "124858.18",
-      avgOpen: "0.08089",
-      pl: "-$452.21",
-      plPercentage: "-4.48%",
-      value: "$9647.79",
-      sell: "0.07727",
-      buy: "0.07984",
-    },
-  ];
 
-  const { searchQuery } = useSearch(); //search
+const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
+  const router = useRouter();
+  const [selectedpage, setSelectedPage] = useState("newpair");
+  const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
+  const [selectChain, setSelectChain] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  //pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
 
-  //search
-  const filteredData = portfolioData.filter((coin) =>
-    // coin.id.toLowerCase().includes(searchQuery.toLowerCase())
-    coin.coin.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  const visibleData = filteredData.slice(startIndex, endIndex);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+ 
+ 
+  const [isOn, setIsOn] = useState(false);
+ 
+  
+  const toggleSwitch = () => {
+    setIsOn(!isOn);
   };
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery]);
+ 
+ 
+ 
 
   return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 md:mr-5 md:ml-0  xsm:mr-4 xsm:ml-5">
-        <div className=" mt-7" />
-        <div className="flex items-center justify-between mt-6">
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full ">
+      <div className="text-white xl:ml-[8rem] xl:mr-[92px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
+        
+      <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">My Portfolio</div>
         </div>
-        <div className="flex  md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
-          <div>
-            <button className="bg-blue-500 px-2 rounded-full">Orders</button>
-          </div>
-          <div>
-            <button className="  ">Manual Trades</button>
-          </div>
-        </div>
 
-        <div className="mt-5 mb-5 lg:block hidden">
-          <div className="rounded-lg">
-            <div className="bg-[#1C1C1C] text-white overflow-auto rounded-lg ">
-              {/* for 2xl ,xl and lg size  */}
-              <>
-                <table className="w-full">
-                  <thead className="sticky top-0 bg-[#1C1C1C] shadow-2xl">
-                    <tr
-                      style={{ backgroundColor: "rgba(23, 136, 251, 0.26)" }}
-                      className="text-[#CECECE]"
-                    >
-                      <th className="px-2 py-3 text-center text-base font-medium  sticky left-0 ">
-                        Coin
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Price
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Units
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Avg.Open
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        P/L
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        P/L(%)
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Value
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Sell
-                      </th>
-                      <th className="px-2 py-3 text-center text-base font-medium   whitespace-nowrap">
-                        Buy
-                      </th>
-                    </tr>
-                  </thead>
+        <div className="">
+          <div className="mt-6 rounded-lg overflow-auto">
+            <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
+              {/* for with points and recent join user data show */}
 
-                  <tbody>
-                    {visibleData?.length > 0 &&
-                      visibleData?.map((item, index) => (
-                        <tr key={index}>
-                          <td className="px-3 py-4 text-center whitespace-nowrap font-medium text-white sticky left-0 bg-[#1C1C1C]">
-                            <div className="flex items-center  gap-2">
-                              <div>
-                                <Image
-                                  src={bit}
-                                  alt="Picture of the author"
-                                  className="rounded-full max-w-12"
-                                />
-                              </div>
-                              <div>{item?.coin}</div>
-                            </div>
-                          </td>
-
-                          <td className="px-3 py-4  whitespace-nowrap  text-white">
-                            <div className="py-0.5 text-center">
-                              {item?.price}
-                            </div>
-                            <p className="text-sm text-[#FF0000] text-center">
-                              <span
-                                className={` ${
-                                  item?.p === 0
-                                    ? "text-white"
-                                    : item?.p < 0
-                                    ? "text-red-500"
-                                    : "text-green-500"
-                                }`}
-                              >
-                                {item?.p}
-                              </span>
-                            </p>
-                          </td>
-
-                          <td className=" px-3 py-4 text-center whitespace-nowrap  text-white">
-                            <div className="py-0.5 text-center">
-                              {item?.units}
-                            </div>
-                            <p className="text-sm lg:mr-10 md:mr-4 xsm:mr-2 text-[#CECECE] text-end">
-                              Long
-                            </p>
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.avgOpen}
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            <span
-                              className={` ${
-                                item?.pl === 0
-                                  ? "text-white"
-                                  : item?.pl < 0
-                                  ? "text-red-500"
-                                  : "text-green-500"
-                              }`}
-                            >
-                              {item?.pl}
-                            </span>
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            <span
-                              className={` ${
-                                item?.plPercentage === 0
-                                  ? "text-white"
-                                  : item?.plPercentage < 0
-                                  ? "text-red-500"
-                                  : "text-green-500"
-                              }`}
-                            >
-                              {item?.plPercentage}
-                            </span>
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.value}
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.sell}
-                          </td>
-                          <td className="px-3 py-4 text-center whitespace-nowrap  text-white">
-                            {item?.buy}
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </>
-            </div>
-          </div>
-        </div>
-
-        <Pagination
-          totalItems={filteredData.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
-
-        {/* for md and sm size */}
-        {visibleData?.length > 0 &&
-          visibleData?.map((item, index) => (
-            <div key={index} className="lg:hidden mt-4 ">
-              <div className="w-full  mx-auto bg-[#1C1C1C] shadow-md rounded-md ">
-                <div className="w-full  ">
-                  <div className="">
-                    <>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Coin</div>
-                        <div className="flex justify-end items-center py-2 pr-4 pl-4 gap-1.5">
-                          <span>
-                            <Image
-                              src={bit}
-                              alt="Picture of the author"
-                              className="rounded-full max-w-12"
-                            />
-                          </span>
-                          {item?.coin}
-                        </div>
+             
+              
+              View all tokens you&apos;ve bought or sold through Photon.
+                  <div className="flex py-2">
+                    <div className="pr-3">
+                      {" "}
+                      <Filter />
+                    </div>
+                    <div className="flex items-center">
+                      <div
+                        className={`w-10 h-4 flex items-center rounded-full p-1 cursor-pointer ${
+                          isOn ? onColor : offColor
+                        }`}
+                        onClick={toggleSwitch}
+                      >
+                        <div
+                          className={`bg-white w-5 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${
+                            isOn ? "translate-x-4" : "translate-x-0"
+                          }`}
+                        />
                       </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Price</div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          <span className="pl-5">{item?.price}</span>
-                          <p className="text-sm text-[#FF0000]">
-                            <span
-                              className={` ${
-                                item?.p === 0
-                                  ? "text-white"
-                                  : item?.p < 0
-                                  ? "text-red-500"
-                                  : "text-green-500"
-                              }`}
-                            >
-                              {item?.p}
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Units</div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          {item?.units}
-                          <p className="text-sm mr-4 text-[#CECECE] text-end">
-                            Long
-                          </p>
-                        </div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold">
-                          {" "}
-                          Avg.Open
-                        </div>
-                        <div className=" py-2 pr-4 pl-4"> {item?.avgOpen}</div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> P/L</div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          <span
-                            className={` ${
-                              item?.pl === 0
-                                ? "text-white"
-                                : item?.pl < 0
-                                ? "text-red-500"
-                                : "text-green-500"
-                            }`}
-                          >
-                            {item?.pl}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> P/L(%)</div>
-                        <div className=" py-2 pr-4 pl-4">
-                          {" "}
-                          <span
-                            className={` ${
-                              item?.plPercentage === 0
-                                ? "text-white"
-                                : item?.plPercentage < 0
-                                ? "text-red-500"
-                                : "text-green-500"
-                            }`}
-                          >
-                            {item?.plPercentage}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Value</div>
-                        <div className=" py-2 pr-4 pl-4"> {item?.value}</div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Sell</div>
-                        <div className=" py-2 pr-4 pl-4"> {item?.sell}</div>
-                      </div>
-                      <div className="border-b border-[#494949] flex justify-between">
-                        <div className="py-2  pl-4 font-semibold"> Buy</div>
-                        <div className=" py-2 pr-4 pl-4"> {item?.buy}</div>
-                      </div>
-                      <div></div>
-                    </>
+                      <span className="mx-3 ">
+                      Show hidden</span>
+                    </div>
                   </div>
-                </div>
-              </div>
+                  <table className="w-full">
+                    <thead className="sticky top-0 leader-color shadow-2xl ">
+                      <tr
+                        className="  text-[#CECECE]   bg-[#1C1C1C]  "
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                      >
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Pair Info
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Created
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-4 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Liquidity
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Initial Liquidity
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          FDV
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          TXNS
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Volume
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Buy/Sell Tax
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Audit Results
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
+                        >
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    {/* <tbody>
+                    {visibleData?.length > 0 ? (
+                      visibleData.map((leader, index) => (
+                        <tr key={index}>
+                          {selectedLeaderboard === "referral" ? (
+                            <>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.name}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.email}
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                                {leader?.referrals}
+                              </td>
+                            </>
+                          ) : (
+                            <>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.name}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.email}
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md text-white">
+                                {leader?.totalTransaction}
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                                {Math.floor(leader?.totalTransferToken)}
+                               
+                              </td>
+                            </>
+                          )}
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan="4"
+                          className="px-6 py-4 pt-60 font-bold text-lg text-center text-md text-white"
+                        >
+                          No data found.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody> */}
+                  </table>
+              
+            
+               
             </div>
-          ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Portfolio;
+export default Discover;
