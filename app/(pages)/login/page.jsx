@@ -202,7 +202,7 @@ const Login = () => {
             setValidCaptcha(value);
             setCaptchaError(false);
           }}
-          className=" flex justify-center mt-5"
+          className=" flex justify-center mt-5 "
         />
 
         <div className="flex justify-center mt-10">

@@ -94,9 +94,9 @@ const LeaderBoard = () => {
     selectedLeaderboard === "referral" ? refrealList : defiList;
   const filteredData = currentLeaderboard?.filter(
     (coin) =>
-      coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      coin.points.toLowerCase().includes(searchQuery.toLowerCase())
+      coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+      // coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      // coin.points.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {

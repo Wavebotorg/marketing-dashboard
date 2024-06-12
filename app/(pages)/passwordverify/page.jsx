@@ -20,12 +20,8 @@ const PasswordVerify = () => {
   const timer1 = setTimeout(() => {
     setRemainingTime(remainingTime - 1);
   }, 1000);
-  const {
-    setWalletAddress,
-    setEmail,
-    setSolanaAddress,
-    setUserProfile
-  } = useWallet();
+  const { setWalletAddress, setEmail, setSolanaAddress, setUserProfile } =
+    useWallet();
 
   const timer = setTimeout(() => {
     setShowResendButton(true);
@@ -41,7 +37,6 @@ const PasswordVerify = () => {
       router.push("/login");
     }
   }, []);
-
 
   const getUserProfile = async () => {
     try {
@@ -81,7 +76,7 @@ const PasswordVerify = () => {
 
         if (myData?.status) {
           if (myData?.data === "signup") {
-            getUserProfile();   
+            getUserProfile();
             router.push("/");
           }
 

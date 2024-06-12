@@ -24,11 +24,13 @@ import send from "../../../public/send.svg";
 import Swap from "../../../public/assets/sidebar/swap.svg";
 import swaphistory from "../../../public/assets/sidebar/swaphistory.svg";
 import Apecurdocs from "../../../public/assets/sidebar/apecurdocs.svg";
-import Officialwebsite from "../../../public/assets/sidebar/officialwebsite.svg";
-import Sidebaruserlogo from "../../../public/assets/sidebar/sidebaruserlogo.png";
+import instagram from "../../../public/assets/sidebar/instagram.png";
+import community from "../../../public/assets/sidebar/community.png";
+import youtube from "../../../public/assets/sidebar/youtube.png";
 import Arrow from "../../../public/assets/sidebar/arraowsidebar.png";
-import Twitter from "../../../public/assets/sidebar/twitter.png";
-import medium from "../../../public/assets/sidebar/medium.png";
+import tiktok from "../../../public/assets/sidebar/tiktok.png";
+import x from "../../../public/assets/sidebar/tweet.png";
+import bot from "../../../public/assets/sidebar/bot.png";
 import Cookies from "js-cookie";
 
 import discord from "../../../public/assets/sidebar/discord.png";
@@ -526,30 +528,55 @@ function Sidebar() {
                         Invited by {userProfile1?.email || userProfile?.email}
                       </p>
                       <div className="flex mt-2">
-                        <Link href="/" > <Image
-                          src={discord}
-                          alt="discord"
-                          width="10px"
-                          height="10px"
-                          className="mr-2 cursor-pointer"
-                        /></Link>
-                        <Link    href="/"> <Image
-                          src={Twitter}
-                          alt="twitter"
-                          width="10px"
-                          height="10px"
-                          className="mr-2 cursor-pointer"
-                        /></Link>
-                        <Link  href="/"> <Image
-                          src={medium}
-                          alt="medium"
-                          width="10px"
-                          height="10px"
-                          className="mr-2 cursor-pointer"
-                        /></Link>
-                       
-                       
-                       
+                        <Link href="https://t.me/onchain_wavebot">
+                          <Image
+                            src={bot}
+                            alt="Telegram bot"
+                            className="mr-2 cursor-pointer"
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        </Link>
+
+                        <Link href="https://t.me/WaveUsers">
+                          <Image
+                            src={community}
+                            alt="Telegram community"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                        <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                          <Image
+                            src={x}
+                            alt="twitter"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                        <Link href="https://www.instagram.com/wavebotapp/">
+                          <Image
+                            src={instagram}
+                            alt="instagram"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                        <Link href="https://t.me/onchain_wavebot">
+                          <Image
+                            src={tiktok}
+                            alt="tiktok"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                        <Link href="https://www.youtube.com/@WaveBotApp">
+                          <Image
+                            src={youtube}
+                            alt="youtube"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
                       </div>
                     </div>
                   </div>
