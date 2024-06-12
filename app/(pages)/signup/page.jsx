@@ -151,7 +151,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bgImage overflow-y-auto">
+    <div className="fixed top-0 left-0 w-full  h-full flex flex-col items-center justify-center bgImage overflow-y-auto">
       <div className="text-center">
         <Image
           src={Logo}
@@ -160,8 +160,8 @@ const Signup = () => {
         />
       </div>
 
-      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-8  sm:py-8 md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-8 sm:mt-8 md:mt-10 lg:mt-10 xl:mt-12">
-        <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-10 sm:mb-10 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
+      <div className="px-5 sm:px-7 md:px-7 2xl:px-14 bg-black shadow-xl py-3  flex-container md:w-[26rem] lg:w-[29rem] xl:w-[31.5rem] 2xl:w-[35rem]  md:py-8 lg:py-10  2xl:py-14   rounded-3xl mt-3 md:mt-10 lg:mt-10 xl:mt-12">
+        <h2 className="text-xl sm:text-xl md:text-2xl lg:text-2xl  2xl:text-4xl tracking-wide text-white   mb-3 md:mb-10 lg:mb-12 2xl:mb-14  font-semibold text-center">
           Sign up
         </h2>
 
@@ -252,7 +252,7 @@ const Signup = () => {
           />
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-5">
           {loading ? (
             <button
               onClick={handleSubmit}
@@ -272,7 +272,7 @@ const Signup = () => {
           )}
           <ToastContainer />
         </div>
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-5">
           <Link href="/login" className="text-xs text-[#CACACA]">
             Already a User?{" "}
             <span className="font-bold text-sm hover:text-[#1788FB]">

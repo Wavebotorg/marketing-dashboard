@@ -154,7 +154,7 @@ const LeaderBoard = () => {
                           >
                             Name
                           </th>
-                          <th
+                          {/* <th
                             scope="col"
                             style={{
                               backgroundColor: "rgba(23, 136, 251, 0.26)",
@@ -162,7 +162,7 @@ const LeaderBoard = () => {
                             className="px-6 py-3 text-center text-base font-medium   whitespace-nowrap"
                           >
                             Invited by
-                          </th>
+                          </th> */}
                           <th
                             scope="col"
                             style={{
@@ -184,7 +184,7 @@ const LeaderBoard = () => {
                           >
                             Name
                           </th>
-                          <th
+                          {/* <th
                             scope="col"
                             style={{
                               backgroundColor: "rgba(23, 136, 251, 0.26)",
@@ -192,7 +192,7 @@ const LeaderBoard = () => {
                             className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                           >
                             Email
-                          </th>
+                          </th> */}
                           <th
                             scope="col"
                             style={{
@@ -225,9 +225,9 @@ const LeaderBoard = () => {
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                                 {leader?.name}
                               </td>
-                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                              {/* <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
                                 {leader?.email}
-                              </td>
+                              </td> */}
                               <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
                                 {leader?.referrals}
                               </td>
@@ -237,9 +237,9 @@ const LeaderBoard = () => {
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                                 {leader?.name}
                               </td>
-                              <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
+                              {/* <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
                                 {leader?.email}
-                              </td>
+                              </td> */}
                               <td className="px-4 py-4 text-center whitespace-nowrap text-md text-white">
                                 {leader?.totalTransaction}
                               </td>
