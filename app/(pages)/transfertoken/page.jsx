@@ -188,10 +188,11 @@ const TransferToken = () => {
             await getWalletBalance(selectedNetwork);
           }
         }, 3000);
+        resetFields();
       } else {
         toast.error(response?.data?.message);
       }
-      resetFields(); // Reset all fields after successful transfer
+      // Reset all fields after successful transfer
 
       // console.log(
       //   "------------------------------------------------------LOG",
@@ -236,10 +237,11 @@ const TransferToken = () => {
             await getWalletBalance(selectedNetwork);
           }
         }, 3000);
+        resetFields();
       } else {
         toast.error(response?.data?.message);
       }
-      resetFields(); // Reset all fields after successful transfer
+      // Reset all fields after successful transfer
     } catch (error) {
       console.error("There was a problem with the API call:", error);
       toast.error("An error occurred while processing your request");

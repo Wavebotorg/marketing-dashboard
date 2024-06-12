@@ -461,10 +461,11 @@ const Swap = () => {
               await getWalletBalance(selectedNetwork);
             }
           }, 3000);
+          resetFields();
         } else {
           toast.error(myData?.message);
         }
-        resetFields(); // Reset all fields after successful transfer
+        // Reset all fields after successful transfer
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -579,10 +580,11 @@ const Swap = () => {
                   await getWalletBalance(selectedNetwork);
                 }
               }, 3000);
+              resetFields();
             } else {
               toast.error(myData?.message);
             }
-            resetFields(); // Reset all fields after successful transfer
+            // Reset all fields after successful transfer
           })
           .catch((error) => {
             console.error("Error occurred:", error);
