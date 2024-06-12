@@ -52,7 +52,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
              
               
-              View all tokens you've bought or sold through Photon.
+              View all tokens you&apos;ve bought or sold through Photon.
                   <div className="flex py-2">
                     <div className="pr-3">
                       {" "}
