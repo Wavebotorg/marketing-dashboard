@@ -69,6 +69,27 @@ const Swap = () => {
   });
   // console.log("selectedTokenDatato---",selectedTokenDatato)
 
+  // Function to reset all fields
+  const resetFields = () => {
+    setSelectedTokenDatato({
+      name_to: "",
+      image_to: "",
+      price_to: "",
+      address_to: "",
+      decimals_to: "",
+      input_to: "",
+      name_from: "",
+      image_from: "",
+      input_from: "",
+      price_from: "",
+      address_from: "",
+      decimals_from: "",
+      chainid: "",
+      descode: "",
+      chainname: "",
+    });
+  };
+
   const NetworkData = [
     {
       name: "Ethereum",
@@ -443,6 +464,7 @@ const Swap = () => {
         } else {
           toast.error(myData?.message);
         }
+        resetFields(); // Reset all fields after successful transfer
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -560,6 +582,7 @@ const Swap = () => {
             } else {
               toast.error(myData?.message);
             }
+            resetFields(); // Reset all fields after successful transfer
           })
           .catch((error) => {
             console.error("Error occurred:", error);
@@ -625,6 +648,7 @@ const Swap = () => {
         } else {
           toast.error(myData?.message);
         }
+        resetFields(); // Reset all fields after successful transfer
       })
       .catch((error) => {
         console.error("Error occurred:", error);

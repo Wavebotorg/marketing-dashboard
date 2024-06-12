@@ -11,6 +11,8 @@ import { useWallet } from "../../components/contexts/WalletContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import Cookies from "js-cookie";
+
 const PasswordVerify = () => {
   const router = useRouter();
   const [otp, setOtp] = useState("");
@@ -72,10 +74,12 @@ const PasswordVerify = () => {
       .post("verify", mydata)
       .then((res) => {
         const myData = res?.data;
-        console.log("OTP Done--->", myData?.data);
+        console.log("OTP Done---> ", myData?.data);
 
         if (myData?.status) {
           if (myData?.data === "signup") {
+            localStorage.setItem("Token", myData?.token);
+            Cookies.set("auth-token", myData?.token);
             getUserProfile();
             router.push("/");
           }

@@ -583,37 +583,108 @@ function Sidebar() {
                 </div>
 
                 {/* Only show the image on screens smaller than 2xl and xl */}
-                <Link href="/profile" onClick={() => setIsNavbar(false)}>
-                  <div
-                    className="2xl:hidden xl:hidden flex gap-2 lg:ml-0 ml-3  "
-                    style={{ position: "absolute", bottom: "0" }}
-                  >
-                    {/* <Image
+
+                <div
+                  className="2xl:hidden xl:hidden flex gap-2 lg:ml-0 ml-3 mt-5 "
+                  style={{ position: "absolute", bottom: "0" }}
+                >
+                  {/* <Image
                       src={Sidebaruserlogo}
                       alt="Sidebaruserlogo"
                       width="30px"
                       height="30px"
                       className=" ml-2 items-center"
                     /> */}
+                  <Link href="/profile" onClick={() => setIsNavbar(false)}>
                     <div
                       className="text-lg rounded-full profile-bg
-                       w-14 h-14 text-center pt-3 "
+                       w-14 h-14 text-center pt-3 mt-5"
                     >
                       {capitalizeFirstAndLast(
                         userProfile1?.name || userProfile?.name
                       )}
                     </div>
-                    {/* < className="ml-6">  */}
-                    <div className={` ${isNavbar ? "" : "hidden "} `}>
-                      <p className="">
-                        {userProfile1?.name || userProfile?.name}
-                      </p>
-                      <p className="text-xs">
-                        {userProfile1?.email || userProfile?.email}
-                      </p>
+                  </Link>
+                  {/* < className="ml-6">  */}
+                  {/*      <div className={` ${isNavbar ? "" : "hidden "} `}>
+                    <p className="">
+                      {userProfile1?.name || userProfile?.name}
+                    </p>
+                    <p className="text-xs">
+                      {userProfile1?.email || userProfile?.email}
+                    </p>
+                  </div> */}
+                  <div>
+                    <div className="flex mt-2  items-center">
+                      <h1>{userProfile1?.name || userProfile?.name}</h1>
+                      <Link href="/profile">
+                        <span>
+                          <Image
+                            src={Arrow}
+                            alt="arrow"
+                            width="10px"
+                            height="10px"
+                            className="mb-3 ml-1.5"
+                          />
+                        </span>
+                      </Link>
+                    </div>
+                    <p className="text-xs">
+                      Invited by {userProfile1?.email || userProfile?.email}
+                    </p>
+                    <div className="flex mt-2">
+                      <Link href="https://t.me/onchain_wavebot">
+                        <Image
+                          src={bot}
+                          alt="Telegram bot"
+                          className="mr-2 cursor-pointer"
+                          style={{ width: "20px", height: "20px" }}
+                        />
+                      </Link>
+
+                      <Link href="https://t.me/WaveUsers">
+                        <Image
+                          src={community}
+                          alt="Telegram community"
+                          style={{ width: "20px", height: "20px" }}
+                          className="mr-2 cursor-pointer"
+                        />
+                      </Link>
+                      <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                        <Image
+                          src={x}
+                          alt="twitter"
+                          style={{ width: "20px", height: "20px" }}
+                          className="mr-2 cursor-pointer"
+                        />
+                      </Link>
+                      <Link href="https://www.instagram.com/wavebotapp/">
+                        <Image
+                          src={instagram}
+                          alt="instagram"
+                          style={{ width: "20px", height: "20px" }}
+                          className="mr-2 cursor-pointer"
+                        />
+                      </Link>
+                      <Link href="https://t.me/onchain_wavebot">
+                        <Image
+                          src={tiktok}
+                          alt="tiktok"
+                          style={{ width: "20px", height: "20px" }}
+                          className="mr-2 cursor-pointer"
+                        />
+                      </Link>
+                      <Link href="https://www.youtube.com/@WaveBotApp">
+                        <Image
+                          src={youtube}
+                          alt="youtube"
+                          style={{ width: "20px", height: "20px" }}
+                          className="mr-2 cursor-pointer"
+                        />
+                      </Link>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
             </div>
           </div>
