@@ -24,6 +24,7 @@ import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FaBars } from "react-icons/fa6";
+import { FiRefreshCcw } from "react-icons/fi";
 
 const Swap = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
@@ -42,6 +43,7 @@ const Swap = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedtofrom, setSelectedtofrom] = useState(0);
   const [showBalance, setShowBalance] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectChain, setSelectChain] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -1201,7 +1203,7 @@ const Swap = () => {
                           value={selectedTokenDatato?.input_to}
                           onChange={(e) => {
                             handleInputChanges(e);
-                            getPrice();
+                           
                           }}
                         />
                       </div>
@@ -1243,13 +1245,13 @@ const Swap = () => {
                       <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                         <div className="text-gray-300 flex items-center gap-3">
                           <p>You receive</p>
-                          {/* <button onClick={() => getEvmTokenPrice()}>
+                          <button onClick={() =>  getPrice()}>
                         <FiRefreshCcw
                           className={`text-[18px] ${
                             refresh ? "animate-spin" : null
                           }`}
                         />
-                      </button> */}
+                      </button>
                         </div>
                         <div className="flex justify-between py-2">
                           <div className="space-y-2">
