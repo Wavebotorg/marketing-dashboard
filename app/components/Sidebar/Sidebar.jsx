@@ -528,7 +528,11 @@ function Sidebar() {
                         Invited by {userProfile1?.email || userProfile?.email}
                       </p>
                       <div className="flex mt-2">
-                        <Link href="https://t.me/onchain_wavebot">
+                        <Link
+                          href="https://t.me/onchain_wavebot"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={bot}
                             alt="Telegram bot"
@@ -537,7 +541,11 @@ function Sidebar() {
                           />
                         </Link>
 
-                        <Link href="https://t.me/WaveUsers">
+                        <Link
+                          href="https://t.me/WaveUsers"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={community}
                             alt="Telegram community"
@@ -545,7 +553,11 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                        <Link
+                          href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={x}
                             alt="twitter"
@@ -553,7 +565,11 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://www.instagram.com/wavebotapp/">
+                        <Link
+                          href="https://www.instagram.com/wavebotapp/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={instagram}
                             alt="instagram"
@@ -561,7 +577,11 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://www.tiktok.com/@wavebotapp">
+                        <Link
+                          href="https://www.tiktok.com/@wavebotapp"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={tiktok}
                             alt="tiktok"
@@ -569,7 +589,11 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://www.youtube.com/@WaveBotApp">
+                        <Link
+                          href="https://www.youtube.com/@WaveBotApp"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={youtube}
                             alt="youtube"
@@ -633,7 +657,11 @@ function Sidebar() {
                       Invited by {userProfile1?.email || userProfile?.email}
                     </p>
                     <div className="flex mt-2">
-                      <Link href="https://t.me/onchain_wavebot">
+                      <Link
+                        href="https://t.me/onchain_wavebot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={bot}
                           alt="Telegram bot"
@@ -642,7 +670,11 @@ function Sidebar() {
                         />
                       </Link>
 
-                      <Link href="https://t.me/WaveUsers">
+                      <Link
+                        href="https://t.me/WaveUsers"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={community}
                           alt="Telegram community"
@@ -650,7 +682,11 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                      <Link
+                        href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={x}
                           alt="twitter"
@@ -658,7 +694,11 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://www.instagram.com/wavebotapp/">
+                      <Link
+                        href="https://www.instagram.com/wavebotapp/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={instagram}
                           alt="instagram"
@@ -666,7 +706,11 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://www.tiktok.com/@wavebotapp">
+                      <Link
+                        href="https://www.tiktok.com/@wavebotapp"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={tiktok}
                           alt="tiktok"
@@ -674,7 +718,11 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://www.youtube.com/@WaveBotApp">
+                      <Link
+                        href="https://www.youtube.com/@WaveBotApp"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={youtube}
                           alt="youtube"
