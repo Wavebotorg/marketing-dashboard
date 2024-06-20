@@ -4,7 +4,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -528,8 +528,15 @@ const TransferToken = () => {
 
   return (
     <>
-      <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
-        <div className="  xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+      <div
+        style={{
+          marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+        }}
+        className=" md:pl-4 sm:pl-4 xsm:pl-0 mx-auto"
+      >
+        {/* 2xl:pl-64 xl:pl-64 */}
+        <div className="   gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+          {/*  xl:ml-32 xl:mr-[92px] */}
           <div className="text-lg font-semibold flex justify-between pt-2">
             <div
               className={`lg:scale-0 scale-[1] text-3xl `}
@@ -540,7 +547,9 @@ const TransferToken = () => {
                   <FaBars />
                 </div>
               ) : (
-                <div className="  cursor-pointer"> X </div>
+                <div className="  cursor-pointer"> 
+              <MdKeyboardDoubleArrowLeft />
+              </div>
               )}
             </div>
             <button
