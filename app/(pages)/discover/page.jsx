@@ -165,14 +165,13 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
   return (
     <div
-      style={{
-        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
-      }}
-      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
-    >
-      {/* 2xl:pl-64 xl:pl-64 */}
-      <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
-        {/* xl:ml-[8rem] xl:mr-[92px] */}
+    style={{
+      marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+    }}
+    className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
+  >
+    {/* 2xl:pl-64 xl:pl-64 */}
+    <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="flex gap-4 my-4">
           <button
             className={`px-4 py-2 rounded ${
@@ -371,6 +370,23 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
                         </th>
                       </tr>
                     </thead>
+                    <tbody>
+                    <tr>
+                          
+                            <>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                        hghg
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                           tyhu
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                              tgyjuyhju
+                              </td>
+                            </>
+                        
+                        </tr>
+                    </tbody>
                     {/* <tbody>
                     {visibleData?.length > 0 ? (
                       visibleData.map((leader, index) => (

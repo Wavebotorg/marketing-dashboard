@@ -202,7 +202,7 @@ const SwapHistory = () => {
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className=" my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         {/* xl:ml-32 xl:mr-[92px] */}
-        <div className="mt-10 flex">
+        <div className="mt-4 flex">
           <div className="flex">
             <button
               onClick={handleDropdownToggle}

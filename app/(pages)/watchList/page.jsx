@@ -158,7 +158,7 @@ const WatchList = () => {
     >
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="flex flex-col xl:justify-center   lg:ml-2 lg:mr-5 ml-5 mr-5">
-        <div className=" mt-7" />
+        <div className=" " />
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">
             <div>

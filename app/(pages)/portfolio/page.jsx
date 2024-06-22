@@ -153,7 +153,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
       }}
     >
       <div className="text-white lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
-        <div className="flex items-center justify-between mt-6">
+        <div className="flex items-center justify-between mt-3">
           <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">
             My Portfolio
           </div>

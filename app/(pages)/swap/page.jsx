@@ -538,8 +538,8 @@ const Swap = () => {
   //for buy submit for both network
   const handleBuySubmit = async () => {
     setLoading(true);
-    handleBuyprice()
-      .then((e) => {
+   
+    
         let endpoint;
         if (selectedNetwork === "Solana") {
           endpoint = "/solanaSwap";
@@ -555,14 +555,14 @@ const Swap = () => {
                   input: walletAddressbuysell,
                   output: selectedTokenDatato?.address_to,
 
-                  amount: Number(e),
+                  amount: Number(selectedTokenDatato?.input_to),
                   email: email,
                   method: "buy",
                 }
               : {
                   tokenIn: walletAddressbuysell,
                   tokenOut: selectedTokenDatato?.address_to,
-                  amount: Number(e),
+                  amount: Number(selectedTokenDatato?.input_to),
                   chain: Number(selectedChainId),
                   email: email,
                   chainId: selectedTokenDatato?.chainname,
@@ -595,10 +595,7 @@ const Swap = () => {
           .finally(() => {
             setLoading(false);
           });
-      })
-      .catch((err) => {
-        console.err("Error occurred:", err);
-      });
+    
   };
 
   //for pass value to sell evm submit
