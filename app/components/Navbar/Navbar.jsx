@@ -91,7 +91,7 @@ const Navbar = () => {
           getPath === "/login" ||
           getPath === "/profile" ||
           getPath === "/swap" ||
-          getPath === "/transfertoken" ||
+          getPath === "/withdraw" ||
           getPath === "/signup" ||
           getPath === "/swap" ||
           getPath === "/forgotpassword" ||

@@ -25,7 +25,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FaBars } from "react-icons/fa6";
 
-const TransferToken = () => {
+const Withdraw = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
   const router = useRouter();
@@ -849,4 +849,4 @@ const TransferToken = () => {
   );
 };
 
-export default TransferToken;
+export default Withdraw;

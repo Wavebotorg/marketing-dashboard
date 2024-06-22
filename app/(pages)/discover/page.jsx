@@ -377,6 +377,23 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
                         </th>
                       </tr>
                     </thead>
+                    <tbody>
+                    <tr>
+                          
+                            <>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                        hghg
+                              </td>
+                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                           tyhu
+                              </td>
+                              <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                              tgyjuyhju
+                              </td>
+                            </>
+                        
+                        </tr>
+                    </tbody>
                     {/* <tbody>
                     {visibleData?.length > 0 ? (
                       visibleData.map((leader, index) => (

@@ -28,5 +28,5 @@ export function middleware(request) {
   }
 }
 export const config = {
-  matcher: ["/login", "/","/apecurdocs","/discover","/leaderboard","/market","/portfolio","/profile","/referral","/resetpassword","/swap","/swaphistory","/transfertoken","/watchList",],
+  matcher: ["/login", "/","/apecurdocs","/discover","/leaderboard","/market","/portfolio","/profile","/referral","/resetpassword","/swap","/swaphistory","/withdraw","/watchList",],
 };

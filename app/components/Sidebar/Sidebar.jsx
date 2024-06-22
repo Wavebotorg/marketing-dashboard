@@ -99,9 +99,9 @@ function Sidebar() {
     },
     {
       id: 3,
-      pathname: "/transfertoken",
+      pathname: "/withdraw",
       icon: send,
-      pagename: "Transfer Token",
+      pagename: "Withdraw",
     },
     {
       id: 4,
@@ -164,7 +164,13 @@ function Sidebar() {
       id: 13,
       pathname:"https://wavebot.gitbook.io/wave-manual" ,
       icon: Apecurdocs,
-      pagename: "Apecurdocs",
+      pagename: "Wave Manual",
+    },
+    {
+      id: 14,
+      pathname:"holder" ,
+      // icon: holder,
+      pagename: "Holder",
     },
     /*     {
       id: 14,
