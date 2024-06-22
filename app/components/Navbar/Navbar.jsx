@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 
 import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
@@ -114,7 +114,8 @@ const Navbar = () => {
         >
           {isNavbar === false ? (
             <div className="cursor-pointer">
-              <FaBars />
+              {/* <FaBars /> */}
+              <FaBarsStaggered />
             </div>
           ) : (
             <div className="  cursor-pointer">

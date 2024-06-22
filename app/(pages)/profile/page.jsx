@@ -5,7 +5,7 @@ import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
 import Security from "../../components/Profileinfo/Security";
 import Setup from "../../components/Profileinfo/Setup";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
@@ -49,7 +49,8 @@ const Profile = () => {
             >
               {isNavbar === false ? (
                 <div className="cursor-pointer">
-                  <FaBars />
+                  {/* <FaBars /> */}
+                  <FaBarsStaggered />
                 </div>
               ) : (
                 <div className="cursor-pointer">

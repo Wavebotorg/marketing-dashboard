@@ -23,7 +23,7 @@ import qs from "qs";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { FiRefreshCcw } from "react-icons/fi";
 
 const Swap = () => {
@@ -1063,7 +1063,8 @@ const Swap = () => {
             >
               {isNavbar === false ? (
                 <div className="cursor-pointer">
-                  <FaBars />
+                  {/* <FaBars /> */}
+                  <FaBarsStaggered />
                 </div>
               ) : (
                 <div className="  cursor-pointer">

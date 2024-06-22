@@ -608,7 +608,7 @@ import { FiPower } from "react-icons/fi";
 import Loginicon from "../../../public/assets/loginicon.png";
 import Image from "next/image";
 import "./Sidebar.css";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
 import Homemenu from "../../../public/assets/sidebar/home.svg";
@@ -632,6 +632,8 @@ import tiktok from "../../../public/assets/sidebar/tiktok.png";
 import x from "../../../public/assets/sidebar/tweet.png";
 import bot from "../../../public/assets/sidebar/bot.png";
 import Cookies from "js-cookie";
+import useWindowSize from "../hook/window";
+import { useMediaQuery } from "react-responsive";
 
 import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
@@ -667,8 +669,13 @@ function Sidebar() {
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
-  console.log("🚀 ~ Sidebar ~ isLargeScreen:", isLargeScreen);
+  // const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
+  // const [isLargeScreen, setIsLargeScreen] = useState(
+  //   window.matchMedia("(min-width: 1440px)").matches
+  // );
+  // const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  // console.log("🚀 ~ Sidebar ~ isLargeScreen:", isLargeScreen);
   const headerdata = [
     {
       id: 1,
@@ -799,7 +806,11 @@ function Sidebar() {
     setConfirmationPopUp(false);
   };
 
+  //close when click outside
+
   const navbarRef = useRef(null);
+
+  const isLargeScreen = useMediaQuery({ query: "(min-width: 1440px)" });
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -807,7 +818,7 @@ function Sidebar() {
     }
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth >= 1440);
     };
@@ -816,13 +827,39 @@ function Sidebar() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
-
+  }, []); */
+  /* 
   useEffect(() => {
+    const handleResize = () => {
+      const isLarge =
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--is-large-screen"
+        ) === "1";
+      setIsLargeScreen(isLarge);
+    };
+
+    handleResize(); // Initial check
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+ */
+  /*   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []); */
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
   }, []);
 
   /*   const handleClickOutside = (event) => {
@@ -856,8 +893,9 @@ function Sidebar() {
       setIsNavbar(false);
     }
   };
+  const { width: windowWidth } = useWindowSize();
 
-  const [windowWidth, setWindowWidth] = useState(0);
+  /*   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
     // Function to update window width
@@ -875,7 +913,7 @@ function Sidebar() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -906,7 +944,8 @@ function Sidebar() {
                 >
                   {isNavbar === false ? (
                     <div className="mt-10 mx-auto ml-2 cursor-pointer">
-                      <FaBars />
+                      {/* <FaBars /> */}
+                      <FaBarsStaggered />
                     </div>
                   ) : (
                     <div className=" mt-8 ml-6 cursor-pointer">

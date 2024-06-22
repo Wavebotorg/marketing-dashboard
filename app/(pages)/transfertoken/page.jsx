@@ -23,7 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 
 const TransferToken = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
@@ -544,12 +544,13 @@ const TransferToken = () => {
             >
               {isNavbar === false ? (
                 <div className="cursor-pointer">
-                  <FaBars />
+                  {/* <FaBars /> */}
+                  <FaBarsStaggered />
                 </div>
               ) : (
-                <div className="  cursor-pointer"> 
-              <MdKeyboardDoubleArrowLeft />
-              </div>
+                <div className="  cursor-pointer">
+                  <MdKeyboardDoubleArrowLeft />
+                </div>
               )}
             </div>
             <button
