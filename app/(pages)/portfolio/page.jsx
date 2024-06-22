@@ -23,6 +23,102 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
   const [selectChain, setSelectChain] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+  const NetworkData = [
+    {
+      name: "Ethereum",
+      chainid: "1",
+      img: eth,
+      descode: "0x1",
+      walletAddressbuysell: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    },
+    {
+      name: "Arbitrum",
+      chainid: "42161",
+      img: arbitrum,
+      descode: "0xa4b1",
+      walletAddressbuysell: "0x912CE59144191C1204E64559FE8253a0e49E6548",
+    },
+    {
+      name: "Optimism",
+      chainid: "10",
+      img: optimism,
+      descode: "0xa",
+      walletAddressbuysell: "0x4200000000000000000000000000000000000042",
+    },
+    {
+      name: "Polygon",
+      chainid: "137",
+      img: poly,
+      descode: "0x89",
+      walletAddressbuysell: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+    },
+    {
+      name: "Solana",
+      chainid: "19999",
+      img: SOL,
+      descode: "",
+      walletAddressbuysell: "So11111111111111111111111111111111111111112",
+    },
+    {
+      name: "BNB Chain",
+      chainid: "56",
+      img: BNB,
+      descode: "0x38",
+      walletAddressbuysell: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    },
+    {
+      name: "Avalanche",
+      chainid: "43114",
+      img: avalanche,
+      descode: "0xa86a",
+      walletAddressbuysell: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    },
+    {
+      name: "Cronos",
+      chainid: "25",
+      img: cronos,
+      descode: "0x19",
+      walletAddressbuysell: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23",
+    },
+    {
+      name: "Base",
+      chainid: "250",
+      img: fantom,
+      descode: "0x2105",
+      walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Fantom",
+      chainid: "250",
+      img: fantom,
+      descode: "0xfa",
+      walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+  ];
+  useEffect(() => {
+    const ethereumNetwork = NetworkData.find(
+      (network) => network.name === "Ethereum"
+    );
+    if (ethereumNetwork) {
+      setSelectChain(ethereumNetwork.img);
+    }
+  }, []);
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+  const handleOptionClick = (name) => {
+    const selectedNetworkData = NetworkData.find(
+      (network) => network.name === name
+    );
+
+    setSelectedNetwork(selectedNetworkData?.name);
+    if (selectedNetworkData) {
+      setShowDropdown(false);
+    }
+  };
 
   const [isOn, setIsOn] = useState(false);
 
@@ -30,22 +126,110 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
     setIsOn(!isOn);
   };
 
-  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
-    useWallet();
+  const dropdownRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
 
   return (
     <div
+      className="md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full  "
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
     >
-      {/* 2xl:pl-64 xl:pl-64 */}
-      <div className="text-white  lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
-        {/* xl:ml-[8rem] xl:mr-[92px] */}
+      <div className="text-white lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="flex items-center justify-between mt-6">
           <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">
             My Portfolio
+          </div>
+          <div ref={dropdownRef} className="dropdown-container relative mr-20 ">
+            <button
+              className="dropdown-toggle focus:outline-none flex"
+              onClick={toggleDropdown}
+            >
+              {selectChain && (
+                <Image src={selectChain} className="h-6 w-6 rounded-full" />
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-6 w-6 text-gray-400 ${
+                  showDropdown ? "rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            {/* {showDropdown && ( */}
+            <div
+              className={`overflow-hidden ${
+                showDropdown ? "h-[430px] py-2" : "h-0"
+              } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
+            >
+              <ul>
+                <ul>
+                  {NetworkData.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        handleOptionClick(item.name);
+                        setSelectChain(item?.img);
+                      }}
+                      className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                        selectedNetwork === item.name ? "bg-blue-500" : ""
+                      }`}
+                    >
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        className="!h-[30px] !w-[30px] mr-2 rounded-full"
+                      />
+                      <span className="text-white">{item.name}</span>
+                      {selectedNetwork === item.name && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-white mr-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </ul>
+            </div>
+            {/* )} */}
           </div>
         </div>
 

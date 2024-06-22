@@ -171,7 +171,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
       className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
     >
       {/* 2xl:pl-64 xl:pl-64 */}
-      <div className="text-white  lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
+      <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
         {/* xl:ml-[8rem] xl:mr-[92px] */}
         <div className="flex gap-4 my-4">
           <button

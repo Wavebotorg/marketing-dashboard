@@ -13,6 +13,8 @@ import { FiPower, FiLogIn } from "react-icons/fi";
 import { useSearch } from "../contexts/SearchContext";
 import { useWallet } from "../contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+
 const Navbar = () => {
   const router = useRouter();
   const [active, setActive] = useState("");
@@ -95,7 +97,7 @@ const Navbar = () => {
           getPath === "/login" ||
           getPath === "/profile" ||
           getPath === "/swap" ||
-          getPath === "/transfertoken" ||
+          getPath === "/withdraw" ||
           getPath === "/signup" ||
           getPath === "/swap" ||
           getPath === "/forgotpassword" ||
@@ -115,12 +117,14 @@ const Navbar = () => {
           {isNavbar === false ? (
             <div className="cursor-pointer">
               {/* <FaBars /> */}
-              <FaBarsStaggered />
+              {/* <FaBarsStaggered /> */}
+              <TbArrowBarRight />
             </div>
           ) : (
             <div className="  cursor-pointer">
               {" "}
-              <MdKeyboardDoubleArrowLeft />
+              {/* <MdKeyboardDoubleArrowLeft /> */}
+              <TbArrowBarLeft />
             </div>
           )}
         </div>

@@ -5,6 +5,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -25,7 +27,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
 import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 
-const TransferToken = () => {
+const Withdraw = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
   const router = useRouter();
@@ -545,11 +547,13 @@ const TransferToken = () => {
               {isNavbar === false ? (
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
-                  <FaBarsStaggered />
+                  {/* <FaBarsStaggered /> */}
+                  <TbArrowBarRight />
                 </div>
               ) : (
                 <div className="  cursor-pointer">
-                  <MdKeyboardDoubleArrowLeft />
+                  {/* <MdKeyboardDoubleArrowLeft /> */}
+                  <TbArrowBarLeft />
                 </div>
               )}
             </div>
@@ -859,4 +863,4 @@ const TransferToken = () => {
   );
 };
 
-export default TransferToken;
+export default Withdraw;

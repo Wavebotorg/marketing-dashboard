@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -1064,11 +1066,13 @@ const Swap = () => {
               {isNavbar === false ? (
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
-                  <FaBarsStaggered />
+                  {/* <FaBarsStaggered /> */}
+                  <TbArrowBarRight />
                 </div>
               ) : (
                 <div className="  cursor-pointer">
-                  <MdKeyboardDoubleArrowLeft />
+                  {/* <MdKeyboardDoubleArrowLeft /> */}
+                  <TbArrowBarLeft />
                 </div>
               )}
             </div>

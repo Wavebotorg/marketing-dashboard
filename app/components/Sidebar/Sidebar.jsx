@@ -609,6 +609,7 @@ import Loginicon from "../../../public/assets/loginicon.png";
 import Image from "next/image";
 import "./Sidebar.css";
 import { FaBars, FaBarsStaggered } from "react-icons/fa6";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
 import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
 import Homemenu from "../../../public/assets/sidebar/home.svg";
@@ -691,7 +692,7 @@ function Sidebar() {
     },
     {
       id: 3,
-      pathname: "/transfertoken",
+      pathname: "/withdraw",
       icon: send,
       pagename: "Transfer Token",
     },
@@ -945,12 +946,14 @@ function Sidebar() {
                   {isNavbar === false ? (
                     <div className="mt-10 mx-auto ml-2 cursor-pointer">
                       {/* <FaBars /> */}
-                      <FaBarsStaggered />
+                      {/* <FaBarsStaggered /> */}
+                      <TbArrowBarRight />
                     </div>
                   ) : (
                     <div className=" mt-8 ml-6 cursor-pointer">
                       {" "}
-                      <MdKeyboardDoubleArrowLeft />
+                      {/* <MdKeyboardDoubleArrowLeft /> */}
+                      <TbArrowBarLeft />
                     </div>
                   )}
                 </div>
@@ -1156,14 +1159,16 @@ function Sidebar() {
               <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
                 <div className="hidden 2xl:flex xl:flex">
                   <div className="flex gap-2">
-                    <div
-                      className="text-lg xl:px-4 mt-2 rounded-full profile-bg
+                    <Link href="/profile">
+                      <div
+                        className="text-lg xl:px-4 mt-2 rounded-full profile-bg
                        md:w-14  h-14 text-center pt-3"
-                    >
-                      {capitalizeFirstAndLast(
-                        userProfile1?.name || userProfile?.name
-                      )}
-                    </div>
+                      >
+                        {capitalizeFirstAndLast(
+                          userProfile1?.name || userProfile?.name
+                        )}
+                      </div>
+                    </Link>
 
                     <div>
                       <div className="flex mt-2  items-center">

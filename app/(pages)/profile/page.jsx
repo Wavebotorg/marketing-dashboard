@@ -8,6 +8,7 @@ import Setup from "../../components/Profileinfo/Setup";
 import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
@@ -50,11 +51,13 @@ const Profile = () => {
               {isNavbar === false ? (
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
-                  <FaBarsStaggered />
+                  {/* <FaBarsStaggered /> */}
+                  <TbArrowBarRight />
                 </div>
               ) : (
                 <div className="cursor-pointer">
-                  <MdKeyboardDoubleArrowLeft />
+                  {/* <MdKeyboardDoubleArrowLeft /> */}
+                  <TbArrowBarLeft />
                 </div>
               )}
             </div>

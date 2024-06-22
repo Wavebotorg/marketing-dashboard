@@ -200,7 +200,7 @@ const SwapHistory = () => {
       className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
     >
       {/* 2xl:pl-64 xl:pl-64 */}
-      <div className=" my-10   gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className=" my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         {/* xl:ml-32 xl:mr-[92px] */}
         <div className="mt-10 flex">
           <div className="flex">
