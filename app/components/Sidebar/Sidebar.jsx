@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -8,7 +10,7 @@ import { FiPower } from "react-icons/fi";
 import Loginicon from "../../../public/assets/loginicon.png";
 import Image from "next/image";
 import "./Sidebar.css";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import Logo from "../../../public/assets/wave.png";
 import Homemenu from "../../../public/assets/sidebar/home.svg";
@@ -32,6 +34,8 @@ import tiktok from "../../../public/assets/sidebar/tiktok.png";
 import x from "../../../public/assets/sidebar/tweet.png";
 import bot from "../../../public/assets/sidebar/bot.png";
 import Cookies from "js-cookie";
+import useWindowSize from "../hook/window";
+import { useMediaQuery } from "react-responsive";
 
 import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
@@ -41,6 +45,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import { useWallet } from "../contexts/WalletContext";
 
 import { Cookie } from "next/font/google";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 function Sidebar() {
   const router = useRouter();
   const {
@@ -62,28 +67,17 @@ function Sidebar() {
 
   const Token =
     typeof window !== "undefined" ? localStorage.getItem("Token") : null;
-  // const getUserdata = async () => {
-  //   await axiosInstanceAuth
-  //     .get("getUserProfile")
-  //     .then((res) => {
-  //       const myData = res?.data?.data;
-  //       setAllUser(myData || []);
-  //       setWalletAddress(myData?.wallet)
-  //       setEmail(myData?.email)
-  //       console.log("setWalletAddress:", myData?.wallet)
-  //       console.log("getUserProfile---->", myData);
-  //     })
-  //     .catch((err) => {
-  //       console.log("err --->", err);
-  //     });
-  // };
 
   const pathname = usePathname();
   // const { pathname } = location;
   const [isHover, setIsHover] = useState(null);
-  // const [isHover1, setIsHover1] = useState(null);
-  // const [isNavbar, setIsNavbar] = useState(false);
-  // const [isNavbar1, setIsNavbar1] = useState(false);
+  // const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1440);
+  // const [isLargeScreen, setIsLargeScreen] = useState(
+  //   window.matchMedia("(min-width: 1440px)").matches
+  // );
+  // const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  // console.log("🚀 ~ Sidebar ~ isLargeScreen:", isLargeScreen);
   const headerdata = [
     {
       id: 1,
@@ -109,18 +103,7 @@ function Sidebar() {
       icon: swaphistory,
       pagename: "Swap History",
     },
-    /*     {
-      id: 5,
-      pathname: "/tokendashboard",
-      icon: Tokendashboard,
-      pagename: "Token Dashboard",
-    },
-    {
-      id: 6,
-      pathname: "/holder",
-      icon: Holder,
-      pagename: "Holder",
-    }, */
+
     {
       id: 7,
       pathname: "/referral",
@@ -139,12 +122,6 @@ function Sidebar() {
       icon: Portfolio,
       pagename: "Portfolio",
     },
-    /*     {
-      id: 10,
-      pathname: "/volumestats",
-      icon: Volumestats,
-      pagename: "Volume Stats",
-    }, */
   ];
 
   const headerbottom = [
@@ -162,22 +139,10 @@ function Sidebar() {
     },
     {
       id: 13,
-      pathname:"https://wavebot.gitbook.io/wave-manual" ,
+      pathname: "https://wavebot.gitbook.io/wave-manual",
       icon: Apecurdocs,
       pagename: "Wave Manual",
     },
-    {
-      id: 14,
-      pathname:"holder" ,
-      // icon: holder,
-      pagename: "Holder",
-    },
-    /*     {
-      id: 14,
-      pathname: "/officialwebsite",
-      icon: Officialwebsite,
-      pagename: "Officialwebsite",
-    }, */
   ];
   const HoverStyle = (id) => {
     setIsHover(id);
@@ -198,9 +163,10 @@ function Sidebar() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const res = await axiosInstanceAuth.get("/getUserProfile");0
+        const res = await axiosInstanceAuth.get("/getUserProfile");
+        0;
         const myData = res?.data?.data;
-        console.log("🚀 ~ getUserProfile ~ getUserProfile:",  res)
+        console.log("🚀 ~ getUserProfile ~ getUserProfile:", res);
         setUserProfile1(myData);
         setWalletAddress(myData?.wallet);
         setSolanaAddress(myData?.solanawallet || "");
@@ -210,7 +176,6 @@ function Sidebar() {
         console.error("Error fetching user profile:", error);
       }
     };
-  
 
     getUserProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -243,7 +208,11 @@ function Sidebar() {
     setConfirmationPopUp(false);
   };
 
+  //close when click outside
+
   const navbarRef = useRef(null);
+
+  const isLargeScreen = useMediaQuery({ query: "(min-width: 1440px)" });
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -251,12 +220,65 @@ function Sidebar() {
     }
   };
 
+  /*   useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 1440);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); */
+  /* 
   useEffect(() => {
+    const handleResize = () => {
+      const isLarge =
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--is-large-screen"
+        ) === "1";
+      setIsLargeScreen(isLarge);
+    };
+
+    handleResize(); // Initial check
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+ */
+  /*   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []); */
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
   }, []);
+
+  /*   const handleClickOutside = (event) => {
+    // Check if screen size is LG, MD, or SM
+    const isLargeScreen = ["lg", "md", "sm"].some((size) =>
+      document.body.classList.contains(`screen-${size}`)
+    );
+
+    // Close sidebar only if screen size is XL or 2XL
+    if (
+      !isLargeScreen &&
+      navbarRef.current &&
+      !navbarRef.current.contains(event.target)
+    ) {
+      setIsNavbar(false);
+    }
+  };*/
 
   //for profile image show convert in text format
   const capitalizeFirstAndLast = (name) => {
@@ -266,6 +288,34 @@ function Sidebar() {
       name.charAt(0).toUpperCase() + name.charAt(name.length - 1).toUpperCase()
     );
   };
+
+  //when click on item sidebar not close on xl and above size
+  const handleClick = () => {
+    if (windowWidth < 1400) {
+      setIsNavbar(false);
+    }
+  };
+  const { width: windowWidth } = useWindowSize();
+
+  /*   const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    // Function to update window width
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Initialize window width
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); */
 
   return (
     <>
@@ -279,40 +329,47 @@ function Sidebar() {
           className={`sidebar   ${
             isNavbar
               ? "w-72"
-              : " w-[0rem] md:w-[0rem] z-[999] lg:w-[4rem] xl:w-72 relative"
+              : " w-[0rem] md:w-[0rem] z-[999] lg:w-[4rem] xl:w-[4rem]  relative"
           } transition-all duration-500 ease-in-out  `}
         >
+          {/* xl:w-72 */}
           <div className="sidebar h-full  -ml-[4px] hover:shadow-lg">
             {/* <div className="sidebar min-h-screen lg:block hidden w-[3.35rem] overflow-hidden p-1 hover:w-52  hover:shadow-lg"> */}
             <div
-              ref={navbarRef}
+              ref={isLargeScreen ? null : navbarRef}
               className="flex h-screen flex-col   overflow-y-auto"
             >
               <div className="flex  items-center text-white justify-center">
                 <div
-                  className={`xl:hidden text-3xl `}
+                  className={` text-3xl `}
                   onClick={() => setIsNavbar(!isNavbar)}
                 >
                   {isNavbar === false ? (
                     <div className="mt-10 mx-auto ml-2 cursor-pointer">
-                      <FaBars />
+                      {/* <FaBars /> */}
+                      <FaBarsStaggered />
                     </div>
                   ) : (
-                    <div className=" mt-8 ml-6 cursor-pointer"> X </div>
+                    <div className=" mt-8 ml-6 cursor-pointer">
+                      {" "}
+                      <MdKeyboardDoubleArrowLeft />
+                    </div>
                   )}
                 </div>
+
                 <Image
                   src={Logo}
                   alt="wave-logo"
                   className={`${
-                    isNavbar === false ? "hidden xl:block" : "block"
+                    isNavbar === false ? "hidden " : "block"
                   } mt-10 mx-auto`}
                 />
               </div>
               <div>
                 <ul className="flex flex-col  pr- justify-start xl:pb-7 pb-3  mt-7 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                   {headerdata?.map((data) => (
-                    <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4   ">
+                    <li key={data?.id} className="min-w-max   ">
+                      {/* xl:mx-5 xl:mr-4  */}
                       <Link
                         href={data?.pathname}
                         className={`${
@@ -321,7 +378,8 @@ function Sidebar() {
                             ? "navHover "
                             : "text-white"
                         } flex md:px-1 lg:px-2   py-2 rounded-lg`}
-                        onClick={() => setIsNavbar(false)}
+                        // onClick={() => setIsNavbar(false)}
+                        onClick={handleClick}
                         onMouseEnter={() => HoverStyle(data?.id)}
                         onMouseLeave={() => setIsHover(null)}
                       >
@@ -348,16 +406,30 @@ function Sidebar() {
                   ))}
                   <div className="border-b border-stone-500 my-2 " />
                   {headerbottom?.map((data) => (
-                    <li key={data?.id} className="min-w-max xl:mx-5 xl:mr-4 ">
+                    <li key={data?.id} className="min-w-max  ">
+                      {/* xl:mx-5 xl:mr-4 */}
                       <Link
                         href={data?.pathname}
+                        target={
+                          data?.pathname ===
+                          "https://wavebot.gitbook.io/wave-manual"
+                            ? "_blank"
+                            : undefined
+                        }
+                        rel={
+                          data?.pathname ===
+                          "https://wavebot.gitbook.io/wave-manual"
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
                         className={`${
                           (isHover && data?.id === isHover) ||
                           data?.pathname === pathname
                             ? "navHover"
                             : ""
                         } flex md:px-1 lg:px-2 py-2 rounded-lg`}
-                        onClick={() => setIsNavbar(false)}
+                        // onClick={() => setIsNavbar(false)}
+                        onClick={handleClick}
                         onMouseEnter={() => HoverStyle(data?.id)}
                         onMouseLeave={() => setIsHover(null)}
                       >
@@ -404,10 +476,10 @@ function Sidebar() {
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
                         // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
-                        className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center"
+                        className="bg-[#1788FB] xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl  lg: px-3 place-items-center"
                       >
                         <div className="flex items-center gap-1">
-                          <FiPower size={18} className="xl:block hidden" />
+                          <FiPower size={18} className="hidden" />
                           {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
                           <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                             Logout
@@ -467,18 +539,6 @@ function Sidebar() {
                 ) : (
                   <div className=" grid place-items-center">
                     <Link href="/login" className="">
-                      {/* <button className="bg-[#1788FB] text-white p-2 rounded-xl ">
-                    <div className="flex items-center  px-5 ">
-                      <Image
-                        src={Loginicon}
-                        alt="loginicon"
-                        className="w-[20px] h-[20px] xl:block hidden "
-                      />
-                      <span className="lg:ml-2 md:text-md text-sm   block ">
-                        Login
-                      </span>
-                    </div>
-                  </button>  */}
                       <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
                         <div className="flex items-center">
                           <Image
@@ -495,20 +555,12 @@ function Sidebar() {
                   </div>
                 )}
               </div>
-              <div className="text-white xl:px-8 px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
+              <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
                 <div className="hidden 2xl:flex xl:flex">
                   <div className="flex gap-2">
-                    {/* <div>
-                      <Image
-                        src={Sidebaruserlogo}
-                        alt="Sidebaruserlogo"
-                        width="20px"
-                        height="10px"
-                      />
-                    </div> */}
                     <div
-                      className="text-lg mt-2 rounded-full profile-bg
-                       w-14 h-14 text-center pt-3"
+                      className="text-lg xl:px-4 mt-2 rounded-full profile-bg
+                       md:w-14  h-14 text-center pt-3"
                     >
                       {capitalizeFirstAndLast(
                         userProfile1?.name || userProfile?.name
@@ -534,7 +586,11 @@ function Sidebar() {
                         Invited by {userProfile1?.email || userProfile?.email}
                       </p>
                       <div className="flex mt-2">
-                        <Link href="https://t.me/onchain_wavebot">
+                        <Link
+                          href="https://t.me/onchain_wavebot"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={bot}
                             alt="Telegram bot"
@@ -543,7 +599,11 @@ function Sidebar() {
                           />
                         </Link>
 
-                        <Link href="https://t.me/WaveUsers">
+                        <Link
+                          href="https://t.me/WaveUsers"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={community}
                             alt="Telegram community"
@@ -551,34 +611,14 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
-                        <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                        <Link
+                          href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={x}
                             alt="twitter"
-                            style={{ width: "20px", height: "20px" }}
-                            className="mr-2 cursor-pointer"
-                          />
-                        </Link>
-                        <Link href="https://www.instagram.com/wavebotapp/">
-                          <Image
-                            src={instagram}
-                            alt="instagram"
-                            style={{ width: "20px", height: "20px" }}
-                            className="mr-2 cursor-pointer"
-                          />
-                        </Link>
-                        <Link href="https://t.me/onchain_wavebot">
-                          <Image
-                            src={tiktok}
-                            alt="tiktok"
-                            style={{ width: "20px", height: "20px" }}
-                            className="mr-2 cursor-pointer"
-                          />
-                        </Link>
-                        <Link href="https://www.youtube.com/@WaveBotApp">
-                          <Image
-                            src={youtube}
-                            alt="youtube"
                             style={{ width: "20px", height: "20px" }}
                             className="mr-2 cursor-pointer"
                           />
@@ -594,13 +634,6 @@ function Sidebar() {
                   className="2xl:hidden xl:hidden flex gap-2 lg:ml-0 ml-3 mt-5 "
                   style={{ position: "absolute", bottom: "0" }}
                 >
-                  {/* <Image
-                      src={Sidebaruserlogo}
-                      alt="Sidebaruserlogo"
-                      width="30px"
-                      height="30px"
-                      className=" ml-2 items-center"
-                    /> */}
                   <Link href="/profile" onClick={() => setIsNavbar(false)}>
                     <div
                       className="text-lg rounded-full profile-bg
@@ -611,15 +644,7 @@ function Sidebar() {
                       )}
                     </div>
                   </Link>
-                  {/* < className="ml-6">  */}
-                  {/*      <div className={` ${isNavbar ? "" : "hidden "} `}>
-                    <p className="">
-                      {userProfile1?.name || userProfile?.name}
-                    </p>
-                    <p className="text-xs">
-                      {userProfile1?.email || userProfile?.email}
-                    </p>
-                  </div> */}
+
                   <div>
                     <div className="flex mt-2  items-center">
                       <h1>{userProfile1?.name || userProfile?.name}</h1>
@@ -639,7 +664,11 @@ function Sidebar() {
                       Invited by {userProfile1?.email || userProfile?.email}
                     </p>
                     <div className="flex mt-2">
-                      <Link href="https://t.me/onchain_wavebot">
+                      <Link
+                        href="https://t.me/onchain_wavebot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={bot}
                           alt="Telegram bot"
@@ -648,7 +677,11 @@ function Sidebar() {
                         />
                       </Link>
 
-                      <Link href="https://t.me/WaveUsers">
+                      <Link
+                        href="https://t.me/WaveUsers"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={community}
                           alt="Telegram community"
@@ -656,34 +689,14 @@ function Sidebar() {
                           className="mr-2 cursor-pointer"
                         />
                       </Link>
-                      <Link href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09">
+                      <Link
+                        href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Image
                           src={x}
                           alt="twitter"
-                          style={{ width: "20px", height: "20px" }}
-                          className="mr-2 cursor-pointer"
-                        />
-                      </Link>
-                      <Link href="https://www.instagram.com/wavebotapp/">
-                        <Image
-                          src={instagram}
-                          alt="instagram"
-                          style={{ width: "20px", height: "20px" }}
-                          className="mr-2 cursor-pointer"
-                        />
-                      </Link>
-                      <Link href="https://t.me/onchain_wavebot">
-                        <Image
-                          src={tiktok}
-                          alt="tiktok"
-                          style={{ width: "20px", height: "20px" }}
-                          className="mr-2 cursor-pointer"
-                        />
-                      </Link>
-                      <Link href="https://www.youtube.com/@WaveBotApp">
-                        <Image
-                          src={youtube}
-                          alt="youtube"
                           style={{ width: "20px", height: "20px" }}
                           className="mr-2 cursor-pointer"
                         />

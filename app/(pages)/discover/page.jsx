@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigation } from "react-router-dom";
 import { useRouter } from "next/navigation";
 import NewPair from "../newpair/page";
@@ -15,7 +15,7 @@ import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
-
+import { useWallet } from "../../components/contexts/WalletContext.js";
 
 const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   const router = useRouter();
@@ -23,7 +23,6 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
   const [selectChain, setSelectChain] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-
 
   const NetworkData = [
     {
@@ -110,7 +109,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   //   router.push(`/${page}`);
   // };
   const [isOn, setIsOn] = useState(false);
- 
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -124,12 +123,10 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
     setSelectedNetwork(selectedNetworkData?.name);
     if (selectedNetworkData) {
-     
       setShowDropdown(false);
     }
   };
 
- 
   // const [tokenData, setTokenData] = useState({
   //   Ethereum: token_data_ETH,
   //   Solana: [],
@@ -163,9 +160,18 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
     };
   }, [showDropdown]);
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full ">
-      <div className="text-white xl:ml-[8rem] xl:mr-[92px] lg:ml-1 lg:mr-4 md:ml-1 md:mr-6  ml-5 mr-5 ">
+    <div
+    style={{
+      marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+    }}
+    className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
+  >
+    {/* 2xl:pl-64 xl:pl-64 */}
+    <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="flex gap-4 my-4">
           <button
             className={`px-4 py-2 rounded ${
@@ -189,94 +195,81 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
           >
             Trending
           </button>
-          <div
-                        ref={dropdownRef}
-                        className="dropdown-container relative  "
-                       >
-                        <button
-                          className="dropdown-toggle focus:outline-none flex"
-                          onClick={toggleDropdown}
-                        >
-                          {selectChain && (
-                            <Image
-                              src={selectChain}
-                              className="h-6 w-6 rounded-full"
-                            />
-                          )}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-6 w-6 text-gray-400 ${
-                              showDropdown ? "rotate-180" : ""
-                            }`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
+          <div ref={dropdownRef} className="dropdown-container relative  ">
+            <button
+              className="dropdown-toggle focus:outline-none flex"
+              onClick={toggleDropdown}
+            >
+              {selectChain && (
+                <Image src={selectChain} className="h-6 w-6 rounded-full" />
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-6 w-6 text-gray-400 ${
+                  showDropdown ? "rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-                        {/* {showDropdown && ( */}
-                        <div
-                          className={`overflow-hidden ${
-                            showDropdown ? "h-[430px] py-2" : "h-0"
-                          } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
+            {/* {showDropdown && ( */}
+            <div
+              className={`overflow-hidden ${
+                showDropdown ? "h-[430px] py-2" : "h-0"
+              } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
+            >
+              <ul>
+                <ul>
+                  {NetworkData.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        handleOptionClick(item.name);
+                        setSelectChain(item?.img);
+                      }}
+                      className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                        selectedNetwork === item.name ? "bg-blue-500" : ""
+                      }`}
+                    >
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        className="!h-[30px] !w-[30px] mr-2 rounded-full"
+                      />
+                      <span className="text-white">{item.name}</span>
+                      {selectedNetwork === item.name && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-white mr-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          <ul>
-                            <ul>
-                              {NetworkData.map((item, index) => (
-                                <li
-                                  key={index}
-                                  onClick={() => {
-                                    handleOptionClick(item.name);
-                                    setSelectChain(item?.img);
-
-                                    
-                                  }}
-                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                    selectedNetwork === item.name
-                                      ? "bg-blue-500"
-                                      : ""
-                                  }`}
-                                >
-                                  <Image
-                                    src={item.img}
-                                    alt={item.name}
-                                    className="!h-[30px] !w-[30px] mr-2 rounded-full"
-                                  />
-                                  <span className="text-white">
-                                    {item.name}
-                                  </span>
-                                  {selectedNetwork === item.name && (
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="h-6 w-6 text-white mr-2"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M5 13l4 4L19 7"
-                                      />
-                                    </svg>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </ul>
-                        </div>
-                        {/* )} */}
-                      </div>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </ul>
+            </div>
+            {/* )} */}
+          </div>
         </div>
-       
 
         <div className="">
           <div className="mt-6 rounded-lg overflow-auto">
@@ -469,7 +462,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
                   </div>
                   <table className="w-full">
                     <thead className="sticky top-0 leader-color shadow-2xl ">
-                    <tr
+                      <tr
                         className="  text-[#CECECE]   bg-[#1C1C1C]  "
                         style={{
                           backgroundColor: "rgba(23, 136, 251, 0.26)",

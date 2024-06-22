@@ -15,6 +15,7 @@ import CELO from "../../../public/assets/tokenimg/CELO.png";
 import BURST from "../../../public/assets/tokenimg/BURST.png";
 import Image from "next/image";
 import { MdDone } from "react-icons/md";
+import { useWallet } from "../../components/contexts/WalletContext";
 
 const SwapHistory = () => {
   const [transactions, setTransactions] = useState([]);
@@ -188,9 +189,19 @@ const SwapHistory = () => {
     setShowDropdown(false);
   };
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className=" my-10 xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
+    >
+      {/* 2xl:pl-64 xl:pl-64 */}
+      <div className=" my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+        {/* xl:ml-32 xl:mr-[92px] */}
         <div className="mt-10 flex">
           <div className="flex">
             <button

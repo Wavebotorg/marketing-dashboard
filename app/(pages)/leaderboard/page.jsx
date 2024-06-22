@@ -7,6 +7,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
+import { useWallet } from "../../components/contexts/WalletContext";
 
 //for show email structure
 const truncateEmail = (email) => {
@@ -93,10 +94,9 @@ const LeaderBoard = () => {
   const currentLeaderboard =
     selectedLeaderboard === "referral" ? refrealList : defiList;
   const filteredData = currentLeaderboard?.filter(
-    (coin) =>
-      coin.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-      // coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      // coin.points.toLowerCase().includes(searchQuery.toLowerCase())
+    (coin) => coin.name.toLowerCase().includes(searchQuery.toLowerCase())
+    // coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    // coin.points.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
@@ -107,9 +107,19 @@ const LeaderBoard = () => {
     setCurrentPage(1);
   }, [searchQuery]);
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   return (
-    <div className=" 2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
-      <div className="xl:flex my-10 xl:ml-32 xl:mr-[90px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className="  md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
+    >
+      {/* 2xl:pl-64 xl:pl-64 */}
+      <div className="xl:flex my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+        {/* xl:ml-32 xl:mr-[90px] */}
         <div className="w-full">
           <p className="text-[#1788FB]  text-2xl  md:text-3xl font-medium w-auto  ">
             Leader Board

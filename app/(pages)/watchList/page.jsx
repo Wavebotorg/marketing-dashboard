@@ -13,6 +13,7 @@ import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 import Chart from "../chart/ChartComponent";
+import { useWallet } from "../../components/contexts/WalletContext";
 
 const WatchList = () => {
   const [watchlist, setWatchlist] = useState("");
@@ -51,7 +52,7 @@ const WatchList = () => {
     setSelectedCoinId(id);
   };
 
-//get data from coingecko Api
+  //get data from coingecko Api
   const getUserdata = async () => {
     try {
       const res = await axios.get(
@@ -145,9 +146,18 @@ const WatchList = () => {
     return trimmedValue;
   }
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px]  lg:ml-2 lg:mr-5 ml-5 mr-5">
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className="  md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
+    >
+      {/* 2xl:pl-64 xl:pl-64 */}
+      <div className="flex flex-col xl:justify-center   lg:ml-2 lg:mr-5 ml-5 mr-5">
         <div className=" mt-7" />
         <div className="p-2">
           <div className="flex  items-center justify-between mt-6">

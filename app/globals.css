@@ -441,3 +441,15 @@ th {
     width: 400px;
   }
 }
+
+
+
+:root {
+  --is-large-screen: 0;
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --is-large-screen: 1;
+  }
+}

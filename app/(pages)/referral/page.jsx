@@ -5,6 +5,7 @@ import { useSearch } from "../../components/contexts/SearchContext";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 // import Loader from "react-js-loader";
 import Loader from "react-js-loader";
+import { useWallet } from "../../components/contexts/WalletContext";
 
 const ReferralTable = ({ level, data, refData, searchQuery }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -218,9 +219,19 @@ const Referral = () => {
     fetchUserReferals();
   }, []);
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto">
-      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[92px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
+    >
+      {/* 2xl:pl-64 xl:pl-64 */}
+      <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+        {/* xl:ml-32 xl:mr-[92px] */}
         <div className="font-medium mb-4 text-3xl text-[#1788FB]">
           <p>Referral </p>
         </div>

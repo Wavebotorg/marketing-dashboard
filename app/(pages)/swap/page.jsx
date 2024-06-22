@@ -3,7 +3,7 @@ import TokenList from "../../components/ShowTokenSwap/TokensList";
 import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -23,7 +23,7 @@ import qs from "qs";
 import axios from "axios";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import BalancePopUp from "../../components/balancePopup/BalancePopUp";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { FiRefreshCcw } from "react-icons/fi";
 
 const Swap = () => {
@@ -1044,8 +1044,15 @@ const Swap = () => {
   }, [showDropdown]);
   return (
     <>
-      <div className="2xl:pl-64 xl:pl-64 md:pl-4 sm:pl-4 xsm:pl-0 mx-auto">
-        <div className="  xl:ml-32 xl:mr-[92px]  gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+      <div
+        style={{
+          marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+        }}
+        className="  md:pl-4 sm:pl-4 xsm:pl-0 mx-auto"
+      >
+        {/* 2xl:pl-64 xl:pl-64 */}
+        <div className="   gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
+          {/* xl:ml-32 xl:mr-[92px]  */}
           <div className="text-lg font-semibold flex justify-between pt-2">
             <div
               className={`lg:scale-0 scale-[1] text-3xl `}
@@ -1053,10 +1060,13 @@ const Swap = () => {
             >
               {isNavbar === false ? (
                 <div className="cursor-pointer">
-                  <FaBars />
+                  {/* <FaBars /> */}
+                  <FaBarsStaggered />
                 </div>
               ) : (
-                <div className="  cursor-pointer"> X </div>
+                <div className="  cursor-pointer">
+                  <MdKeyboardDoubleArrowLeft />
+                </div>
               )}
             </div>
             <button
@@ -1226,7 +1236,6 @@ const Swap = () => {
                           value={selectedTokenDatato?.input_to}
                           onChange={(e) => {
                             handleInputChanges(e);
-                           
                           }}
                         />
                       </div>
@@ -1268,13 +1277,13 @@ const Swap = () => {
                       <div className="flex flex-col bg-slate-400 bg-opacity-10 rounded-lg p-5">
                         <div className="text-gray-300 flex items-center gap-3">
                           <p>You receive</p>
-                          <button onClick={() =>  getPrice()}>
-                        <FiRefreshCcw
-                          className={`text-[18px] ${
-                            refresh ? "animate-spin" : null
-                          }`}
-                        />
-                      </button>
+                          <button onClick={() => getPrice()}>
+                            <FiRefreshCcw
+                              className={`text-[18px] ${
+                                refresh ? "animate-spin" : null
+                              }`}
+                            />
+                          </button>
                         </div>
                         <div className="flex justify-between py-2">
                           <div className="space-y-2">
