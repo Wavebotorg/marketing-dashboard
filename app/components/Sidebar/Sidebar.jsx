@@ -558,14 +558,19 @@ function Sidebar() {
               <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
                 <div className="hidden 2xl:flex xl:flex">
                   <div className="flex gap-2">
+                  <Link href="/profile" onClick={() => setIsNavbar(false)}>
                     <div
                       className="text-lg xl:px-4 mt-2 rounded-full profile-bg
                        md:w-14  h-14 text-center pt-3"
                     >
                       {capitalizeFirstAndLast(
-                        userProfile1?.name || userProfile?.name
+                        userProfile1?.name || userProfile?.name 
                       )}
                     </div>
+                  
+                    
+                  </Link>
+
 
                     <div>
                       <div className="flex mt-2  items-center">

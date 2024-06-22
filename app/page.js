@@ -40,7 +40,7 @@ const Page = () => {
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="text-white flex flex-col xl:justify-center      lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
         {/* xl:ml-32 xl:mr-[90px] */}
-        <div className="mx-3  md:flex gap-5 ">
+        {/* <div className="mx-3  md:flex gap-5 ">
           <div className="flex items-center mb-5 md:mb-0">
             <Image src={HomeUser} width="20px" height="10px" alt="homeuser" />
             <span className="ml-5 mr-16 text-wrap md:text-nowrap">
@@ -109,10 +109,17 @@ const Page = () => {
               </tbody>
             </table>
           </div>
-        </div>
-        <div className="mt-5  rounded-2xl ">
+        </div> */}
+
+       <div className="flex">
+       <div className="bg-white p-7">gfgghh</div>
+       <div>fgggfh</div>
+       </div>
+       
+
+        {/* <div className="mt-5  rounded-2xl ">
           <Market />
-        </div>
+        </div> */}
       </div>
     </div>
   );
