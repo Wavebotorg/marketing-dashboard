@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaBarsStaggered } from "react-icons/fa6";
-
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
@@ -106,7 +107,7 @@ const Navbar = () => {
           signupRefRegex.test(getPath) ||
           getPath === "/sucessreset"
             ? "hidden"
-            : "flex w-full justify-between"
+            : "flex  justify-between"
         } flex justify-between p-0 py-7`}
       >
         {/*  xl:pl-60 */}
@@ -115,16 +116,28 @@ const Navbar = () => {
           onClick={() => setIsNavbar(!isNavbar)}
         >
           {isNavbar === false ? (
-            <div className="cursor-pointer">
+            <div className="-mt-4 cursor-pointer">
               {/* <FaBars /> */}
               {/* <FaBarsStaggered /> */}
-              <TbArrowBarRight />
+              {/* <TbArrowBarRight /> */}
+              <Image
+                src={openarrow}
+                alt="open sidebar arrow"
+                width={40}
+                height={40}
+              />
             </div>
           ) : (
             <div className="  cursor-pointer">
               {" "}
               {/* <MdKeyboardDoubleArrowLeft /> */}
-              <TbArrowBarLeft />
+              {/* <TbArrowBarLeft /> */}
+              <Image
+                src={closearrow}
+                alt="open sidebar arrow"
+                width={40}
+                height={40}
+              />
             </div>
           )}
         </div>

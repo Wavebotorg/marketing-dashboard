@@ -35,6 +35,8 @@ import bot from "../../../public/assets/sidebar/bot.png";
 import Cookies from "js-cookie";
 import useWindowSize from "../hook/window";
 import { useMediaQuery } from "react-responsive";
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 
 import discord from "../../../public/assets/sidebar/discord.png";
 // import useEncryption from "@/app/components/useEncryption/index";
@@ -344,16 +346,28 @@ function Sidebar() {
                   onClick={() => setIsNavbar(!isNavbar)}
                 >
                   {isNavbar === false ? (
-                    <div className="mt-10 mx-auto ml-2 cursor-pointer">
+                    <div className="mt-2 mx-auto ml-2 cursor-pointer">
                       {/* <FaBars /> */}
                       {/* <FaBarsStaggered /> */}
-                      <TbArrowBarRight />
+                      {/* <TbArrowBarRight /> */}
+                      <Image
+                        src={openarrow}
+                        alt="open sidebar arrow"
+                        width={40}
+                        height={40}
+                      />
                     </div>
                   ) : (
-                    <div className=" mt-8 ml-6 cursor-pointer">
+                    <div className="mt-8 ml-4 cursor-pointer">
                       {" "}
                       {/* <MdKeyboardDoubleArrowLeft /> */}
-                      <TbArrowBarLeft />
+                      {/* <TbArrowBarLeft /> */}
+                      <Image
+                        src={closearrow}
+                        alt="close sidebar arrow"
+                        width={40}
+                        height={40}
+                      />
                     </div>
                   )}
                 </div>
@@ -363,7 +377,7 @@ function Sidebar() {
                   alt="wave-logo"
                   className={`${
                     isNavbar === false ? "hidden " : "block"
-                  } mt-10 mx-auto `}
+                  } mt-10 ml-8 mx-auto `}
                 />
               </div>
               <div>
@@ -540,7 +554,7 @@ function Sidebar() {
                 ) : (
                   <div className=" grid place-items-center">
                     <Link href="/login" className="">
-                      <button className="bg-[#1788FB] xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
+                      <button className="bg-[#1788FB] hidden xsm:p-2 xsm:ml-1 text-white p-2 rounded-xl xl:px-7 lg: px-3 place-items-center">
                         <div className="flex items-center">
                           <Image
                             src={Loginicon}
@@ -557,83 +571,146 @@ function Sidebar() {
                 )}
               </div>
               <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
-                <div className="hidden 2xl:flex xl:flex">
+                <div className=" 2xl:flex xl:flex">
                   <div className="flex gap-2">
-                    <Link href="/profile">
+                    <Link href="/profile" onClick={() => setIsNavbar(false)}>
                       <div
                         className="text-lg xl:px-4 mt-2 rounded-full profile-bg
-                       md:w-14  h-14 text-center pt-3"
+                       md:w-14 xsm:w-14   h-14 text-center pt-3"
                       >
                         {capitalizeFirstAndLast(
                           userProfile1?.name || userProfile?.name
                         )}
                       </div>
                     </Link>
-
-                    <div>
-                      <div className="flex mt-2  items-center">
-                        <h1>{userProfile1?.name || userProfile?.name}</h1>
-                        <Link href="/profile">
-                          <span>
+                    {isNavbar ? (
+                      <div>
+                        <div className="flex mt-2 items-center">
+                          <h1>{userProfile1?.name || userProfile?.name}</h1>
+                          <Link
+                            href="/profile"
+                            onClick={() => setIsNavbar(false)}
+                          >
+                            <span>
+                              <Image
+                                src={Arrow}
+                                alt="arrow"
+                                width="10px"
+                                height="10px"
+                                className="mb-3 ml-1.5"
+                              />
+                            </span>
+                          </Link>
+                        </div>
+                        <p className="text-xs">
+                          Invited by {userProfile1?.email || userProfile?.email}
+                        </p>
+                        <div className="flex mt-2">
+                          <Link
+                            href="https://t.me/onchain_wavebot"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <Image
-                              src={Arrow}
-                              alt="arrow"
-                              width="10px"
-                              height="10px"
-                              className="mb-3 ml-1.5"
+                              src={bot}
+                              alt="Telegram bot"
+                              className="mr-2 cursor-pointer"
+                              style={{ width: "20px", height: "20px" }}
                             />
-                          </span>
-                        </Link>
-                      </div>
-                      <p className="text-xs">
-                        Invited by {userProfile1?.email || userProfile?.email}
-                      </p>
-                      <div className="flex mt-2">
-                        <Link
-                          href="https://t.me/onchain_wavebot"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Image
-                            src={bot}
-                            alt="Telegram bot"
-                            className="mr-2 cursor-pointer"
-                            style={{ width: "20px", height: "20px" }}
-                          />
-                        </Link>
+                          </Link>
 
-                        <Link
-                          href="https://t.me/WaveUsers"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Image
-                            src={community}
-                            alt="Telegram community"
-                            style={{ width: "20px", height: "20px" }}
-                            className="mr-2 cursor-pointer"
-                          />
-                        </Link>
-                        <Link
-                          href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Image
-                            src={x}
-                            alt="twitter"
-                            style={{ width: "20px", height: "20px" }}
-                            className="mr-2 cursor-pointer"
-                          />
-                        </Link>
+                          <Link
+                            href="https://t.me/WaveUsers"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={community}
+                              alt="Telegram community"
+                              style={{ width: "20px", height: "20px" }}
+                              className="mr-2 cursor-pointer"
+                            />
+                          </Link>
+                          <Link
+                            href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={x}
+                              alt="twitter"
+                              style={{ width: "20px", height: "20px" }}
+                              className="mr-2 cursor-pointer"
+                            />
+                          </Link>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="hidden">
+                        <div className="flex mt-2   items-center">
+                          <h1>{userProfile1?.name || userProfile?.name}</h1>
+                          <Link href="/profile">
+                            <span>
+                              <Image
+                                src={Arrow}
+                                alt="arrow"
+                                width="10px"
+                                height="10px"
+                                className="mb-3 ml-1.5"
+                              />
+                            </span>
+                          </Link>
+                        </div>
+                        <p className="text-xs">
+                          Invited by {userProfile1?.email || userProfile?.email}
+                        </p>
+                        <div className="flex mt-2">
+                          <Link
+                            href="https://t.me/onchain_wavebot"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={bot}
+                              alt="Telegram bot"
+                              className="mr-2 cursor-pointer"
+                              style={{ width: "20px", height: "20px" }}
+                            />
+                          </Link>
+
+                          <Link
+                            href="https://t.me/WaveUsers"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={community}
+                              alt="Telegram community"
+                              style={{ width: "20px", height: "20px" }}
+                              className="mr-2 cursor-pointer"
+                            />
+                          </Link>
+                          <Link
+                            href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Image
+                              src={x}
+                              alt="twitter"
+                              style={{ width: "20px", height: "20px" }}
+                              className="mr-2 cursor-pointer"
+                            />
+                          </Link>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Only show the image on screens smaller than 2xl and xl */}
 
-                <div
+                {/*               <div
                   className="2xl:hidden xl:hidden flex gap-2 lg:ml-0 ml-3 mt-5 "
                   style={{ position: "absolute", bottom: "0" }}
                 >
@@ -648,7 +725,7 @@ function Sidebar() {
                     </div>
                   </Link>
 
-                  <div>
+                    <div>
                     <div className="flex mt-2  items-center">
                       <h1>{userProfile1?.name || userProfile?.name}</h1>
                       <Link href="/profile">
@@ -706,7 +783,7 @@ function Sidebar() {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

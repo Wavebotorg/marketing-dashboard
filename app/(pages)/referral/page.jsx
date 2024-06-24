@@ -21,36 +21,36 @@ const Referral = () => {
       }}
       className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
     >
-      <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-4">
+      <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-6 md:ml-0 xsm:ml-5 mr-5 mt-4">
         <div className="font-medium mb-4 text-3xl text-[#1788FB]">
           <p>Referral </p>
         </div>
 
-        <div className=" grid grid-cols-1 md:grid-cols-3 gap-6 mt-5 lg:w-[55rem] w-full">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 lg:w-[56rem]  ">
           <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
-            <p className="text-[#CECECE] font-light">UNCLAIMED REWARDS</p>
+            <p className="text-[#CECECE] font-light">REFERRAL USERS ETH</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 USERS</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE]">ETH UNCLAIMED</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
-            <p className="text-[#CECECE]">UNCLAIMED ETH</p>
+            <p className="text-[#CECECE]">REFERRAL POSITION ETH</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">#0</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE] font-light">ETH TOTAL EARNED</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
           </div>
-          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
-            <p className="text-[#CECECE]">UNCLAIMED SOL</p>
-            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 SOL</p>
-          </div>
-          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
-            <p className="text-[#CECECE] font-light">CURRENT APY</p>
-            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0%</p>
-          </div>
-          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+          {/*    <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
             <p className="text-[#CECECE]">TOTAL EARNED ETH</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
           </div>
           <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
             <p className="text-[#CECECE]">TOTAL EARNED SOL</p>
             <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 SOL</p>
-          </div>
+          </div> */}
         </div>
         <div className="mt-10">
           <div className="flex gap-2 p-2 rounded-t-xl bg-[#1C1C1C] flex-col sm:flex-row items-center justify-center">
@@ -165,7 +165,16 @@ const Referral = () => {
                   )}
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 pt-60 font-bold text-lg text-center text-md text-white"
+                  >
+                    No data found.
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

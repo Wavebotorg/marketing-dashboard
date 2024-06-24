@@ -9,6 +9,9 @@ import { FaBars, FaBarsStaggered } from "react-icons/fa6";
 import { useWallet } from "../../components/contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
+import Image from "next/image";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
@@ -49,15 +52,27 @@ const Profile = () => {
               onClick={() => setIsNavbar(!isNavbar)}
             >
               {isNavbar === false ? (
-                <div className="cursor-pointer">
+                <div className="-mt-3 cursor-pointer">
                   {/* <FaBars /> */}
                   {/* <FaBarsStaggered /> */}
-                  <TbArrowBarRight />
+                  {/* <TbArrowBarRight /> */}
+                  <Image
+                    src={openarrow}
+                    alt="open sidebar arrow"
+                    width={40}
+                    height={40}
+                  />
                 </div>
               ) : (
                 <div className="cursor-pointer">
                   {/* <MdKeyboardDoubleArrowLeft /> */}
-                  <TbArrowBarLeft />
+                  {/* <TbArrowBarLeft /> */}
+                  <Image
+                    src={closearrow}
+                    alt="open sidebar arrow"
+                    width={40}
+                    height={40}
+                  />
                 </div>
               )}
             </div>

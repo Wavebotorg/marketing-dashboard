@@ -5,7 +5,8 @@ import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
-
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -538,64 +539,62 @@ const Swap = () => {
   //for buy submit for both network
   const handleBuySubmit = async () => {
     setLoading(true);
-   
-    
-        let endpoint;
-        if (selectedNetwork === "Solana") {
-          endpoint = "/solanaSwap";
-        } else {
-          endpoint = "/EVMswap";
-        }
 
-        axiosInstance
-          .post(
-            endpoint,
-            selectedNetwork === "Solana"
-              ? {
-                  input: walletAddressbuysell,
-                  output: selectedTokenDatato?.address_to,
+    let endpoint;
+    if (selectedNetwork === "Solana") {
+      endpoint = "/solanaSwap";
+    } else {
+      endpoint = "/EVMswap";
+    }
 
-                  amount: Number(selectedTokenDatato?.input_to),
-                  email: email,
-                  method: "buy",
-                }
-              : {
-                  tokenIn: walletAddressbuysell,
-                  tokenOut: selectedTokenDatato?.address_to,
-                  amount: Number(selectedTokenDatato?.input_to),
-                  chain: Number(selectedChainId),
-                  email: email,
-                  chainId: selectedTokenDatato?.chainname,
-                  desCode: selectedTokenDatato?.descode,
-                  method: "buy",
-                }
-          )
-          .then(async (res) => {
-            const myData = res?.data;
-            console.log("Response from API:", myData);
-            if (myData?.status) {
-              toast.success(myData?.message);
-              setTimeout(async () => {
-                if (selectedNetwork == "Solana") {
-                  await getSolanaBalance();
-                } else {
-                  await getWalletBalance(selectedNetwork);
-                }
-              }, 3000);
-              resetFields();
-            } else {
-              toast.error(myData?.message);
+    axiosInstance
+      .post(
+        endpoint,
+        selectedNetwork === "Solana"
+          ? {
+              input: walletAddressbuysell,
+              output: selectedTokenDatato?.address_to,
+
+              amount: Number(selectedTokenDatato?.input_to),
+              email: email,
+              method: "buy",
             }
-            // Reset all fields after successful transfer
-          })
-          .catch((error) => {
-            console.error("Error occurred:", error);
-            toast.error("An error occurred while processing your request");
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-    
+          : {
+              tokenIn: walletAddressbuysell,
+              tokenOut: selectedTokenDatato?.address_to,
+              amount: Number(selectedTokenDatato?.input_to),
+              chain: Number(selectedChainId),
+              email: email,
+              chainId: selectedTokenDatato?.chainname,
+              desCode: selectedTokenDatato?.descode,
+              method: "buy",
+            }
+      )
+      .then(async (res) => {
+        const myData = res?.data;
+        console.log("Response from API:", myData);
+        if (myData?.status) {
+          toast.success(myData?.message);
+          setTimeout(async () => {
+            if (selectedNetwork == "Solana") {
+              await getSolanaBalance();
+            } else {
+              await getWalletBalance(selectedNetwork);
+            }
+          }, 3000);
+          resetFields();
+        } else {
+          toast.error(myData?.message);
+        }
+        // Reset all fields after successful transfer
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+        toast.error("An error occurred while processing your request");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   //for pass value to sell evm submit
@@ -1064,12 +1063,25 @@ const Swap = () => {
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
                   {/* <FaBarsStaggered /> */}
-                  <TbArrowBarRight />
+                  {/* <TbArrowBarRight /> */}
+
+                  <Image
+                    src={openarrow}
+                    alt="open sidebar arrow"
+                    width={30}
+                    // height={40}
+                  />
                 </div>
               ) : (
                 <div className="  cursor-pointer">
                   {/* <MdKeyboardDoubleArrowLeft /> */}
-                  <TbArrowBarLeft />
+                  {/* <TbArrowBarLeft /> */}
+                  <Image
+                    src={closearrow}
+                    alt="open sidebar arrow"
+                    width={40}
+                    height={40}
+                  />
                 </div>
               )}
             </div>
@@ -1132,6 +1144,7 @@ const Swap = () => {
                           {selectChain && (
                             <Image
                               src={selectChain}
+                              alt="selected Chain Logo"
                               className="h-6 w-6 rounded-full"
                             />
                           )}

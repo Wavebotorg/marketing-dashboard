@@ -6,7 +6,8 @@ import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
-
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
@@ -548,12 +549,24 @@ const Withdraw = () => {
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
                   {/* <FaBarsStaggered /> */}
-                  <TbArrowBarRight />
+                  {/* <TbArrowBarRight /> */}
+                  <Image
+                    src={openarrow}
+                    alt="open sidebar arrow"
+                    width={30}
+                    // height={40}
+                  />
                 </div>
               ) : (
                 <div className="  cursor-pointer">
                   {/* <MdKeyboardDoubleArrowLeft /> */}
-                  <TbArrowBarLeft />
+                  {/* <TbArrowBarLeft /> */}
+                  <Image
+                    src={closearrow}
+                    alt="open sidebar arrow"
+                    width={40}
+                    height={40}
+                  />
                 </div>
               )}
             </div>
