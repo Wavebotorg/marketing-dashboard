@@ -377,7 +377,7 @@ function Sidebar() {
                   alt="wave-logo"
                   className={`${
                     isNavbar === false ? "hidden " : "block"
-                  } mt-10 ml-8 mx-auto `}
+                  } mt-10 ml-8 mx-auto  `}
                 />
               </div>
               <div>
@@ -392,7 +392,8 @@ function Sidebar() {
                           data?.pathname === pathname
                             ? "navHover "
                             : "text-white"
-                        } flex md:px-1 lg:px-2   py-2 rounded-lg`}
+                        } flex md:px-1 lg:px-2 py-2 `}
+                        // rounded-lg
                         // onClick={() => setIsNavbar(false)}
                         onClick={handleClick}
                         onMouseEnter={() => HoverStyle(data?.id)}

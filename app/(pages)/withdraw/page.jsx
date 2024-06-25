@@ -535,7 +535,7 @@ const Withdraw = () => {
         style={{
           marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
         }}
-        className=" md:pl-4 sm:pl-4 xsm:pl-0 mx-auto"
+        className=" md:pl-4 sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
       >
         {/* 2xl:pl-64 xl:pl-64 */}
         <div className="   gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">

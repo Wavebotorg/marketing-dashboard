@@ -168,7 +168,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className=" md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
+      className=" md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full transition-all duration-500 ease-in-out"
     >
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">

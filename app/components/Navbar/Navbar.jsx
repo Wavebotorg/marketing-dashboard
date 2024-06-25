@@ -108,7 +108,7 @@ const Navbar = () => {
           getPath === "/sucessreset"
             ? "hidden"
             : "flex  justify-between"
-        } flex justify-between p-0 py-7`}
+        } flex justify-between p-0 py-7 transition-all duration-500 ease-in-out`}
       >
         {/*  xl:pl-60 */}
         <div
