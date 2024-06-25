@@ -564,8 +564,8 @@ const Withdraw = () => {
                   <Image
                     src={closearrow}
                     alt="open sidebar arrow"
-                    width={40}
-                    height={40}
+                    width={30}
+                    // height={40}
                   />
                 </div>
               )}

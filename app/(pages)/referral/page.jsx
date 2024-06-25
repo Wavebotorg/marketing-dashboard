@@ -19,7 +19,7 @@ const Referral = () => {
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
+      className=" md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
     >
       <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-6 md:ml-0 xsm:ml-5 mr-5 mt-4">
         <div className="font-medium mb-4 text-3xl text-[#1788FB]">

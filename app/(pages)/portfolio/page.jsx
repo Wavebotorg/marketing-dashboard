@@ -147,7 +147,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
   return (
     <div
-      className="md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full  "
+      className="md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full  "
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
@@ -163,7 +163,11 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
               onClick={toggleDropdown}
             >
               {selectChain && (
-                <Image src={selectChain} className="h-6 w-6 rounded-full" />
+                <Image
+                  src={selectChain}
+                  alt="logo"
+                  className="h-6 w-6 rounded-full"
+                />
               )}
               <svg
                 xmlns="http://www.w3.org/2000/svg"

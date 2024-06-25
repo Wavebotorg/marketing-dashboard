@@ -544,7 +544,8 @@ const Swap = () => {
     if (selectedNetwork === "Solana") {
       endpoint = "/solanaSwap";
     } else {
-      endpoint = "/EVMswap";
+      // endpoint = "/EVMswap";
+      endpoint = "/EVMBuy";
     }
 
     axiosInstance
@@ -560,7 +561,7 @@ const Swap = () => {
               method: "buy",
             }
           : {
-              tokenIn: walletAddressbuysell,
+              tokenIn: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
               tokenOut: selectedTokenDatato?.address_to,
               amount: Number(selectedTokenDatato?.input_to),
               chain: Number(selectedChainId),
@@ -600,7 +601,7 @@ const Swap = () => {
   //for pass value to sell evm submit
   const dataEvmSell = {
     tokenIn: selectedTokenDatato?.address_to,
-    tokenOut: walletAddressbuysell,
+    tokenOut: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     amount: Number(selectedTokenDatato?.input_to),
     chain: Number(selectedChainId),
     email: email,
@@ -1079,8 +1080,8 @@ const Swap = () => {
                   <Image
                     src={closearrow}
                     alt="open sidebar arrow"
-                    width={40}
-                    height={40}
+                    width={30}
+                    // height={40}
                   />
                 </div>
               )}

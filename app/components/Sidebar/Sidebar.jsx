@@ -354,7 +354,7 @@ function Sidebar() {
                         src={openarrow}
                         alt="open sidebar arrow"
                         width={40}
-                        height={40}
+                        height={0}
                       />
                     </div>
                   ) : (
@@ -366,7 +366,7 @@ function Sidebar() {
                         src={closearrow}
                         alt="close sidebar arrow"
                         width={40}
-                        height={40}
+                        height={0}
                       />
                     </div>
                   )}
@@ -576,7 +576,7 @@ function Sidebar() {
                     <Link href="/profile" onClick={() => setIsNavbar(false)}>
                       <div
                         className="text-lg xl:px-4 mt-2 rounded-full profile-bg
-                       md:w-14 xsm:w-14   h-14 text-center pt-3"
+                       md:w-14 xsm:w-14 lg:ml-0 xsm:ml-3  h-14 text-center pt-3"
                       >
                         {capitalizeFirstAndLast(
                           userProfile1?.name || userProfile?.name

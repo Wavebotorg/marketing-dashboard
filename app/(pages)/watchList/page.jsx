@@ -154,7 +154,7 @@ const WatchList = () => {
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className="  md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
+      className="  md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
     >
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="flex flex-col xl:justify-center   lg:ml-2 lg:mr-5 ml-5 mr-5">
