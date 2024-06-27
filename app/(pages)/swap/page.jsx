@@ -13,9 +13,14 @@ import optimism from "../../../public/assets/tokenimg/optimism.png";
 import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
 import { IoSwapVerticalOutline } from "react-icons/io5";
@@ -153,9 +158,23 @@ const Swap = () => {
     {
       name: "Base",
       chainid: "250",
-      img: fantom,
+      img: base,
       descode: "0x2105",
       walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+    {
+      name: "Linea",
+      chainid: "250",
+      img: Linea,
+      descode: "0xe705",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     },
     {
       name: "Fantom",
@@ -229,6 +248,42 @@ const Swap = () => {
       descode: `0xa4b1`,
     },
   ];
+
+  const token_data_BLAST = [
+    {
+      name: "Blast ",
+      symbol: "BLAST",
+      chianid: 81457,
+      address: "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad",
+      decimal: "18",
+      logoURI: "https://blastscan.io/token/images/blast_32.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+    {
+      name: "USDB ",
+      symbol: "USDB",
+      chianid: 81457,
+      address: "0x4300000000000000000000000000000000000003",
+      decimal: "18",
+      logoURI: "https://blastscan.io/token/images/usdb_32.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+
+    {
+      name: "Wrapped Ether",
+      symbol: "WETH",
+      chianid: 81457,
+      address: "0x4300000000000000000000000000000000000004",
+      decimal: "18",
+      logoURI:
+        "https://d1k8z2xrei817b.cloudfront.net/images/logo/aave-polygon-weth-94f8bbe8.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+  ];
+
   const token_data_POLY = [
     {
       name: "Tether USD",
@@ -315,6 +370,51 @@ const Swap = () => {
       logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       chainname: "bsc",
       descode: `0x38`,
+    },
+  ];
+
+  const token_data_LINEA = [
+    {
+      name: "Tether USD",
+      symbol: "USDT",
+      chianid: 250,
+      address: "0xA219439258ca9da29E9Cc4cE5596924745e12B93",
+      decimal: "6",
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+    {
+      name: "USDC.e",
+      symbol: "USDC",
+      chianid: 250,
+      address: "0x176211869cA2b568f2A7D4EE941E073a821EE1ff",
+      decimal: "6",
+      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+
+    {
+      name: "SHIBA INU",
+      symbol: "SHIB",
+      chianid: 250,
+      address: "0x99AD925C1Dc14Ac7cc6ca1244eeF8043C74E99d5",
+      decimal: "18",
+      logoURI: "https://lineascan.build/token/images/shibainu_32.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+    {
+      name: "Wrapped BTC",
+      symbol: "WBTC",
+      chianid: 250,
+      address: "0x3aAB2285ddcDdaD8edf438C1bAB47e1a9D05a9b4",
+      decimal: "8",
+      logoURI:
+        "https://cryptoclothing.cc/merch/wrapped-bitcoin-wbtc-sticker.jpg?v=031",
+      chainname: "linea",
+      descode: `0xe705`,
     },
   ];
 
@@ -997,6 +1097,8 @@ const Swap = () => {
     Arbitrum: token_data_ARB,
     Polygon: token_data_POLY,
     "BNB Chain": token_data_BNB,
+    Blast: token_data_BLAST,
+    Linea: token_data_LINEA,
   });
 
   useEffect(() => {
@@ -1170,7 +1272,9 @@ const Swap = () => {
                         {/* {showDropdown && ( */}
                         <div
                           className={`overflow-hidden ${
-                            showDropdown ? "h-[430px] py-2" : "h-0"
+                            showDropdown
+                              ? "h-[430px] overflow-y-scroll py-2"
+                              : "h-0"
                           } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10 ml-[-162px]`}
                         >
                           <ul>

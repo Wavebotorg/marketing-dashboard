@@ -12,6 +12,10 @@ import optimism from "../../../public/assets/tokenimg/optimism.png";
 import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
@@ -84,9 +88,23 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
     {
       name: "Base",
       chainid: "250",
-      img: fantom,
+      img: base,
       descode: "0x2105",
       walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+    {
+      name: "Linea",
+      chainid: "250",
+      img: Linea,
+      descode: "0xe705",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     },
     {
       name: "Fantom",
@@ -228,7 +246,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
             {/* {showDropdown && ( */}
             <div
               className={`overflow-hidden ${
-                showDropdown ? "h-[430px] py-2" : "h-0"
+                showDropdown ? "h-[430px] overflow-y-scroll py-2" : "h-0"
               } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
             >
               <ul>
@@ -276,7 +294,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
         </div>
 
         <div className="">
-          <div className="mt-6 rounded-lg overflow-auto">
+          <div className="mt-6 rounded-lg overflow-auto h-[550px]">
             <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
               {/* for with points and recent join user data show */}
 

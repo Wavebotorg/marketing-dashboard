@@ -12,7 +12,10 @@ import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import CELO from "../../../public/assets/tokenimg/CELO.png";
+
 import BURST from "../../../public/assets/tokenimg/BURST.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+
 import Image from "next/image";
 import { MdDone } from "react-icons/md";
 import { useWallet } from "../../components/contexts/WalletContext";
@@ -52,7 +55,19 @@ const SwapHistory = () => {
     { name: "BNB Chain", chainid: "56", img: BNB, desCode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, desCode: "0xa86a" },
     { name: "Celo", chainid: "42220", img: CELO, desCode: "" },
-    { name: "Blast", chainid: "238", img: BURST, desCode: "" },
+
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+    },
+    {
+      name: "Linea",
+      chainid: "59144",
+      img: Linea,
+      descode: "0xe705",
+    },
   ];
   const handlePageChange = (page) => {
     setCurrentPage(page);

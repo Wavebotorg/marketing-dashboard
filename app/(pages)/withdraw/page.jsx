@@ -18,6 +18,9 @@ import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
 import base from "../../../public/assets/tokenimg/base.webp";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
 import axiosInstance from "../../apiInstances/axiosInstance";
@@ -96,6 +99,18 @@ const Withdraw = () => {
     { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
     { name: "Cronos", chainid: "25", img: cronos, descode: "0x19" },
     { name: "Fantom", chainid: "250", img: fantom, descode: "0xfa" },
+    {
+      name: "Blast",
+      chainid: "238",
+      img: BURST,
+      descode: "0xee",
+    },
+    {
+      name: "Linea",
+      chainid: "59144",
+      img: Linea,
+      descode: "0xe705",
+    },
   ];
   // console.log(
   //   "------------------------------------------------set addredess",
@@ -621,7 +636,9 @@ const Withdraw = () => {
 
                         <div
                           className={`overflow-hidden ${
-                            showDropdown ? "h-[430px] py-2" : "h-0"
+                            showDropdown
+                              ? "h-[430px] overflow-y-scroll py-2"
+                              : "h-0"
                           } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10 ml-[-162px]`}
                         >
                           <ul>
