@@ -294,8 +294,8 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
         </div>
 
         <div className="">
-          <div className="mt-6 rounded-lg overflow-auto h-[550px]">
-            <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
+          <div className="mt-6 rounded-lg overflow-auto h-[1050px]">
+            <div className="bg-[#1C1C1C] h-full mb-7 overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
               {/* for with points and recent join user data show */}
 
               {selectedpage === "newpair" ? (
