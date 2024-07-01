@@ -167,7 +167,7 @@ const ChangePass = () => {
   const handleOtp = async (e) => {
     e.preventDefault();
     await axiosInstance
-      .post("verify", mydata)
+      .post("verifyUser", mydata)
       .then((res) => {
         const myData = res?.data;
         // console.log("OTP Done--->", myData?.data);

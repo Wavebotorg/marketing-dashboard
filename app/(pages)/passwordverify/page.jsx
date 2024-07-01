@@ -71,7 +71,7 @@ const PasswordVerify = () => {
   const handleSubmit = async () => {
     setLoading(true);
     await axiosInstance
-      .post("verify", mydata)
+      .post("verifyUser", mydata)
       .then((res) => {
         const myData = res?.data;
         console.log("OTP Done---> ", myData?.data);

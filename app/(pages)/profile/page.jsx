@@ -119,6 +119,7 @@ const Profile = () => {
                       <TbChartCandleFilled className="mr-1" /> Chart
                     </>
                   )}
+                  
                   {/* {button === 5 && "Notification"} */}
                 </button>
               </div>
