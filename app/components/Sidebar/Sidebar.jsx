@@ -144,6 +144,12 @@ function Sidebar() {
       icon: Apecurdocs,
       pagename: "Wave Manual",
     },
+    {
+      id: 14,
+      pathname: "/holder",
+      icon: Discover,
+      pagename: "HOLDER",
+    },
   ];
   const HoverStyle = (id) => {
     setIsHover(id);

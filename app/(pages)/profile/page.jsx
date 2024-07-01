@@ -12,6 +12,10 @@ import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
 import closearrow from "../../../public/assets/sidebar/closearrow.svg";
 import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import Image from "next/image";
+import { ImStatsBars } from "react-icons/im";
+import { IoPieChartSharp } from "react-icons/io5";
+import { PiSquaresFourFill } from "react-icons/pi";
+import { TbChartCandleFilled } from "react-icons/tb";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
@@ -81,20 +85,41 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="flex md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
+          <div className="flex justify-center  text-center md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button}>
                 <button
-                  className={`hover:bg-blue-500 p-1 px-2 rounded-full md:text-[18px] text-[9px] font-normal ${
+                  className={` flex items-center hover:bg-blue-500 p-1 px-2 rounded-xl md:text-[18px] text-[9px] font-normal ${
                     activeButton === button && "bg-blue-500"
                   }`}
                   onClick={() => handleButtonClick(button)}
                 >
-                  {button === 1 && "About"}
+                  {/*              {button === 1 && "About"}
                   {button === 2 && "Setup"}
                   {button === 3 && "Appearance"}
                   {button === 4 && "Security & Login"}
-                  {button === 5 && "Notification"}
+                  {button === 5 && "Notification"} */}
+                  {button === 1 && (
+                    <>
+                      <PiSquaresFourFill className="mr-1" /> Overview
+                    </>
+                  )}
+                  {button === 2 && (
+                    <>
+                      <ImStatsBars className="mr-1" /> Stats
+                    </>
+                  )}
+                  {button === 3 && (
+                    <>
+                      <IoPieChartSharp className="mr-1" /> Portfolio
+                    </>
+                  )}
+                  {button === 4 && (
+                    <>
+                      <TbChartCandleFilled className="mr-1" /> Chart
+                    </>
+                  )}
+                  {/* {button === 5 && "Notification"} */}
                 </button>
               </div>
             ))}
