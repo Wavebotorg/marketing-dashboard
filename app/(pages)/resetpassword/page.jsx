@@ -42,13 +42,14 @@ const ResetPassword = () => {
     setResetPassData({
       ...resetPassData,
       [name]: value.trim(),
+      // [name]: value,
     });
     validateInput(name, value);
   };
 
   //Pass data to backend for Reset password
   const mydata = {
-    newPassword: resetPassData?.newPassword,
+    password: resetPassData?.newPassword,
     confirmPassword: resetPassData?.confirmPassword,
     email: email,
   };
@@ -84,15 +85,22 @@ const ResetPassword = () => {
   //While Submit show error according to  Details
   const handleSubmit = async () => {
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-    if (!passwordRegex.test(mydata.newPassword && mydata?.confirmPassword)) {
+    // console.log("New Password:", mydata.password);
+    // console.log("Confirm Password:", mydata.confirmPassword);
+    if (!passwordRegex.test(mydata.password && mydata?.confirmPassword)) {
       toast.error(
         "Password must contain at least one number, one special character, one uppercase letter, and be at least 8 characters long."
       );
       return;
     }
 
-    if (mydata.newPassword.length < 8 && mydata.confirmPassword.length < 8) {
+    if (mydata.password.length < 8 && mydata.confirmPassword.length < 8) {
       toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (mydata.password !== mydata.confirmPassword) {
+      toast.error("Passwords do not match.");
       return;
     }
 

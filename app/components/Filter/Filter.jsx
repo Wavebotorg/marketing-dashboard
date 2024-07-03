@@ -56,40 +56,29 @@ const Filter = () => {
             <div className="mb-4 px-4 mt-6">
               <label className="inline-flex items-center">
                 <input
+                  id="horizontal-list-vue"
                   type="checkbox"
-                  className="form-checkbox text-blue-600"
-                  name="social"
+                  class="  h-4 w-4 "
                 />
+
                 <span className="ml-2">Audit results passed</span>
               </label>
             </div>
             <div className="mb-4 px-4 mt-6">
               <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox text-blue-600"
-                  name="avoid_low"
-                />
+                <input type="checkbox" className="  h-4 w-4" />
                 <span className="ml-2">With at least 1 social</span>
               </label>
             </div>
             <div className="mb-4 px-4 mt-6">
               <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox text-blue-600"
-                  name="swll_limit"
-                />
+                <input type="checkbox" className=" text-blue-600  h-4 w-4" />
                 <span className="ml-2">Avoid low sell limit</span>
               </label>
             </div>
             <div className="mb-4 px-4 mt-6">
               <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox text-blue-600"
-                  name="swll_limit"
-                />
+                <input type="checkbox" className=" text-blue-600  h-4 w-4" />
                 <span className="ml-2">Liquidity Added</span>
               </label>
             </div>

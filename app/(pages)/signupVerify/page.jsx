@@ -68,10 +68,10 @@ const PasswordVerify = () => {
   };
 
   //Submit
-  /*  const handleSubmit = async () => {
+  const handleSubmit = async () => {
     setLoading(true);
     await axiosInstance
-      .post("verifyUser", mydata)
+      .post("verify", mydata)
       .then((res) => {
         const myData = res?.data;
         console.log("OTP Done---> ", myData?.data);
@@ -99,71 +99,6 @@ const PasswordVerify = () => {
         setLoading(false);
         console.log("error--->", err);
       });
-  };
- */
-  /* 
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosInstance.post("verifyUser", mydata);
-      const myData = res?.data;
-      console.log("OTP Done---> ", myData?.data);
-
-      if (myData?.status) {
-        if (myData?.data === "signup") {
-          localStorage.setItem("Token", myData?.token);
-          Cookies.set("auth-token", myData?.token);
-          await getUserProfile();
-          router.push("/");
-        } else if (myData?.data === "forget") {
-          router.push("/resetpassword");
-        }
-
-        localStorage.removeItem("type");
-        toast.success(myData?.msg);
-      } else {
-        setLoading(false);
-        toast.error(myData?.msg);
-      }
-    } catch (err) {
-      setLoading(false);
-      console.log("error--->", err);
-      toast.error("An error occurred while verifying the OTP.");
-    }
-  };
- */
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosInstance.post("verifyUser", mydata);
-      const myData = res?.data;
-      console.log("OTP Done---> ", myData?.data);
-
-      if (myData?.status) {
-        // Store the token
-        // localStorage.setItem("Token", myData?.token);
-        // Cookies.set("auth-token", myData?.token);
-
-        if (myData?.data === "signup") {
-          await getUserProfile();
-          router.push("/");
-        } else if (myData?.data === "forget") {
-          console.log("Redirecting to reset password page..."); // Debugging
-          router.push("/resetpassword");
-        }
-
-        localStorage.removeItem("type");
-        toast.success(myData?.msg);
-      } else {
-        setLoading(false);
-        toast.error(myData?.msg);
-      }
-    } catch (err) {
-      setLoading(false);
-      console.log("error--->", err);
-      toast.error("An error occurred while verifying the OTP.");
-    }
   };
 
   //Press Enter Key to submit

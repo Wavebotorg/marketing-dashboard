@@ -33,7 +33,10 @@ const Appearance = () => {
     <div>
       <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 p-5">
         <div>
-          <div ref={dropdownRef} className="dropdown inline-block relative">
+          <div
+            ref={dropdownRef}
+            className="dropdown inline-block relative mt-2"
+          >
             <button
               onClick={toggleDropdown}
               className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"

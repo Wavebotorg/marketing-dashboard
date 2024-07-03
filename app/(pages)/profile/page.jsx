@@ -48,11 +48,11 @@ const Profile = () => {
         className="md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
       >
         {/* 2xl:pl-64 xl:pl-64  */}
-        <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
+        <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 ">
           {/* xl:ml-32 xl:mr-[92px]  */}
-          <div className="flex items-center gap-3 lg:gap-0">
+          <div className="flex items-center gap-3 lg:gap-0  ">
             <div
-              className={`lg:scale-0 scale-[1] text-3xl `}
+              className={`lg:scale-0 scale-[1] text-3xl fixed bg-black w-full xsm:pt-[121px] lg:pt-0 `}
               onClick={() => setIsNavbar(!isNavbar)}
             >
               {isNavbar === false ? (
@@ -80,25 +80,20 @@ const Profile = () => {
                 </div>
               )}
             </div>
-            <div className="text-[35px] font-medium ml-2 lg:ml-0 ">
+            <div className="text-[35px] font-medium bg-black w-full  lg:ml-0 fixed ml-14 pt-[119px]">
               My Profile
             </div>
           </div>
 
-          <div className="flex justify-center  text-center md:gap-5 gap-2 mt-6 lg:px- md:text-base text-sm items-center">
+          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-20 bg-black z-50">
             {[1, 2, 3, 4, 5].map((button) => (
-              <div key={button}>
+              <div key={button} className="bg-black">
                 <button
                   className={` flex items-center hover:bg-blue-500 p-1 px-2 rounded-xl md:text-[18px] text-[9px] font-normal ${
                     activeButton === button && "bg-blue-500"
                   }`}
                   onClick={() => handleButtonClick(button)}
                 >
-                  {/*              {button === 1 && "About"}
-                  {button === 2 && "Setup"}
-                  {button === 3 && "Appearance"}
-                  {button === 4 && "Security & Login"}
-                  {button === 5 && "Notification"} */}
                   {button === 1 && (
                     <>
                       <PiSquaresFourFill className="mr-1" /> Overview
@@ -119,7 +114,7 @@ const Profile = () => {
                       <TbChartCandleFilled className="mr-1" /> Chart
                     </>
                   )}
-                  
+
                   {/* {button === 5 && "Notification"} */}
                 </button>
               </div>
