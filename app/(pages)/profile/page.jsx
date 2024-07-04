@@ -89,7 +89,7 @@ const Profile = () => {
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button} className="bg-black">
                 <button
-                  className={` flex items-center hover:bg-blue-500 p-1 px-2 rounded-xl md:text-[18px] text-[9px] font-normal ${
+                  className={` flex items-center hover:bg-blue-500 p-1 px-2 rounded-xl md:text-[18px] text-[9.5px] font-normal ${
                     activeButton === button && "bg-blue-500"
                   }`}
                   onClick={() => handleButtonClick(button)}

@@ -302,18 +302,25 @@
 // export default Holder;
 
 "use client";
-// src/App.js
 import React from "react";
-import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import { AdvancedChart, TickerTape } from "react-tradingview-embed";
 
-function App() {
+const Dashboard = () => {
   return (
-    <div className="App">
-      <header className="App-header ml-40  ">
-        <h1>React TradingView Widget Demo</h1>
-      </header>
+    <div>
+      {/* <div className="inputDiv ml-20">
+        <TickerTape widgetProps={{}} />
+      </div> */}
+      <div className="ml-20">
+        <AdvancedChart
+        // widgetProps={{
+        //   interval: "1D",
+        //   theme: "white",
+        // }}
+        />
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Dashboard;
