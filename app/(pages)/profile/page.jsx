@@ -51,15 +51,12 @@ const Profile = () => {
         <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 ">
           {/* xl:ml-32 xl:mr-[92px]  */}
           <div className="flex items-center gap-3 lg:gap-0  ">
-            <div
+            {/*        <div
               className={`lg:scale-0 scale-[1] text-3xl fixed bg-black w-full xsm:pt-[121px] lg:pt-0 `}
               onClick={() => setIsNavbar(!isNavbar)}
             >
               {isNavbar === false ? (
                 <div className="-mt-3 cursor-pointer">
-                  {/* <FaBars /> */}
-                  {/* <FaBarsStaggered /> */}
-                  {/* <TbArrowBarRight /> */}
                   <Image
                     src={openarrow}
                     alt="open sidebar arrow"
@@ -69,8 +66,6 @@ const Profile = () => {
                 </div>
               ) : (
                 <div className="cursor-pointer">
-                  {/* <MdKeyboardDoubleArrowLeft /> */}
-                  {/* <TbArrowBarLeft /> */}
                   <Image
                     src={closearrow}
                     alt="open sidebar arrow"
@@ -79,13 +74,13 @@ const Profile = () => {
                   />
                 </div>
               )}
-            </div>
-            <div className="text-[35px] font-medium bg-black w-full  lg:ml-0 fixed ml-14 pt-[119px]">
+            </div> */}
+            <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px]">
               My Profile
             </div>
           </div>
 
-          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-20 bg-black z-50">
+          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-[9.5rem] bg-black z-[9]">
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button} className="bg-black">
                 <button

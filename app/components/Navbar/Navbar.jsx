@@ -15,6 +15,7 @@ import { useSearch } from "../contexts/SearchContext";
 import { useWallet } from "../contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+import Notification from "../notification/notification";
 
 const Navbar = () => {
   const router = useRouter();
@@ -77,7 +78,8 @@ const Navbar = () => {
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-      setIsNavbar(false);
+      // setIsNavbar(false);
+      setIsOpen(false);
     }
   };
 
@@ -88,6 +90,12 @@ const Navbar = () => {
     };
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <div
@@ -96,7 +104,7 @@ const Navbar = () => {
         }}
         className={`${
           getPath === "/login" ||
-          getPath === "/profile" ||
+          // getPath === "/profile" ||
           getPath === "/swap" ||
           getPath === "/withdraw" ||
           getPath === "/signup" ||
@@ -158,12 +166,14 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className=" xsm:mr-[1rem]">
+        <div ref={navbarRef} className=" xsm:mr-[1rem]">
           {/*  xl:mr-[6rem] */}
-          <button>
+          <button onClick={toggleSidebar}>
             <IoIosNotifications size={25} />
           </button>
         </div>
+        <Notification isOpen={isOpen} toggle={toggleSidebar} />
+
         {/* <div
           className={`${
             getPath === "/login" ||

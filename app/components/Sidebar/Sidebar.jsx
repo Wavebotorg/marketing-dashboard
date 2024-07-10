@@ -144,12 +144,12 @@ function Sidebar() {
       icon: Apecurdocs,
       pagename: "Wave Manual",
     },
-    {
+    /*    {
       id: 14,
       pathname: "/holder",
       icon: Discover,
       pagename: "HOLDER",
-    },
+    }, */
   ];
   const HoverStyle = (id) => {
     setIsHover(id);
@@ -352,7 +352,7 @@ function Sidebar() {
   return (
     <>
       <div
-        className={` fixed  top-0 left-0 bg-[#1C1C1C] h-full z-[999999] text-white ${
+        className={` fixed  top-0 left-0 bg-[#1C1C1C]  h-full z-[999999] text-white ${
           matchPath ? "hidden" : "block"
         } `}
       >
@@ -407,8 +407,8 @@ function Sidebar() {
                   src={Logo}
                   alt="wave-logo"
                   className={`${
-                    isNavbar === false ? "hidden " : "block"
-                  } mt-10 ml-8 mx-auto  `}
+                    isNavbar === false ? "hidden " : "block "
+                  } mt-6 ml-8 mx-auto  `}
                 />
               </div>
               <div>
@@ -509,7 +509,7 @@ function Sidebar() {
                     {isNavbar ? (
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
-                        className="bg-[#1788FB] w-64 xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
+                        className="bg-[#1788FB] navbar-content show w-64 xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
                       >
                         <div className="flex items-center gap-1 ">
                           <FiPower size={18} className="block ml-2" />
@@ -523,7 +523,7 @@ function Sidebar() {
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
                         // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
-                        className="bg-[#1788FB] hidden xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl  lg: px-3 place-items-center"
+                        className="bg-[#1788FB] navbar-content hide  xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl  lg: px-3 place-items-center"
                       >
                         <div className="flex items-center gap-1">
                           <FiPower size={18} className="hidden" />
@@ -618,7 +618,7 @@ function Sidebar() {
                       </span>
                     </Link>
                     {isNavbar ? (
-                      <div>
+                      <div className="navbar-content show">
                         <div className="flex mt-2 items-center">
                           <h1>{userProfile1?.name || userProfile?.name}</h1>
                           <Link href="/profile">
@@ -677,7 +677,7 @@ function Sidebar() {
                         </div>
                       </div>
                     ) : (
-                      <div className="hidden">
+                      <div className="navbar-content hide">
                         <div className="flex mt-2   items-center">
                           <h1>{userProfile1?.name || userProfile?.name}</h1>
                           <Link href="/profile">

@@ -197,7 +197,7 @@ const About = () => {
               </div>
             </div>
             {/* Similar Traders Section */}
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-40">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-60">
               <h2 className="text-2xl text-black font-bold mb-4">
                 Similar Traders
               </h2>

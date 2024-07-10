@@ -224,6 +224,16 @@ const Holder = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  function shortenName(name) {
+    return name.length > 40 ? name.slice(0, 20) + "..." : name;
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString();
+    return `${formattedDate}`;
+  };
+
   const headers = {
     accept: "application/json",
     "x-api-key": "NnWuSFA6uF8l1250rzZzq4FQ1TBITVpsafc4CDwy",
@@ -233,6 +243,7 @@ const Holder = () => {
     const baseUrl = "https://public-api.dextools.io/standard/v2/token/ether";
     const params = {
       sort: "socialsInfoUpdated",
+      // sort: "creationTime",
       order: "asc",
       from: "2023-10-01T00:00:00.000Z",
       to: "2023-11-01T00:00:00.000Z",
@@ -281,13 +292,17 @@ const Holder = () => {
               <tr>
                 <th>Name</th>
                 <th>Address</th>
+                <th>Decimals</th>
+                <th>Creation Time</th>
               </tr>
             </thead>
             <tbody>
               {data?.map((token, index) => (
                 <tr key={index}>
-                  <td>{token?.name}</td>
+                  <td>{shortenName(token?.name)}</td>
                   <td>{token?.address}</td>
+                  <td>{token?.decimals}</td>
+                  <td>{formatDate(token?.creationTime)}</td>
                 </tr>
               ))}
             </tbody>
