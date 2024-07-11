@@ -474,7 +474,7 @@ function Sidebar() {
                           data?.pathname === pathname
                             ? "navHover"
                             : ""
-                        } flex md:px-1 lg:px-2 py-2 rounded-lg`}
+                        } flex md:px-1 lg:px-2 py-2 `}
                         // onClick={() => setIsNavbar(false)}
                         onClick={handleClick}
                         onMouseEnter={() => HoverStyle(data?.id)}

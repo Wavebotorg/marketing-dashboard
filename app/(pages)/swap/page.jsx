@@ -1071,6 +1071,12 @@ const Swap = () => {
     };
   }, []);
 
+/* try  */
+
+
+
+/* try */
+
   const [tokens, setTokens] = useState([]);
 
   //for solana image
@@ -1102,6 +1108,7 @@ const Swap = () => {
   });
 
   useEffect(() => {
+    console.log("🚀👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹 ~ Swap ~ tokenData:", tokenData)
     setTokenData((prevTokenData) => ({
       ...prevTokenData,
       Solana: tokens,

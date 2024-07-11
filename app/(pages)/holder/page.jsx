@@ -1,12 +1,276 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { IoIosInformationCircleOutline } from "react-icons/io";
-import Pagination from "../Pagination/Pagination";
-import { useSearch } from "../../components/contexts/SearchContext";
+import eth from "../../../public/assets/tokenimg/eth.png";
+import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
+import optimism from "../../../public/assets/tokenimg/optimism.png";
+import poly from "../../../public/assets/tokenimg/poly.png";
+import SOL from "../../../public/assets/tokenimg/SOL.png";
+import BNB from "../../../public/assets/tokenimg/BNB.png";
+import avalanche from "../../../public/assets/tokenimg/avalanche.png";
+import cronos from "../../../public/assets/tokenimg/cronos.jpg";
+import fantom from "../../../public/assets/tokenimg/fantom.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
 
 import axios from "axios";
+import Image from "next/image";
 
 const Holder = () => {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
+  const [selectedChainId, setSelectedChainId] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectChain, setSelectChain] = useState(false);
+  const [selectedTokenDatato, setSelectedTokenDatato] = useState({
+    name_to: "",
+    image_to: "",
+    price_to: "",
+    address_to: "",
+    decimals_to: "",
+    input_to: "",
+    name_from: "",
+    image_from: "",
+    input_from: "",
+    price_from: "",
+    address_from: "",
+    decimals_from: "",
+    chainid: "",
+    descode: "",
+    chainname: "",
+  });
+
+  const headers = {
+    accept: "application/json",
+    "x-api-key": "NnWuSFA6uF8l1250rzZzq4FQ1TBITVpsafc4CDwy",
+  };
+
+  const fetchDEXToolsData = async (network) => {
+    const baseUrl = `https://public-api.dextools.io/standard/v2/token/${network.toLowerCase()}`;
+    const params = {
+      sort: "creationTime",
+      order: "asc",
+      from: "2023-10-01T00:00:00.000Z",
+      to: "2023-11-01T00:00:00.000Z",
+      pageSize: 50,
+    };
+
+    try {
+      const requests = [];
+      for (let page = 1; page <= 10; page++) {
+        requests.push(
+          axios.get(baseUrl, {
+            headers,
+            params: { ...params, page },
+          })
+        );
+      }
+
+      const responses = await Promise.all(requests);
+      const mergedData = responses.flatMap(
+        (response) => response?.data?.data?.tokens
+      );
+      console.log("mergedData-------------------", mergedData);
+      setData(mergedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDEXToolsData(selectedNetwork);
+  }, [selectedNetwork]);
+
+  const NetworkData = [
+    { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
+    { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
+    { name: "Optimism", chainid: "10", img: optimism, descode: "0xa" },
+    { name: "Polygon", chainid: "137", img: poly, descode: "0x89" },
+    { name: "Solana", chainid: "19999", img: SOL, desCode: "" },
+    { name: "Base", chainid: "8453", img: base, desCode: "0x2105" },
+    { name: "BNB Chain", chainid: "56", img: BNB, descode: "0x38" },
+    { name: "Avalanche", chainid: "43114", img: avalanche, descode: "0xa86a" },
+    { name: "Cronos", chainid: "25", img: cronos, descode: "0x19" },
+    { name: "Fantom", chainid: "250", img: fantom, descode: "0xfa" },
+    {
+      name: "Blast",
+      chainid: "238",
+      img: BURST,
+      descode: "0xee",
+    },
+    {
+      name: "Linea",
+      chainid: "59144",
+      img: Linea,
+      descode: "0xe705",
+    },
+  ];
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleOptionClick = (name) => {
+    const selectedNetworkData = NetworkData.find(
+      (network) => network.name === name
+    );
+
+    setSelectedNetwork(selectedNetworkData?.name);
+    if (selectedNetworkData) {
+      setSelectedChainId(selectedNetworkData.chainid);
+      setShowDropdown(false);
+      setSelectChain(selectedNetworkData.img);
+      setSelectedTokenDatato({
+        name_to: "",
+        image_to: "",
+        price_to: "",
+        address_to: "",
+        decimals_to: "",
+        input_to: "",
+        name_from: "",
+        image_from: "",
+        input_from: "",
+        price_from: "",
+        address_from: "",
+        decimals_from: "",
+        chainid: "",
+        descode: "",
+        chainname: "",
+      });
+    }
+  };
+
+  function shortenName(name) {
+    return name?.length > 40 ? name.slice(0, 20) + "..." : name;
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString();
+    return `${formattedDate}`;
+  };
+
+  return (
+    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
+      <div className="flex flex-col xl:justify-center xl:ml-32 xl:mr-[93px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+        <div className="dropdown-container relative">
+          <button
+            className="dropdown-toggle focus:outline-none flex"
+            onClick={toggleDropdown}
+          >
+            {selectChain && (
+              <Image
+                src={selectChain}
+                className="h-6 w-6 rounded-full"
+                alt="selected network"
+              />
+            )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-6 w-6 text-gray-400 ${
+                showDropdown ? "rotate-180" : ""
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            className={`overflow-hidden ${
+              showDropdown ? "h-[430px] overflow-y-scroll py-2" : "h-0"
+            } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10 ml-[-162px]`}
+          >
+            <ul>
+              {NetworkData.map((item, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleOptionClick(item.name)}
+                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                    selectedNetwork === item.name ? "bg-blue-500" : ""
+                  }`}
+                >
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    className="!h-[30px] !w-[30px] mr-2 rounded-full"
+                  />
+                  <span className="text-white">{item.name}</span>
+                  {selectedNetwork === item.name && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-white mr-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Decimals</th>
+                <th>Creation Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((token, index) => (
+                <tr key={index}>
+                  <td>{shortenName(token?.name)}</td>
+                  <td>{token?.address}</td>
+                  <td>{token?.decimals}</td>
+                  <td>{formatDate(token?.creationTime)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Holder;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //   const [allCoinData, setAllCoinData] = useState([
   //     {
   //       snapblock: "33",
@@ -220,100 +484,7 @@ const Holder = () => {
   //   );
   // };
 
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  function shortenName(name) {
-    return name.length > 40 ? name.slice(0, 20) + "..." : name;
-  }
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString();
-    return `${formattedDate}`;
-  };
-
-  const headers = {
-    accept: "application/json",
-    "x-api-key": "NnWuSFA6uF8l1250rzZzq4FQ1TBITVpsafc4CDwy",
-  };
-
-  const fetchDEXToolsData = async () => {
-    const baseUrl = "https://public-api.dextools.io/standard/v2/token/ether";
-    const params = {
-      sort: "socialsInfoUpdated",
-      // sort: "creationTime",
-      order: "asc",
-      from: "2023-10-01T00:00:00.000Z",
-      to: "2023-11-01T00:00:00.000Z",
-      pageSize: 50,
-    };
-
-    try {
-      // Create an array of promises for each page request
-      const requests = [];
-      for (let page = 1; page <= 10; page++) {
-        requests.push(
-          axios.get(baseUrl, {
-            headers,
-            params: { ...params, page },
-          })
-        );
-      }
-
-      // Resolve all promises
-      const responses = await Promise.all(requests);
-
-      // Merge all data into a single array
-      const mergedData = responses.flatMap(
-        (response) => response?.data?.data?.tokens
-      );
-      console.log("mergedData-------------------", mergedData);
-      setData(mergedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchDEXToolsData();
-  }, []);
-
-  return (
-    <div className="2xl:pl-64 xl:pl-64 md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto ">
-      <div className="flex flex-col xl:justify-center   xl:ml-32 xl:mr-[93px] lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5  mt-10">
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Decimals</th>
-                <th>Creation Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.map((token, index) => (
-                <tr key={index}>
-                  <td>{shortenName(token?.name)}</td>
-                  <td>{token?.address}</td>
-                  <td>{token?.decimals}</td>
-                  <td>{formatDate(token?.creationTime)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Holder;
 
 // "use client";
 // import React from "react";

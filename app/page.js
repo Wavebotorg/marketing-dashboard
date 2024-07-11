@@ -63,6 +63,9 @@ const Page = () => {
       }}
       className="  md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
     >
+
+
+
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="text-white flex flex-col xl:justify-center      lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-5">
         {/* xl:ml-32 xl:mr-[90px] */}

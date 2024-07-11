@@ -154,7 +154,7 @@ const Navbar = () => {
           <div className="flex w-auto md:w-[350px] lg:ml-24    sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             {/* xl:ml-96 */}
             <div className="flex items-center pl-3  pointer-events-none">
-              <CiSearch size={20} />
+              <CiSearch size={20}  />
             </div>
             <input
               type=""
