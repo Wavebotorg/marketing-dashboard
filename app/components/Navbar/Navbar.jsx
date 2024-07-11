@@ -166,13 +166,14 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div ref={navbarRef} className=" xsm:mr-[1rem]">
+        <div  className=" xsm:mr-[1rem]">
+        {/* ref={navbarRef} */}
           {/*  xl:mr-[6rem] */}
           <button onClick={toggleSidebar}>
             <IoIosNotifications size={25} />
           </button>
         </div>
-        <Notification isOpen={isOpen} toggle={toggleSidebar} />
+        <Notification isOpen={isOpen} setIsOpen={setIsOpen} toggle={toggleSidebar} />
 
         {/* <div
           className={`${

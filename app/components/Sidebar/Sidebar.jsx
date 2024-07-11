@@ -506,7 +506,12 @@ function Sidebar() {
               <div>
                 {token ? (
                   <div className=" grid place-items-center xl:mb-3 mb-10">
-                    {isNavbar ? (
+                    {/* {isNavbar ? ( */}
+                    <div
+                      className={`${
+                        isNavbar ? "w- " : "w-0"
+                      }  transition-all duration-500 ease-in-out tracking-wide  !overflow-x-hidden `}
+                    >
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
                         className="bg-[#1788FB] navbar-content show w-64 xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
@@ -519,7 +524,8 @@ function Sidebar() {
                           </span>
                         </div>
                       </button>
-                    ) : (
+                      </div>
+                    {/* ) : (
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
                         // className="bg-[#1788FB]  xl:px-7 px-3 w-full text-white p-2 xl:rounded-r-lg  "
@@ -527,13 +533,13 @@ function Sidebar() {
                       >
                         <div className="flex items-center gap-1">
                           <FiPower size={18} className="hidden" />
-                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
+                          {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> *
                           <span className="md:ml-1 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
                             Logout
                           </span>
                         </div>
                       </button>
-                    )}
+                    )} */}
                     {ConfirmationPopUp ? (
                       <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[999999]   ">
@@ -604,7 +610,7 @@ function Sidebar() {
               </div>
               <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
                 <div className=" 2xl:flex xl:flex">
-                  <div className="flex gap-2">
+                  <div className="flex gap-2  tracking-wide  !overflow-x-hidden">
                     <Link href="/profile">
                       <span onClick={handlesClick}>
                         <div
@@ -617,8 +623,13 @@ function Sidebar() {
                         </div>
                       </span>
                     </Link>
-                    {isNavbar ? (
-                      <div className="navbar-content show">
+                  {/*   {isNavbar ? ( */}
+                  <div
+                      className={`${
+                        isNavbar ? "w-52" : "w-0"
+                      }  transition-all duration-500 ease-in-out tracking-wide  !overflow-x-hidden `}
+                    >
+                      {/* navbar-content show */}
                         <div className="flex mt-2 items-center">
                           <h1>{userProfile1?.name || userProfile?.name}</h1>
                           <Link href="/profile">
@@ -676,7 +687,7 @@ function Sidebar() {
                           </Link>
                         </div>
                       </div>
-                    ) : (
+                   {/*  ) : (
                       <div className="navbar-content hide">
                         <div className="flex mt-2   items-center">
                           <h1>{userProfile1?.name || userProfile?.name}</h1>
@@ -735,7 +746,7 @@ function Sidebar() {
                           </Link>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
 

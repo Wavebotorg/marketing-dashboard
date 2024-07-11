@@ -7,21 +7,20 @@ import { AdvancedChart } from "react-tradingview-embed";
 const Security = () => {
   return (
     <>
-      <div>
-        <div>
-          <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 py-6">
+      <div className="mt-10">
+        <div className="bg-[#1C1C1C] shadow-2xl rounded-lg py-6">
+          <div className="mx-auto w-full max-w-7xl">
             <div>
               {/*        <div className="inputDiv ">
                 <TickerTape widgetProps={{}} />
               </div> */}
-              <div className=" ">
-                <AdvancedChart
+              <AdvancedChart
                 // widgetProps={{
-                //   interval: "1D",
-                //   theme: "white",
+                //   interval: "1D", // Example interval setting
+                //   theme: "dark", // Example theme setting
+                //   symbol: "NASDAQ:AAPL", // Example symbol setting
                 // }}
-                />
-              </div>
+              />
             </div>
           </div>
         </div>

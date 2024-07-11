@@ -26,7 +26,9 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
 
-    extend: {},
+    extend: { transitionProperty: {
+      'max-height': 'max-height',
+    }},
   },
   plugins: [],
 };
