@@ -377,7 +377,7 @@ function Sidebar() {
                   onClick={() => setIsNavbar(!isNavbar)}
                 >
                   {isNavbar === false ? (
-                    <div className="mt-2 mx-auto ml-2 cursor-pointer">
+                    <div className="mt-4 mx-auto ml-2 cursor-pointer">
                       {/* <FaBars /> */}
                       {/* <FaBarsStaggered /> */}
                       {/* <TbArrowBarRight /> */}
