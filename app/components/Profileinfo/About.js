@@ -1,6 +1,46 @@
-import React from "react";
+"use client";
+
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import none from "../../../public/assets/none.png";
 
 const About = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Top");
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0); 
+
+
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleSelectOption = (option, index) => {
+    setSelectedOption(option);
+    setSelectedOptionIndex(index);
+    setShowDropdown(false); 
+  
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
   return (
     <>
       <div className="bg-[#1C1C1C] shadow-2xl rounded-lg">
@@ -19,8 +59,8 @@ const About = () => {
               </div>
               <div className="md:flex flex-1 justify-around mt-10">
                 <div className="flex flex-col gap-4">
-                  <div className="flex justify-between">
-                    <span className="text-gray-500">Return YTD</span>
+                  <div className="flex justify-evenly ">
+                    <span className="text-gray-500 ">Return YTD</span>
                     <span className="text-lg text-black">-</span>
                   </div>
                   <div className="flex justify-between">
@@ -43,30 +83,11 @@ const About = () => {
             </div>
             {/* Action Section */}
             <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
-              <h2 className="text-2xl font-bold mb-4 text-black">Action</h2>
-              <div className="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
-                <span className="text-gray-500">No Data to Display</span>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Return YTD</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Risk Score</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Return 2Y</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Profitable Weeks</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-              </div>
+              {/* <h2 className="text-2xl font-bold mb-4 text-black">Action</h2> */}
+   
+            
               <div className="mt-6">
-                <div className="flex items-center">
+                <div className="flex items-center border-b">
                   <img
                     src="path/to/your/image.png"
                     alt="User"
@@ -75,7 +96,7 @@ const About = () => {
                   <input
                     type="text"
                     placeholder="What's on your mind?"
-                    className="ml-4 w-full p-2 border border-gray-300 rounded-lg"
+                    className="ml-4 w-full p-2  "
                   />
                 </div>
                 <div className="mt-2 flex space-x-2">
@@ -84,7 +105,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
+           {/*  <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
               <h2 className="text-2xl font-bold mb-4 text-black">Action</h2>
               <div className="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
                 <span className="text-gray-500">No Data to Display</span>
@@ -125,48 +146,69 @@ const About = () => {
                   <button className="bg-gray-200 p-2 rounded-lg">Poll</button>
                 </div>
               </div>
-            </div>
-            <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
-              <h2 className="text-2xl font-bold mb-4 text-black">Action</h2>
-              <div className="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
-                <span className="text-gray-500">No Data to Display</span>
+            </div> */}
+            <div>
+              <div>
+                <div ref={dropdownRef} className="dropdown-container relative">
+                  <button
+                    className="flex items-center justify-center px-2 pb-4 dropdown-toggle focus:outline-none text-[1.5rem]"
+                    onClick={toggleDropdown}
+                  >
+                    {selectedOption}
+                    <>
+                      <RiArrowDropDownLine size={35} />
+                    </>
+                  </button>
+
+                  <div
+                    className={`overflow-hidden ${
+                      showDropdown ? " py-2" : "h-0"
+                    } dropdown transition-all ease-in-out duration-300 absolute bg-[#1C1C1C] rounded-lg mt-1 w-52 z-10 mx-1`}
+                  >
+                    <div className="text-lg mx-2">
+                      <p
+                        onClick={() => handleSelectOption("Top", 0)}
+                        className="p-2 cursor-pointer hover:bg-slate-800 flex"
+                      >
+                        Top{" "}
+                        {selectedOptionIndex === 0 && (
+                          <span className="ml-auto flex justify-end">
+                            &#10003;
+                          </span>
+                        )}
+                      </p>
+                      <p
+                        onClick={() => handleSelectOption("All", 1)}
+                        className="p-2 cursor-pointer hover:bg-slate-800 flex"
+                      >
+                        All{" "}
+                        {selectedOptionIndex === 1 && (
+                          <span className="ml-auto flex justify-end">
+                            &#10003;
+                          </span>
+                        )}
+                      </p>
+                      <p
+                        onClick={() => handleSelectOption("Mentions", 2)}
+                        className="p-2 cursor-pointer hover:bg-slate-800 flex"
+                      >
+                        Mentions{" "}
+                        {selectedOptionIndex === 2 && (
+                          <span className="ml-auto flex justify-end">
+                            &#10003;
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Return YTD</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Risk Score</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Return 2Y</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-500">Profitable Weeks</span>
-                  <span className="text-lg text-black">-</span>
-                </div>
-              </div>
-              <div className="mt-6">
-                <div className="flex items-center">
-                  <img
-                    src="path/to/your/image.png"
-                    alt="User"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <input
-                    type="text"
-                    placeholder="What's on your mind?"
-                    className="ml-4 w-full p-2 border border-gray-300 rounded-lg"
-                  />
-                </div>
-                <div className="mt-2 flex space-x-2">
-                  <button className="bg-gray-200 p-2 rounded-lg">Upload</button>
-                  <button className="bg-gray-200 p-2 rounded-lg">Poll</button>
-                </div>
-              </div>
+              <div className="bg-[#f8f8f8] p-10 mb-6 rounded-lg shadow-md flex justify-center items-center">
+      
+          <Image src={none} alt="No Data" className="" />
+      
+      </div>
+
             </div>
           </div>
 

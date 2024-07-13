@@ -245,7 +245,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
             {/* {showDropdown && ( */}
             <div
-              className={`overflow-hidden ${
+              className={`overflow-hidden scrollbar ${
                 showDropdown ? "h-[430px] overflow-y-scroll py-2" : "h-0"
               } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
             >

@@ -1278,7 +1278,7 @@ const Swap = () => {
 
                         {/* {showDropdown && ( */}
                         <div
-                          className={`overflow-hidden ${
+                          className={`overflow-hidden scrollbar ${
                             showDropdown
                               ? "h-[430px] overflow-y-scroll py-2"
                               : "h-0"
