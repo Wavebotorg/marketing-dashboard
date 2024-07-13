@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import Pagination from "../Pagination/Pagination";
 import { useSearch } from "../../components/contexts/SearchContext";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import axiosInstance from "../../apiInstances/axiosInstance";
+
 // import Loader from "react-js-loader";
 import Loader from "react-js-loader";
 import { useWallet } from "../../components/contexts/WalletContext";
+import axios from "axios";
+// import CountUp from "react-countup/build/CountUp";
+import CountUp from "react-countup";
 
 const ReferralTable = ({ level, data, refData, searchQuery }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -177,7 +182,7 @@ const ReferralTable = ({ level, data, refData, searchQuery }) => {
   );
 };
 
-const Referral = () => {
+/* const Referral = () => {
   const { searchQuery } = useSearch();
   const [userReferals, setUserReferals] = useState([]);
   const [level2, setLevel2] = useState([]);
@@ -190,25 +195,51 @@ const Referral = () => {
   const [level4ref, setLevel4ref] = useState([]);
   const [level5ref, setLevel5ref] = useState([]);
 
+  const [countLevel1, setCountLevel1] = useState(0);
+  console.log("🚀 ~ Referral ~ countLevel1:", countLevel1);
+  const [countLevel2, setCountLevel2] = useState(0);
+  const [countLevel3, setCountLevel3] = useState(0);
+  const [countLevel4, setCountLevel4] = useState(0);
+  const [countLevel5, setCountLevel5] = useState(0);
+
   const [loading, setLoading] = useState(true);
 
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
   //Api for Fetch Data
+
   useEffect(() => {
     const fetchUserReferals = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstanceAuth.get("/getUserReferals");
+        const response = await axiosInstance.post("/getUserReferals", {
+          email: localStorage.getItem("email"),
+        });
         console.log("🚀 ~ fetchUserReferals ~ response:", response);
-        setUserReferals(response?.data?.data?.level1 || []);
-        setLevel2(response?.data?.data?.level2 || []);
-        setLevel3(response?.data?.data?.level3 || []);
-        setLevel4(response?.data?.data?.level4 || []);
-        setLevel5(response?.data?.data?.level5 || []);
 
-        setLevel2ref(response?.data?.data?.level2?.map((d) => d?.referred));
-        setLevel3ref(response?.data?.data?.level3?.map((d) => d?.referred));
-        setLevel4ref(response?.data?.data?.level4?.map((d) => d?.referred));
-        setLevel5ref(response?.data?.data?.level5?.map((d) => d?.referred));
+        const level1Data = response?.data?.data?.level1 || [];
+        const level2Data = response?.data?.data?.level2 || [];
+        const level3Data = response?.data?.data?.level3 || [];
+        const level4Data = response?.data?.data?.level4 || [];
+        const level5Data = response?.data?.data?.level5 || [];
+
+        setUserReferals(level1Data);
+        setLevel2(level2Data);
+        setLevel3(level3Data);
+        setLevel4(level4Data);
+        setLevel5(level5Data);
+
+        setLevel2ref(level2Data.map((d) => d?.referred));
+        setLevel3ref(level3Data.map((d) => d?.referred));
+        setLevel4ref(level4Data.map((d) => d?.referred));
+        setLevel5ref(level5Data.map((d) => d?.referred));
+
+        setCountLevel1(level1Data.length);
+        setCountLevel2(level2Data.length);
+        setCountLevel3(level3Data.length);
+        setCountLevel4(level4Data.length);
+        setCountLevel5(level5Data.length);
       } catch (error) {
         console.error("Error fetching user referals:", error);
       } finally {
@@ -219,9 +250,6 @@ const Referral = () => {
     fetchUserReferals();
   }, []);
 
-  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
-    useWallet();
-
   return (
     <div
       style={{
@@ -229,27 +257,45 @@ const Referral = () => {
       }}
       className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
     >
-      {/* 2xl:pl-64 xl:pl-64 */}
+      {/* 2xl:pl-64 xl:pl-64 *
       <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
-        {/* xl:ml-32 xl:mr-[92px] */}
-        <div className="font-medium mb-4 text-3xl text-[#1788FB]">
+        {/* xl:ml-32 xl:mr-[92px] *        <div className="font-medium mb-4 text-3xl text-[#1788FB]">
           <p>Referral </p>
         </div>
-        {/*  <div className="flex flex-col  md:flex-row gap-6 mt-5 md:w-full ">
-          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#CECECE]  font-light">Total Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1  w-[178px] ">0ETH</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem]">
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C]">
+            <p className="text-[#CECECE] font-light">Level 1</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+              {countLevel1} Users
+            </p>
           </div>
-          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#CECECE] ">Unclaimed Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C]">
+            <p className="text-[#CECECE]">Level 2</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+              {countLevel2} Users
+            </p>
           </div>
-          <div className="rounded-lg px-4 py-2 md:py-4  bg-[#1C1C1C] ">
-            <p className="text-[#CECECE] ">Claimable Rewards</p>
-            <p className="text-blue-400 text-2xl mt-1 w-[178px] ">0ETH</p>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C]">
+            <p className="text-[#CECECE]">Level 3</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+              {countLevel3} Users
+            </p>
           </div>
-        </div> */}
-        {/* pass this Ref. table to above ReferralTable to set Data in Table  */}
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C]">
+            <p className="text-[#CECECE]">Level 4</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+              {countLevel4} Users
+            </p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C]">
+            <p className="text-[#CECECE]">Level 5</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+              {countLevel5} Users
+            </p>
+          </div>
+        </div>
+
+        {/* pass this Ref. table to above ReferralTable to set Data in Table  *
         <div className="">
           <ReferralTable
             level={1}
@@ -293,4 +339,369 @@ const Referral = () => {
   );
 };
 
+export default Referral; */
+
+const Referral = () => {
+  const { searchQuery } = useSearch();
+  const [userReferals, setUserReferals] = useState([]);
+  const [level2, setLevel2] = useState([]);
+  const [level3, setLevel3] = useState([]);
+  const [level4, setLevel4] = useState([]);
+  const [level5, setLevel5] = useState([]);
+
+  const [level2ref, setLevel2ref] = useState([]);
+  const [level3ref, setLevel3ref] = useState([]);
+  const [level4ref, setLevel4ref] = useState([]);
+  const [level5ref, setLevel5ref] = useState([]);
+
+  const [countLevel1, setCountLevel1] = useState(0);
+  const [countLevel2, setCountLevel2] = useState(0);
+  const [countLevel3, setCountLevel3] = useState(0);
+  const [countLevel4, setCountLevel4] = useState(0);
+  const [countLevel5, setCountLevel5] = useState(0);
+
+  const [loading, setLoading] = useState(true);
+  const [currentLevel, setCurrentLevel] = useState(1); // State to manage current level
+
+  useEffect(() => {
+    const fetchUserReferals = async () => {
+      setLoading(true);
+      try {
+        const response = await axiosInstance.post("/getUserReferals", {
+          email: localStorage.getItem("email"),
+        });
+
+        const level1Data = response?.data?.data?.level1 || [];
+        const level2Data = response?.data?.data?.level2 || [];
+        const level3Data = response?.data?.data?.level3 || [];
+        const level4Data = response?.data?.data?.level4 || [];
+        const level5Data = response?.data?.data?.level5 || [];
+
+        setUserReferals(level1Data);
+        setLevel2(level2Data);
+        setLevel3(level3Data);
+        setLevel4(level4Data);
+        setLevel5(level5Data);
+
+        setLevel2ref(level2Data.map((d) => d?.referred));
+        setLevel3ref(level3Data.map((d) => d?.referred));
+        setLevel4ref(level4Data.map((d) => d?.referred));
+        setLevel5ref(level5Data.map((d) => d?.referred));
+
+        setCountLevel1(level1Data.length);
+        setCountLevel2(level2Data.length);
+        setCountLevel3(level3Data.length);
+        setCountLevel4(level4Data.length);
+        setCountLevel5(level5Data.length);
+      } catch (error) {
+        console.error("Error fetching user referals:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserReferals();
+  }, []);
+
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
+  const handleLevelClick = (level) => {
+    setCurrentLevel(level); // Update current level state based on user click
+  };
+
+  return (
+    /*     <div className="mx-auto">
+      <div className="flex flex-col items-center mt-10">
+        <div className="font-medium mb-4 text-3xl text-[#1788FB]">
+          <p>Referral</p>
+        </div> */
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0 ",
+      }}
+      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto  transition-all duration-500 ease-in-out "
+    >
+      <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 mt-10">
+        <div className="font-medium mb-4 text-3xl text-[#1788FB]">
+          <p>Referral </p>
+        </div>
+        {/*        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
+          {[1, 2, 3, 4, 5].map((level) => (
+            <div
+              key={level}
+              className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
+                currentLevel === level ? "border-2 border-blue-500" : ""
+              }`}
+              onClick={() => handleLevelClick(level)}
+            >
+              <p className="text-[#CECECE]  font-light">{`Level ${level}`}</p>
+              <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                {level === 1 && countLevel1}
+                {level === 2 && countLevel2}
+                {level === 3 && countLevel3}
+                {level === 4 && countLevel4}
+                {level === 5 && countLevel5} Users
+              </p>
+            </div>
+          ))}
+        </div> */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
+          {[1, 2, 3, 4, 5].map((level) => {
+            const userCount =
+              (level === 1 && countLevel1) ||
+              (level === 2 && countLevel2) ||
+              (level === 3 && countLevel3) ||
+              (level === 4 && countLevel4) ||
+              (level === 5 && countLevel5);
+
+            if (userCount === 0) return null; // Hide the level if there's no data
+
+            return (
+              <div
+                key={level}
+                className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
+                  currentLevel === level ? "border-2 border-blue-500" : ""
+                }`}
+                onClick={() => handleLevelClick(level)}
+              >
+                <p className="text-[#CECECE]  font-light">{`Level ${level}`}</p>
+                <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                  {userCount} Users
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Render the ReferralTable component based on currentLevel */}
+        {[1, 2, 3, 4, 5].map(
+          (level) =>
+            currentLevel === level && (
+              <ReferralTable
+                key={level}
+                level={level}
+                data={
+                  level === 1
+                    ? userReferals
+                    : level === 2
+                    ? level2
+                    : level === 3
+                    ? level3
+                    : level === 4
+                    ? level4
+                    : level5
+                }
+                refData={
+                  level === 2
+                    ? level2ref
+                    : level === 3
+                    ? level3ref
+                    : level === 4
+                    ? level4ref
+                    : level5ref
+                }
+                searchQuery={searchQuery}
+              />
+            )
+        )}
+      </div>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <Loader type="spinner-cub" bgColor="#1788FB" size={40} />
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default Referral;
+
+/* "use client";
+import React, { useEffect, useState } from "react";
+
+import { useWallet } from "../../components/contexts/WalletContext";
+
+const Referral = () => {
+  const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
+    useWallet();
+
+  const [activeButton, setActiveButton] = useState(1);
+  useState("Reward History");
+
+  const handleButtonClick = (buttonNumber) => {
+    setActiveButton(buttonNumber);
+  };
+
+  return (
+    <div
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className=" md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
+    >
+      <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-6 md:ml-0 xsm:ml-5 mr-5 mt-4">
+        <div className="font-medium mb-4 text-3xl text-[#1788FB]">
+          <p>Referral </p>
+        </div>
+
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 lg:w-[56rem]  ">
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE] font-light">REFERRAL USERS ETH</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 USERS</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE]">ETH UNCLAIMED</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE]">REFERRAL POSITION ETH</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">#0</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE] font-light">ETH TOTAL EARNED</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
+          </div>
+          {/*    <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE]">TOTAL EARNED ETH</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 ETH</p>
+          </div>
+          <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] flex-1">
+            <p className="text-[#CECECE]">TOTAL EARNED SOL</p>
+            <p className="text-blue-400 text-2xl mt-1 w-[178px]">0 SOL</p>
+          </div> *
+        </div>
+        <div className="mt-10">
+          <div className="flex gap-2 p-2 rounded-t-xl bg-[#1C1C1C] flex-col sm:flex-row items-center justify-center">
+            <button
+              className={`delay-75 p-3 px-10 py-2 rounded-xl hover:bg-[#294894] hover:text-white ${
+                activeButton === 1 ? "bg-[#294894] text-white" : "text-white"
+              }`}
+              onClick={() => handleButtonClick(1)}
+            >
+              Reward History
+            </button>
+            <button
+              className={`delay-75 p-3 px-10 py-2 rounded-xl hover:bg-[#294894] hover:text-white ${
+                activeButton === 2 ? "bg-[#294894] text-white" : "text-white"
+              }`}
+              onClick={() => handleButtonClick(2)}
+            >
+              Claimed Rewards
+            </button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full overflow-hidden">
+              <thead className="sticky top-0 leader-color shadow-2xl">
+                <tr className="text-[#CECECE] bg-[#1C1C1C]">
+                  {activeButton === 1 ? (
+                    <>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        TIME
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        REWARDS EVM
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        REWARDS SOL
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        REWARDS USD
+                      </th>
+                    </>
+                  ) : (
+                    <>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        TIME
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        AMOUNT BANANA
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        AMOUNT ETH
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        AMOUNT SOL
+                      </th>
+                      <th
+                        scope="col"
+                        style={{
+                          backgroundColor: "rgba(23, 136, 251, 0.26)",
+                        }}
+                        className="px-2 md:px-4 lg:px-6 py-2 md:py-3 text-center text-sm md:text-base font-medium whitespace-nowrap"
+                      >
+                        STATUS
+                      </th>
+                    </>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 pt-60 font-bold text-lg text-center text-md text-white"
+                  >
+                    No data found.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Referral;
+ */

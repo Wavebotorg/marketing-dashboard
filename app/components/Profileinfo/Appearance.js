@@ -1,4 +1,93 @@
-import React from "react";
+"use client";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import chart from "../../../public/assets/chart.svg";
+import { IoChevronDownCircleOutline } from "react-icons/io5";
+
+const Appearance = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div>
+      <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 p-5">
+        <div>
+          <div
+            ref={dropdownRef}
+            className="dropdown inline-block relative mt-2"
+          >
+            <button
+              onClick={toggleDropdown}
+              className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+            >
+              <span className="mr-1">Portfolio</span>
+              <IoChevronDownCircleOutline className="h-4 w-4" />
+            </button>
+
+            {isOpen && (
+              <ul className="dropdown-menu absolute text-gray-700 pt-1">
+                <li>
+                  <a
+                    onClick={handleOptionClick}
+                    className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                  >
+                    History
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={handleOptionClick}
+                    className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                  >
+                    Portfolio
+                  </a>
+                </li>
+              </ul>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-center items-center">
+          <Image src={chart} alt="chart" className="h-72 w-72" height={50} />
+        </div>
+        <div className="mt-5 text-center">
+          {/* <p className="font-bold text-3xl">No Stats to Display</p> */}
+          <p className="font-bold text-4xl">Portfolio is empty</p>
+
+          {/*         <p className="text-lg mt-2">
+            This user has no stats, probably because it&apos;s a new account
+            without any trading history.
+          </p> */}
+          <p className="text-xl mt-2">User has no open trades at the moment.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Appearance;
+
+/* import React from "react";
 
 const Appearance = () => {
   return (
@@ -18,3 +107,4 @@ const Appearance = () => {
 };
 
 export default Appearance;
+ */

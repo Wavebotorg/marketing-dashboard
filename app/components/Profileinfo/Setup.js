@@ -1,20 +1,21 @@
+import Image from "next/image";
 import React from "react";
+import graph from "../../../public/assets/graph.svg";
 
 const Setup = () => {
   return (
     <>
-      <div>
-        <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 p-5">
-          <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-            <div className="mx-auto max-w-screen-sm text-center">
-              <h1 className="mb-4 text-4xl tracking-tight font-extrabold lg:text-4xl text-primary-600 text-primary-500">
-                Setup Page
-              </h1>
-              <p className="mb-4 text-4xl tracking-tight font-bold  md:text-4xl text-white">
-                Comming Soon!!
-              </p>
-            </div>
-          </div>
+      <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 p-5">
+        <div className="flex justify-center items-center">
+          <Image src={graph} alt="chart" className="h-72 w-72" height={50} />
+        </div>
+        <div className="mt-5 text-center">
+          <p className="font-bold text-4xl">No Stats to Display</p>
+
+          <p className="text-xl mt-2">
+            This user has no stats, probably because it&apos;s a new account
+            without any trading history.
+          </p>
         </div>
       </div>
     </>

@@ -1,5 +1,8 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+// import { useMediaQuery } from "react-responsive";
+
+import { useMediaQuery } from '@mui/material';
 
 const WalletContext = createContext();
 
@@ -12,6 +15,16 @@ export const WalletProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState([]);
   // console.log("🚀 ~ WalletProvider ~ email:", email)
   const [solanaAddress, setSolanaAddress] = useState(null);
+
+  const isXlScreen = useMediaQuery('(min-width: 1280px)'); // xl screen size
+  const is2XlScreen = useMediaQuery('(min-width: 1536px)'); // 2xl screen size
+
+  useEffect(() => {
+    if (isXlScreen || is2XlScreen) {
+      setIsNavbar(true);
+    }
+  }, [isXlScreen, is2XlScreen]);
+
   return (
     <WalletContext.Provider
       value={{

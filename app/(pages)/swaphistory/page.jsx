@@ -12,7 +12,10 @@ import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import CELO from "../../../public/assets/tokenimg/CELO.png";
+
 import BURST from "../../../public/assets/tokenimg/BURST.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+
 import Image from "next/image";
 import { MdDone } from "react-icons/md";
 import { useWallet } from "../../components/contexts/WalletContext";
@@ -52,7 +55,19 @@ const SwapHistory = () => {
     { name: "BNB Chain", chainid: "56", img: BNB, desCode: "0x38" },
     { name: "Avalanche", chainid: "43114", img: avalanche, desCode: "0xa86a" },
     { name: "Celo", chainid: "42220", img: CELO, desCode: "" },
-    { name: "Blast", chainid: "238", img: BURST, desCode: "" },
+
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+    },
+    {
+      name: "Linea",
+      chainid: "59144",
+      img: Linea,
+      descode: "0xe705",
+    },
   ];
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -197,12 +212,12 @@ const SwapHistory = () => {
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto "
+      className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
     >
       {/* 2xl:pl-64 xl:pl-64 */}
-      <div className=" my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className=" my-   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         {/* xl:ml-32 xl:mr-[92px] */}
-        <div className="mt-10 flex">
+        <div className="mt-4 flex">
           <div className="flex">
             <button
               onClick={handleDropdownToggle}

@@ -19,7 +19,7 @@ export default function BalancePopUp({
         <button
           className="text-[20px]"
           onClick={() => {
-            setBalancePopup(false); 
+            setBalancePopup(false);
           }}
         >
           <RxCross1 className="!text-[#979797]" />
@@ -28,7 +28,7 @@ export default function BalancePopUp({
       {showBalance?.length > 0 ? (
         showBalance?.map((item, index) => (
           <div className="flex items-center mt-5" key={index}>
-         <div>  {item?.solana}</div> 
+            <div> {item?.solana}</div>
             <div className="flex">
               <img
                 src={item?.logo}

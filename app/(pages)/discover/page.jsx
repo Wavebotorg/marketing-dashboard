@@ -12,6 +12,10 @@ import optimism from "../../../public/assets/tokenimg/optimism.png";
 import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
@@ -84,9 +88,23 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
     {
       name: "Base",
       chainid: "250",
-      img: fantom,
+      img: base,
       descode: "0x2105",
       walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+    {
+      name: "Linea",
+      chainid: "250",
+      img: Linea,
+      descode: "0xe705",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     },
     {
       name: "Fantom",
@@ -165,13 +183,13 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
   return (
     <div
-    style={{
-      marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
-    }}
-    className=" md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full "
-  >
-    {/* 2xl:pl-64 xl:pl-64 */}
-    <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+      className=" md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full transition-all duration-500 ease-in-out"
+    >
+      {/* 2xl:pl-64 xl:pl-64 */}
+      <div className="text-white  lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
         <div className="flex gap-4 my-4">
           <button
             className={`px-4 py-2 rounded ${
@@ -201,7 +219,11 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
               onClick={toggleDropdown}
             >
               {selectChain && (
-                <Image src={selectChain} className="h-6 w-6 rounded-full" />
+                <Image
+                  src={selectChain}
+                  alt="logo"
+                  className="h-6 w-6 rounded-full"
+                />
               )}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -223,8 +245,8 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
             {/* {showDropdown && ( */}
             <div
-              className={`overflow-hidden ${
-                showDropdown ? "h-[430px] py-2" : "h-0"
+              className={`overflow-hidden scrollbar ${
+                showDropdown ? "h-[430px] overflow-y-scroll py-2" : "h-0"
               } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
             >
               <ul>
@@ -272,8 +294,8 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
         </div>
 
         <div className="">
-          <div className="mt-6 rounded-lg overflow-auto">
-            <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
+          <div className="mt-6 rounded-lg overflow-auto h-[1050px]">
+            <div className="bg-[#1C1C1C] h-full mb-7 overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
               {/* for with points and recent join user data show */}
 
               {selectedpage === "newpair" ? (
@@ -371,21 +393,19 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                          
-                            <>
-                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                        hghg
-                              </td>
-                              <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
-                           tyhu
-                              </td>
-                              <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
-                              tgyjuyhju
-                              </td>
-                            </>
-                        
-                        </tr>
+                      <tr>
+                        <>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                            hghg
+                          </td>
+                          <td className="px-6 py-4 text-center whitespace-nowrap text-md  text-white">
+                            tyhu
+                          </td>
+                          <td className="px-4 py-4 text-center whitespace-nowrap text-md  text-white">
+                            tgyjuyhju
+                          </td>
+                        </>
+                      </tr>
                     </tbody>
                     {/* <tbody>
                     {visibleData?.length > 0 ? (

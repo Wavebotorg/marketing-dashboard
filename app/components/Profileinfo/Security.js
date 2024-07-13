@@ -1,4 +1,37 @@
+"use client";
+
 import React from "react";
+import { AdvancedChart } from "react-tradingview-embed";
+// import { AdvancedChart, TickerTape } from "react-tradingview-embed";
+
+const Security = () => {
+  return (
+    <>
+      <div className="mt-10">
+        <div className="bg-[#1C1C1C] shadow-2xl rounded-lg py-6">
+          <div className="mx-auto w-full max-w-7xl">
+            <div>
+              {/*        <div className="inputDiv ">
+                <TickerTape widgetProps={{}} />
+              </div> */}
+              <AdvancedChart
+                // widgetProps={{
+                //   interval: "1D", // Example interval setting
+                //   theme: "dark", // Example theme setting
+                //   symbol: "NASDAQ:AAPL", // Example symbol setting
+                // }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Security;
+
+/* import React from "react";
 
 const Security = () => {
   return (
@@ -24,3 +57,4 @@ const Security = () => {
 };
 
 export default Security;
+ */

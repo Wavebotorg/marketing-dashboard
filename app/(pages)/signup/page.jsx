@@ -125,7 +125,8 @@ const Signup = () => {
         // localStorage.setItem("Token", myData?.token);
         // Cookies.set("auth-token", myData?.token);
         toast.success(response?.data?.msg);
-        router.push("/passwordverify");
+        // router.push("/passwordverify");
+        router.push("/signupVerify");
       } else {
         setLoading(false);
         toast.error(response?.data?.msg);

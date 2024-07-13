@@ -209,14 +209,7 @@ const Login = () => {
           {loading ? (
             <button
               className="bg-[#1788FB] text-white font-bold py-2 px-4 xl:px-10 2xl:px-14 rounded hover:bg-[#1789fbbb]"
-              onClick={handleSubmit}
               disabled={!validCaptcha}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleSubmit();
-                  setCreateFolder(false);
-                }
-              }}
             >
               <span className="loader "></span>
             </button>

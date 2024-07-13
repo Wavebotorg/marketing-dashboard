@@ -115,12 +115,12 @@ const LeaderBoard = () => {
       style={{
         marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
       }}
-      className="  md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto"
+      className="  md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
     >
       {/* 2xl:pl-64 xl:pl-64 */}
-      <div className="xl:flex my-10   gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
+      <div className="xl:flex    gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         {/* xl:ml-32 xl:mr-[90px] */}
-        <div className="w-full">
+        <div className="w-full mt-1">
           <p className="text-[#1788FB]  text-2xl  md:text-3xl font-medium w-auto  ">
             Leader Board
           </p>

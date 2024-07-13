@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { FaBars, FaBarsStaggered } from "react-icons/fa6";
-
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import { useRouter } from "next/navigation";
 import Loginicon from "../../../public/assets/loginicon.png";
 import { CiSearch } from "react-icons/ci";
@@ -13,6 +14,9 @@ import { FiPower, FiLogIn } from "react-icons/fi";
 import { useSearch } from "../contexts/SearchContext";
 import { useWallet } from "../contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+import Notification from "../notification/notification";
+
 const Navbar = () => {
   const router = useRouter();
   const [active, setActive] = useState("");
@@ -74,7 +78,8 @@ const Navbar = () => {
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-      setIsNavbar(false);
+      // setIsNavbar(false);
+      setIsOpen(false);
     }
   };
 
@@ -85,6 +90,12 @@ const Navbar = () => {
     };
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <div
@@ -93,7 +104,7 @@ const Navbar = () => {
         }}
         className={`${
           getPath === "/login" ||
-          getPath === "/profile" ||
+          // getPath === "/profile" ||
           getPath === "/swap" ||
           getPath === "/withdraw" ||
           getPath === "/signup" ||
@@ -104,8 +115,8 @@ const Navbar = () => {
           signupRefRegex.test(getPath) ||
           getPath === "/sucessreset"
             ? "hidden"
-            : "flex w-full justify-between"
-        } flex justify-between p-0 py-7`}
+            : "flex  justify-between"
+        } flex justify-between p-0 py-7 transition-all duration-500 ease-in-out`}
       >
         {/*  xl:pl-60 */}
         <div
@@ -113,14 +124,28 @@ const Navbar = () => {
           onClick={() => setIsNavbar(!isNavbar)}
         >
           {isNavbar === false ? (
-            <div className="cursor-pointer">
+            <div className="-mt-4 cursor-pointer">
               {/* <FaBars /> */}
-              <FaBarsStaggered />
+              {/* <FaBarsStaggered /> */}
+              {/* <TbArrowBarRight /> */}
+              <Image
+                src={openarrow}
+                alt="open sidebar arrow"
+                width={40}
+                height={40}
+              />
             </div>
           ) : (
             <div className="  cursor-pointer">
               {" "}
-              <MdKeyboardDoubleArrowLeft />
+              {/* <MdKeyboardDoubleArrowLeft /> */}
+              {/* <TbArrowBarLeft /> */}
+              <Image
+                src={closearrow}
+                alt="open sidebar arrow"
+                width={40}
+                height={40}
+              />
             </div>
           )}
         </div>
@@ -129,7 +154,7 @@ const Navbar = () => {
           <div className="flex w-auto md:w-[350px] lg:ml-24    sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             {/* xl:ml-96 */}
             <div className="flex items-center pl-3  pointer-events-none">
-              <CiSearch size={20} />
+              <CiSearch size={20}  />
             </div>
             <input
               type=""
@@ -141,12 +166,15 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className=" xsm:mr-[1rem]">
+        <div  className=" xsm:mr-[1rem]">
+        {/* ref={navbarRef} */}
           {/*  xl:mr-[6rem] */}
-          <button>
+          <button onClick={toggleSidebar}>
             <IoIosNotifications size={25} />
           </button>
         </div>
+        <Notification isOpen={isOpen} setIsOpen={setIsOpen} toggle={toggleSidebar} />
+
         {/* <div
           className={`${
             getPath === "/login" ||

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const TokenList = ({ tokens = [], clickedTokens, selectToken, searchTerm }) => {
   const filteredTokens = tokens.filter((token) =>
-    token.name.toLowerCase().includes(searchTerm.toLowerCase())
+    token?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <>

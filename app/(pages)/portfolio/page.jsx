@@ -12,6 +12,10 @@ import optimism from "../../../public/assets/tokenimg/optimism.png";
 import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
@@ -24,7 +28,7 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   const [selectChain, setSelectChain] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
-  useWallet();
+    useWallet();
   const NetworkData = [
     {
       name: "Ethereum",
@@ -85,9 +89,23 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
     {
       name: "Base",
       chainid: "250",
-      img: fantom,
+      img: base,
       descode: "0x2105",
       walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Blast",
+      chainid: "d",
+      img: BURST,
+      descode: "0xee",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+    {
+      name: "Linea",
+      chainid: "250",
+      img: Linea,
+      descode: "0xe705",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     },
     {
       name: "Fantom",
@@ -116,18 +134,16 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 
     setSelectedNetwork(selectedNetworkData?.name);
     if (selectedNetworkData) {
-     
       setShowDropdown(false);
     }
   };
 
- 
   const [isOn, setIsOn] = useState(false);
-  
+
   const toggleSwitch = () => {
     setIsOn(!isOn);
   };
- 
+
   const dropdownRef = useRef(null);
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -148,106 +164,105 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
   }, [showDropdown]);
 
   return (
-    <div className="md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full  "  style={{
-      marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
-    }}>
+    <div
+      className="md:pl-5 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto h-full transition-all duration-500 ease-in-out "
+      style={{
+        marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
+      }}
+    >
       <div className="text-white lg:ml-1 lg:mr-5 md:ml-1 md:mr-6  ml-5 mr-5 ">
-        
-      <div className="flex items-center justify-between mt-6">
-          <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">My Portfolio</div>
+        <div className="flex items-center justify-between mt-3">
+          <div className="text-2xl justify-start  text-[#1788FB]  md:text-3xl font-medium max-w-screen-lg ">
+            My Portfolio
+          </div>
           <div
-                        ref={dropdownRef}
-                        className="dropdown-container relative mr-20 "
-                       >
-                        <button
-                          className="dropdown-toggle focus:outline-none flex"
-                          onClick={toggleDropdown}
-                        >
-                          {selectChain && (
-                            <Image
-                              src={selectChain}
-                              className="h-6 w-6 rounded-full"
-                            />
-                          )}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`h-6 w-6 text-gray-400 ${
-                              showDropdown ? "rotate-180" : ""
-                            }`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </button>
+            ref={dropdownRef}
+            className="dropdown-container relative mr-[6.5rem] "
+          >
+            <button
+              className="dropdown-toggle focus:outline-none flex"
+              onClick={toggleDropdown}
+            >
+              {selectChain && (
+                <Image
+                  src={selectChain}
+                  alt="logo"
+                  className="h-6 w-6 rounded-full"
+                />
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={`h-6 w-6 text-gray-400 ${
+                  showDropdown ? "rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-                        {/* {showDropdown && ( */}
-                        <div
-                          className={`overflow-hidden ${
-                            showDropdown ? "h-[430px] py-2" : "h-0"
-                          } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10  `}
+            {/* {showDropdown && ( */}
+            <div
+              className={`overflow-hidden scrollbar ${
+                showDropdown ? "h-[430px] overflow-y-scroll py-2" : "h-0"
+              } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-40 md:min-w-fit z-10  `}
+            >
+              <ul>
+                <ul>
+                  {NetworkData.map((item, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        handleOptionClick(item.name);
+                        setSelectChain(item?.img);
+                      }}
+                      className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
+                        selectedNetwork === item.name ? "bg-blue-500" : ""
+                      }`}
+                    >
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        className="!h-[30px] !w-[30px] mr-2 rounded-full"
+                      />
+                      <span className="text-white">{item.name}</span>
+                      {selectedNetwork === item.name && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-white mr-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          <ul>
-                            <ul>
-                              {NetworkData.map((item, index) => (
-                                <li
-                                  key={index}
-                                  onClick={() => {
-                                    handleOptionClick(item.name);
-                                    setSelectChain(item?.img);
-
-                                    
-                                  }}
-                                  className={`flex items-center py-2 px-4 cursor-pointer hover:bg-gray-700 ${
-                                    selectedNetwork === item.name
-                                      ? "bg-blue-500"
-                                      : ""
-                                  }`}
-                                >
-                                  <Image
-                                    src={item.img}
-                                    alt={item.name}
-                                    className="!h-[30px] !w-[30px] mr-2 rounded-full"
-                                  />
-                                  <span className="text-white">
-                                    {item.name}
-                                  </span>
-                                  {selectedNetwork === item.name && (
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="h-6 w-6 text-white mr-2"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M5 13l4 4L19 7"
-                                      />
-                                    </svg>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                          </ul>
-                        </div>
-                        {/* )} */}
-                      </div>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </ul>
+            </div>
+            {/* )} */}
+          </div>
         </div>
 
         <div className="">
-          <div className="mt-6 rounded-lg overflow-auto">
-            <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
+          <div className="mt-6 rounded-lg overflow-auto h-[1050px]">
+            <div className="bg-[#1C1C1C] h-full mb-7 overflow-y-auto text-white  overflow-auto rounded-xl p-5 ">
               {/* for with points and recent join user data show */}
-              View all tokens you&apos;ve bought or sold through Photon.
+              View all tokens you&apos;ve bought or sold through Wave.
               <div className="flex py-2">
                 <div className="pr-3">
                   {" "}

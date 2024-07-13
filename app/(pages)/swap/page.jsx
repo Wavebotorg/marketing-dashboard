@@ -4,15 +4,23 @@ import React, { useEffect, useState, useRef } from "react";
 import { IoMdClose, IoMdSettings } from "react-icons/io";
 import Image from "next/image";
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
+import closearrow from "../../../public/assets/sidebar/closearrow.svg";
+import openarrow from "../../../public/assets/sidebar/openarrow.svg";
 import eth from "../../../public/assets/tokenimg/eth.png";
 import arbitrum from "../../../public/assets/tokenimg/arbitrum.png";
 import optimism from "../../../public/assets/tokenimg/optimism.png";
 import poly from "../../../public/assets/tokenimg/poly.png";
 import SOL from "../../../public/assets/tokenimg/SOL.png";
 import BNB from "../../../public/assets/tokenimg/BNB.png";
+import BURST from "../../../public/assets/tokenimg/BURST.png";
+import base from "../../../public/assets/tokenimg/base.webp";
+
 import avalanche from "../../../public/assets/tokenimg/avalanche.png";
 import cronos from "../../../public/assets/tokenimg/cronos.jpg";
 import fantom from "../../../public/assets/tokenimg/fantom.png";
+import Linea from "../../../public/assets/tokenimg/linea.png";
+
 import { useWallet } from "../../components/contexts/WalletContext";
 import { useRouter } from "next/navigation";
 import { IoSwapVerticalOutline } from "react-icons/io5";
@@ -150,9 +158,23 @@ const Swap = () => {
     {
       name: "Base",
       chainid: "250",
-      img: fantom,
+      img: base,
       descode: "0x2105",
       walletAddressbuysell: "0x4200000000000000000000000000000000000006",
+    },
+    {
+      name: "Blast",
+      chainid: "81457",
+      img: BURST,
+      descode: "0xee",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+    },
+    {
+      name: "Linea",
+      chainid: "250",
+      img: Linea,
+      descode: "0xe705",
+      // walletAddressbuysell: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
     },
     {
       name: "Fantom",
@@ -226,6 +248,42 @@ const Swap = () => {
       descode: `0xa4b1`,
     },
   ];
+
+  const token_data_BLAST = [
+    {
+      name: "Blast ",
+      symbol: "BLAST",
+      chianid: 81457,
+      address: "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad",
+      decimal: "18",
+      logoURI: "https://blastscan.io/token/images/blast_32.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+    {
+      name: "USDB ",
+      symbol: "USDB",
+      chianid: 81457,
+      address: "0x4300000000000000000000000000000000000003",
+      decimal: "18",
+      logoURI: "https://blastscan.io/token/images/usdb_32.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+
+    {
+      name: "Wrapped Ether",
+      symbol: "WETH",
+      chianid: 81457,
+      address: "0x4300000000000000000000000000000000000004",
+      decimal: "18",
+      logoURI:
+        "https://d1k8z2xrei817b.cloudfront.net/images/logo/aave-polygon-weth-94f8bbe8.png",
+      chainname: "blast",
+      descode: `0xee`,
+    },
+  ];
+
   const token_data_POLY = [
     {
       name: "Tether USD",
@@ -312,6 +370,51 @@ const Swap = () => {
       logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
       chainname: "bsc",
       descode: `0x38`,
+    },
+  ];
+
+  const token_data_LINEA = [
+    {
+      name: "Tether USD",
+      symbol: "USDT",
+      chianid: 250,
+      address: "0xA219439258ca9da29E9Cc4cE5596924745e12B93",
+      decimal: "6",
+      logoURI: "https://cryptologos.cc/logos/tether-usdt-logo.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+    {
+      name: "USDC.e",
+      symbol: "USDC",
+      chianid: 250,
+      address: "0x176211869cA2b568f2A7D4EE941E073a821EE1ff",
+      decimal: "6",
+      logoURI: "https://s2.coinmarketcap.com/static/img/coins/200x200/3408.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+
+    {
+      name: "SHIBA INU",
+      symbol: "SHIB",
+      chianid: 250,
+      address: "0x99AD925C1Dc14Ac7cc6ca1244eeF8043C74E99d5",
+      decimal: "18",
+      logoURI: "https://lineascan.build/token/images/shibainu_32.png",
+      chainname: "linea",
+      descode: `0xe705`,
+    },
+    {
+      name: "Wrapped BTC",
+      symbol: "WBTC",
+      chianid: 250,
+      address: "0x3aAB2285ddcDdaD8edf438C1bAB47e1a9D05a9b4",
+      decimal: "8",
+      logoURI:
+        "https://cryptoclothing.cc/merch/wrapped-bitcoin-wbtc-sticker.jpg?v=031",
+      chainname: "linea",
+      descode: `0xe705`,
     },
   ];
 
@@ -536,70 +639,69 @@ const Swap = () => {
   //for buy submit for both network
   const handleBuySubmit = async () => {
     setLoading(true);
-   
-    
-        let endpoint;
-        if (selectedNetwork === "Solana") {
-          endpoint = "/solanaSwap";
-        } else {
-          endpoint = "/EVMswap";
-        }
 
-        axiosInstance
-          .post(
-            endpoint,
-            selectedNetwork === "Solana"
-              ? {
-                  input: walletAddressbuysell,
-                  output: selectedTokenDatato?.address_to,
+    let endpoint;
+    if (selectedNetwork === "Solana") {
+      endpoint = "/solanaSwap";
+    } else {
+      // endpoint = "/EVMswap";
+      endpoint = "/EVMBuy";
+    }
 
-                  amount: Number(selectedTokenDatato?.input_to),
-                  email: email,
-                  method: "buy",
-                }
-              : {
-                  tokenIn: walletAddressbuysell,
-                  tokenOut: selectedTokenDatato?.address_to,
-                  amount: Number(selectedTokenDatato?.input_to),
-                  chain: Number(selectedChainId),
-                  email: email,
-                  chainId: selectedTokenDatato?.chainname,
-                  desCode: selectedTokenDatato?.descode,
-                  method: "buy",
-                }
-          )
-          .then(async (res) => {
-            const myData = res?.data;
-            console.log("Response from API:", myData);
-            if (myData?.status) {
-              toast.success(myData?.message);
-              setTimeout(async () => {
-                if (selectedNetwork == "Solana") {
-                  await getSolanaBalance();
-                } else {
-                  await getWalletBalance(selectedNetwork);
-                }
-              }, 3000);
-              resetFields();
-            } else {
-              toast.error(myData?.message);
+    axiosInstance
+      .post(
+        endpoint,
+        selectedNetwork === "Solana"
+          ? {
+              input: walletAddressbuysell,
+              output: selectedTokenDatato?.address_to,
+
+              amount: Number(selectedTokenDatato?.input_to),
+              email: email,
+              method: "buy",
             }
-            // Reset all fields after successful transfer
-          })
-          .catch((error) => {
-            console.error("Error occurred:", error);
-            toast.error("An error occurred while processing your request");
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-    
+          : {
+              tokenIn: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+              tokenOut: selectedTokenDatato?.address_to,
+              amount: Number(selectedTokenDatato?.input_to),
+              chain: Number(selectedChainId),
+              email: email,
+              chainId: selectedTokenDatato?.chainname,
+              desCode: selectedTokenDatato?.descode,
+              method: "buy",
+            }
+      )
+      .then(async (res) => {
+        const myData = res?.data;
+        console.log("Response from API:", myData);
+        if (myData?.status) {
+          toast.success(myData?.message);
+          setTimeout(async () => {
+            if (selectedNetwork == "Solana") {
+              await getSolanaBalance();
+            } else {
+              await getWalletBalance(selectedNetwork);
+            }
+          }, 3000);
+          resetFields();
+        } else {
+          toast.error(myData?.message);
+        }
+        // Reset all fields after successful transfer
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+        toast.error("An error occurred while processing your request");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   //for pass value to sell evm submit
   const dataEvmSell = {
     tokenIn: selectedTokenDatato?.address_to,
-    tokenOut: walletAddressbuysell,
+    tokenOut: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
     amount: Number(selectedTokenDatato?.input_to),
     chain: Number(selectedChainId),
     email: email,
@@ -969,6 +1071,12 @@ const Swap = () => {
     };
   }, []);
 
+/* try  */
+
+
+
+/* try */
+
   const [tokens, setTokens] = useState([]);
 
   //for solana image
@@ -995,9 +1103,12 @@ const Swap = () => {
     Arbitrum: token_data_ARB,
     Polygon: token_data_POLY,
     "BNB Chain": token_data_BNB,
+    Blast: token_data_BLAST,
+    Linea: token_data_LINEA,
   });
 
   useEffect(() => {
+    console.log("🚀👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹 ~ Swap ~ tokenData:", tokenData)
     setTokenData((prevTokenData) => ({
       ...prevTokenData,
       Solana: tokens,
@@ -1048,7 +1159,7 @@ const Swap = () => {
         style={{
           marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
         }}
-        className="  md:pl-4 sm:pl-4 xsm:pl-0 mx-auto"
+        className="  md:pl-4 sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
       >
         {/* 2xl:pl-64 xl:pl-64 */}
         <div className="   gap-6 lg:ml-3 lg:mr-6 md:ml-0 md:mr-6 ml-5  mr-5">
@@ -1061,11 +1172,26 @@ const Swap = () => {
               {isNavbar === false ? (
                 <div className="cursor-pointer">
                   {/* <FaBars /> */}
-                  <FaBarsStaggered />
+                  {/* <FaBarsStaggered /> */}
+                  {/* <TbArrowBarRight /> */}
+
+                  <Image
+                    src={openarrow}
+                    alt="open sidebar arrow"
+                    width={30}
+                    // height={40}
+                  />
                 </div>
               ) : (
                 <div className="  cursor-pointer">
-                  <MdKeyboardDoubleArrowLeft />
+                  {/* <MdKeyboardDoubleArrowLeft /> */}
+                  {/* <TbArrowBarLeft /> */}
+                  <Image
+                    src={closearrow}
+                    alt="open sidebar arrow"
+                    width={30}
+                    // height={40}
+                  />
                 </div>
               )}
             </div>
@@ -1128,6 +1254,7 @@ const Swap = () => {
                           {selectChain && (
                             <Image
                               src={selectChain}
+                              alt="selected Chain Logo"
                               className="h-6 w-6 rounded-full"
                             />
                           )}
@@ -1151,8 +1278,10 @@ const Swap = () => {
 
                         {/* {showDropdown && ( */}
                         <div
-                          className={`overflow-hidden ${
-                            showDropdown ? "h-[430px] py-2" : "h-0"
+                          className={`overflow-hidden scrollbar ${
+                            showDropdown
+                              ? "h-[430px] overflow-y-scroll py-2"
+                              : "h-0"
                           } dropdown transition-all ease-in-out duration-300 absolute bg-gray-800 rounded-lg mt-1 w-48 md:min-w-fit z-10 ml-[-162px]`}
                         >
                           <ul>
