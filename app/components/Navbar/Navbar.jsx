@@ -15,7 +15,7 @@ import { useSearch } from "../contexts/SearchContext";
 import { useWallet } from "../contexts/WalletContext";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { TbArrowBarLeft, TbArrowBarRight } from "react-icons/tb";
-import Notification from "../notification/notification";
+import Notification from "../notification/Notification.js";
 
 const Navbar = () => {
   const router = useRouter();
