@@ -57,7 +57,7 @@ function Sidebar() {
     setIsNavbar,
     userProfile,
   } = useWallet();
-    console.log("🚀 ~ userProfile:", userProfile)
+  
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =
