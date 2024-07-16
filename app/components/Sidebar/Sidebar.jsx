@@ -57,7 +57,7 @@ function Sidebar() {
     setIsNavbar,
     userProfile,
   } = useWallet();
-  
+
   const [allUser, setAllUser] = useState({});
   const [active, setActive] = useState("");
   const getdata =
@@ -372,48 +372,59 @@ function Sidebar() {
               ref={isLargeScreen ? null : navbarRef}
               className="flex h-screen flex-col   overflow-y-auto"
             >
-              <div className="flex  items-center text-white justify-center">
+              <div className="flex  items-center text-white justify-center mt-2">
                 <div
                   className={` text-3xl `}
                   onClick={() => setIsNavbar(!isNavbar)}
                 >
                   {isNavbar === false ? (
-                    <div className="mt-4 mx-auto ml-2 cursor-pointer">
+                    <div className="mt-3  mx-auto ml-2 cursor-pointer">
                       {/* <FaBars /> */}
                       {/* <FaBarsStaggered /> */}
                       {/* <TbArrowBarRight /> */}
-                      <Image
-                        src={openarrow}
-                        alt="open sidebar arrow"
-                        width={40}
-                        height={0}
-                      />
+                      <span className="inline-flex justify-center items-center px-4 relative ">
+                        <Image
+                          src={openarrow}
+                          alt="open sidebar arrow"
+                          className="w-10 h-10"
+                          // style={{height: "50px"}}
+                        />
+                      </span>
                     </div>
                   ) : (
-                    <div className="mt-8 ml-4 cursor-pointer">
+                    <div className="mt-3 mx-auto ml-  cursor-pointer">
                       {" "}
                       {/* <MdKeyboardDoubleArrowLeft /> */}
                       {/* <TbArrowBarLeft /> */}
-                      <Image
-                        src={closearrow}
-                        alt="close sidebar arrow"
-                        width={40}
-                        height={0}
-                      />
+                      <span className="inline-flex justify-center items-center px-4 relative ">
+                        <Image
+                          src={closearrow}
+                          alt="close sidebar arrow"
+                          className="w-10 h-10"
+                          // style={{height: "50px"}}
+                        />
+                      </span>
                     </div>
                   )}
                 </div>
-
-                <Image
-                  src={Logo}
-                  alt="wave-logo"
-                  className={`${
-                    isNavbar === false ? "hidden " : "block "
-                  } mt-6 ml-8 mx-auto  `}
-                />
+                <>
+                  <div
+                    className={`mt- ml-5 mx-auto transition-all duration-300 ${
+                      isNavbar ? "" : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={Logo}
+                      alt="wave-logo"
+                      className="block  p-2"
+                      width={120}
+                      height={120}
+                    />
+                  </div>
+                </>
               </div>
               <div>
-                <ul className="flex flex-col  pr- justify-start xl:pb-7 pb-3  mt-7 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
+                <ul className="flex flex-col  pr- justify-start xl:pb-7 pb-3  mt-5 p-0 gap-1.5  tracking-wide !overflow-y-auto !overflow-x-hidden">
                   {headerdata?.map((data) => (
                     <li key={data?.id} className="min-w-max   ">
                       {/* xl:mx-5 xl:mr-4  */}
@@ -510,22 +521,33 @@ function Sidebar() {
                     {/* {isNavbar ? ( */}
                     <div
                       className={`${
-                        isNavbar ? "w- " : "w-0"
+                        isNavbar ? "w- " : "w-"
                       }  transition-all duration-500 ease-in-out tracking-wide  !overflow-x-hidden `}
                     >
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
-                        className="bg-[#1788FB] navbar-content show w-64 xsm:p-[0.330rem] xsm:ml-1 mt-10  text-white p-2 rounded-xl xl:px-7  px-3  place-items-center"
+                        className={`bg-[#1788FB] navbar-content show rounded-xl text-white place-items-center xsm:p-[0.330rem] xsm:ml-1 mt-10 ${
+                          isNavbar ? " w-64 p-2 xl:px-7  px-3  " : " p-5"
+                        } `}
                       >
                         <div className="flex items-center gap-1 ">
-                          <FiPower size={18} className="block ml-2" />
+                          <FiPower
+                            size={18}
+                            className={`${
+                              isNavbar ? "block ml-2 " : " block  h-6 w-6 "
+                            }  transition-all duration-500 ease-in-out `}
+                          />
                           {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
-                          <span className="ml-4 tracking-wide font-bold   xl:text-sm text-[12px] xsm:text-[10.5px]  block ">
+                          <span
+                            className={`ml-4 tracking-wide font-bold xl:text-sm text-[12px] xsm:text-[10.5px]  transition-all duration-500 ease-in-out ${
+                              isNavbar ? "block" : "hidden"
+                            }`}
+                          >
                             Logout
                           </span>
                         </div>
                       </button>
-                      </div>
+                    </div>
                     {/* ) : (
                       <button
                         onClick={(e) => setConfirmationPopUp(true)}
@@ -611,7 +633,7 @@ function Sidebar() {
               </div>
               <div className="text-white  px-0 md:pb-3 pb-5 relative mt-[2.7rem]  lg:ml-2.5 md:ml-1.5">
                 <div className=" 2xl:flex xl:flex">
-                  <div className="flex gap-2  tracking-wide  !overflow-x-hidden">
+                  <div className="flex gap-2  tracking-wide  !overflow-x-hidden ">
                     <Link href="/profile">
                       <span onClick={handlesClick}>
                         <div
@@ -624,71 +646,71 @@ function Sidebar() {
                         </div>
                       </span>
                     </Link>
-                  {/*   {isNavbar ? ( */}
-                  <div
+                    {/*   {isNavbar ? ( */}
+                    <div
                       className={`${
                         isNavbar ? "w-52" : "w-0"
-                      }  transition-all duration-500 ease-in-out tracking-wide  !overflow-x-hidden `}
+                      }  transition-all duration-500 ease-in-out tracking-wide  !overflow-x-hidden  `}
                     >
                       {/* navbar-content show */}
-                        <div className="flex mt-2 items-center">
-                          <h1>{userProfile1?.name || userProfile?.name}</h1>
-                          <Link href="/profile">
-                            <span onClick={handlesClick}>
-                              <Image
-                                src={Arrow}
-                                alt="arrow"
-                                width="10px"
-                                height="10px"
-                                className="mb-3 ml-1.5"
-                              />
-                            </span>
-                          </Link>
-                        </div>
-                        <p className="text-xs">
-                          Invited by {userProfile1?.email || userProfile?.email}
-                        </p>
-                        <div className="flex mt-2">
-                          <Link
-                            href="https://t.me/onchain_wavebot"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                      <div className="flex mt-2 items-center">
+                        <h1>{userProfile1?.name || userProfile?.name}</h1>
+                        <Link href="/profile">
+                          <span onClick={handlesClick}>
                             <Image
-                              src={bot}
-                              alt="Telegram bot"
-                              className="mr-2 cursor-pointer"
-                              style={{ width: "20px", height: "20px" }}
+                              src={Arrow}
+                              alt="arrow"
+                              width="10px"
+                              height="10px"
+                              className="mb-3 ml-1.5"
                             />
-                          </Link>
-
-                          <Link
-                            href="https://t.me/WaveUsers"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Image
-                              src={community}
-                              alt="Telegram community"
-                              style={{ width: "20px", height: "20px" }}
-                              className="mr-2 cursor-pointer"
-                            />
-                          </Link>
-                          <Link
-                            href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Image
-                              src={x}
-                              alt="twitter"
-                              style={{ width: "20px", height: "20px" }}
-                              className="mr-2 cursor-pointer"
-                            />
-                          </Link>
-                        </div>
+                          </span>
+                        </Link>
                       </div>
-                   {/*  ) : (
+                      <p className="text-xs">
+                        Invited by {userProfile1?.email || userProfile?.email}
+                      </p>
+                      <div className="flex mt-2">
+                        <Link
+                          href="https://t.me/onchain_wavebot"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={bot}
+                            alt="Telegram bot"
+                            className="mr-2 cursor-pointer"
+                            style={{ width: "20px", height: "20px" }}
+                          />
+                        </Link>
+
+                        <Link
+                          href="https://t.me/WaveUsers"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={community}
+                            alt="Telegram community"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                        <Link
+                          href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={x}
+                            alt="twitter"
+                            style={{ width: "20px", height: "20px" }}
+                            className="mr-2 cursor-pointer"
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                    {/*  ) : (
                       <div className="navbar-content hide">
                         <div className="flex mt-2   items-center">
                           <h1>{userProfile1?.name || userProfile?.name}</h1>

@@ -23,11 +23,11 @@ const Page = () => {
   //for copy value
   const [copied, setCopied] = useState(null);
 
-  const copyToClipboard = (ID, index) => {
-    navigator.clipboard.writeText(ID);
-    setCopied(index);
-    setTimeout(() => setCopied(null), 2000); // Reset copied state after 2 seconds
-  };
+  // const copyToClipboard = (ID, index) => {
+  //   navigator.clipboard.writeText(ID);
+  //   setCopied(index);
+  //   setTimeout(() => setCopied(null), 2000); // Reset copied state after 2 seconds
+  // };
 
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
@@ -99,7 +99,7 @@ const Page = () => {
                           {/* {ID} */}
                           {items?.userId}
                           <button
-                            onClick={() => copyToClipboard(ID)}
+                            // onClick={() => copyToClipboard(ID)}
                             className="text-xl text-[#828282] align-middle pb-1.5"
                           >
                             <MdOutlineContentCopy className="ml-1.5 items-center" />

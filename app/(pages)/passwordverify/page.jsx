@@ -55,7 +55,7 @@ const PasswordVerify = () => {
   };
 
   //OTP Change
-  const handleOtpChange = (value) => {
+  const  handleOtpChange = (value) => {
     const sanitizedValue = value.replace(/\D/g, "");
     setOtp(sanitizedValue);
   };

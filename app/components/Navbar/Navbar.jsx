@@ -124,7 +124,7 @@ const Navbar = () => {
           onClick={() => setIsNavbar(!isNavbar)}
         >
           {isNavbar === false ? (
-            <div className="-mt-4 cursor-pointer">
+            <div className="-mt-3 cursor-pointer">
               {/* <FaBars /> */}
               {/* <FaBarsStaggered /> */}
               {/* <TbArrowBarRight /> */}

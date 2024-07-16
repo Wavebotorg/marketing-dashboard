@@ -19,7 +19,7 @@ import { WalletProvider } from "./components/contexts/WalletContext";
 
 export const metadata = {
   title: "Wave Dashboard",
-  description: "wave app",
+  description: "Optimize your portfolio, discover the hottest meme tokens, and mirror the strategies of top traders - all in one seamless experience designed for the meme coin enthusiast.",
   icons: {
     icon: "/wave_logo.png",
     shortcut: "/wave_logo.png",

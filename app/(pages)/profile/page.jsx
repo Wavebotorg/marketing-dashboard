@@ -75,12 +75,13 @@ const Profile = () => {
                 </div>
               )}
             </div> */}
-            <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px]">
+            <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px] z-10">
               My Profile
             </div>
           </div>
+          
 
-          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-[9.5rem] bg-black z-[9]">
+          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-[9.5rem] bg-black ">
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button} className="bg-black">
                 <button

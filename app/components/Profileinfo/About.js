@@ -4,12 +4,16 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import none from "../../../public/assets/none.png";
+import profile from "../../../public/assets/profile.png";
+import Profile from "../../../public/assets/profile.png";
+import sol from "../../../public/assets/sol.png";
 
 const About = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Top");
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0); 
-
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
+  // const [imageSrc, setImageSrc] = useState(Profile);
+  // const fileInputRef = useRef(null);
 
   const dropdownRef = useRef(null);
 
@@ -20,8 +24,7 @@ const About = () => {
   const handleSelectOption = (option, index) => {
     setSelectedOption(option);
     setSelectedOptionIndex(index);
-    setShowDropdown(false); 
-  
+    setShowDropdown(false);
   };
 
   const handleClickOutside = (event) => {
@@ -41,8 +44,49 @@ const About = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
+
+  // const handleImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImageSrc(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+
+  // const openFileInput = () => {
+  //   fileInputRef.current.click();
+  // };
+
   return (
     <>
+      {/*     <div className="">
+        <div className="md:pl-16 xsm:pl-6  pt-4 back mt-5 flex">
+          <Image
+            src={imageSrc}
+            alt="Profilelogo"
+            width={100}
+            height={100}
+            className="rounded-full"
+          />
+          <button
+            onClick={openFileInput}
+            className="absolute  rounded-full top-[19rem] cursor-pointer"
+          >
+            <Image src={sol} alt="logo" />
+          </button>
+          <input
+            ref={fileInputRef}
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+          />
+        </div>
+      </div> */}
       <div className="bg-[#1C1C1C] shadow-2xl rounded-lg">
         <div className=" xl:px-48 mt-10 pt-10 flex flex-col lg:flex-row gap-4 ">
           {/* Left Section: Performance and Action */}
@@ -84,8 +128,7 @@ const About = () => {
             {/* Action Section */}
             <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
               {/* <h2 className="text-2xl font-bold mb-4 text-black">Action</h2> */}
-   
-            
+
               <div className="mt-6">
                 <div className="flex items-center border-b">
                   <img
@@ -105,7 +148,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-           {/*  <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
+            {/*  <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
               <h2 className="text-2xl font-bold mb-4 text-black">Action</h2>
               <div className="bg-gray-100 h-64 flex items-center justify-center rounded-lg">
                 <span className="text-gray-500">No Data to Display</span>
@@ -149,7 +192,7 @@ const About = () => {
             </div> */}
             <div>
               <div>
-                <div ref={dropdownRef} className="dropdown-container relative">
+                <div ref={dropdownRef} className="dropdown-container relative ">
                   <button
                     className="flex items-center justify-center px-2 pb-4 dropdown-toggle focus:outline-none text-[1.5rem]"
                     onClick={toggleDropdown}
@@ -204,11 +247,8 @@ const About = () => {
                 </div>
               </div>
               <div className="bg-[#f8f8f8] p-10 mb-6 rounded-lg shadow-md flex justify-center items-center">
-      
-          <Image src={none} alt="No Data" className="" />
-      
-      </div>
-
+                <Image src={none} alt="No Data" className="" />
+              </div>
             </div>
           </div>
 
@@ -247,8 +287,8 @@ const About = () => {
                 Example Trader Card (Repeat for top traders)
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img
-                      src="path/to/your/image.png"
+                    <Image
+                      src={profile}
                       alt="Trader"
                       className="w-10 h-10 rounded-full"
                     />
@@ -265,8 +305,8 @@ const About = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img
-                      src="path/to/your/image.png"
+                    <Image
+                      src={profile}
                       alt="Trader"
                       className="w-10 h-10 rounded-full"
                     />
@@ -283,8 +323,8 @@ const About = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img
-                      src="path/to/your/image.png"
+                    <Image
+                      src={profile}
                       alt="Trader"
                       className="w-10 h-10 rounded-full"
                     />
@@ -301,8 +341,8 @@ const About = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <img
-                      src="path/to/your/image.png"
+                    <Image
+                      src={profile}
                       alt="Trader"
                       className="w-10 h-10 rounded-full"
                     />
