@@ -86,7 +86,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <>
+    <>  
       <div
         style={{
           marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
