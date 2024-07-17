@@ -7,6 +7,8 @@ import none from "../../../public/assets/none.png";
 import profile from "../../../public/assets/profile.png";
 import Profile from "../../../public/assets/profile.png";
 import sol from "../../../public/assets/sol.png";
+import { BiPoll } from "react-icons/bi";
+import { GoPaperclip } from "react-icons/go";
 
 const About = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -87,8 +89,8 @@ const About = () => {
           />
         </div>
       </div> */}
-      <div className="bg-[#1C1C1C] shadow-2xl rounded-lg">
-        <div className=" xl:px-48 mt-10 pt-10 flex flex-col lg:flex-row gap-4 ">
+      <div className="bg-[#1C1C1C] lg:ml-[4.4rem] mr-5 xsm:ml-5  shadow-2xl rounded-lg">
+        <div style={{marginTop: "7.6rem"}} className=" xl:px-48  pt-10 flex flex-col lg:flex-row gap-4 ">
           {/* Left Section: Performance and Action */}
           <div className="lg:w-[60%] md:w-full">
             {" "}
@@ -129,22 +131,34 @@ const About = () => {
             <div className="bg-white p-6 mb-6 rounded-lg shadow-md ">
               {/* <h2 className="text-2xl font-bold mb-4 text-black">Action</h2> */}
 
-              <div className="mt-6">
-                <div className="flex items-center border-b">
-                  <img
-                    src="path/to/your/image.png"
-                    alt="User"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <input
-                    type="text"
-                    placeholder="What's on your mind?"
-                    className="ml-4 w-full p-2  "
-                  />
+              <div className=" ">
+                <div className="flex items-center border-b ">
+                  <div className="flex mb-4">
+                    <Image
+                      src={profile}
+                      alt="User"
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <input
+                      type="text"
+                      placeholder="What's on your mind?"
+                      className="ml-4 w-full p-2  placeholder:text-[#bababa]  placeholder:text-[16px] placeholder:hover:hover:text-[#32374b] outline-none text-black"
+                    />
+                  </div>
                 </div>
-                <div className="mt-2 flex space-x-2">
-                  <button className="bg-gray-200 p-2 rounded-lg">Upload</button>
-                  <button className="bg-gray-200 p-2 rounded-lg">Poll</button>
+                <div className="mt-5 flex space-x-2">
+                  <div className=" ">
+                    <button className="bg-transparent text-[#777] p-2 flex gap-1 rounded-lg hover:text-[#32374b] ">
+                    <GoPaperclip size={20} className="  " />
+                      Upload
+                    </button>
+                  </div>
+                  <div className=" ">
+                    <button className="bg-transparent text-[#777] flex gap-1 p-2 rounded-lg hover:text-[#32374b]">
+                    <BiPoll size={20} className="" />
+                      Poll
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -279,7 +293,7 @@ const About = () => {
               </div>
             </div>
             {/* Similar Traders Section */}
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-60">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-80">
               <h2 className="text-2xl text-black font-bold mb-4">
                 Similar Traders
               </h2>

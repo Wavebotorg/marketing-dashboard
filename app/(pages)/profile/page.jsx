@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Appearance from "../../components/Profileinfo/Appearance";
 import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
@@ -16,6 +16,9 @@ import { ImStatsBars } from "react-icons/im";
 import { IoPieChartSharp } from "react-icons/io5";
 import { PiSquaresFourFill } from "react-icons/pi";
 import { TbChartCandleFilled } from "react-icons/tb";
+import Profiles from "../../../public/assets/profile.png";
+import sol from "../../../public/assets/sol.png";
+import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
@@ -30,6 +33,9 @@ const Profile = () => {
     6: false,
   });
 
+  const [imageSrc, setImageSrc] = useState(Profiles);
+  const fileInputRef = useRef(null);
+
   const handleButtonClick = (component) => {
     setComponentVisibility((prevState) => ({
       ...prevState,
@@ -39,18 +45,58 @@ const Profile = () => {
     setActiveButton(component);
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const openFileInput = () => {
+    fileInputRef.current.click();
+  };
+
+  const [userProfile, setUserProfile] = useState([]);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const response = await axiosInstanceAuth.get("/getUserProfile");
+        setUserProfile(response?.data?.data?.name || []);
+        setEmail(response?.data?.data?.email);
+        console.log(
+          "🚀🚜🚛🚒🚜🛴 ~ getUserProfile ~ setEmail:",
+          response?.data?.data?.email
+        );
+        console.log(
+          "🦼🛹🛹🚔🚜🚛User Profile Data:",
+          response?.data?.data?.name
+        );
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+
+    getUserProfile();
+  }, []);
+
   return (
     <>
       <div
         style={{
           marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
         }}
-        className="md:pl-6 lg:pl-[4.8rem] sm:pl-4 xsm:pl-0 mx-auto transition-all duration-500 ease-in-out"
+        className="md:pl- lg:pl-[rem] sm:pl- xsm:pl- mx-auto transition-all duration-500 ease-in-out "
       >
         {/* 2xl:pl-64 xl:pl-64  */}
-        <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr-5 md:ml-0 xsm:ml-5 mr-5 ">
+        <div className="flex flex-col xl:justify-center  lg:ml-2 lg:mr- md:ml-0 xsm:ml- mr- ">
           {/* xl:ml-32 xl:mr-[92px]  */}
-          <div className="flex items-center gap-3 lg:gap-0  ">
+          <div className="flex items-center gap-3 lg:gap-0   ">
             {/*        <div
               className={`lg:scale-0 scale-[1] text-3xl fixed bg-black w-full xsm:pt-[121px] lg:pt-0 `}
               onClick={() => setIsNavbar(!isNavbar)}
@@ -75,13 +121,48 @@ const Profile = () => {
                 </div>
               )}
             </div> */}
-            <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px] z-10">
+            {/*  <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px] z-10">
               My Profile
+            </div> */}
+            <div className="bg-black  w-full   fixed  pt-[120px] pb-6  z-10">
+              <div className="lg:pl-16 xsm:pl-  pt-4  ml-7 mt-6 flex">
+                <Image
+                  src={imageSrc}
+                  alt="Profilelogo"
+                  width={100}
+                  height={100}
+                  className="rounded-full"
+                />
+                <p className="text-2xl font-bold text-center my-auto ml-5 ">{userProfile}</p>
+                <button
+                  onClick={openFileInput}
+                  className="absolute cursor-pointer"
+                >
+                  <Image src={sol} alt="logo" />
+                </button>
+                {/*  <button
+                  onClick={openFileInput}
+                  className="absolute w-[100px] h-[100px] pl-9 cursor-pointer "
+                  style={{
+                    backgroundImage: "linear-gradient(to bottom, transparent, rgba(0, 0, 0, .75))"
+                  }}
+                 
+                >
+                  <Image src={sol} alt="logo" />
+                </button> */}
+                <input
+                  ref={fileInputRef}
+                  id="imageInput"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                />
+              </div>
             </div>
           </div>
-          
 
-          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5 lg:px- md:text-base text-sm items-center p-4 sticky top-[9.5rem] bg-black ">
+          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5  lg:px- md:text-base text-sm items-center p-4 sticky top-[14.6rem] border-t border-[#ededed]   bg-black z-[9]">
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button} className="bg-black">
                 <button

@@ -31,7 +31,7 @@ const Appearance = () => {
 
   return (
     <div>
-      <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-10 p-5">
+      <div className="bg-[#1C1C1C] shadow-2xl rounded-lg mt-24 lg:ml-[4.4rem] mr-5 xsm:ml-5 p-5">
         <div>
           <div
             ref={dropdownRef}

@@ -58,7 +58,7 @@ const Filter = () => {
                 <input
                   id="horizontal-list-vue"
                   type="checkbox"
-                  class="  h-4 w-4 "
+                  className="  h-4 w-4 "
                 />
 
                 <span className="ml-2">Audit results passed</span>
