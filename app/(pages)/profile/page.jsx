@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Appearance from "../../components/Profileinfo/Appearance";
 import About from "../../components/Profileinfo/About";
 import Notification from "../../components/Profileinfo/Notification";
@@ -33,7 +33,8 @@ const Profile = () => {
     6: false,
   });
 
-  const [imageSrc, setImageSrc] = useState(Profiles);
+  // const [imageSrc, setImageSrc] = useState(Profiles);
+  const { imageSrc, setImageSrc } = useWallet();
   const fileInputRef = useRef(null);
 
   const handleButtonClick = (component) => {
@@ -85,8 +86,22 @@ const Profile = () => {
     getUserProfile();
   }, []);
 
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const topOffset = window.pageYOffset;
+      setShowImage(topOffset > 102);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <>  
+    <>
       <div
         style={{
           marginLeft: isNavbar && window.innerWidth >= 1440 ? "12%" : "0",
@@ -124,7 +139,7 @@ const Profile = () => {
             {/*  <div className="text-[35px] font-medium bg-black w-full   fixed  pt-[70px] z-10">
               My Profile
             </div> */}
-            <div className="bg-black  w-full   fixed  pt-[120px] pb-6  z-10">
+            <div className="bg-black  w-full     pt-[px] pb-6  z-10">
               <div className="lg:pl-16 xsm:pl-  pt-4  ml-7 mt-6 flex">
                 <Image
                   src={imageSrc}
@@ -133,7 +148,9 @@ const Profile = () => {
                   height={100}
                   className="rounded-full"
                 />
-                <p className="text-2xl font-bold text-center my-auto ml-5 ">{userProfile}</p>
+                <p className="text-2xl font-bold text-center my-auto ml-5 ">
+                  {userProfile}
+                </p>
                 <button
                   onClick={openFileInput}
                   className="absolute cursor-pointer"
@@ -162,7 +179,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5  lg:px- md:text-base text-sm items-center p-4 sticky top-[14.6rem] border-t border-[#ededed]   bg-black z-[9]">
+          {/*   <div className="flex justify-center  text-center md:gap-5 gap-2  mb-5  lg:px- md:text-base text-sm items-center p-4 sticky top-[14.6rem] border-t border-[#ededed]   bg-black z-[9]">
             {[1, 2, 3, 4, 5].map((button) => (
               <div key={button} className="bg-black">
                 <button
@@ -192,10 +209,69 @@ const Profile = () => {
                     </>
                   )}
 
-                  {/* {button === 5 && "Notification"} */}
+                  {/* {button === 5 && "Notification"} *
                 </button>
               </div>
             ))}
+          </div> */}
+
+          <div className="flex justify-between items-center p-4 sticky top-[5.75rem] border-t border-[#ededed] bg-black z-[9]">
+            <div
+              style={{
+                display: "flex",
+              }}
+              className={`text-white  xsm:hidden lg:block ml-20 ${
+                showImage
+                  ? "opacity-100 duration-300 transition-all  ease-linear"
+                  : "opacity-0"
+              }`}
+            >
+              {" "}
+              <Image
+                src={imageSrc}
+                alt="Profilelogo"
+                width={35}
+                height={35}
+                className="rounded-full "
+              />
+              <div className="text-2xl font-bold text-center my-auto ml-5 ">
+                {userProfile}
+              </div>
+            </div>
+            <div className="flex justify-center gap-2 md:gap-5 flex-grow">
+              {[1, 2, 3, 4, 5].map((button) => (
+                <div key={button} className="bg-black">
+                  <button
+                    className={`flex items-center hover:bg-blue-500 p-1 px-2 rounded-xl md:text-[18px] text-[9.5px] font-normal ${
+                      activeButton === button && "bg-blue-500"
+                    }`}
+                    onClick={() => handleButtonClick(button)}
+                  >
+                    {button === 1 && (
+                      <>
+                        <PiSquaresFourFill className="mr-1" /> Overview
+                      </>
+                    )}
+                    {button === 2 && (
+                      <>
+                        <ImStatsBars className="mr-1" /> Stats
+                      </>
+                    )}
+                    {button === 3 && (
+                      <>
+                        <IoPieChartSharp className="mr-1" /> Portfolio
+                      </>
+                    )}
+                    {button === 4 && (
+                      <>
+                        <TbChartCandleFilled className="mr-1" /> Chart
+                      </>
+                    )}
+                    {/* {button === 5 && "Notification"} */}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="">

@@ -449,15 +449,42 @@ const Referral = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
           {[1, 2, 3, 4, 5].map((level) => {
-            const userCount =
-              (level === 1 && countLevel1) ||
-              (level === 2 && countLevel2) ||
-              (level === 3 && countLevel3) ||
-              (level === 4 && countLevel4) ||
-              (level === 5 && countLevel5);
+            let userCount = 0;
 
-            if (userCount === 0) return null; // Hide the level if there's no data
+            // Determine userCount based on the level
+            switch (level) {
+              case 1:
+                userCount = countLevel1;
+                break;
+              case 2:
+                userCount = countLevel2;
+                break;
+              case 3:
+                userCount = countLevel3;
+                break;
+              case 4:
+                userCount = countLevel4;
+                break;
+              case 5:
+                userCount = countLevel5;
+                break;
+              default:
+                userCount = 0;
+            }
 
+            // Check if userCount is zero or undefined/null to conditionally render
+            if (userCount === 0) return null;
+        
+
+            // const userCount =
+            //   (level === 1 && countLevel1) ||
+            //   (level === 2 && countLevel2) ||
+            //   (level === 3 && countLevel3) ||
+            //   (level === 4 && countLevel4) ||
+            //   (level === 5 && countLevel5);
+
+            // if (userCount === 0) return null; // Hide the level if there's no data
+            // if (!userCount) return null;
             return (
               <div
                 key={level}

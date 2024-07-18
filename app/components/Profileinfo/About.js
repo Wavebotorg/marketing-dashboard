@@ -9,6 +9,7 @@ import Profile from "../../../public/assets/profile.png";
 import sol from "../../../public/assets/sol.png";
 import { BiPoll } from "react-icons/bi";
 import { GoPaperclip } from "react-icons/go";
+import { useWallet } from "../contexts/WalletContext";
 
 const About = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -46,6 +47,8 @@ const About = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showDropdown]);
+
+  const {imageSrc } =   useWallet();
 
   // const handleImageChange = (event) => {
   //   const file = event.target.files[0];
@@ -90,7 +93,7 @@ const About = () => {
         </div>
       </div> */}
       <div className="bg-[#1C1C1C] lg:ml-[4.4rem] mr-5 xsm:ml-5  shadow-2xl rounded-lg">
-        <div style={{marginTop: "7.6rem"}} className=" xl:px-48  pt-10 flex flex-col lg:flex-row gap-4 ">
+        <div className=" xl:px-48  pt-10 flex flex-col lg:flex-row gap-4 ">
           {/* Left Section: Performance and Action */}
           <div className="lg:w-[60%] md:w-full">
             {" "}
@@ -135,8 +138,10 @@ const About = () => {
                 <div className="flex items-center border-b ">
                   <div className="flex mb-4">
                     <Image
-                      src={profile}
+                     src={imageSrc}
                       alt="User"
+                      width={0}
+                      height={0}
                       className="w-10 h-10 rounded-full"
                     />
                     <input
@@ -293,7 +298,7 @@ const About = () => {
               </div>
             </div>
             {/* Similar Traders Section */}
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-80">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-44">
               <h2 className="text-2xl text-black font-bold mb-4">
                 Similar Traders
               </h2>
