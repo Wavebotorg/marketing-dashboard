@@ -160,6 +160,8 @@ function Sidebar() {
     pathname === "/login" ||
     // pathname === "/" ||
     pathname === "/signup" ||
+    pathname === "/signupRef" ||
+    pathname === "/signupVerify" ||
     pathname === "/forgotpassword" ||
     pathname === "/passwordverify" ||
     pathname === "/resetpassword" ||

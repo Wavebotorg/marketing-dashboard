@@ -99,6 +99,15 @@ const Profile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
+  function isMediumOrSmallScreen() {
+    // Assuming Tailwind CSS breakpoints
+    const md = window.matchMedia('(max-width: 768px)').matches;
+    const sm = window.matchMedia('(max-width: 640px)').matches;
+    
+    return md || sm;
+  }
+  
 
   return (
     <>
@@ -140,7 +149,7 @@ const Profile = () => {
               My Profile
             </div> */}
             <div className="bg-black  w-full     pt-[px] pb-6  z-10">
-              <div className="lg:pl-16 xsm:pl-  pt-4  ml-7 mt-6 flex">
+              <div className="lg:pl-16 xsm:pl-  pt-4  ml-7 mt-1 flex">
                 <Image
                   src={imageSrc}
                   alt="Profilelogo"
@@ -216,15 +225,26 @@ const Profile = () => {
           </div> */}
 
           <div className="flex justify-between items-center p-4 sticky top-[5.75rem] border-t border-[#ededed] bg-black z-[9]">
-            <div
+            {/*   <div
               style={{
                 display: "flex",
+                display: "none",
               }}
-              className={`text-white  xsm:hidden lg:block ml-20 ${
+              className={`text-white hides ml-20 ${
                 showImage
-                  ? "opacity-100 duration-300 transition-all  ease-linear"
-                  : "opacity-0"
+                  ? "opacity-100 duration-300 transition-all  ease-linear "
+                  : "opacity-0 "
               }`}
+            > */}
+            <div
+              className={`text-white ml-20 ${
+                showImage
+                  ? "opacity-100 duration-300 transition-all ease-linear "
+                  : "opacity-0 "
+              } ${isMediumOrSmallScreen() ? "hidden" : ""}`}
+              style={{
+                display: isMediumOrSmallScreen() ? "none" : "flex",
+              }}
             >
               {" "}
               <Image
@@ -305,3 +325,13 @@ const renderComponent = (key) => {
 };
 
 export default Profile;
+
+
+
+
+// 7000
+
+// for 6 months
+
+
+

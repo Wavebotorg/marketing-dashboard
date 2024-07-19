@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
+
+
 const RefSignUp = ({ params }) => {
   const ref = decodeURIComponent(params?.refId);
   console.log("🚀 ~ RefSignUp ~ ref:", ref);

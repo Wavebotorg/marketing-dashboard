@@ -108,6 +108,8 @@ const Navbar = () => {
           getPath === "/swap" ||
           getPath === "/withdraw" ||
           getPath === "/signup" ||
+          getPath === "/signupRef" ||
+          getPath === "/signupVerify" ||
           getPath === "/swap" ||
           getPath === "/forgotpassword" ||
           getPath === "/passwordverify" ||
@@ -116,7 +118,7 @@ const Navbar = () => {
           getPath === "/sucessreset"
             ? "hidden"
             : "flex  justify-between"
-        } flex justify-between p-0 py-7 transition-all duration-500 ease-in-out`}
+        } flex justify-between p-0 py-7  transition-all duration-500 ease-in-out`}
       >
         {/*  xl:pl-60 */}
         <div

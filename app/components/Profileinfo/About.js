@@ -48,7 +48,7 @@ const About = () => {
     };
   }, [showDropdown]);
 
-  const {imageSrc } =   useWallet();
+  const { imageSrc } = useWallet();
 
   // const handleImageChange = (event) => {
   //   const file = event.target.files[0];
@@ -64,6 +64,18 @@ const About = () => {
   // const openFileInput = () => {
   //   fileInputRef.current.click();
   // };
+
+
+ 
+    const handleUploadClick = () => {
+      // Implement your upload logic here
+      console.log('Upload button clicked');
+      // Example: Open file dialog
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.click(); // Simulate a click on the file input
+    };
+
 
   return (
     <>
@@ -138,7 +150,7 @@ const About = () => {
                 <div className="flex items-center border-b ">
                   <div className="flex mb-4">
                     <Image
-                     src={imageSrc}
+                      src={imageSrc}
                       alt="User"
                       width={0}
                       height={0}
@@ -153,14 +165,14 @@ const About = () => {
                 </div>
                 <div className="mt-5 flex space-x-2">
                   <div className=" ">
-                    <button className="bg-transparent text-[#777] p-2 flex gap-1 rounded-lg hover:text-[#32374b] ">
-                    <GoPaperclip size={20} className="  " />
+                    <button onClick={handleUploadClick} className="bg-transparent text-[#777] p-2 flex gap-1 rounded-lg hover:text-[#32374b] ">
+                      <GoPaperclip size={20} className="  " />
                       Upload
                     </button>
                   </div>
                   <div className=" ">
                     <button className="bg-transparent text-[#777] flex gap-1 p-2 rounded-lg hover:text-[#32374b]">
-                    <BiPoll size={20} className="" />
+                      <BiPoll size={20} className="" />
                       Poll
                     </button>
                   </div>
@@ -1043,5 +1055,4 @@ const About = () => {
 };
 
 export default About;
- */
-}
+ */}

@@ -469,12 +469,11 @@ const Referral = () => {
                 userCount = countLevel5;
                 break;
               default:
-                userCount = 0;
+                userCount = null;
             }
 
             // Check if userCount is zero or undefined/null to conditionally render
             if (userCount === 0) return null;
-        
 
             // const userCount =
             //   (level === 1 && countLevel1) ||
@@ -486,18 +485,38 @@ const Referral = () => {
             // if (userCount === 0) return null; // Hide the level if there's no data
             // if (!userCount) return null;
             return (
-              <div
-                key={level}
-                className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
-                  currentLevel === level ? "border-2 border-blue-500" : ""
-                }`}
-                onClick={() => handleLevelClick(level)}
-              >
-                <p className="text-[#CECECE]  font-light">{`Level ${level}`}</p>
-                <p className="text-blue-400 text-2xl mt-1 w-[178px]">
-                  {userCount} Users
-                </p>
-              </div>
+              <React.Fragment key={level}>
+                {userCount === null ? (
+                  <div className="text-blue-400 text-2xl mt-1 justify-center rounded-lg px-4 py-2 bg-[#1C1C1C]">
+                    No Data to Show
+                  </div>
+                ) : (
+                  <div
+                    className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
+                      currentLevel === level ? "border-2 border-blue-500" : ""
+                    }`}
+                    onClick={() => handleLevelClick(level)}
+                  >
+                    <p className="text-[#CECECE] font-light">Level {level}</p>
+                    <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                      {userCount} Users
+                    </p>
+                  </div>
+                )}
+
+                {/*               <div
+                  key={level}
+                  className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
+                    currentLevel === level ? "border-2 border-blue-500" : ""
+                  }`}
+                  onClick={() => handleLevelClick(level)}
+                >
+                  <p className="text-[#CECECE]  font-light">{`Level ${level}`}</p>
+                  <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                    {userCount} Users
+                  </p>
+                </div>  */}
+              </React.Fragment>
             );
           })}
         </div>
