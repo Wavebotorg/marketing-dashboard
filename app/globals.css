@@ -466,3 +466,10 @@ th {
 
 
 
+
+
+@media (min-width: 1024px) {
+  .margin {
+    margin-right: 100px;
+  }
+}

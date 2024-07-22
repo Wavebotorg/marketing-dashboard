@@ -447,7 +447,7 @@ const Referral = () => {
           ))}
         </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
+        {/*    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
           {[1, 2, 3, 4, 5].map((level) => {
             let userCount = 0;
 
@@ -473,7 +473,16 @@ const Referral = () => {
             }
 
             // Check if userCount is zero or undefined/null to conditionally render
-            if (userCount === 0) return null;
+            // if (userCount === 0) return null;
+            if (userCount === null) {
+              return (
+                <React.Fragment key={level}>
+                  <div className="text-blue-400 text-2xl mt-1 justify-center rounded-lg px-4 py-2 bg-[#1C1C1C]">
+                    No Data to Show
+                  </div>
+                </React.Fragment>
+              );
+            }
 
             // const userCount =
             //   (level === 1 && countLevel1) ||
@@ -504,7 +513,7 @@ const Referral = () => {
                   </div>
                 )}
 
-                {/*               <div
+                     {/* <div
                   key={level}
                   className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
                     currentLevel === level ? "border-2 border-blue-500" : ""
@@ -515,10 +524,70 @@ const Referral = () => {
                   <p className="text-blue-400 text-2xl mt-1 w-[178px]">
                     {userCount} Users
                   </p>
-                </div>  */}
+                </div> *
               </React.Fragment>
             );
           })}
+        </div> */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mt-5 lg:w-[56rem] mb-10">
+          {[1, 2, 3, 4, 5]
+            .map((level) => {
+              let userCount = 0;
+
+              // Determine userCount based on the level
+              switch (level) {
+                case 1:
+                  userCount = countLevel1;
+                  break;
+                case 2:
+                  userCount = countLevel2;
+                  break;
+                case 3:
+                  userCount = countLevel3;
+                  break;
+                case 4:
+                  userCount = countLevel4;
+                  break;
+                case 5:
+                  userCount = countLevel5;
+                  break;
+                default:
+                  userCount = 0;
+              }
+
+              return { level, userCount };
+            })
+            .filter((item) => item.userCount > 0)
+            .map(({ level, userCount }) => (
+              <React.Fragment key={level}>
+                <div
+                  className={`rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer ${
+                    currentLevel === level ? "border-2 border-blue-500" : ""
+                  }`}
+                  onClick={() => handleLevelClick(level)}
+                >
+                  <p className="text-[#CECECE] font-light">{`Level ${level}`}</p>
+                  <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                    {userCount} Users
+                  </p>
+                </div>
+              </React.Fragment>
+            ))}
+
+          {[
+            countLevel1,
+            countLevel2,
+            countLevel3,
+            countLevel4,
+            countLevel5,
+          ].every((count) => count === 0) && (
+            <div className="rounded-lg px-4 py-2 md:py-4 bg-[#1C1C1C] cursor-pointer">
+              <p className="text-blue-400 text-2xl mt-1 w-[178px]">
+                NO Referral
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Render the ReferralTable component based on currentLevel */}

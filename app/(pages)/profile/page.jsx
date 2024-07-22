@@ -19,6 +19,7 @@ import { TbChartCandleFilled } from "react-icons/tb";
 import Profiles from "../../../public/assets/profile.png";
 import sol from "../../../public/assets/sol.png";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+import { useIsMediumOrSmallScreen } from "../../components/hook/mediaquery"
 
 const Profile = () => {
   const { isNavbar, setIsNavbar } = useWallet();
@@ -99,15 +100,17 @@ const Profile = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const isMediumOrSmallScreen = useIsMediumOrSmallScreen();
   
-  function isMediumOrSmallScreen() {
+  /* function isMediumOrSmallScreen() {
     // Assuming Tailwind CSS breakpoints
     const md = window.matchMedia('(max-width: 768px)').matches;
     const sm = window.matchMedia('(max-width: 640px)').matches;
     
     return md || sm;
   }
-  
+   */
 
   return (
     <>
@@ -241,9 +244,9 @@ const Profile = () => {
                 showImage
                   ? "opacity-100 duration-300 transition-all ease-linear "
                   : "opacity-0 "
-              } ${isMediumOrSmallScreen() ? "hidden" : ""}`}
+              } ${isMediumOrSmallScreen ? "hidden" : ""}`}
               style={{
-                display: isMediumOrSmallScreen() ? "none" : "flex",
+                display: isMediumOrSmallScreen ? "none" : "flex",
               }}
             >
               {" "}
@@ -258,7 +261,7 @@ const Profile = () => {
                 {userProfile}
               </div>
             </div>
-            <div className="flex justify-center gap-2 md:gap-5 flex-grow">
+            <div className="margin flex justify-center gap-2 md:gap-5 flex-grow">
               {[1, 2, 3, 4, 5].map((button) => (
                 <div key={button} className="bg-black">
                   <button

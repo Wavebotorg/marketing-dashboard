@@ -155,7 +155,7 @@ const Login = () => {
             name="email"
             value={loginFields?.email}
             onChange={onChangeInput}
-            placeholder="Your Enter Email"
+            placeholder="Enter Your Email"
             onKeyPress={handleKeyPress}
           />
           {errors.email && (
@@ -170,7 +170,7 @@ const Login = () => {
             name="password"
             value={loginFields?.password}
             onChange={onChangeInput}
-            placeholder="Your Enter Password"
+            placeholder=" Enter Your Password"
             onKeyPress={handleKeyPress}
           />
           {errors.password && (
