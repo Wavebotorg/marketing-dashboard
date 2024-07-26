@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import { useWallet } from "../../components/contexts/WalletContext";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
+
 const Login = () => {
   const router = useRouter();
   const { decryptData } = useEncryption();
