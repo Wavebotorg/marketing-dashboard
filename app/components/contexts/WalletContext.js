@@ -33,7 +33,7 @@ export const WalletProvider = ({ children }) => {
         walletAddress,
         setWalletAddress,
         email,
-        setEmail,
+        setEmail, 
         solanaAddress,
         setSolanaAddress,
         isNavbar,

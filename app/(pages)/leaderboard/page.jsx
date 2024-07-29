@@ -8,6 +8,7 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 import { useWallet } from "../../components/contexts/WalletContext";
+import axiosInstance from "../../apiInstances/axiosInstance";
 
 //for show email structure
 const truncateEmail = (email) => {
@@ -32,7 +33,7 @@ const LeaderBoard = () => {
     }
   };
   const refrealLeader = async () => {
-    await axiosInstanceAuth
+    await axiosInstance
       .get("/leaderBoardList")
       .then((res) => {
         const myData = res?.data?.leaderboard;
@@ -49,7 +50,7 @@ const LeaderBoard = () => {
 
   const [defiList, setDefiList] = useState([]);
   const defiLeader = async () => {
-    await axiosInstanceAuth
+    await axiosInstance
       .get("/transactionBoardList")
       .then((res) => {
         const myData = res?.data?.userTransactionCount;
@@ -219,7 +220,8 @@ const LeaderBoard = () => {
                             }}
                             className="px-6 py-3 text-center text-base font-medium whitespace-nowrap"
                           >
-                            Total Transfer Token
+                            {/* Total Transfer Token */}
+                            Total Volume Transfer
                           </th>
                         </>
                       )}
@@ -254,8 +256,8 @@ const LeaderBoard = () => {
                                 {leader?.totalTransaction}
                               </td>
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                                {Math.floor(leader?.totalTransferToken)}
-                                {/* {leader?.totalTransferToken.toFixed(2)} */}
+                                 {/* {Math.floor(leader?.totalTransferToken)}*/}
+                               {leader?.totalTransferToken.toFixed(2)} 
                               </td>
                             </>
                           )}

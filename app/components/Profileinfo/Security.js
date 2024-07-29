@@ -7,7 +7,7 @@ import { AdvancedChart } from "react-tradingview-embed";
 const Security = () => {
   return (
     <>
-      <div className=" mt-[7.7rem] lg:ml-[4.7rem] mr-5 xsm:ml-5 xl:ml-[4.4rem]  ">
+      <div className=" mt-[rem] mb-5 lg:ml-[4.7rem] mr-5 xsm:ml-5 xl:ml-[4.4rem]  ">
         <div className="bg-[#1C1C1C] shadow-2xl rounded-lg py-6 ">
           <div className="mx-auto w-full max-w-7xl">
             <div>
