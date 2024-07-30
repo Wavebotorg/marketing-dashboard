@@ -23,7 +23,9 @@ const truncateEmail = (email) => {
 };
 
 const LeaderBoard = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const [selectedLeaderboard, setSelectedLeaderboard] = useState("referral");
+  const [selectedPeriod, setSelectedPeriod] = useState("all");
   const [refrealList, setRefrealList] = useState([]);
   const fetchLeaderboardData = async () => {
     if (selectedLeaderboard === "referral") {
@@ -49,18 +51,62 @@ const LeaderBoard = () => {
   }
 
   const [defiList, setDefiList] = useState([]);
-  const defiLeader = async () => {
+  /*  const defiLeader = async () => {
     await axiosInstance
       .get("/transactionBoardList")
       .then((res) => {
-        const myData = res?.data?.userTransactionCount;
+        const myData = res?.data?.data;
         console.log("🚀 ~ .then ~ myData:", myData);
+
+
+      /*   console.log("Daily Leaderboard:", myData?.daily);
+        console.log("Weekly Leaderboard:", myData?.weekly);
+        console.log("Monthly Leaderboard:", myData?.monthly);
+        console.log("All Time Leaderboard:", myData?.allTime); 
         setDefiList(myData || []);
       })
       .catch((err) => {
         console.log("err --->", err);
       });
+  }; */
+
+  const defiLeader = async (period) => {
+    await axiosInstance
+      .get("/transactionBoardList")
+      .then((res) => {
+        const myData = res?.data?.data;
+        console.log("🚀 ~ .then ~ myData:", myData);
+
+        switch (period) {
+          case "daily":
+            console.log("Daily Leaderboard:", myData?.daily);
+            setDefiList(myData?.daily || []);
+            break;
+          case "weekly":
+            console.log("Weekly Leaderboard:", myData?.weekly);
+            setDefiList(myData?.weekly || []);
+            break;
+          case "monthly":
+            console.log("Monthly Leaderboard:", myData?.monthly);
+            setDefiList(myData?.monthly || []);
+            break;
+          case "all":
+            console.log("Monthly Leaderboard:", myData?.allTime);
+            setDefiList(myData?.allTime || []);
+            break;
+          default:
+            console.log("Daily Leaderboard:", myData?.allTime);
+            setDefiList(myData?.allTime || []);
+        }
+      })
+      .catch((err) => {
+        console.log("err --->", err);
+      });
   };
+
+  useEffect(() => {
+    defiLeader(selectedPeriod);
+  }, [selectedPeriod]);
 
   useEffect(() => {
     fetchLeaderboardData();
@@ -94,11 +140,16 @@ const LeaderBoard = () => {
   //search
   const currentLeaderboard =
     selectedLeaderboard === "referral" ? refrealList : defiList;
-  const filteredData = currentLeaderboard?.filter(
+  /*   const filteredData = currentLeaderboard?.filter(
     (coin) => coin.name.toLowerCase().includes(searchQuery.toLowerCase())
     // coin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
     // coin.points.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ); */
+  const filteredData = Array.isArray(currentLeaderboard)
+    ? currentLeaderboard.filter((coin) =>
+        coin.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
   const visibleData = filteredData.slice(startIndex, endIndex);
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -132,7 +183,10 @@ const LeaderBoard = () => {
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-black"
               }`}
-              onClick={() => setSelectedLeaderboard("referral")}
+              onClick={() => {
+                setSelectedLeaderboard("referral");
+                setShowDropdown(false);
+              }}
             >
               Referral Leaderboard
             </button>
@@ -142,10 +196,42 @@ const LeaderBoard = () => {
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-black"
               }`}
-              onClick={() => setSelectedLeaderboard("defi")}
+              onClick={() => {
+                setSelectedLeaderboard("defi");
+                setShowDropdown(true);
+              }}
             >
               Defi Leaderboard
             </button>
+            {selectedLeaderboard === "defi" && showDropdown && (
+              <div className="">
+                <select
+                  value={selectedPeriod}
+                  onChange={(e) => setSelectedPeriod(e.target.value)}
+                  className="rounded-md w-full px-4 py-2 text-white bg-gray-600"
+                >
+                  <option className="bg-gray-800" value="monthly">
+                    All
+                  </option>
+                  <option className="bg-gray-800" value="daily">
+                    Daily
+                  </option>
+                  <option className="bg-gray-800" value="weekly">
+                    Weekly
+                  </option>
+                  <option className="bg-gray-800" value="monthly">
+                    Monthly
+                  </option>
+                </select>
+                <div>
+                  {/* Show the selected period */}
+                  {selectedPeriod === "all"}
+                  {selectedPeriod === "daily"}
+                  {selectedPeriod === "weekly"}
+                  {selectedPeriod === "monthly"}
+                </div>
+              </div>
+            )}
           </div>
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
@@ -256,8 +342,8 @@ const LeaderBoard = () => {
                                 {leader?.totalTransaction}
                               </td>
                               <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white">
-                                 {/* {Math.floor(leader?.totalTransferToken)}*/}
-                               {leader?.totalTransferToken.toFixed(2)} 
+                                {/* {Math.floor(leader?.totalTransferToken)}*/}
+                                {leader?.totalTransferToken.toFixed(2)}
                               </td>
                             </>
                           )}

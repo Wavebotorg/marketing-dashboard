@@ -608,4 +608,3 @@ const Discover = ({ onColor = "bg-purple-500", offColor = "bg-gray-300" }) => {
 };
 
 export default Discover;
-
