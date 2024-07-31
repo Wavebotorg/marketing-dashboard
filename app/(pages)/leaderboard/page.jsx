@@ -176,7 +176,7 @@ const LeaderBoard = () => {
           <p className="text-[#1788FB]  text-2xl  md:text-3xl font-medium w-auto  ">
             Leader Board
           </p>
-          <div className="flex gap-4 my-4">
+      {/*     <div className="flex gap-4 my-4">
             <button
               className={`px-4 py-2 rounded ${
                 selectedLeaderboard === "referral"
@@ -186,6 +186,7 @@ const LeaderBoard = () => {
               onClick={() => {
                 setSelectedLeaderboard("referral");
                 setShowDropdown(false);
+                setSelectedPeriod("all");
               }}
             >
               Referral Leaderboard
@@ -210,7 +211,7 @@ const LeaderBoard = () => {
                   onChange={(e) => setSelectedPeriod(e.target.value)}
                   className="rounded-md w-full px-4 py-2 text-white bg-gray-600"
                 >
-                  <option className="bg-gray-800" value="monthly">
+                  <option className="bg-gray-800" value="all">
                     All
                   </option>
                   <option className="bg-gray-800" value="daily">
@@ -224,7 +225,7 @@ const LeaderBoard = () => {
                   </option>
                 </select>
                 <div>
-                  {/* Show the selected period */}
+                  {/* Show the selected period *
                   {selectedPeriod === "all"}
                   {selectedPeriod === "daily"}
                   {selectedPeriod === "weekly"}
@@ -232,7 +233,70 @@ const LeaderBoard = () => {
                 </div>
               </div>
             )}
+          </div> */}
+           <div className="flex flex-col gap-4 my-4 sm:flex-row">
+      {/* Buttons */}
+      <div className="flex  gap-4 mb-4">
+        <button
+          className={`px-4 py-2 rounded ${
+            selectedLeaderboard === "referral"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 text-black"
+          }`}
+          onClick={() => {
+            setSelectedLeaderboard("referral");
+            setShowDropdown(false);
+            setSelectedPeriod("all");
+          }}
+        >
+          Referral Leaderboard
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${
+            selectedLeaderboard === "defi"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 text-black"
+          }`}
+          onClick={() => {
+            setSelectedLeaderboard("defi");
+            setShowDropdown(true);
+          }}
+        >
+          Defi Leaderboard
+        </button>
+      </div>
+
+      {/* Dropdown */}
+      {selectedLeaderboard === "defi" && showDropdown && (
+        <div className="xsm:w-28 ">
+          <select
+            value={selectedPeriod}
+            onChange={(e) => setSelectedPeriod(e.target.value)}
+            className="rounded-md w-full px-4 py-2 text-white bg-gray-600 cursor-pointer"
+          >
+            <option className="bg-gray-800" value="all">
+              All
+            </option>
+            <option className="bg-gray-800" value="daily">
+              Daily
+            </option>
+            <option className="bg-gray-800" value="weekly">
+              Weekly
+            </option>
+            <option className="bg-gray-800" value="monthly">
+              Monthly
+            </option>
+          </select>
+          <div className="mt-2 text-white">
+            {/* Display the selected period */}
+            {selectedPeriod === "all" }
+            {selectedPeriod === "daily" }
+            {selectedPeriod === "weekly" }
+            {selectedPeriod === "monthly" }
           </div>
+        </div>
+      )}
+    </div>
           <div className="">
             <div className="mt-6 rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl ">
