@@ -92,8 +92,17 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSidebar = () => {
+  /*   const toggleSidebar = () => {
+    setIsOpen(false);
+  }; */
+
+
+  /* const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  }; */
+
+  const toggleSidebar = () => {
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -156,7 +165,7 @@ const Navbar = () => {
           <div className="flex w-auto md:w-[350px] lg:ml-24    sm:gap-2  gap-1  text-sm  rounded-lg  bg-[#1C1C1C]   text-white ">
             {/* xl:ml-96 */}
             <div className="flex items-center pl-3  pointer-events-none">
-              <CiSearch size={20}  />
+              <CiSearch size={20} />
             </div>
             <input
               type=""
@@ -168,8 +177,8 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div  className=" xsm:mr-[1rem]">
-        {/* ref={navbarRef} */}
+        <div className=" xsm:mr-[1rem]">
+          {/* ref={navbarRef} */}
           {/*  xl:mr-[6rem] */}
           <button onClick={toggleSidebar}>
             <IoIosNotifications size={25} />
