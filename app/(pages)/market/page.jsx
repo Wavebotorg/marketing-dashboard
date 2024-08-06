@@ -264,9 +264,9 @@ const Market = () => {
                 </thead>
                 <tbody>
                   {visibleData?.length > 0 &&
-                    visibleData?.map((market, index) => (
+                    visibleData?.map((market, index1) => (
                       <>
-                        <tr key={index} className="2xl:text-md xl:text-[.875rem]">
+                        <tr key={index1} className="2xl:text-md xl:text-[.875rem]">
                           <td className="py-4 text-center whitespace-nowrap font-medium text-white ">
                             <div className="flex items-center gap-2">
                               <div>

@@ -308,7 +308,7 @@ const WatchList = () => {
                               }`}
                             >
                               {" "}
-                              {d?.current_price}
+                              ${d?.current_price}
                             </span>
                           </td>
                           <td className="px-6 py-4 text-center whitespace-nowrap text-md text-white ">

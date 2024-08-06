@@ -613,6 +613,7 @@ const Withdraw = () => {
                             // eslint-disable-next-line jsx-a11y/alt-text
                             <Image
                               src={selectChain}
+                              alt="chain icon"
                               className="h-6 w-6 rounded-full"
                             />
                           )}

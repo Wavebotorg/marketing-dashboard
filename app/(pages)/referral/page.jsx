@@ -364,6 +364,11 @@ const Referral = () => {
             );
           })}
         </div>
+   {/*       {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <Loader type="spinner-cub" bgColor="#1788FB" size={40} />
+        </div>
+      )} */}
 
         {/* Render the ReferralTable component based on currentLevel */}
         {[1, 2, 3, 4, 5].map(

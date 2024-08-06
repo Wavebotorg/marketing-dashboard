@@ -542,7 +542,7 @@ function Sidebar() {
                           {/* <span className="md:ml-1 tracking-wide font-bold  xl:text-sm text-[12px] xsm:text-[10.5px]  "> */}
                           <span
                             className={`ml-4 tracking-wide font-bold xl:text-sm text-[12px] xsm:text-[10.5px]  transition-all duration-500 ease-in-out ${
-                              isNavbar ? "block" : "hidden"
+                              isNavbar ? "block" : "hidden "
                             }`}
                           >
                             Logout
@@ -698,11 +698,12 @@ function Sidebar() {
                             className="mr-2 cursor-pointer"
                           />
                         </Link>
+                        {/* ?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09 */}
                         <Link
-                          href="https://x.com/WaveBotApp?t=ncOPeN0KVJY_JuBZSjI-jQ&s=09"
+                          href="https://x.com/WaveBotApp"
                           target="_blank"
                           rel="noopener noreferrer"
-                        >
+                          >
                           <Image
                             src={x}
                             alt="twitter"

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import img from "../../../public/assets/profile.png";
 import { useSearch } from "../../components/contexts/SearchContext"; //search
@@ -9,6 +9,7 @@ import axiosInstanceAuth from "../../apiInstances/axiosInstanceAuth";
 import Pagination from "../Pagination/Pagination";
 import { useWallet } from "../../components/contexts/WalletContext";
 import axiosInstance from "../../apiInstances/axiosInstance";
+import { IoChevronDownCircleOutline } from "react-icons/io5";
 
 //for show email structure
 const truncateEmail = (email) => {
@@ -162,6 +163,32 @@ const LeaderBoard = () => {
   const { walletAddress, email, solanaAddress, isNavbar, setIsNavbar } =
     useWallet();
 
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (period) => {
+    setSelectedPeriod(period);
+    setIsOpen(false); // Close the dropdown after selection
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -172,11 +199,11 @@ const LeaderBoard = () => {
       {/* 2xl:pl-64 xl:pl-64 */}
       <div className="xl:flex    gap-6 lg:ml-2 lg:mr-6 md:ml-0 md:mr-6 ml-5 xl:space-y-0 space-y-4 mr-5">
         {/* xl:ml-32 xl:mr-[90px] */}
-        <div className="w-full mt-1">
+        <div className="w-full ">
           <p className="text-[#1788FB]  text-2xl  md:text-3xl font-medium w-auto  ">
             Leader Board
           </p>
-      {/*     <div className="flex gap-4 my-4">
+          {/*     <div className="flex gap-4 my-4">
             <button
               className={`px-4 py-2 rounded ${
                 selectedLeaderboard === "referral"
@@ -234,40 +261,39 @@ const LeaderBoard = () => {
               </div>
             )}
           </div> */}
-           <div className="flex flex-col gap-4 my-4 sm:flex-row">
-      {/* Buttons */}
-      <div className="flex  gap-4 mb-4">
-        <button
-          className={`px-4 py-2 rounded ${
-            selectedLeaderboard === "referral"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-black"
-          }`}
-          onClick={() => {
-            setSelectedLeaderboard("referral");
-            setShowDropdown(false);
-            setSelectedPeriod("all");
-          }}
-        >
-          Referral Leaderboard
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            selectedLeaderboard === "defi"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-black"
-          }`}
-          onClick={() => {
-            setSelectedLeaderboard("defi");
-            setShowDropdown(true);
-          }}
-        >
-          Defi Leaderboard
-        </button>
-      </div>
+          <div className="flex flex-col gap-4 my-4 sm:flex-row">
+            {/* Buttons */}
+            <div className="flex  gap-4 mb-2">
+              <button
+                className={`px-4 py-2 rounded ${
+                  selectedLeaderboard === "referral"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-black"
+                }`}
+                onClick={() => {
+                  setSelectedLeaderboard("referral");
+                  setShowDropdown(false);
+                  setSelectedPeriod("all");
+                }}
+              >
+                Referral Leaderboard
+              </button>
+              <button
+                className={`px-4 py-2 rounded ${
+                  selectedLeaderboard === "defi"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-black"
+                }`}
+                onClick={() => {
+                  setSelectedLeaderboard("defi");
+                  setShowDropdown(true);
+                }}
+              >
+                Defi Leaderboard
+              </button>
+            </div>
 
-      {/* Dropdown */}
-      {selectedLeaderboard === "defi" && showDropdown && (
+            {/* {selectedLeaderboard === "defi" && showDropdown && (
         <div className="xsm:w-28 ">
           <select
             value={selectedPeriod}
@@ -288,17 +314,80 @@ const LeaderBoard = () => {
             </option>
           </select>
           <div className="mt-2 text-white">
-            {/* Display the selected period */}
+           
             {selectedPeriod === "all" }
             {selectedPeriod === "daily" }
             {selectedPeriod === "weekly" }
             {selectedPeriod === "monthly" }
           </div>
         </div>
-      )}
-    </div>
+      )}  */}
+
+            {selectedLeaderboard === "defi" && showDropdown && (
+              <div className="xsm:w-28">
+                <div
+                  ref={dropdownRef}
+                  className="dropdown inline-block relative "
+                >
+                  <button
+                    onClick={toggleDropdown}
+                    className="text-white bg-gray-600 font-semibold py-2 px-4 rounded inline-flex items-center"
+                  >
+                    <span className="mr-2">
+                      {selectedPeriod.charAt(0).toUpperCase() +
+                        selectedPeriod.slice(1)}
+                    </span>
+                    <IoChevronDownCircleOutline
+                      className={`h-4 w-4 ${
+                        isOpen
+                          ? "rotate-180 transition-all ease-in-out duration-300"
+                          : "transition-all ease-in-out duration-300"
+                      }`}
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <ul className="dropdown-menu z-50 cursor-pointer absolute text-white pt-1 bg-gray-800 rounded-md mt-1">
+                      <li>
+                        <a
+                          onClick={() => handleOptionClick("all")}
+                          className="rounded-t  hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        >
+                          All
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => handleOptionClick("daily")}
+                          className=" hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        >
+                          Daily
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => handleOptionClick("weekly")}
+                          className=" hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        >
+                          Weekly
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => handleOptionClick("monthly")}
+                          className=" hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        >
+                          Monthly
+                        </a>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
           <div className="">
-            <div className="mt-6 rounded-lg overflow-auto">
+            <div className=" rounded-lg overflow-auto">
               <div className="bg-[#1C1C1C] h-full overflow-y-auto text-white  overflow-auto rounded-xl ">
                 {/* for with points and recent join user data show */}
                 <table className="w-full">
@@ -441,12 +530,12 @@ const LeaderBoard = () => {
           <p className="text-[#1788FB]   text-2xl  md:text-3xl font-medium max-w-screen-lg ">
             Recent Joins
           </p>
-          <div className="mt-6 rounded-lg overflow-hidden w-full table-container xl:mt-20">
-            <div className="bg-[#1C1C1C] h-[40rem] overflow-y-auto text-white xl:block md:grid md:grid-cols-2 ">
+          <div className="mt-6 rounded-lg overflow-hidden w-full  xl:mt-20">
+            <div className="bg-[#1C1C1C] scrollbar  table-container overflow-y-auto text-white xl:block md:grid md:grid-cols-2 ">
               {allRecentUser?.length > 0 ? (
                 allRecentUser.map((d, index) => (
                   <div key={index} className="">
-                    <div className="md:p-4 p-3">
+                    <div className="md:p-4 p-3 ">
                       <div className="flex gap-2">
                         <div className="w-[2.5rem] sm:[1.5rem]">
                           <Image
