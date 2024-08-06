@@ -43,7 +43,7 @@ export default Notification;
 import React, { useEffect, useRef } from "react";
 
 const Notification = ({ isOpen, toggle, setIsOpen }) => {
-  const notificationRef = useRef(null);
+/*   const notificationRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -64,11 +64,11 @@ const Notification = ({ isOpen, toggle, setIsOpen }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen, setIsOpen]);
+  }, [isOpen, setIsOpen]); */
 
   return (
     <div
-      ref={notificationRef}
+      // ref={notificationRef}
       className={`fixed inset-y-0 mt-[5.8rem] right-0 w-80 bg-gray-800 px-8 py-4 transition duration-300 ease-in-out transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}

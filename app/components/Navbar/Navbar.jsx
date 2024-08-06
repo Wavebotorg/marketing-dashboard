@@ -76,9 +76,21 @@ const Navbar = () => {
   const navbarRef = useRef(null);
   const signupRefRegex = /^\/signupRef\/(.*)/;
 
-  const handleClickOutside = (event) => {
+  /*  const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
       // setIsNavbar(false);
+      setIsOpen(false);
+    }
+  };
+ */
+  const notificationRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (
+      navbarRef.current &&
+      !navbarRef.current.contains(event.target) &&
+      notificationRef.current &&
+      !notificationRef.current.contains(event.target)
+    ) {
       setIsOpen(false);
     }
   };
@@ -95,7 +107,6 @@ const Navbar = () => {
   /*   const toggleSidebar = () => {
     setIsOpen(false);
   }; */
-
 
   /* const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -177,14 +188,22 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className=" xsm:mr-[1rem]">
-          {/* ref={navbarRef} */}
-          {/*  xl:mr-[6rem] */}
+        <div ref={navbarRef} className=" xsm:mr-[1rem]">
+          {/* xl:mr-[6rem] */}
           <button onClick={toggleSidebar}>
             <IoIosNotifications size={25} />
           </button>
+          <div ref={notificationRef}>
+          <Notification
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            toggle={toggleSidebar}
+          />
         </div>
-        <Notification isOpen={isOpen} setIsOpen={setIsOpen} toggle={toggleSidebar} />
+        </div>
+        {/*    <Notification isOpen={isOpen} setIsOpen={setIsOpen} toggle={toggleSidebar} /> */}
+
+
 
         {/* <div
           className={`${
