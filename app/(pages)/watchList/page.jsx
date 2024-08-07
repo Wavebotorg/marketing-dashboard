@@ -212,6 +212,7 @@ const WatchList = () => {
 
         <div className="hidden lg:block mt-5 mb-5">
           <div className="rounded-lg">
+            
             <div className="bg-[#1C1C1C]  text-white h-auto overflow-auto rounded-lg">
               {/* for 2xl ,xl and lg size  */}
               <table className="w-full  ">
