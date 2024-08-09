@@ -20,10 +20,10 @@ const Holder = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedNetwork, setSelectedNetwork] = useState("Ethereum");
+  const [selectedNetwork, setSelectedNetwork] = useState("Ether");
   const [selectedChainId, setSelectedChainId] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectChain, setSelectChain] = useState(false);
+  const [selectChain, setSelectChain] = useState(eth);
   const [selectedTokenDatato, setSelectedTokenDatato] = useState({
     name_to: "",
     image_to: "",
@@ -87,7 +87,7 @@ const Holder = () => {
   }, [selectedNetwork]);
 
   const NetworkData = [
-    { name: "Ethereum", chainid: "1", img: eth, descode: "0x1" },
+    { name: "Ether", chainid: "1", img: eth, descode: "0x1" },
     { name: "Arbitrum", chainid: "42161", img: arbitrum, descode: "0xa4b1" },
     { name: "Optimism", chainid: "10", img: optimism, descode: "0xa" },
     { name: "Polygon", chainid: "137", img: poly, descode: "0x89" },
